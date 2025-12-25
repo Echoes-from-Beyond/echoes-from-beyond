@@ -80,8 +80,6 @@ public final class SigilValidation {
    * the upper-left corner of the grid. Given this model, this method will ensure point array
    * upholds certain invariants, namely:
    *
-   * <p>
-   *
    * <ul>
    *   <li>Negative coordinates are not allowed
    *   <li>Length cannot exceed {@link SigilValidation#MAX_SIGIL_LENGTH}
@@ -92,7 +90,7 @@ public final class SigilValidation {
    *   <li>Adjacent coordinates must not differ by more than 1 along the x or y axes
    * </ul>
    *
-   * <h1>Canonicalization</h1>
+   * <h4>Canonicalization</h4>
    *
    * The canonicalization process ensures that identical Sigils produce equal {@link SigilKey}s,
    * regardless of the order in which they were drawn.
