@@ -18,7 +18,7 @@
 
 package org.echoesfrombeyond.util;
 
-/** Static utilities relating to array. */
+/** Static utilities relating to arrays. */
 public final class ArrayUtil {
   private ArrayUtil() {}
 

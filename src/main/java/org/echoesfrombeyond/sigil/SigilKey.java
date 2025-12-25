@@ -33,7 +33,7 @@ import org.jetbrains.annotations.VisibleForTesting;
  * its format is not specified and is subject to change.
  *
  * <p>The only way to obtain an instance of this class is by calling {@link
- * SigilValidation#canonicalize(byte[])} or through deserialization.
+ * SigilValidation#canonicalize(byte[])} or through deserializing a previously-serialized instance.
  */
 public final class SigilKey implements Comparable<SigilKey>, Serializable {
   @Serial private static final long serialVersionUID = 7587438460546625759L;

@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import org.echoesfrombeyond.util.ArrayUtil;
 
+/** {@link SigilKey} static utilities and factory functions. */
 public final class SigilValidation {
   /**
    * Size of the Sigil grid. Should always be a power of 2. The largest supported value for this
@@ -79,6 +80,8 @@ public final class SigilValidation {
    * the upper-left corner of the grid. Given this model, this method will ensure point array
    * upholds certain invariants, namely:
    *
+   * <p>
+   *
    * <ul>
    *   <li>Negative coordinates are not allowed
    *   <li>Length cannot exceed {@link SigilValidation#MAX_SIGIL_LENGTH}
@@ -88,8 +91,6 @@ public final class SigilValidation {
    *       over more than once)
    *   <li>Adjacent coordinates must not differ by more than 1 along the x or y axes
    * </ul>
-   *
-   * <p>
    *
    * <h1>Canonicalization</h1>
    *
