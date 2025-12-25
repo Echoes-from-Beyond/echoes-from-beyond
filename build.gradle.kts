@@ -23,6 +23,8 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(25)
     }
+
+    withSourcesJar()
 }
 
 tasks.test {
@@ -30,16 +32,6 @@ tasks.test {
 }
 
 spotless {
-    json {
-        target("src/main/*.json", "src/test/*.json")
-        gson()
-            .version("2.13.1")
-            .indentWithSpaces(2)
-
-            // Sort by JSON keys. This might cause things to break, but can be turned
-            // off easily without causing formatting churn.
-            .sortByKeys()
-    }
     java {
         target(sourceSets.main.get().java, sourceSets.test.get().java)
 
@@ -70,6 +62,8 @@ spotless {
         eclipse()
             .sortMembersEnabled(true)
             .sortMembersVisibilityOrderEnabled(true)
+
+            // Don't sort fields, this can cause compiler errors.
             .sortMembersDoNotSortFields(true)
 
             // T = (nested) types, SF = static fields, SI = static initializers,
@@ -100,30 +94,45 @@ sourceSets {
 
         compileClasspath = sourceSets.main.get().compileClasspath
     }
+
+    main {
+        val set = sourceSets.getByName("generatedPackageInfo")
+        output.dir(set.output)
+
+        compileClasspath += set.output
+        runtimeClasspath += set.output
+    }
 }
 
-tasks.getByName("build").dependsOn("generatePackageInfo")
+tasks.getByName("compileGeneratedPackageInfoJava")
+    .dependsOn("generatePackageInfo")
+
+tasks.getByName("compileJava")
+    .dependsOn("generatePackageInfo", "compileGeneratedPackageInfoJava")
 
 tasks.register("generatePackageInfo") {
     group = "other"
     description = "Generates package-info.java files corresponding to the package tree."
 
     inputs.files({ sourceSets.main.get().java.sourceDirectories })
+
     inputs.property("generatedSourceDirs", {
-        sourceSets.getByName("generatedPackageInfo").java.srcDirs
+        // property access syntax doesn't work here, this warning is a false positive
+        @Suppress("UsePropertyAccessSyntax")
+        sourceSets.getByName("generatedPackageInfo").java.sourceDirectories.map(File::getPath)
     })
 
     outputs.dirs({
-        @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UNCHECKED_CAST")
-        val outSourceDirs = inputs.properties["generatedSourceDirs"] as java.util.Set<File>
+        @Suppress("UNCHECKED_CAST")
+        val outSourceDirs = inputs.properties["generatedSourceDirs"] as Iterable<String>
 
         outSourceDirs.flatMap { outDirectory ->
-            sourceSets.main.get().java.srcDirs.flatMap { sourceDirectory ->
+            sourceSets.main.get().java.sourceDirectories.flatMap { sourceDirectory ->
                 sourceDirectory.walkTopDown().filter(File::isDirectory).filter { dir ->
                     dir.walkTopDown().maxDepth(1).filter(File::isFile).any { file ->
                         file.extension == "java"
                     }
-                }.map { file -> outDirectory.resolve(file.relativeTo(sourceDirectory)) }
+                }.map { file -> file(outDirectory).resolve(file.relativeTo(sourceDirectory)) }
             }
         }
     })
@@ -131,10 +140,10 @@ tasks.register("generatePackageInfo") {
     doLast {
         val fileSet = outputs.files.files
 
-        @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UNCHECKED_CAST")
-        val outSourceDirs = inputs.properties["generatedSourceDirs"] as java.util.Set<File>
+        @Suppress("UNCHECKED_CAST")
+        val outSourceDirs = inputs.properties["generatedSourceDirs"] as Iterable<String>
 
-        outSourceDirs.forEach { outSourceDir ->
+        outSourceDirs.map { path -> File(path) }.forEach { outSourceDir ->
             outSourceDir.walkBottomUp().filter(File::isDirectory).filter { file ->
                 fileSet.none { set -> set.startsWith(file) }
             }.forEach { file -> file.deleteRecursively() }
