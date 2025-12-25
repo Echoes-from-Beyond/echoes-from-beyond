@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 
 /**
  * Opaque type created from Sigil canonicalization, designed for use as a key in a {@link HashMap}
@@ -90,6 +91,7 @@ public final class SigilKey implements Comparable<SigilKey>, Serializable {
    *
    * @return true if this key is canonical; false otherwise
    */
+  @VisibleForTesting
   boolean isCanonical() {
     if (this.points.length < 2) return false;
 
@@ -124,6 +126,7 @@ public final class SigilKey implements Comparable<SigilKey>, Serializable {
    * @param bytes the raw bytes
    * @return the serializable proxy object
    */
+  @VisibleForTesting
   static Object serializationProxyFromBytes(byte @Nullable [] bytes) {
     return new Proxy(bytes);
   }
