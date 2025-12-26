@@ -97,7 +97,7 @@ spotless {
 }
 
 sourceSets {
-    create("generatedPackageInfo") {
+    val set = create("generatedPackageInfo") {
         java {
             srcDir("src/generatedPackageInfo/java")
         }
@@ -106,79 +106,75 @@ sourceSets {
     }
 
     main {
-        val set = sourceSets.getByName("generatedPackageInfo")
-
         // This makes sure that (compiled) generated code is included in our
         // resulting build.
         output.dir(set.output)
 
+        // This makes sure that anything in the generated code can be referenced by
+        // anything in `main`.
         compileClasspath += set.output
         runtimeClasspath += set.output
     }
 }
 
-tasks.getByName("compileGeneratedPackageInfoJava")
-    .dependsOn("generatePackageInfo")
+tasks.compileJava {
+    // Run Spotless automatically before compilation.
+    dependsOn("spotlessApply")
 
-tasks.getByName("compileJava")
-    .dependsOn(
-        // Run Spotless automatically before compilation.
-        "spotlessApply",
+    // Compilation depends on the generated files.
+    inputs.files({ tasks.getByName("generatePackageInfo") })
+}
 
-        // Make sure we generate & compile sources in `generatedPackageInfo`.
-        "compileGeneratedPackageInfoJava"
-    )
-
-// Source set tracked by `generatePackageInfo`.
-val targetSourceSet = sourceSets.main
+tasks.getByName("compileGeneratedPackageInfoJava") {
+    // We need to generate sources before we compile them.
+    inputs.files({ tasks.getByName("generatePackageInfo") })
+}
 
 tasks.register("generatePackageInfo") {
     group = "other"
     description = "Generates package-info.java files corresponding to the package tree."
 
-    inputs.files({ targetSourceSet.get().java.sourceDirectories })
-
-    inputs.property("generatedSourceDirs", {
-        sourceSets.getByName("generatedPackageInfo").java.sourceDirectories.files
-    })
-
-    outputs.dirs({
-        @Suppress("UNCHECKED_CAST")
-        val out = inputs.properties["generatedSourceDirs"] as Iterable<File>
-
-        out.flatMap { outDirectory ->
-            targetSourceSet.get().java.sourceDirectories.flatMap { sourceDirectory ->
-                sourceDirectory.walkTopDown().filter(File::isDirectory).filter { dir ->
-                    dir.walkTopDown().maxDepth(1).filter(File::isFile).any { file ->
-                        file.extension == "java"
-                    }
-                }.map { file -> outDirectory.resolve(file.relativeTo(sourceDirectory)) }
-            }
-        }
+    inputs.files({ sourceSets.main.get().java.sourceDirectories })
+    outputs.dir({
+        sourceSets.getByName("generatedPackageInfo").java.sourceDirectories
     })
 
     doLast {
-        val fileSet = outputs.files.files
+        // `outputDirs` are all folders that must be constructed.
+        val outputDirs = inputs.files.flatMap { inputRoot ->
+            inputRoot.walkTopDown().filter(File::isDirectory).filter { dir ->
+                dir.walkTopDown()
+                    .maxDepth(1)
+                    .filter(File::isFile)
+                    .any { file -> file.extension == "java" }
+            }.map { dir -> dir.relativeTo(inputRoot) }
+        }.flatMap { path ->
+            outputs.files.map { file -> Pair(file, file.resolve(path)) }
+        }.toCollection(mutableSetOf())
 
-        @Suppress("UNCHECKED_CAST")
-        val out = inputs.properties["generatedSourceDirs"] as Iterable<File>
+        // Clean up all files in the output directory that are not needed anymore.
+        outputs.files.flatMap { outputRoot ->
+            outputRoot.walkBottomUp().filter(File::isDirectory).filter { dir ->
+                // Check if this directory corresponds to any of our files. Also
+                // remove empty folders.
+                outputDirs.none { (_, outputDir) -> outputDir.startsWith(dir) } ||
+                        (dir.exists() && dir.listFiles()?.size == 0)
+            }
+        }.forEach { deletionTarget -> deletionTarget.deleteRecursively() }
 
-        out.forEach { outSourceDir ->
-            // Clean up files in our generated folder that shouldn't exist anymore.
-            outSourceDir.walkBottomUp().filter(File::isDirectory).filter { file ->
-                fileSet.none { set -> set.startsWith(file) }
-            }.forEach { file -> file.deleteRecursively() }
+        // Generate required package-info.java files.
+        outputDirs
+            // Don't re-create already present files.
+            .filter { (_, outputDir) -> outputDir.exists() }
+            .forEach { (root, outputDir) ->
+                val packageName = outputDir.relativeTo(root).path
+                    .replace('/', '.')
 
-            // Write package-info.java files to the output source tree.
-            fileSet.filter { file -> file.startsWith(outSourceDir)  }
-                .map { file -> Pair(file, file.relativeTo(outSourceDir).path) }
-                .map { (file, path) -> Pair(file, path.replace('/', '.')) }
-                .forEach { (file, packageName) ->
-                    val packageInfo = file.resolve("package-info.java")
-                    packageInfo.writeText("/* AUTOGENERATED, do not edit */ " +
+                outputDir.mkdirs()
+                outputDir.resolve("package-info.java")
+                    .writeText("/* AUTOGENERATED, DO NOT EDIT */ " +
                             "@org.jetbrains.annotations.NotNullByDefault " +
                             "package $packageName;", Charsets.UTF_8)
-                }
         }
     }
 }
