@@ -126,7 +126,6 @@ tasks.getByName("compileJava")
         "spotlessApply",
 
         // Make sure we generate & compile sources in `generatedPackageInfo`.
-        "generatePackageInfo",
         "compileGeneratedPackageInfoJava"
     )
 
