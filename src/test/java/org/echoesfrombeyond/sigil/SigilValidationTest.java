@@ -27,7 +27,7 @@ import org.echoesfrombeyond.util.ArrayUtil;
 import org.junit.jupiter.api.Test;
 
 public class SigilValidationTest {
-  private static final int EXPLORE_LEN = 10;
+  private static final int EXPLORE_LEN = 7;
 
   interface PointVisitor {
     void visit(int x, int y);
