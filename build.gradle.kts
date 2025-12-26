@@ -165,7 +165,7 @@ tasks.register("generatePackageInfo") {
         // Generate required package-info.java files.
         outputDirs
             // Don't re-create already present files.
-            .filter { (_, outputDir) -> outputDir.exists() }
+            .filter { (_, outputDir) -> !outputDir.exists() }
             .forEach { (root, outputDir) ->
                 val packageName = outputDir.relativeTo(root).path
                     .replace('/', '.')
