@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import kotlin.io.path.extension
+
 plugins {
     id("java")
 
@@ -143,10 +146,13 @@ tasks.register("generatePackageInfo") {
         // `outputDirs` are all folders that must be constructed.
         val outputDirs = inputs.files.flatMap { inputRoot ->
             inputRoot.walkTopDown().filter(File::isDirectory).filter { dir ->
-                dir.walkTopDown()
-                    .maxDepth(1)
-                    .filter(File::isFile)
-                    .any { file -> file.extension == "java" }
+                // We use newDirectoryStream because it lazily loads directory
+                // entries, improving performance if there are many entries.
+                Files.newDirectoryStream(dir.toPath()).use { stream ->
+                    stream
+                        .filter { path -> path.extension == "java" }
+                        .any(Files::isRegularFile)
+                }
             }.map { dir -> dir.relativeTo(inputRoot) }
         }.flatMap { path ->
             outputs.files.map { file -> Pair(file, file.resolve(path)) }
@@ -155,10 +161,11 @@ tasks.register("generatePackageInfo") {
         // Clean up all files in the output directory that are not needed anymore.
         outputs.files.flatMap { outputRoot ->
             outputRoot.walkBottomUp().filter(File::isDirectory).filter { dir ->
-                // Check if this directory corresponds to any of our files. Also
-                // remove empty folders.
-                outputDirs.none { (_, outputDir) -> outputDir.startsWith(dir) } ||
-                        (dir.exists() && dir.listFiles()?.size == 0)
+                // All empty directories match, as well as "orphan" directories that
+                // aren't in our source tree.
+                Files.newDirectoryStream(dir.toPath()).use { stream ->
+                    !stream.iterator().hasNext()
+                } || outputDirs.none { (_, outputDir) -> outputDir.startsWith(dir) }
             }
         }.forEach { deletionTarget -> deletionTarget.deleteRecursively() }
 
