@@ -1,3 +1,4 @@
+import com.diffplug.spotless.LineEnding
 import java.nio.file.Files
 import kotlin.io.path.extension
 
@@ -30,8 +31,8 @@ java {
         languageVersion = JavaLanguageVersion.of(25)
     }
 
-    withSourcesJar()
-    withJavadocJar()
+    // withSourcesJar()
+    // withJavadocJar()
 }
 
 tasks.test {
@@ -48,8 +49,10 @@ tasks.javadoc {
 }
 
 spotless {
+    lineEndings = LineEnding.UNIX
+
     java {
-        target(sourceSets.main.get().java, sourceSets.test.get().java)
+        targetExclude("src/generatedPackageInfo/**/*")
 
         // Always clean these up first.
         removeUnusedImports()
@@ -123,9 +126,9 @@ sourceSets {
     }
 }
 
-tasks.build {
-    dependsOn("generatePackageInfo")
-}
+// tasks.build {
+//    dependsOn("generatePackageInfo")
+// }
 
 tasks.register("generatePackageHierarchy") {
     inputs.files(sourceSets.main.map { set -> set.output.classesDirs })
