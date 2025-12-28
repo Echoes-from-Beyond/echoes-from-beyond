@@ -124,9 +124,6 @@ sourceSets {
 }
 
 tasks.compileJava {
-    // Run Spotless automatically before compilation.
-    dependsOn("spotlessApply")
-
     // Compilation depends on the generated files.
     inputs.files({ tasks.getByName("generatePackageInfo") })
 }
