@@ -48,8 +48,7 @@ public final class SigilValidation {
   static int compactKey(byte point) {
     // One of the many footguns to watch out for when doing bit hacking shenanigans
     // in Java: e.g. casting the all 1s byte (-1) to int will result in an all 1s
-    // int
-    // (still -1), which WILL lead to the wrong result here (we actually want
+    // int (still -1), which WILL lead to the wrong result here (we actually want
     // 255...)
     int unsigned = Byte.toUnsignedInt(point);
     return (unsigned >>> COMPACT_SHIFT) | (unsigned & Y_MASK);
