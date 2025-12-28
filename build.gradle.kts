@@ -123,65 +123,90 @@ sourceSets {
     }
 }
 
-tasks.compileJava {
-    // Compilation depends on the generated files.
-    inputs.files({ tasks.getByName("generatePackageInfo") })
+tasks.build {
+    dependsOn("generatePackageInfo")
 }
 
-tasks.getByName("compileGeneratedPackageInfoJava") {
-    // We need to generate sources before we compile them.
-    inputs.files({ tasks.getByName("generatePackageInfo") })
+tasks.register("generatePackageHierarchy") {
+    inputs.files(sourceSets.main.map { set -> set.output.classesDirs })
+    outputs.file("build/pkgs.txt")
+
+    doLast {
+        outputs.files.singleFile.bufferedWriter(Charsets.UTF_8).use { out ->
+            inputs.files.flatMap { root ->
+                root.walkTopDown()
+                    .filter(File::isDirectory)
+                    .filter { dir ->
+                        Files.newDirectoryStream(dir.toPath()).use { stream ->
+                            stream.filter(Files::isRegularFile)
+                                .any { path -> path.extension == "class" }
+                        }
+                    }
+                    .map { file -> file.relativeTo(root) }
+            }.forEach { file ->
+                out.write(file.invariantSeparatorsPath.replace('/', '.'))
+                out.write("\n")
+            }
+
+            out.flush()
+        }
+    }
+}
+
+tasks.register("cleanPackageInfo") {
+    inputs.files({ tasks.getByName("generatePackageHierarchy") })
+    outputs.dirs({
+        sourceSets.getByName("generatedPackageInfo").java.sourceDirectories
+    })
+
+    doLast {
+        val packages = inputs.files.singleFile.readLines(Charsets.UTF_8).map { line ->
+            var base = File("")
+            line.split('.').forEach { pack ->
+                base = base.resolve(pack)
+            }
+
+            base
+        }
+
+        outputs.files.forEach { outputDir ->
+            outputDir.walkBottomUp()
+                .filter(File::isDirectory)
+                .forEach { dir ->
+                    val relative = dir.relativeTo(outputDir)
+                    println(relative.path)
+
+                    if (packages.none { p -> p.startsWith(relative) }) {
+                        dir.deleteRecursively()
+                    }
+                }
+        }
+    }
 }
 
 tasks.register("generatePackageInfo") {
     group = "other"
     description = "Generates package-info.java files corresponding to the package tree."
 
-    inputs.files({ sourceSets.main.get().java.sourceDirectories })
-    outputs.dir({
+    inputs.files({ tasks.getByName("generatePackageHierarchy") })
+    outputs.dirs({
         sourceSets.getByName("generatedPackageInfo").java.sourceDirectories
     })
 
     doLast {
-        // `outputDirs` are all folders that must be constructed.
-        val outputDirs = inputs.files.flatMap { inputRoot ->
-            inputRoot.walkTopDown().filter(File::isDirectory).filter { dir ->
-                // We use newDirectoryStream because it lazily loads directory
-                // entries, improving performance if there are many entries.
-                Files.newDirectoryStream(dir.toPath()).use { stream ->
-                    stream
-                        .filter { path -> path.extension == "java" }
-                        .any(Files::isRegularFile)
-                }
-            }.map { dir -> dir.relativeTo(inputRoot) }
-        }.flatMap { path ->
-            outputs.files.map { file -> Pair(file, file.resolve(path)) }
-        }.toCollection(mutableSetOf())
+        val packages = inputs.files.singleFile.readLines(Charsets.UTF_8)
 
-        // Clean up all files in the output directory that are not needed anymore.
-        outputs.files.flatMap { outputRoot ->
-            outputRoot.walkBottomUp().filter(File::isDirectory).filter { dir ->
-                // All empty directories match, as well as "orphan" directories that
-                // aren't in our source tree.
-                Files.newDirectoryStream(dir.toPath()).use { stream ->
-                    !stream.iterator().hasNext()
-                } || outputDirs.none { (_, outputDir) -> outputDir.startsWith(dir) }
-            }
-        }.forEach { deletionTarget -> deletionTarget.deleteRecursively() }
+        outputs.files.forEach { outputDir ->
+            packages.forEach { pkg ->
+                var path = outputDir
+                pkg.split('.').forEach { dir -> path = path.resolve(dir) }
 
-        // Generate required package-info.java files.
-        outputDirs
-            // Don't re-create already present files.
-            .filter { (_, outputDir) -> !outputDir.exists() }
-            .forEach { (root, outputDir) ->
-                val packageName = outputDir.relativeTo(root).path
-                    .replace('/', '.')
-
-                outputDir.mkdirs()
-                outputDir.resolve("package-info.java")
+                path.mkdirs()
+                path.resolve("package-info.java")
                     .writeText("/* AUTOGENERATED, DO NOT EDIT */ " +
-                            "@org.jetbrains.annotations.NotNullByDefault " +
-                            "package $packageName;", Charsets.UTF_8)
+                        "@org.jetbrains.annotations.NotNullByDefault " +
+                        "package $pkg;")
+            }
         }
     }
 }
