@@ -1,0 +1,76 @@
+# Dependencies must be added to one of the following bundles in order to actually do
+# anything. They are referenced by their configuration key below. Dependencies in an
+# individual list are sorted in ascending alphabetical order.
+[bundles]
+
+# Dependencies here are only present at compile time. They are not included in the
+# final .jar file. This is appropriate for some things like annotations libraries
+# that only exist to enable static analysis for IDEs.
+compileOnly = [
+    "annotations",
+]
+
+# Dependencies that are available at both compile and run-time but are not provided
+# transitively to anything using this library.
+#
+# When in doubt, this is where new dependencies should be listed!
+implementation = [ ]
+
+# Dependencies that are added at runtime but cannot be accessed directly at compile
+# time. Usually reserved for "runtimes" that share a (decoupled) common API.
+runtimeOnly = [ ]
+
+# Equivalent of `implementation` above, but only exists for testing code. APIs for
+# test frameworks like JUnit should go here.
+testImplementation = [
+    "junit-jupiter",
+]
+
+# Equivalent of `runtimeOnly` above, but only exists for testing code. Runtimes for
+# test frameworks like JUnit should go here.
+testRuntimeOnly = [
+    "junit-platform-launcher",
+]
+
+# If two or more related dependencies share the same version, define it here to
+# reduce chance of mismatch. Unrelated dependencies that happen to share a dependency
+# should NOT use this feature! This feature only makes sense for "tightly coupled"
+# libraries.
+[versions]
+junit = "6.0.1"
+
+# Libraries are defined below, sorted by ascending alphabetical order of their
+# configuration keys.
+#
+# Library inclusion must be justified with a comment explaining its usage and
+# expected scope, formatted like in the example below:
+#
+# ```
+# usage: to provide faster versions of common data structures
+# scope: everywhere
+# ```
+#
+# `scope` indicates where the library is expected to be used. It should be a single
+# word that describes where in the codebase it is needed, or "everywhere" if it is
+# going to be present, well, everywhere.
+#
+# This is meant to make it easier to audit 3rd-party libraries in the future.
+[libraries]
+
+# usage: provides annotations for IDE static analysis
+# scope: everywhere
+annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
+
+# usage: JUnit testing API for unit tests
+# scope: testing
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+
+# usage: JUnit runtime for unit tests
+# scope: testing
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit" }
+
+# Gradle plugins. It's unnecessary to add many of these.
+[plugins]
+
+# Code formatting plugin.
+spotless = { id = "com.diffplug.spotless", version = "8.1.0" }

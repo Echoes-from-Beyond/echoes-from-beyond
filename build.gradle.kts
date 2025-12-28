@@ -5,7 +5,7 @@ plugins {
     id("java")
 
     // Code formatting plugin.
-    id("com.diffplug.spotless") version "8.1.0"
+    alias(libs.plugins.spotless)
 }
 
 group = "org.echoesfrombeyond"
@@ -15,11 +15,14 @@ repositories {
     mavenCentral()
 }
 
+// Actual dependencies are defined in `gradle/libs.versions.toml`.
 dependencies {
-    compileOnly("org.jetbrains:annotations:26.0.2-1")
+    compileOnly(libs.bundles.compileOnly)
+    implementation(libs.bundles.implementation)
+    runtimeOnly(libs.bundles.runtimeOnly)
 
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation(libs.bundles.testImplementation)
+    testRuntimeOnly(libs.bundles.testRuntimeOnly)
 }
 
 java {
