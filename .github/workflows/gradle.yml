@@ -36,4 +36,7 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew build
+
+        # Run without the daemon because the test runner will not stay online for
+        # more than one execution of this command.
+        run: ./gradlew --no-daemon build
