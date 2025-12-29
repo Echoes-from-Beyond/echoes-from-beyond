@@ -45,6 +45,9 @@ tasks.test {
 }
 
 tasks.javadoc {
+    // Use UTF-8 encoding for everything.
+    options.encoding = "UTF-8"
+
     val core = options as? CoreJavadocOptions
 
     // See https://docs.oracle.com/en/java/javase/25/docs/specs/man/javadoc.html#doclint
@@ -54,11 +57,18 @@ tasks.javadoc {
     core?.addBooleanOption("Xdoclint:all,-missing", true)
 }
 
+tasks.withType<JavaCompile>().configureEach {
+    options.encoding = "UTF-8"
+}
+
 spotless {
     // This is currently necessary to prevent Gradle config cache invalidation:
     // https://github.com/gradle/gradle/issues/25469#issuecomment-3444231151. Also
     // make sure that any files formatted by Spotless are using LF.
     lineEndings = LineEnding.UNIX
+
+    // This is the default, but it's nice to be explicit.
+    encoding = Charsets.UTF_8
 
     java {
         target({ sourceSets.main.map { set -> set.allJava.sourceDirectories } })
@@ -148,17 +158,14 @@ sourceSets {
     }
 }
 
-tasks.getByName("compileGeneratedPackageInfoJava") {
+tasks.named("compileGeneratedPackageInfoJava").configure {
     // We must generate the source before trying to compile it.
-    inputs.files({ tasks.getByName("generatePackageInfo") })
+    inputs.files({ tasks.named("generatePackageInfo") })
 }
 
-tasks.register("generatePackageHierarchy") {
+val generateHierarchy = tasks.register("generatePackageHierarchy") {
     group = "other"
     description = "Generates a file listing all non-empty Java packages in the input."
-
-    inputs.files(sourceSets.main.map { set -> set.allJava.sourceDirectories })
-    outputs.file(generatePackageInfoDir.map { dir -> dir.file("packages") })
 
     doLast {
         // It only makes sense for us to have a single output file.
@@ -199,14 +206,9 @@ tasks.register("generatePackageHierarchy") {
     }
 }
 
-tasks.register("generatePackageInfo") {
+val generatePackageInfo = tasks.register("generatePackageInfo") {
     group = "other"
     description = "Generates package-info.java files corresponding to the package tree."
-
-    inputs.files({ tasks.getByName("generatePackageHierarchy") })
-    outputs.dirs({
-        sourceSets.getByName("generatedPackageInfo").allJava.sourceDirectories
-    })
 
     doLast {
         // Read the `packages` file into a list of Pairs, each of which contains the
@@ -282,4 +284,18 @@ tasks.register("generatePackageInfo") {
                 }
         }
     }
+}
+
+generateHierarchy.configure {
+    inputs.files(sourceSets.main.map { set -> set.allJava.sourceDirectories })
+    outputs.file(generatePackageInfoDir.map { dir -> dir.file("packages") })
+}
+
+generatePackageInfo.configure {
+    inputs.files({ tasks.named("generatePackageHierarchy") })
+    outputs.dirs({
+        sourceSets.named("generatedPackageInfo").map { set ->
+            set.allJava.sourceDirectories
+        }
+    })
 }
