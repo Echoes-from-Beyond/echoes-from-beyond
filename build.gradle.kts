@@ -2,6 +2,7 @@ import com.diffplug.spotless.LineEnding
 import java.nio.file.Files
 import java.security.MessageDigest
 import kotlin.io.path.extension
+import kotlin.math.min
 
 plugins {
     id("java")
@@ -39,6 +40,8 @@ java {
 
 tasks.test {
     useJUnitPlatform()
+
+    maxParallelForks = min(Runtime.getRuntime().availableProcessors() - 1, 1)
 }
 
 tasks.javadoc {
