@@ -1,5 +1,6 @@
 import com.diffplug.spotless.LineEnding
 import java.nio.file.Files
+import java.security.MessageDigest
 import kotlin.io.path.extension
 
 plugins {
@@ -16,7 +17,8 @@ repositories {
     mavenCentral()
 }
 
-// Actual dependencies are defined in `gradle/libs.versions.toml`.
+// Actual dependencies are defined in `gradle/libs.versions.toml`. They should not be
+// added here.
 dependencies {
     compileOnly(libs.bundles.compileOnly)
     implementation(libs.bundles.implementation)
@@ -31,8 +33,8 @@ java {
         languageVersion = JavaLanguageVersion.of(25)
     }
 
-    // withSourcesJar()
-    // withJavadocJar()
+    withSourcesJar()
+    withJavadocJar()
 }
 
 tasks.test {
@@ -42,17 +44,21 @@ tasks.test {
 tasks.javadoc {
     val core = options as? CoreJavadocOptions
 
-    // See https://docs.oracle.com/en/java/javase/17/docs/specs/man/javadoc.html#additional-options-provided-by-the-standard-doclet.
-    // Unfortunately there's seemingly no way to only disable missing javadoc warnings for private
-    // methods. Setting it up this way will at least lint for other errors.
+    // See https://docs.oracle.com/en/java/javase/25/docs/specs/man/javadoc.html#doclint
+    // Unfortunately there's seemingly no way to only disable missing javadoc
+    // warnings for private methods. Setting it up this way will at least lint for
+    // other errors.
     core?.addBooleanOption("Xdoclint:all,-missing", true)
 }
 
 spotless {
+    // This is currently necessary to prevent Gradle config cache invalidation:
+    // https://github.com/gradle/gradle/issues/25469#issuecomment-3444231151. Also
+    // make sure that any files formatted by Spotless are using LF.
     lineEndings = LineEnding.UNIX
 
     java {
-        targetExclude("src/generatedPackageInfo/**/*")
+        target({ sourceSets.main.map { set -> set.allJava.sourceDirectories } })
 
         // Always clean these up first.
         removeUnusedImports()
@@ -105,12 +111,24 @@ spotless {
     }
 }
 
+val generatePackageInfoDir = project.layout.buildDirectory.map { buildDir ->
+    buildDir.dir("generatePackageInfo")
+}
+
+// We need to define a source set for generating package-info.java files into.
 sourceSets {
     val set = create("generatedPackageInfo") {
         java {
-            srcDir("src/generatedPackageInfo/java")
+            // Need to call setSrcDirs otherwise Gradle's "helpful" default path
+            // src/main/java, will be present.
+            setSrcDirs(arrayOf(generatePackageInfoDir.map { dir ->
+                dir.dir("src")
+                    .dir("main")
+                    .dir("java")
+            }).asIterable())
         }
 
+        // Our compile-time classpath is the same as main's.
         compileClasspath = sourceSets.main.get().compileClasspath
     }
 
@@ -120,69 +138,60 @@ sourceSets {
         output.dir(set.output)
 
         // This makes sure that anything in the generated code can be referenced by
-        // anything in `main`.
+        // anything in `main`. `runtimeClasspath` is not strictly necessary as long
+        // as we're only generating annotations.
         compileClasspath += set.output
         runtimeClasspath += set.output
     }
 }
 
-// tasks.build {
-//    dependsOn("generatePackageInfo")
-// }
+tasks.getByName("compileGeneratedPackageInfoJava") {
+    // We must generate the source before trying to compile it.
+    inputs.files({ tasks.getByName("generatePackageInfo") })
+}
 
 tasks.register("generatePackageHierarchy") {
-    inputs.files(sourceSets.main.map { set -> set.output.classesDirs })
-    outputs.file("build/pkgs.txt")
+    group = "other"
+    description = "Generates a file listing all non-empty Java packages in the input."
+
+    inputs.files(sourceSets.main.map { set -> set.allJava.sourceDirectories })
+    outputs.file(generatePackageInfoDir.map { dir -> dir.file("packages") })
 
     doLast {
+        // It only makes sense for us to have a single output file.
         outputs.files.singleFile.bufferedWriter(Charsets.UTF_8).use { out ->
-            inputs.files.flatMap { root ->
+            // We can have multiple source directories, though. Treat all of them as
+            // one big directory. We de-duplicate identical packages and sort them
+            // for consistent output.
+            inputs.files.asSequence().flatMap { root ->
                 root.walkTopDown()
                     .filter(File::isDirectory)
                     .filter { dir ->
+                        // Check for any .java files. Directories that don't contain
+                        // .java files do not need a corresponding package-info.java.
                         Files.newDirectoryStream(dir.toPath()).use { stream ->
                             stream.filter(Files::isRegularFile)
-                                .any { path -> path.extension == "class" }
+                                .any { path -> path.extension == "java" }
                         }
                     }
-                    .map { file -> file.relativeTo(root) }
-            }.forEach { file ->
-                out.write(file.invariantSeparatorsPath.replace('/', '.'))
+                    .map { file ->
+                        file.relativeTo(root)
+                    }
+            }.map { file ->
+                // All the paths are relativized to their respective roots.
+                file.invariantSeparatorsPath.replace('/', '.')
+            }.filter { name ->
+                // Java package names can't contain newline characters. If they do,
+                // we have far worse problems. But we can reasonably avoid mucking
+                // up the formatting of our output file by skipping such pathological
+                // input.
+                !name.contains('\n')
+            }.toMutableSet().sorted().toList().forEach { name ->
+                out.write(name)
                 out.write("\n")
             }
 
             out.flush()
-        }
-    }
-}
-
-tasks.register("cleanPackageInfo") {
-    inputs.files({ tasks.getByName("generatePackageHierarchy") })
-    outputs.dirs({
-        sourceSets.getByName("generatedPackageInfo").java.sourceDirectories
-    })
-
-    doLast {
-        val packages = inputs.files.singleFile.readLines(Charsets.UTF_8).map { line ->
-            var base = File("")
-            line.split('.').forEach { pack ->
-                base = base.resolve(pack)
-            }
-
-            base
-        }
-
-        outputs.files.forEach { outputDir ->
-            outputDir.walkBottomUp()
-                .filter(File::isDirectory)
-                .forEach { dir ->
-                    val relative = dir.relativeTo(outputDir)
-                    println(relative.path)
-
-                    if (packages.none { p -> p.startsWith(relative) }) {
-                        dir.deleteRecursively()
-                    }
-                }
         }
     }
 }
@@ -193,23 +202,81 @@ tasks.register("generatePackageInfo") {
 
     inputs.files({ tasks.getByName("generatePackageHierarchy") })
     outputs.dirs({
-        sourceSets.getByName("generatedPackageInfo").java.sourceDirectories
+        sourceSets.getByName("generatedPackageInfo").allJava.sourceDirectories
     })
 
     doLast {
-        val packages = inputs.files.singleFile.readLines(Charsets.UTF_8)
+        // Read the `packages` file into a list of Pairs, each of which contains the
+        // original package name (without newlines) and the relative file path
+        // starting from the source root.
+        val packages = inputs.files.singleFile.useLines(Charsets.UTF_8) { lines ->
+            lines.map { line ->
+                Pair(line, line.split('.')
+                    .fold(File("")) { file, name -> file.resolve(name) })
+            }.toList()
+        }
+
+        val md = MessageDigest.getInstance("SHA-1")
 
         outputs.files.forEach { outputDir ->
-            packages.forEach { pkg ->
-                var path = outputDir
-                pkg.split('.').forEach { dir -> path = path.resolve(dir) }
+            // Delete unnecessary files; i.e. those that do not correspond to or
+            // contain any active packages.
+            outputDir.walkBottomUp()
+                // Our deletion targets are all relative to the output directory.
+                .map { base -> Pair(base, base.relativeTo(outputDir)) }
+                .map { (base, relative) ->
+                    // For the purposes of determining if a package is used, check
+                    // the current directory if we're a directory, or the file's
+                    // parent if we're a file.
+                    Pair(base,
+                        if (base.isDirectory) relative
+                        else relative.parentFile)
+                }
+                .filter { (_, relative) ->
+                    // Check if this directory corresponds to a package that contains
+                    // at least one .java file.
+                    packages.none { (_, file) -> file.startsWith(relative) }
+                }
+                .forEach { (base, _) -> base.deleteRecursively() }
 
-                path.mkdirs()
-                path.resolve("package-info.java")
-                    .writeText("/* AUTOGENERATED, DO NOT EDIT */ " +
-                        "@org.jetbrains.annotations.NotNullByDefault " +
-                        "package $pkg;")
-            }
+            // Generate package-info.java files based on our input list. Create all
+            // directories as necessary.
+            packages
+                .map { (name, file) ->
+                    Pair(name, outputDir
+                        .resolve(file)
+                        .resolve("package-info.java"))
+                }
+                .forEach inner@ { (name, file) ->
+                    // The code to generate in each package. Always encoded in UTF-8
+                    // bytes.
+                    val textBytes = ("/* AUTOGENERATED, DO NOT EDIT */ " +
+                            "@org.jetbrains.annotations.NotNullByDefault " +
+                            "package $name;").toByteArray(Charsets.UTF_8)
+
+                    val exists = file.exists()
+
+                    // If our length stayed the same, we run a checksum to determine
+                    // if we need to actually write the contents.
+                    if (exists && (file.length() == textBytes.size.toLong())) {
+                        md.update(textBytes)
+                        val expected = md.digest()
+
+                        md.update(file.readBytes())
+                        val actual = md.digest()
+
+                        // Same checksum. We have nothing to write.
+                        if (expected.contentEquals(actual)) return@inner
+                    }
+
+                    // If the file exists, its parents definitely exist, so don't
+                    // bother running `mkdirs`.
+                    if (!exists) {
+                        file.parentFile.mkdirs()
+                    }
+
+                    file.writeBytes(textBytes)
+                }
         }
     }
 }
