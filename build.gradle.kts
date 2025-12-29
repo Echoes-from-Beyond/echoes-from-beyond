@@ -95,23 +95,6 @@ spotless {
             "\\#org.echoesfrombeyond"
         )
 
-        // Use Eclipse JDT to reorder members. This helps to reduce the risk of merge
-        // conflicts.
-        eclipse()
-            .sortMembersEnabled(true)
-            .sortMembersVisibilityOrderEnabled(true)
-
-            // Don't sort fields, this can cause compiler errors.
-            .sortMembersDoNotSortFields(true)
-
-            // T = (nested) types, SF = static fields, SI = static initializers,
-            // F = fields, I = initializers, C = constructors, SM = static methods,
-            // M = methods
-            .sortMembersOrder("T,SF,SI,F,I,C,SM,M")
-
-            // V = private, R = protected, D = package-private, B = public
-            .sortMembersVisibilityOrder("V,R,D,B")
-
         googleJavaFormat("1.33.0")
             .reflowLongStrings()
 
