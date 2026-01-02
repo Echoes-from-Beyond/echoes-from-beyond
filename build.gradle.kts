@@ -39,15 +39,12 @@ java {
 }
 
 tasks.test {
-    useJUnitPlatform()
-
     maxParallelForks = min(Runtime.getRuntime().availableProcessors() - 1, 1)
+
+    useJUnitPlatform()
 }
 
 tasks.javadoc {
-    // Use UTF-8 encoding for everything.
-    options.encoding = "UTF-8"
-
     val core = options as? CoreJavadocOptions
 
     // See https://docs.oracle.com/en/java/javase/25/docs/specs/man/javadoc.html#doclint
@@ -61,6 +58,10 @@ tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
 }
 
+tasks.withType<Javadoc>().configureEach {
+    options.encoding = "UTF-8"
+}
+
 spotless {
     // This is currently necessary to prevent Gradle config cache invalidation:
     // https://github.com/gradle/gradle/issues/25469#issuecomment-3444231151. Also
@@ -71,7 +72,7 @@ spotless {
     encoding = Charsets.UTF_8
 
     java {
-        target({ sourceSets.main.map { set -> set.allJava.sourceDirectories } })
+        target(sourceSets.main.map { set -> set.allJava.sourceDirectories })
 
         // Always clean these up first.
         removeUnusedImports()
@@ -118,9 +119,7 @@ sourceSets {
             // Need to call setSrcDirs otherwise Gradle's "helpful" default path
             // src/main/java, will be present.
             setSrcDirs(arrayOf(generatePackageInfoDir.map { dir ->
-                dir.dir("src")
-                    .dir("main")
-                    .dir("java")
+                dir.dir("src").dir("main").dir("java")
             }).asIterable())
         }
     }
@@ -130,15 +129,17 @@ sourceSets {
         // as `main`.
         generated.compileClasspath = compileClasspath
 
+        val generatedOutput = generated.output
+
         // This makes sure that (compiled) generated code is included in our
         // resulting build.
-        output.dir(generated.output)
+        output.dir(generatedOutput)
 
         // This makes sure that anything in the generated code can be referenced by
         // anything in `main`. `runtimeClasspath` is not strictly necessary as long
         // as we're only generating annotations.
-        compileClasspath += generated.output
-        runtimeClasspath += generated.output
+        compileClasspath += generatedOutput
+        runtimeClasspath += generatedOutput
     }
 }
 
@@ -147,7 +148,7 @@ tasks.named("compileGeneratedPackageInfoJava").configure {
     inputs.files({ tasks.named("generatePackageInfo") })
 }
 
-val generateHierarchy = tasks.register("generatePackageHierarchy") {
+val generatePackageHierarchy = tasks.register("generatePackageHierarchy") {
     group = "other"
     description = "Generates a file listing all non-empty Java packages in the input."
 
@@ -280,13 +281,13 @@ val generatePackageInfo = tasks.register("generatePackageInfo") {
     }
 }
 
-generateHierarchy.configure {
+generatePackageHierarchy.configure {
     inputs.files(sourceSets.main.map { set -> set.allJava.sourceDirectories })
     outputs.file(generatePackageInfoDir.map { dir -> dir.file("packages") })
 }
 
 generatePackageInfo.configure {
-    inputs.files(generateHierarchy)
+    inputs.files(generatePackageHierarchy)
     outputs.dirs({
         sourceSets.named("generatedPackageInfo").map { set ->
             set.allJava.sourceDirectories
