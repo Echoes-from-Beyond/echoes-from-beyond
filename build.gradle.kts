@@ -113,7 +113,7 @@ val generatePackageInfoDir = project.layout.buildDirectory.map { buildDir ->
 
 // We need to define a source set for generating package-info.java files into.
 sourceSets {
-    val set = create("generatedPackageInfo") {
+    val generated = create("generatedPackageInfo") {
         java {
             // Need to call setSrcDirs otherwise Gradle's "helpful" default path
             // src/main/java, will be present.
@@ -123,21 +123,22 @@ sourceSets {
                     .dir("java")
             }).asIterable())
         }
-
-        // Our compile-time classpath is the same as main's.
-        compileClasspath = sourceSets.main.get().compileClasspath
     }
 
     main {
+        // For compilation purposes, the generated code has the exact same classpath
+        // as `main`.
+        generated.compileClasspath = compileClasspath
+
         // This makes sure that (compiled) generated code is included in our
         // resulting build.
-        output.dir(set.output)
+        output.dir(generated.output)
 
         // This makes sure that anything in the generated code can be referenced by
         // anything in `main`. `runtimeClasspath` is not strictly necessary as long
         // as we're only generating annotations.
-        compileClasspath += set.output
-        runtimeClasspath += set.output
+        compileClasspath += generated.output
+        runtimeClasspath += generated.output
     }
 }
 
@@ -167,11 +168,9 @@ val generateHierarchy = tasks.register("generatePackageHierarchy") {
                                 .any { path -> path.extension == "java" }
                         }
                     }
-                    .map { file ->
-                        file.relativeTo(root)
-                    }
+                    // All paths are relativized to their respective roots.
+                    .map { file -> file.relativeTo(root) }
             }.map { file ->
-                // All the paths are relativized to their respective roots.
                 file.invariantSeparatorsPath.replace('/', '.')
             }.filter { name ->
                 // Java package names can't contain newline characters. If they do,
@@ -179,7 +178,7 @@ val generateHierarchy = tasks.register("generatePackageHierarchy") {
                 // up the formatting of our output file by skipping such pathological
                 // input.
                 !name.contains('\n')
-            }.toMutableSet().sorted().toList().forEach { name ->
+            }.toSortedSet().forEach { name ->
                 out.write(name)
                 out.write("\n")
             }
@@ -197,12 +196,19 @@ val generatePackageInfo = tasks.register("generatePackageInfo") {
         // Read the `packages` file into a list of Pairs, each of which contains the
         // original package name (without newlines) and the relative file path
         // starting from the source root.
-        val packages = inputs.files.singleFile.useLines(Charsets.UTF_8) { lines ->
-            lines.map { line ->
-                Pair(line, line.split('.')
-                    .fold(File("")) { file, name -> file.resolve(name) })
-            }.toList()
-        }
+        //
+        // We call `readText` and `split` instead of something like `useLines` to
+        // keep behavior the same regardless of platform: `packages` always uses LF
+        // as the line separator!
+        val packages = inputs.files.singleFile
+            .readText(Charsets.UTF_8)
+            .splitToSequence('\n')
+            .filter(String::isNotBlank)
+            .map { line -> Pair(line, line.split('.')
+                .fold(File("")) { file, name ->
+                    file.resolve(name)
+                })
+        }.toList()
 
         val md = MessageDigest.getInstance("SHA-1")
 
@@ -223,7 +229,12 @@ val generatePackageInfo = tasks.register("generatePackageInfo") {
                 .filter { (_, relative) ->
                     // Check if this directory corresponds to a package that contains
                     // at least one .java file.
-                    packages.none { (_, file) -> file.startsWith(relative) }
+                    //
+                    // `relative` may be null if we encounter a file at the top level
+                    // of the source tree. We always want to delete such files.
+                    relative == null || packages.none { (_, file) ->
+                        file.startsWith(relative)
+                    }
                 }
                 .forEach { (base, _) -> base.deleteRecursively() }
 
@@ -275,7 +286,7 @@ generateHierarchy.configure {
 }
 
 generatePackageInfo.configure {
-    inputs.files({ tasks.named("generatePackageHierarchy") })
+    inputs.files(generateHierarchy)
     outputs.dirs({
         sourceSets.named("generatedPackageInfo").map { set ->
             set.allJava.sourceDirectories
