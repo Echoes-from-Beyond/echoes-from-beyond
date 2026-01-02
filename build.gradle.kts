@@ -54,6 +54,13 @@ tasks.javadoc {
     core?.addBooleanOption("Xdoclint:all,-missing", true)
 }
 
+// Copy the license to every built .jar file.
+tasks.withType<Jar>().configureEach {
+    from("LICENSE") {
+        into("META-INF")
+    }
+}
+
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
 }
