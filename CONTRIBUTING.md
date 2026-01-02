@@ -10,3 +10,5 @@ If you're fixing a bug, please create an issue first and reference it in your pu
 If you're adding a new feature, you don't _need_ to create an issue first, but it's HIGHLY recommended to do so in order to find out if your feature will be accepted before you make it!
 
 Our CI system detects invalid code style and will fail the build. Before you commit, make sure you run `./gradlew spotlessApply`.
+
+By contributing, you agree to license the contributed code under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html#license-text). Please do not submit code under different licenses.
