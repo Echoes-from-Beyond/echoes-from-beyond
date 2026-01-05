@@ -179,7 +179,7 @@ val generatePackageHierarchy = tasks.register("generatePackageHierarchy") {
                     // All paths are relativized to their respective roots.
                     .map { file -> file.relativeTo(root) }
             }.map { file ->
-                file.invariantSeparatorsPath.replace('/', '.')
+                file.normalize().invariantSeparatorsPath.replace('/', '.')
             }.filter { name ->
                 // Java package names can't contain newline characters. If they do,
                 // we have far worse problems. But we can reasonably avoid mucking
