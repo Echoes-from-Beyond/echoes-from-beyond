@@ -75,9 +75,9 @@ public final class SigilValidation {
    * will always be the same as {@link SigilValidation#encodePoint(int, int)}, which should be used
    * whenever necessary to construct ad hoc Sigils.
    *
-   * <p>Sigils should instead be thought of as arrays of integer (x, y) coordinates, where (0, 0) is
-   * the upper-left corner of the grid. Given this model, this method will ensure point array
-   * upholds certain invariants, namely:
+   * <p>Sigils should be thought of as arrays of integer (x, y) coordinates, where (0, 0) is the
+   * upper-left corner of the grid, y increasing while moving down, x increasing while moving right.
+   * Given this model, this method will ensure the point array upholds certain invariants, namely:
    *
    * <ul>
    *   <li>Negative coordinates are not allowed

@@ -121,7 +121,7 @@ public final class SigilKey implements Comparable<SigilKey>, Serializable {
    * used to construct the proxy were invalid.
    *
    * <p>This is intended to be used to simulate invalid or malicious serialized data by allowing any
-   * bytes to be written.
+   * bytes to be read during deserialization.
    *
    * @param bytes the raw bytes
    * @return the serializable proxy object
