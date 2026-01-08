@@ -7,6 +7,9 @@ private val threadLocalDigest = ThreadLocal.withInitial {
     MessageDigest.getInstance("SHA-1")
 }
 
+/**
+ * Basic [WorkAction] for generating package-info.java files.
+ */
 abstract class GeneratePackageInfoWorkAction : WorkAction<PackageInfoWorkParameters> {
     override fun execute() {
         val contents = parameters.contents.get().toByteArray(Charsets.UTF_8)
@@ -14,6 +17,7 @@ abstract class GeneratePackageInfoWorkAction : WorkAction<PackageInfoWorkParamet
 
         val exists = file.exists()
 
+        // Run a checksum to determine if we need to write anything to the file.
         if (exists && (file.length() == contents.size.toLong())) {
             val md = threadLocalDigest.get()
 

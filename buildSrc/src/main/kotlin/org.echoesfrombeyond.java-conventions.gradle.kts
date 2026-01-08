@@ -5,6 +5,8 @@ import kotlin.math.min
 
 plugins {
     id("java")
+
+    // Plugin versions in precompiled scripts are determined by buildSrc/build.gradle.kts.
     id("com.diffplug.spotless")
 }
 
@@ -13,6 +15,7 @@ repositories {
 }
 
 dependencies {
+    // We have to use the String APIs of versionCatalogs here because of Gradle quirks.
     val libs = versionCatalogs.named("libs")
 
     compileOnly(libs.findBundle("compileOnly").get())
@@ -112,12 +115,16 @@ val generatePackageInfoSrcDir: Provider<Directory> = generatePackageInfoDir.map 
 }
 
 sourceSets {
+    // Creating a source set here makes it so that static analysis tools can pick up on e.g.
+    // nullability annotations in the generated code.
     val generated = create("generatedPackageInfo") {
         java {
             setSrcDirs(listOf(generatePackageInfoSrcDir))
         }
     }
 
+    // We want the generated sources to be able to reference anything `main` can. Ensure the
+    // classpath is the same, and also allow `main` to reference the generated code.
     main {
         generated.compileClasspath = compileClasspath
 

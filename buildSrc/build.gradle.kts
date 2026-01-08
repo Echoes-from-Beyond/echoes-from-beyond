@@ -11,6 +11,9 @@ repositories {
 
 dependencies {
     val libs = versionCatalogs.named("libs")
+
+    // These are plugins that we depend upon as `implementation`. They're not used as plugins for
+    // this build script, but they are for build scripts that apply our convention plugin.
     implementation(libs.findBundle("build").get())
 }
 
