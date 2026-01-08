@@ -10,7 +10,7 @@ For example, if versions `4.7.6`, `4.8.7` and `5.1.3` are released, this reposit
 
 Email <chemky2000@gmail.com> to report vulnerabilities. The title of the email should contain the text `VULNERABILITY REPORT` somewhere.
 
-Reports must use the format detailed [here](#format). Please copy-paste this into your email client of choice. It's also strongly recommended to _encrypt_ the contents using PGP, with the following key:
+Reports must use the format as provided in the [format section](#format). Please copy-paste this into your email client of choice. It's also strongly recommended to _encrypt_ the contents using PGP, with the following key:
 
 <details>
   <summary>Public Key</summary>
