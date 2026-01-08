@@ -1,0 +1,27 @@
+name: Dependency Submission
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  # Dependency graph support.
+  dependency-submission:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e # 5.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 25
+
+      - name: Submit dependency graph
+        uses: gradle/actions/dependency-submission@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # 5.0.0
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
