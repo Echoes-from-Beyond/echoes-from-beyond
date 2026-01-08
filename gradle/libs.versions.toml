@@ -32,6 +32,11 @@ testRuntimeOnly = [
     "junit-platform-launcher",
 ]
 
+# Used only in buildSrc for "implementation" (plugin) dependencies.
+build = [
+    "spotless"
+]
+
 # If two or more related dependencies share the same version, define it here to
 # reduce chance of mismatch. Unrelated dependencies that happen to share a dependency
 # should NOT use this feature! This feature only makes sense for "tightly coupled"
@@ -69,8 +74,6 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jun
 # scope: testing
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit" }
 
-# Gradle plugins. It's unnecessary to add many of these.
-[plugins]
-
-# Code formatting plugin.
-spotless = { id = "com.diffplug.spotless", version = "8.1.0" }
+# usage: code formatting plugin
+# scope: buildSrc
+spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version = "8.1.0" }
