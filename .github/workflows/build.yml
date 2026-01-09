@@ -25,6 +25,9 @@ jobs:
           # Key is based off of the hash of all the script files.
           key: gradle-buildSrc-${{ hashFiles('buildSrc/*.gradle.kts', 'buildSrc/src/**/*') }}
 
+          # The OS should not matter for these files.
+          enableCrossOsArchive: true
+
           # These directories prevent ':buildSrc:jar' from being invalidated.
           path: |
             ./buildSrc/build/classes
