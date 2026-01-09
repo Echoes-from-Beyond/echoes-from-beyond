@@ -38,22 +38,19 @@ import org.jetbrains.annotations.VisibleForTesting;
 public final class SigilKey implements Comparable<SigilKey>, Serializable {
   @Serial private static final long serialVersionUID = 7587438460546625759L;
 
-  // Used in place of SigilKey for (de)serialization; just a thin wrapper around a
-  // byte array.
+  // Used in place of SigilKey for (de)serialization; just a thin wrapper around a byte array.
   private record Proxy(byte @Nullable [] untrustedPoints) implements Serializable {
     @Serial private static final long serialVersionUID = -6469837533138978770L;
 
     @Serial
     private Object readResolve() throws InvalidObjectException {
       if (untrustedPoints == null)
-        // It would be fine to call `canonicalize` with a null array, because it
-        // would just throw a NullPointerException. But this error message is better,
-        // keeps the exception type consistent, and prevents static analysis from
-        // yelling at us.
+        // It would be fine to call `canonicalize` with a null array, because it would just throw a
+        // NullPointerException. But this error message is better, keeps the exception type
+        // consistent, and prevents static analysis from yelling at us.
         throw new InvalidObjectException("points array shouldn't have been null");
 
-      // Canonicalize the data. If it's invalid, we'll throw an
-      // InvalidObjectException.
+      // Canonicalize the data. If it's invalid, we'll throw an InvalidObjectException.
       return SigilValidation.canonicalize(untrustedPoints)
           .orElseThrow(() -> new InvalidObjectException("points array couldn't be canonicalized"));
     }
@@ -67,9 +64,9 @@ public final class SigilKey implements Comparable<SigilKey>, Serializable {
 
   @Serial
   private void readObject(ObjectInputStream ois) throws InvalidObjectException {
-    // Deserialization should only occur through the proxy, as that performs the
-    // required validation. Encountering directly-serialized SigilKey objects is
-    // always either a bug or malicious input.
+    // Deserialization should only occur through the proxy, as that performs the required
+    // validation. Encountering directly-serialized SigilKey objects is always either a bug or
+    // "malicious" input.
     throw new InvalidObjectException("proxy is required");
   }
 
