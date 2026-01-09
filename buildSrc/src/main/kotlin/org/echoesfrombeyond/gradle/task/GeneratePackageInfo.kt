@@ -88,8 +88,8 @@ abstract class GeneratePackageInfo : DefaultTask() {
             val file = this.generatedSourceDirectory.file(packageInfo.invariantSeparatorsPathString)
 
             queue.submit(GeneratePackageInfoWorkAction::class.java) {
-                contents.set(packageInfoGenerator.map { g -> g.apply(info.name) })
-                targetFile.set(file)
+                it.contents.set(packageInfoGenerator.map { g -> g.apply(info.name) })
+                it.targetFile.set(file)
             }
         }
     }

@@ -1,8 +1,9 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
-    `kotlin-dsl`
+    id("org.jetbrains.kotlin.jvm") version "2.2.0"
 }
 
 repositories {
@@ -10,14 +11,14 @@ repositories {
 }
 
 dependencies {
-    val libs = versionCatalogs.named("libs")
+    val libs = project.extensions.getByName<VersionCatalogsExtension>("versionCatalogs").named("libs")
 
     // These are plugins that we depend upon as `implementation`. They're not used as plugins for
     // this build script, but they are for build scripts that apply our convention plugin.
-    implementation(libs.findBundle("build").get())
+    add("implementation", libs.findBundle("build").get())
 }
 
-kotlin {
+project.extensions.configure<KotlinJvmProjectExtension>("kotlin") {
     jvmToolchain(25)
 
     // TODO: remove this once Gradle 9.4 comes out
@@ -28,7 +29,7 @@ kotlin {
 }
 
 // TODO: remove this once Gradle 9.4 comes out
-java {
+project.extensions.configure<JavaPluginExtension>("java") {
     sourceCompatibility = JavaVersion.VERSION_24
     targetCompatibility = JavaVersion.VERSION_24
 }

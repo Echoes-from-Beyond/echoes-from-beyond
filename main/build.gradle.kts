@@ -1,3 +1,1 @@
-plugins {
-    id("org.echoesfrombeyond.java-conventions")
-}
+apply<org.echoesfrombeyond.gradle.plugin.JavaConventionPlugin>()
