@@ -1,9 +1,7 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "2.2.0"
+    id("org.jetbrains.kotlin.jvm") version "2.3.0"
 }
 
 repositories {
@@ -20,16 +18,4 @@ dependencies {
 
 project.extensions.configure<KotlinJvmProjectExtension>("kotlin") {
     jvmToolchain(25)
-
-    // TODO: remove this once Gradle 9.4 comes out
-    compilerOptions {
-        apiVersion.set(KotlinVersion.KOTLIN_2_2)
-        jvmTarget.set(JvmTarget.JVM_24)
-    }
-}
-
-// TODO: remove this once Gradle 9.4 comes out
-project.extensions.configure<JavaPluginExtension>("java") {
-    sourceCompatibility = JavaVersion.VERSION_24
-    targetCompatibility = JavaVersion.VERSION_24
 }
