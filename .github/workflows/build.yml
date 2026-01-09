@@ -24,6 +24,8 @@ jobs:
         with:
           # Key is based off of the runner OS + the hash of all the script files.
           key: ${{ runner.os }}-buildSrc-${{ hashFiles('buildSrc/*.gradle.kts', 'buildSrc/src/**/*') }}
+
+          # These directories prevent ':buildSrc:jar' from being invalidated.
           path: |
             ./buildSrc/build/classes
             ./buildSrc/build/libs
