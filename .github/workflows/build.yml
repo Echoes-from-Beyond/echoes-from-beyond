@@ -23,15 +23,26 @@ jobs:
           java-version: '25'
           distribution: 'temurin'
 
+      # We need to use a separate cache action for the convention plugin specifically: setup-gradle
+      # does NOT do this automatically.
+      - name: Cache buildSrc
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # 5.0.1
+        with:
+          # Key is based off of the runner OS + the hash of all the script files.
+          key: ${{ runner.os }}-buildSrc-${{ hashFiles('/buildSrc/*.gradle.kts', '/buildSrc/src/**/*') }}
+          path: |
+            ./buildSrc/build/classes
+            ./buildSrc/build/libs
+
       # This step performs caching by default. As recommended by
-      # https://community.gradle.org/github-actions/docs/setup-gradle/, we avoid
-      # using `cache: 'gradle'` for actions/setup-java above as this step performs
-      # its own, more effective, caching.
+      # https://community.gradle.org/github-actions/docs/setup-gradle/, we avoid using
+      # `cache: 'gradle'` for actions/setup-java above as this step performs its own, more
+      # effective, caching.
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # 5.0.0
         with:
-          # We need to provide this secret key for the configuration cache to be
-          # cached between builds.
+          # We need to provide this secret key for the configuration cache to be cached between
+          # builds.
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Build Project
