@@ -19,11 +19,16 @@
 package org.echoesfrombeyond.util;
 
 import java.lang.reflect.Array;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Range;
-import org.jetbrains.annotations.VisibleForTesting;
+import java.util.Objects;
+import org.jetbrains.annotations.*;
 
-/** Static input validation methods. */
+/**
+ * Static input validation methods.
+ *
+ * <p>Where possible, prefer to use the methods in this class rather than e.g. {@link
+ * Objects#requireNonNull(Object)}. This is because eventually the checks may be elided in an
+ * "optimized" build that replaces the method bodies with no-ops.
+ */
 public final class Preconditions {
   /**
    * Range check internals used by {@link Preconditions#inBounds(Object, int, int)}.
@@ -44,6 +49,20 @@ public final class Preconditions {
   }
 
   /**
+   * Throw a {@link NullPointerException} if {@code o} is null, otherwise return it.
+   *
+   * <p>This should be used instead of {@link Objects#requireNonNull(Object)}.
+   *
+   * @param o the object to null check
+   * @return {@code o} if non-null
+   */
+  @Contract("null -> fail; _ -> param1")
+  public static <T> T nonNull(@UnknownNullability T o) {
+    if (o == null) throw new NullPointerException();
+    return o;
+  }
+
+  /**
    * Checks that {@code start} and {@code len} form a subsequence that is in range for {@code
    * array}.
    *
@@ -58,9 +77,9 @@ public final class Preconditions {
    */
   @Contract("null, _, _ -> fail")
   public static void inBounds(
-      Object array,
+      @UnknownNullability Object array,
       @Range(from = 0, to = Integer.MAX_VALUE) int start,
       @Range(from = 0, to = Integer.MAX_VALUE) int len) {
-    checkInRange(Array.getLength(array), start, len);
+    checkInRange(Array.getLength(nonNull(array)), start, len);
   }
 }

@@ -21,6 +21,7 @@ package org.echoesfrombeyond.sigil;
 import java.util.Arrays;
 import java.util.Optional;
 import org.echoesfrombeyond.util.array.ArrayUtil;
+import org.jetbrains.annotations.Range;
 
 /** {@link SigilKey} static utilities and factory functions. */
 public final class SigilValidation {
@@ -361,7 +362,8 @@ public final class SigilValidation {
    * @param y the y-coordinate of this point in the Sigil
    * @return the encoded point
    */
-  public static byte encodePoint(int x, int y) {
+  public static byte encodePoint(
+      @Range(from = 0, to = GRID_SIZE - 1) int x, @Range(from = 0, to = GRID_SIZE - 1) int y) {
     return (byte) (((x << X_SHIFT) & X_MASK) | (y & Y_MASK));
   }
 }
