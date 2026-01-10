@@ -16,7 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.util;
+package org.echoesfrombeyond.util.array;
+
+import org.echoesfrombeyond.util.Preconditions;
+import org.jetbrains.annotations.Range;
 
 /** Static utilities relating to arrays. */
 public final class ArrayUtil {
@@ -28,8 +31,18 @@ public final class ArrayUtil {
    * @param array the array to reverse
    * @param startInclusive the start of the sequence to reverse
    * @param count the number of elements to reverse
+   * @throws NullPointerException if {@code array} is {@code null}
+   * @throws IndexOutOfBoundsException if {@code startInclusive} is outside the bounds of {@code
+   *     array}
+   * @throws IllegalArgumentException if {@code startInclusive} is valid but {@code startInclusive +
+   *     count} is outside the bounds of the array
    */
-  public static void reverse(byte[] array, int startInclusive, int count) {
+  public static void reverse(
+      byte[] array,
+      @Range(from = 0, to = Integer.MAX_VALUE) int startInclusive,
+      @Range(from = 0, to = Integer.MAX_VALUE) int count) {
+    Preconditions.inBounds(array, startInclusive, count);
+
     int endExclusive = startInclusive + count;
 
     for (int i = 0; i < count / 2; i++) {

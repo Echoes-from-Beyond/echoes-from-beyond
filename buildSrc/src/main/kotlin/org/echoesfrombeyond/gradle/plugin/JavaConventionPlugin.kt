@@ -71,15 +71,15 @@ class JavaConventionPlugin : Plugin<Project> {
             core?.addBooleanOption("Xdoclint:all,-missing", true)
         }
 
-        val mainSourceSet = (target.extensions
-            .getByName("sourceSets") as SourceSetContainer)
-            .named("main")
+        val sourceSetContainer = (target.extensions.getByName("sourceSets") as SourceSetContainer)
 
         target.extensions.configure<SpotlessExtension>("spotless") {
             it.lineEndings = LineEnding.UNIX
             it.encoding = Charsets.UTF_8
             it.java { java ->
-                java.target(mainSourceSet.map { set -> set.java.sourceDirectories })
+                java.target(sourceSetContainer
+                    .filter { set -> set.name == "main" || set.name == "test" }
+                    .map { set -> set.java.sourceDirectories }.toTypedArray())
 
                 // Always clean these up first.
                 java.removeUnusedImports()
@@ -139,7 +139,7 @@ class JavaConventionPlugin : Plugin<Project> {
         }
 
         val generatePackageTree = target.tasks.register("generatePackageTree", GeneratePackageTree::class.java) {
-            it.sourceDirectories.set(mainSourceSet.map { set -> set.java.sourceDirectories })
+            it.sourceDirectories.set(sourceSetContainer.named("main").map { set -> set.java.sourceDirectories })
             it.packagesFile.set(generatePackageInfoDir.map { dir -> dir.file("packages") })
         }
 

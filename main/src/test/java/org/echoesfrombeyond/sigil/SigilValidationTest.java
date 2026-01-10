@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.*;
 import java.util.*;
 import java.util.function.Predicate;
-import org.echoesfrombeyond.util.ArrayUtil;
+import org.echoesfrombeyond.util.array.ArrayUtil;
 import org.junit.jupiter.api.Test;
 
 public class SigilValidationTest {

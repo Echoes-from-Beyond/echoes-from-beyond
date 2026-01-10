@@ -1,3 +1,3 @@
 rootProject.name = "echoes-from-beyond"
 
-include("main")
+include("main", "util")

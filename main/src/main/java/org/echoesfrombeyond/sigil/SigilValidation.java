@@ -20,7 +20,7 @@ package org.echoesfrombeyond.sigil;
 
 import java.util.Arrays;
 import java.util.Optional;
-import org.echoesfrombeyond.util.ArrayUtil;
+import org.echoesfrombeyond.util.array.ArrayUtil;
 
 /** {@link SigilKey} static utilities and factory functions. */
 public final class SigilValidation {
