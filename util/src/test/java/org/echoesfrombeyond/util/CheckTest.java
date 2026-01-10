@@ -22,43 +22,40 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class PreconditionsTest {
+class CheckTest {
   @Test
   public void emptyRangeIsValid() {
     byte[] array = new byte[] {42};
-    Preconditions.inBounds(array, 0, 0);
+    Check.inBounds(array, 0, 0);
   }
 
   @Test
   public void emptyRangeOnEmptyArrayIsInvalid() {
     byte[] array = new byte[] {};
-    assertThrows(IndexOutOfBoundsException.class, () -> Preconditions.inBounds(array, 0, 0));
+    assertThrows(IndexOutOfBoundsException.class, () -> Check.inBounds(array, 0, 0));
   }
 
   @Test
   public void fullLengthIsValid() {
     byte[] array = new byte[] {1, 2, 3};
-    Preconditions.inBounds(array, 0, array.length);
+    Check.inBounds(array, 0, array.length);
   }
 
   @Test
   public void fullLengthPlusOneIsInvalid() {
     byte[] array = new byte[] {1, 2, 3};
-    assertThrows(
-        IllegalArgumentException.class, () -> Preconditions.inBounds(array, 0, array.length + 1));
+    assertThrows(IllegalArgumentException.class, () -> Check.inBounds(array, 0, array.length + 1));
   }
 
   @Test
   public void largeNegativeLenIsInvalid() {
     assertThrows(
         IllegalArgumentException.class,
-        () ->
-            Preconditions.checkInRange(
-                Integer.MAX_VALUE, Integer.MAX_VALUE - 1, Integer.MIN_VALUE));
+        () -> Check.inRange(Integer.MAX_VALUE, Integer.MAX_VALUE - 1, Integer.MIN_VALUE));
   }
 
   @Test
   public void smallNegativeLenIsInvalid() {
-    assertThrows(IllegalArgumentException.class, () -> Preconditions.checkInRange(10, 5, -1));
+    assertThrows(IllegalArgumentException.class, () -> Check.inRange(10, 5, -1));
   }
 }

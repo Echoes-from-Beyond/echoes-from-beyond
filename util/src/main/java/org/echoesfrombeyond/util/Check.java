@@ -23,29 +23,30 @@ import java.util.Objects;
 import org.jetbrains.annotations.*;
 
 /**
- * Static input validation methods.
+ * Static input validation methods that throw runtime exceptions on precondition failure.
  *
  * <p>Where possible, prefer to use the methods in this class rather than e.g. {@link
  * Objects#requireNonNull(Object)}. This is because eventually the checks may be elided in an
  * "optimized" build that replaces the method bodies with no-ops.
  */
-public final class Preconditions {
+public final class Check {
+  private Check() {}
+
   /**
-   * Range check internals used by {@link Preconditions#inBounds(Object, int, int)}.
+   * Range check internals used by {@link Check#inBounds(Object, int, int)}.
    *
    * @param arrayLen the array length
    * @param index the index into the array, inclusive
    * @param len the number of elements in the range
    */
   @VisibleForTesting
-  static void checkInRange(
-      @Range(from = 0, to = Integer.MAX_VALUE) int arrayLen, int index, int len) {
+  static void inRange(@Range(from = 0, to = Integer.MAX_VALUE) int arrayLen, int index, int len) {
     if (index < 0 || index >= arrayLen) throw new ArrayIndexOutOfBoundsException(index);
 
     int toIndexExclusive = index + len;
     if (toIndexExclusive < index || toIndexExclusive > arrayLen)
       throw new IllegalArgumentException(
-          "index " + index + " length " + len + " for array length " + arrayLen);
+          "index " + index + ", length " + len + " out of bounds for array length " + arrayLen);
   }
 
   /**
@@ -55,10 +56,27 @@ public final class Preconditions {
    *
    * @param o the object to null check
    * @return {@code o} if non-null
+   * @param <T> the object type
    */
   @Contract("null -> fail; _ -> param1")
   public static <T> T nonNull(@UnknownNullability T o) {
     if (o == null) throw new NullPointerException();
+    return o;
+  }
+
+  /**
+   * Equivalent to {@link Check#nonNull(Object)} but uses {@code message} as the exception message.
+   *
+   * <p>This should be used instead of {@link Objects#requireNonNull(Object, String)}.
+   *
+   * @param o the object to null check
+   * @param message the exception message used if {@code o == null}; can itself be null
+   * @return {@code o} if non-null
+   * @param <T> the object type
+   */
+  @Contract("null, _ -> fail; _, _ -> param1")
+  public static <T> T nonNull(@UnknownNullability T o, @Nullable String message) {
+    if (o == null) throw new NullPointerException(message);
     return o;
   }
 
@@ -76,10 +94,19 @@ public final class Preconditions {
    *     the bounds of {@code array}
    */
   @Contract("null, _, _ -> fail")
-  public static void inBounds(
-      @UnknownNullability Object array,
-      @Range(from = 0, to = Integer.MAX_VALUE) int start,
-      @Range(from = 0, to = Integer.MAX_VALUE) int len) {
-    checkInRange(Array.getLength(nonNull(array)), start, len);
+  public static void inBounds(@UnknownNullability Object array, int start, int len) {
+    inRange(Array.getLength(nonNull(array)), start, len);
+  }
+
+  /**
+   * Checks if {@code index} is in bounds for array {@code array}.
+   *
+   * @param array the array to check
+   * @param index the index to check
+   */
+  @Contract("null, _ -> fail")
+  public static void inBounds(@UnknownNullability Object array, int index) {
+    int arrayLen = Array.getLength(nonNull(array));
+    if (index < 0 || index >= arrayLen) throw new ArrayIndexOutOfBoundsException(index);
   }
 }

@@ -35,7 +35,6 @@ Note: the words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are intended to be i
   * You SHOULD prefer `@Nullable` over `@UnknownNullability` except in cases when:
     * The method or field in question is part of a data structure where the user of the API was responsible for populating it with data.
 * If a method or constructor parameter accepts `null` as a _valid_ value, it MUST be annotated with `@Nullable`.
-* Method and constructor parameters MUST NOT be annotated with `@UnknownNullability`.
 * One MUST use explicit nullchecks to validate untrusted input, such as deserialized data from a file.
 * One SHOULD NOT use explicit nullchecks (like `Objects#requireNonNull`) in cases where implicit ones are equivalent.
   * One MAY use explicit nullchecks in cases where implicit ones would have lesser or no effect on nullness detection.

@@ -18,7 +18,7 @@
 
 package org.echoesfrombeyond.util.array;
 
-import org.echoesfrombeyond.util.Preconditions;
+import org.echoesfrombeyond.util.Check;
 import org.jetbrains.annotations.Range;
 
 /** Static utilities relating to arrays. */
@@ -41,7 +41,7 @@ public final class ArrayUtil {
       byte[] array,
       @Range(from = 0, to = Integer.MAX_VALUE) int startInclusive,
       @Range(from = 0, to = Integer.MAX_VALUE) int count) {
-    Preconditions.inBounds(array, startInclusive, count);
+    Check.inBounds(array, startInclusive, count);
 
     int endExclusive = startInclusive + count;
 
