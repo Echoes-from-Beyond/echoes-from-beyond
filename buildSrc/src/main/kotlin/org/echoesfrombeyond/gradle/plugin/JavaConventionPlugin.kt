@@ -147,12 +147,7 @@ class JavaConventionPlugin : Plugin<Project> {
             it.generatedSourceDirectory.set(generatePackageInfoSrcDir)
             it.packagesFile.set(generatePackageTree.flatMap { t -> t.packagesFile })
             it.packageInfoGenerator.set { packageName ->
-                """
-                @NotNullByDefault
-                package $packageName;
-
-                import org.jetbrains.annotations.NotNullByDefault;
-                """.trimIndent()
+                "@org.jetbrains.annotations.NotNullByDefault package $packageName;"
             }
         }
 
