@@ -58,7 +58,7 @@ public final class Check {
    * @return {@code o} if non-null
    * @param <T> the object type
    */
-  @Contract("null -> fail; _ -> param1")
+  @Contract(value = "null -> fail; _ -> param1", pure = true)
   public static <T> T nonNull(@UnknownNullability T o) {
     if (o == null) throw new NullPointerException();
     return o;
@@ -75,7 +75,7 @@ public final class Check {
    * @param <T> the object type
    * @see Check#nonNull(Object) the version without an error message
    */
-  @Contract("null, _ -> fail; _, _ -> param1")
+  @Contract(value = "null, _ -> fail; _, _ -> param1", pure = true)
   public static <T> T nonNull(@UnknownNullability T o, @Nullable String message) {
     if (o == null) throw new NullPointerException(message);
     return o;
@@ -94,7 +94,7 @@ public final class Check {
    * @throws IllegalArgumentException if {@code start} is valid but {@code start + len} is outside
    *     the bounds of {@code array}
    */
-  @Contract("null, _, _ -> fail")
+  @Contract(value = "null, _, _ -> fail", pure = true)
   public static void inBounds(@UnknownNullability Object array, int start, int len) {
     inRange(Array.getLength(nonNull(array)), start, len);
   }
@@ -105,7 +105,7 @@ public final class Check {
    * @param array the array to check
    * @param index the index to check
    */
-  @Contract("null, _ -> fail")
+  @Contract(value = "null, _ -> fail", pure = true)
   public static void inBounds(@UnknownNullability Object array, int index) {
     int arrayLen = Array.getLength(nonNull(array));
     if (index < 0 || index >= arrayLen) throw new ArrayIndexOutOfBoundsException(index);

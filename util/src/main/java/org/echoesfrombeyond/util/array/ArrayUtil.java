@@ -19,6 +19,7 @@
 package org.echoesfrombeyond.util.array;
 
 import org.echoesfrombeyond.util.Check;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Range;
 
 /** Static utilities relating to arrays. */
@@ -37,6 +38,7 @@ public final class ArrayUtil {
    * @throws IllegalArgumentException if {@code startInclusive} is valid but {@code startInclusive +
    *     count} is outside the bounds of the array
    */
+  @Contract(value = "null, _, _ -> fail", mutates = "param1")
   public static void reverse(
       byte[] array,
       @Range(from = 0, to = Integer.MAX_VALUE) int startInclusive,
