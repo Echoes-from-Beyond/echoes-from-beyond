@@ -58,4 +58,49 @@ class CheckTest {
   public void smallNegativeLenIsInvalid() {
     assertThrows(IllegalArgumentException.class, () -> Check.inRange(10, 5, -1));
   }
+
+  @Test
+  public void indexNotInBoundsForEmptyArray() {
+    byte[] array = new byte[] {};
+    assertThrows(IndexOutOfBoundsException.class, () -> Check.inBounds(array, 0));
+  }
+
+  @Test
+  public void lowerIndexInBounds() {
+    byte[] array = new byte[] {0, 1, 2};
+    Check.inBounds(array, 0);
+  }
+
+  @Test
+  public void higherIndexInBounds() {
+    byte[] array = new byte[] {0, 1, 2};
+    Check.inBounds(array, 2);
+  }
+
+  @Test
+  public void lowerIndexOutOfBounds() {
+    byte[] array = new byte[] {0, 1, 2};
+    assertThrows(IndexOutOfBoundsException.class, () -> Check.inBounds(array, -1));
+  }
+
+  @Test
+  public void upperIndexOutOfBounds() {
+    byte[] array = new byte[] {0, 1, 2};
+    assertThrows(IndexOutOfBoundsException.class, () -> Check.inBounds(array, 3));
+  }
+
+  @Test
+  public void nonNullThrowsOnNull() {
+    assertThrows(NullPointerException.class, () -> Check.nonNull(null));
+    assertThrows(NullPointerException.class, () -> Check.nonNull(null, "message"));
+  }
+
+  @Test
+  public void nonNullDoesntThrowOnNonNull() {
+    String value = "not null";
+    assertSame(value, Check.nonNull(value));
+
+    String value2 = "not null";
+    assertSame(value, Check.nonNull(value2, "message"));
+  }
 }

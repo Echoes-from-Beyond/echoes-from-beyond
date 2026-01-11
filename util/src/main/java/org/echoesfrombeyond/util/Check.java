@@ -73,6 +73,7 @@ public final class Check {
    * @param message the exception message used if {@code o == null}; can itself be null
    * @return {@code o} if non-null
    * @param <T> the object type
+   * @see Check#nonNull(Object) the version without an error message
    */
   @Contract("null, _ -> fail; _, _ -> param1")
   public static <T> T nonNull(@UnknownNullability T o, @Nullable String message) {
