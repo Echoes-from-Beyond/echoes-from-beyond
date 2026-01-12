@@ -6,7 +6,10 @@ import org.echoesfrombeyond.gradle.task.GeneratePackageInfo
 import org.echoesfrombeyond.gradle.task.GeneratePackageTree
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.compile.JavaCompile
@@ -27,7 +30,7 @@ import kotlin.jvm.java
  */
 class JavaConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply("java")
+        target.plugins.apply("java-library")
         target.plugins.apply("com.diffplug.spotless")
 
         target.repositories.add(target.repositories.mavenCentral())
@@ -154,5 +157,60 @@ class JavaConventionPlugin : Plugin<Project> {
         target.tasks.named("compileGeneratedPackageInfoJava").configure {
             it.inputs.files(generatePackageInfo)
         }
+
+        target.tasks.named("jar", Jar::class.java).configure {
+            it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+            val runtimeClasspath = target.configurations.named("runtimeClasspath")
+
+            it.dependsOn(runtimeClasspath)
+            it.from(runtimeClasspath.map { configuration ->
+                configuration.filter { file -> file.extension == "jar" }
+                    .map { jar -> target.zipTree(jar) }
+            })
+        }
+
+        val includes = setOf("implementation", "api")
+
+        // We want to include sources and Javadoc from project dependencies declared under
+        // `implementation` or `api`. This function runs that check.
+        val spec = { name: String -> includes.contains(name) }
+
+        target.tasks.named("sourcesJar", Jar::class.java).configure {
+            it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+            // This is horribly ugly, but what it does is actually simple: collect all project
+            // dependencies and the files outputted by their `sourcesJar` tasks. This only includes
+            // the direct project dependencies, but this is fine since those also have this
+            // configuration applied.
+            val sources = target.configurations.named(spec).asSequence().flatMap { config ->
+                config.dependencies.withType(ProjectDependency::class.java).asSequence().map { dependency ->
+                    target.project(dependency.path).tasks.named("sourcesJar", Jar::class.java)
+                }
+            }.map { source -> target.zipTree(source.map { jar -> jar.outputs.files.singleFile }) }
+
+            it.from(generatePackageInfo)
+            it.from({ sources.toList() })
+        }
+
+        // Instead of configuring `javadocJar`, configure `javadoc` as we can directly change the
+        // source inputs.
+        target.tasks.named("javadoc", Javadoc::class.java).configure {
+            // Similar logic to the configuration of `sourcesJar`.
+            it.source(target.configurations.named(spec).map { config ->
+                config.dependencies.withType(ProjectDependency::class.java)
+                    .map { dependency ->
+                        target.project(dependency.path).tasks.named("javadoc", Javadoc::class.java)
+                            .map { javadoc -> javadoc.source }
+                    }
+            })
+        }
     }
+}
+
+/**
+ * Add another project as an implementation dependency.
+ */
+fun DependencyHandler.projectImplementation(path: String) {
+    add("implementation", project(mapOf("path" to path)))
 }
