@@ -60,3 +60,4 @@ Note: the words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are intended to be i
 * One SHOULD add implementation comments liberally for _complex_ code, or code that is especially bug-prone.
 * One MAY use `// TODO` comments when reasonable.
 * One SHOULD link to existing code for further reading.
+* One SHOULD wrap comment lines at 100 characters.
