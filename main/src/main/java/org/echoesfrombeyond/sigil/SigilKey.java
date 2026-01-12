@@ -24,7 +24,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 import org.jetbrains.annotations.VisibleForTesting;
 
 /**
@@ -39,7 +39,7 @@ public final class SigilKey implements Comparable<SigilKey>, Serializable {
   @Serial private static final long serialVersionUID = 7587438460546625759L;
 
   // Used in place of SigilKey for (de)serialization; just a thin wrapper around a byte array.
-  private record Proxy(byte @Nullable [] untrustedPoints) implements Serializable {
+  private record Proxy(byte @UnknownNullability [] untrustedPoints) implements Serializable {
     @Serial private static final long serialVersionUID = -6469837533138978770L;
 
     @Serial
@@ -124,7 +124,7 @@ public final class SigilKey implements Comparable<SigilKey>, Serializable {
    * @return the serializable proxy object
    */
   @VisibleForTesting
-  static Object serializationProxyFromBytes(byte @Nullable [] bytes) {
+  static Object serializationProxyFromBytes(byte @UnknownNullability [] bytes) {
     return new Proxy(bytes);
   }
 
