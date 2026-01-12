@@ -11,6 +11,7 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.specs.Spec
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.javadoc.Javadoc
@@ -179,31 +180,44 @@ class JavaConventionPlugin : Plugin<Project> {
         target.tasks.named("sourcesJar", Jar::class.java).configure {
             it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
+            it.from(generatePackageInfo)
+
             // This is horribly ugly, but what it does is actually simple: collect all project
             // dependencies and the files outputted by their `sourcesJar` tasks. This only includes
             // the direct project dependencies, but this is fine since those also have this
             // configuration applied.
-            val sources = target.configurations.named(spec).asSequence().flatMap { config ->
-                config.dependencies.withType(ProjectDependency::class.java).asSequence().map { dependency ->
-                    target.project(dependency.path).tasks.named("sourcesJar", Jar::class.java)
+            it.from({
+                dependentProjects(target, spec) { project ->
+                    project.tasks.named("sourcesJar", Jar::class.java)
+                }.map { source ->
+                    target.zipTree(source.map { jar -> jar.outputs.files.singleFile })
                 }
-            }.map { source -> target.zipTree(source.map { jar -> jar.outputs.files.singleFile }) }
-
-            it.from(generatePackageInfo)
-            it.from({ sources.toList() })
+            })
         }
 
-        // Instead of configuring `javadocJar`, configure `javadoc` as we can directly change the
+        // Instead of configuring `javadocJar`, configure `javadoc` as we can directly add new
         // source inputs.
         target.tasks.named("javadoc", Javadoc::class.java).configure {
             // Similar logic to the configuration of `sourcesJar`.
-            it.source(target.configurations.named(spec).map { config ->
-                config.dependencies.withType(ProjectDependency::class.java)
-                    .map { dependency ->
-                        target.project(dependency.path).tasks.named("javadoc", Javadoc::class.java)
-                            .map { javadoc -> javadoc.source }
-                    }
+            it.source(dependentProjects(target, spec) { project ->
+                project.tasks.named("javadoc", Javadoc::class.java).map { javadoc ->
+                    javadoc.source
+                }
             })
+        }
+    }
+}
+
+/**
+ * Return a [List] made by iterating all [ProjectDependency] found in [target]'s configurations that
+ * match [nameFilter], after applying the [transform] mapping function to each.
+ */
+private fun <R> dependentProjects(target: Project,
+                                  nameFilter: Spec<String>,
+                                  transform: (Project) -> R): List<R> {
+    return target.configurations.named(nameFilter).flatMap { config ->
+        config.dependencies.withType(ProjectDependency::class.java).map { dependency ->
+            transform(target.project(dependency.path))
         }
     }
 }
