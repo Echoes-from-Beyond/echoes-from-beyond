@@ -101,6 +101,6 @@ class CheckTest {
     assertSame(value, Check.nonNull(value));
 
     String value2 = "not null";
-    assertSame(value, Check.nonNull(value2, "message"));
+    assertSame(value2, Check.nonNull(value2, "message"));
   }
 }
