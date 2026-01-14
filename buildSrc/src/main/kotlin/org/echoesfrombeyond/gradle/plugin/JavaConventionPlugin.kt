@@ -167,10 +167,14 @@ class JavaConventionPlugin : Plugin<Project> {
 
             val runtimeClasspath = target.configurations.named("runtimeClasspath")
 
+            val extra = target.dependencies.extensions.getByName("ext") as ExtraPropertiesExtension
+            val sdkPath = (extra.get("hytaleSdk") as? FileCollection)?.singleFile?.canonicalPath
+
             it.dependsOn(runtimeClasspath)
 
             it.from(runtimeClasspath.map { configuration ->
-                configuration.filter { file -> file.name != "HytaleServer.jar" && file.extension == "jar" }
+                configuration
+                    .filter { file -> file.extension == "jar" && file.canonicalPath != sdkPath }
                     .map { jar -> target.zipTree(jar) }
             })
         }
