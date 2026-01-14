@@ -167,14 +167,11 @@ class JavaConventionPlugin : Plugin<Project> {
 
             val runtimeClasspath = target.configurations.named("runtimeClasspath")
 
-            val extra = target.dependencies.extensions.getByName("ext") as ExtraPropertiesExtension
-            val sdkPath = (extra.get("hytaleSdk") as? FileCollection)?.singleFile?.canonicalPath
-
             it.dependsOn(runtimeClasspath)
 
             it.from(runtimeClasspath.map { configuration ->
                 configuration
-                    .filter { file -> file.extension == "jar" && file.canonicalPath != sdkPath }
+                    .filter { file -> file.extension == "jar" }
                     .map { jar -> target.zipTree(jar) }
             })
         }
@@ -238,7 +235,7 @@ fun DependencyHandler.projectImplementation(path: String) {
 }
 
 /**
- * Add a dependency on Hytale.
+ * Add a compile-only dependency on Hytale.
  */
 fun DependencyHandler.hytale() {
     val extra = extensions.getByName("ext") as ExtraPropertiesExtension
@@ -248,5 +245,5 @@ fun DependencyHandler.hytale() {
                 "HytaleServer.jar file from your installation. If relative, the path is resolved " +
                 "relative to the root project directory.")
 
-    add("implementation", extra["hytaleSdk"] as FileCollection)
+    add("compileOnly", extra["hytaleSdk"] as FileCollection)
 }
