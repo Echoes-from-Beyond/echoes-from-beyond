@@ -26,15 +26,28 @@ It has a very different theme from said official mode and we intend to integrate
 
 ## Install
 
-This project is built using [Gradle](https://gradle.org/).
+This project is built using [Gradle](https://gradle.org/), and requires the user to have a local copy of the Hytale server to build against.
 
 ```
 ./gradlew build
 ```
 
-The above will also run all tests.
+If there are formatting errors, run `spotlessApply` before `build`. If tests succeed, the mod jar (containing all required dependencies) will be output to `main/build/libs/main.jar`.
 
-**In-progress**: Any additional steps needed to build against the Hytale SDK.
+### Setting up the Hytale SDK
+For the time being (until we can access a proper Maven dependency) users have to build against their local copy of the Hytale server. To do this, create a file named `.hytale` in the root project directory (same level as this readme).
+
+Then, find the path to the server jar. This is generally dependent on your OS:
+
+```
+Linux: $XDG_DATA_HOME/.var/app/com.hypixel.HytaleLauncher/data/Hytale/install/release/package/game/latest/Server/HytaleServer.jar
+Windows: %appdata%\Hytale\install\release\package\game\latest\Server\HytaleServer.jar
+MacOS: ~/Application Support/Hytale/install/release/package/game/latest/Server/HytaleServer.jar
+```
+
+Once you have located the server, you will want to convert the file to an _absolute path_ as appropriate for your operating system. Then, copy-paste the absolute path into the `.hytale` file. If `./gradlew build` completes without errors, the setup worked.
+
+`.hytale` is gitignore'd and should not be commited to the repo, as it will be different for every user.
 
 ## Usage
 

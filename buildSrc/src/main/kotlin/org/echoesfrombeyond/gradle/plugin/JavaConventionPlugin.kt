@@ -4,12 +4,15 @@ import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.spotless.LineEnding
 import org.echoesfrombeyond.gradle.task.GeneratePackageInfo
 import org.echoesfrombeyond.gradle.task.GeneratePackageTree
+import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.api.file.FileCollection
+import org.gradle.api.plugins.ExtraPropertiesExtension
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.specs.Spec
 import org.gradle.api.tasks.SourceSetContainer
@@ -165,8 +168,9 @@ class JavaConventionPlugin : Plugin<Project> {
             val runtimeClasspath = target.configurations.named("runtimeClasspath")
 
             it.dependsOn(runtimeClasspath)
+
             it.from(runtimeClasspath.map { configuration ->
-                configuration.filter { file -> file.extension == "jar" }
+                configuration.filter { file -> file.name != "HytaleServer.jar" && file.extension == "jar" }
                     .map { jar -> target.zipTree(jar) }
             })
         }
@@ -227,4 +231,18 @@ private fun <R> dependentProjects(target: Project,
  */
 fun DependencyHandler.projectImplementation(path: String) {
     add("implementation", project(mapOf("path" to path)))
+}
+
+/**
+ * Add a dependency on Hytale.
+ */
+fun DependencyHandler.hytale() {
+    val extra = extensions.getByName("ext") as ExtraPropertiesExtension
+    if (!extra.has("hytaleSdk"))
+        throw GradleException("Using the `hytale()` dependency requires you to create a file " +
+                "named `.hytale` in the project root. This file must contain a path to the " +
+                "HytaleServer.jar file from your installation. If relative, the path is resolved " +
+                "relative to the root project directory.")
+
+    add("implementation", extra["hytaleSdk"] as FileCollection)
 }
