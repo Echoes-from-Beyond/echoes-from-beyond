@@ -19,7 +19,7 @@ jobs:
       - name: Cache buildSrc
         uses: actions/cache/restore@9255dc7a253b0ccc959486e2bca901246202afeb # 5.0.1
         with:
-          key: gradle-buildSrc-${{ hashFiles('buildSrc/*.gradle.kts', 'buildSrc/src/**/*') }}
+          key: gradle-buildSrc-${{ hashFiles('buildSrc/*.gradle.kts', 'buildSrc/src/**/*', 'gradle/wrapper/*') }}
           enableCrossOsArchive: true
           path: |
             ./buildSrc/build/classes

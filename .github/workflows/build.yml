@@ -22,8 +22,8 @@ jobs:
       - name: Cache buildSrc
         uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # 5.0.1
         with:
-          # Key is based off of the hash of all the script files.
-          key: gradle-buildSrc-${{ hashFiles('buildSrc/*.gradle.kts', 'buildSrc/src/**/*') }}
+          # Key is based off of the hash of all the script files, plus the Gradle wrapper.
+          key: gradle-buildSrc-${{ hashFiles('buildSrc/*.gradle.kts', 'buildSrc/src/**/*', 'gradle/wrapper/*') }}
 
           # The OS should not matter for these files.
           enableCrossOsArchive: true
