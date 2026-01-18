@@ -34,29 +34,15 @@ tasks.register<Copy>("copySdk") {
     from(serverJar, assetsZip).into(runDirectory)
 }
 
-fun runConfig(isDebug: Boolean): JavaExec.() -> Unit {
-    return {
-        dependsOn("syncPlugins", "copySdk")
+tasks.register<JavaExec>("runDevServer") {
+    dependsOn("syncPlugins", "copySdk")
 
-        // Pass through commands to the Hytale server.
-        standardInput = System.`in`
+    // Pass through commands to the Hytale server.
+    standardInput = System.`in`
 
-        classpath = files(runDirectory.file("HytaleServer.jar"))
-        workingDir = runDirectory.asFile
+    classpath = files(runDirectory.file("HytaleServer.jar"))
+    workingDir = runDirectory.asFile
 
-        jvmArgs = listOf("-Xms6G", "-Xmx6G")
-        args = listOf("--disable-sentry", "--assets", "Assets.zip")
-
-        if (isDebug) {
-            // Let IDEs attach to the build.
-            debugOptions {
-                enabled = true
-                server = true
-                suspend = true
-            }
-        }
-    }
+    jvmArgs = listOf("-Xms6G", "-Xmx6G")
+    args = listOf("--disable-sentry", "--assets", "Assets.zip")
 }
-
-tasks.register<JavaExec>("runDevServer", runConfig(false))
-tasks.register<JavaExec>("runDevServerDebug", runConfig(true))

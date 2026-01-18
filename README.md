@@ -53,9 +53,9 @@ Once you have located the installation, you will want to convert the file to an 
 
 Execute `./gradlew runDevServer` to launch a Hytale server on your local machine for testing. This assumes you have set up the Hytale SDK as described [here](#dependencies).
 
-First time launch will require you to authenticate the server with your Hytale account. Follow the instructions in the terminal (the steps are the same as in [the Hytale server manual](https://support.hytale.com/hc/en-us/articles/45326769420827-Hytale-Server-Manual)). Run `/auth persistence Encrypted` after to persist your credentials and avoid needing to sign in on every launch.
+First time launch will require you to authenticate the server with your Hytale account. Follow the instructions in the terminal (the steps are the same as in [the Hytale server manual](https://support.hytale.com/hc/en-us/articles/45326769420827-Hytale-Server-Manual)). Run the Hytale server command `/auth persistence Encrypted` after to persist your credentials and avoid needing to sign in on every launch.
 
-You can also run `./gradlew runDevServerDebug` to launch the server with a JDWP debugger, which binds to port `5005` by default. The process will suspend until the debugger attaches.
+[IntelliJ IDEA](https://www.jetbrains.com/idea/) users can use the provided run configuration `Launch development server` to run or debug the server, instead of executing the Gradle task manually.
 
 ## Usage
 
