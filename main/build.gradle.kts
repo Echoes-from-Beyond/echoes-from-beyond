@@ -10,6 +10,7 @@ val sdk = hytaleSdkProperty()
 val serverJar: Provider<RegularFile> = sdk.map { dir ->
     dir.dir("Server").file("HytaleServer.jar")
 }
+
 val assetsZip: Provider<RegularFile> = sdk.map { directory ->
     directory.file("Assets.zip")
 }
@@ -21,7 +22,7 @@ dependencies {
     hytale(files(serverJar))
 }
 
-tasks.register<Sync>("syncPlugins") {
+val syncTask = tasks.register<Sync>("syncPlugins") {
     from(tasks.named("jar")).into(runDirectory.dir("mods"))
 
     preserve {
@@ -30,12 +31,12 @@ tasks.register<Sync>("syncPlugins") {
     }
 }
 
-tasks.register<Copy>("copySdk") {
+val copyTask = tasks.register<Copy>("copySdk") {
     from(serverJar, assetsZip).into(runDirectory)
 }
 
 tasks.register<JavaExec>("runDevServer") {
-    dependsOn("syncPlugins", "copySdk")
+    dependsOn(syncTask, copyTask)
 
     // Pass through commands to the Hytale server.
     standardInput = System.`in`
