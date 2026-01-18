@@ -10,6 +10,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.file.FileCollection
 import org.gradle.api.plugins.ExtraPropertiesExtension
@@ -22,6 +23,7 @@ import org.gradle.api.tasks.testing.Test
 import org.gradle.external.javadoc.CoreJavadocOptions
 import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JavaLanguageVersion
+import java.io.File
 import kotlin.jvm.java
 
 /**
@@ -234,16 +236,25 @@ fun DependencyHandler.projectImplementation(path: String) {
     add("implementation", project(mapOf("path" to path)))
 }
 
+private fun missingSdkException(): GradleException {
+    return GradleException("Using the `hytale()` dependency requires you to create a file " +
+            "named `.hytale` in the project root. This file must contain a path to the " +
+            "HytaleServer.jar file from your installation. If relative, the path is resolved " +
+            "relative to the root project directory.")
+}
+
+fun Project.hytaleSdkProperty(): DirectoryProperty {
+    return objects.directoryProperty().fileProvider(provider {
+        val extra = dependencies.extensions.getByName("ext") as ExtraPropertiesExtension
+        if (!extra.has("hytale")) throw missingSdkException()
+
+        extra["hytale"] as File
+    })
+}
+
 /**
  * Add a compile-only dependency on Hytale.
  */
-fun DependencyHandler.hytale() {
-    val extra = extensions.getByName("ext") as ExtraPropertiesExtension
-    if (!extra.has("hytaleSdk"))
-        throw GradleException("Using the `hytale()` dependency requires you to create a file " +
-                "named `.hytale` in the project root. This file must contain a path to the " +
-                "HytaleServer.jar file from your installation. If relative, the path is resolved " +
-                "relative to the root project directory.")
-
-    add("compileOnly", extra["hytaleSdk"] as FileCollection)
+fun DependencyHandler.hytale(files: FileCollection) {
+    add("compileOnly", files)
 }
