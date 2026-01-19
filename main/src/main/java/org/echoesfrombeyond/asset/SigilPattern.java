@@ -19,6 +19,8 @@
 package org.echoesfrombeyond.asset;
 
 import com.hypixel.hytale.assetstore.AssetExtraInfo;
+import com.hypixel.hytale.assetstore.AssetRegistry;
+import com.hypixel.hytale.assetstore.AssetStore;
 import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
 import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
 import com.hypixel.hytale.assetstore.map.JsonAssetWithMap;
@@ -32,6 +34,7 @@ import org.echoesfrombeyond.codec.validation.CanonicalSigilValidator;
 import org.echoesfrombeyond.sigil.SigilKey;
 import org.echoesfrombeyond.sigil.SigilValidation;
 import org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.util.thread.Once;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -43,6 +46,10 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class SigilPattern
     implements JsonAssetWithMap<String, DefaultAssetMap<String, SigilPattern>> {
+  /** Asset store supplier. */
+  public static final Once<AssetStore<String, SigilPattern, DefaultAssetMap<String, SigilPattern>>>
+      ASSET_STORE = Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(SigilPattern.class)));
+
   /** The codec. */
   public static final AssetBuilderCodec<String, SigilPattern> CODEC;
 
