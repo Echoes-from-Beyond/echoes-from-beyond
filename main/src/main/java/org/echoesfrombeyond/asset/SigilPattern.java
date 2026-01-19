@@ -100,7 +100,7 @@ public class SigilPattern
    */
   public SigilKey getSigilKey() {
     return canonicalizeAndCache()
-        .orElseThrow(() -> new IllegalStateException("Cannot compute key of non-canonical sigil"));
+        .orElseThrow(() -> new IllegalStateException(SigilValidation.NON_CANONICAL_ERR_MSG));
   }
 
   @Override

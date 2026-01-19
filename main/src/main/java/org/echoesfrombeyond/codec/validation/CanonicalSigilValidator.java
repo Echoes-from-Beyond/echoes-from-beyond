@@ -36,7 +36,7 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public class CanonicalSigilValidator implements Validator<SigilPoint[]> {
-  /** The singleton instance. */
+  /** The singleton instance of this class. */
   public static CanonicalSigilValidator INSTANCE = new CanonicalSigilValidator();
 
   private CanonicalSigilValidator() {}
@@ -46,7 +46,7 @@ public class CanonicalSigilValidator implements Validator<SigilPoint[]> {
     // There's no obvious way to use the SigilKey that's produced by canonicalization here. So, for
     // now, we are doing duplicate work as we also canonicalize in SigilPattern.
     if (SigilValidation.canonicalize(SigilPoint.encodeArray(points)).isEmpty()) {
-      validationResults.fail("Sigils must be canonical");
+      validationResults.fail("Encountered a non-canonical Sigil");
     }
   }
 

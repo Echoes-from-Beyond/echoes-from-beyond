@@ -24,9 +24,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
-import org.jetbrains.annotations.UnknownNullability;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Opaque type created from Sigil canonicalization, designed for use as a key in a {@link HashMap}
@@ -41,7 +41,7 @@ public final class SigilKey implements Comparable<SigilKey>, Serializable {
   @Serial private static final long serialVersionUID = 7587438460546625759L;
 
   // Used in place of SigilKey for (de)serialization; just a thin wrapper around a byte array.
-  private record Proxy(byte @UnknownNullability [] untrustedPoints) implements Serializable {
+  private record Proxy(byte @Nullable [] untrustedPoints) implements Serializable {
     @Serial private static final long serialVersionUID = -6469837533138978770L;
 
     @Serial
@@ -54,7 +54,7 @@ public final class SigilKey implements Comparable<SigilKey>, Serializable {
 
       // Canonicalize the data. If it's invalid, we'll throw an InvalidObjectException.
       return SigilValidation.canonicalize(untrustedPoints)
-          .orElseThrow(() -> new InvalidObjectException("points array couldn't be canonicalized"));
+          .orElseThrow(() -> new InvalidObjectException(SigilValidation.NON_CANONICAL_ERR_MSG));
     }
   }
 
@@ -69,7 +69,7 @@ public final class SigilKey implements Comparable<SigilKey>, Serializable {
     // Deserialization should only occur through the proxy, as that performs the required
     // validation. Encountering directly-serialized SigilKey objects is always either a bug or
     // "malicious" input.
-    throw new InvalidObjectException("proxy is required");
+    throw new InvalidObjectException("should have encountered proxy object");
   }
 
   private final byte[] points;
@@ -126,7 +126,7 @@ public final class SigilKey implements Comparable<SigilKey>, Serializable {
    * @return the serializable proxy object
    */
   @VisibleForTesting
-  static Object serializationProxyFromBytes(byte @UnknownNullability [] bytes) {
+  static Object serializationProxyFromBytes(byte @Nullable [] bytes) {
     return new Proxy(bytes);
   }
 

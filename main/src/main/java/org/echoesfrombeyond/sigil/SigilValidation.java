@@ -36,6 +36,12 @@ public final class SigilValidation {
   /** There's a hard limit of 32 points in a valid Sigil. */
   public static final int MAX_SIGIL_LENGTH = 32;
 
+  /**
+   * If throwing an exception upon encountering a non-canonical sigil, this is the recommended error
+   * message.
+   */
+  public static final String NON_CANONICAL_ERR_MSG = "sigil should have been canonical";
+
   private static final byte X_MASK = (byte) 0xF0;
 
   private static final byte X_SHIFT = 4;
