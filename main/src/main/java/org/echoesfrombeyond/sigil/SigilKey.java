@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import org.jetbrains.annotations.UnknownNullability;
 import org.jetbrains.annotations.VisibleForTesting;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Opaque type created from Sigil canonicalization, designed for use as a key in a {@link HashMap}
@@ -35,6 +36,7 @@ import org.jetbrains.annotations.VisibleForTesting;
  * <p>The only way to obtain an instance of this class is by calling {@link
  * SigilValidation#canonicalize(byte[])} or through deserializing a previously-serialized instance.
  */
+@NullMarked
 public final class SigilKey implements Comparable<SigilKey>, Serializable {
   @Serial private static final long serialVersionUID = 7587438460546625759L;
 

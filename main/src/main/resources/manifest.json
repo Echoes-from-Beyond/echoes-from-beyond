@@ -17,5 +17,6 @@
   ],
   "Website": null,
   "Main": "org.echoesfrombeyond.Plugin",
-  "ServerVersion": "*"
+  "ServerVersion": "*",
+  "IncludesAssetPack": true
 }

@@ -2,8 +2,6 @@ package org.echoesfrombeyond.gradle.plugin
 
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.spotless.LineEnding
-import org.echoesfrombeyond.gradle.task.GeneratePackageInfo
-import org.echoesfrombeyond.gradle.task.GeneratePackageTree
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -85,10 +83,19 @@ class JavaConventionPlugin : Plugin<Project> {
         target.extensions.configure<SpotlessExtension>("spotless") {
             it.lineEndings = LineEnding.UNIX
             it.encoding = Charsets.UTF_8
+
+            it.json { json ->
+                json.target(sourceSetContainer
+                    .filter { set -> set.name == "main" || set.name == "test" }
+                    .map { set -> set.resources.include("**/*.json") }.toTypedArray())
+
+                json.gson().indentWithSpaces(2).version("2.13.2")
+            }
+
             it.java { java ->
                 java.target(sourceSetContainer
                     .filter { set -> set.name == "main" || set.name == "test" }
-                    .map { set -> set.java.sourceDirectories }.toTypedArray())
+                    .map { set -> set.java }.toTypedArray())
 
                 // Always clean these up first.
                 java.removeUnusedImports()
@@ -124,46 +131,6 @@ class JavaConventionPlugin : Plugin<Project> {
             }
         }
 
-        val generatePackageInfoDir = target.layout.buildDirectory.map { buildDir ->
-            buildDir.dir("generated/sources/packageInfo")
-        }
-
-        val generatePackageInfoSrcDir = generatePackageInfoDir.map { dir ->
-            dir.dir("src/main/java")
-        }
-
-        target.extensions.configure<SourceSetContainer>("sourceSets") {
-            val main = it.getByName("main")
-
-            val generated = it.create("generatedPackageInfo") { set ->
-                set.java.setSrcDirs(listOf(generatePackageInfoSrcDir))
-                set.compileClasspath = main.compileClasspath
-            }
-
-            val generatedOutput = generated.output
-
-            main.output.dir(generatedOutput)
-            main.compileClasspath += generatedOutput
-            main.runtimeClasspath += generatedOutput
-        }
-
-        val generatePackageTree = target.tasks.register("generatePackageTree", GeneratePackageTree::class.java) {
-            it.sourceDirectories.set(sourceSetContainer.named("main").map { set -> set.java.sourceDirectories })
-            it.packagesFile.set(generatePackageInfoDir.map { dir -> dir.file("packages") })
-        }
-
-        val generatePackageInfo = target.tasks.register("generatePackageInfo", GeneratePackageInfo::class.java) {
-            it.generatedSourceDirectory.set(generatePackageInfoSrcDir)
-            it.packagesFile.set(generatePackageTree.flatMap { t -> t.packagesFile })
-            it.packageInfoGenerator.set { packageName ->
-                "@org.jetbrains.annotations.NotNullByDefault package $packageName;"
-            }
-        }
-
-        target.tasks.named("compileGeneratedPackageInfoJava").configure {
-            it.inputs.files(generatePackageInfo)
-        }
-
         target.tasks.named("jar", Jar::class.java).configure {
             it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
@@ -186,8 +153,6 @@ class JavaConventionPlugin : Plugin<Project> {
 
         target.tasks.named("sourcesJar", Jar::class.java).configure {
             it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-            it.from(generatePackageInfo)
 
             // This is horribly ugly, but what it does is actually simple: collect all project
             // dependencies and the files outputted by their `sourcesJar` tasks. This only includes

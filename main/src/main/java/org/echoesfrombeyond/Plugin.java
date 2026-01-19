@@ -18,16 +18,14 @@
 
 package org.echoesfrombeyond;
 
-import com.hypixel.hytale.server.core.Message;
-import com.hypixel.hytale.server.core.command.system.AbstractCommand;
-import com.hypixel.hytale.server.core.command.system.CommandContext;
-import com.hypixel.hytale.server.core.command.system.CommandSender;
-import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
+import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import java.util.concurrent.CompletableFuture;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.echoesfrombeyond.asset.SigilPattern;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Main entrypoint of the mod. All initialization happens here.
@@ -36,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
  * here.
  */
 @SuppressWarnings("unused")
+@NullMarked
 public class Plugin extends JavaPlugin {
   /**
    * First entrypoint. Actual initialization tasks should probably go in the various load methods.
@@ -46,38 +45,28 @@ public class Plugin extends JavaPlugin {
     super(init);
   }
 
+  /**
+   * Generic configuration happens here. May be done in parallel using {@link CompletableFuture}s.
+   *
+   * @return a future representing our plugin's pre-load phase
+   */
   @Override
   public @Nullable CompletableFuture<Void> preLoad() {
-    System.out.println("Hello Orbis (preload)");
-
     // This loads all the plugin configs. So plugins must always call this unless they don't need to
     // bother with configuration.
     return super.preLoad();
   }
 
+  /** Setup. Most asset registration happens here. */
   @Override
   protected void setup() {
-    System.out.println("Hello Orbis (setup)");
-
-    getCommandRegistry()
-        .registerCommand(
-            new AbstractCommand("succ", null) {
-              @Override
-              protected @Nullable CompletableFuture<Void> execute(
-                  @NotNull CommandContext commandContext) {
-                if (commandContext.isPlayer()) {
-                  Player player = commandContext.senderAs(Player.class);
-                  player.sendMessage(Message.raw("how many layers of irony are you on?"));
-                }
-
-                return null;
-              }
-
-              @Override
-              public boolean hasPermission(@NotNull CommandSender sender) {
-                return true;
-              }
-            });
+    getAssetRegistry()
+        .register(
+            HytaleAssetStore.builder(SigilPattern.class, new DefaultAssetMap<>())
+                .setCodec(SigilPattern.CODEC)
+                .setExtension(".json")
+                .setPath("SigilPatterns")
+                .build());
 
     // This is a no-op currently, but because this has an actual implementation something may be
     // done in the future, so it should always be called.
@@ -86,8 +75,6 @@ public class Plugin extends JavaPlugin {
 
   @Override
   protected void start() {
-    System.out.println("Hello Orbis (start)");
-
     // Also a no-op.
     super.start();
   }

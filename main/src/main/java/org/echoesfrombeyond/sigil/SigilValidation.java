@@ -22,8 +22,10 @@ import java.util.Arrays;
 import java.util.Optional;
 import org.echoesfrombeyond.util.array.ArrayUtil;
 import org.jetbrains.annotations.Range;
+import org.jspecify.annotations.NullMarked;
 
 /** {@link SigilKey} static utilities and factory functions. */
+@NullMarked
 public final class SigilValidation {
   /**
    * Size of the Sigil grid. Should always be a power of 2. The largest supported value for this
@@ -46,7 +48,7 @@ public final class SigilValidation {
 
   private SigilValidation() {}
 
-  static int compactKey(byte point) {
+  private static int compactKey(byte point) {
     // One of the many footguns to watch out for when doing bit hacking shenanigans in Java: e.g.
     // casting the all 1s byte (-1) to int will result in an all 1s int (still -1), which WILL lead
     // to the wrong result here (we actually want 255...)
@@ -57,15 +59,29 @@ public final class SigilValidation {
     return (unsigned >>> COMPACT_SHIFT) | (unsigned & Y_MASK);
   }
 
-  static boolean pointOutsideGrid(byte point) {
+  private static boolean pointOutsideGrid(byte point) {
     return unpackX(point) >= GRID_SIZE || unpackY(point) >= GRID_SIZE;
   }
 
-  static byte unpackX(byte point) {
+  /**
+   * Given a byte produced by a call to {@link SigilValidation#encodePoint(int, int)}, extracts the
+   * x-coordinate.
+   *
+   * @param point an encoded point
+   * @return the x-coordinate
+   */
+  public static byte unpackX(byte point) {
     return (byte) ((point & X_MASK) >>> X_SHIFT);
   }
 
-  static byte unpackY(byte point) {
+  /**
+   * Given a byte produced by a call to {@link SigilValidation#encodePoint(int, int)}, extracts the
+   * y-coordinate.
+   *
+   * @param point an encoded point
+   * @return the y-coordinate
+   */
+  public static byte unpackY(byte point) {
     return (byte) (point & Y_MASK);
   }
 

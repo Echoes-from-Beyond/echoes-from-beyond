@@ -21,6 +21,8 @@ package org.echoesfrombeyond.util;
 import java.lang.reflect.Array;
 import java.util.Objects;
 import org.jetbrains.annotations.*;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Static input validation methods that throw runtime exceptions on precondition failure.
@@ -59,7 +61,7 @@ public final class Check {
    * @param <T> the object type
    */
   @Contract(value = "null -> fail; _ -> param1", pure = true)
-  public static <T> T nonNull(@UnknownNullability T o) {
+  public static <T> @NonNull T nonNull(T o) {
     if (o == null) throw new NullPointerException();
     return o;
   }
@@ -76,7 +78,7 @@ public final class Check {
    * @see Check#nonNull(Object) the version without an error message
    */
   @Contract(value = "null, _ -> fail; _, _ -> param1", pure = true)
-  public static <T> T nonNull(@UnknownNullability T o, @Nullable String message) {
+  public static <T> @NonNull T nonNull(T o, @Nullable String message) {
     if (o == null) throw new NullPointerException(message);
     return o;
   }
@@ -95,7 +97,7 @@ public final class Check {
    *     the bounds of {@code array}
    */
   @Contract(value = "null, _, _ -> fail", pure = true)
-  public static void inBounds(@UnknownNullability Object array, int start, int len) {
+  public static void inBounds(Object array, int start, int len) {
     inRange(Array.getLength(nonNull(array)), start, len);
   }
 
@@ -106,7 +108,7 @@ public final class Check {
    * @param index the index to check
    */
   @Contract(value = "null, _ -> fail", pure = true)
-  public static void inBounds(@UnknownNullability Object array, int index) {
+  public static void inBounds(Object array, int index) {
     int arrayLen = Array.getLength(nonNull(array));
     if (index < 0 || index >= arrayLen) throw new ArrayIndexOutOfBoundsException(index);
   }

@@ -28,13 +28,9 @@ Note: the words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are intended to be i
   * There is a significant and _demonstrable_ performance degradation caused by returning `Optional` compared to returning `null`.
   * APIs that are designed to "mimic" or wrap Java APIs, like `Map#get`, MAY return `null` instead of an empty `Optional`.
 * One MUST NOT annotate anything with `@NotNull`!
-  * Everything in the codebase is implicitly non-null due to a code generation task automatically creating `package-info.java` files with `@NotNullByDefault` applied to them.
-* If a method or field can legally return or contain `null`, it MUST be annotated with _either_ `@Nullable` or `@UnknownNullability`.
-  * "Legally" means that the method or field can contain `null` _without_ a violation of the nullability contract of a related method, field, or constructor having occurred prior.
-    * IDE static analysis should take care of this, so as long as there are no nullability-related warnings you are probably good. 
-  * You SHOULD prefer `@Nullable` over `@UnknownNullability` except in cases when:
-    * The method or field in question is part of a data structure where the user of the API was responsible for populating it with data.
-* If a method or constructor parameter accepts `null` as a _valid_ value, it MUST be annotated with `@Nullable`.
+  * Instead, one SHOULD apply `@NullMarked` to every class file.
+    * One exception is when "unknown nullability" is actually desired throughout the entire file.
+* One MUST use `jspecify` annotations instead of `jetbrains` where possible.
 * One MUST use explicit nullchecks to validate untrusted input, such as deserialized data from a file.
 * One SHOULD NOT use explicit nullchecks (like `Objects#requireNonNull`) in cases where implicit ones are equivalent.
   * One MAY use explicit nullchecks in cases where implicit ones would have lesser or no effect on nullness detection.
