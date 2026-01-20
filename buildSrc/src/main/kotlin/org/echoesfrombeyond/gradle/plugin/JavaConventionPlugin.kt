@@ -14,7 +14,6 @@ import org.gradle.api.file.FileCollection
 import org.gradle.api.plugins.ExtraPropertiesExtension
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.specs.Spec
-import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.api.tasks.testing.Test
@@ -78,24 +77,17 @@ class JavaConventionPlugin : Plugin<Project> {
             core?.addBooleanOption("Xdoclint:all,-missing", true)
         }
 
-        val sourceSetContainer = (target.extensions.getByName("sourceSets") as SourceSetContainer)
-
         target.extensions.configure<SpotlessExtension>("spotless") {
             it.lineEndings = LineEnding.UNIX
             it.encoding = Charsets.UTF_8
 
             it.json { json ->
-                json.target(sourceSetContainer
-                    .filter { set -> set.name == "main" || set.name == "test" }
-                    .map { set -> set.resources.include("**/*.json") }.toTypedArray())
-
+                json.target("**/*.json")
                 json.gson().indentWithSpaces(2).version("2.13.2")
             }
 
             it.java { java ->
-                java.target(sourceSetContainer
-                    .filter { set -> set.name == "main" || set.name == "test" }
-                    .map { set -> set.java }.toTypedArray())
+                java.target("**/*.java")
 
                 // Always clean these up first.
                 java.removeUnusedImports()
