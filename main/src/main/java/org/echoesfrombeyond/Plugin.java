@@ -19,11 +19,21 @@
 package org.echoesfrombeyond;
 
 import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
+import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
+import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.Universe;
+import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.Locale;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.asset.SigilPattern;
+import org.echoesfrombeyond.ui.MemeUIPage;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -67,6 +77,35 @@ public class Plugin extends JavaPlugin {
                 .setExtension(".json")
                 .setPath("SigilPatterns")
                 .build());
+
+    getEventRegistry()
+        .registerGlobal(
+            PlayerChatEvent.class,
+            (evt) -> {
+              PlayerRef playerRef = evt.getSender();
+              UUID worldUUID = playerRef.getWorldUuid();
+              if (worldUUID == null) return;
+
+              if (!evt.getContent().toLowerCase(Locale.ROOT).contains("vegetal")) return;
+
+              World world = Universe.get().getWorld(worldUUID);
+              if (world == null) return;
+
+              world.execute(
+                  () -> {
+                    var ref = playerRef.getReference();
+                    if (ref == null) return;
+
+                    Store<EntityStore> store = world.getEntityStore().getStore();
+
+                    Player player = store.getComponent(ref, Player.getComponentType());
+                    if (player == null) return;
+
+                    player
+                        .getPageManager()
+                        .openCustomPage(ref, store, new MemeUIPage(evt.getSender()));
+                  });
+            });
 
     // This is a no-op currently, but because this has an actual implementation something may be
     // done in the future, so it should always be called.

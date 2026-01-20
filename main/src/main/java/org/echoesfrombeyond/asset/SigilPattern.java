@@ -69,6 +69,7 @@ public class SigilPattern
                 new KeyedCodec<>("Points", SigilPoint.ARRAY_CODEC, true),
                 (self, points) -> self.points = SigilPoint.encodeArray(points),
                 (self) -> SigilPoint.decodeArray(self.points))
+            .documentation("An array of strings containing comma-separated pairs of numbers.")
             .addValidator(Validators.nonNull())
             .addValidator(Validators.arraySizeRange(2, SigilValidation.MAX_SIGIL_LENGTH))
             .addValidator(CanonicalSigilValidator.INSTANCE)
