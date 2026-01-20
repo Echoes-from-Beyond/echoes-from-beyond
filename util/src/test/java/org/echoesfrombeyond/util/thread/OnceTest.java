@@ -66,4 +66,21 @@ class OnceTest {
     assertNull(once.get());
     assertEquals(1, count.get());
   }
+
+  @Test
+  public void subsequentGetAfterExceptionThrowsIllegalStateException() {
+    AtomicInteger count = new AtomicInteger();
+    Once<Object> once =
+        Once.of(
+            () -> {
+              count.getAndIncrement();
+              throw new NullPointerException();
+            });
+
+    assertEquals(0, count.get());
+    assertThrows(NullPointerException.class, once::get);
+    assertEquals(1, count.get());
+    assertThrows(IllegalStateException.class, once::get);
+    assertEquals(1, count.get());
+  }
 }

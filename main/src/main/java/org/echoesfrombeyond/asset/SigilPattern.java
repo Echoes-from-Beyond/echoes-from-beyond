@@ -46,7 +46,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class SigilPattern
     implements JsonAssetWithMap<String, DefaultAssetMap<String, SigilPattern>> {
-  /** Asset store supplier. */
+  /** Asset store supplier. This should not be called until after plugin setup. */
   public static final Once<AssetStore<String, SigilPattern, DefaultAssetMap<String, SigilPattern>>>
       ASSET_STORE = Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(SigilPattern.class)));
 
