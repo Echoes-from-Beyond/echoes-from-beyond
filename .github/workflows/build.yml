@@ -63,11 +63,10 @@ jobs:
           ! test -e Server 
           ! test -e .hytale
 
-      - &determine-game-version
-        name: Determine game version
+      - name: Determine game version
         env:
           HYTALE_DOWNLOADER_CREDENTIALS: ${{ secrets.HYTALE_DOWNLOADER_CREDENTIALS }}
-        run: |
+        run: &game-version-command |
           mkdir HytaleDownloader
           cd HytaleDownloader
           
@@ -77,8 +76,7 @@ jobs:
           printf %s "$HYTALE_DOWNLOADER_CREDENTIALS" > .hytale-downloader-credentials.json
           ./hytale-downloader-linux-amd64 -skip-update-check -print-version > game_version
 
-      - &cache-server-files
-        name: Cache server files
+      - name: Cache server files
         id: cache-server-files
         uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # 5.0.1
         with:
@@ -131,8 +129,20 @@ jobs:
         with:
           artifact-ids: ${{ needs.build.outputs.plugin }}
 
-      - *determine-game-version
-      - *cache-server-files
+      - name: Determine game version
+        env:
+          HYTALE_DOWNLOADER_CREDENTIALS: ${{ secrets.HYTALE_DOWNLOADER_CREDENTIALS }}
+        run: *game-version-command
+
+      - name: Cache server files
+        id: cache-server-files
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # 5.0.1
+        with:
+          key: hytale-server-files-${{ hashFiles('HytaleDownloader/game_version') }}
+          path: |
+            ./Server/HytaleServer.jar
+            ./Assets.zip
+
       - *download-and-extract-game
 
       - name: Validate assets
