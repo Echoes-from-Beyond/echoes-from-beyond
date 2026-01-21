@@ -37,23 +37,29 @@ If there are formatting errors, run `spotlessApply` before `build`. If tests suc
 ### Dependencies
 For the time being (until we can access a proper Maven dependency) users have to build against their local copy of the Hytale server. To do this, create a file named `.hytale` in the root project directory (same level as this readme).
 
-Then, find the path to your Hytale installation. This is generally dependent on your OS:
+Then, find the path to your Hytale installation. This is generally dependent on your OS.
+
+Note: all of these are _pre-release_ versions! We always build against the latest pre-release server, so make sure your client is on that branch as well.
 
 ```
-Linux: $XDG_DATA_HOME/.var/app/com.hypixel.HytaleLauncher/data/Hytale/install/release/package/game/latest
-Windows: %appdata%\Hytale\install\release\package\game\latest
-MacOS: ~/Application Support/Hytale/install/release/package/game/latest
+Linux: $XDG_DATA_HOME/.var/app/com.hypixel.HytaleLauncher/data/Hytale/install/pre-release/package/game/latest
+Windows: %appdata%\Hytale\install\pre-release\package\game\latest
+MacOS: ~/Application Support/Hytale/install/pre-release/package/game/latest
 ```
 
 Once you have located the installation, you will want to convert the file to an _absolute path_ as appropriate for your operating system. Then, copy-paste the absolute path into the `.hytale` file. If `./gradlew build` completes without errors, the setup worked.
 
-`.hytale` is gitignore'd and should not be commited to the repo, as it will be different for every user.
+`.hytale` is gitignore'd and should not be commited to the repo, as it will be different for every user. 
 
 ### Setting up a development environment
 
-Execute `./gradlew runDevServer` to launch a Hytale server on your local machine for testing. This assumes you have set up the Hytale SDK as described [here](#dependencies).
+Execute `./gradlew runDevServer` to launch a Hytale server on your local machine for testing. This assumes you have set up the Hytale SDK as described [here](#dependencies). This task will also ensure that your development server is using the same version as your client. Ensure that you apply the latest available updates/patches through the Hytale launcher _before_ running this command!
+
+All server files are created inside a gitignore'd directory named `run`, relative to the project root. This includes logs, worlds, configs, etc. All of these will persist between launches, and the total size can grow over time as logs accrue and the world is explored. Execute `./gradlew cleanRunDir` to restore `run` to a "minimal" state. **Warning: this will recursively delete EVERYTHING in the run directory except for top-level .json files!**
 
 First time launch will require you to authenticate the server with your Hytale account. Follow the instructions in the terminal (the steps are the same as in [the Hytale server manual](https://support.hytale.com/hc/en-us/articles/45326769420827-Hytale-Server-Manual)). Run the Hytale server command `/auth persistence Encrypted` after to persist your credentials and avoid needing to sign in on every launch.
+
+Choosing this authentication storage method will create a file named `auth.enc` inside the `run` directory. **Do not commit or share this file.** It should already be gitignore'd as a consequence of being within `run`.
 
 [IntelliJ IDEA](https://www.jetbrains.com/idea/) users can use the provided run configuration `Launch development server` to run or debug the server, instead of executing the Gradle task manually.
 

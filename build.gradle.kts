@@ -46,7 +46,7 @@ tasks.register("runDevServer", JavaExec::class.java) {
     // Pass through commands to the Hytale server.
     standardInput = System.`in`
 
-    classpath = files(serverJar)
+    classpath = files(runDirectory.file("HytaleServer.jar"))
     workingDir = runDirectory.asFile
 
     jvmArgs = listOf("-Xms6G", "-Xmx6G", "--enable-native-access=ALL-UNNAMED")
@@ -59,9 +59,9 @@ tasks.register("cleanRunDir", Delete::class.java) {
     delete(runDirectory.dir("universe"))
     delete(runDirectory.asFileTree.matching {
         include("*")
+        exclude("*.json")
         exclude("Assets.zip")
         exclude("auth.enc")
-        exclude("config.json")
         exclude("HytaleServer.jar")
     })
 }
