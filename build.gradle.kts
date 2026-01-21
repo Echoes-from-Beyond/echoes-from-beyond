@@ -46,6 +46,6 @@ tasks.register("runDevServer", JavaExec::class.java) {
     classpath = files(serverJar)
     workingDir = runDirectory.asFile
 
-    jvmArgs = listOf("-Xms6G", "-Xmx6G")
+    jvmArgs = listOf("-Xms6G", "-Xmx6G", "--enable-native-access=ALL-UNNAMED")
     args = listOf("--disable-sentry", "--assets", "Assets.zip")
 }
