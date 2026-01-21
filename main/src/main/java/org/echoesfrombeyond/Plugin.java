@@ -23,6 +23,7 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.event.events.player.PlayerChatEvent;
+import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
@@ -33,6 +34,7 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.asset.SigilPattern;
+import org.echoesfrombeyond.interaction.DrawSigilInteraction;
 import org.echoesfrombeyond.ui.MemeUIPage;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -76,7 +78,11 @@ public class Plugin extends JavaPlugin {
                 .setCodec(SigilPattern.CODEC)
                 .setExtension(".json")
                 .setPath("SigilPatterns")
+                .setKeyFunction(SigilPattern::getId)
                 .build());
+
+    getCodecRegistry(Interaction.CODEC)
+        .register("Draw_Sigil", DrawSigilInteraction.class, DrawSigilInteraction.CODEC);
 
     getEventRegistry()
         .registerGlobal(

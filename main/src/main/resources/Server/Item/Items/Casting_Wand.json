@@ -1,0 +1,24 @@
+{
+  "TranslationProperties": {
+    "Name": "Casting Wand",
+    "Description": "Basic wand for casting Sigil-based spells."
+  },
+  "Id": "Casting_Wand",
+  "Icon": "Icons/ItemsGenerated/Casting_Wand.png",
+  "Model": "Items/Tools/Wands/Casting_Wand_Model.blockymodel",
+  "Texture": "Items/Tools/Wands/Casting_Wand_Texture.png",
+  "Quality": "Common",
+  "MaxStack": 1,
+  "Categories": [
+    "Items.Example"
+  ],
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "Draw_Sigil"
+        }
+      ]
+    }
+  }
+}
