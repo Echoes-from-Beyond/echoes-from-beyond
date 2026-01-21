@@ -2,8 +2,7 @@
 .hytale
 .kotlin
 build/
-run/
-!gradle/wrapper/gradle-wrapper.jar
+/run
 !**/src/main/**/build/
 !**/src/test/**/build/
 
