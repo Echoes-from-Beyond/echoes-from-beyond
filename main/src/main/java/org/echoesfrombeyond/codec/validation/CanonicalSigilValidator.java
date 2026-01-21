@@ -36,8 +36,11 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public class CanonicalSigilValidator implements Validator<SigilPoint[]> {
-  /** The singleton instance of this class. */
-  public static CanonicalSigilValidator INSTANCE = new CanonicalSigilValidator();
+  /**
+   * The singleton instance of this class. Currently only obtained by calling {@link
+   * CustomValidators#canonicalSigil()}
+   */
+  static CanonicalSigilValidator INSTANCE = new CanonicalSigilValidator();
 
   private CanonicalSigilValidator() {}
 

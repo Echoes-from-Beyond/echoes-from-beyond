@@ -1,49 +1,11 @@
 import org.echoesfrombeyond.gradle.plugin.JavaConventionPlugin
-import org.echoesfrombeyond.gradle.plugin.hytale
-import org.echoesfrombeyond.gradle.plugin.hytaleSdkProperty
 import org.echoesfrombeyond.gradle.plugin.projectImplementation
+import org.echoesfrombeyond.gradle.plugin.withHytalePlugin
+
+version = "0.1.0"
 
 apply<JavaConventionPlugin>()
 
-val sdk = hytaleSdkProperty()
+withHytalePlugin("EchoesFromBeyond")
 
-val serverJar: Provider<RegularFile> = sdk.map { dir ->
-    dir.dir("Server").file("HytaleServer.jar")
-}
-
-val assetsZip: Provider<RegularFile> = sdk.map { directory ->
-    directory.file("Assets.zip")
-}
-
-val runDirectory: Directory = rootProject.layout.projectDirectory.dir("run")
-
-dependencies {
-    projectImplementation(":util")
-    hytale(files(serverJar))
-}
-
-val syncTask = tasks.register<Sync>("syncPlugins") {
-    from(tasks.named("jar")).into(runDirectory.dir("mods"))
-
-    preserve {
-        // Preserve all subdirectories, we only want to remove stale plugin jars.
-        include("*/**/*")
-    }
-}
-
-val copyTask = tasks.register<Copy>("copySdk") {
-    from(serverJar, assetsZip).into(runDirectory)
-}
-
-tasks.register<JavaExec>("runDevServer") {
-    dependsOn(syncTask, copyTask)
-
-    // Pass through commands to the Hytale server.
-    standardInput = System.`in`
-
-    classpath = files(runDirectory.file("HytaleServer.jar"))
-    workingDir = runDirectory.asFile
-
-    jvmArgs = listOf("-Xms6G", "-Xmx6G")
-    args = listOf("--disable-sentry", "--assets", "Assets.zip")
-}
+dependencies { projectImplementation(":util") }

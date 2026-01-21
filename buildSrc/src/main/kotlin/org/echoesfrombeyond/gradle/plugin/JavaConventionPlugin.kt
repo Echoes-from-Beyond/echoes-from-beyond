@@ -10,7 +10,6 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.DuplicatesStrategy
-import org.gradle.api.file.FileCollection
 import org.gradle.api.plugins.ExtraPropertiesExtension
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.specs.Spec
@@ -18,6 +17,7 @@ import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.api.tasks.testing.Test
 import org.gradle.external.javadoc.CoreJavadocOptions
+import org.gradle.internal.extensions.core.extra
 import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import java.io.File
@@ -80,6 +80,11 @@ class JavaConventionPlugin : Plugin<Project> {
         target.extensions.configure<SpotlessExtension>("spotless") {
             it.lineEndings = LineEnding.UNIX
             it.encoding = Charsets.UTF_8
+
+            it.kotlinGradle { kotlinGradle ->
+                kotlinGradle.target("*.gradle.kts")
+                kotlinGradle.ktfmt("0.61")
+            }
 
             it.json { json ->
                 json.target("**/*.json")
@@ -193,25 +198,35 @@ fun DependencyHandler.projectImplementation(path: String) {
     add("implementation", project(mapOf("path" to path)))
 }
 
-private fun missingSdkException(): GradleException {
-    return GradleException("Using the `hytale()` dependency requires you to create a file " +
-            "named `.hytale` in the project root. This file must contain a path to the " +
-            "HytaleServer.jar file from your installation. If relative, the path is resolved " +
-            "relative to the root project directory.")
-}
-
-fun Project.hytaleSdkProperty(): DirectoryProperty {
+private fun Project.hytaleSdkProperty(): DirectoryProperty {
     return objects.directoryProperty().fileProvider(provider {
         val extra = dependencies.extensions.getByName("ext") as ExtraPropertiesExtension
-        if (!extra.has("hytale")) throw missingSdkException()
-
         extra["hytale"] as File
     })
 }
 
-/**
- * Add a compile-only dependency on Hytale.
- */
-fun DependencyHandler.hytale(files: FileCollection) {
-    add("compileOnly", files)
+fun Project.withHytalePlugin(name: String) {
+    if (plugins.withType(JavaConventionPlugin::class.java).isEmpty())
+        throw GradleException("Hytale plugin projects must apply JavaConventionPlugin!")
+
+    val sdk = hytaleSdkProperty()
+
+    val serverJar = sdk.map { dir -> dir.file("Server/HytaleServer.jar") }
+    val baseNameProperty = provider { version }.map { v -> "$name-$v" }
+
+    dependencies.add("compileOnly", files(serverJar))
+
+    tasks.named("jar", Jar::class.java).configure { jar ->
+        jar.archiveFileName.set(baseNameProperty.map { property -> "$property.jar" })
+    }
+
+    tasks.named("sourcesJar", Jar::class.java).configure { jar ->
+        jar.archiveFileName.set(baseNameProperty.map { property -> "$property-sources.jar" })
+    }
+
+    tasks.named("javadocJar", Jar::class.java).configure { jar ->
+        jar.archiveFileName.set(baseNameProperty.map { property -> "$property-javadoc.jar" })
+    }
+
+    extra["hasPlugin"] = true
 }

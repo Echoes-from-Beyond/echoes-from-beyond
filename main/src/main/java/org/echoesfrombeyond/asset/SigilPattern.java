@@ -30,20 +30,18 @@ import com.hypixel.hytale.codec.validation.Validators;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import org.echoesfrombeyond.codec.SigilPoint;
-import org.echoesfrombeyond.codec.validation.CanonicalSigilValidator;
+import org.echoesfrombeyond.codec.validation.CustomValidators;
 import org.echoesfrombeyond.sigil.SigilKey;
 import org.echoesfrombeyond.sigil.SigilValidation;
 import org.echoesfrombeyond.util.Check;
 import org.echoesfrombeyond.util.thread.Once;
-import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 /**
  * A Sigil pattern. Call {@link SigilPattern#getSigilKey()} to access the canonicalized sigil.
  *
  * @see SigilValidation for canonicalization details
  */
-@NullMarked
 public class SigilPattern
     implements JsonAssetWithMap<String, DefaultAssetMap<String, SigilPattern>> {
   /** Asset store supplier. This should not be called until after plugin setup. */
@@ -60,7 +58,7 @@ public class SigilPattern
                 SigilPattern::new,
                 Codec.STRING,
                 (sigil, id) -> sigil.id = id,
-                (sigil) -> Check.nonNull(sigil.id),
+                (sigil) -> sigil.id,
                 (sigil, data) -> sigil.data = data,
                 (sigil) -> sigil.data)
             .documentation(
@@ -72,17 +70,17 @@ public class SigilPattern
             .documentation("An array of strings containing comma-separated pairs of numbers.")
             .addValidator(Validators.nonNull())
             .addValidator(Validators.arraySizeRange(2, SigilValidation.MAX_SIGIL_LENGTH))
-            .addValidator(CanonicalSigilValidator.INSTANCE)
+            .addValidator(CustomValidators.canonicalSigil())
             .add()
             .build();
   }
 
-  private @Nullable String id;
-  private AssetExtraInfo.@Nullable Data data;
+  private String id;
+  private AssetExtraInfo.Data data;
 
-  private byte @Nullable [] points;
+  private byte[] points;
 
-  private final AtomicReference<@Nullable SigilKey> keyCache;
+  private final AtomicReference<SigilKey> keyCache;
 
   private SigilPattern() {
     this.keyCache = new AtomicReference<>(null);
@@ -106,13 +104,13 @@ public class SigilPattern
    * @return the canonical key
    * @throws IllegalStateException if this asset was serialized from invalid data
    */
-  public SigilKey getSigilKey() {
+  public @NonNull SigilKey getSigilKey() {
     return canonicalizeAndCache()
         .orElseThrow(() -> new IllegalStateException(SigilValidation.NON_CANONICAL_ERR_MSG));
   }
 
   @Override
-  public String getId() {
+  public @NonNull String getId() {
     return Check.nonNull(id);
   }
 }

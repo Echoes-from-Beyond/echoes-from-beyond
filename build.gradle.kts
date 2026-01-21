@@ -1,11 +1,51 @@
+import org.gradle.internal.extensions.core.extra
 import java.nio.file.Paths
 
-val file: File? = rootProject.file(".hytale")
+val hytaleDotfile: File = rootProject.file(".hytale")
+var hytalePath: File
 
-if (file?.exists() ?: false) {
-    val path = file.readText(Charsets.UTF_8).trim()
+if (hytaleDotfile.exists()) {
+    hytalePath = Paths.get(hytaleDotfile.readText(Charsets.UTF_8).trim()).toFile()
 
-    allprojects {
-        dependencies.ext["hytale"] = Paths.get(path).toFile()
+    allprojects { dependencies.ext["hytale"] = hytalePath }
+} else {
+    throw GradleException("Missing .hytale file! Please read the # Install section in the README " +
+            "for setup details.")
+}
+
+val runDirectory: Directory = rootProject.layout.projectDirectory.dir("run")
+
+val serverJar = hytalePath.resolve("Server").resolve("HytaleServer.jar")
+val assetsZip = hytalePath.resolve("Assets.zip")
+
+val copySdkTask: TaskProvider<Copy> = tasks.register("copySdk", Copy::class.java) {
+    from(serverJar, assetsZip).into(runDirectory)
+}
+
+val syncPluginsTask: TaskProvider<Sync> = tasks.register("syncPlugins", Sync::class.java) {
+    // Copy from all subprojects that have the `hasPlugin` property set to `true`. This is only the
+    // case when their build script includes `withHytalePlugin`.
+    from(subprojects.filter { sub -> sub.extra.has("hasPlugin") }
+        .filter { sub -> sub.extra.get("hasPlugin") as? Boolean ?: false }
+        .map { sub -> sub.tasks.named("jar") })
+        .into(runDirectory.dir("mods"))
+
+    // Preserve everything except run/mods/*.jar
+    preserve {
+        include { _ -> true }
+        exclude("*.jar")
     }
+}
+
+tasks.register("runDevServer", JavaExec::class.java) {
+    inputs.files(copySdkTask, syncPluginsTask)
+
+    // Pass through commands to the Hytale server.
+    standardInput = System.`in`
+
+    classpath = files(serverJar)
+    workingDir = runDirectory.asFile
+
+    jvmArgs = listOf("-Xms6G", "-Xmx6G")
+    args = listOf("--disable-sentry", "--assets", "Assets.zip")
 }
