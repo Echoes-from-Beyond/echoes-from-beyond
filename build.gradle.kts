@@ -49,3 +49,16 @@ tasks.register("runDevServer", JavaExec::class.java) {
     jvmArgs = listOf("-Xms6G", "-Xmx6G", "--enable-native-access=ALL-UNNAMED")
     args = listOf("--disable-sentry", "--assets", "Assets.zip")
 }
+
+tasks.register("cleanRunDir", Delete::class.java) {
+    delete(runDirectory.dir("logs"))
+    delete(runDirectory.dir("mods"))
+    delete(runDirectory.dir("universe"))
+    delete(runDirectory.asFileTree.matching {
+        include("*")
+        exclude("Assets.zip")
+        exclude("auth.enc")
+        exclude("config.json")
+        exclude("HytaleServer.jar")
+    })
+}
