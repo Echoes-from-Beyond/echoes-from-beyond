@@ -7,6 +7,9 @@ var hytalePath: File
 if (hytaleDotfile.exists()) {
     hytalePath = Paths.get(hytaleDotfile.readText(Charsets.UTF_8).trim()).toFile()
 
+    if (!hytalePath.exists())
+        throw GradleException("The path specified in .hytale does not exist!")
+
     allprojects { dependencies.ext["hytale"] = hytalePath }
 } else {
     throw GradleException("Missing .hytale file! Please read the # Install section in the README " +

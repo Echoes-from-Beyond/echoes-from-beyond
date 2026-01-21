@@ -8,7 +8,6 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
-import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.ExtraPropertiesExtension
 import org.gradle.api.plugins.JavaPluginExtension
@@ -198,21 +197,22 @@ fun DependencyHandler.projectImplementation(path: String) {
     add("implementation", project(mapOf("path" to path)))
 }
 
-private fun Project.hytaleSdkProperty(): DirectoryProperty {
-    return objects.directoryProperty().fileProvider(provider {
-        val extra = dependencies.extensions.getByName("ext") as ExtraPropertiesExtension
-        extra["hytale"] as File
-    })
-}
-
+/**
+ * Specifies that this project produces a Hytale plugin.
+ *
+ * @param name the name of the plugin
+ */
 fun Project.withHytalePlugin(name: String) {
     if (plugins.withType(JavaConventionPlugin::class.java).isEmpty())
         throw GradleException("Hytale plugin projects must apply JavaConventionPlugin!")
 
-    val sdk = hytaleSdkProperty()
+    val sdk = objects.directoryProperty().fileProvider(provider {
+        val extra = dependencies.extensions.getByName("ext") as ExtraPropertiesExtension
+        extra["hytale"] as File
+    })
 
     val serverJar = sdk.map { dir -> dir.file("Server/HytaleServer.jar") }
-    val baseNameProperty = provider { version }.map { v -> "$name-$v" }
+    val baseNameProperty = provider { version }.map { version -> "$name-$version" }
 
     dependencies.add("compileOnly", files(serverJar))
 
