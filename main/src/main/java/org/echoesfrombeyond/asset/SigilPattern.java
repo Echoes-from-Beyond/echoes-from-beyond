@@ -35,13 +35,15 @@ import org.echoesfrombeyond.sigil.SigilKey;
 import org.echoesfrombeyond.sigil.SigilValidation;
 import org.echoesfrombeyond.util.Check;
 import org.echoesfrombeyond.util.thread.Once;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A Sigil pattern. Call {@link SigilPattern#getSigilKey()} to access the canonicalized sigil.
  *
  * @see SigilValidation for canonicalization details
  */
+@NullMarked
 public class SigilPattern
     implements JsonAssetWithMap<String, DefaultAssetMap<String, SigilPattern>> {
   /** Asset store supplier. This should not be called until after plugin setup. */
@@ -58,7 +60,7 @@ public class SigilPattern
                 SigilPattern::new,
                 Codec.STRING,
                 (sigil, id) -> sigil.id = id,
-                (sigil) -> sigil.id,
+                SigilPattern::getId,
                 (sigil, data) -> sigil.data = data,
                 (sigil) -> sigil.data)
             .documentation(
@@ -75,12 +77,12 @@ public class SigilPattern
             .build();
   }
 
-  private String id;
-  private AssetExtraInfo.Data data;
+  private @Nullable String id;
+  private AssetExtraInfo.@Nullable Data data;
 
-  private byte[] points;
+  private byte @Nullable [] points;
 
-  private final AtomicReference<SigilKey> keyCache;
+  private final AtomicReference<@Nullable SigilKey> keyCache;
 
   private SigilPattern() {
     this.keyCache = new AtomicReference<>(null);
@@ -104,13 +106,13 @@ public class SigilPattern
    * @return the canonical key
    * @throws IllegalStateException if this asset was serialized from invalid data
    */
-  public @NonNull SigilKey getSigilKey() {
+  public SigilKey getSigilKey() {
     return canonicalizeAndCache()
         .orElseThrow(() -> new IllegalStateException(SigilValidation.NON_CANONICAL_ERR_MSG));
   }
 
   @Override
-  public @NonNull String getId() {
+  public String getId() {
     return Check.nonNull(id);
   }
 }

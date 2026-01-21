@@ -198,11 +198,10 @@ fun DependencyHandler.projectImplementation(path: String) {
 }
 
 /**
- * Specifies that this project produces a Hytale plugin.
- *
- * @param name the name of the plugin
+ * Adds a dependency on Hytale, but does not make this project a plugin like [withHytalePlugin]
+ * would.
  */
-fun Project.withHytalePlugin(name: String) {
+fun Project.withHytaleDependency() {
     if (plugins.withType(JavaConventionPlugin::class.java).isEmpty())
         throw GradleException("Hytale plugin projects must apply JavaConventionPlugin!")
 
@@ -212,9 +211,18 @@ fun Project.withHytalePlugin(name: String) {
     })
 
     val serverJar = sdk.map { dir -> dir.file("Server/HytaleServer.jar") }
-    val baseNameProperty = provider { version }.map { version -> "$name-$version" }
-
     dependencies.add("compileOnly", files(serverJar))
+}
+
+/**
+ * Specifies that this project produces a Hytale plugin. Implies [withHytaleDependency].
+ *
+ * @param name the name of the plugin
+ */
+fun Project.withHytalePlugin(name: String) {
+    withHytaleDependency()
+
+    val baseNameProperty = provider { version }.map { version -> "$name-$version" }
 
     tasks.named("jar", Jar::class.java).configure { jar ->
         jar.archiveFileName.set(baseNameProperty.map { property -> "$property.jar" })
