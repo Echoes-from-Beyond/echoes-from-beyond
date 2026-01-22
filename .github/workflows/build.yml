@@ -23,7 +23,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           gh secret list > /dev/null
-          printf %s .runner > .hytale
+          printf %s "$(pwd)/.runner" > .hytale
           
           mkdir .runner && cd .runner
           printf %s "$HYTALE_DOWNLOADER_CREDENTIALS" | base64 -d > .hytale-downloader-credentials.json

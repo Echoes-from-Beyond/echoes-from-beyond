@@ -82,7 +82,9 @@ public class Plugin extends JavaPlugin {
                 .setKeyFunction(SigilPattern::getId)
                 .build());
 
-    if (System.getenv("ENABLE_INTEGRATION_TESTS").equalsIgnoreCase("true")) {
+    String integrationTests = System.getenv("ENABLE_INTEGRATION_TESTS");
+
+    if (integrationTests != null && integrationTests.equalsIgnoreCase("true")) {
       getCommandRegistry().registerCommand(IntegrationTestCommand.INSTANCE);
     }
 
