@@ -1,4 +1,7 @@
 import org.gradle.internal.extensions.core.extra
+import java.io.BufferedInputStream
+import java.io.FileInputStream
+import java.util.jar.Manifest
 import java.nio.file.Paths
 
 val hytalePath: Provider<File> = provider {
@@ -25,7 +28,58 @@ val assetsZip: Provider<File> = hytalePath.map { file -> file.resolve("Assets.zi
 
 val runDirectory: Directory = rootProject.layout.projectDirectory.dir("run")
 
+val collectHytaleRevisions: TaskProvider<Task> = tasks.register("collectHytaleRevisions") {
+    inputs.file(serverJar.map { jar ->
+        resources.text.fromArchiveEntry(jar, "META-INF/MANIFEST.MF").asFile()
+    }).withPathSensitivity(PathSensitivity.NONE)
+
+    inputs.files(provider {
+        project("main").configurations["compileClasspath"].asFileTree.matching {
+            include("**/Server-*.jar")
+        }.map { file -> resources.text.fromArchiveEntry(file, "META-INF/MANIFEST.MF").asFile() }
+    }).withPathSensitivity(PathSensitivity.NONE)
+
+    outputs.file(rootProject.layout.buildDirectory.file("hytaleRevisions"))
+
+    doLast {
+        val entries = inputs.files.toList().asSequence().map { file ->
+            BufferedInputStream(FileInputStream(file)).use { stream ->
+                Manifest(stream).mainAttributes
+            }
+        }
+
+        val revisionIds = mutableSetOf<String>()
+        entries.forEach { entry ->
+            val value = entry.getValue("Implementation-Revision-Id")
+            if (value != null) revisionIds.add(value)
+        }
+
+        val sorted = revisionIds.toSortedSet()
+        outputs.files.singleFile.writeText(sorted.joinToString("\n"), Charsets.UTF_8)
+    }
+}
+
+val validateHytaleRevisions: TaskProvider<Task> = tasks.register("validateHytaleRevisions") {
+    inputs.files(collectHytaleRevisions)
+
+    doLast {
+        val revisionIds = inputs.files.singleFile.readText(Charsets.UTF_8)
+            .split("\n")
+            .map(String::trim)
+            .filter(CharSequence::isNotEmpty)
+
+        if (revisionIds.size > 1) {
+            throw GradleException("Identified a mismatch between your local Hytale version and " +
+                    "the latest downloaded from Maven. All revision IDs must agree exactly.\n\n" +
+                    "All revision IDs found on classpath:\n${revisionIds.joinToString("\n")}\n\n" +
+                    "To resolve this error, please update your Hytale client to the latest " +
+                    "pre-release.")
+        }
+    }
+}
+
 val copySdkTask: TaskProvider<Copy> = tasks.register("copySdk", Copy::class.java) {
+    dependsOn(validateHytaleRevisions)
     from(serverJar, assetsZip).into(runDirectory)
 }
 
