@@ -22,20 +22,20 @@ See `SECURITY.md` for our vulnerability disclosure policy.
 
 This project was made to act as an early story-based experience that will be playable before the official Adventure Mode.
 
-It has a very different theme from said official mode and we intend to integrate with rather than replace it.
+It has a very different theme from said official mode, and we intend to integrate with rather than replace it.
 
 ## Install
 
-This project is built using [Gradle](https://gradle.org/), and requires the user to have a local copy of the Hytale server to build against.
+This project is built using [Gradle](https://gradle.org/). Run `./gradlew build` to run tests and build all submodules.
 
-```
-./gradlew build
-```
+Alternatively, run `./gradlew check syncPlugins`. This will assemble all Hytale plugins into the `run/mods` directory.
 
-If there are formatting errors, run `spotlessApply` before `build`. If tests succeed, the mod jar (containing all required dependencies) will be output to `main/build/libs/main.jar`.
+If there are formatting errors, run `./gradlew spotlessApply` to fix them.
 
-### Dependencies
-For the time being (until we can access a proper Maven dependency) users have to build against their local copy of the Hytale server. To do this, create a file named `.hytale` in the root project directory (same level as this readme).
+### Setting up a development environment
+In order to actually test the mod in-game, users need to specify their local Hytale installation. 
+
+To do this, create a file named `.hytale` in the root project directory (same level as this readme).
 
 Then, find the path to your Hytale installation. This is generally dependent on your OS.
 
@@ -47,13 +47,11 @@ Windows: %appdata%\Hytale\install\pre-release\package\game\latest
 MacOS: ~/Application Support/Hytale/install/pre-release/package/game/latest
 ```
 
-Once you have located the installation, you will want to convert the file to an _absolute path_ as appropriate for your operating system. Then, copy-paste the absolute path into the `.hytale` file. If `./gradlew build` completes without errors, the setup worked.
+Once you have located the installation, you will need to convert the file to an _absolute path_ as appropriate for your operating system. Then, copy-paste the absolute path into the `.hytale` file. If `./gradlew build` completes without errors, the setup worked.
 
 `.hytale` is gitignore'd and should not be commited to the repo, as it will be different for every user. 
 
-### Setting up a development environment
-
-Execute `./gradlew runDevServer` to launch a Hytale server on your local machine for testing. This assumes you have set up the Hytale SDK as described [here](#dependencies). This task will also ensure that your development server is using the same version as your client. Ensure that you apply the latest available updates/patches through the Hytale launcher _before_ running this command!
+Finally, execute `./gradlew runDevServer` to launch a Hytale server on your local machine for testing. This task will also ensure that your development server is using the same version as your client. Ensure that you apply the latest available updates/patches through the Hytale launcher _before_ running this command!
 
 All server files are created inside a gitignore'd directory named `run`, relative to the project root. This includes logs, worlds, configs, etc. All of these will persist between launches, and the total size can grow over time as logs accrue and the world is explored. Execute `./gradlew cleanRunDir` to restore `run` to a "minimal" state. **Warning: this will recursively delete EVERYTHING in the run directory except for top-level .json files!**
 

@@ -1,27 +1,29 @@
 import org.gradle.internal.extensions.core.extra
 import java.nio.file.Paths
 
-val hytaleDotfile: File = rootProject.file(".hytale")
+val hytalePath: Provider<File> = provider {
+    val hytaleDotfile: File = rootProject.file(".hytale")
 
-if (!hytaleDotfile.exists())
-    throw GradleException("Missing .hytale file! Please read the # Install section in the README " +
-            "for setup details.")
+    if (!hytaleDotfile.exists())
+        throw GradleException("Missing .hytale file! Please read the # Install section in the " +
+                "README for setup details.")
 
-var hytalePath: File = Paths.get(hytaleDotfile.readText(Charsets.UTF_8).trim()).toFile()
+    var hytalePath: File = Paths.get(hytaleDotfile.readText(Charsets.UTF_8).trim()).toFile()
 
-if (!hytalePath.isDirectory)
-    throw GradleException("The path specified in .hytale does not exist or is not the right type " +
-            "(must be a directory)!")
+    if (!hytalePath.isDirectory)
+        throw GradleException("The path specified in .hytale does not exist or is not the right " +
+                "type (must be a directory)!")
 
-if (!hytalePath.isAbsolute)
-    throw GradleException("The path specified in .hytale is not absolute!")
+    if (!hytalePath.isAbsolute)
+        throw GradleException("The path specified in .hytale is not absolute!")
 
-allprojects { dependencies.ext["hytale"] = hytalePath }
+    hytalePath
+}
+
+val serverJar: Provider<File> = hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.jar") }
+val assetsZip: Provider<File> = hytalePath.map { file -> file.resolve("Assets.zip") }
 
 val runDirectory: Directory = rootProject.layout.projectDirectory.dir("run")
-
-val serverJar = hytalePath.resolve("Server").resolve("HytaleServer.jar")
-val assetsZip = hytalePath.resolve("Assets.zip")
 
 val copySdkTask: TaskProvider<Copy> = tasks.register("copySdk", Copy::class.java) {
     from(serverJar, assetsZip).into(runDirectory)

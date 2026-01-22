@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout
@@ -29,7 +29,6 @@ jobs:
         # if the `gh` command fails it means we didn't update the stored value of the secret.
         run: |
           gh secret list > /dev/null
-          printf %s "$(pwd)/.runner" > .hytale
           
           mkdir .runner && cd .runner
           printf %s "$HYTALE_DOWNLOADER_CREDENTIALS" | base64 -d > .hytale-downloader-credentials.json
