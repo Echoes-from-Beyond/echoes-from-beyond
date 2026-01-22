@@ -9,7 +9,6 @@ import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.file.DuplicatesStrategy
-import org.gradle.api.plugins.ExtraPropertiesExtension
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.specs.Spec
 import org.gradle.api.tasks.compile.JavaCompile
@@ -19,7 +18,7 @@ import org.gradle.external.javadoc.CoreJavadocOptions
 import org.gradle.internal.extensions.core.extra
 import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JavaLanguageVersion
-import java.io.File
+import java.net.URI
 import kotlin.jvm.java
 
 /**
@@ -205,13 +204,15 @@ fun Project.withHytaleDependency() {
     if (plugins.withType(JavaConventionPlugin::class.java).isEmpty())
         throw GradleException("Hytale plugin projects must apply JavaConventionPlugin!")
 
-    val sdk = objects.directoryProperty().fileProvider(provider {
-        val extra = dependencies.extensions.getByName("ext") as ExtraPropertiesExtension
-        extra["hytale"] as File
-    })
+    repositories.exclusiveContent { exclusive ->
+        exclusive.forRepositories(repositories.maven { maven ->
+            maven.name = "hytale-pre-release"
+            maven.url = URI.create("https://maven.hytale.com/pre-release")
+        })
+        exclusive.filter { filter -> filter.includeGroup("com.hypixel.hytale") }
+    }
 
-    val serverJar = sdk.map { dir -> dir.file("Server/HytaleServer.jar") }
-    dependencies.add("compileOnly", files(serverJar))
+    dependencies.add("compileOnly", "com.hypixel.hytale:Server:latest.integration")
 }
 
 /**
