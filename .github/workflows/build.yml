@@ -36,7 +36,7 @@ jobs:
           exit_code=$?
           set -e
           
-          base64 .hytale-downloader-credentials.json | gh secret set HYTALE_DOWNLOADER_CREDENTIALS
+          base64 -w 0 .hytale-downloader-credentials.json | gh secret set HYTALE_DOWNLOADER_CREDENTIALS
           exit "$exit_code"
 
       - name: Cache server files
@@ -63,7 +63,7 @@ jobs:
           exit_code=$?
           set -e
           
-          base64 .hytale-downloader-credentials.json | gh secret set HYTALE_DOWNLOADER_CREDENTIALS
+          base64 -w 0 .hytale-downloader-credentials.json | gh secret set HYTALE_DOWNLOADER_CREDENTIALS
           [ "$exit_code" -eq 0 ] || exit "$exit_code"
           
           unzip game.zip
