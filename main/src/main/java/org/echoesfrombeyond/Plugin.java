@@ -34,6 +34,7 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.asset.SigilPattern;
+import org.echoesfrombeyond.command.IntegrationTestCommand;
 import org.echoesfrombeyond.interaction.DrawSigilInteraction;
 import org.echoesfrombeyond.ui.MemeUIPage;
 import org.jspecify.annotations.NullMarked;
@@ -80,6 +81,10 @@ public class Plugin extends JavaPlugin {
                 .setPath("SigilPatterns")
                 .setKeyFunction(SigilPattern::getId)
                 .build());
+
+    if (System.getenv("ENABLE_INTEGRATION_TESTS").equalsIgnoreCase("true")) {
+      getCommandRegistry().registerCommand(IntegrationTestCommand.INSTANCE);
+    }
 
     getCodecRegistry(Interaction.CODEC)
         .register("Draw_Sigil", DrawSigilInteraction.class, DrawSigilInteraction.CODEC);

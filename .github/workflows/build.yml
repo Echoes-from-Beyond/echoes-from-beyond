@@ -11,11 +11,57 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
+
+      - name: Determine server version
+        env:
+          HYTALE_DOWNLOADER_CREDENTIALS: ${{ secrets.HYTALE_DOWNLOADER_CREDENTIALS }}
+        run: |
+          printf %s .runner > .hytale
+          
+          mkdir .runner && cd .runner
+          printf %s "$HYTALE_DOWNLOADER_CREDENTIALS" | base64 -d > .hytale-downloader-credentials.json
+          wget 'https://downloader.hytale.com/hytale-downloader.zip' -O downloader.zip
+          unzip downloader.zip
+          chmod +x hytale-downloader-linux-amd64
+          
+          set +e
+          ./hytale-downloader-linux-amd64 -skip-update-check -patchline pre-release -print-version > version
+          exit_code=$?
+          set -e
+          
+          base64 .hytale-downloader-credentials.json | gh secret set HYTALE_DOWNLOADER_CREDENTIALS
+          exit "$exit_code"
+
+      - name: Cache server files
+        id: cache-server-files
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # 5.0.1
+        with:
+          key: hytale-server-files-${{ hashFiles('.runner/version') }}
+          enableCrossOsArchive: true
+          path: |
+            .runner/Assets.zip
+            .runner/Server/HytaleServer.jar
+            .runner/Server/HytaleServer.aot
+
+      - name: Download and unzip server files
+        if: steps.cache-server-files.outputs.cache-hit != 'true'
+        run: |
+          cd .runner
+          
+          set +e
+          ./hytale-downloader-linux-amd64 -skip-update-check -patchline pre-release -download-path game.zip
+          exit_code=$?
+          set -e
+          
+          base64 .hytale-downloader-credentials.json | gh secret set HYTALE_DOWNLOADER_CREDENTIALS
+          [ "$exit_code" -eq 0 ] || exit "$exit_code"
+          
+          unzip game.zip
 
       # We need to use a separate cache action for the convention plugin specifically: setup-gradle
       # does NOT do this automatically.
@@ -51,5 +97,13 @@ jobs:
           # builds.
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
-      - name: Build Project
-        run: ./gradlew build
+      - name: Run unit tests and assemble plugins
+        run: ./gradlew check syncPlugins
+
+      - name: Run integration tests
+        run: |
+          mkdir .runner/Server/mods
+          cp run/mods/*.jar .runner/Server/mods/
+          
+          cd .runner/Server
+          ENABLE_INTEGRATION_TESTS=true java -XX:AOTCache=HytaleServer.aot --enable-native-access=ALL-UNNAMED -jar HytaleServer.jar --assets ../Assets.zip --disable-sentry --auth-mode=insecure --boot-command=integration_test --boot-command=stop
