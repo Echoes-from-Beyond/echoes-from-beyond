@@ -20,7 +20,9 @@ jobs:
       - name: Determine server version
         env:
           HYTALE_DOWNLOADER_CREDENTIALS: ${{ secrets.HYTALE_DOWNLOADER_CREDENTIALS }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          gh secret list > /dev/null
           printf %s .runner > .hytale
           
           mkdir .runner && cd .runner
@@ -49,8 +51,11 @@ jobs:
             .runner/Server/HytaleServer.aot
 
       - name: Download and unzip server files
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         if: steps.cache-server-files.outputs.cache-hit != 'true'
         run: |
+          gh secret list > /dev/null
           cd .runner
           
           set +e
