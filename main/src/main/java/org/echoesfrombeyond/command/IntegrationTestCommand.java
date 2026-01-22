@@ -22,6 +22,7 @@ import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.command.system.AbstractCommand;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.console.ConsoleSender;
+import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import java.util.concurrent.CompletableFuture;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -32,13 +33,26 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public class IntegrationTestCommand extends AbstractCommand {
-  /** Singleton instance of this class. */
-  public static final IntegrationTestCommand INSTANCE = new IntegrationTestCommand();
+  private static final IntegrationTestCommand INSTANCE = new IntegrationTestCommand();
 
   private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
   private IntegrationTestCommand() {
     super("integration_test", "When invoked by the server console, runs integration tests.");
+  }
+
+  /**
+   * Registers the integration test command, if the appropriate environment variable {@code
+   * ENABLE_INTEGRATION_TESTS} is set to {@code true}.
+   *
+   * @param plugin the launch plugin
+   */
+  public static void setup(JavaPlugin plugin) {
+    String integrationTests = System.getenv("ENABLE_INTEGRATION_TESTS");
+
+    if (integrationTests != null && integrationTests.equalsIgnoreCase("true")) {
+      plugin.getCommandRegistry().registerCommand(IntegrationTestCommand.INSTANCE);
+    }
   }
 
   @Override
