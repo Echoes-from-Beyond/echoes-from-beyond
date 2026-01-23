@@ -1,0 +1,9 @@
+$Common = "Common.ui";
+
+@SigilGrid = PatchStyle(TexturePath: "Sigil_Grid.png");
+
+Group {
+  LayoutMode: Center;
+  Background: @SigilGrid;
+  Anchor: (Width: 601, Height: 601);
+}

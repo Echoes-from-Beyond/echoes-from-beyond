@@ -16,7 +16,21 @@
     "Secondary": {
       "Interactions": [
         {
-          "Type": "Draw_Sigil"
+          "Type": "Start_Drawing_Sigil"
+        },
+        {
+          "Type": "Charging",
+          "FailsOnDamage": true,
+          "HorizontalSpeedMultiplier": 0.4,
+          "AllowIndefiniteHold": true,
+          "Next": {
+            "0.0": {
+              "Type": "Stop_Drawing_Sigil"
+            }
+          },
+          "Failed": {
+            "Type": "Stop_Drawing_Sigil"
+          }
         }
       ]
     }

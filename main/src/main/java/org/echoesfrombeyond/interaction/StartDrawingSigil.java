@@ -19,30 +19,48 @@
 package org.echoesfrombeyond.interaction;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.component.CommandBuffer;
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.protocol.InteractionType;
-import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
+import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class DrawSigilInteraction extends SimpleInstantInteraction {
-  public static final BuilderCodec<DrawSigilInteraction> CODEC =
+public class StartDrawingSigil extends SimpleInstantInteraction {
+  public static final BuilderCodec<StartDrawingSigil> CODEC =
       BuilderCodec.builder(
-              DrawSigilInteraction.class, DrawSigilInteraction::new, SimpleInstantInteraction.CODEC)
+              StartDrawingSigil.class, StartDrawingSigil::new, SimpleInstantInteraction.CODEC)
           .build();
+
+  private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
   @Override
   protected void firstRun(
       InteractionType interactionType,
       InteractionContext interactionContext,
       CooldownHandler cooldownHandler) {
-    var commandBuffer = interactionContext.getCommandBuffer();
-    if (commandBuffer == null) return;
+    LOGGER.atInfo().log("Drawing sigil...");
+    Ref<EntityStore> ref = interactionContext.getEntity();
+    CommandBuffer<EntityStore> buffer = interactionContext.getCommandBuffer();
+    if (buffer == null) return;
 
-    World world = commandBuffer.getExternalData().getWorld();
-    world.sendMessage(Message.raw("Hello World"));
+    Player player = buffer.getComponent(ref, Player.getComponentType());
+    PlayerRef playerRef = buffer.getComponent(ref, PlayerRef.getComponentType());
+    if (player == null || playerRef == null) return;
+
+    World world = player.getWorld();
+    if (world == null) return;
+
+    player
+        .getWorld()
+        .execute(() -> player.getHudManager().setCustomHud(playerRef, new SigilHud(playerRef)));
   }
 }

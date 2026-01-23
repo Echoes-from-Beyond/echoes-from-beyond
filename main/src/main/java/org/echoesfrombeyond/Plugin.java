@@ -26,7 +26,8 @@ import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.command.IntegrationTestCommand;
-import org.echoesfrombeyond.interaction.DrawSigilInteraction;
+import org.echoesfrombeyond.interaction.StartDrawingSigil;
+import org.echoesfrombeyond.interaction.StopDrawingSigil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -73,7 +74,10 @@ public class Plugin extends JavaPlugin {
                 .build());
 
     getCodecRegistry(Interaction.CODEC)
-        .register("Draw_Sigil", DrawSigilInteraction.class, DrawSigilInteraction.CODEC);
+        .register("Start_Drawing_Sigil", StartDrawingSigil.class, StartDrawingSigil.CODEC);
+
+    getCodecRegistry(Interaction.CODEC)
+        .register("Stop_Drawing_Sigil", StopDrawingSigil.class, StopDrawingSigil.CODEC);
 
     IntegrationTestCommand.setup(this);
 
