@@ -9,9 +9,12 @@ If you're fixing a bug, please create an issue first and reference it in your pu
 
 If you're adding a new feature, you don't _need_ to create an issue first, but it's HIGHLY recommended to do so in order to find out if your feature will be accepted before you make it!
 
-Our CI system detects invalid code style and will fail the build. Before you commit, make sure you run `./gradlew spotlessApply`. Also see the [style section](#style).
+Our CI system detects invalid code style and will fail the build. Before you commit, make sure you run `./gradlew spotlessApply`. Also see the [style section](#style). You can run `./gradlew spotlessInstallGitPrePushHook` to install a Git hook that will ensure code is formatted correctly before submission.
 
 By contributing, you agree to license the contributed code under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html#license-text). Please do not submit code under different licenses.
+
+## AI Generated Code Policy
+Pull requests that contain AI generated code or documentation must be _thoroughly_ reviewed by the submitter, and they must conform to our style guide. You are expected to understand how your contribution works. "Low-effort" AI generated pull requests may be treated as spam and closed, at the discretion of the maintainers.
 
 ## Style
 
