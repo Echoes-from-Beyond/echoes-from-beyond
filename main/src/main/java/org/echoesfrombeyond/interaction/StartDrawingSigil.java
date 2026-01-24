@@ -21,7 +21,6 @@ package org.echoesfrombeyond.interaction;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.entity.entities.Player;
@@ -40,14 +39,11 @@ public class StartDrawingSigil extends SimpleInstantInteraction {
               StartDrawingSigil.class, StartDrawingSigil::new, SimpleInstantInteraction.CODEC)
           .build();
 
-  private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
-
   @Override
   protected void firstRun(
       InteractionType interactionType,
       InteractionContext interactionContext,
       CooldownHandler cooldownHandler) {
-    LOGGER.atInfo().log("Drawing sigil...");
     Ref<EntityStore> ref = interactionContext.getEntity();
     CommandBuffer<EntityStore> buffer = interactionContext.getCommandBuffer();
     if (buffer == null) return;

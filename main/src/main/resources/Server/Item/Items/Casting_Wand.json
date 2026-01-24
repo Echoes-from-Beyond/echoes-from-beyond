@@ -1,7 +1,7 @@
 {
   "TranslationProperties": {
-    "Name": "Casting Wand",
-    "Description": "Basic wand for casting Sigil-based spells."
+    "Name": "items.Casting_Wand.name",
+    "Description": "items.Casting_Wand.description"
   },
   "Id": "Casting_Wand",
   "Icon": "Icons/ItemsGenerated/Casting_Wand.png",
@@ -13,23 +13,20 @@
     "Items.Example"
   ],
   "Interactions": {
-    "Secondary": {
+    "Primary": {
       "Interactions": [
         {
           "Type": "Start_Drawing_Sigil"
         },
         {
           "Type": "Charging",
-          "FailsOnDamage": true,
           "HorizontalSpeedMultiplier": 0.4,
           "AllowIndefiniteHold": true,
+          "CancelOnOtherClick": false,
           "Next": {
             "0.0": {
               "Type": "Stop_Drawing_Sigil"
             }
-          },
-          "Failed": {
-            "Type": "Stop_Drawing_Sigil"
           }
         }
       ]
