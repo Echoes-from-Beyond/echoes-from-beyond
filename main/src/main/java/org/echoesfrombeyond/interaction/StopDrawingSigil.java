@@ -27,8 +27,8 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
-import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import org.echoesfrombeyond.component.sigil.SigilDraw;
 import org.echoesfrombeyond.ui.hud.EmptyHud;
 import org.jspecify.annotations.NullMarked;
 
@@ -44,20 +44,14 @@ public class StopDrawingSigil extends SimpleInstantInteraction {
       InteractionType interactionType,
       InteractionContext interactionContext,
       CooldownHandler cooldownHandler) {
-    Ref<EntityStore> ref = interactionContext.getEntity();
-    CommandBuffer<EntityStore> buffer = interactionContext.getCommandBuffer();
-    if (buffer == null) return;
+    InteractionUtils.forPlayerInStore(interactionContext, StopDrawingSigil::run);
+  }
 
-    Player player = buffer.getComponent(ref, Player.getComponentType());
-    PlayerRef playerRef = buffer.getComponent(ref, PlayerRef.getComponentType());
+  private static void run(
+      CommandBuffer<EntityStore> buffer, Ref<EntityStore> ref, Player player, PlayerRef playerRef) {
+    var sigilDraw = buffer.ensureAndGetComponent(ref, SigilDraw.getComponentType());
 
-    if (player == null || playerRef == null) return;
-
-    World world = player.getWorld();
-    if (world == null) return;
-
-    player
-        .getWorld()
-        .execute(() -> player.getHudManager().setCustomHud(playerRef, new EmptyHud(playerRef)));
+    sigilDraw.active = false;
+    player.getHudManager().setCustomHud(playerRef, new EmptyHud(playerRef));
   }
 }

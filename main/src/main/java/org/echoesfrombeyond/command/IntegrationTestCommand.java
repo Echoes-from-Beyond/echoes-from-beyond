@@ -24,6 +24,7 @@ import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.console.ConsoleSender;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import java.util.concurrent.CompletableFuture;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -47,7 +48,8 @@ public class IntegrationTestCommand extends AbstractCommand {
    *
    * @param plugin the launch plugin
    */
-  public static void setup(JavaPlugin plugin) {
+  @ApiStatus.Internal
+  public static void register(JavaPlugin plugin) {
     String integrationTests = System.getenv("ENABLE_INTEGRATION_TESTS");
 
     if (integrationTests != null && integrationTests.equalsIgnoreCase("true")) {

@@ -28,8 +28,7 @@ import org.jspecify.annotations.Nullable;
  * Static input validation methods that throw runtime exceptions on precondition failure.
  *
  * <p>Where possible, prefer to use the methods in this class rather than e.g. {@link
- * Objects#requireNonNull(Object)}. This is because eventually the checks may be elided in an
- * "optimized" build that replaces the method bodies with no-ops.
+ * Objects#requireNonNull(Object)}.
  */
 public final class Check {
   private Check() {}
@@ -111,5 +110,21 @@ public final class Check {
   public static void inBounds(Object array, int index) {
     int arrayLen = Array.getLength(nonNull(array));
     if (index < 0 || index >= arrayLen) throw new ArrayIndexOutOfBoundsException(index);
+  }
+
+  /**
+   * Checks if {@code first} is equal to {@code second}, as if by {@link Objects#equals(Object,
+   * Object)}.
+   *
+   * @param first the first object
+   * @param second the second object
+   * @throws IllegalArgumentException if {@code Objects.equals(first, second)} would have returned
+   *     false for the given arguments
+   */
+  @Contract(value = "null, !null -> fail; !null, null -> fail", pure = true)
+  public static void equals(@Nullable Object first, @Nullable Object second) {
+    if (Objects.equals(first, second)) return;
+
+    throw new IllegalArgumentException(first + " != " + second);
   }
 }

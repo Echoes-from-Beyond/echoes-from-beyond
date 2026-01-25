@@ -18,16 +18,9 @@
 
 package org.echoesfrombeyond;
 
-import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
-import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
-import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import java.util.concurrent.CompletableFuture;
-import org.echoesfrombeyond.asset.SigilPattern;
-import org.echoesfrombeyond.command.IntegrationTestCommand;
-import org.echoesfrombeyond.interaction.StartDrawingSigil;
-import org.echoesfrombeyond.interaction.StopDrawingSigil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -64,22 +57,10 @@ public class Plugin extends JavaPlugin {
   /** Setup. Most asset registration happens here. */
   @Override
   protected void setup() {
-    getAssetRegistry()
-        .register(
-            HytaleAssetStore.builder(SigilPattern.class, new DefaultAssetMap<>())
-                .setCodec(SigilPattern.CODEC)
-                .setExtension(".json")
-                .setPath("SigilPatterns")
-                .setKeyFunction(SigilPattern::getId)
-                .build());
-
-    getCodecRegistry(Interaction.CODEC)
-        .register("Start_Drawing_Sigil", StartDrawingSigil.class, StartDrawingSigil.CODEC);
-
-    getCodecRegistry(Interaction.CODEC)
-        .register("Stop_Drawing_Sigil", StopDrawingSigil.class, StopDrawingSigil.CODEC);
-
-    IntegrationTestCommand.setup(this);
+    Init.registerAssetRegistries(this);
+    Init.registerCodecs(this);
+    Init.registerCommands(this);
+    Init.registerComponents(this);
 
     // This is a no-op currently, but because this has an actual implementation something may be
     // done in the future, so it should always be called.

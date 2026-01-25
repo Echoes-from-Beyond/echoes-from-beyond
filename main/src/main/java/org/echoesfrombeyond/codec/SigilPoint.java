@@ -29,7 +29,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Intermediate data class used during {@link SigilPattern} deserialization.
+ * Intermediate data class used during {@link SigilPattern} deserialization and elsewhere to store
+ * parts of a Sigil.
  *
  * @param x the sigil x-coordinate
  * @param y the sigil y-coordinate

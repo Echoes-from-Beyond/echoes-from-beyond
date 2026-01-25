@@ -18,5 +18,9 @@
   "Website": null,
   "Main": "org.echoesfrombeyond.Plugin",
   "ServerVersion": "*",
-  "IncludesAssetPack": true
+  "IncludesAssetPack": true,
+  "DependsOn": {
+    "Hytale:EntityModule": "*",
+    "Hytale:BlockModule": "*"
+  }
 }
