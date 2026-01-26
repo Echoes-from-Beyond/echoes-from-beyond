@@ -30,7 +30,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.interaction.InteractionUtils;
-import org.echoesfrombeyond.ui.hud.EmptyHud;
+import org.echoesfrombeyond.ui.hud.HudUtils;
 import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
 
@@ -52,12 +52,9 @@ public class CloseSigilHud extends SimpleInstantInteraction {
 
   private static void run(
       CommandBuffer<EntityStore> buffer, Ref<EntityStore> ref, Player player, PlayerRef playerRef) {
+    HudUtils.hideHud(SigilHud.class, player, playerRef);
+
     var sigilDraw = buffer.getComponent(ref, SigilDrawComponent.getComponentType());
-    var hudManager = player.getHudManager();
-
-    if (hudManager.getCustomHud() instanceof SigilHud)
-      hudManager.setCustomHud(playerRef, new EmptyHud(playerRef));
-
     if (sigilDraw != null) sigilDraw.reset();
   }
 }

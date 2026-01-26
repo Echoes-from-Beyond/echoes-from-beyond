@@ -30,9 +30,9 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Sim
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.codec.SigilPoint;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.interaction.InteractionUtils;
+import org.echoesfrombeyond.ui.hud.HudUtils;
 import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
 
@@ -58,26 +58,15 @@ public class OpenSigilHud extends SimpleInstantInteraction {
     if (head == null) return;
 
     var sigilDraw = buffer.ensureAndGetComponent(ref, SigilDrawComponent.getComponentType());
-    var wasNotOpen = !sigilDraw.open;
 
-    if (wasNotOpen) {
-      sigilDraw.open = true;
-      sigilDraw.initialRotation = head.getRotation().clone();
-    }
+    sigilDraw.open = true;
+    sigilDraw.initialRotation = head.getRotation().clone();
 
-    var hudManager = player.getHudManager();
+    var hud = new SigilHud(playerRef);
+    HudUtils.showHud(player, playerRef, hud);
 
-    SigilHud hud;
-    if (hudManager.getCustomHud() instanceof SigilHud sigilHud) hud = sigilHud;
-    else {
-      hud = new SigilHud(playerRef);
-      hudManager.setCustomHud(playerRef, hud);
-    }
-
-    if (wasNotOpen) {
-      var builder = new UICommandBuilder();
-      hud.highlight(builder, SigilPoint.ZERO, true);
-      hud.update(false, builder);
-    }
+    var builder = new UICommandBuilder();
+    hud.highlight(builder, sigilDraw.highlighted, true);
+    hud.update(false, builder);
   }
 }
