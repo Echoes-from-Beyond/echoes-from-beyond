@@ -384,7 +384,7 @@ public final class SigilValidation {
    * @param y the y-coordinate of this point in the Sigil
    * @return the encoded point
    */
-  public static byte encodePoint(
+  public static @Range(from = 0, to = GRID_SIZE * GRID_SIZE - 1) byte encodePoint(
       @Range(from = 0, to = GRID_SIZE - 1) int x, @Range(from = 0, to = GRID_SIZE - 1) int y) {
     return (byte) (((x << X_SHIFT) & X_MASK) | (y & Y_MASK));
   }

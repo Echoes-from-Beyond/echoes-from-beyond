@@ -54,11 +54,11 @@ public final class SigilPointCodec implements Codec<SigilPoint>, RawJsonCodec<Si
 
   @Override
   public SigilPoint decode(BsonValue bsonValue, ExtraInfo extraInfo) {
-    String value = bsonValue.asString().getValue();
-    String[] split = value.split(",", 2);
+    var value = bsonValue.asString().getValue();
+    var split = value.split(",", 2);
 
-    int x = Integer.parseInt(split[0].strip());
-    int y = Integer.parseInt(split[1].strip());
+    var x = Integer.parseInt(split[0].strip());
+    var y = Integer.parseInt(split[1].strip());
 
     return new SigilPoint(x, y);
   }
@@ -79,7 +79,7 @@ public final class SigilPointCodec implements Codec<SigilPoint>, RawJsonCodec<Si
   }
 
   private static Schema toSchema0(@Nullable SigilPoint def) {
-    StringSchema schema = new StringSchema();
+    var schema = new StringSchema();
     schema.setPattern(SIGIL_POINT_PATTERN);
     schema.setTitle("Sigil Point");
 

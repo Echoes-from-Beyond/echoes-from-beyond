@@ -89,12 +89,12 @@ public class SigilPattern
   }
 
   private Optional<SigilKey> canonicalizeAndCache() {
-    SigilKey value = keyCache.get();
+    var value = keyCache.get();
 
     if (value != null) return Optional.of(value);
     if (points == null) return Optional.empty();
 
-    Optional<SigilKey> attempt = SigilValidation.canonicalize(points);
+    var attempt = SigilValidation.canonicalize(points);
     attempt.ifPresent(key -> keyCache.compareAndSet(null, key));
 
     return attempt;

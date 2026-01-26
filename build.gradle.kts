@@ -53,7 +53,7 @@ tasks.register("runDevServer", JavaExec::class.java) {
     classpath = files(runDirectory.file("HytaleServer.jar"))
     workingDir = runDirectory.asFile
 
-    jvmArgs = listOf("-Xms6G", "-Xmx6G", "--enable-native-access=ALL-UNNAMED")
+    jvmArgs = listOf("-Xms6G", "-Xmx6G", "--enable-native-access=ALL-UNNAMED", "-ea")
     args = listOf("--disable-sentry", "--assets", "Assets.zip")
 }
 

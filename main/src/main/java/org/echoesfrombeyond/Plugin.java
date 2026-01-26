@@ -61,6 +61,7 @@ public class Plugin extends JavaPlugin {
     Init.registerCodecs(this);
     Init.registerCommands(this);
     Init.registerComponents(this);
+    Init.registerSystems(this);
 
     // This is a no-op currently, but because this has an actual implementation something may be
     // done in the future, so it should always be called.

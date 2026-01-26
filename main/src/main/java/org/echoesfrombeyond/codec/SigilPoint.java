@@ -43,8 +43,27 @@ public record SigilPoint(
   /** The codec. */
   public static final Codec<SigilPoint> CODEC = new SigilPointCodec();
 
+  /** The point (0, 0) */
+  public static final SigilPoint ZERO = new SigilPoint(0, 0);
+
   /** The array codec. */
   public static final Codec<SigilPoint[]> ARRAY_CODEC = new ArrayCodec<>(CODEC, SigilPoint[]::new);
+
+  /**
+   * Determines if one point is adjacent to another. Points are considered adjacent if they are not
+   * the same point, but do not differ by more than 1 unit on either axis. For example, (0, 0) and
+   * (1, 1) are adjacent; (0, 1) and (0, 2) are adjacent, but (0, 0) and (0, 2) are not.
+   *
+   * @param other the other point to consider
+   * @return {@code true} if this point is adjacent to {@code other}, {@code false} otherwise
+   */
+  @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+  public boolean isAdjacentTo(SigilPoint other) {
+    int diffX = Math.abs(x - other.x);
+    int diffY = Math.abs(y - other.y);
+
+    return (!(diffX == 0 && diffY == 0)) && diffX <= 1 && diffY <= 1;
+  }
 
   /**
    * Converts an array of {@link SigilPoint} to a byte array, as per {@link
@@ -58,9 +77,9 @@ public record SigilPoint(
   public static byte @Nullable [] encodeArray(SigilPoint @Nullable [] objects) {
     if (objects == null) return null;
 
-    byte[] points = new byte[objects.length];
+    var points = new byte[objects.length];
     for (int i = 0; i < objects.length; i++) {
-      SigilPoint point = objects[i];
+      var point = objects[i];
       points[i] = SigilValidation.encodePoint(point.x(), point.y());
     }
 
@@ -79,7 +98,7 @@ public record SigilPoint(
   public static SigilPoint @Nullable [] decodeArray(byte @Nullable [] bytes) {
     if (bytes == null) return null;
 
-    SigilPoint[] objects = new SigilPoint[bytes.length];
+    var objects = new SigilPoint[bytes.length];
     for (int i = 0; i < bytes.length; i++) {
       byte point = bytes[i];
       objects[i] = new SigilPoint(SigilValidation.unpackX(point), SigilValidation.unpackY(point));

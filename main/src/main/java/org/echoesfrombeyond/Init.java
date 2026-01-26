@@ -22,6 +22,7 @@ import com.hypixel.hytale.assetstore.AssetStore;
 import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.component.Component;
+import com.hypixel.hytale.component.system.System;
 import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
 import com.hypixel.hytale.server.core.command.system.AbstractCommand;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
@@ -29,9 +30,12 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.PluginState;
 import org.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.command.IntegrationTestCommand;
-import org.echoesfrombeyond.component.sigil.SigilDraw;
-import org.echoesfrombeyond.interaction.StartDrawingSigil;
-import org.echoesfrombeyond.interaction.StopDrawingSigil;
+import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
+import org.echoesfrombeyond.interaction.sigil.BeginSigilDraw;
+import org.echoesfrombeyond.interaction.sigil.CloseSigilHUD;
+import org.echoesfrombeyond.interaction.sigil.EndSigilDraw;
+import org.echoesfrombeyond.interaction.sigil.OpenSigilHUD;
+import org.echoesfrombeyond.system.sigil.SigilDrawSystem;
 import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 
@@ -74,11 +78,19 @@ public class Init {
     // Order registrations alphabetically by `id` parameter.
     plugin
         .getCodecRegistry(Interaction.CODEC)
-        .register("Start_Drawing_Sigil", StartDrawingSigil.class, StartDrawingSigil.CODEC);
+        .register("Begin_Sigil_Draw", BeginSigilDraw.class, BeginSigilDraw.CODEC);
 
     plugin
         .getCodecRegistry(Interaction.CODEC)
-        .register("Stop_Drawing_Sigil", StopDrawingSigil.class, StopDrawingSigil.CODEC);
+        .register("Close_Sigil_Hud", CloseSigilHUD.class, CloseSigilHUD.CODEC);
+
+    plugin
+        .getCodecRegistry(Interaction.CODEC)
+        .register("End_Sigil_Draw", EndSigilDraw.class, EndSigilDraw.CODEC);
+
+    plugin
+        .getCodecRegistry(Interaction.CODEC)
+        .register("Open_Sigil_Hud", OpenSigilHUD.class, OpenSigilHUD.CODEC);
   }
 
   /**
@@ -108,6 +120,20 @@ public class Init {
     var proxy = plugin.getEntityStoreRegistry();
 
     // Order registrations alphabetically by class name.
-    SigilDraw.registerComponentType(proxy);
+    SigilDrawComponent.registerComponentType(proxy);
+  }
+
+  /**
+   * Registers custom {@link System}s.
+   *
+   * @param plugin the plugin
+   * @throws IllegalArgumentException if {@code plugin} is not in the {@link PluginState#SETUP}
+   *     state
+   */
+  static void registerSystems(JavaPlugin plugin) {
+    Check.equals(plugin.getState(), PluginState.SETUP);
+
+    // Order registrations alphabetically by class name.
+    plugin.getEntityStoreRegistry().registerSystem(new SigilDrawSystem());
   }
 }

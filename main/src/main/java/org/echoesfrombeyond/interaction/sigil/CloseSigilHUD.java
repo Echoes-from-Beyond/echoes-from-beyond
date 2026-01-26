@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.interaction;
+package org.echoesfrombeyond.interaction.sigil;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.CommandBuffer;
@@ -28,15 +28,15 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHa
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.component.sigil.SigilDraw;
-import org.echoesfrombeyond.ui.hud.SigilHud;
+import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
+import org.echoesfrombeyond.interaction.InteractionUtils;
+import org.echoesfrombeyond.ui.hud.EmptyHud;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class StartDrawingSigil extends SimpleInstantInteraction {
-  public static final BuilderCodec<StartDrawingSigil> CODEC =
-      BuilderCodec.builder(
-              StartDrawingSigil.class, StartDrawingSigil::new, SimpleInstantInteraction.CODEC)
+public class CloseSigilHUD extends SimpleInstantInteraction {
+  public static final BuilderCodec<CloseSigilHUD> CODEC =
+      BuilderCodec.builder(CloseSigilHUD.class, CloseSigilHUD::new, SimpleInstantInteraction.CODEC)
           .build();
 
   @Override
@@ -44,14 +44,14 @@ public class StartDrawingSigil extends SimpleInstantInteraction {
       InteractionType interactionType,
       InteractionContext interactionContext,
       CooldownHandler cooldownHandler) {
-    InteractionUtils.forPlayerInStore(interactionContext, StartDrawingSigil::run);
+    InteractionUtils.forPlayerInStore(interactionContext, CloseSigilHUD::run);
   }
 
   private static void run(
       CommandBuffer<EntityStore> buffer, Ref<EntityStore> ref, Player player, PlayerRef playerRef) {
-    var sigilDraw = buffer.ensureAndGetComponent(ref, SigilDraw.getComponentType());
+    var sigilDraw = buffer.ensureAndGetComponent(ref, SigilDrawComponent.getComponentType());
 
-    sigilDraw.active = true;
-    player.getHudManager().setCustomHud(playerRef, new SigilHud(playerRef));
+    player.getHudManager().setCustomHud(playerRef, new EmptyHud(playerRef));
+    sigilDraw.reset();
   }
 }

@@ -16,7 +16,7 @@
     "Primary": {
       "Interactions": [
         {
-          "Type": "Start_Drawing_Sigil"
+          "Type": "Open_Sigil_Hud"
         },
         {
           "Type": "Charging",
@@ -25,7 +25,27 @@
           "CancelOnOtherClick": false,
           "Next": {
             "0.0": {
-              "Type": "Stop_Drawing_Sigil"
+              "Type": "Close_Sigil_Hud"
+            }
+          },
+          "Forks": {
+            "Secondary": {
+              "Interactions": [
+                {
+                  "Type": "Begin_Sigil_Draw"
+                },
+                {
+                  "Type": "Charging",
+                  "HorizontalSpeedMultiplier": 1,
+                  "AllowIndefiniteHold": true,
+                  "CancelOnOtherClick": false,
+                  "Next": {
+                    "0.0": {
+                      "Type": "End_Sigil_Draw"
+                    }
+                  }
+                }
+              ]
             }
           }
         }

@@ -50,7 +50,7 @@ public class IntegrationTestCommand extends AbstractCommand {
    */
   @ApiStatus.Internal
   public static void register(JavaPlugin plugin) {
-    String integrationTests = System.getenv("ENABLE_INTEGRATION_TESTS");
+    var integrationTests = System.getenv("ENABLE_INTEGRATION_TESTS");
 
     if (integrationTests != null && integrationTests.equalsIgnoreCase("true")) {
       plugin.getCommandRegistry().registerCommand(IntegrationTestCommand.INSTANCE);
