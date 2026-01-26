@@ -25,6 +25,7 @@ import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
+import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -32,8 +33,13 @@ import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.interaction.InteractionUtils;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * {@link Interaction} to start drawing a Sigil. This will have no effect if the Sigil UI is not
+ * open yet, or if drawing has already started.
+ */
 @NullMarked
 public class BeginSigilDraw extends SimpleInstantInteraction {
+  /** The codec. */
   public static final BuilderCodec<BeginSigilDraw> CODEC =
       BuilderCodec.builder(
               BeginSigilDraw.class, BeginSigilDraw::new, SimpleInstantInteraction.CODEC)
@@ -50,7 +56,7 @@ public class BeginSigilDraw extends SimpleInstantInteraction {
   private static void run(
       CommandBuffer<EntityStore> buffer, Ref<EntityStore> ref, Player player, PlayerRef playerRef) {
     var sigilDraw = buffer.getComponent(ref, SigilDrawComponent.getComponentType());
-    if (sigilDraw == null || sigilDraw.drawing) return;
+    if (sigilDraw == null || sigilDraw.drawing || !sigilDraw.open) return;
 
     sigilDraw.points.add(sigilDraw.highlighted);
     sigilDraw.drawing = true;

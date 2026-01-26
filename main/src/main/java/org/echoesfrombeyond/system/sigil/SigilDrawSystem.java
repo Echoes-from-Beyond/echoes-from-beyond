@@ -33,10 +33,15 @@ import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/** Handles Sigil rendering and initial casting. */
 @NullMarked
 public class SigilDrawSystem extends EntityTickingSystem<EntityStore> {
   private final Archetype<EntityStore> archetype;
 
+  /**
+   * Creates a new instance of this class with the default {@link Archetype}, that consists of
+   * {@link SigilDrawComponent}, {@link HeadRotation} and {@link Player}.
+   */
   public SigilDrawSystem() {
     this.archetype =
         Archetype.of(
@@ -114,13 +119,24 @@ public class SigilDrawSystem extends EntityTickingSystem<EntityStore> {
 
   private @Nullable UICommandBuilder maybeDrawLine(
       @Nullable UICommandBuilder builder, SigilDrawComponent draw, SigilHud hud) {
-    if (!draw.drawing || draw.points.isEmpty()) return builder;
+    if (!draw.drawing
+        || draw.points.isEmpty()
+        || draw.points.size() >= SigilValidation.MAX_SIGIL_LENGTH) return builder;
 
     var mostRecentPoint = draw.points.getLast();
     if (!mostRecentPoint.isAdjacentTo(draw.highlighted)) return builder;
 
     int length = draw.points.size();
     boolean set = length == 1 || !draw.points.get(length - 2).equals(draw.highlighted);
+
+    if (set) {
+      for (int i = 0; i < length - 1; i++) {
+        if (!draw.points.get(i).equals(mostRecentPoint)) continue;
+
+        if ((i > 0 && draw.points.get(i - 1).equals(draw.highlighted))
+            || draw.points.get(i + 1).equals(draw.highlighted)) return builder;
+      }
+    }
 
     if (builder == null) builder = new UICommandBuilder();
     hud.line(builder, mostRecentPoint, draw.highlighted, set);
@@ -132,7 +148,7 @@ public class SigilDrawSystem extends EntityTickingSystem<EntityStore> {
   }
 
   @Override
-  public @Nullable Query<EntityStore> getQuery() {
+  public Query<EntityStore> getQuery() {
     return archetype;
   }
 }

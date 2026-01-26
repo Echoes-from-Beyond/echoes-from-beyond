@@ -24,22 +24,22 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.entity.entities.Player;
-import com.hypixel.hytale.server.core.modules.entity.component.HeadRotation;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
-import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.codec.SigilPoint;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.interaction.InteractionUtils;
+import org.echoesfrombeyond.ui.hud.EmptyHud;
 import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
 
+/** Closes the Sigil HUD. This will cast any drawn Sigils. */
 @NullMarked
-public class OpenSigilHUD extends SimpleInstantInteraction {
-  public static final BuilderCodec<OpenSigilHUD> CODEC =
-      BuilderCodec.builder(OpenSigilHUD.class, OpenSigilHUD::new, SimpleInstantInteraction.CODEC)
+public class CloseSigilHud extends SimpleInstantInteraction {
+  /** The codec. */
+  public static final BuilderCodec<CloseSigilHud> CODEC =
+      BuilderCodec.builder(CloseSigilHud.class, CloseSigilHud::new, SimpleInstantInteraction.CODEC)
           .build();
 
   @Override
@@ -47,24 +47,17 @@ public class OpenSigilHUD extends SimpleInstantInteraction {
       InteractionType interactionType,
       InteractionContext interactionContext,
       CooldownHandler cooldownHandler) {
-    InteractionUtils.forPlayerInStore(interactionContext, OpenSigilHUD::run);
+    InteractionUtils.forPlayerInStore(interactionContext, CloseSigilHud::run);
   }
 
   private static void run(
       CommandBuffer<EntityStore> buffer, Ref<EntityStore> ref, Player player, PlayerRef playerRef) {
-    var head = buffer.getComponent(ref, HeadRotation.getComponentType());
-    if (head == null) return;
+    var sigilDraw = buffer.getComponent(ref, SigilDrawComponent.getComponentType());
+    var hudManager = player.getHudManager();
 
-    var sigilDraw = buffer.ensureAndGetComponent(ref, SigilDrawComponent.getComponentType());
+    if (hudManager.getCustomHud() instanceof SigilHud)
+      hudManager.setCustomHud(playerRef, new EmptyHud(playerRef));
 
-    sigilDraw.open = true;
-    sigilDraw.initialRotation = head.getRotation().clone();
-
-    var hud = new SigilHud(playerRef);
-    player.getHudManager().setCustomHud(playerRef, hud);
-
-    var builder = new UICommandBuilder();
-    hud.highlight(builder, SigilPoint.ZERO, true);
-    hud.update(false, builder);
+    if (sigilDraw != null) sigilDraw.reset();
   }
 }

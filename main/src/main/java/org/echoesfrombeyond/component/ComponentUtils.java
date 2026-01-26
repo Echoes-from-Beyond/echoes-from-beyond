@@ -18,6 +18,7 @@
 
 package org.echoesfrombeyond.component;
 
+import com.hypixel.hytale.component.Archetype;
 import com.hypixel.hytale.component.ArchetypeChunk;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentType;
@@ -25,10 +26,24 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/** Utilities for working with {@link Component}s. */
 @NullMarked
 public final class ComponentUtils {
   private ComponentUtils() {}
 
+  /**
+   * Assumes that the provided {@link ArchetypeChunk} contains a component of {@link ComponentType}
+   * {@code type} at index {@code i}, and returns it. This is useful in cases when the user
+   * definitely knows that the component is present, like when working with a static {@link
+   * Archetype}.
+   *
+   * @param chunk the chunk
+   * @param i the index
+   * @param type the component type
+   * @return the component
+   * @param <E> the component type
+   * @param <C> the component
+   */
   public static <E extends @Nullable Object, C extends @Nullable Component<E>> @NonNull C assume(
       ArchetypeChunk<E> chunk, int i, ComponentType<E, C> type) {
     var component = chunk.getComponent(i, type);

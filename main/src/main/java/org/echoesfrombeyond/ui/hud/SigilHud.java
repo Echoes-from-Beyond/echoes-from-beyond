@@ -25,8 +25,13 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import org.echoesfrombeyond.codec.SigilPoint;
 import org.echoesfrombeyond.sigil.SigilValidation;
+import org.echoesfrombeyond.system.sigil.SigilDrawSystem;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * Used to render Sigils as they are being drawn. This class is driven by {@link SigilDrawSystem}
+ * and does not contain much logic on its own.
+ */
 @NullMarked
 public class SigilHud extends CustomUIHud {
   private static final String[] HIGHLIGHT_SELECTOR_LOOKUP;
@@ -54,6 +59,13 @@ public class SigilHud extends CustomUIHud {
     return x << SHIFT | y;
   }
 
+  /**
+   * Converts Sigil grid coordinates to pixel coordinates. Grid coordinates start at (0, 0) (at the
+   * very top left of the grid). (0.5, 0.5) is the center of the top left cell.
+   *
+   * @param c the grid coordinate
+   * @return the pixel coordinate equivalent
+   */
   public static float gridToPixelCoordinates(float c) {
     // Update this value if changing the cell width in Sigil_Hud.ui.
     return c * 150;
@@ -61,6 +73,11 @@ public class SigilHud extends CustomUIHud {
 
   private final Anchor cursor;
 
+  /**
+   * Creates a new instance of this HUD for the specified player.
+   *
+   * @param playerRef the player reference component
+   */
   public SigilHud(PlayerRef playerRef) {
     super(playerRef);
 
@@ -74,6 +91,17 @@ public class SigilHud extends CustomUIHud {
     builder.append("Sigil_Hud.ui");
   }
 
+  /**
+   * Sets or clears the highlight of a specific Sigil grid square.
+   *
+   * <p>This function appends one or more commands to {@code builder}, but does not update the UI
+   * for the client. It is necessary to call {@link SigilHud#update(boolean, UICommandBuilder)} with
+   * {@code builder} after.
+   *
+   * @param builder the builder
+   * @param point the point to highlight or clear
+   * @param set if {@code true}, highlights the grid square; otherwise clears the highlight status
+   */
   public void highlight(UICommandBuilder builder, SigilPoint point, boolean set) {
     // Use a bitmask here because it keeps the index in bounds of the array.
     var selector = HIGHLIGHT_SELECTOR_LOOKUP[index(point.x(), point.y()) & MASK];
@@ -82,6 +110,18 @@ public class SigilHud extends CustomUIHud {
     else builder.set(selector, BASE_COLOR);
   }
 
+  /**
+   * Updates the cursor position. {@code x} and {@code y} are given in grid coordinates; for example
+   * (0.5, 0.5) is the center of the top-left Sigil grid cell.
+   *
+   * <p>This function appends one or more commands to {@code builder}, but does not update the UI
+   * for the client. It is necessary to call {@link SigilHud#update(boolean, UICommandBuilder)} with
+   * {@code builder} after.
+   *
+   * @param builder the builder
+   * @param x the cursor x-coordinate
+   * @param y the cursor y-coordinate
+   */
   public void cursor(UICommandBuilder builder, float x, float y) {
     cursor.setLeft(Value.of((int) Math.rint(gridToPixelCoordinates(x))));
     cursor.setTop(Value.of((int) Math.rint(gridToPixelCoordinates(y))));
@@ -89,15 +129,48 @@ public class SigilHud extends CustomUIHud {
     builder.setObject("#Cursor.Anchor", cursor);
   }
 
+  /**
+   * Adds or removes a line between two Sigil grid cells. This function will do nothing if {@code
+   * !first.isAdjacentTo(second)}.
+   *
+   * <p>This function appends one or more commands to {@code builder}, but does not update the UI
+   * for the client. It is necessary to call {@link SigilHud#update(boolean, UICommandBuilder)} with
+   * {@code builder} after.
+   *
+   * @param builder the builder
+   * @param first the first point
+   * @param second the second point
+   * @param set if {@code true}, adds a line, otherwise removes an existing one
+   */
   public void line(UICommandBuilder builder, SigilPoint first, SigilPoint second, boolean set) {
     if (!first.isAdjacentTo(second)) return;
 
-    int indexA = index(first.x(), first.y());
-    int indexB = index(second.x(), second.y());
+    int indexA = index(first.x(), first.y()) & MASK;
+    int indexB = index(second.x(), second.y()) & MASK;
 
     int firstIndex = Math.min(indexA, indexB);
     int secondIndex = Math.max(indexA, indexB);
 
     builder.set("#L" + firstIndex + "t" + secondIndex + ".Visible", set);
+  }
+
+  /**
+   * Unsets all lines made by {@code points}. Unsetting a line is performed as if by calling {@code
+   * line(builder, first, second, false)}.
+   *
+   * <p>This function appends one or more commands to {@code builder}, but does not update the UI
+   * for the client. It is necessary to call {@link SigilHud#update(boolean, UICommandBuilder)} with
+   * {@code builder} after.
+   *
+   * @param builder the builder
+   * @param points an {@link Iterable} of all points to remove
+   */
+  public void unsetLines(UICommandBuilder builder, Iterable<SigilPoint> points) {
+    SigilPoint first = null;
+
+    for (SigilPoint second : points) {
+      if (first != null) line(builder, first, second, false);
+      first = second;
+    }
   }
 }

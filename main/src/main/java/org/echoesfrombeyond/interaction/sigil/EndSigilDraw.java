@@ -25,15 +25,23 @@ import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
+import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
+import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.interaction.InteractionUtils;
+import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * {@link Interaction} to finish drawing a Sigil. This will have no effect if the Sigil UI is not
+ * open yet, or if drawing has not started.
+ */
 @NullMarked
 public class EndSigilDraw extends SimpleInstantInteraction {
+  /** The codec. */
   public static final BuilderCodec<EndSigilDraw> CODEC =
       BuilderCodec.builder(EndSigilDraw.class, EndSigilDraw::new, SimpleInstantInteraction.CODEC)
           .build();
@@ -49,9 +57,15 @@ public class EndSigilDraw extends SimpleInstantInteraction {
   private static void run(
       CommandBuffer<EntityStore> buffer, Ref<EntityStore> ref, Player player, PlayerRef playerRef) {
     var sigilDraw = buffer.getComponent(ref, SigilDrawComponent.getComponentType());
-    if (sigilDraw == null || !sigilDraw.drawing) return;
 
-    // TODO: add completed Sigil to queue
+    if (sigilDraw == null || !sigilDraw.drawing || !sigilDraw.open) return;
+
+    if (sigilDraw.points.size() > 1
+        && player.getHudManager().getCustomHud() instanceof SigilHud sigilHud) {
+      UICommandBuilder builder = new UICommandBuilder();
+      sigilHud.unsetLines(builder, sigilDraw.points);
+      sigilHud.update(false, builder);
+    }
 
     sigilDraw.points.clear();
     sigilDraw.drawing = false;

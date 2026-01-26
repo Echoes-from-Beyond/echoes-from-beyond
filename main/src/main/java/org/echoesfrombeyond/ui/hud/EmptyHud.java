@@ -23,8 +23,14 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
+/** HUD that displays nothing. */
 @NullMarked
 public class EmptyHud extends CustomUIHud {
+  /**
+   * Creates a new instance of this class for the provided player reference.
+   *
+   * @param playerRef the player reference component
+   */
   public EmptyHud(PlayerRef playerRef) {
     super(playerRef);
   }

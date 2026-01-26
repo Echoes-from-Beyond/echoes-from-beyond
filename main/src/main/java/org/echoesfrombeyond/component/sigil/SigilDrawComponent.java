@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.echoesfrombeyond.codec.SigilPoint;
 import org.echoesfrombeyond.ui.hud.SigilHud;
-import org.echoesfrombeyond.util.Check;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -56,7 +55,8 @@ public class SigilDrawComponent implements Component<EntityStore> {
    * @return the component type
    */
   public static ComponentType<EntityStore, SigilDrawComponent> getComponentType() {
-    return Check.nonNull(COMPONENT_TYPE);
+    assert COMPONENT_TYPE != null;
+    return COMPONENT_TYPE;
   }
 
   /** Whether the Sigil HUD is open. */

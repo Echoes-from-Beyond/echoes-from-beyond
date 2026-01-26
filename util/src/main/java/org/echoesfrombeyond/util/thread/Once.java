@@ -88,7 +88,7 @@ public final class Once<T extends @Nullable Object> implements Supplier<T> {
 
   @Override
   public T get() {
-    T current = this.value;
+    T current = value;
     if (current != UNINIT) return current;
 
     synchronized (lock) {

@@ -32,9 +32,9 @@ import org.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.command.IntegrationTestCommand;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.interaction.sigil.BeginSigilDraw;
-import org.echoesfrombeyond.interaction.sigil.CloseSigilHUD;
+import org.echoesfrombeyond.interaction.sigil.CloseSigilHud;
 import org.echoesfrombeyond.interaction.sigil.EndSigilDraw;
-import org.echoesfrombeyond.interaction.sigil.OpenSigilHUD;
+import org.echoesfrombeyond.interaction.sigil.OpenSigilHud;
 import org.echoesfrombeyond.system.sigil.SigilDrawSystem;
 import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
@@ -82,7 +82,7 @@ public class Init {
 
     plugin
         .getCodecRegistry(Interaction.CODEC)
-        .register("Close_Sigil_Hud", CloseSigilHUD.class, CloseSigilHUD.CODEC);
+        .register("Close_Sigil_Hud", CloseSigilHud.class, CloseSigilHud.CODEC);
 
     plugin
         .getCodecRegistry(Interaction.CODEC)
@@ -90,7 +90,7 @@ public class Init {
 
     plugin
         .getCodecRegistry(Interaction.CODEC)
-        .register("Open_Sigil_Hud", OpenSigilHUD.class, OpenSigilHUD.CODEC);
+        .register("Open_Sigil_Hud", OpenSigilHud.class, OpenSigilHud.CODEC);
   }
 
   /**

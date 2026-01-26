@@ -110,7 +110,7 @@ Group {
   // 01 05 09 13
   // 02 06 10 14
   // 03 07 11 15
-  // The canonical line alwayse has the smallest coordinate first.
+  // The canonical line always has the smallest coordinate first.
 
   // Vertical lines
   @VerticalLine #L0t1 { Anchor: (...@VerticalAnchor, Left: @Zero, Top: @Zero); }
