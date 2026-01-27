@@ -10,6 +10,10 @@ $Common = "Common.ui";
 @DiagonalLineDownTexture = PatchStyle(TexturePath: "Line_Diagonal_Down.png");
 @DiagonalLineUpTexture = PatchStyle(TexturePath: "Line_Diagonal_Up.png");
 @VerticalLineTexture = PatchStyle(TexturePath: "Line_Vertical.png");
+@CursorTexture = PatchStyle(TexturePath: "Cursor.png");
+
+@CursorWidth = 30;
+@CursorHeight = 30;
 
 @HorizontalAnchor = Anchor(
   Width: @CellWidth,
@@ -93,8 +97,8 @@ Group {
   Anchor: (Width: @GridWidth, Height: @GridWidth);
 
   Group #Cursor {
-    Background: #00FF00;
-    Anchor: (Left: @CellWidth / 2, Top: @CellWidth / 2, Width: 5, Height: 5);
+    Background: @CursorTexture;
+    Anchor: (Left: (@CellWidth / 2) - (@CursorWidth / 2), Top: (@CellWidth / 2) - (@CursorHeight / 2), Width: @CursorWidth, Height: @CursorHeight);
   }
 }
 

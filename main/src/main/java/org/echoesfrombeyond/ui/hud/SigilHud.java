@@ -82,8 +82,8 @@ public class SigilHud extends CustomUIHud {
     super(playerRef);
 
     this.cursor = new Anchor();
-    this.cursor.setWidth(Value.of(5));
-    this.cursor.setHeight(Value.of(5));
+    this.cursor.setWidth(Value.of(30));
+    this.cursor.setHeight(Value.of(30));
   }
 
   @Override
