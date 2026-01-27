@@ -29,6 +29,7 @@ import org.echoesfrombeyond.codec.SigilPoint;
 import org.echoesfrombeyond.component.ComponentUtils;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.sigil.SigilValidation;
+import org.echoesfrombeyond.ui.hud.HudUtils;
 import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -61,7 +62,8 @@ public class SigilDrawSystem extends EntityTickingSystem<EntityStore> {
     if (!draw.open) return;
 
     var player = ComponentUtils.assume(chunk, i, Player.getComponentType());
-    if (!(player.getHudManager().getCustomHud() instanceof SigilHud hud)) return;
+    var hud = HudUtils.getHud(SigilHud.class, player.getHudManager());
+    if (hud == null) return;
 
     var head = ComponentUtils.assume(chunk, i, HeadRotation.getComponentType());
     var rot = head.getRotation().clone().subtract(draw.initialRotation);

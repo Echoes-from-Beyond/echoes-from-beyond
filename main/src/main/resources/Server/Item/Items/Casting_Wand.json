@@ -13,7 +13,7 @@
     "Items.Example"
   ],
   "Interactions": {
-    "Primary": {
+    "Secondary": {
       "Interactions": [
         {
           "Type": "Open_Sigil_Hud"
@@ -29,7 +29,7 @@
             }
           },
           "Forks": {
-            "Secondary": {
+            "Primary": {
               "Interactions": [
                 {
                   "Type": "Begin_Sigil_Draw"
