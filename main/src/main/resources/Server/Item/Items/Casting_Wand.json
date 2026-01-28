@@ -1,0 +1,55 @@
+{
+  "TranslationProperties": {
+    "Name": "items.Casting_Wand.name",
+    "Description": "items.Casting_Wand.description"
+  },
+  "Id": "Casting_Wand",
+  "Icon": "Icons/ItemsGenerated/Casting_Wand.png",
+  "Model": "Items/Tools/Wands/Casting_Wand_Model.blockymodel",
+  "Texture": "Items/Tools/Wands/Casting_Wand_Texture.png",
+  "Quality": "Common",
+  "MaxStack": 1,
+  "Categories": [
+    "Items.Example"
+  ],
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "Open_Sigil_Hud"
+        },
+        {
+          "Type": "Charging",
+          "HorizontalSpeedMultiplier": 0.4,
+          "AllowIndefiniteHold": true,
+          "CancelOnOtherClick": false,
+          "Next": {
+            "0.0": {
+              "Type": "Close_Sigil_Hud"
+            }
+          },
+          "Forks": {
+            "Primary": {
+              "Interactions": [
+                {
+                  "Type": "Begin_Sigil_Draw"
+                },
+                {
+                  "Type": "Charging",
+                  "HorizontalSpeedMultiplier": 1,
+                  "AllowIndefiniteHold": true,
+                  "CancelOnOtherClick": false,
+                  "Next": {
+                    "0.0": {
+                      "Type": "End_Sigil_Draw"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

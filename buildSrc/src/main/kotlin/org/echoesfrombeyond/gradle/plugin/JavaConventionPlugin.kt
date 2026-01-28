@@ -2,8 +2,7 @@ package org.echoesfrombeyond.gradle.plugin
 
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.spotless.LineEnding
-import org.echoesfrombeyond.gradle.task.GeneratePackageInfo
-import org.echoesfrombeyond.gradle.task.GeneratePackageTree
+import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
@@ -12,13 +11,14 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.specs.Spec
-import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.api.tasks.testing.Test
 import org.gradle.external.javadoc.CoreJavadocOptions
+import org.gradle.internal.extensions.core.extra
 import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JavaLanguageVersion
+import java.net.URI
 import kotlin.jvm.java
 
 /**
@@ -75,15 +75,22 @@ class JavaConventionPlugin : Plugin<Project> {
             core?.addBooleanOption("Xdoclint:all,-missing", true)
         }
 
-        val sourceSetContainer = (target.extensions.getByName("sourceSets") as SourceSetContainer)
-
         target.extensions.configure<SpotlessExtension>("spotless") {
             it.lineEndings = LineEnding.UNIX
             it.encoding = Charsets.UTF_8
+
+            it.kotlinGradle { kotlinGradle ->
+                kotlinGradle.target("*.gradle.kts")
+                kotlinGradle.ktfmt("0.61")
+            }
+
+            it.json { json ->
+                json.target("**/*.json")
+                json.gson().indentWithSpaces(2).version("2.13.2")
+            }
+
             it.java { java ->
-                java.target(sourceSetContainer
-                    .filter { set -> set.name == "main" || set.name == "test" }
-                    .map { set -> set.java.sourceDirectories }.toTypedArray())
+                java.target("**/*.java")
 
                 // Always clean these up first.
                 java.removeUnusedImports()
@@ -119,54 +126,16 @@ class JavaConventionPlugin : Plugin<Project> {
             }
         }
 
-        val generatePackageInfoDir = target.layout.buildDirectory.map { buildDir ->
-            buildDir.dir("generated/sources/packageInfo")
-        }
-
-        val generatePackageInfoSrcDir = generatePackageInfoDir.map { dir ->
-            dir.dir("src/main/java")
-        }
-
-        target.extensions.configure<SourceSetContainer>("sourceSets") {
-            val main = it.getByName("main")
-
-            val generated = it.create("generatedPackageInfo") { set ->
-                set.java.setSrcDirs(listOf(generatePackageInfoSrcDir))
-                set.compileClasspath = main.compileClasspath
-            }
-
-            val generatedOutput = generated.output
-
-            main.output.dir(generatedOutput)
-            main.compileClasspath += generatedOutput
-            main.runtimeClasspath += generatedOutput
-        }
-
-        val generatePackageTree = target.tasks.register("generatePackageTree", GeneratePackageTree::class.java) {
-            it.sourceDirectories.set(sourceSetContainer.named("main").map { set -> set.java.sourceDirectories })
-            it.packagesFile.set(generatePackageInfoDir.map { dir -> dir.file("packages") })
-        }
-
-        val generatePackageInfo = target.tasks.register("generatePackageInfo", GeneratePackageInfo::class.java) {
-            it.generatedSourceDirectory.set(generatePackageInfoSrcDir)
-            it.packagesFile.set(generatePackageTree.flatMap { t -> t.packagesFile })
-            it.packageInfoGenerator.set { packageName ->
-                "@org.jetbrains.annotations.NotNullByDefault package $packageName;"
-            }
-        }
-
-        target.tasks.named("compileGeneratedPackageInfoJava").configure {
-            it.inputs.files(generatePackageInfo)
-        }
-
         target.tasks.named("jar", Jar::class.java).configure {
             it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
             val runtimeClasspath = target.configurations.named("runtimeClasspath")
 
             it.dependsOn(runtimeClasspath)
+
             it.from(runtimeClasspath.map { configuration ->
-                configuration.filter { file -> file.extension == "jar" }
+                configuration
+                    .filter { file -> file.extension == "jar" }
                     .map { jar -> target.zipTree(jar) }
             })
         }
@@ -179,8 +148,6 @@ class JavaConventionPlugin : Plugin<Project> {
 
         target.tasks.named("sourcesJar", Jar::class.java).configure {
             it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-            it.from(generatePackageInfo)
 
             // This is horribly ugly, but what it does is actually simple: collect all project
             // dependencies and the files outputted by their `sourcesJar` tasks. This only includes
@@ -227,4 +194,50 @@ private fun <R> dependentProjects(target: Project,
  */
 fun DependencyHandler.projectImplementation(path: String) {
     add("implementation", project(mapOf("path" to path)))
+}
+
+/**
+ * Adds a dependency on Hytale, but does not make this project a plugin like [withHytalePlugin]
+ * would.
+ */
+fun Project.withHytaleDependency() {
+    if (plugins.withType(JavaConventionPlugin::class.java).isEmpty())
+        throw GradleException("Hytale plugin projects must apply JavaConventionPlugin!")
+
+    repositories.exclusiveContent { exclusive ->
+        exclusive.forRepositories(repositories.maven { maven ->
+            maven.name = "hytale-pre-release"
+            maven.url = URI.create("https://maven.hytale.com/pre-release")
+        })
+        exclusive.filter { filter -> filter.includeGroup("com.hypixel.hytale") }
+    }
+
+    val hytale = "com.hypixel.hytale:Server:latest.integration"
+    dependencies.add("compileOnly", hytale)
+    dependencies.add("testImplementation", hytale)
+}
+
+/**
+ * Specifies that this project produces a Hytale plugin. Implies [withHytaleDependency].
+ *
+ * @param name the name of the plugin
+ */
+fun Project.withHytalePlugin(name: String) {
+    withHytaleDependency()
+
+    val baseNameProperty = provider { version }.map { version -> "$name-$version" }
+
+    tasks.named("jar", Jar::class.java).configure { jar ->
+        jar.archiveFileName.set(baseNameProperty.map { property -> "$property.jar" })
+    }
+
+    tasks.named("sourcesJar", Jar::class.java).configure { jar ->
+        jar.archiveFileName.set(baseNameProperty.map { property -> "$property-sources.jar" })
+    }
+
+    tasks.named("javadocJar", Jar::class.java).configure { jar ->
+        jar.archiveFileName.set(baseNameProperty.map { property -> "$property-javadoc.jar" })
+    }
+
+    extra["hasPlugin"] = true
 }

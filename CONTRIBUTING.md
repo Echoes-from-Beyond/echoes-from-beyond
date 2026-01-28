@@ -9,9 +9,12 @@ If you're fixing a bug, please create an issue first and reference it in your pu
 
 If you're adding a new feature, you don't _need_ to create an issue first, but it's HIGHLY recommended to do so in order to find out if your feature will be accepted before you make it!
 
-Our CI system detects invalid code style and will fail the build. Before you commit, make sure you run `./gradlew spotlessApply`. Also see the [style section](#style).
+Our CI system detects invalid code style and will fail the build. Before you commit, make sure you run `./gradlew spotlessApply`. Also see the [style section](#style). You can run `./gradlew spotlessInstallGitPrePushHook` to install a Git hook that will ensure code is formatted correctly before submission.
 
 By contributing, you agree to license the contributed code under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html#license-text). Please do not submit code under different licenses.
+
+## AI Generated Code Policy
+Pull requests that contain AI generated code or documentation must be _thoroughly_ reviewed by the submitter, and they must conform to our style guide. You are expected to understand how your contribution works. "Low-effort" AI generated pull requests may be treated as spam and closed, at the discretion of the maintainers.
 
 ## Style
 
@@ -28,18 +31,16 @@ Note: the words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are intended to be i
   * There is a significant and _demonstrable_ performance degradation caused by returning `Optional` compared to returning `null`.
   * APIs that are designed to "mimic" or wrap Java APIs, like `Map#get`, MAY return `null` instead of an empty `Optional`.
 * One MUST NOT annotate anything with `@NotNull`!
-  * Everything in the codebase is implicitly non-null due to a code generation task automatically creating `package-info.java` files with `@NotNullByDefault` applied to them.
-* If a method or field can legally return or contain `null`, it MUST be annotated with _either_ `@Nullable` or `@UnknownNullability`.
-  * "Legally" means that the method or field can contain `null` _without_ a violation of the nullability contract of a related method, field, or constructor having occurred prior.
-    * IDE static analysis should take care of this, so as long as there are no nullability-related warnings you are probably good. 
-  * You SHOULD prefer `@Nullable` over `@UnknownNullability` except in cases when:
-    * The method or field in question is part of a data structure where the user of the API was responsible for populating it with data.
-* If a method or constructor parameter accepts `null` as a _valid_ value, it MUST be annotated with `@Nullable`.
+  * Instead, one SHOULD apply `@NullMarked` to every class file.
+    * One exception is when "unknown nullability" is actually desired throughout the entire file.
+* One MUST use `jspecify` annotations instead of `jetbrains` where possible.
 * One MUST use explicit nullchecks to validate untrusted input, such as deserialized data from a file.
 * One SHOULD NOT use explicit nullchecks (like `Objects#requireNonNull`) in cases where implicit ones are equivalent.
   * One MAY use explicit nullchecks in cases where implicit ones would have lesser or no effect on nullness detection.
 * One SHOULD limit external dependencies. 
   * For example, small utility methods, even if they "duplicate" code found in external packages, are preferred.
+* Exception messages SHOULD be non-capitalized sentences without trailing punctuation.
+* Exception messages SHOULD be phrased in terms of what should (or should not) have happened instead.
 
 ### Testing
 * Non-trivial logic SHOULD be unit tested.

@@ -1,0 +1,178 @@
+$Common = "Common.ui";
+
+// Must agree with the constant org.echoesfrombeyond.ui.hud.SigilHud#CELL_WIDTH
+@CellWidth = 150;
+
+// Must agree with the constant org.echoesfrombeyond.ui.hud.SigilHud#CURSOR_WIDTH
+@CursorWidth = 30;
+
+@GridWidth = @CellWidth * 4;
+@LineWidth = 5;
+
+@HorizontalLineTexture = PatchStyle(TexturePath: "Line_Horizontal.png");
+@DiagonalLineDownTexture = PatchStyle(TexturePath: "Line_Diagonal_Down.png");
+@DiagonalLineUpTexture = PatchStyle(TexturePath: "Line_Diagonal_Up.png");
+@VerticalLineTexture = PatchStyle(TexturePath: "Line_Vertical.png");
+@CursorTexture = PatchStyle(TexturePath: "Cursor.png");
+
+@HorizontalAnchor = Anchor(
+  Width: @CellWidth,
+  Height: @LineWidth
+);
+
+@DiagonalAnchor = Anchor(
+  Width: @CellWidth,
+  Height: @CellWidth
+);
+
+@VerticalAnchor = Anchor(
+  Width: @LineWidth,
+  Height: @CellWidth
+);
+
+@HorizontalLine = Group {
+  Background: @HorizontalLineTexture;
+  Visible: false;
+};
+
+@DiagonalLineDown = Group {
+  Background: @DiagonalLineDownTexture;
+  Visible: false;
+};
+
+@DiagonalLineUp = Group {
+  Background: @DiagonalLineUpTexture;
+  Visible: false;
+};
+
+@VerticalLine = Group {
+  Background: @VerticalLineTexture;
+  Visible: false;
+};
+
+@Cell = Group {
+  Anchor: (Width: @CellWidth, Height: @CellWidth);
+};
+
+@Row = Group {
+  LayoutMode: Left;
+  Anchor: (Width: @GridWidth, Height: @CellWidth);
+};
+
+Group {
+  LayoutMode: Top;
+  Background: #222222(0.5);
+  Anchor: (Width: @GridWidth, Height: @GridWidth);
+
+  @Row {
+    @Cell #P00 {}
+    @Cell #P10 {}
+    @Cell #P20 {}
+    @Cell #P30 {}
+  }
+
+  @Row {
+    @Cell #P01 {}
+    @Cell #P11 {}
+    @Cell #P21 {}
+    @Cell #P31 {}
+  }
+
+  @Row {
+    @Cell #P02 {}
+    @Cell #P12 {}
+    @Cell #P22 {}
+    @Cell #P32 {}
+  }
+
+  @Row {
+    @Cell #P03 {}
+    @Cell #P13 {}
+    @Cell #P23 {}
+    @Cell #P33 {}
+  }
+}
+
+Group {
+  Anchor: (Width: @GridWidth, Height: @GridWidth);
+
+  Group #Cursor {
+    Background: @CursorTexture;
+    Anchor: (Left: (@CellWidth / 2) - (@CursorWidth / 2), Top: (@CellWidth / 2) - (@CursorWidth / 2), Width: @CursorWidth, Height: @CursorWidth);
+  }
+}
+
+@Zero = @CellWidth / 2;
+@One = @CellWidth + @Zero;
+@Two = @CellWidth * 2 + @Zero;
+@Three = @CellWidth * 3 + @Zero;
+
+Group {
+  Anchor: (Width: @GridWidth, Height: @GridWidth);
+
+  // 00 04 08 12
+  // 01 05 09 13
+  // 02 06 10 14
+  // 03 07 11 15
+  // The canonical line always has the smallest coordinate first.
+
+  // Vertical lines
+  @VerticalLine #L0t1 { Anchor: (...@VerticalAnchor, Left: @Zero, Top: @Zero); }
+  @VerticalLine #L1t2 { Anchor: (...@VerticalAnchor, Left: @Zero, Top: @One); }
+  @VerticalLine #L2t3 { Anchor: (...@VerticalAnchor, Left: @Zero, Top: @Two); }
+
+  @VerticalLine #L4t5 { Anchor: (...@VerticalAnchor, Left: @One, Top: @Zero); }
+  @VerticalLine #L5t6 { Anchor: (...@VerticalAnchor, Left: @One, Top: @One); }
+  @VerticalLine #L6t7 { Anchor: (...@VerticalAnchor, Left: @One, Top: @Two); }
+
+  @VerticalLine #L8t9 { Anchor: (...@VerticalAnchor, Left: @Two, Top: @Zero); }
+  @VerticalLine #L9t10 { Anchor: (...@VerticalAnchor, Left: @Two, Top: @One); }
+  @VerticalLine #L10t11 { Anchor: (...@VerticalAnchor, Left: @Two, Top: @Two); }
+
+  @VerticalLine #L12t13 { Anchor: (...@VerticalAnchor, Left: @Three, Top: @Zero); }
+  @VerticalLine #L13t14 { Anchor: (...@VerticalAnchor, Left: @Three, Top: @One); }
+  @VerticalLine #L14t15 { Anchor: (...@VerticalAnchor, Left: @Three, Top: @Two); }
+
+  // Horizontal lines
+  @HorizontalLine #L0t4 { Anchor: (...@HorizontalAnchor, Left: @Zero, Top: @Zero); }
+  @HorizontalLine #L4t8 { Anchor: (...@HorizontalAnchor, Left: @One, Top: @Zero); }
+  @HorizontalLine #L8t12 { Anchor: (...@HorizontalAnchor, Left: @Two, Top: @Zero); }
+
+  @HorizontalLine #L1t5 { Anchor: (...@HorizontalAnchor, Left: @Zero, Top: @One); }
+  @HorizontalLine #L5t9 { Anchor: (...@HorizontalAnchor, Left: @One, Top: @One); }
+  @HorizontalLine #L9t13 { Anchor: (...@HorizontalAnchor, Left: @Two, Top: @One); }
+
+  @HorizontalLine #L2t6 { Anchor: (...@HorizontalAnchor, Left: @Zero, Top: @Two); }
+  @HorizontalLine #L6t10 { Anchor: (...@HorizontalAnchor, Left: @One, Top: @Two); }
+  @HorizontalLine #L10t14 { Anchor: (...@HorizontalAnchor, Left: @Two, Top: @Two); }
+
+  @HorizontalLine #L3t7 { Anchor: (...@HorizontalAnchor, Left: @Zero, Top: @Three); }
+  @HorizontalLine #L7t11 { Anchor: (...@HorizontalAnchor, Left: @One, Top: @Three); }
+  @HorizontalLine #L11t15 { Anchor: (...@HorizontalAnchor, Left: @Two, Top: @Three); }
+
+  // Downwards diagonal lines
+  @DiagonalLineDown #L0t5 { Anchor: (...@DiagonalAnchor, Left: @Zero, Top: @Zero); }
+  @DiagonalLineDown #L4t9 { Anchor: (...@DiagonalAnchor, Left: @One, Top: @Zero); }
+  @DiagonalLineDown #L8t13 { Anchor: (...@DiagonalAnchor, Left: @Two, Top: @Zero); }
+
+  @DiagonalLineDown #L1t6 { Anchor: (...@DiagonalAnchor, Left: @Zero, Top: @One); }
+  @DiagonalLineDown #L5t10 { Anchor: (...@DiagonalAnchor, Left: @One, Top: @One); }
+  @DiagonalLineDown #L9t14 { Anchor: (...@DiagonalAnchor, Left: @Two, Top: @One); }
+
+  @DiagonalLineDown #L2t7 { Anchor: (...@DiagonalAnchor, Left: @Zero, Top: @Two); }
+  @DiagonalLineDown #L6t11 { Anchor: (...@DiagonalAnchor, Left: @One, Top: @Two); }
+  @DiagonalLineDown #L10t15 { Anchor: (...@DiagonalAnchor, Left: @Two, Top: @Two); }
+
+  // Upwards diagonal lines
+  @DiagonalLineUp #L1t4 { Anchor: (...@DiagonalAnchor, Left: @Zero, Top: @Zero); }
+  @DiagonalLineUp #L5t8 { Anchor: (...@DiagonalAnchor, Left: @One, Top: @Zero); }
+  @DiagonalLineUp #L9t12 { Anchor: (...@DiagonalAnchor, Left: @Two, Top: @Zero); }
+
+  @DiagonalLineUp #L2t5 { Anchor: (...@DiagonalAnchor, Left: @Zero, Top: @One); }
+  @DiagonalLineUp #L6t9 { Anchor: (...@DiagonalAnchor, Left: @One, Top: @One); }
+  @DiagonalLineUp #L10t13 { Anchor: (...@DiagonalAnchor, Left: @Two, Top: @One); }
+
+  @DiagonalLineUp #L3t6 { Anchor: (...@DiagonalAnchor, Left: @Zero, Top: @Two); }
+  @DiagonalLineUp #L7t10 { Anchor: (...@DiagonalAnchor, Left: @One, Top: @Two); }
+  @DiagonalLineUp #L11t14 { Anchor: (...@DiagonalAnchor, Left: @Two, Top: @Two); }
+}

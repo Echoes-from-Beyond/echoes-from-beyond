@@ -21,13 +21,14 @@ package org.echoesfrombeyond.util;
 import java.lang.reflect.Array;
 import java.util.Objects;
 import org.jetbrains.annotations.*;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Static input validation methods that throw runtime exceptions on precondition failure.
  *
  * <p>Where possible, prefer to use the methods in this class rather than e.g. {@link
- * Objects#requireNonNull(Object)}. This is because eventually the checks may be elided in an
- * "optimized" build that replaces the method bodies with no-ops.
+ * Objects#requireNonNull(Object)}.
  */
 public final class Check {
   private Check() {}
@@ -59,7 +60,7 @@ public final class Check {
    * @param <T> the object type
    */
   @Contract(value = "null -> fail; _ -> param1", pure = true)
-  public static <T> T nonNull(@UnknownNullability T o) {
+  public static <T> @NonNull T nonNull(T o) {
     if (o == null) throw new NullPointerException();
     return o;
   }
@@ -76,7 +77,7 @@ public final class Check {
    * @see Check#nonNull(Object) the version without an error message
    */
   @Contract(value = "null, _ -> fail; _, _ -> param1", pure = true)
-  public static <T> T nonNull(@UnknownNullability T o, @Nullable String message) {
+  public static <T> @NonNull T nonNull(T o, @Nullable String message) {
     if (o == null) throw new NullPointerException(message);
     return o;
   }
@@ -95,7 +96,7 @@ public final class Check {
    *     the bounds of {@code array}
    */
   @Contract(value = "null, _, _ -> fail", pure = true)
-  public static void inBounds(@UnknownNullability Object array, int start, int len) {
+  public static void inBounds(Object array, int start, int len) {
     inRange(Array.getLength(nonNull(array)), start, len);
   }
 
@@ -106,8 +107,24 @@ public final class Check {
    * @param index the index to check
    */
   @Contract(value = "null, _ -> fail", pure = true)
-  public static void inBounds(@UnknownNullability Object array, int index) {
+  public static void inBounds(Object array, int index) {
     int arrayLen = Array.getLength(nonNull(array));
     if (index < 0 || index >= arrayLen) throw new ArrayIndexOutOfBoundsException(index);
+  }
+
+  /**
+   * Checks if {@code first} is equal to {@code second}, as if by {@link Objects#equals(Object,
+   * Object)}.
+   *
+   * @param first the first object
+   * @param second the second object
+   * @throws IllegalArgumentException if {@code Objects.equals(first, second)} would have returned
+   *     false for the given arguments
+   */
+  @Contract(value = "null, !null -> fail; !null, null -> fail", pure = true)
+  public static void equals(@Nullable Object first, @Nullable Object second) {
+    if (Objects.equals(first, second)) return;
+
+    throw new IllegalArgumentException(first + " != " + second);
   }
 }

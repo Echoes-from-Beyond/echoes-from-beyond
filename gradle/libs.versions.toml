@@ -7,7 +7,8 @@
 # final .jar file. This is appropriate for some things like annotations libraries
 # that only exist to enable static analysis for IDEs.
 compileOnly = [
-    "annotations",
+    "jetbrains-annotations",
+    "jspecify"
 ]
 
 # Dependencies that are available at both compile and run-time but are not provided
@@ -62,9 +63,13 @@ junit = "6.0.1"
 # This is meant to make it easier to audit 3rd-party libraries in the future.
 [libraries]
 
-# usage: provides annotations for IDE static analysis
+# usage: More annotations not included in jspecify
 # scope: everywhere
-annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
+jetbrains-annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
+
+# usage: Nullability annotations
+# scope: everywhere
+jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
 
 # usage: JUnit testing API for unit tests
 # scope: testing
