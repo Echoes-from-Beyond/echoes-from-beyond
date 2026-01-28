@@ -18,6 +18,7 @@
 
 package org.echoesfrombeyond.ui.hud;
 
+import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.entity.entities.player.hud.CustomUIHud;
 import com.hypixel.hytale.server.core.ui.Anchor;
 import com.hypixel.hytale.server.core.ui.Value;
@@ -45,6 +46,14 @@ public class SigilHud extends CustomUIHud {
   private static final int SHIFT = Integer.numberOfTrailingZeros(SigilValidation.GRID_SIZE);
   private static final int MASK = (SigilValidation.GRID_SIZE * SigilValidation.GRID_SIZE) - 1;
 
+  // Update this value if changing the cell width in Sigil_Hud.ui.
+  private static final int CELL_WIDTH = 150;
+
+  // Update this value if changing the cursor width in Sigil_Hud.ui.
+  private static final int CURSOR_WIDTH = 30;
+
+  private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
+
   static {
     HIGHLIGHT_SELECTOR_LOOKUP = new String[SigilValidation.GRID_SIZE * SigilValidation.GRID_SIZE];
 
@@ -67,8 +76,7 @@ public class SigilHud extends CustomUIHud {
    * @return the pixel coordinate equivalent
    */
   public static float gridToPixelCoordinates(float c) {
-    // Update this value if changing the cell width in Sigil_Hud.ui.
-    return c * 150;
+    return c * CELL_WIDTH;
   }
 
   private final Anchor cursor;
@@ -82,8 +90,8 @@ public class SigilHud extends CustomUIHud {
     super(playerRef);
 
     this.cursor = new Anchor();
-    this.cursor.setWidth(Value.of(30));
-    this.cursor.setHeight(Value.of(30));
+    this.cursor.setWidth(Value.of(CURSOR_WIDTH));
+    this.cursor.setHeight(Value.of(CURSOR_WIDTH));
   }
 
   @Override
@@ -143,10 +151,23 @@ public class SigilHud extends CustomUIHud {
    * @param set if {@code true}, adds a line, otherwise removes an existing one
    */
   public void line(UICommandBuilder builder, SigilPoint first, SigilPoint second, boolean set) {
-    if (!first.isAdjacentTo(second)) return;
+    if (!first.isAdjacentTo(second)) {
+      LOGGER.atWarning().log(
+          "Tried to draw line between two non-adjacent points: " + first + " -> " + second);
+      return;
+    }
 
-    int indexA = index(first.x(), first.y()) & MASK;
-    int indexB = index(second.x(), second.y()) & MASK;
+    if (!first.isInBounds() || !second.isInBounds()) {
+      LOGGER.atWarning().log(
+          "Tried to draw line between two points where at least one was out of bounds: "
+              + first
+              + " -> "
+              + second);
+      return;
+    }
+
+    int indexA = index(first.x(), first.y());
+    int indexB = index(second.x(), second.y());
 
     int firstIndex = Math.min(indexA, indexB);
     int secondIndex = Math.max(indexA, indexB);

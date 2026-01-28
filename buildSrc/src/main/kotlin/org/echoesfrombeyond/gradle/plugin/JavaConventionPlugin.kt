@@ -212,7 +212,9 @@ fun Project.withHytaleDependency() {
         exclusive.filter { filter -> filter.includeGroup("com.hypixel.hytale") }
     }
 
-    dependencies.add("compileOnly", "com.hypixel.hytale:Server:latest.integration")
+    val hytale = "com.hypixel.hytale:Server:latest.integration"
+    dependencies.add("compileOnly", hytale)
+    dependencies.add("testImplementation", hytale)
 }
 
 /**

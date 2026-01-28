@@ -24,7 +24,6 @@ import org.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.sigil.SigilValidation;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Range;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -37,9 +36,7 @@ import org.jspecify.annotations.Nullable;
  */
 @ApiStatus.Internal
 @NullMarked
-public record SigilPoint(
-    @Range(from = 0, to = SigilValidation.GRID_SIZE - 1) int x,
-    @Range(from = 0, to = SigilValidation.GRID_SIZE - 1) int y) {
+public record SigilPoint(int x, int y) {
   /** The codec. */
   public static final Codec<SigilPoint> CODEC = new SigilPointCodec();
 
@@ -63,6 +60,14 @@ public record SigilPoint(
     int diffY = Math.abs(y - other.y);
 
     return (!(diffX == 0 && diffY == 0)) && diffX <= 1 && diffY <= 1;
+  }
+
+  /**
+   * @return {@code true} if this point is in-bounds of the Sigil grid; {@code false} otherwise
+   */
+  @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+  public boolean isInBounds() {
+    return x >= 0 && x < SigilValidation.GRID_SIZE && y >= 0 && y < SigilValidation.GRID_SIZE;
   }
 
   /**

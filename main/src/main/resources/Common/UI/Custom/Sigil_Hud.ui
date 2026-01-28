@@ -1,9 +1,12 @@
 $Common = "Common.ui";
 
-// Must agree with the constant in org.echoesfrombeyond.ui.hud.SigilHud#gridToPixelCoordinates
+// Must agree with the constant org.echoesfrombeyond.ui.hud.SigilHud#CELL_WIDTH
 @CellWidth = 150;
-@GridWidth = @CellWidth * 4;
 
+// Must agree with the constant org.echoesfrombeyond.ui.hud.SigilHud#CURSOR_WIDTH
+@CursorWidth = 30;
+
+@GridWidth = @CellWidth * 4;
 @LineWidth = 5;
 
 @HorizontalLineTexture = PatchStyle(TexturePath: "Line_Horizontal.png");
@@ -11,9 +14,6 @@ $Common = "Common.ui";
 @DiagonalLineUpTexture = PatchStyle(TexturePath: "Line_Diagonal_Up.png");
 @VerticalLineTexture = PatchStyle(TexturePath: "Line_Vertical.png");
 @CursorTexture = PatchStyle(TexturePath: "Cursor.png");
-
-@CursorWidth = 30;
-@CursorHeight = 30;
 
 @HorizontalAnchor = Anchor(
   Width: @CellWidth,
@@ -98,7 +98,7 @@ Group {
 
   Group #Cursor {
     Background: @CursorTexture;
-    Anchor: (Left: (@CellWidth / 2) - (@CursorWidth / 2), Top: (@CellWidth / 2) - (@CursorHeight / 2), Width: @CursorWidth, Height: @CursorHeight);
+    Anchor: (Left: (@CellWidth / 2) - (@CursorWidth / 2), Top: (@CellWidth / 2) - (@CursorWidth / 2), Width: @CursorWidth, Height: @CursorWidth);
   }
 }
 
