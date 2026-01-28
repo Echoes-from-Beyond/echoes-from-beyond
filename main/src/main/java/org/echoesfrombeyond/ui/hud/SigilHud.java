@@ -123,8 +123,8 @@ public class SigilHud extends CustomUIHud {
    * @param y the cursor y-coordinate
    */
   public void cursor(UICommandBuilder builder, float x, float y) {
-    cursor.setLeft(Value.of((int) Math.rint(gridToPixelCoordinates(x))));
-    cursor.setTop(Value.of((int) Math.rint(gridToPixelCoordinates(y))));
+    cursor.setLeft(Value.of((int) Math.rint(gridToPixelCoordinates(x) - 15)));
+    cursor.setTop(Value.of((int) Math.rint(gridToPixelCoordinates(y) - 15)));
 
     builder.setObject("#Cursor.Anchor", cursor);
   }

@@ -4,7 +4,7 @@ $Common = "Common.ui";
 @CellWidth = 150;
 @GridWidth = @CellWidth * 4;
 
-@LineWidth = 3;
+@LineWidth = 5;
 
 @HorizontalLineTexture = PatchStyle(TexturePath: "Line_Horizontal.png");
 @DiagonalLineDownTexture = PatchStyle(TexturePath: "Line_Diagonal_Down.png");
@@ -103,9 +103,9 @@ Group {
 }
 
 @Zero = @CellWidth / 2;
-@One = @CellWidth + (@CellWidth / 2);
-@Two = @CellWidth * 2 + (@CellWidth / 2);
-@Three = @CellWidth * 3 + (@CellWidth / 2);
+@One = @CellWidth + @Zero;
+@Two = @CellWidth * 2 + @Zero;
+@Three = @CellWidth * 3 + @Zero;
 
 Group {
   Anchor: (Width: @GridWidth, Height: @GridWidth);
