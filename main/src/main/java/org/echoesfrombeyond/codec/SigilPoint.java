@@ -40,11 +40,11 @@ public record SigilPoint(int x, int y) {
   /** The codec. */
   public static final Codec<SigilPoint> CODEC = new SigilPointCodec();
 
-  /** The point (0, 0) */
-  public static final SigilPoint ZERO = new SigilPoint(0, 0);
-
   /** The array codec. */
   public static final Codec<SigilPoint[]> ARRAY_CODEC = new ArrayCodec<>(CODEC, SigilPoint[]::new);
+
+  /** The point (0, 0) */
+  public static final SigilPoint ZERO = new SigilPoint(0, 0);
 
   /**
    * Determines if one point is adjacent to another. Points are considered adjacent if they are not

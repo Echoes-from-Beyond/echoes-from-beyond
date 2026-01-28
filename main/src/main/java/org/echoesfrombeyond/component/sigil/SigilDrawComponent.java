@@ -37,6 +37,7 @@ public class SigilDrawComponent implements Component<EntityStore> {
   /** Default value for {@link SigilDrawComponent#gridDistance}. */
   public static final float DEFAULT_GRID_DISTANCE = 4;
 
+  /** Initial x and y coordinate for the Sigil draw cursor. */
   public static final float DEFAULT_CURSOR_XY = SigilHud.gridToPixelCoordinates(0.5F);
 
   private static @Nullable ComponentType<EntityStore, SigilDrawComponent> COMPONENT_TYPE;
@@ -86,7 +87,7 @@ public class SigilDrawComponent implements Component<EntityStore> {
   public SigilDrawComponent() {
     this.open = false;
     this.drawing = false;
-    this.initialRotation = Vector3f.ZERO;
+    this.initialRotation = new Vector3f(0, 0, 0);
     this.gridDistance = DEFAULT_GRID_DISTANCE;
     this.lastCursorX = DEFAULT_CURSOR_XY;
     this.lastCursorY = DEFAULT_CURSOR_XY;
@@ -97,7 +98,7 @@ public class SigilDrawComponent implements Component<EntityStore> {
   private SigilDrawComponent(SigilDrawComponent other) {
     this.open = other.open;
     this.drawing = other.drawing;
-    this.initialRotation = other.initialRotation;
+    this.initialRotation = other.initialRotation.clone();
     this.gridDistance = other.gridDistance;
     this.lastCursorX = other.lastCursorX;
     this.lastCursorY = other.lastCursorY;
@@ -108,7 +109,7 @@ public class SigilDrawComponent implements Component<EntityStore> {
   public void reset() {
     this.open = false;
     this.drawing = false;
-    this.initialRotation = Vector3f.ZERO;
+    this.initialRotation.assign(0, 0, 0);
     this.gridDistance = DEFAULT_GRID_DISTANCE;
     this.lastCursorX = DEFAULT_CURSOR_XY;
     this.lastCursorY = DEFAULT_CURSOR_XY;
