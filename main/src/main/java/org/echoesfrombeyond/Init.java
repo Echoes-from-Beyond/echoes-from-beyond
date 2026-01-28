@@ -19,7 +19,6 @@
 package org.echoesfrombeyond;
 
 import com.hypixel.hytale.assetstore.AssetStore;
-import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.system.System;
@@ -28,6 +27,7 @@ import com.hypixel.hytale.server.core.command.system.AbstractCommand;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.PluginState;
+import org.echoesfrombeyond.asset.SigilAssetMap;
 import org.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.command.IntegrationTestCommand;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
@@ -60,7 +60,7 @@ public class Init {
     plugin
         .getAssetRegistry()
         .register(
-            HytaleAssetStore.builder(SigilPattern.class, new DefaultAssetMap<>())
+            HytaleAssetStore.builder(SigilPattern.class, new SigilAssetMap())
                 .setCodec(SigilPattern.CODEC)
                 .setPath("SigilPatterns")
                 .setKeyFunction(SigilPattern::getId)

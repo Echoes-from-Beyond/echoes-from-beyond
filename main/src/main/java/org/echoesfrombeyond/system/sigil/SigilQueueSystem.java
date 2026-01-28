@@ -26,17 +26,14 @@ import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.CancellableEcsEvent;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import org.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.sigil.SigilKey;
-import org.echoesfrombeyond.util.thread.Once;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class SigilQueueSystem extends EntityEventSystem<EntityStore, SigilQueueSystem.Event> {
-  private final Once<Archetype<EntityStore>> archetype;
-
   public SigilQueueSystem() {
     super(Event.class);
-    this.archetype = Once.of(Archetype::empty);
   }
 
   @Override
@@ -49,16 +46,20 @@ public class SigilQueueSystem extends EntityEventSystem<EntityStore, SigilQueueS
 
   @Override
   public Query<EntityStore> getQuery() {
-    return archetype.get();
+    return Archetype.empty();
   }
 
   /** Raise to queue a valid, canonical Sigil in the spell queue. */
   public static class Event extends CancellableEcsEvent {
-    /** The Sigil. */
+    /** The Sigil key. */
     public final SigilKey key;
 
-    public Event(SigilKey key) {
+    /** The Sigil pattern. */
+    public final SigilPattern pattern;
+
+    public Event(SigilKey key, SigilPattern pattern) {
       this.key = key;
+      this.pattern = pattern;
     }
   }
 }

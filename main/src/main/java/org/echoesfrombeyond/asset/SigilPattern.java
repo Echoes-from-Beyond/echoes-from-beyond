@@ -22,7 +22,6 @@ import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.AssetRegistry;
 import com.hypixel.hytale.assetstore.AssetStore;
 import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
-import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
 import com.hypixel.hytale.assetstore.map.JsonAssetWithMap;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
@@ -44,11 +43,10 @@ import org.jspecify.annotations.Nullable;
  * @see SigilValidation for canonicalization details
  */
 @NullMarked
-public class SigilPattern
-    implements JsonAssetWithMap<String, DefaultAssetMap<String, SigilPattern>> {
+public class SigilPattern implements JsonAssetWithMap<String, SigilAssetMap> {
   /** Asset store supplier. This should not be called until after plugin setup. */
-  public static final Once<AssetStore<String, SigilPattern, DefaultAssetMap<String, SigilPattern>>>
-      ASSET_STORE = Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(SigilPattern.class)));
+  public static final Once<AssetStore<String, SigilPattern, SigilAssetMap>> ASSET_STORE =
+      Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(SigilPattern.class)));
 
   /** The codec. */
   public static final AssetBuilderCodec<String, SigilPattern> CODEC;

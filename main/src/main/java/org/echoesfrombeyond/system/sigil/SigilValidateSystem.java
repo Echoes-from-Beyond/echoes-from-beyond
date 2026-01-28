@@ -27,18 +27,15 @@ import com.hypixel.hytale.component.system.CancellableEcsEvent;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.List;
+import org.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.codec.SigilPoint;
 import org.echoesfrombeyond.sigil.SigilValidation;
-import org.echoesfrombeyond.util.thread.Once;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class SigilValidateSystem extends EntityEventSystem<EntityStore, SigilValidateSystem.Event> {
-  private final Once<Archetype<EntityStore>> archetype;
-
   public SigilValidateSystem() {
     super(Event.class);
-    this.archetype = Once.of(Archetype::empty);
   }
 
   @Override
@@ -55,13 +52,17 @@ public class SigilValidateSystem extends EntityEventSystem<EntityStore, SigilVal
 
     if (optional.isEmpty()) return;
 
-    var ref = archetypeChunk.getReferenceTo(i);
-    commandBuffer.invoke(ref, new SigilQueueSystem.Event(optional.get()));
+    var key = optional.get();
+    var pattern = SigilPattern.ASSET_STORE.get().getAssetMap().getSigilPattern(key);
+    if (pattern == null) return;
+
+    commandBuffer.invoke(
+        archetypeChunk.getReferenceTo(i), new SigilQueueSystem.Event(key, pattern));
   }
 
   @Override
   public Query<EntityStore> getQuery() {
-    return archetype.get();
+    return Archetype.empty();
   }
 
   /**
