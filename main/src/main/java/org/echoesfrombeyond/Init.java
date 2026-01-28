@@ -36,6 +36,8 @@ import org.echoesfrombeyond.interaction.sigil.CloseSigilHud;
 import org.echoesfrombeyond.interaction.sigil.EndSigilDraw;
 import org.echoesfrombeyond.interaction.sigil.OpenSigilHud;
 import org.echoesfrombeyond.system.sigil.SigilDrawSystem;
+import org.echoesfrombeyond.system.sigil.SigilQueueSystem;
+import org.echoesfrombeyond.system.sigil.SigilValidateSystem;
 import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 
@@ -117,10 +119,10 @@ public class Init {
   static void registerComponents(JavaPlugin plugin) {
     Check.equals(plugin.getState(), PluginState.SETUP);
 
-    var proxy = plugin.getEntityStoreRegistry();
+    var registry = plugin.getEntityStoreRegistry();
 
     // Order registrations alphabetically by class name.
-    SigilDrawComponent.registerComponentType(proxy);
+    SigilDrawComponent.registerComponentType(registry);
   }
 
   /**
@@ -133,7 +135,11 @@ public class Init {
   static void registerSystems(JavaPlugin plugin) {
     Check.equals(plugin.getState(), PluginState.SETUP);
 
+    var registry = plugin.getEntityStoreRegistry();
+
     // Order registrations alphabetically by class name.
-    plugin.getEntityStoreRegistry().registerSystem(new SigilDrawSystem());
+    registry.registerSystem(new SigilDrawSystem());
+    registry.registerSystem(new SigilQueueSystem());
+    registry.registerSystem(new SigilValidateSystem());
   }
 }

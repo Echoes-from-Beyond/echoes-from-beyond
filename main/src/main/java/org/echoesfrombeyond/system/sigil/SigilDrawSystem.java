@@ -31,13 +31,14 @@ import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.sigil.SigilValidation;
 import org.echoesfrombeyond.ui.hud.HudUtils;
 import org.echoesfrombeyond.ui.hud.SigilHud;
+import org.echoesfrombeyond.util.thread.Once;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /** Handles Sigil rendering and initial casting. */
 @NullMarked
 public class SigilDrawSystem extends EntityTickingSystem<EntityStore> {
-  private final Archetype<EntityStore> archetype;
+  private final Once<Archetype<EntityStore>> archetype;
 
   /**
    * Creates a new instance of this class with the default {@link Archetype}, that consists of
@@ -45,10 +46,12 @@ public class SigilDrawSystem extends EntityTickingSystem<EntityStore> {
    */
   public SigilDrawSystem() {
     this.archetype =
-        Archetype.of(
-            SigilDrawComponent.getComponentType(),
-            HeadRotation.getComponentType(),
-            Player.getComponentType());
+        Once.of(
+            () ->
+                Archetype.of(
+                    SigilDrawComponent.getComponentType(),
+                    HeadRotation.getComponentType(),
+                    Player.getComponentType()));
   }
 
   @Override
@@ -151,6 +154,6 @@ public class SigilDrawSystem extends EntityTickingSystem<EntityStore> {
 
   @Override
   public Query<EntityStore> getQuery() {
-    return archetype;
+    return archetype.get();
   }
 }

@@ -22,7 +22,6 @@ import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.codecs.array.ArrayCodec;
 import org.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.sigil.SigilValidation;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -34,7 +33,6 @@ import org.jspecify.annotations.Nullable;
  * @param x the sigil x-coordinate
  * @param y the sigil y-coordinate
  */
-@ApiStatus.Internal
 @NullMarked
 public record SigilPoint(int x, int y) {
   /** The codec. */

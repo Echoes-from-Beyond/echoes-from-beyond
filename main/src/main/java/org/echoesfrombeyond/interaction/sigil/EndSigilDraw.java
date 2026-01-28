@@ -32,6 +32,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.interaction.InteractionUtils;
+import org.echoesfrombeyond.system.sigil.SigilValidateSystem;
 import org.echoesfrombeyond.ui.hud.HudUtils;
 import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
@@ -67,6 +68,8 @@ public class EndSigilDraw extends SimpleInstantInteraction {
       hud.unsetLines(builder, sigilDraw.points);
       hud.update(false, builder);
     }
+
+    buffer.invoke(ref, new SigilValidateSystem.Event(sigilDraw.points));
 
     sigilDraw.points.clear();
     sigilDraw.drawing = false;

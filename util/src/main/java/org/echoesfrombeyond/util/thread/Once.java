@@ -25,7 +25,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A thread-safe {@link Supplier} that only initializes a value once, and caches it for subsequent
- * invocations of {@link Once#get()}. This is ideal for e.g. statically initialized values.
+ * invocations of {@link Once#get()}. This is ideal for e.g. statically initialized values and lazy
+ * suppliers that might be accessed by multiple threads.
  *
  * <p>Instances can be created from an arbitrary {@link Supplier} by calling {@link
  * Once#of(Supplier)}. The supplier is <i>guaranteed</i> to either have never been called or to be
@@ -69,7 +70,7 @@ public final class Once<T extends @Nullable Object> implements Supplier<T> {
    * @param <T> the type returned by `getter`
    * @throws NullPointerException if {@code getter} is null
    */
-  public static <T extends @Nullable Object> Once<T> of(Supplier<T> getter) {
+  public static <T> Once<T> of(Supplier<T> getter) {
     Check.nonNull(getter);
 
     if (getter instanceof Once<T> once) return once;
