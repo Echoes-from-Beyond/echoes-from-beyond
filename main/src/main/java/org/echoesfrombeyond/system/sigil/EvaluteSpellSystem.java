@@ -26,15 +26,19 @@ import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.CancellableEcsEvent;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.asset.SigilPattern;
+import org.echoesfrombeyond.component.ComponentUtils;
 import org.echoesfrombeyond.component.sigil.SigilQueueComponent;
-import org.echoesfrombeyond.sigil.SigilKey;
+import org.echoesfrombeyond.util.thread.Once;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class SigilQueueSystem extends EntityEventSystem<EntityStore, SigilQueueSystem.Event> {
-  public SigilQueueSystem() {
+public class EvaluteSpellSystem extends EntityEventSystem<EntityStore, EvaluteSpellSystem.Event> {
+  private final Once<Archetype<EntityStore>> archetype;
+
+  public EvaluteSpellSystem() {
     super(Event.class);
+
+    this.archetype = Once.of(() -> Archetype.of(SigilQueueComponent.getComponentType()));
   }
 
   @Override
@@ -44,31 +48,20 @@ public class SigilQueueSystem extends EntityEventSystem<EntityStore, SigilQueueS
       Store<EntityStore> store,
       CommandBuffer<EntityStore> commandBuffer,
       Event event) {
-    if (event.isCancelled()) return;
+    var queue = ComponentUtils.assume(archetypeChunk, i, SigilQueueComponent.getComponentType());
 
-    commandBuffer
-        .ensureAndGetComponent(
-            archetypeChunk.getReferenceTo(i), SigilQueueComponent.getComponentType())
-        .patterns
-        .add(event.pattern);
+    queue.patterns.clear();
   }
 
   @Override
   public Query<EntityStore> getQuery() {
-    return Archetype.empty();
+    return archetype.get();
   }
 
   /** Raise to queue a valid, canonical Sigil in the spell queue. */
   public static class Event extends CancellableEcsEvent {
-    /** The Sigil key. */
-    public final SigilKey key;
+    public static final Event INSTANCE = new Event();
 
-    /** The Sigil pattern. */
-    public final SigilPattern pattern;
-
-    public Event(SigilKey key, SigilPattern pattern) {
-      this.key = key;
-      this.pattern = pattern;
-    }
+    private Event() {}
   }
 }

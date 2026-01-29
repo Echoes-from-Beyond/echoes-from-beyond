@@ -31,6 +31,7 @@ import org.echoesfrombeyond.asset.SigilAssetMap;
 import org.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.command.IntegrationTestCommand;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
+import org.echoesfrombeyond.component.sigil.SigilQueueComponent;
 import org.echoesfrombeyond.interaction.sigil.BeginSigilDraw;
 import org.echoesfrombeyond.interaction.sigil.CloseSigilHud;
 import org.echoesfrombeyond.interaction.sigil.EndSigilDraw;
@@ -123,6 +124,7 @@ public class Init {
 
     // Order registrations alphabetically by class name.
     SigilDrawComponent.registerComponentType(registry);
+    SigilQueueComponent.registerComponentType(registry);
   }
 
   /**

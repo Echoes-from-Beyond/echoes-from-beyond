@@ -29,7 +29,9 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Sim
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
+import org.echoesfrombeyond.component.sigil.SigilQueueComponent;
 import org.echoesfrombeyond.interaction.InteractionUtils;
+import org.echoesfrombeyond.system.sigil.EvaluteSpellSystem;
 import org.echoesfrombeyond.ui.hud.HudUtils;
 import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
@@ -55,6 +57,9 @@ public class CloseSigilHud extends SimpleInstantInteraction {
     HudUtils.hideHud(SigilHud.class, player, playerRef);
 
     var sigilDraw = buffer.getComponent(ref, SigilDrawComponent.getComponentType());
+    var sigilQueue = buffer.getComponent(ref, SigilQueueComponent.getComponentType());
+
     if (sigilDraw != null) sigilDraw.reset();
+    if (sigilQueue != null) buffer.invoke(ref, EvaluteSpellSystem.Event.INSTANCE);
   }
 }
