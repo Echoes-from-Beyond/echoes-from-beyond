@@ -25,7 +25,10 @@ import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
 import com.hypixel.hytale.assetstore.map.JsonAssetWithMap;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
+import com.hypixel.hytale.codec.codecs.map.Object2FloatMapCodec;
 import com.hypixel.hytale.codec.validation.Validators;
+import it.unimi.dsi.fastutil.objects.Object2FloatMap;
+import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import org.echoesfrombeyond.codec.SigilPoint;
@@ -34,6 +37,7 @@ import org.echoesfrombeyond.sigil.SigilKey;
 import org.echoesfrombeyond.sigil.SigilValidation;
 import org.echoesfrombeyond.util.Check;
 import org.echoesfrombeyond.util.thread.Once;
+import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -72,6 +76,22 @@ public class SigilPattern implements JsonAssetWithMap<String, SigilAssetMap> {
             .addValidator(Validators.arraySizeRange(2, SigilValidation.MAX_SIGIL_LENGTH))
             .addValidator(CustomValidators.canonicalSigil())
             .add()
+            .append(
+                new KeyedCodec<>("IsModifier", Codec.BOOLEAN, false),
+                (self, value) -> self.isModifier = value,
+                (self) -> self.isModifier)
+            .documentation("Whether the pattern represents a modifier.")
+            .add()
+            .append(
+                new KeyedCodec<>(
+                    "Vars",
+                    new Object2FloatMapCodec<>(Codec.STRING, Object2FloatOpenHashMap::new, true),
+                    true),
+                (self, value) -> self.vars = value,
+                (self) -> self.vars)
+            .documentation("")
+            .addValidator(Validators.nonNull())
+            .add()
             .build();
   }
 
@@ -79,6 +99,8 @@ public class SigilPattern implements JsonAssetWithMap<String, SigilAssetMap> {
   private AssetExtraInfo.@Nullable Data data;
 
   private byte @Nullable [] points;
+  private boolean isModifier;
+  private @Nullable Object2FloatMap<String> vars;
 
   private final AtomicReference<@Nullable SigilKey> keyCache;
 
@@ -109,8 +131,21 @@ public class SigilPattern implements JsonAssetWithMap<String, SigilAssetMap> {
         .orElseThrow(() -> new IllegalStateException(SigilValidation.NON_CANONICAL_ERR_MSG));
   }
 
+  /**
+   * @return whether this Sigil represents a modifier
+   */
+  public boolean isModifier() {
+    return isModifier;
+  }
+
+  public @Unmodifiable Object2FloatMap<String> getVars() {
+    assert vars != null;
+    return vars;
+  }
+
   @Override
   public String getId() {
-    return Check.nonNull(id);
+    assert id != null;
+    return id;
   }
 }

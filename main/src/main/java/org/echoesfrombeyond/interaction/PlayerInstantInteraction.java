@@ -16,10 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.interaction.sigil;
+package org.echoesfrombeyond.interaction;
 
-import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.CommandBuffer;
+import com.hypixel.hytale.logger.HytaleLogger;
+import com.hypixel.hytale.protocol.InteractionState;
 import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.entity.entities.Player;
@@ -27,37 +28,41 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHa
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
-import org.echoesfrombeyond.component.sigil.SigilQueueComponent;
-import org.echoesfrombeyond.interaction.PlayerInstantInteraction;
-import org.echoesfrombeyond.system.sigil.EvaluateSpellSystem;
-import org.echoesfrombeyond.ui.hud.HudUtils;
-import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
 
-/** Closes the Sigil HUD. This will cast any drawn Sigils. */
 @NullMarked
-public class CloseSigilHud extends PlayerInstantInteraction {
-  /** The codec. */
-  public static final BuilderCodec<CloseSigilHud> CODEC =
-      BuilderCodec.builder(CloseSigilHud.class, CloseSigilHud::new, SimpleInstantInteraction.CODEC)
-          .build();
+public abstract class PlayerInstantInteraction extends SimpleInstantInteraction {
+  private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
   @Override
-  protected void firstRunPlayer(
+  protected final void firstRun(
+      InteractionType interactionType,
+      InteractionContext interactionContext,
+      CooldownHandler cooldownHandler) {
+    var buffer = InteractionUtils.getBuffer(interactionContext);
+    if (buffer == null) {
+      LOGGER.atWarning().log("Null command buffer");
+      interactionContext.getState().state = InteractionState.Failed;
+      return;
+    }
+
+    var ref = interactionContext.getEntity();
+    var player = buffer.getComponent(ref, Player.getComponentType());
+    var playerRef = buffer.getComponent(ref, PlayerRef.getComponentType());
+
+    if (player == null || playerRef == null) {
+      interactionContext.getState().state = InteractionState.Failed;
+      return;
+    }
+
+    firstRunPlayer(interactionType, interactionContext, cooldownHandler, buffer, player, playerRef);
+  }
+
+  protected abstract void firstRunPlayer(
       InteractionType interactionType,
       InteractionContext interactionContext,
       CooldownHandler cooldownHandler,
       CommandBuffer<EntityStore> buffer,
       Player player,
-      PlayerRef playerRef) {
-    HudUtils.hideHud(SigilHud.class, player, playerRef);
-
-    var ref = interactionContext.getEntity();
-    var sigilDraw = buffer.getComponent(ref, SigilDrawComponent.getComponentType());
-    var sigilQueue = buffer.getComponent(ref, SigilQueueComponent.getComponentType());
-
-    if (sigilDraw != null) sigilDraw.reset();
-    if (sigilQueue != null) buffer.invoke(ref, new EvaluateSpellSystem.Event(sigilQueue.patterns));
-  }
+      PlayerRef playerRef);
 }

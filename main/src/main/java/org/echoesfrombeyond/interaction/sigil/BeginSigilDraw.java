@@ -19,16 +19,11 @@
 package org.echoesfrombeyond.interaction.sigil;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
-import com.hypixel.hytale.component.CommandBuffer;
-import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
-import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
-import com.hypixel.hytale.server.core.universe.PlayerRef;
-import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.interaction.InteractionUtils;
 import org.jspecify.annotations.NullMarked;
@@ -50,12 +45,11 @@ public class BeginSigilDraw extends SimpleInstantInteraction {
       InteractionType interactionType,
       InteractionContext interactionContext,
       CooldownHandler cooldownHandler) {
-    InteractionUtils.forPlayerInStore(interactionContext, BeginSigilDraw::run);
-  }
+    var buffer = InteractionUtils.getBuffer(interactionContext);
+    if (buffer == null) return;
 
-  private static void run(
-      CommandBuffer<EntityStore> buffer, Ref<EntityStore> ref, Player player, PlayerRef playerRef) {
-    var sigilDraw = buffer.getComponent(ref, SigilDrawComponent.getComponentType());
+    var sigilDraw =
+        buffer.getComponent(interactionContext.getEntity(), SigilDrawComponent.getComponentType());
     if (sigilDraw == null || sigilDraw.drawing || !sigilDraw.open) return;
 
     sigilDraw.points.add(sigilDraw.highlighted);

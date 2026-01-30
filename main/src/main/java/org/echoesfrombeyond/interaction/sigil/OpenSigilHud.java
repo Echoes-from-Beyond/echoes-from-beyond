@@ -20,7 +20,6 @@ package org.echoesfrombeyond.interaction.sigil;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.CommandBuffer;
-import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.entity.entities.Player;
@@ -31,29 +30,28 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
-import org.echoesfrombeyond.interaction.InteractionUtils;
+import org.echoesfrombeyond.interaction.PlayerInstantInteraction;
 import org.echoesfrombeyond.ui.hud.HudUtils;
 import org.echoesfrombeyond.ui.hud.SigilHud;
 import org.jspecify.annotations.NullMarked;
 
 /** Opens the Sigil HUD. */
 @NullMarked
-public class OpenSigilHud extends SimpleInstantInteraction {
+public class OpenSigilHud extends PlayerInstantInteraction {
   /** The codec. */
   public static final BuilderCodec<OpenSigilHud> CODEC =
       BuilderCodec.builder(OpenSigilHud.class, OpenSigilHud::new, SimpleInstantInteraction.CODEC)
           .build();
 
   @Override
-  protected void firstRun(
+  protected void firstRunPlayer(
       InteractionType interactionType,
       InteractionContext interactionContext,
-      CooldownHandler cooldownHandler) {
-    InteractionUtils.forPlayerInStore(interactionContext, OpenSigilHud::run);
-  }
-
-  private static void run(
-      CommandBuffer<EntityStore> buffer, Ref<EntityStore> ref, Player player, PlayerRef playerRef) {
+      CooldownHandler cooldownHandler,
+      CommandBuffer<EntityStore> buffer,
+      Player player,
+      PlayerRef playerRef) {
+    var ref = interactionContext.getEntity();
     var head = buffer.getComponent(ref, HeadRotation.getComponentType());
     if (head == null) return;
 

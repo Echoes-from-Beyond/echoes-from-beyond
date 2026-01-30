@@ -22,9 +22,11 @@ import com.hypixel.hytale.assetstore.AssetMap;
 import com.hypixel.hytale.assetstore.codec.AssetCodec;
 import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.StampedLock;
 import org.echoesfrombeyond.sigil.SigilKey;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -36,10 +38,12 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public class SigilAssetMap extends DefaultAssetMap<String, SigilPattern> {
+  private final StampedLock patternLock;
   private final Map<SigilKey, SigilPattern> patternMap;
 
   /** Creates a new instance of this class, that contains no sigil patterns initially. */
   public SigilAssetMap() {
+    this.patternLock = new StampedLock();
     this.patternMap = new ConcurrentHashMap<>();
   }
 
@@ -52,11 +56,11 @@ public class SigilAssetMap extends DefaultAssetMap<String, SigilPattern> {
       Map<String, Set<String>> loadedAssetChildren) {
     super.putAll(packKey, codec, loadedAssets, loadedKeyToPathMap, loadedAssetChildren);
 
-    var stamp = assetMapLock.writeLock();
+    var stamp = patternLock.writeLock();
     try {
       for (var pattern : loadedAssets.values()) patternMap.put(pattern.getSigilKey(), pattern);
     } finally {
-      assetMapLock.unlockWrite(stamp);
+      patternLock.unlockWrite(stamp);
     }
   }
 
@@ -64,11 +68,11 @@ public class SigilAssetMap extends DefaultAssetMap<String, SigilPattern> {
   protected void clear() {
     super.clear();
 
-    var stamp = assetMapLock.writeLock();
+    var stamp = patternLock.writeLock();
     try {
       patternMap.clear();
     } finally {
-      assetMapLock.unlockWrite(stamp);
+      patternLock.unlockWrite(stamp);
     }
   }
 
@@ -79,15 +83,37 @@ public class SigilAssetMap extends DefaultAssetMap<String, SigilPattern> {
    * @return the pattern; or {@code null} if it does not exist
    */
   public @Nullable SigilPattern getSigilPattern(SigilKey key) {
-    var read = assetMapLock.tryOptimisticRead();
+    var read = patternLock.tryOptimisticRead();
     var value = patternMap.get(key);
-    if (assetMapLock.validate(read)) return value;
+    if (patternLock.validate(read)) return value;
 
-    read = assetMapLock.readLock();
+    read = patternLock.readLock();
     try {
       return patternMap.get(key);
     } finally {
-      assetMapLock.unlockRead(read);
+      patternLock.unlockRead(read);
     }
+  }
+
+  private void remove0(Set<String> toRemove) {
+    var stamp = patternLock.writeLock();
+    try {
+      patternMap.values().removeIf(value -> toRemove.contains(value.getId()));
+    } finally {
+      patternLock.unlockWrite(stamp);
+    }
+  }
+
+  @Override
+  protected Set<String> remove(Set<String> keys) {
+    remove0(keys);
+    return super.remove(keys);
+  }
+
+  @Override
+  protected Set<String> remove(
+      String packKey, Set<String> keys, List<Map.Entry<String, Object>> pathsToReload) {
+    remove0(keys);
+    return super.remove(packKey, keys, pathsToReload);
   }
 }

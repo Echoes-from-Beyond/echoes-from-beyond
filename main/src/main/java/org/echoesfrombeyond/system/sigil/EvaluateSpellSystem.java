@@ -26,19 +26,16 @@ import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.CancellableEcsEvent;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.component.ComponentUtils;
-import org.echoesfrombeyond.component.sigil.SigilQueueComponent;
-import org.echoesfrombeyond.util.thread.Once;
+import it.unimi.dsi.fastutil.objects.Object2FloatMap;
+import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
+import java.util.List;
+import org.echoesfrombeyond.asset.SigilPattern;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class EvaluteSpellSystem extends EntityEventSystem<EntityStore, EvaluteSpellSystem.Event> {
-  private final Once<Archetype<EntityStore>> archetype;
-
-  public EvaluteSpellSystem() {
+public class EvaluateSpellSystem extends EntityEventSystem<EntityStore, EvaluateSpellSystem.Event> {
+  public EvaluateSpellSystem() {
     super(Event.class);
-
-    this.archetype = Once.of(() -> Archetype.of(SigilQueueComponent.getComponentType()));
   }
 
   @Override
@@ -48,20 +45,39 @@ public class EvaluteSpellSystem extends EntityEventSystem<EntityStore, EvaluteSp
       Store<EntityStore> store,
       CommandBuffer<EntityStore> commandBuffer,
       Event event) {
-    var queue = ComponentUtils.assume(archetypeChunk, i, SigilQueueComponent.getComponentType());
+    if (event.isCancelled()) return;
 
-    queue.patterns.clear();
+    outer:
+    for (int j = 0; j < event.patterns.size(); j++) {
+      var pattern = event.patterns.get(j);
+
+      if (pattern.isModifier()) {
+        var mergedModifier = new ModifierRepr();
+        for (int k = j + 1; k < event.patterns.size(); k++) {
+          var sample = event.patterns.get(k);
+          if (!sample.isModifier()) continue outer;
+
+          for (var entry : sample.getVars().object2FloatEntrySet())
+            mergedModifier.vars.merge(entry.getKey(), entry.getFloatValue(), Float::sum);
+        }
+      }
+    }
   }
 
   @Override
   public Query<EntityStore> getQuery() {
-    return archetype.get();
+    return Archetype.empty();
   }
 
-  /** Raise to queue a valid, canonical Sigil in the spell queue. */
   public static class Event extends CancellableEcsEvent {
-    public static final Event INSTANCE = new Event();
+    public final List<SigilPattern> patterns;
 
-    private Event() {}
+    public Event(List<SigilPattern> patterns) {
+      this.patterns = patterns;
+    }
+  }
+
+  private static class ModifierRepr {
+    public final Object2FloatMap<String> vars = new Object2FloatOpenHashMap<>();
   }
 }
