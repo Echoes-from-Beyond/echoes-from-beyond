@@ -27,8 +27,7 @@ import com.hypixel.hytale.codec.schema.config.ArraySchema;
 import com.hypixel.hytale.codec.schema.config.Schema;
 import com.hypixel.hytale.codec.util.RawJsonReader;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
+import java.util.Collection;
 import java.util.function.Supplier;
 import org.bson.BsonArray;
 import org.bson.BsonValue;
@@ -36,24 +35,22 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-class ListCodec<V extends @Nullable Object, S extends List<V>>
-    implements Codec<List<V>>, WrappedCodec<V> {
-  private final Codec<V> elementCodec;
-  private final Supplier<S> listSupplier;
-  private final boolean unmodifiable;
+class ContainerCodec<Element extends @Nullable Object, Container extends Collection<Element>>
+    implements Codec<Container>, WrappedCodec<Element> {
+  private final Codec<Element> elementCodec;
+  private final Supplier<? extends Container> creator;
 
-  ListCodec(Codec<V> elementCodec, Supplier<S> listSupplier, boolean unmodifiable) {
+  ContainerCodec(Codec<Element> elementCodec, Supplier<? extends Container> creator) {
     this.elementCodec = elementCodec;
-    this.listSupplier = listSupplier;
-    this.unmodifiable = unmodifiable;
+    this.creator = creator;
   }
 
-  public List<V> decode(BsonValue bsonValue, ExtraInfo extraInfo) {
+  @Override
+  public @Nullable Container decode(BsonValue bsonValue, ExtraInfo extraInfo) {
     var list = bsonValue.asArray();
-    if (list.isEmpty()) return unmodifiable ? List.of() : listSupplier.get();
+    if (list.isEmpty()) return creator.get();
 
-    var out = listSupplier.get();
-
+    var out = creator.get();
     for (int i = 0; i < list.size(); ++i) {
       var value = list.get(i);
       extraInfo.pushIntKey(i);
@@ -67,16 +64,18 @@ class ListCodec<V extends @Nullable Object, S extends List<V>>
       }
     }
 
-    return unmodifiable ? Collections.unmodifiableList(out) : out;
+    return out;
   }
 
-  public List<V> decodeJson(RawJsonReader reader, ExtraInfo extraInfo) throws IOException {
+  @Override
+  public @Nullable Container decodeJson(RawJsonReader reader, ExtraInfo extraInfo)
+      throws IOException {
     reader.expect('[');
     reader.consumeWhiteSpace();
-    if (reader.tryConsume(']')) return unmodifiable ? List.of() : listSupplier.get();
+    if (reader.tryConsume(']')) return creator.get();
 
-    int i = 0;
-    var out = listSupplier.get();
+    var i = 0;
+    var out = creator.get();
 
     while (true) {
       extraInfo.pushIntKey(i, reader);
@@ -92,23 +91,21 @@ class ListCodec<V extends @Nullable Object, S extends List<V>>
       }
 
       reader.consumeWhiteSpace();
-      if (reader.tryConsumeOrExpect(']', ',')) {
-        return unmodifiable ? Collections.unmodifiableList(out) : out;
-      }
-
+      if (reader.tryConsumeOrExpect(']', ',')) return out;
       reader.consumeWhiteSpace();
     }
   }
 
-  public BsonValue encode(List<V> vs, ExtraInfo extraInfo) {
+  @Override
+  public BsonValue encode(Container elements, ExtraInfo extraInfo) {
     var out = new BsonArray();
     var key = 0;
 
-    for (var v : vs) {
+    for (var element : elements) {
       extraInfo.pushIntKey(key++);
 
       try {
-        out.add(elementCodec.encode(v, extraInfo));
+        out.add(elementCodec.encode(element, extraInfo));
       } finally {
         extraInfo.popKey();
       }
@@ -117,14 +114,16 @@ class ListCodec<V extends @Nullable Object, S extends List<V>>
     return out;
   }
 
-  public Schema toSchema(SchemaContext context) {
-    ArraySchema schema = new ArraySchema();
-    schema.setTitle("List");
-    schema.setItem(context.refDefinition(elementCodec));
+  @Override
+  public Schema toSchema(SchemaContext schemaContext) {
+    var schema = new ArraySchema();
+    schema.setTitle("Collection");
+    schema.setItem(schemaContext.refDefinition(elementCodec));
     return schema;
   }
 
-  public Codec<V> getChildCodec() {
+  @Override
+  public Codec<Element> getChildCodec() {
     return elementCodec;
   }
 }

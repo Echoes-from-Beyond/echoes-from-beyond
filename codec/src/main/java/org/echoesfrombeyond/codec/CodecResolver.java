@@ -19,38 +19,36 @@
 package org.echoesfrombeyond.codec;
 
 import com.hypixel.hytale.codec.Codec;
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
+import java.util.*;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
 @FunctionalInterface
 public interface CodecResolver {
-  @Nullable Codec<?> resolve(Type type);
+  @Nullable Codec<?> resolve(Type type, Field field);
 
   default CodecResolver chain(CodecResolver other) {
     return new ChainedResolver(this, other);
   }
 
-  default CodecResolver withListSupport(
-      Supplier<? extends List<?>> listSupplier, boolean unmodifiable) {
+  default CodecResolver withCollectionSupport(ContainerProvider containerProvider) {
     var chained = new ChainedResolver(this);
-    chained.append(new CollectionResolver(chained, listSupplier, unmodifiable));
+    chained.append(new CollectionResolver(chained, containerProvider));
     return chained;
   }
 
-  default CodecResolver withListSupport(Supplier<? extends List<?>> listSupplier) {
-    return withListSupport(listSupplier, false);
-  }
-
-  default CodecResolver withListSupport() {
-    return withListSupport(ArrayList::new, false);
-  }
-
-  default CodecResolver withListSupport(boolean unmodifiable) {
-    return withListSupport(ArrayList::new, unmodifiable);
+  default CodecResolver withStandardCollectionSupport() {
+    return withCollectionSupport(
+        ContainerProvider.withAbstractMappings(
+            Map.of(
+                List.class,
+                ArrayList.class,
+                Set.class,
+                HashSet.class,
+                Collection.class,
+                ArrayList.class)));
   }
 }

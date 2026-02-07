@@ -20,6 +20,7 @@ package org.echoesfrombeyond.codec;
 
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.Map;
 import org.jspecify.annotations.NullMarked;
@@ -48,7 +49,7 @@ public final class CodecUtil {
                 Map.entry(String.class, Codec.STRING));
 
         @Override
-        public @Nullable Codec<?> resolve(Type type) {
+        public @Nullable Codec<?> resolve(Type type, Field field) {
           if (!(type instanceof Class<?> raw)) return null;
           return PRIMITIVE_CODEC_MAP.get(raw);
         }

@@ -19,11 +19,10 @@
 package org.echoesfrombeyond.codec;
 
 import com.hypixel.hytale.codec.Codec;
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.Collection;
-import java.util.List;
-import java.util.function.Supplier;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -34,19 +33,16 @@ class CollectionResolver implements CodecResolver {
   }
 
   private final CodecResolver root;
-  private final Supplier<? extends List<?>> listSupplier;
-  private final boolean unmodifiable;
+  private final ContainerProvider containerProvider;
 
-  CollectionResolver(
-      CodecResolver root, Supplier<? extends List<?>> listSupplier, boolean unmodifiable) {
+  CollectionResolver(CodecResolver root, ContainerProvider containerProvider) {
     this.root = root;
-    this.listSupplier = listSupplier;
-    this.unmodifiable = unmodifiable;
+    this.containerProvider = containerProvider;
   }
 
   @Override
-  @SuppressWarnings("unchecked")
-  public @Nullable Codec<?> resolve(Type type) {
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public @Nullable Codec<?> resolve(Type type, Field field) {
     var raw = GenericUtil.getRawType(type);
     if (raw == null || !Collection.class.isAssignableFrom(raw)) return null;
 
@@ -56,10 +52,9 @@ class CollectionResolver implements CodecResolver {
     var elementType = params.get(Vars.ELEMENT_TYPE);
     assert elementType != null;
 
-    var elementCodec = root.resolve(elementType);
+    var elementCodec = root.resolve(elementType, field);
     if (elementCodec == null) return null;
 
-    return new ListCodec<>(
-        (Codec<Object>) elementCodec, (Supplier<List<Object>>) listSupplier, unmodifiable);
+    return new ContainerCodec(elementCodec, containerProvider.forType(raw));
   }
 }

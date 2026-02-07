@@ -19,11 +19,11 @@
 package org.echoesfrombeyond.codec;
 
 import com.hypixel.hytale.codec.Codec;
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -41,9 +41,9 @@ class ChainedResolver implements CodecResolver {
   }
 
   @Override
-  public @Nullable Codec<?> resolve(Type type) {
+  public @Nullable Codec<?> resolve(Type type, Field field) {
     for (var resolver : resolvers) {
-      var codec = resolver.resolve(type);
+      var codec = resolver.resolve(type, field);
       if (codec != null) return codec;
     }
 
@@ -57,9 +57,8 @@ class ChainedResolver implements CodecResolver {
   }
 
   @Override
-  public CodecResolver withListSupport(
-      Supplier<? extends List<?>> listSupplier, boolean unmodifiable) {
-    resolvers.add(new CollectionResolver(this, listSupplier, unmodifiable));
+  public CodecResolver withCollectionSupport(ContainerProvider containerProvider) {
+    resolvers.add(new CollectionResolver(this, containerProvider));
     return this;
   }
 }

@@ -18,7 +18,7 @@
 
 package org.echoesfrombeyond.codec;
 
-import java.util.List;
+import java.util.*;
 import org.junit.jupiter.api.Test;
 
 class GenericUtilTest {
@@ -26,9 +26,13 @@ class GenericUtilTest {
 
   @Test
   void test() throws NoSuchFieldException {
-    var resolver = CodecUtil.PRIMITIVE_RESOLVER.withListSupport();
-    var codec =
-        resolver.resolve(GenericUtilTest.class.getDeclaredField("testRecursive").getGenericType());
+    var resolve =
+        CodecUtil.PRIMITIVE_RESOLVER.withCollectionSupport(
+            ContainerProvider.withAbstractMappings(
+                Map.of(List.class, ArrayList.class, Set.class, HashSet.class)));
+
+    var field = GenericUtilTest.class.getDeclaredField("testRecursive");
+    var codec = resolve.resolve(field.getGenericType(), field);
 
     System.out.println(codec);
   }
