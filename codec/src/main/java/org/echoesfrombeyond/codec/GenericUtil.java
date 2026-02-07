@@ -1,0 +1,82 @@
+/*
+ * Echoes from Beyond: Hytale Mod
+ * Copyright (C) 2025 Echoes from Beyond Team <chemky2000@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package org.echoesfrombeyond.codec;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+@NullMarked
+public final class GenericUtil {
+  public static @Nullable Class<?> getRawType(Type type) {
+    return switch (type) {
+      case Class<?> cls -> cls;
+      case ParameterizedType pt -> (Class<?>) pt.getRawType();
+      default -> null;
+    };
+  }
+
+  public static @Nullable Map<TypeVariable<?>, Type> resolveSupertypeParameters(
+      Type base, Class<?> supertype) {
+    var baseRaw = getRawType(base);
+    if (baseRaw == null || !supertype.isAssignableFrom(baseRaw)) return null;
+
+    var queue = new ArrayDeque<Type>();
+    queue.add(base);
+
+    var map = new HashMap<TypeVariable<?>, Type>();
+    while (true) {
+      var cur = queue.removeFirst();
+      var raw = getRawType(cur);
+
+      // We only add ParameterizedType and Class<?>.
+      assert raw != null;
+
+      if (cur instanceof ParameterizedType pt) {
+        var typeVariables = raw.getTypeParameters();
+        var typeArguments = pt.getActualTypeArguments();
+
+        for (int i = 0; i < typeVariables.length; i++) {
+          var arg = typeArguments[i];
+
+          //noinspection SuspiciousMethodCalls
+          map.put(typeVariables[i], map.getOrDefault(arg, arg));
+        }
+      }
+
+      if (raw.equals(supertype)) return map;
+
+      queue(raw.getGenericSuperclass(), queue);
+      for (var genericInterface : raw.getGenericInterfaces()) queue(genericInterface, queue);
+    }
+  }
+
+  private static void queue(@Nullable Type type, Deque<Type> queue) {
+    switch (type) {
+      case Class<?> _, ParameterizedType _ -> queue.addLast(type);
+      case null, default -> {}
+    }
+  }
+}

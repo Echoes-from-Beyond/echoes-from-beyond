@@ -21,36 +21,45 @@ package org.echoesfrombeyond.codec;
 import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-@FunctionalInterface
-public interface CodecResolver {
-  @Nullable Codec<?> resolve(Type type);
+class ChainedResolver implements CodecResolver {
+  private final List<CodecResolver> resolvers;
 
-  default CodecResolver chain(CodecResolver other) {
-    return new ChainedResolver(this, other);
+  ChainedResolver(CodecResolver... initial) {
+    this.resolvers = new ArrayList<>(initial.length);
+    this.resolvers.addAll(Arrays.asList(initial));
   }
 
-  default CodecResolver withListSupport(
+  void append(CodecResolver resolver) {
+    resolvers.add(resolver);
+  }
+
+  @Override
+  public @Nullable Codec<?> resolve(Type type) {
+    for (var resolver : resolvers) {
+      var codec = resolver.resolve(type);
+      if (codec != null) return codec;
+    }
+
+    return null;
+  }
+
+  @Override
+  public CodecResolver chain(CodecResolver other) {
+    resolvers.add(other);
+    return this;
+  }
+
+  @Override
+  public CodecResolver withListSupport(
       Supplier<? extends List<?>> listSupplier, boolean unmodifiable) {
-    var chained = new ChainedResolver(this);
-    chained.append(new CollectionResolver(chained, listSupplier, unmodifiable));
-    return chained;
-  }
-
-  default CodecResolver withListSupport(Supplier<? extends List<?>> listSupplier) {
-    return withListSupport(listSupplier, false);
-  }
-
-  default CodecResolver withListSupport() {
-    return withListSupport(ArrayList::new, false);
-  }
-
-  default CodecResolver withListSupport(boolean unmodifiable) {
-    return withListSupport(ArrayList::new, unmodifiable);
+    resolvers.add(new CollectionResolver(this, listSupplier, unmodifiable));
+    return this;
   }
 }
