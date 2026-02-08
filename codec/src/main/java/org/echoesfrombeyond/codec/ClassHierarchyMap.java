@@ -18,22 +18,22 @@
 
 package org.echoesfrombeyond.codec;
 
-import java.util.*;
-import org.junit.jupiter.api.Test;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
-class GenericUtilTest {
-  public static List<List<String>> testRecursive;
-
-  @Test
-  void test() throws NoSuchFieldException {
-    var resolve =
-        CodecUtil.PRIMITIVE_RESOLVER.withCollectionSupport(
-            ContainerProvider.withAbstractMappings(
-                Map.of(List.class, ArrayList.class, Set.class, HashSet.class), false));
-
-    var field = GenericUtilTest.class.getDeclaredField("testRecursive");
-    var codec = resolve.resolve(field.getGenericType(), field);
-
-    System.out.println(codec);
+@NullMarked
+public interface ClassHierarchyMap<V> {
+  enum Find {
+    CLOSEST,
+    FURTHEST,
+    EXACT
   }
+
+  @Nullable V getSuperclass(Class<?> key, Find find);
+
+  @Nullable V getSubclass(Class<?> superKey, Find find);
+
+  void put(Class<?> key, V value);
+
+  void remove(Class<?> key);
 }

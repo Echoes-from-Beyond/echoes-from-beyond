@@ -22,11 +22,74 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.*;
+import org.echoesfrombeyond.util.iterable.IterableUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public final class GenericUtil {
+  public static int hierarchyDistance(Class<?> base, Class<?> superclass) {
+    if (!superclass.isAssignableFrom(base)) return -1;
+    if (base.equals(superclass)) return 0;
+
+    int distance = 0;
+    var queue = new ArrayDeque<Class<?>>();
+    queue.push(base);
+
+    while (!queue.isEmpty()) {
+      var cur = queue.removeFirst();
+
+      var next = cur.getSuperclass();
+      if (superclass.equals(next)) break;
+
+      var superinterfaces = cur.getInterfaces();
+      for (var superinterface : superinterfaces) if (superinterface.equals(superclass)) break;
+
+      if (next != null) queue.push(next);
+      for (var superinterface : superinterfaces) queue.push(superinterface);
+
+      distance++;
+    }
+
+    return distance;
+  }
+
+  public static Iterable<Class<?>> traverseHierarchy(Class<?> base, Class<?> stop) {
+    if (base.equals(stop)) return IterableUtil.onceIterable(base);
+    if (!stop.isAssignableFrom(base)) return IterableUtil::emptyIterator;
+
+    var queue = new ArrayDeque<Class<?>>();
+    queue.push(base);
+
+    return () ->
+        new Iterator<>() {
+          private boolean foundStop;
+
+          @Override
+          public boolean hasNext() {
+            return !queue.isEmpty() && !foundStop;
+          }
+
+          @Override
+          public Class<?> next() {
+            var end = foundStop;
+            if (queue.isEmpty() || end) throw new NoSuchElementException();
+
+            var next = queue.removeFirst();
+            if (next.equals(stop)) {
+              foundStop = true;
+              return next;
+            }
+
+            var superclass = next.getSuperclass();
+            if (!next.isInterface() && superclass != null) queue.addLast(superclass);
+            for (var superinterface : next.getInterfaces()) queue.addLast(superinterface);
+
+            return next;
+          }
+        };
+  }
+
   public static @Nullable Class<?> getRawType(Type type) {
     return switch (type) {
       case Class<?> cls -> cls;

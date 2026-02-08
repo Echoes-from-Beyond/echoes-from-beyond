@@ -49,6 +49,7 @@ public interface CodecResolver {
                 Set.class,
                 HashSet.class,
                 Collection.class,
-                ArrayList.class)));
+                ArrayList.class),
+            false));
   }
 }

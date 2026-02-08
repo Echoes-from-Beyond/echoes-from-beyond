@@ -41,7 +41,7 @@ class CollectionResolver implements CodecResolver {
   }
 
   @Override
-  @SuppressWarnings({"rawtypes", "unchecked"})
+  @SuppressWarnings("unchecked")
   public @Nullable Codec<?> resolve(Type type, Field field) {
     var raw = GenericUtil.getRawType(type);
     if (raw == null || !Collection.class.isAssignableFrom(raw)) return null;
@@ -55,6 +55,9 @@ class CollectionResolver implements CodecResolver {
     var elementCodec = root.resolve(elementType, field);
     if (elementCodec == null) return null;
 
-    return new ContainerCodec(elementCodec, containerProvider.forType(raw));
+    return new ContainerCodec<>(
+        (Codec<Object>) elementCodec,
+        (ContainerProvider.Spec<? extends Collection<Object>>)
+            containerProvider.forType(raw, field));
   }
 }

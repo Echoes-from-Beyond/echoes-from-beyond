@@ -28,7 +28,6 @@ import com.hypixel.hytale.codec.schema.config.Schema;
 import com.hypixel.hytale.codec.util.RawJsonReader;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.function.Supplier;
 import org.bson.BsonArray;
 import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
@@ -38,19 +37,20 @@ import org.jspecify.annotations.Nullable;
 class ContainerCodec<Element extends @Nullable Object, Container extends Collection<Element>>
     implements Codec<Container>, WrappedCodec<Element> {
   private final Codec<Element> elementCodec;
-  private final Supplier<? extends Container> creator;
+  private final ContainerProvider.Spec<Container> spec;
 
-  ContainerCodec(Codec<Element> elementCodec, Supplier<? extends Container> creator) {
+  ContainerCodec(Codec<Element> elementCodec, ContainerProvider.Spec<Container> spec) {
     this.elementCodec = elementCodec;
-    this.creator = creator;
+    this.spec = spec;
   }
 
   @Override
   public @Nullable Container decode(BsonValue bsonValue, ExtraInfo extraInfo) {
     var list = bsonValue.asArray();
-    if (list.isEmpty()) return creator.get();
+    if (list.isEmpty())
+      return spec.emptyImmutable() == null ? spec.creator().get() : spec.emptyImmutable();
 
-    var out = creator.get();
+    var out = spec.creator().get();
     for (int i = 0; i < list.size(); ++i) {
       var value = list.get(i);
       extraInfo.pushIntKey(i);
@@ -64,7 +64,7 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
       }
     }
 
-    return out;
+    return spec.makeImmutable() == null ? out : spec.makeImmutable().apply(out);
   }
 
   @Override
@@ -72,10 +72,10 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
       throws IOException {
     reader.expect('[');
     reader.consumeWhiteSpace();
-    if (reader.tryConsume(']')) return creator.get();
+    if (reader.tryConsume(']')) return spec.creator().get();
 
     var i = 0;
-    var out = creator.get();
+    var out = spec.creator().get();
 
     while (true) {
       extraInfo.pushIntKey(i, reader);
