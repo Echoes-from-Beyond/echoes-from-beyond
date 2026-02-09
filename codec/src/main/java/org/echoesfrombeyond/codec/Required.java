@@ -23,6 +23,4 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Use {
-  Class<? extends CodecProvider> value();
-}
+public @interface Required {}

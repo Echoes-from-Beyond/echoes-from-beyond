@@ -38,6 +38,6 @@ class RecursiveResolver implements CodecResolver {
     var raw = TypeUtil.getRawType(type);
     if (raw == null || !raw.isAnnotationPresent(ModelBuilder.class)) return null;
 
-    return CodecUtil.modelBuilderCodec(type, root);
+    return CodecUtil.modelBuilder(raw, root);
   }
 }

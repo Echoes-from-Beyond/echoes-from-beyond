@@ -19,8 +19,14 @@
 package org.echoesfrombeyond.codec;
 
 import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.codec.exception.CodecException;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.Map;
 import org.jspecify.annotations.NullMarked;
@@ -57,7 +63,90 @@ public final class CodecUtil {
 
   private CodecUtil() {}
 
-  public static <T> BuilderCodec<T> modelBuilderCodec(Type model, CodecResolver resolver) {
-    return null;
+  @SuppressWarnings("unchecked")
+  public static <T> BuilderCodec<T> modelBuilder(Class<T> model, CodecResolver resolver) {
+    if (!model.isAnnotationPresent(ModelBuilder.class))
+      throw new IllegalArgumentException("Missing ModelBuilder annotation " + model.getName());
+
+    MethodHandle constructor;
+    try {
+      constructor =
+          MethodHandles.publicLookup().findConstructor(model, MethodType.methodType(void.class));
+    } catch (NoSuchMethodException _) {
+      throw new IllegalArgumentException(
+          "Model missing public parameterless constructor " + model.getName());
+    } catch (IllegalAccessException e) {
+      throw new IllegalArgumentException(model.getName(), e);
+    }
+
+    var builder =
+        BuilderCodec.builder(
+            model,
+            () -> {
+              try {
+                return model.cast(constructor.invoke());
+              } catch (Throwable e) {
+                throw new RuntimeException(e);
+              }
+            });
+
+    var topLevelDocumentation = model.getDeclaredAnnotation(Doc.class);
+    if (topLevelDocumentation != null)
+      builder = builder.documentation(topLevelDocumentation.value());
+
+    var fields = model.getDeclaredFields();
+
+    for (var field : fields) {
+      int modifiers = field.getModifiers();
+      if (Modifier.isStatic(modifiers)
+          || !Modifier.isPublic(modifiers)
+          || Modifier.isFinal(modifiers)) continue;
+
+      if (field.isAnnotationPresent(Skip.class)) continue;
+
+      var nameAnnotation = field.getDeclaredAnnotation(Name.class);
+      var name = nameAnnotation == null ? field.getName() : nameAnnotation.value();
+
+      var resolve = (Codec<Object>) resolver.resolve(field.getGenericType(), field);
+      if (resolve == null)
+        throw new IllegalArgumentException("Could not resolve codec for field " + field);
+
+      var key = new KeyedCodec<>(name, resolve, field.isAnnotationPresent(Required.class));
+
+      MethodHandle read;
+      MethodHandle write;
+      try {
+        read = MethodHandles.publicLookup().unreflectGetter(field);
+        write = MethodHandles.publicLookup().unreflectSetter(field);
+      } catch (IllegalAccessException e) {
+        throw new RuntimeException(e);
+      }
+
+      var fieldBuilder =
+          builder.append(
+              key,
+              (self, value) -> {
+                try {
+                  write.invoke(self, value);
+                } catch (Throwable e) {
+                  throw new CodecException("Write error", e);
+                }
+              },
+              (self) -> {
+                try {
+                  return read.invoke(self);
+                } catch (Throwable e) {
+                  throw new CodecException("Read error", e);
+                }
+              });
+
+      var fieldDocumentation = field.getDeclaredAnnotation(Doc.class);
+      if (fieldDocumentation != null)
+        fieldBuilder = fieldBuilder.documentation(fieldDocumentation.value());
+
+      builder = fieldBuilder.add();
+    }
+
+    return builder.build();
   }
 }

@@ -38,7 +38,7 @@ public interface CodecResolver {
 
   @ApiStatus.NonExtendable
   default CodecResolver withCollectionSupport(
-      ImplementationProvider<Collection<Object>> implementationProvider) {
+      ImplementationProvider<Collection<?>> implementationProvider) {
     var chained = new ChainedResolver(this);
     chained.append(new CollectionResolver(chained, implementationProvider));
     return chained;

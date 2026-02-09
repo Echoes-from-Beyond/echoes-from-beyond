@@ -59,7 +59,7 @@ class ChainedResolver implements CodecResolver {
 
   @Override
   public CodecResolver withCollectionSupport(
-      ImplementationProvider<Collection<Object>> implementationProvider) {
+      ImplementationProvider<Collection<?>> implementationProvider) {
     resolvers.add(new CollectionResolver(this, implementationProvider));
     return this;
   }

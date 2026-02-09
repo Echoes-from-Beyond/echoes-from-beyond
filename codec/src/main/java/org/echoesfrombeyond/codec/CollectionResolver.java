@@ -34,10 +34,9 @@ class CollectionResolver implements CodecResolver {
   }
 
   private final CodecResolver root;
-  private final ImplementationProvider<Collection<Object>> implementationProvider;
+  private final ImplementationProvider<Collection<?>> implementationProvider;
 
-  CollectionResolver(
-      CodecResolver root, ImplementationProvider<Collection<Object>> collectionProvider) {
+  CollectionResolver(CodecResolver root, ImplementationProvider<Collection<?>> collectionProvider) {
     this.root = root;
     this.implementationProvider = collectionProvider;
   }
@@ -58,6 +57,8 @@ class CollectionResolver implements CodecResolver {
     if (elementCodec == null) return null;
 
     return new ContainerCodec<>(
-        (Codec<Object>) elementCodec, implementationProvider.forType(raw, field));
+        (Codec<Object>) elementCodec,
+        (ImplementationProvider.Spec<Collection<Object>>)
+            implementationProvider.forType(raw, field));
   }
 }

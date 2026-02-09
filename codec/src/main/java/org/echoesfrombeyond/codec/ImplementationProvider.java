@@ -33,7 +33,7 @@ import org.jspecify.annotations.Nullable;
 public sealed interface ImplementationProvider<V> permits ImplementationProviderImpl {
   record Spec<C>(Supplier<? extends C> creator, @Nullable Immutable<C> immutable) {
     public record Immutable<C>(
-        Class<C> type, Function<? super C, ? extends C> makeImmutable, C emptyImmutable) {}
+        Class<?> type, Function<? super C, ? extends C> makeImmutable, C emptyImmutable) {}
   }
 
   class Builder<B> {
