@@ -34,6 +34,8 @@ import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public final class CodecUtil {
+  public static final CodecCache CACHE = CodecCache.cache();
+
   public static final CodecResolver PRIMITIVE_RESOLVER =
       new CodecResolver() {
         private static final Map<Class<?>, Codec<?>> PRIMITIVE_CODEC_MAP =
@@ -63,8 +65,12 @@ public final class CodecUtil {
 
   private CodecUtil() {}
 
-  @SuppressWarnings("unchecked")
   public static <T> BuilderCodec<T> modelBuilder(Class<T> model, CodecResolver resolver) {
+    return CACHE.compute(model, resolver, () -> modelBuilder0(model, resolver));
+  }
+
+  @SuppressWarnings("unchecked")
+  private static <T> BuilderCodec<T> modelBuilder0(Class<T> model, CodecResolver resolver) {
     if (!model.isAnnotationPresent(ModelBuilder.class))
       throw new IllegalArgumentException("Missing ModelBuilder annotation " + model.getName());
 
