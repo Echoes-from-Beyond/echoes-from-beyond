@@ -25,7 +25,7 @@ import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class HashClassHierarchyMap<V> implements ClassHierarchyMap<V> {
+public final class HashClassHierarchyMap<V> implements ClassHierarchyMap<V> {
   private final Map<Class<?>, V> inner;
 
   public HashClassHierarchyMap() {

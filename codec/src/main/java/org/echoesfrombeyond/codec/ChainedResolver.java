@@ -63,4 +63,10 @@ class ChainedResolver implements CodecResolver {
     resolvers.add(new CollectionResolver(this, implementationProvider));
     return this;
   }
+
+  @Override
+  public CodecResolver withRecursiveResolution() {
+    resolvers.add(new RecursiveResolver(this));
+    return this;
+  }
 }

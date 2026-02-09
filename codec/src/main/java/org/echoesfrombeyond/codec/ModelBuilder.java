@@ -18,24 +18,9 @@
 
 package org.echoesfrombeyond.codec;
 
-import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
+import java.lang.annotation.*;
 
-@NullMarked
-public sealed interface ClassHierarchyMap<V> permits HashClassHierarchyMap {
-  enum Find {
-    CLOSEST,
-    FURTHEST,
-    EXACT
-  }
-
-  @Nullable V getSuperclass(Class<?> baseClass, Find find);
-
-  @Nullable V getSubclass(Class<?> superClass, Find find);
-
-  @Contract("_, null -> fail")
-  @Nullable V put(Class<?> key, V value);
-
-  @Nullable V remove(Class<?> key);
-}
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface ModelBuilder {}

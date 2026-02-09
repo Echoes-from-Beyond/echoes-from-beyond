@@ -21,33 +21,23 @@ package org.echoesfrombeyond.codec;
 import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.Collection;
-import org.jetbrains.annotations.ApiStatus;
+import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-@FunctionalInterface
-public interface CodecResolver {
-  @Nullable Codec<?> resolve(Type type, Field field);
+class RecursiveResolver implements CodecResolver {
+  private final CodecResolver root;
 
-  @ApiStatus.NonExtendable
-  default CodecResolver chain(CodecResolver other) {
-    return new ChainedResolver(this, other);
+  RecursiveResolver(CodecResolver root) {
+    this.root = root;
   }
 
-  @ApiStatus.NonExtendable
-  default CodecResolver withCollectionSupport(
-      ImplementationProvider<Collection<Object>> implementationProvider) {
-    var chained = new ChainedResolver(this);
-    chained.append(new CollectionResolver(chained, implementationProvider));
-    return chained;
-  }
+  @Override
+  public @Nullable Codec<?> resolve(Type type, Field field) {
+    var raw = TypeUtil.getRawType(type);
+    if (raw == null || !raw.isAnnotationPresent(ModelBuilder.class)) return null;
 
-  @ApiStatus.NonExtendable
-  default CodecResolver withRecursiveResolution() {
-    var chained = new ChainedResolver(this);
-    chained.append(new RecursiveResolver(chained));
-    return chained;
+    return CodecUtil.modelBuilderCodec(type, root);
   }
 }

@@ -61,5 +61,9 @@ public sealed interface ImplementationProvider<V> permits ImplementationProvider
     }
   }
 
+  static <B> Builder<B> builder() {
+    return new Builder<>();
+  }
+
   Spec<? extends V> forType(Class<?> type, Field field);
 }
