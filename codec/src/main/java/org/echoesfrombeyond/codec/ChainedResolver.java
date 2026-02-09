@@ -23,6 +23,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -57,8 +58,9 @@ class ChainedResolver implements CodecResolver {
   }
 
   @Override
-  public CodecResolver withCollectionSupport(ContainerProvider containerProvider) {
-    resolvers.add(new CollectionResolver(this, containerProvider));
+  public CodecResolver withCollectionSupport(
+      ImplementationProvider<Collection<Object>> implementationProvider) {
+    resolvers.add(new CollectionResolver(this, implementationProvider));
     return this;
   }
 }

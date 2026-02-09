@@ -21,7 +21,8 @@ package org.echoesfrombeyond.codec;
 import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Collection;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -30,13 +31,16 @@ import org.jspecify.annotations.Nullable;
 public interface CodecResolver {
   @Nullable Codec<?> resolve(Type type, Field field);
 
+  @ApiStatus.NonExtendable
   default CodecResolver chain(CodecResolver other) {
     return new ChainedResolver(this, other);
   }
 
-  default CodecResolver withCollectionSupport(ContainerProvider containerProvider) {
+  @ApiStatus.NonExtendable
+  default CodecResolver withCollectionSupport(
+      ImplementationProvider<Collection<Object>> implementationProvider) {
     var chained = new ChainedResolver(this);
-    chained.append(new CollectionResolver(chained, containerProvider));
+    chained.append(new CollectionResolver(chained, implementationProvider));
     return chained;
   }
 }

@@ -23,16 +23,15 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.Collection;
 import java.util.Map;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-final class ContainerProviderImpl implements ContainerProvider {
+final class ImplementationProviderImpl<V> implements ImplementationProvider<V> {
   private final ClassHierarchyMap<MethodHandle> handles;
   private final ClassHierarchyMap<Spec.Immutable<Object>> immutables;
 
-  ContainerProviderImpl(
+  ImplementationProviderImpl(
       Map<Class<?>, Class<?>> abstractMappings, Iterable<Spec.Immutable<?>> immutableMappings) {
     this.handles = new HashClassHierarchyMap<>();
     this.immutables = new HashClassHierarchyMap<>();
@@ -40,10 +39,6 @@ final class ContainerProviderImpl implements ContainerProvider {
     for (var entry : abstractMappings.entrySet()) {
       var key = entry.getKey();
       var value = entry.getValue();
-
-      if (!Collection.class.isAssignableFrom(key))
-        throw new IllegalArgumentException(
-            "Abstract mapping key does not extend Collection " + value.getName());
 
       if (!key.isAssignableFrom(value))
         throw new IllegalArgumentException(
@@ -80,7 +75,8 @@ final class ContainerProviderImpl implements ContainerProvider {
   }
 
   @Override
-  public Spec<?> forType(Class<?> type, Field field) {
+  @SuppressWarnings("unchecked")
+  public Spec<? extends V> forType(Class<?> type, Field field) {
     var handle = handles.getSubclass(type, ClassHierarchyMap.Find.CLOSEST);
     if (handle == null) {
       if (Modifier.isAbstract(type.getModifiers()))
@@ -89,15 +85,15 @@ final class ContainerProviderImpl implements ContainerProvider {
       handle = extractConstructor(type);
     }
 
-    Spec.Immutable<Object> immutable = null;
+    Spec.Immutable<V> immutable = null;
     if (field.isAnnotationPresent(Immutable.class))
-      immutable = immutables.getSubclass(type, ClassHierarchyMap.Find.CLOSEST);
+      immutable = (Spec.Immutable<V>) immutables.getSubclass(type, ClassHierarchyMap.Find.CLOSEST);
 
     var finalHandle = handle;
     return new Spec<>(
         () -> {
           try {
-            return finalHandle.invoke();
+            return (V) finalHandle.invoke();
           } catch (Throwable e) {
             throw new RuntimeException(e);
           }

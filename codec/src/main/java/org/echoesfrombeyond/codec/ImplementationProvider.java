@@ -19,17 +19,47 @@
 package org.echoesfrombeyond.codec;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-public sealed interface ContainerProvider permits ContainerProviderImpl {
+public sealed interface ImplementationProvider<V> permits ImplementationProviderImpl {
   record Spec<C>(Supplier<? extends C> creator, @Nullable Immutable<C> immutable) {
-    record Immutable<C>(
+    public record Immutable<C>(
         Class<C> type, Function<? super C, ? extends C> makeImmutable, C emptyImmutable) {}
   }
 
-  Spec<?> forType(Class<?> type, Field field);
+  class Builder<B> {
+    private final Map<Class<?>, Class<?>> abstractMappings;
+    private final List<Spec.Immutable<?>> immutableMappings;
+
+    private Builder() {
+      this.abstractMappings = new HashMap<>();
+      this.immutableMappings = new ArrayList<>();
+    }
+
+    public <T extends B> Builder<B> withAbstractMapping(
+        Class<T> abstractClass, Class<? extends T> concreteClass) {
+      abstractMappings.put(Check.nonNull(abstractClass), Check.nonNull(concreteClass));
+      return this;
+    }
+
+    public <T extends B> Builder<B> withImmutable(Spec.Immutable<T> immutable) {
+      immutableMappings.add(immutable);
+      return this;
+    }
+
+    public ImplementationProvider<B> build() {
+      return new ImplementationProviderImpl<>(abstractMappings, immutableMappings);
+    }
+  }
+
+  Spec<? extends V> forType(Class<?> type, Field field);
 }

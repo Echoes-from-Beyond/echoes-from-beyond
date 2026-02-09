@@ -37,9 +37,9 @@ import org.jspecify.annotations.Nullable;
 class ContainerCodec<Element extends @Nullable Object, Container extends Collection<Element>>
     implements Codec<Container>, WrappedCodec<Element> {
   private final Codec<Element> elementCodec;
-  private final ContainerProvider.Spec<Container> spec;
+  private final ImplementationProvider.Spec<Container> spec;
 
-  ContainerCodec(Codec<Element> elementCodec, ContainerProvider.Spec<Container> spec) {
+  ContainerCodec(Codec<Element> elementCodec, ImplementationProvider.Spec<Container> spec) {
     this.elementCodec = elementCodec;
     this.spec = spec;
   }
