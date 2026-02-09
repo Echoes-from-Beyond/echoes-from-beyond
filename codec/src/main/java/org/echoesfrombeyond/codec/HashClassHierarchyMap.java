@@ -20,6 +20,8 @@ package org.echoesfrombeyond.codec;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
@@ -31,26 +33,29 @@ public class HashClassHierarchyMap<V> implements ClassHierarchyMap<V> {
   }
 
   @Override
-  public V getSuperclass(Class<?> key, Find find) {
-    if (find == Find.EXACT) return inner.get(key);
+  public V getSuperclass(Class<?> baseClass, Find find) {
+    if (find == Find.EXACT) return inner.get(baseClass);
 
     if (find == Find.CLOSEST) {
-      var direct = inner.get(key);
+      var direct = inner.get(baseClass);
       if (direct != null) return direct;
     }
 
     V value = null;
-    for (var candidate : GenericUtil.traverseHierarchy(key, Object.class)) {
-      value = inner.get(candidate);
-      if (find == Find.CLOSEST && value != null) return value;
+    for (var candidate : TypeUtil.traverseHierarchy(baseClass, Object.class)) {
+      var candidateValue = inner.get(candidate);
+      if (candidateValue == null) continue;
+
+      if (find == Find.CLOSEST) return candidateValue;
+      else value = candidateValue;
     }
 
     return value;
   }
 
   @Override
-  public V getSubclass(Class<?> superKey, Find find) {
-    if (find == Find.EXACT) return inner.get(superKey);
+  public V getSubclass(Class<?> superClass, Find find) {
+    if (find == Find.EXACT) return inner.get(superClass);
 
     var bestDistance = find == Find.FURTHEST ? Integer.MIN_VALUE : Integer.MAX_VALUE;
     V bestValue = null;
@@ -59,7 +64,7 @@ public class HashClassHierarchyMap<V> implements ClassHierarchyMap<V> {
       var key = entry.getKey();
       var value = entry.getValue();
 
-      var distance = GenericUtil.hierarchyDistance(key, superKey);
+      var distance = TypeUtil.inheritanceDistance(key, superClass);
       if (distance < 0) continue;
 
       if (find == Find.FURTHEST ? distance > bestDistance : distance < bestDistance) {
@@ -72,12 +77,12 @@ public class HashClassHierarchyMap<V> implements ClassHierarchyMap<V> {
   }
 
   @Override
-  public void put(Class<?> key, V value) {
-    inner.put(key, value);
+  public V put(Class<?> key, V value) {
+    return inner.put(key, Check.nonNull(value));
   }
 
   @Override
-  public void remove(Class<?> key) {
-    inner.remove(key);
+  public V remove(Class<?> key) {
+    return inner.remove(key);
   }
 }

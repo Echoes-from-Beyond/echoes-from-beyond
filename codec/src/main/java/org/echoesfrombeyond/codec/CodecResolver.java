@@ -39,17 +39,4 @@ public interface CodecResolver {
     chained.append(new CollectionResolver(chained, containerProvider));
     return chained;
   }
-
-  default CodecResolver withStandardCollectionSupport() {
-    return withCollectionSupport(
-        ContainerProvider.withAbstractMappings(
-            Map.of(
-                List.class,
-                ArrayList.class,
-                Set.class,
-                HashSet.class,
-                Collection.class,
-                ArrayList.class),
-            false));
-  }
 }

@@ -18,22 +18,9 @@
 
 package org.echoesfrombeyond.codec;
 
-import java.util.*;
-import org.junit.jupiter.api.Test;
+import java.lang.annotation.*;
 
-class GenericUtilTest {
-  public static List<List<String>> testRecursive;
-
-  @Test
-  void test() throws NoSuchFieldException {
-    var resolve =
-        CodecUtil.PRIMITIVE_RESOLVER.withCollectionSupport(
-            ContainerProvider.withAbstractMappings(
-                Map.of(List.class, ArrayList.class, Set.class, HashSet.class), false));
-
-    var field = GenericUtilTest.class.getDeclaredField("testRecursive");
-    var codec = resolve.resolve(field.getGenericType(), field);
-
-    System.out.println(codec);
-  }
-}
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface Immutable {}

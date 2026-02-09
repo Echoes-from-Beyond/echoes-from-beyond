@@ -48,7 +48,7 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
   public @Nullable Container decode(BsonValue bsonValue, ExtraInfo extraInfo) {
     var list = bsonValue.asArray();
     if (list.isEmpty())
-      return spec.emptyImmutable() == null ? spec.creator().get() : spec.emptyImmutable();
+      return spec.immutable() == null ? spec.creator().get() : spec.immutable().emptyImmutable();
 
     var out = spec.creator().get();
     for (int i = 0; i < list.size(); ++i) {
@@ -64,7 +64,7 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
       }
     }
 
-    return spec.makeImmutable() == null ? out : spec.makeImmutable().apply(out);
+    return spec.immutable() == null ? out : spec.immutable().makeImmutable().apply(out);
   }
 
   @Override

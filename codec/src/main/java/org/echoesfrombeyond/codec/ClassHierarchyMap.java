@@ -18,6 +18,7 @@
 
 package org.echoesfrombeyond.codec;
 
+import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -29,11 +30,12 @@ public interface ClassHierarchyMap<V> {
     EXACT
   }
 
-  @Nullable V getSuperclass(Class<?> key, Find find);
+  @Nullable V getSuperclass(Class<?> baseClass, Find find);
 
-  @Nullable V getSubclass(Class<?> superKey, Find find);
+  @Nullable V getSubclass(Class<?> superClass, Find find);
 
-  void put(Class<?> key, V value);
+  @Contract("_, null -> fail")
+  @Nullable V put(Class<?> key, V value);
 
-  void remove(Class<?> key);
+  @Nullable V remove(Class<?> key);
 }

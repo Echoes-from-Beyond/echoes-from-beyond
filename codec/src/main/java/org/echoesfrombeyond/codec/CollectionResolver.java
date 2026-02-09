@@ -23,6 +23,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.Collection;
+import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -43,10 +44,10 @@ class CollectionResolver implements CodecResolver {
   @Override
   @SuppressWarnings("unchecked")
   public @Nullable Codec<?> resolve(Type type, Field field) {
-    var raw = GenericUtil.getRawType(type);
+    var raw = TypeUtil.getRawType(type);
     if (raw == null || !Collection.class.isAssignableFrom(raw)) return null;
 
-    var params = GenericUtil.resolveSupertypeParameters(type, Collection.class);
+    var params = TypeUtil.resolveSupertypeParameters(type, Collection.class);
     assert params != null;
 
     var elementType = params.get(Vars.ELEMENT_TYPE);
