@@ -21,8 +21,9 @@ package org.echoesfrombeyond.codec;
 import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collection;
-import org.jetbrains.annotations.ApiStatus;
+import java.util.List;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -31,23 +32,65 @@ import org.jspecify.annotations.Nullable;
 public interface CodecResolver {
   @Nullable Codec<?> resolve(Type type, Field field);
 
-  @ApiStatus.NonExtendable
-  default CodecResolver chain(CodecResolver other) {
-    return new ChainedResolver(this, other);
+  sealed interface Builder permits BuilderImpl {
+    Builder chain(CodecResolver resolver);
+
+    Builder withCollectionSupport(ImplementationProvider<Collection<?>> implementationProvider);
+
+    Builder withRecursiveResolution();
+
+    Builder withRecursiveResolution(CodecCache cache);
+
+    CodecResolver build();
   }
 
-  @ApiStatus.NonExtendable
-  default CodecResolver withCollectionSupport(
-      ImplementationProvider<Collection<?>> implementationProvider) {
-    var chained = new ChainedResolver(this);
-    chained.append(new CollectionResolver(chained, implementationProvider));
-    return chained;
+  static Builder builder() {
+    return new BuilderImpl();
   }
 
-  @ApiStatus.NonExtendable
-  default CodecResolver withRecursiveResolution() {
-    var chained = new ChainedResolver(this);
-    chained.append(new RecursiveResolver(chained));
-    return chained;
+  final class BuilderImpl implements Builder {
+    private List<CodecResolver> resolvers;
+    private CodecResolver result;
+
+    private BuilderImpl() {
+      this.resolvers = new ArrayList<>();
+      this.result = new ChainedResolver(this.resolvers);
+    }
+
+    @Override
+    public Builder chain(CodecResolver resolver) {
+      resolvers.add(resolver);
+      return this;
+    }
+
+    @Override
+    public Builder withCollectionSupport(
+        ImplementationProvider<Collection<?>> implementationProvider) {
+      resolvers.add(new CollectionResolver(result, implementationProvider));
+      return this;
+    }
+
+    @Override
+    public Builder withRecursiveResolution() {
+      resolvers.add(new RecursiveResolver(result, null));
+      return this;
+    }
+
+    @Override
+    public Builder withRecursiveResolution(CodecCache cache) {
+      resolvers.add(new RecursiveResolver(result, cache));
+      return this;
+    }
+
+    @Override
+    public CodecResolver build() {
+      var resolvers = this.resolvers;
+      var result = this.result;
+
+      this.resolvers = new ArrayList<>(resolvers);
+      this.result = new ChainedResolver(this.resolvers);
+
+      return result;
+    }
   }
 }

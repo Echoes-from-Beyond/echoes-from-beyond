@@ -28,9 +28,11 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 class RecursiveResolver implements CodecResolver {
   private final CodecResolver root;
+  private final @Nullable CodecCache cache;
 
-  RecursiveResolver(CodecResolver root) {
+  RecursiveResolver(CodecResolver root, @Nullable CodecCache cache) {
     this.root = root;
+    this.cache = cache;
   }
 
   @Override
@@ -38,6 +40,8 @@ class RecursiveResolver implements CodecResolver {
     var raw = TypeUtil.getRawType(type);
     if (raw == null || !raw.isAnnotationPresent(ModelBuilder.class)) return null;
 
-    return CodecUtil.modelBuilder(raw, root);
+    return cache == null
+        ? CodecUtil.modelBuilder(raw, root)
+        : CodecUtil.modelBuilder(raw, root, cache);
   }
 }

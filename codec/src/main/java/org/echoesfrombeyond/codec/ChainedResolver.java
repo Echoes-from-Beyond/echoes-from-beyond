@@ -21,9 +21,6 @@ package org.echoesfrombeyond.codec;
 import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -32,13 +29,8 @@ import org.jspecify.annotations.Nullable;
 class ChainedResolver implements CodecResolver {
   private final List<CodecResolver> resolvers;
 
-  ChainedResolver(CodecResolver... initial) {
-    this.resolvers = new ArrayList<>(initial.length);
-    this.resolvers.addAll(Arrays.asList(initial));
-  }
-
-  void append(CodecResolver resolver) {
-    resolvers.add(resolver);
+  ChainedResolver(List<CodecResolver> resolvers) {
+    this.resolvers = resolvers;
   }
 
   @Override
@@ -49,24 +41,5 @@ class ChainedResolver implements CodecResolver {
     }
 
     return null;
-  }
-
-  @Override
-  public CodecResolver chain(CodecResolver other) {
-    resolvers.add(other);
-    return this;
-  }
-
-  @Override
-  public CodecResolver withCollectionSupport(
-      ImplementationProvider<Collection<?>> implementationProvider) {
-    resolvers.add(new CollectionResolver(this, implementationProvider));
-    return this;
-  }
-
-  @Override
-  public CodecResolver withRecursiveResolution() {
-    resolvers.add(new RecursiveResolver(this));
-    return this;
   }
 }

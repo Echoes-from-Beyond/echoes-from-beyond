@@ -156,7 +156,11 @@ class CodecUtilTest {
   public void simpleNestedCodecResolution() {
     var builderCodec =
         CodecUtil.modelBuilder(
-            SimpleNested.class, CodecUtil.PRIMITIVE_RESOLVER.withRecursiveResolution());
+            SimpleNested.class,
+            CodecResolver.builder()
+                .chain(CodecUtil.PRIMITIVE_RESOLVER)
+                .withRecursiveResolution()
+                .build());
 
     var actual = new SimpleNested();
     actual.Inner = new SimpleSkip();
@@ -178,10 +182,13 @@ class CodecUtilTest {
     var builderCodec =
         CodecUtil.modelBuilder(
             SimpleCollection.class,
-            CodecUtil.PRIMITIVE_RESOLVER.withCollectionSupport(
-                ImplementationProvider.<Collection<?>>builder()
-                    .withAbstractMapping(List.class, ArrayList.class)
-                    .build()));
+            CodecResolver.builder()
+                .chain(CodecUtil.PRIMITIVE_RESOLVER)
+                .withCollectionSupport(
+                    ImplementationProvider.<Collection<?>>builder()
+                        .withAbstractMapping(List.class, ArrayList.class)
+                        .build())
+                .build());
 
     var actual = new SimpleCollection();
     actual.StringList = new ArrayList<>();
@@ -204,13 +211,16 @@ class CodecUtilTest {
     var builderCodec =
         CodecUtil.modelBuilder(
             SimpleImmutableCollection.class,
-            CodecUtil.PRIMITIVE_RESOLVER.withCollectionSupport(
-                ImplementationProvider.<Collection<?>>builder()
-                    .withAbstractMapping(List.class, ArrayList.class)
-                    .withImmutable(
-                        new ImplementationProvider.Spec.Immutable<List<?>>(
-                            List.class, List::copyOf, List.of()))
-                    .build()));
+            CodecResolver.builder()
+                .chain(CodecUtil.PRIMITIVE_RESOLVER)
+                .withCollectionSupport(
+                    ImplementationProvider.<Collection<?>>builder()
+                        .withAbstractMapping(List.class, ArrayList.class)
+                        .withImmutable(
+                            new ImplementationProvider.Spec.Immutable<>(
+                                List.class, List::copyOf, List.of()))
+                        .build())
+                .build());
 
     var actual = new SimpleImmutableCollection();
     actual.StringList = new ArrayList<>();
