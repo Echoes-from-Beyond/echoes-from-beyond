@@ -144,6 +144,17 @@ public interface CodecResolver {
     Builder withCollectionSupport();
 
     /**
+     * Enables support for {@link Map} implementations whose key type is {@link String}.
+     *
+     * <p>Otherwise works similarly to {@link Builder#withCollectionSupport()}, including the
+     * requirement to add subtype mappings if it is desirable to resolve abstract types.
+     *
+     * @return this instance
+     */
+    @Contract("-> this")
+    Builder withMapSupport();
+
+    /**
      * Builds a new {@link CodecResolver}. This method may be called multiple times to construct
      * multiple instances of {@link CodecResolver} with the same settings.
      *
@@ -172,6 +183,7 @@ public interface CodecResolver {
     private @Nullable CodecCache recursiveResolutionCache;
     private boolean arraySupport;
     private boolean collectionSupport;
+    private boolean mapSupport;
 
     private BuilderImpl() {
       this.resolvers = new ArrayList<>();
@@ -224,6 +236,12 @@ public interface CodecResolver {
     }
 
     @Override
+    public Builder withMapSupport() {
+      mapSupport = true;
+      return this;
+    }
+
+    @Override
     public CodecResolver build() {
       var resolversCopy = new ArrayList<>(resolvers);
       var chained = new ChainedResolver(resolversCopy);
@@ -235,6 +253,7 @@ public interface CodecResolver {
       }
       if (arraySupport) resolversCopy.add(new ArrayResolver(chained));
       if (collectionSupport) resolversCopy.add(new CollectionResolver(chained));
+      if (mapSupport) resolversCopy.add(new MapResolver(chained));
       if (recursiveResolution)
         resolversCopy.add(new RecursiveResolver(chained, recursiveResolutionCache));
 
