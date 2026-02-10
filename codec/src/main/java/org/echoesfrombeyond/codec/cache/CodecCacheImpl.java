@@ -26,6 +26,10 @@ import java.util.function.Supplier;
 import org.echoesfrombeyond.codec.CodecResolver;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * Standard cache implementation of {@link CodecCache}, backed by a {@link HashMap} and a {@link
+ * ReentrantReadWriteLock}.
+ */
 @NullMarked
 final class CodecCacheImpl implements CodecCache {
   private record CacheKey(Class<?> model, CodecResolver resolver) {
@@ -48,6 +52,7 @@ final class CodecCacheImpl implements CodecCache {
   private final Map<CacheKey, Codec<?>> cache;
   private final ReentrantReadWriteLock rwl;
 
+  /** Creates a new, initially empty cache. */
   CodecCacheImpl() {
     this.cache = new HashMap<>();
     this.rwl = new ReentrantReadWriteLock();

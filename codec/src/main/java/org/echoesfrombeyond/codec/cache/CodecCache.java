@@ -21,13 +21,47 @@ package org.echoesfrombeyond.codec.cache;
 import com.hypixel.hytale.codec.Codec;
 import java.util.function.Supplier;
 import org.echoesfrombeyond.codec.CodecResolver;
+import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * A generic, thread-safe cache of resolved {@link Codec}s.
+ *
+ * <p>Codec resolution can be costly, especially for large compound types. Using a cache ensures
+ * that each type is only resolved once per resolver.
+ *
+ * <p>When using a cache, it is important to ensure that all resolved codecs are functionally
+ * stateless, as the same codec instance may be shared in multiple locations.
+ *
+ * <p>Use {@link CodecCache#cache()} to construct a new implementation of this interface.
+ */
 @NullMarked
 public sealed interface CodecCache permits CodecCacheImpl {
+  /**
+   * Returns a cached codec if it exists; otherwise invokes {@code resolveCodec} and inserts the
+   * codec into the cache.
+   *
+   * <p>It is important to ensure that {@code resolver} is the same {@link CodecResolver} used to
+   * resolve the codec returned by the {@code resolveCodec} supplier. Failing to do so may lead to
+   * cache problems.
+   *
+   * <p>Implementations are tolerant of reentrancy: {@code resolveCodec} may directly or indirectly
+   * invoke this method again.
+   *
+   * @param model the codec class
+   * @param resolver the resolver used to resolve the codec
+   * @param resolveCodec the actual resolved codec
+   * @return the cached or freshly-resolved codec
+   * @param <V> the type (de)serialized by the codec
+   * @param <C> the codec type
+   */
   <V, C extends Codec<V>> C compute(
       Class<V> model, CodecResolver resolver, Supplier<C> resolveCodec);
 
+  /**
+   * @return a new {@link CodecCache} implementation
+   */
+  @Contract(value = "-> new", pure = true)
   static CodecCache cache() {
     return new CodecCacheImpl();
   }
