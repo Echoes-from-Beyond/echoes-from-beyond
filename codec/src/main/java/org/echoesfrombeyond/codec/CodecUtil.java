@@ -55,13 +55,7 @@ public final class CodecUtil {
                 Map.entry(Long.class, Codec.LONG),
                 Map.entry(double.class, Codec.DOUBLE),
                 Map.entry(Double.class, Codec.DOUBLE),
-                Map.entry(String.class, Codec.STRING),
-                Map.entry(boolean[].class, BOOLEAN_ARRAY_CODEC),
-                Map.entry(int[].class, Codec.INT_ARRAY),
-                Map.entry(float[].class, Codec.FLOAT_ARRAY),
-                Map.entry(long[].class, Codec.LONG_ARRAY),
-                Map.entry(double[].class, Codec.DOUBLE_ARRAY),
-                Map.entry(String[].class, Codec.STRING_ARRAY));
+                Map.entry(String.class, Codec.STRING));
 
         @Override
         public @Nullable Codec<?> resolve(Type type, Field field) {

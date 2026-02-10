@@ -23,12 +23,22 @@ import com.hypixel.hytale.codec.codecs.array.ArrayCodec;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.Map;
+import java.util.function.IntFunction;
 import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
 class ArrayResolver implements CodecResolver {
+  private static final Map<Class<?>, Codec<?>> PRIMITIVE_ARRAY_CODECS =
+      Map.ofEntries(
+          Map.entry(boolean.class, CodecUtil.BOOLEAN_ARRAY_CODEC),
+          Map.entry(int.class, Codec.INT_ARRAY),
+          Map.entry(float.class, Codec.FLOAT_ARRAY),
+          Map.entry(long.class, Codec.LONG_ARRAY),
+          Map.entry(double.class, Codec.DOUBLE_ARRAY));
+
   private final CodecResolver root;
 
   ArrayResolver(CodecResolver root) {
@@ -36,18 +46,18 @@ class ArrayResolver implements CodecResolver {
   }
 
   @Override
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({"unchecked", "rawtypes"})
   public @Nullable Codec<?> resolve(Type type, Field field) {
     var componentType = TypeUtil.getArrayComponentType(type);
     if (componentType == null) return null;
 
-    var componentCodec = (Codec<Object>) root.resolve(componentType, field);
-    if (componentCodec == null) return null;
-
     var rawComponentType = TypeUtil.getRawType(componentType);
     if (rawComponentType == null) return null;
+    if (rawComponentType.isPrimitive()) return PRIMITIVE_ARRAY_CODECS.get(rawComponentType);
 
+    var componentCodec = (Codec<Object>) root.resolve(componentType, field);
+    if (componentCodec == null) return null;
     return new ArrayCodec<>(
-        componentCodec, len -> (Object[]) Array.newInstance(rawComponentType, len));
+        componentCodec, (IntFunction) value -> Array.newInstance(rawComponentType, value));
   }
 }

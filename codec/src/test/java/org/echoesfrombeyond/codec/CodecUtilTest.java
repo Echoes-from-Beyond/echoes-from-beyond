@@ -83,6 +83,12 @@ class CodecUtilTest {
     public Simple[] SubtypeArray;
   }
 
+  @ModelBuilder
+  @NullUnmarked
+  public static class SimpleArray {
+    public int[] Arrays;
+  }
+
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
     if (expected == null && actual == null) return;
     if (expected == null ^ actual == null) {
@@ -250,7 +256,7 @@ class CodecUtilTest {
     var builderCodec =
         CodecUtil.modelBuilder(
             PrimitiveArrays.class,
-            CodecResolver.builder().chain(CodecUtil.PRIMITIVE_RESOLVER).build());
+            CodecResolver.builder().chain(CodecUtil.PRIMITIVE_RESOLVER).withArraySupport().build());
 
     var actual = new PrimitiveArrays();
     actual.Booleans = new boolean[] {true, false};
@@ -293,6 +299,21 @@ class CodecUtilTest {
     expected.SubtypeArray = new Simple[] {new Simple(), new Simple()};
     expected.SubtypeArray[0].Value = 67;
     expected.SubtypeArray[1].Value = 42;
+
+    assertRoundTripEquals(actual, expected, builderCodec);
+  }
+
+  @Test
+  public void arrayResolutionWithoutPrimitive() {
+    var builderCodec =
+        CodecUtil.modelBuilder(
+            SimpleArray.class, CodecResolver.builder().withArraySupport().build());
+
+    var actual = new SimpleArray();
+    actual.Arrays = new int[] {1, 2, 3};
+
+    var expected = new SimpleArray();
+    expected.Arrays = new int[] {1, 2, 3};
 
     assertRoundTripEquals(actual, expected, builderCodec);
   }
