@@ -16,10 +16,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codec;
+package org.echoesfrombeyond.codec.annotation;
 
 import java.lang.annotation.*;
 
+/**
+ * Marker annotation applied to a field to indicate that it should be skipped during codec
+ * resolution. This is the semantic equivalent of the {@code transient} modifier.
+ *
+ * <p>Skipped fields will not be written to or read from during codec (de)serialization, even if
+ * they appear in the input data.
+ *
+ * <p>Note that non-{@code public}, {@code static}, or {@code final} fields will be skipped
+ * regardless, so it is redundant to apply this annotation to them.
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

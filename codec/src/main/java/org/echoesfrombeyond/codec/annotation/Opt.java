@@ -16,11 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codec;
+package org.echoesfrombeyond.codec.annotation;
 
+import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.KeyedCodec;
 import java.lang.annotation.*;
 
-@Target(ElementType.TYPE)
+/**
+ * Specifies that the target field may be null. This is the same as invoking the constructor {@link
+ * KeyedCodec#KeyedCodec(String, Codec, boolean)} with {@code required} set to {@code false}.
+ *
+ * <p>By default, all fields are required.
+ */
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ModelBuilder {}
+public @interface Opt {}

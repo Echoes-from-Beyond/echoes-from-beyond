@@ -28,6 +28,7 @@ import com.hypixel.hytale.codec.schema.config.Schema;
 import com.hypixel.hytale.codec.util.RawJsonReader;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.function.Supplier;
 import org.bson.BsonArray;
 import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
@@ -37,20 +38,19 @@ import org.jspecify.annotations.Nullable;
 class ContainerCodec<Element extends @Nullable Object, Container extends Collection<Element>>
     implements Codec<Container>, WrappedCodec<Element> {
   private final Codec<Element> elementCodec;
-  private final ImplementationProvider.Spec<Container> spec;
+  private final Supplier<Container> containerSupplier;
 
-  ContainerCodec(Codec<Element> elementCodec, ImplementationProvider.Spec<Container> spec) {
+  ContainerCodec(Codec<Element> elementCodec, Supplier<Container> containerSupplier) {
     this.elementCodec = elementCodec;
-    this.spec = spec;
+    this.containerSupplier = containerSupplier;
   }
 
   @Override
   public @Nullable Container decode(BsonValue bsonValue, ExtraInfo extraInfo) {
     var list = bsonValue.asArray();
-    if (list.isEmpty())
-      return spec.immutable() == null ? spec.creator().get() : spec.immutable().emptyImmutable();
+    if (list.isEmpty()) return containerSupplier.get();
 
-    var out = spec.creator().get();
+    var out = containerSupplier.get();
     for (int i = 0; i < list.size(); ++i) {
       var value = list.get(i);
       extraInfo.pushIntKey(i);
@@ -64,7 +64,7 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
       }
     }
 
-    return spec.immutable() == null ? out : spec.immutable().makeImmutable().apply(out);
+    return out;
   }
 
   @Override
@@ -72,10 +72,10 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
       throws IOException {
     reader.expect('[');
     reader.consumeWhiteSpace();
-    if (reader.tryConsume(']')) return spec.creator().get();
+    if (reader.tryConsume(']')) return containerSupplier.get();
 
     var i = 0;
-    var out = spec.creator().get();
+    var out = containerSupplier.get();
 
     while (true) {
       extraInfo.pushIntKey(i, reader);

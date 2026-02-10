@@ -29,6 +29,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.Map;
+import org.echoesfrombeyond.codec.annotation.*;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -124,7 +125,7 @@ public final class CodecUtil {
       if (resolve == null)
         throw new IllegalArgumentException("Could not resolve codec for field " + field);
 
-      var key = new KeyedCodec<>(name, resolve, field.isAnnotationPresent(Required.class));
+      var key = new KeyedCodec<>(name, resolve, !field.isAnnotationPresent(Opt.class));
 
       MethodHandle read;
       MethodHandle write;

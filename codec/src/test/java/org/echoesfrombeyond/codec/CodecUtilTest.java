@@ -29,8 +29,9 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import org.echoesfrombeyond.codec.annotation.ModelBuilder;
+import org.echoesfrombeyond.codec.annotation.Skip;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
@@ -62,12 +63,6 @@ class CodecUtilTest {
   @NullUnmarked
   public static class SimpleCollection {
     public List<String> StringList;
-  }
-
-  @ModelBuilder
-  @NullUnmarked
-  public static class SimpleImmutableCollection {
-    @Immutable public List<String> StringList;
   }
 
   @ModelBuilder
@@ -230,10 +225,8 @@ class CodecUtilTest {
             SimpleCollection.class,
             CodecResolver.builder()
                 .chain(CodecUtil.PRIMITIVE_RESOLVER)
-                .withCollectionSupport(
-                    ImplementationProvider.<Collection<?>>builder()
-                        .withAbstractMapping(List.class, ArrayList.class)
-                        .build())
+                .withCollectionSupport()
+                .withSubtypeMapping(List.class, ArrayList.class)
                 .build());
 
     var actual = new SimpleCollection();
@@ -250,38 +243,6 @@ class CodecUtilTest {
 
     // ensure the list is mutable
     decoded.StringList.add("!");
-  }
-
-  @Test
-  public void simpleImmutableCollectionResolution() {
-    var builderCodec =
-        CodecUtil.modelBuilder(
-            SimpleImmutableCollection.class,
-            CodecResolver.builder()
-                .chain(CodecUtil.PRIMITIVE_RESOLVER)
-                .withCollectionSupport(
-                    ImplementationProvider.<Collection<?>>builder()
-                        .withAbstractMapping(List.class, ArrayList.class)
-                        .withImmutable(
-                            new ImplementationProvider.Spec.Immutable<>(
-                                List.class, List::copyOf, List.of()))
-                        .build())
-                .build());
-
-    var actual = new SimpleImmutableCollection();
-    actual.StringList = new ArrayList<>();
-    actual.StringList.add("Hello");
-    actual.StringList.add("World");
-
-    var expected = new SimpleImmutableCollection();
-    expected.StringList = new ArrayList<>();
-    expected.StringList.add("Hello");
-    expected.StringList.add("World");
-
-    var decoded = assertRoundTripEquals(actual, expected, builderCodec);
-
-    // ensure the list is immutable
-    assertThrows(UnsupportedOperationException.class, () -> decoded.StringList.add("!"));
   }
 
   @Test

@@ -18,9 +18,7 @@
 
 package org.echoesfrombeyond.util.type;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
+import java.lang.reflect.*;
 import java.util.*;
 import org.echoesfrombeyond.util.iterable.IterableUtil;
 import org.jspecify.annotations.NullMarked;
@@ -29,6 +27,26 @@ import org.jspecify.annotations.Nullable;
 /** Utilities relating to reflection and types. */
 @NullMarked
 public final class TypeUtil {
+  public static @Nullable Type getArrayComponentType(Type type) {
+    return switch (type) {
+      case Class<?> cls -> cls.isArray() ? cls.getComponentType() : null;
+      case GenericArrayType generic -> generic.getGenericComponentType();
+      default -> null;
+    };
+  }
+
+  @SuppressWarnings("SwitchStatementWithTooFewBranches")
+  public static Type replaceRawType(Type type, Class<?> raw) {
+    return switch (type) {
+      case ParameterizedType parameterizedType -> {
+        if (parameterizedType.getRawType().equals(raw)) yield type;
+        yield new ParameterizedTypeImpl(
+            parameterizedType.getOwnerType(), raw, parameterizedType.getActualTypeArguments());
+      }
+      default -> type;
+    };
+  }
+
   /**
    * Compute the distance between a base class and superclass.
    *
@@ -129,15 +147,23 @@ public final class TypeUtil {
 
   /**
    * If {@code type} is {@link ParameterizedType}, returns the raw type. If {@code type} is {@link
-   * Class}, returns {@code type} after casting. In all other cases, returns {@code null}.
+   * Class}, returns {@code type} after casting.
+   *
+   * <p>If {@code type} is {@link GenericArrayType}, attempts to recursively resolve the raw type of
+   * the generic component type, then returns the array type of that raw type (if it exists).
    *
    * @param type the type object
-   * @return the raw type, or {@code null} if {@code type} is not a Class or ParameterizedType
+   * @return the raw type, or {@code null} if {@code type} is not a Class, ParameterizedType, or
+   *     GenericArrayType whose component is the same
    */
   public static @Nullable Class<?> getRawType(Type type) {
     return switch (type) {
       case Class<?> cls -> cls;
       case ParameterizedType pt -> (Class<?>) pt.getRawType();
+      case GenericArrayType generic -> {
+        var next = getRawType(generic.getGenericComponentType());
+        yield next == null ? null : next.arrayType();
+      }
       default -> null;
     };
   }

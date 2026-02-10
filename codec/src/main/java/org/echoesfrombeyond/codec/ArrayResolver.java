@@ -38,16 +38,16 @@ class ArrayResolver implements CodecResolver {
   @Override
   @SuppressWarnings("unchecked")
   public @Nullable Codec<?> resolve(Type type, Field field) {
-    var raw = TypeUtil.getRawType(type);
-    if (raw == null || !raw.isArray()) return null;
-
-    var componentType = raw.getComponentType();
-    assert componentType != null;
+    var componentType = TypeUtil.getArrayComponentType(type);
+    if (componentType == null) return null;
 
     var componentCodec = (Codec<Object>) root.resolve(componentType, field);
     if (componentCodec == null) return null;
 
+    var rawComponentType = TypeUtil.getRawType(componentType);
+    if (rawComponentType == null) return null;
+
     return new ArrayCodec<>(
-        componentCodec, len -> (Object[]) Array.newInstance(componentType, len));
+        componentCodec, len -> (Object[]) Array.newInstance(rawComponentType, len));
   }
 }

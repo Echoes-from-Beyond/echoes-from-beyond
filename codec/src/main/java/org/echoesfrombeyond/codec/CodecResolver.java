@@ -21,11 +21,15 @@ package org.echoesfrombeyond.codec;
 import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Given a {@link Type} and a {@link Field}, attempts to resolve a {@link Codec} capable of
+ * serializing values contained in the field, as well as deserializing data that may be written to
+ * the field.
+ */
 @NullMarked
 @FunctionalInterface
 public interface CodecResolver {
@@ -34,13 +38,15 @@ public interface CodecResolver {
   sealed interface Builder permits BuilderImpl {
     Builder chain(CodecResolver resolver);
 
-    Builder withCollectionSupport(ImplementationProvider<Collection<?>> implementationProvider);
+    <T> Builder withSubtypeMapping(Class<T> baseClass, Class<? extends T> subClass);
 
     Builder withRecursiveResolution();
 
-    Builder withRecursiveResolution(CodecCache cache);
+    Builder withRecursiveResolution(@Nullable CodecCache cache);
 
     Builder withArraySupport();
+
+    Builder withCollectionSupport();
 
     CodecResolver build();
   }
@@ -50,12 +56,17 @@ public interface CodecResolver {
   }
 
   final class BuilderImpl implements Builder {
-    private ArrayList<CodecResolver> resolvers;
-    private CodecResolver result;
+    private final List<CodecResolver> resolvers;
+    private final Map<Class<?>, Class<?>> subtypeMap;
+
+    private boolean recursiveResolution;
+    private @Nullable CodecCache recursiveResolutionCache;
+    private boolean arraySupport;
+    private boolean collectionSupport;
 
     private BuilderImpl() {
       this.resolvers = new ArrayList<>();
-      this.result = new ChainedResolver(this.resolvers);
+      this.subtypeMap = new HashMap<>();
     }
 
     @Override
@@ -65,41 +76,61 @@ public interface CodecResolver {
     }
 
     @Override
-    public Builder withCollectionSupport(
-        ImplementationProvider<Collection<?>> implementationProvider) {
-      resolvers.add(new CollectionResolver(result, implementationProvider));
+    public <T> Builder withSubtypeMapping(Class<T> baseClass, Class<? extends T> subClass) {
+      if (!baseClass.isAssignableFrom(subClass))
+        throw new IllegalArgumentException(
+            subClass.getName() + " does not extend " + baseClass.getName());
+
+      if (baseClass.equals(subClass))
+        throw new IllegalArgumentException(
+            "Superclass " + baseClass.getName() + " cannot be equal to subclass");
+
+      subtypeMap.put(baseClass, subClass);
       return this;
     }
 
     @Override
     public Builder withRecursiveResolution() {
-      resolvers.add(new RecursiveResolver(result, null));
+      recursiveResolution = true;
       return this;
     }
 
     @Override
-    public Builder withRecursiveResolution(CodecCache cache) {
-      resolvers.add(new RecursiveResolver(result, cache));
+    public Builder withRecursiveResolution(@Nullable CodecCache cache) {
+      recursiveResolution = true;
+      recursiveResolutionCache = cache;
       return this;
     }
 
     @Override
     public Builder withArraySupport() {
-      resolvers.add(new ArrayResolver(result));
+      arraySupport = true;
+      return this;
+    }
+
+    @Override
+    public Builder withCollectionSupport() {
+      collectionSupport = true;
       return this;
     }
 
     @Override
     public CodecResolver build() {
-      var resolvers = this.resolvers;
-      var result = this.result;
+      var resolversCopy = new ArrayList<>(resolvers);
+      var chained = new ChainedResolver(resolversCopy);
 
-      resolvers.trimToSize();
+      if (!subtypeMap.isEmpty()) {
+        var map = new HashClassHierarchyMap<Class<?>>();
+        for (var entry : subtypeMap.entrySet()) map.put(entry.getKey(), entry.getValue());
+        resolversCopy.add(new SubtypeResolver(chained, map));
+      }
+      if (arraySupport) resolversCopy.add(new ArrayResolver(chained));
+      if (collectionSupport) resolversCopy.add(new CollectionResolver(chained));
+      if (recursiveResolution)
+        resolversCopy.add(new RecursiveResolver(chained, recursiveResolutionCache));
 
-      this.resolvers = new ArrayList<>(resolvers);
-      this.result = new ChainedResolver(this.resolvers);
-
-      return result;
+      resolversCopy.trimToSize();
+      return chained;
     }
   }
 }

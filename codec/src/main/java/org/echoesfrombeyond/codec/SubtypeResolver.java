@@ -21,28 +21,28 @@ package org.echoesfrombeyond.codec;
 import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import org.echoesfrombeyond.codec.annotation.ModelBuilder;
 import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-class RecursiveResolver implements CodecResolver {
+class SubtypeResolver implements CodecResolver {
   private final CodecResolver root;
-  private final @Nullable CodecCache cache;
+  private final ClassHierarchyMap<Class<?>> subtypeMap;
 
-  RecursiveResolver(CodecResolver root, @Nullable CodecCache cache) {
+  SubtypeResolver(CodecResolver root, ClassHierarchyMap<Class<?>> subtypeMap) {
     this.root = root;
-    this.cache = cache;
+    this.subtypeMap = subtypeMap;
   }
 
   @Override
   public @Nullable Codec<?> resolve(Type type, Field field) {
     var raw = TypeUtil.getRawType(type);
-    if (raw == null || !raw.isAnnotationPresent(ModelBuilder.class)) return null;
+    if (raw == null) return null;
 
-    return cache == null
-        ? CodecUtil.modelBuilder(raw, root)
-        : CodecUtil.modelBuilder(raw, root, cache);
+    var subtype = subtypeMap.getSubclass(raw, ClassHierarchyMap.Find.CLOSEST);
+    if (subtype == null) return null;
+
+    return root.resolve(TypeUtil.replaceRawType(type, subtype), field);
   }
 }

@@ -19,7 +19,12 @@
 package org.echoesfrombeyond.codec;
 
 import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.exception.CodecException;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.Collection;
@@ -34,31 +39,43 @@ class CollectionResolver implements CodecResolver {
   }
 
   private final CodecResolver root;
-  private final ImplementationProvider<Collection<?>> implementationProvider;
 
-  CollectionResolver(CodecResolver root, ImplementationProvider<Collection<?>> collectionProvider) {
+  CollectionResolver(CodecResolver root) {
     this.root = root;
-    this.implementationProvider = collectionProvider;
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public @Nullable Codec<?> resolve(Type type, Field field) {
     var raw = TypeUtil.getRawType(type);
-    if (raw == null || !Collection.class.isAssignableFrom(raw)) return null;
+    if (raw == null
+        || !Collection.class.isAssignableFrom(raw)
+        || Modifier.isAbstract(raw.getModifiers())) return null;
 
     var params = TypeUtil.resolveSupertypeParameters(type, Collection.class);
     assert params != null;
 
     var elementType = params.get(Vars.ELEMENT_TYPE);
-    assert elementType != null;
+    if (elementType == null) return null;
 
     var elementCodec = root.resolve(elementType, field);
     if (elementCodec == null) return null;
 
+    MethodHandle ctor;
+    try {
+      ctor = MethodHandles.publicLookup().findConstructor(raw, MethodType.methodType(void.class));
+    } catch (NoSuchMethodException | IllegalAccessException e) {
+      return null;
+    }
+
     return new ContainerCodec<>(
         (Codec<Object>) elementCodec,
-        (ImplementationProvider.Spec<Collection<Object>>)
-            implementationProvider.forType(raw, field));
+        () -> {
+          try {
+            return (Collection<Object>) ctor.invoke();
+          } catch (Throwable e) {
+            throw new CodecException("Problem invoking collection constructor", e);
+          }
+        });
   }
 }

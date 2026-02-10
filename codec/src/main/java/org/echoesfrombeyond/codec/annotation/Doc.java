@@ -16,11 +16,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codec;
+package org.echoesfrombeyond.codec.annotation;
 
+import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.codec.builder.BuilderField;
 import java.lang.annotation.*;
+import org.jspecify.annotations.NonNull;
 
-@Target(ElementType.FIELD)
+/**
+ * Adds documentation to the type or field. This is equivalent to calling {@link
+ * BuilderField.FieldBuilder#documentation(String)} (if applied to a field) or {@link
+ * BuilderCodec.Builder#documentation(String)} (if applied to a type).
+ */
+@Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Immutable {}
+public @interface Doc {
+  /**
+   * @return the documentation string
+   */
+  @NonNull String value();
+}

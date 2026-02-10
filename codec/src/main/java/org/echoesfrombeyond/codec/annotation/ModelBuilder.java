@@ -16,13 +16,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codec;
+package org.echoesfrombeyond.codec.annotation;
 
+import com.hypixel.hytale.codec.Codec;
 import java.lang.annotation.*;
+import org.echoesfrombeyond.codec.CodecResolver;
+import org.echoesfrombeyond.codec.CodecUtil;
 
-@Target({ElementType.FIELD, ElementType.TYPE})
+/**
+ * Marker annotation applied to a class that indicates it supports automatic {@link Codec}
+ * generation using {@link CodecUtil#modelBuilder(Class, CodecResolver)}.
+ */
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Doc {
-  String value();
-}
+public @interface ModelBuilder {}
