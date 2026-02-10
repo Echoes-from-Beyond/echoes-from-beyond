@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codec;
+package org.echoesfrombeyond.util.type;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,8 +40,10 @@ class HashClassHierarchyMapTest {
     var map = new HashClassHierarchyMap<String>();
     map.put(Z.class, "Z");
 
-    var first = map.getSubclass(Z.class, ClassHierarchyMap.Find.EXACT);
-    var second = map.getSuperclass(Z.class, ClassHierarchyMap.Find.EXACT);
+    var first =
+        map.getSubclass(Z.class, org.echoesfrombeyond.util.type.ClassHierarchyMap.Find.EXACT);
+    var second =
+        map.getSuperclass(Z.class, org.echoesfrombeyond.util.type.ClassHierarchyMap.Find.EXACT);
 
     assertEquals("Z", first);
     assertEquals("Z", second);
@@ -53,7 +55,8 @@ class HashClassHierarchyMapTest {
     map.put(B.class, "B");
     map.put(C.class, "C");
 
-    var closest = map.getSubclass(A.class, ClassHierarchyMap.Find.CLOSEST);
+    var closest =
+        map.getSubclass(A.class, org.echoesfrombeyond.util.type.ClassHierarchyMap.Find.CLOSEST);
     assertEquals("B", closest);
   }
 
@@ -63,7 +66,8 @@ class HashClassHierarchyMapTest {
     map.put(B.class, "B");
     map.put(C.class, "C");
 
-    var furthest = map.getSubclass(A.class, ClassHierarchyMap.Find.FURTHEST);
+    var furthest =
+        map.getSubclass(A.class, org.echoesfrombeyond.util.type.ClassHierarchyMap.Find.FURTHEST);
     assertEquals("C", furthest);
   }
 
@@ -73,7 +77,8 @@ class HashClassHierarchyMapTest {
     map.put(A.class, "A");
     map.put(B.class, "B");
 
-    var furthest = map.getSuperclass(C.class, ClassHierarchyMap.Find.FURTHEST);
+    var furthest =
+        map.getSuperclass(C.class, org.echoesfrombeyond.util.type.ClassHierarchyMap.Find.FURTHEST);
     assertEquals("A", furthest);
   }
 
@@ -83,7 +88,8 @@ class HashClassHierarchyMapTest {
     map.put(A.class, "A");
     map.put(B.class, "B");
 
-    var closest = map.getSuperclass(C.class, ClassHierarchyMap.Find.CLOSEST);
+    var closest =
+        map.getSuperclass(C.class, org.echoesfrombeyond.util.type.ClassHierarchyMap.Find.CLOSEST);
     assertEquals("B", closest);
   }
 

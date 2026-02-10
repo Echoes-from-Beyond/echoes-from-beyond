@@ -28,9 +28,10 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 class SubtypeResolver implements CodecResolver {
   private final CodecResolver root;
-  private final ClassHierarchyMap<Class<?>> subtypeMap;
+  private final org.echoesfrombeyond.util.type.ClassHierarchyMap<Class<?>> subtypeMap;
 
-  SubtypeResolver(CodecResolver root, ClassHierarchyMap<Class<?>> subtypeMap) {
+  SubtypeResolver(
+      CodecResolver root, org.echoesfrombeyond.util.type.ClassHierarchyMap<Class<?>> subtypeMap) {
     this.root = root;
     this.subtypeMap = subtypeMap;
   }
@@ -40,7 +41,8 @@ class SubtypeResolver implements CodecResolver {
     var raw = TypeUtil.getRawType(type);
     if (raw == null) return null;
 
-    var subtype = subtypeMap.getSubclass(raw, ClassHierarchyMap.Find.CLOSEST);
+    var subtype =
+        subtypeMap.getSubclass(raw, org.echoesfrombeyond.util.type.ClassHierarchyMap.Find.CLOSEST);
     if (subtype == null) return null;
 
     return root.resolve(TypeUtil.replaceRawType(type, subtype), field);

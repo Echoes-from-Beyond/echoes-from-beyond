@@ -16,12 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codec;
+package org.echoesfrombeyond.util.type;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.echoesfrombeyond.util.Check;
-import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

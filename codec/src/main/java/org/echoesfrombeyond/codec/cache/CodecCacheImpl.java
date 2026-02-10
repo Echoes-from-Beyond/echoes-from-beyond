@@ -16,13 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codec;
+package org.echoesfrombeyond.codec.cache;
 
 import com.hypixel.hytale.codec.Codec;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Supplier;
+import org.echoesfrombeyond.codec.CodecResolver;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

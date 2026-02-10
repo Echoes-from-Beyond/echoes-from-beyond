@@ -22,6 +22,8 @@ import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.*;
+import org.echoesfrombeyond.codec.cache.CodecCache;
+import org.echoesfrombeyond.util.type.HashClassHierarchyMap;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

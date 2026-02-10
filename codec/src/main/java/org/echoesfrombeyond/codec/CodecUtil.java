@@ -30,6 +30,7 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.Map;
 import org.echoesfrombeyond.codec.annotation.*;
+import org.echoesfrombeyond.codec.cache.CodecCache;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

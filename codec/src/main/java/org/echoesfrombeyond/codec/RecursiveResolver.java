@@ -22,6 +22,7 @@ import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import org.echoesfrombeyond.codec.annotation.ModelBuilder;
+import org.echoesfrombeyond.codec.cache.CodecCache;
 import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

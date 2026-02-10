@@ -16,26 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codec;
+package org.echoesfrombeyond.codec.cache;
 
-import org.jetbrains.annotations.Contract;
+import com.hypixel.hytale.codec.Codec;
+import java.util.function.Supplier;
+import org.echoesfrombeyond.codec.CodecResolver;
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
 
 @NullMarked
-public sealed interface ClassHierarchyMap<V> permits HashClassHierarchyMap {
-  enum Find {
-    CLOSEST,
-    FURTHEST,
-    EXACT
+public sealed interface CodecCache permits CodecCacheImpl {
+  <V, C extends Codec<V>> C compute(
+      Class<V> model, CodecResolver resolver, Supplier<C> resolveCodec);
+
+  static CodecCache cache() {
+    return new CodecCacheImpl();
   }
-
-  @Nullable V getSuperclass(Class<?> baseClass, Find find);
-
-  @Nullable V getSubclass(Class<?> superClass, Find find);
-
-  @Contract("_, null -> fail")
-  @Nullable V put(Class<?> key, V value);
-
-  @Nullable V remove(Class<?> key);
 }
