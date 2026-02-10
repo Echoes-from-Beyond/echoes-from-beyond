@@ -34,6 +34,8 @@ class ArrayResolver implements CodecResolver {
   private static final Map<Class<?>, Codec<?>> PRIMITIVE_ARRAY_CODECS =
       Map.ofEntries(
           Map.entry(boolean.class, CodecUtil.BOOLEAN_ARRAY_CODEC),
+          Map.entry(byte.class, CodecUtil.BYTE_ARRAY_CODEC),
+          Map.entry(short.class, CodecUtil.SHORT_ARRAY_CODEC),
           Map.entry(int.class, Codec.INT_ARRAY),
           Map.entry(float.class, Codec.FLOAT_ARRAY),
           Map.entry(long.class, Codec.LONG_ARRAY),

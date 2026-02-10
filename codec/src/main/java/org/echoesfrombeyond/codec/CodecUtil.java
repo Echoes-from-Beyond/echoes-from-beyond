@@ -36,6 +36,8 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class CodecUtil {
   public static final Codec<boolean[]> BOOLEAN_ARRAY_CODEC = new BooleanArrayCodec();
+  public static final Codec<byte[]> BYTE_ARRAY_CODEC = new ByteArrayCodec();
+  public static final Codec<short[]> SHORT_ARRAY_CODEC = new ShortArrayCodec();
 
   public static final CodecResolver PRIMITIVE_RESOLVER =
       new CodecResolver() {
