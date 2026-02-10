@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Supplier;
 import org.echoesfrombeyond.codec.CodecResolver;
+import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -81,7 +82,7 @@ final class CodecCacheImpl implements CodecCache {
       cached = cache.get(key);
       if (cached != null) return (C) cached;
 
-      var computed = resolveCodec.get();
+      var computed = Check.nonNull(resolveCodec.get());
       cache.put(key, computed);
       return computed;
     } finally {

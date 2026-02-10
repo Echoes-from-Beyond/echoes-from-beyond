@@ -54,6 +54,8 @@ public sealed interface CodecCache permits CodecCacheImpl {
    * @return the cached or freshly-resolved codec
    * @param <V> the type (de)serialized by the codec
    * @param <C> the codec type
+   * @throws NullPointerException if there is a cache miss and {@code resolveCodec} yields a null
+   *     value
    */
   <V, C extends Codec<V>> C compute(
       Class<V> model, CodecResolver resolver, Supplier<C> resolveCodec);

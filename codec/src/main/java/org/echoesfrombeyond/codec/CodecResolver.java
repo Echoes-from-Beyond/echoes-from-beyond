@@ -23,6 +23,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.*;
 import org.echoesfrombeyond.codec.cache.CodecCache;
+import org.echoesfrombeyond.util.Check;
 import org.echoesfrombeyond.util.type.HashClassHierarchyMap;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -73,7 +74,7 @@ public interface CodecResolver {
 
     @Override
     public Builder chain(CodecResolver resolver) {
-      resolvers.add(resolver);
+      resolvers.add(Check.nonNull(resolver));
       return this;
     }
 
