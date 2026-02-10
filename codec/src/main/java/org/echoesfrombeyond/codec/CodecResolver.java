@@ -23,7 +23,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -41,6 +40,8 @@ public interface CodecResolver {
 
     Builder withRecursiveResolution(CodecCache cache);
 
+    Builder withArraySupport();
+
     CodecResolver build();
   }
 
@@ -49,7 +50,7 @@ public interface CodecResolver {
   }
 
   final class BuilderImpl implements Builder {
-    private List<CodecResolver> resolvers;
+    private ArrayList<CodecResolver> resolvers;
     private CodecResolver result;
 
     private BuilderImpl() {
@@ -83,9 +84,17 @@ public interface CodecResolver {
     }
 
     @Override
+    public Builder withArraySupport() {
+      resolvers.add(new ArrayResolver(result));
+      return this;
+    }
+
+    @Override
     public CodecResolver build() {
       var resolvers = this.resolvers;
       var result = this.result;
+
+      resolvers.trimToSize();
 
       this.resolvers = new ArrayList<>(resolvers);
       this.result = new ChainedResolver(this.resolvers);

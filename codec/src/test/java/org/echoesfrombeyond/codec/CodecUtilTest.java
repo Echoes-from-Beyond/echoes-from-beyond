@@ -22,6 +22,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.ExtraInfo;
+import com.hypixel.hytale.codec.RawJsonCodec;
+import com.hypixel.hytale.codec.util.RawJsonReader;
+import java.io.CharArrayReader;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -65,16 +70,69 @@ class CodecUtilTest {
     @Immutable public List<String> StringList;
   }
 
-  private <T> void assertFieldsEqual(@Nullable T expected, @Nullable T actual) {
+  @ModelBuilder
+  @NullUnmarked
+  public static class PrimitiveArrays {
+    public boolean[] Booleans;
+    public int[] Ints;
+    public float[] Floats;
+    public double[] Doubles;
+    public long[] Longs;
+    public String[] String;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  public static class NestedArrays {
+    public int[][] MultidimensionalIntArray;
+    public Simple[] SubtypeArray;
+  }
+
+  private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
     if (expected == null && actual == null) return;
     if (expected == null ^ actual == null) {
       if (expected == null) fail("expected was null while actual was non-null");
       else fail("expected was non-null while actual was null");
     }
 
-    var fields = expected.getClass().getDeclaredFields();
+    var expectedClass = expected.getClass();
+    var actualClass = actual.getClass();
 
-    for (var field : fields) {
+    if (expectedClass.isArray() && actualClass.isArray()) {
+      var expectedComponent = expectedClass.getComponentType();
+      var actualComponent = actualClass.getComponentType();
+
+      if (!expectedComponent.equals(actualComponent))
+        fail(
+            "expected component type was "
+                + expectedComponent.getName()
+                + ", actual was "
+                + actualComponent.getName());
+
+      var expectedLen = Array.getLength(expected);
+      var actualLen = Array.getLength(actual);
+
+      assertEquals(expectedLen, actualLen, "actual length differed from expected length");
+
+      for (int i = 0; i < expectedLen; i++)
+        assertDeepEquals(Array.get(expected, i), Array.get(actual, i));
+      return;
+    }
+
+    if (!expectedClass.isAnnotationPresent(ModelBuilder.class)
+        || !actualClass.isAnnotationPresent(ModelBuilder.class)) {
+      assertEquals(expected, actual);
+      return;
+    }
+
+    if (!expectedClass.equals(actualClass))
+      fail(
+          "expected ModelBuilder class was "
+              + expectedClass.getName()
+              + ", actual ModelBuilder class was "
+              + actualClass.getName());
+
+    for (var field : expectedClass.getDeclaredFields()) {
       int modifiers = field.getModifiers();
       if (field.isAnnotationPresent(Skip.class)
           || Modifier.isFinal(modifiers)
@@ -82,45 +140,33 @@ class CodecUtilTest {
           || Modifier.isStatic(modifiers)) continue;
 
       try {
-        var expectedValue = field.get(expected);
-        var actualValue = field.get(actual);
-
-        if (expectedValue == actualValue) continue;
-
-        if (expectedValue == null ^ actualValue == null) {
-          if (expectedValue == null) fail(field + " (expected) was null");
-          else fail(field + " (actual) was null");
-        }
-
-        var expectedClass = expectedValue.getClass();
-        var actualClass = actualValue.getClass();
-
-        if (!expectedClass.isAnnotationPresent(ModelBuilder.class))
-          assertEquals(expectedValue, actualValue);
-        else {
-          if (!expectedClass.equals(actualClass))
-            fail(
-                field
-                    + " (expected) type was "
-                    + expectedClass.getName()
-                    + ", actual was "
-                    + actualClass.getName());
-
-          assertFieldsEqual(expectedValue, actualValue);
-        }
+        assertDeepEquals(field.get(expected), field.get(actual));
       } catch (IllegalAccessException e) {
         fail(e);
       }
     }
   }
 
-  private <T extends @Nullable Object> T assertRoundTripEquals(T data, T expected, Codec<T> codec) {
+  private <T extends @Nullable Object, C extends Codec<T> & RawJsonCodec<T>>
+      T assertRoundTripEquals(T data, T expected, C codec) {
     var encoded = codec.encode(data, new ExtraInfo());
     var decoded = codec.decode(encoded, new ExtraInfo());
 
-    assertFieldsEqual(data, decoded);
-    assertFieldsEqual(expected, decoded);
+    assertDeepEquals(data, decoded);
+    assertDeepEquals(expected, decoded);
 
+    var rawJsonReader =
+        new RawJsonReader(
+            new CharArrayReader(encoded.asDocument().toJson().toCharArray()), new char[4096]);
+
+    T rawDecoded = null;
+    try {
+      rawDecoded = codec.decodeJson(rawJsonReader, new ExtraInfo());
+    } catch (IOException e) {
+      fail(e);
+    }
+
+    assertDeepEquals(data, rawDecoded);
     return decoded;
   }
 
@@ -234,7 +280,59 @@ class CodecUtilTest {
 
     var decoded = assertRoundTripEquals(actual, expected, builderCodec);
 
-    // ensure the list is mutable
+    // ensure the list is immutable
     assertThrows(UnsupportedOperationException.class, () -> decoded.StringList.add("!"));
+  }
+
+  @Test
+  public void primitiveArraysResolution() {
+    var builderCodec =
+        CodecUtil.modelBuilder(
+            PrimitiveArrays.class,
+            CodecResolver.builder().chain(CodecUtil.PRIMITIVE_RESOLVER).build());
+
+    var actual = new PrimitiveArrays();
+    actual.Booleans = new boolean[] {true, false};
+    actual.Ints = new int[] {0, 10, 67, Integer.MAX_VALUE, Integer.MIN_VALUE};
+    actual.Floats = new float[] {0.0F, 0.5F, 50F};
+    actual.Longs = new long[] {Long.MAX_VALUE, Long.MIN_VALUE};
+    actual.Doubles = new double[] {-67, 1000.5};
+    actual.String = new String[] {"Hello", "World", "!"};
+
+    var expected = new PrimitiveArrays();
+    expected.Booleans = new boolean[] {true, false};
+    expected.Ints = new int[] {0, 10, 67, Integer.MAX_VALUE, Integer.MIN_VALUE};
+    expected.Floats = new float[] {0.0F, 0.5F, 50F};
+    expected.Longs = new long[] {Long.MAX_VALUE, Long.MIN_VALUE};
+    expected.Doubles = new double[] {-67, 1000.5};
+    expected.String = new String[] {"Hello", "World", "!"};
+
+    assertRoundTripEquals(actual, expected, builderCodec);
+  }
+
+  @Test
+  public void nestedArrayResolution() {
+    var builderCodec =
+        CodecUtil.modelBuilder(
+            NestedArrays.class,
+            CodecResolver.builder()
+                .chain(CodecUtil.PRIMITIVE_RESOLVER)
+                .withArraySupport()
+                .withRecursiveResolution()
+                .build());
+
+    var actual = new NestedArrays();
+    actual.MultidimensionalIntArray = new int[][] {new int[] {0, 1, 2}, new int[] {3, 4, 5}};
+    actual.SubtypeArray = new Simple[] {new Simple(), new Simple()};
+    actual.SubtypeArray[0].Value = 67;
+    actual.SubtypeArray[1].Value = 42;
+
+    var expected = new NestedArrays();
+    expected.MultidimensionalIntArray = new int[][] {new int[] {0, 1, 2}, new int[] {3, 4, 5}};
+    expected.SubtypeArray = new Simple[] {new Simple(), new Simple()};
+    expected.SubtypeArray[0].Value = 67;
+    expected.SubtypeArray[1].Value = 42;
+
+    assertRoundTripEquals(actual, expected, builderCodec);
   }
 }

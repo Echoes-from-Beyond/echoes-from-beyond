@@ -72,6 +72,9 @@ final class CodecCacheImpl implements CodecCache {
       readLocked = false;
       write.lock();
 
+      cached = cache.get(key);
+      if (cached != null) return (C) cached;
+
       var computed = resolveCodec.get();
       cache.put(key, computed);
       return computed;
