@@ -21,17 +21,24 @@ package org.echoesfrombeyond.codec;
 import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import org.echoesfrombeyond.util.type.ClassHierarchyMap;
 import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/** Resolves more generic types by attempting to resolve specified subtypes. */
 @NullMarked
 class SubtypeResolver implements CodecResolver {
   private final CodecResolver root;
-  private final org.echoesfrombeyond.util.type.ClassHierarchyMap<Class<?>> subtypeMap;
+  private final ClassHierarchyMap<Class<?>> subtypeMap;
 
-  SubtypeResolver(
-      CodecResolver root, org.echoesfrombeyond.util.type.ClassHierarchyMap<Class<?>> subtypeMap) {
+  /**
+   * Creates a new instance of this class.
+   *
+   * @param root the root resolver
+   * @param subtypeMap map used to determine which subtype should be resolved
+   */
+  SubtypeResolver(CodecResolver root, ClassHierarchyMap<Class<?>> subtypeMap) {
     this.root = root;
     this.subtypeMap = subtypeMap;
   }
@@ -41,8 +48,7 @@ class SubtypeResolver implements CodecResolver {
     var raw = TypeUtil.getRawType(type);
     if (raw == null) return null;
 
-    var subtype =
-        subtypeMap.getSubclass(raw, org.echoesfrombeyond.util.type.ClassHierarchyMap.Find.CLOSEST);
+    var subtype = subtypeMap.getSubclass(raw, ClassHierarchyMap.Find.CLOSEST);
     if (subtype == null) return null;
 
     return root.resolve(TypeUtil.replaceRawType(type, subtype), field);

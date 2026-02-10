@@ -29,6 +29,10 @@ import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Internal implementation supporting resolution of N-dimensional arrays, including primitive
+ * arrays.
+ */
 @NullMarked
 class ArrayResolver implements CodecResolver {
   private static final Map<Class<?>, Codec<?>> PRIMITIVE_ARRAY_CODECS =
@@ -43,6 +47,9 @@ class ArrayResolver implements CodecResolver {
 
   private final CodecResolver root;
 
+  /**
+   * @param root the root resolver, which will be used to resolve the component type codec
+   */
   ArrayResolver(CodecResolver root) {
     this.root = root;
   }

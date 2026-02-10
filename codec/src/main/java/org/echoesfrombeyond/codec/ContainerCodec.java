@@ -34,12 +34,25 @@ import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Generic {@link Codec} for subclasses of {@link Collection}.
+ *
+ * @param <Element> the element type
+ * @param <Container> the collection type
+ * @see CollectionResolver
+ */
 @NullMarked
 class ContainerCodec<Element extends @Nullable Object, Container extends Collection<Element>>
     implements Codec<Container>, WrappedCodec<Element> {
   private final Codec<Element> elementCodec;
   private final Supplier<Container> containerSupplier;
 
+  /**
+   * Creates a new instance of this codec.
+   *
+   * @param elementCodec the codec of the collection element type
+   * @param containerSupplier supplier used to construct the collection
+   */
   ContainerCodec(Codec<Element> elementCodec, Supplier<Container> containerSupplier) {
     this.elementCodec = elementCodec;
     this.containerSupplier = containerSupplier;

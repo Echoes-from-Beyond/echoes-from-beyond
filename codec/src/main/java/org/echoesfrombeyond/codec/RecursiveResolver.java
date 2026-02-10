@@ -27,11 +27,18 @@ import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/** Resolver capable of recursively resolving types annotated with {@link ModelBuilder}. */
 @NullMarked
 class RecursiveResolver implements CodecResolver {
   private final CodecResolver root;
   private final @Nullable CodecCache cache;
 
+  /**
+   * Creates a new instance of this class.
+   *
+   * @param root the root type
+   * @param cache the codec cache to be used for sub-codecs
+   */
   RecursiveResolver(CodecResolver root, @Nullable CodecCache cache) {
     this.root = root;
     this.cache = cache;

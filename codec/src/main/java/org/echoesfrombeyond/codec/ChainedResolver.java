@@ -25,10 +25,21 @@ import java.util.List;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Simple resolver that delegates to a list of sub resolvers, each evaluated in-order. The first
+ * resolver returning a non-null value is returned.
+ */
 @NullMarked
 class ChainedResolver implements CodecResolver {
   private final List<CodecResolver> resolvers;
 
+  /**
+   * Creates a new instance of this class from the provided resolvers list.
+   *
+   * <p>The list is not copied, so changing it will modify the behavior of the resolver.
+   *
+   * @param resolvers the resolvers list
+   */
   ChainedResolver(List<CodecResolver> resolvers) {
     this.resolvers = resolvers;
   }

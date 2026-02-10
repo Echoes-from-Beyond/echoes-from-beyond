@@ -32,6 +32,11 @@ import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Generic resolver supporting subclasses of {@link Collection}.
+ *
+ * @see ContainerCodec
+ */
 @NullMarked
 class CollectionResolver implements CodecResolver {
   private static class Vars {
@@ -40,6 +45,11 @@ class CollectionResolver implements CodecResolver {
 
   private final CodecResolver root;
 
+  /**
+   * Creates a new instance of this class.
+   *
+   * @param root the root resolver, which is used to obtain the component type
+   */
   CollectionResolver(CodecResolver root) {
     this.root = root;
   }

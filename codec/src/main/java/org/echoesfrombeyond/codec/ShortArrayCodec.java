@@ -33,10 +33,12 @@ import org.bson.BsonInt32;
 import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
 
+/** {@link Codec} for an array of primitive short. */
 @NullMarked
 class ShortArrayCodec implements Codec<short[]>, RawJsonCodec<short[]> {
   private static final short[] EMPTY_SHORT_ARRAY = new short[0];
 
+  /** Creates a new instance of this class. */
   ShortArrayCodec() {}
 
   public short[] decode(BsonValue bsonValue, ExtraInfo extraInfo) {

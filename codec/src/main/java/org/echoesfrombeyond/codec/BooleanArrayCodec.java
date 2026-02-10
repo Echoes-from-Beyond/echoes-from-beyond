@@ -33,10 +33,12 @@ import org.bson.BsonBoolean;
 import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
 
+/** {@link Codec} for an array of primitive boolean. */
 @NullMarked
 class BooleanArrayCodec implements Codec<boolean[]>, RawJsonCodec<boolean[]> {
   private static final boolean[] EMPTY_BOOLEAN_ARRAY = new boolean[0];
 
+  /** Creates a new instance of this class. */
   BooleanArrayCodec() {}
 
   public boolean[] decode(BsonValue bsonValue, ExtraInfo extraInfo) {

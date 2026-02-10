@@ -21,6 +21,7 @@ package org.echoesfrombeyond.codec;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.codec.builder.BuilderField;
 import com.hypixel.hytale.codec.exception.CodecException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -29,17 +30,33 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 import org.echoesfrombeyond.codec.annotation.*;
 import org.echoesfrombeyond.codec.cache.CodecCache;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Convenience utilities for working with {@link Codec}. Contains several static Codec
+ * implementations as well as utilities to generate codecs automatically using an annotation-driven
+ * API.
+ */
 @NullMarked
 public final class CodecUtil {
+  /** Primitive {@code boolean} array codec. */
   public static final Codec<boolean[]> BOOLEAN_ARRAY_CODEC = new BooleanArrayCodec();
+
+  /** Primitive {@code byte} array codec. */
   public static final Codec<byte[]> BYTE_ARRAY_CODEC = new ByteArrayCodec();
+
+  /** Primitive {@code short} array codec. */
   public static final Codec<short[]> SHORT_ARRAY_CODEC = new ShortArrayCodec();
 
+  /**
+   * A {@link CodecResolver} capable of resolving all primitive types, their associated wrapper
+   * (boxed) types, as well as {@link String}.
+   */
   public static final CodecResolver PRIMITIVE_RESOLVER =
       new CodecResolver() {
         private static final Map<Class<?>, Codec<?>> PRIMITIVE_CODEC_MAP =
@@ -69,11 +86,55 @@ public final class CodecUtil {
 
   private CodecUtil() {}
 
+  /**
+   * Works the same as {@link CodecUtil#modelBuilder(Class, CodecResolver)}, but uses the provided
+   * {@link CodecCache} to cache generated codecs and prevent unnecessary resolution.
+   *
+   * @param model the model type
+   * @param resolver the resolver
+   * @param cache the cache used to avoid duplicate work
+   * @return a new {@link BuilderCodec}
+   * @param <T> the model type, which must be annotated with {@link ModelBuilder}
+   * @throws IllegalArgumentException if the codec cannot be resolved for any reason
+   */
   public static <T> BuilderCodec<T> modelBuilder(
       Class<T> model, CodecResolver resolver, CodecCache cache) {
     return cache.compute(model, resolver, () -> modelBuilder(model, resolver));
   }
 
+  /**
+   * Generates a {@link BuilderCodec} from an arbitrary user-defined class. The class must be
+   * public, annotated with {@link ModelBuilder}, and it must provide a public parameterless
+   * constructor.
+   *
+   * <p>The declared, public, non-final fields of {@code model} will be examined in order. Those
+   * annotated with {@link Skip} will be ignored. Each eligible field will be used to construct a
+   * {@link KeyedCodec} according to the following guidelines:
+   *
+   * <ol>
+   *   <li>If the field is annotated with {@link Name}, the value of that annotation is passed to
+   *       the {@code key} parameter of the KeyedCodec constructor. Otherwise, the name of the field
+   *       is passed as-is.
+   *   <li>{@link CodecResolver#resolve(Type, Field)} is called with the generic type of the field
+   *       and the field itself.
+   *   <li>If the resolver returned null, throw an {@link IllegalArgumentException}. Otherwise, the
+   *       codec is passed to the {@code codec} parameter of the KeyedCodec constructor.
+   *   <li>The value of the {@code required} parameter is {@code false} if the field is annotated
+   *       with {@link Opt}, and {@code true} otherwise.
+   * </ol>
+   *
+   * <p>The constructed KeyedCodec is passed to {@link BuilderCodec.Builder#append(KeyedCodec,
+   * BiConsumer, Function)}; the {@code setter} and {@code getter} parameters of this constructor
+   * are generated using reflection.
+   *
+   * <p>Finally, if the field is annotated with {@link Doc}, its value is passed to {@link
+   * BuilderField.FieldBuilder#documentation(String)}.
+   *
+   * @param model the model type class
+   * @param resolver the resolver used to generate {@link Codec}s based on the field type
+   * @return the generated BuilderCodec
+   * @param <T> the model type
+   */
   @SuppressWarnings("unchecked")
   public static <T> BuilderCodec<T> modelBuilder(Class<T> model, CodecResolver resolver) {
     if (!model.isAnnotationPresent(ModelBuilder.class))

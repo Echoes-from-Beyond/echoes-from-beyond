@@ -22,9 +22,11 @@ import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.*;
+import org.echoesfrombeyond.codec.annotation.ModelBuilder;
 import org.echoesfrombeyond.codec.cache.CodecCache;
 import org.echoesfrombeyond.util.Check;
 import org.echoesfrombeyond.util.type.HashClassHierarchyMap;
+import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -32,32 +34,136 @@ import org.jspecify.annotations.Nullable;
  * Given a {@link Type} and a {@link Field}, attempts to resolve a {@link Codec} capable of
  * serializing values contained in the field, as well as deserializing data that may be written to
  * the field.
+ *
+ * @see CodecResolver#builder() builder method to compose instances of this interface
+ * @see CodecUtil to use instances of this class to generate custom Codec instances
  */
 @NullMarked
 @FunctionalInterface
 public interface CodecResolver {
+  /**
+   * Resolves a codec, given a {@link Type} (which may contain generic information) and {@link
+   * Field}.
+   *
+   * <p>The type may differ from the field's type. For example, a resolver attempting to resolve a
+   * field of type List&lt;String&gt; may first need to resolve the raw type (List), and then the
+   * component type (String), separately but for the same field.
+   *
+   * @param type the type to resolve
+   * @param field the field
+   * @return {@code null} if this resolver cannot resolve the type; otherwise the resolved {@link
+   *     Codec}
+   */
   @Nullable Codec<?> resolve(Type type, Field field);
 
+  /** Builder of composite {@link CodecResolver}s. */
   sealed interface Builder permits BuilderImpl {
+    /**
+     * Adds a new resolver. This is order-sensitive: resolvers {@code chain}ed last will be
+     * evaluated last. The first resolver whose {@link CodecResolver#resolve(Type, Field)} method
+     * returns a non-null value will determine the result of the composite resolver.
+     *
+     * <p>Pass {@link CodecUtil#PRIMITIVE_RESOLVER} here to enable resolution of basic primitive
+     * types.
+     *
+     * @param resolver the resolver
+     * @return this instance
+     * @throws NullPointerException if {@code resolver} is null
+     */
+    @Contract("_ -> this")
     Builder chain(CodecResolver resolver);
 
+    /**
+     * Adds a subtype mapping.
+     *
+     * <p>When the resulting resolver encounters a field of type {@code baseClass}, it will instead
+     * attempt to resolve a codec for {@code subClass}. This is particularly useful when {@code
+     * baseClass} is an abstract class or interface that cannot be instantiated directly.
+     *
+     * <p>Subclass resolution does not require an exact {@code baseClass} match. For example, if
+     * base class {@link List} is mapped to subclass {@link ArrayList}, instances of {@link
+     * Collection} will match, because List is a sub-interface of Collection.
+     *
+     * <p>However, if there is a mapping from Collection to e.g. {@link HashSet}, the latter will be
+     * used instead. This is because, judging by the inheritance tree, Collection is closer to
+     * itself than it is to List.
+     *
+     * @param baseClass the base class
+     * @param subClass the subclass
+     * @return this instance
+     * @param <T> the base class type
+     */
+    @Contract("_, _ -> this")
     <T> Builder withSubtypeMapping(Class<T> baseClass, Class<? extends T> subClass);
 
+    /**
+     * Enables "recursive resolution", that is, types annotated with {@link ModelBuilder} containing
+     * types that are, themselves, annotated with {@link ModelBuilder}.
+     *
+     * <p>Recursive resolution will not use any {@link CodecCache}.
+     *
+     * @return this instance
+     */
+    @Contract("-> this")
     Builder withRecursiveResolution();
 
-    Builder withRecursiveResolution(@Nullable CodecCache cache);
+    /**
+     * Enables "recursive resolution", that is, types annotated with {@link ModelBuilder} containing
+     * types that are, themselves, annotated with {@link ModelBuilder}.
+     *
+     * <p>Recursive resolution will use the provided cache.
+     *
+     * @param cache the cache to use when resolving recursively
+     * @return this instance
+     */
+    @Contract("_ -> this")
+    Builder withRecursiveResolution(CodecCache cache);
 
+    /**
+     * Enables support for array codec resolution.
+     *
+     * <p>On its own, this will enable all primitive arrays to be resolved, as well as all arrays
+     * whose component type is supported, recursively (i.e. multidimensional arrays are supported).
+     *
+     * @return this instance
+     */
+    @Contract("-> this")
     Builder withArraySupport();
 
+    /**
+     * Enables support for collection resolution.
+     *
+     * <p>Users will typically want to add one or more subtype mappings, as it is conventional to
+     * use abstract types or interfaces for type declarations of collections. For example, call
+     * {@code builder.withSubtypeMapping(List.class, ArrayList.class)} to construct {@link
+     * ArrayList} instances whenever a {@link List} is used as a field type.
+     *
+     * @return this instance
+     */
+    @Contract("-> this")
     Builder withCollectionSupport();
 
+    /**
+     * Builds a new {@link CodecResolver}. This method may be called multiple times to construct
+     * multiple instances of {@link CodecResolver} with the same settings.
+     *
+     * @return a new CodecResolver
+     */
+    @Contract("-> new")
     CodecResolver build();
   }
 
+  /**
+   * Constructs a new {@link Builder}.
+   *
+   * @return a new Builder
+   */
+  @Contract("-> new")
   static Builder builder() {
     return new BuilderImpl();
   }
 
+  /** Internal {@link Builder} implementation. */
   final class BuilderImpl implements Builder {
     private final List<CodecResolver> resolvers;
     private final Map<Class<?>, Class<?>> subtypeMap;
@@ -99,7 +205,7 @@ public interface CodecResolver {
     }
 
     @Override
-    public Builder withRecursiveResolution(@Nullable CodecCache cache) {
+    public Builder withRecursiveResolution(CodecCache cache) {
       recursiveResolution = true;
       recursiveResolutionCache = cache;
       return this;

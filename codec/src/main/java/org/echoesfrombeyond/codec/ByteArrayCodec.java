@@ -33,10 +33,12 @@ import org.bson.BsonInt32;
 import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
 
+/** {@link Codec} for an array of primitive byte. */
 @NullMarked
 class ByteArrayCodec implements Codec<byte[]>, RawJsonCodec<byte[]> {
   private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
 
+  /** Creates a new instance of this class. */
   ByteArrayCodec() {}
 
   public byte[] decode(BsonValue bsonValue, ExtraInfo extraInfo) {
