@@ -29,7 +29,9 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.echoesfrombeyond.codec.annotation.ModelBuilder;
 import org.echoesfrombeyond.codec.annotation.Skip;
 import org.echoesfrombeyond.codec.cache.CodecCache;
@@ -103,6 +105,12 @@ class CodecUtilTest {
   public static class CacheOuter {
     public CacheInner InnerOne;
     public CacheInner InnerTwo;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  public static class StringKeyMap {
+    public Map<String, Integer> StringToIntMap;
   }
 
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
@@ -351,5 +359,29 @@ class CodecUtilTest {
 
     assertSame(firstOuter, secondOuter);
     assertSame(inner, firstInner);
+  }
+
+  @Test
+  public void stringToIntMap() {
+    var resolver =
+        CodecResolver.builder()
+            .chain(CodecUtil.PRIMITIVE_RESOLVER)
+            .withMapSupport()
+            .withSubtypeMapping(Map.class, HashMap.class)
+            .build();
+
+    var codec = CodecUtil.modelBuilder(StringKeyMap.class, resolver);
+
+    var actual = new StringKeyMap();
+    actual.StringToIntMap = new HashMap<>();
+    actual.StringToIntMap.put("Hello", 67);
+    actual.StringToIntMap.put("Goodbye", -67);
+
+    var expected = new StringKeyMap();
+    expected.StringToIntMap = new HashMap<>();
+    expected.StringToIntMap.put("Hello", 67);
+    expected.StringToIntMap.put("Goodbye", -67);
+
+    assertRoundTripEquals(actual, expected, codec);
   }
 }
