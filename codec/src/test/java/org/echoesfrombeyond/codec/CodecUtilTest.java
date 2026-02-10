@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.echoesfrombeyond.codec.annotation.ModelBuilder;
 import org.echoesfrombeyond.codec.annotation.Skip;
+import org.echoesfrombeyond.codec.cache.CodecCache;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
@@ -87,6 +88,21 @@ class CodecUtilTest {
   @NullUnmarked
   public static class SimpleArray {
     public int[] Arrays;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class CacheInner {
+    public int Value;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class CacheOuter {
+    public CacheInner InnerOne;
+    public CacheInner InnerTwo;
   }
 
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
@@ -316,5 +332,24 @@ class CodecUtilTest {
     expected.Arrays = new int[] {1, 2, 3};
 
     assertRoundTripEquals(actual, expected, builderCodec);
+  }
+
+  @Test
+  public void cacheDeduplicatesIdenticalCodecs() {
+    var cache = CodecCache.cache();
+    var resolver =
+        CodecResolver.builder()
+            .withRecursiveResolution(cache)
+            .chain(CodecUtil.PRIMITIVE_RESOLVER)
+            .build();
+
+    var firstOuter = CodecUtil.modelBuilder(CacheOuter.class, resolver, cache);
+    var secondOuter = CodecUtil.modelBuilder(CacheOuter.class, resolver, cache);
+
+    var inner = CodecUtil.modelBuilder(CacheInner.class, resolver, cache);
+    var firstInner = firstOuter.getEntries().get("InnerOne").getFirst().getCodec().getChildCodec();
+
+    assertSame(firstOuter, secondOuter);
+    assertSame(inner, firstInner);
   }
 }
