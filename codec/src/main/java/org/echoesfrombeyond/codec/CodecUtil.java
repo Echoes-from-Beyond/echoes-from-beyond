@@ -29,13 +29,11 @@ import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import org.echoesfrombeyond.codec.annotation.*;
 import org.echoesfrombeyond.codec.cache.CodecCache;
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
 
 /**
  * Convenience utilities for working with {@link Codec}. Contains several static Codec
@@ -52,37 +50,6 @@ public final class CodecUtil {
 
   /** Primitive {@code short} array codec. */
   public static final Codec<short[]> SHORT_ARRAY_CODEC = new ShortArrayCodec();
-
-  /**
-   * A {@link CodecResolver} capable of resolving all primitive types, their associated wrapper
-   * (boxed) types, as well as {@link String}.
-   */
-  public static final CodecResolver PRIMITIVE_RESOLVER =
-      new CodecResolver() {
-        private static final Map<Class<?>, Codec<?>> PRIMITIVE_CODEC_MAP =
-            Map.ofEntries(
-                Map.entry(boolean.class, Codec.BOOLEAN),
-                Map.entry(Boolean.class, Codec.BOOLEAN),
-                Map.entry(byte.class, Codec.BYTE),
-                Map.entry(Byte.class, Codec.BYTE),
-                Map.entry(short.class, Codec.SHORT),
-                Map.entry(Short.class, Codec.SHORT),
-                Map.entry(int.class, Codec.INTEGER),
-                Map.entry(Integer.class, Codec.INTEGER),
-                Map.entry(float.class, Codec.FLOAT),
-                Map.entry(Float.class, Codec.FLOAT),
-                Map.entry(long.class, Codec.LONG),
-                Map.entry(Long.class, Codec.LONG),
-                Map.entry(double.class, Codec.DOUBLE),
-                Map.entry(Double.class, Codec.DOUBLE),
-                Map.entry(String.class, Codec.STRING));
-
-        @Override
-        public @Nullable Codec<?> resolve(Type type, Field field) {
-          if (!(type instanceof Class<?> raw)) return null;
-          return PRIMITIVE_CODEC_MAP.get(raw);
-        }
-      };
 
   private CodecUtil() {}
 

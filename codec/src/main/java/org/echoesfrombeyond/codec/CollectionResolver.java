@@ -78,14 +78,15 @@ class CollectionResolver implements CodecResolver {
       return null;
     }
 
-    return new ContainerCodec<>(
-        (Codec<Object>) elementCodec,
-        () -> {
-          try {
-            return (Collection<Object>) ctor.invoke();
-          } catch (Throwable e) {
-            throw new CodecException("Problem invoking collection constructor", e);
-          }
-        });
+    return new ContainerCodec<>((Codec<Object>) elementCodec, () -> construct(ctor));
+  }
+
+  @SuppressWarnings("unchecked")
+  private static Collection<Object> construct(MethodHandle ctor) {
+    try {
+      return (Collection<Object>) ctor.invoke();
+    } catch (Throwable e) {
+      throw new CodecException("Problem invoking collection constructor", e);
+    }
   }
 }

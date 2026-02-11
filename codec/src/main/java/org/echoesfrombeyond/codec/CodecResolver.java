@@ -42,8 +42,42 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @FunctionalInterface
 public interface CodecResolver {
+  /** The default field name for the key component of a map entry. */
   String DEFAULT_MAP_KEY_NAME = "Key";
+
+  /** The default field name for the value component of a map entry. */
   String DEFAULT_MAP_VALUE_NAME = "Value";
+
+  /**
+   * A {@link CodecResolver} capable of resolving all primitive types, their associated wrapper
+   * (boxed) types, as well as {@link String}.
+   */
+  CodecResolver PRIMITIVE =
+      new CodecResolver() {
+        private static final Map<Class<?>, Codec<?>> PRIMITIVE_CODEC_MAP =
+            Map.ofEntries(
+                Map.entry(boolean.class, Codec.BOOLEAN),
+                Map.entry(Boolean.class, Codec.BOOLEAN),
+                Map.entry(byte.class, Codec.BYTE),
+                Map.entry(Byte.class, Codec.BYTE),
+                Map.entry(short.class, Codec.SHORT),
+                Map.entry(Short.class, Codec.SHORT),
+                Map.entry(int.class, Codec.INTEGER),
+                Map.entry(Integer.class, Codec.INTEGER),
+                Map.entry(float.class, Codec.FLOAT),
+                Map.entry(Float.class, Codec.FLOAT),
+                Map.entry(long.class, Codec.LONG),
+                Map.entry(Long.class, Codec.LONG),
+                Map.entry(double.class, Codec.DOUBLE),
+                Map.entry(Double.class, Codec.DOUBLE),
+                Map.entry(String.class, Codec.STRING));
+
+        @Override
+        public @Nullable Codec<?> resolve(Type type, Field field) {
+          if (!(type instanceof Class<?> raw)) return null;
+          return PRIMITIVE_CODEC_MAP.get(raw);
+        }
+      };
 
   /**
    * Resolves a codec, given a {@link Type} (which may contain generic information) and {@link
@@ -67,8 +101,7 @@ public interface CodecResolver {
      * evaluated last. The first resolver whose {@link CodecResolver#resolve(Type, Field)} method
      * returns a non-null value will determine the result of the composite resolver.
      *
-     * <p>Pass {@link CodecUtil#PRIMITIVE_RESOLVER} here to enable resolution of basic primitive
-     * types.
+     * <p>Pass {@link CodecResolver#PRIMITIVE} here to enable resolution of basic primitive types.
      *
      * @param resolver the resolver
      * @return this instance

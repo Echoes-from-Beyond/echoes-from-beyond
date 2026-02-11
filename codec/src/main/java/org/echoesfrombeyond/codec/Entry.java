@@ -21,5 +21,13 @@ package org.echoesfrombeyond.codec;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Represents a key/value pair in a map. Supports null keys and values.
+ *
+ * @param key the key
+ * @param value the value
+ * @param <Key> the key type
+ * @param <Value> the value type
+ */
 @NullMarked
 record Entry<Key extends @Nullable Object, Value extends @Nullable Object>(Key key, Value value) {}

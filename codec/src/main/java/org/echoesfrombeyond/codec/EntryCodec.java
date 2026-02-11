@@ -32,6 +32,12 @@ import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * {@link Codec} implementation used by {@link AnyMapCodec}.
+ *
+ * @param <Key> the key type
+ * @param <Value> the value type
+ */
 @NullMarked
 class EntryCodec<Key extends @Nullable Object, Value extends @Nullable Object>
     implements Codec<Entry<Key, Value>> {
@@ -40,6 +46,16 @@ class EntryCodec<Key extends @Nullable Object, Value extends @Nullable Object>
   private final String keyName;
   private final String valueName;
 
+  /**
+   * Creates a new instance of this class.
+   *
+   * <p>{@code keyName} should never equal {@code valueName}.
+   *
+   * @param keyCodec the key codec
+   * @param valueCodec the value codec
+   * @param keyName the key name
+   * @param valueName the value name
+   */
   EntryCodec(Codec<Key> keyCodec, Codec<Value> valueCodec, String keyName, String valueName) {
     this.keyCodec = keyCodec;
     this.valueCodec = valueCodec;

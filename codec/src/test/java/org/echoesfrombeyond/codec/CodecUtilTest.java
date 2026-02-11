@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.bson.json.JsonWriterSettings;
 import org.echoesfrombeyond.codec.annotation.ModelBuilder;
 import org.echoesfrombeyond.codec.annotation.Skip;
 import org.echoesfrombeyond.codec.cache.CodecCache;
@@ -213,7 +214,7 @@ class CodecUtilTest {
 
   @Test
   public void simpleCodecResolution() {
-    var builderCodec = CodecUtil.modelBuilder(Simple.class, CodecUtil.PRIMITIVE_RESOLVER);
+    var builderCodec = CodecUtil.modelBuilder(Simple.class, CodecResolver.PRIMITIVE);
 
     var actual = new Simple();
     actual.Value = 67;
@@ -226,7 +227,7 @@ class CodecUtilTest {
 
   @Test
   public void simpleSkipCodecResolution() {
-    var builderCodec = CodecUtil.modelBuilder(SimpleSkip.class, CodecUtil.PRIMITIVE_RESOLVER);
+    var builderCodec = CodecUtil.modelBuilder(SimpleSkip.class, CodecResolver.PRIMITIVE);
 
     var actual = new SimpleSkip();
     actual.Value = 67;
@@ -245,7 +246,7 @@ class CodecUtilTest {
         CodecUtil.modelBuilder(
             SimpleNested.class,
             CodecResolver.builder()
-                .chain(CodecUtil.PRIMITIVE_RESOLVER)
+                .chain(CodecResolver.PRIMITIVE)
                 .withRecursiveResolution()
                 .build());
 
@@ -270,7 +271,7 @@ class CodecUtilTest {
         CodecUtil.modelBuilder(
             SimpleCollection.class,
             CodecResolver.builder()
-                .chain(CodecUtil.PRIMITIVE_RESOLVER)
+                .chain(CodecResolver.PRIMITIVE)
                 .withCollectionSupport()
                 .withSubtypeMapping(List.class, ArrayList.class)
                 .build());
@@ -296,7 +297,7 @@ class CodecUtilTest {
     var builderCodec =
         CodecUtil.modelBuilder(
             PrimitiveArrays.class,
-            CodecResolver.builder().chain(CodecUtil.PRIMITIVE_RESOLVER).withArraySupport().build());
+            CodecResolver.builder().chain(CodecResolver.PRIMITIVE).withArraySupport().build());
 
     var actual = new PrimitiveArrays();
     actual.Booleans = new boolean[] {true, false};
@@ -323,7 +324,7 @@ class CodecUtilTest {
         CodecUtil.modelBuilder(
             NestedArrays.class,
             CodecResolver.builder()
-                .chain(CodecUtil.PRIMITIVE_RESOLVER)
+                .chain(CodecResolver.PRIMITIVE)
                 .withArraySupport()
                 .withRecursiveResolution()
                 .build());
@@ -364,7 +365,7 @@ class CodecUtilTest {
     var resolver =
         CodecResolver.builder()
             .withRecursiveResolution(cache)
-            .chain(CodecUtil.PRIMITIVE_RESOLVER)
+            .chain(CodecResolver.PRIMITIVE)
             .build();
 
     var firstOuter = CodecUtil.modelBuilder(CacheOuter.class, resolver, cache);
@@ -381,7 +382,7 @@ class CodecUtilTest {
   public void stringToIntMap() {
     var resolver =
         CodecResolver.builder()
-            .chain(CodecUtil.PRIMITIVE_RESOLVER)
+            .chain(CodecResolver.PRIMITIVE)
             .withMapSupport()
             .withSubtypeMapping(Map.class, HashMap.class)
             .build();
@@ -405,7 +406,7 @@ class CodecUtilTest {
   public void anyValuedMap() {
     var resolver =
         CodecResolver.builder()
-            .chain(CodecUtil.PRIMITIVE_RESOLVER)
+            .chain(CodecResolver.PRIMITIVE)
             .withRecursiveResolution()
             .withMapSupport()
             .withSubtypeMapping(Map.class, HashMap.class)
@@ -436,5 +437,35 @@ class CodecUtilTest {
     expected.Mapping.put(expectedKey, expectedValue);
 
     assertRoundTripEquals(actual, expected, codec);
+  }
+
+  @Test
+  public void customKeyValueNamedMap() {
+    var resolver =
+        CodecResolver.builder()
+            .chain(CodecResolver.PRIMITIVE)
+            .withRecursiveResolution()
+            .withMapSupport("NewKey", "NewValue")
+            .withSubtypeMapping(Map.class, HashMap.class)
+            .build();
+
+    var codec = CodecUtil.modelBuilder(AnyMap.class, resolver);
+    var actual = new AnyMap();
+
+    var actualKey = new Simple();
+    actualKey.Value = 10;
+
+    var actualValue = new Simple();
+    actualValue.Value = 67;
+
+    actual.Mapping = new HashMap<>();
+    actual.Mapping.put(actualKey, actualValue);
+
+    var json =
+        codec
+            .encode(actual, new ExtraInfo())
+            .toJson(JsonWriterSettings.builder().indent(false).build());
+    assertEquals(
+        "{\"Mapping\": [{\"NewKey\": {\"Value\": 10}, \"NewValue\": {\"Value\": 67}}]}", json);
   }
 }

@@ -34,9 +34,13 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Generic resolver supporting subclasses of {@link Map} with {@link String} as the key type.
+ * Generic resolver supporting subclasses of {@link Map}.
+ *
+ * <p>Maps with a key type of {@link String} will resolve to a {@link MapCodec}. Maps with any other
+ * key type will resolve to {@link AnyMapCodec}, which supports arbitrary key types.
  *
  * @see MapCodec
+ * @see AnyMapCodec
  */
 @NullMarked
 class MapResolver implements CodecResolver {
@@ -53,6 +57,8 @@ class MapResolver implements CodecResolver {
    * Creates a new instance of this class.
    *
    * @param root the root resolver, which is used to obtain the component type
+   * @param keyName the map entry key field name
+   * @param valueName the map entry value field name
    */
   MapResolver(CodecResolver root, String keyName, String valueName) {
     this.root = root;

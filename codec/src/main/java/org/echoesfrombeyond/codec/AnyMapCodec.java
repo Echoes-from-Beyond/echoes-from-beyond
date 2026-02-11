@@ -33,6 +33,16 @@ import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Generic {@link Codec} for subclasses of {@link Map}. Supports any key type. Maps are deserialized
+ * as arrays of {@link Entry}.
+ *
+ * @param <Key> the map key type
+ * @param <Value> the map value type
+ * @param <Container> the map type
+ * @see MapResolver
+ * @see EntryCodec
+ */
 @NullMarked
 class AnyMapCodec<
         Key extends @Nullable Object,
@@ -42,6 +52,12 @@ class AnyMapCodec<
   private final Codec<Entry<Key, Value>> entryCodec;
   private final Supplier<Container> containerSupplier;
 
+  /**
+   * Creates a new instance of this class.
+   *
+   * @param entryCodec the entry codec
+   * @param containerSupplier supplier to create instances of this map
+   */
   AnyMapCodec(Codec<Entry<Key, Value>> entryCodec, Supplier<Container> containerSupplier) {
     this.entryCodec = entryCodec;
     this.containerSupplier = containerSupplier;
