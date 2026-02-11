@@ -45,7 +45,7 @@ class BooleanArrayCodec implements Codec<boolean[]>, RawJsonCodec<boolean[]> {
     var array = bsonValue.asArray();
     var result = new boolean[array.size()];
 
-    for (int i = 0; i < result.length; ++i) result[i] = array.get(i).asBoolean().getValue();
+    for (int i = 0; i < result.length; i++) result[i] = array.get(i).asBoolean().getValue();
 
     return result;
   }

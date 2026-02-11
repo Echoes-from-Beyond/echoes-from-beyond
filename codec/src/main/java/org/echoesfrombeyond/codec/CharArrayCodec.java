@@ -23,54 +23,61 @@ import com.hypixel.hytale.codec.ExtraInfo;
 import com.hypixel.hytale.codec.RawJsonCodec;
 import com.hypixel.hytale.codec.schema.SchemaContext;
 import com.hypixel.hytale.codec.schema.config.ArraySchema;
-import com.hypixel.hytale.codec.schema.config.IntegerSchema;
 import com.hypixel.hytale.codec.schema.config.Schema;
 import com.hypixel.hytale.codec.util.RawJsonReader;
 import java.io.IOException;
 import java.util.Arrays;
 import org.bson.BsonArray;
-import org.bson.BsonInt32;
+import org.bson.BsonString;
 import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
 
-/** {@link Codec} for an array of primitive byte. */
+/** {@link Codec} for an array of primitive char. */
 @NullMarked
-class ByteArrayCodec implements Codec<byte[]>, RawJsonCodec<byte[]> {
-  private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+class CharArrayCodec implements Codec<char[]>, RawJsonCodec<char[]> {
+  private static final char[] EMPTY_CHAR_ARRAY = new char[0];
 
   /** Creates a new instance of this class. */
-  ByteArrayCodec() {}
+  CharArrayCodec() {}
 
-  public byte[] decode(BsonValue bsonValue, ExtraInfo extraInfo) {
+  public char[] decode(BsonValue bsonValue, ExtraInfo extraInfo) {
     var array = bsonValue.asArray();
-    var result = new byte[array.size()];
+    var result = new char[array.size()];
 
-    for (int i = 0; i < result.length; i++) result[i] = Codec.BYTE.decode(array.get(i), extraInfo);
+    for (int i = 0; i < result.length; ++i) {
+      var character = CodecUtil.CHARACTER_CODEC.decode(array.get(i), extraInfo);
+      assert character != null;
+
+      result[i] = character;
+    }
     return result;
   }
 
-  public BsonValue encode(byte[] values, ExtraInfo extraInfo) {
+  public BsonValue encode(char[] values, ExtraInfo extraInfo) {
     var array = new BsonArray();
-    for (var value : values) array.add(new BsonInt32(value));
+    for (var value : values) array.add(new BsonString(Character.toString(value)));
     return array;
   }
 
-  public byte[] decodeJson(RawJsonReader reader, ExtraInfo extraInfo) throws IOException {
+  public char[] decodeJson(RawJsonReader reader, ExtraInfo extraInfo) throws IOException {
     reader.expect('[');
     reader.consumeWhiteSpace();
-    if (reader.tryConsume(']')) return EMPTY_BYTE_ARRAY;
+    if (reader.tryConsume(']')) return EMPTY_CHAR_ARRAY;
 
     var i = 0;
-    var result = new byte[10];
+    var result = new char[10];
 
     while (true) {
       if (i == result.length) {
-        var temp = new byte[i + 1 + (i >> 1)];
+        var temp = new char[i + 1 + (i >> 1)];
         System.arraycopy(result, 0, temp, 0, i);
         result = temp;
       }
 
-      result[i++] = Codec.BYTE.decodeJson(reader, extraInfo);
+      var character = CodecUtil.CHARACTER_CODEC.decodeJson(reader, extraInfo);
+      assert character != null;
+
+      result[i++] = character;
       reader.consumeWhiteSpace();
       if (reader.tryConsumeOrExpect(']', ',')) {
         if (result.length == i) return result;
@@ -83,10 +90,9 @@ class ByteArrayCodec implements Codec<byte[]>, RawJsonCodec<byte[]> {
 
   public Schema toSchema(SchemaContext context) {
     var schema = new ArraySchema();
-    var item = new IntegerSchema();
-    item.setMaximum(Byte.MAX_VALUE);
-    item.setMinimum(Byte.MIN_VALUE);
-    schema.setItem(item);
+    schema.setTitle("CharacterArray");
+    schema.setItem(context.refDefinition(CodecUtil.CHARACTER_CODEC));
+
     return schema;
   }
 }

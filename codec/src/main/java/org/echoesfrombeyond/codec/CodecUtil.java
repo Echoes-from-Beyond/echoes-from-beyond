@@ -42,11 +42,17 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class CodecUtil {
+  /** {@link Character} codec, (de)serialized as a String of length 1 */
+  public static final Codec<Character> CHARACTER_CODEC = new CharacterCodec();
+
   /** Primitive {@code boolean} array codec. */
   public static final Codec<boolean[]> BOOLEAN_ARRAY_CODEC = new BooleanArrayCodec();
 
   /** Primitive {@code byte} array codec. */
   public static final Codec<byte[]> BYTE_ARRAY_CODEC = new ByteArrayCodec();
+
+  /** Primitive {@code char} array codec. */
+  public static final Codec<char[]> CHAR_ARRAY_CODEC = new CharArrayCodec();
 
   /** Primitive {@code short} array codec. */
   public static final Codec<short[]> SHORT_ARRAY_CODEC = new ShortArrayCodec();

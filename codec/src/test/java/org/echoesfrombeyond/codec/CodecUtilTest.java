@@ -83,6 +83,9 @@ class CodecUtilTest {
   @NullUnmarked
   public static class PrimitiveArrays {
     public boolean[] Booleans;
+    public byte[] Bytes;
+    public short[] Shorts;
+    public char[] Chars;
     public int[] Ints;
     public float[] Floats;
     public double[] Doubles;
@@ -301,6 +304,9 @@ class CodecUtilTest {
 
     var actual = new PrimitiveArrays();
     actual.Booleans = new boolean[] {true, false};
+    actual.Bytes = new byte[] {0, 4, 8, Byte.MAX_VALUE, Byte.MIN_VALUE};
+    actual.Shorts = new short[] {123, 24, Short.MAX_VALUE, Short.MIN_VALUE};
+    actual.Chars = new char[] {'a', 'b', '\0', 'z'};
     actual.Ints = new int[] {0, 10, 67, Integer.MAX_VALUE, Integer.MIN_VALUE};
     actual.Floats = new float[] {0.0F, 0.5F, 50F};
     actual.Longs = new long[] {Long.MAX_VALUE, Long.MIN_VALUE};
@@ -309,6 +315,9 @@ class CodecUtilTest {
 
     var expected = new PrimitiveArrays();
     expected.Booleans = new boolean[] {true, false};
+    expected.Bytes = new byte[] {0, 4, 8, Byte.MAX_VALUE, Byte.MIN_VALUE};
+    expected.Shorts = new short[] {123, 24, Short.MAX_VALUE, Short.MIN_VALUE};
+    expected.Chars = new char[] {'a', 'b', '\0', 'z'};
     expected.Ints = new int[] {0, 10, 67, Integer.MAX_VALUE, Integer.MIN_VALUE};
     expected.Floats = new float[] {0.0F, 0.5F, 50F};
     expected.Longs = new long[] {Long.MAX_VALUE, Long.MIN_VALUE};

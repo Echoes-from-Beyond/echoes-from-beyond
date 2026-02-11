@@ -45,7 +45,8 @@ class ShortArrayCodec implements Codec<short[]>, RawJsonCodec<short[]> {
     var array = bsonValue.asArray();
     var result = new short[array.size()];
 
-    for (int i = 0; i < result.length; ++i) result[i] = (short) array.get(i).asInt32().getValue();
+    for (int i = 0; i < result.length; i++) result[i] = Codec.SHORT.decode(array.get(i), extraInfo);
+
     return result;
   }
 
@@ -70,7 +71,7 @@ class ShortArrayCodec implements Codec<short[]>, RawJsonCodec<short[]> {
         result = temp;
       }
 
-      result[i++] = reader.readByteValue();
+      result[i++] = Codec.SHORT.decodeJson(reader, extraInfo);
       reader.consumeWhiteSpace();
       if (reader.tryConsumeOrExpect(']', ',')) {
         if (result.length == i) return result;

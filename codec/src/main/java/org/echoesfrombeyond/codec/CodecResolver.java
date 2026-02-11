@@ -62,6 +62,8 @@ public interface CodecResolver {
                 Map.entry(Byte.class, Codec.BYTE),
                 Map.entry(short.class, Codec.SHORT),
                 Map.entry(Short.class, Codec.SHORT),
+                Map.entry(char.class, CodecUtil.CHARACTER_CODEC),
+                Map.entry(Character.class, CodecUtil.CHARACTER_CODEC),
                 Map.entry(int.class, Codec.INTEGER),
                 Map.entry(Integer.class, Codec.INTEGER),
                 Map.entry(float.class, Codec.FLOAT),
