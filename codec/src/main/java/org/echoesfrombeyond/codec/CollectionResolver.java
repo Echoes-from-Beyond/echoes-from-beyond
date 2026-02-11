@@ -35,7 +35,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Generic resolver supporting subclasses of {@link Collection}.
  *
- * @see ContainerCodec
+ * @see CollectionCodec
  */
 @NullMarked
 class CollectionResolver implements CodecResolver {
@@ -78,7 +78,7 @@ class CollectionResolver implements CodecResolver {
       return null;
     }
 
-    return new ContainerCodec<>((Codec<Object>) elementCodec, () -> construct(ctor));
+    return new CollectionCodec<>((Codec<Object>) elementCodec, () -> construct(ctor));
   }
 
   @SuppressWarnings("unchecked")

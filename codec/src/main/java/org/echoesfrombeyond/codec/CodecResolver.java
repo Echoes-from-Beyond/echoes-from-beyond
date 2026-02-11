@@ -224,7 +224,7 @@ public interface CodecResolver {
    *
    * @return a new Builder
    */
-  @Contract("-> new")
+  @Contract(value = "-> new", pure = true)
   static Builder builder() {
     return new BuilderImpl();
   }
@@ -271,6 +271,7 @@ public interface CodecResolver {
     @Override
     public Builder withRecursiveResolution() {
       recursiveResolution = true;
+      recursiveResolutionCache = null;
       return this;
     }
 

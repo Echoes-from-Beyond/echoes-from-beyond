@@ -42,7 +42,7 @@ import org.jspecify.annotations.Nullable;
  * @see CollectionResolver
  */
 @NullMarked
-class ContainerCodec<Element extends @Nullable Object, Container extends Collection<Element>>
+class CollectionCodec<Element extends @Nullable Object, Container extends Collection<Element>>
     implements Codec<Container>, WrappedCodec<Element> {
   private final Codec<Element> elementCodec;
   private final Supplier<Container> containerSupplier;
@@ -53,7 +53,7 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
    * @param elementCodec the codec of the collection element type
    * @param containerSupplier supplier used to construct the collection
    */
-  ContainerCodec(Codec<Element> elementCodec, Supplier<Container> containerSupplier) {
+  CollectionCodec(Codec<Element> elementCodec, Supplier<Container> containerSupplier) {
     this.elementCodec = elementCodec;
     this.containerSupplier = containerSupplier;
   }
