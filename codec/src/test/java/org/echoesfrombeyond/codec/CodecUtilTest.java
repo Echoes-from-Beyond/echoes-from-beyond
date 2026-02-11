@@ -45,6 +45,16 @@ class CodecUtilTest {
   @ModelBuilder
   public static class Simple {
     public int Value;
+
+    @Override
+    public boolean equals(Object obj) {
+      return obj instanceof Simple simple && simple.Value == Value;
+    }
+
+    @Override
+    public int hashCode() {
+      return Integer.hashCode(Value);
+    }
   }
 
   @ModelBuilder
@@ -111,6 +121,12 @@ class CodecUtilTest {
   @NullUnmarked
   public static class StringKeyMap {
     public Map<String, Integer> StringToIntMap;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  public static class AnyMap {
+    public Map<Simple, Simple> Mapping;
   }
 
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
@@ -381,6 +397,43 @@ class CodecUtilTest {
     expected.StringToIntMap = new HashMap<>();
     expected.StringToIntMap.put("Hello", 67);
     expected.StringToIntMap.put("Goodbye", -67);
+
+    assertRoundTripEquals(actual, expected, codec);
+  }
+
+  @Test
+  public void anyValuedMap() {
+    var resolver =
+        CodecResolver.builder()
+            .chain(CodecUtil.PRIMITIVE_RESOLVER)
+            .withRecursiveResolution()
+            .withMapSupport()
+            .withSubtypeMapping(Map.class, HashMap.class)
+            .build();
+
+    var codec = CodecUtil.modelBuilder(AnyMap.class, resolver);
+
+    var actual = new AnyMap();
+
+    var actualKey = new Simple();
+    actualKey.Value = 10;
+
+    var actualValue = new Simple();
+    actualValue.Value = 67;
+
+    actual.Mapping = new HashMap<>();
+    actual.Mapping.put(actualKey, actualValue);
+
+    var expected = new AnyMap();
+
+    var expectedKey = new Simple();
+    expectedKey.Value = 10;
+
+    var expectedValue = new Simple();
+    expectedValue.Value = 67;
+
+    expected.Mapping = new HashMap<>();
+    expected.Mapping.put(expectedKey, expectedValue);
 
     assertRoundTripEquals(actual, expected, codec);
   }

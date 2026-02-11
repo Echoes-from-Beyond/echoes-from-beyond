@@ -46,14 +46,18 @@ class MapResolver implements CodecResolver {
   }
 
   private final CodecResolver root;
+  private final String keyName;
+  private final String valueName;
 
   /**
    * Creates a new instance of this class.
    *
    * @param root the root resolver, which is used to obtain the component type
    */
-  MapResolver(CodecResolver root) {
+  MapResolver(CodecResolver root, String keyName, String valueName) {
     this.root = root;
+    this.keyName = keyName;
+    this.valueName = valueName;
   }
 
   @SuppressWarnings("unchecked")
@@ -68,10 +72,16 @@ class MapResolver implements CodecResolver {
 
     var keyType = params.get(Vars.KEY_TYPE);
     var valueType = params.get(Vars.VALUE_TYPE);
-    if (keyType == null || valueType == null || !keyType.equals(String.class)) return null;
+    if (keyType == null || valueType == null) return null;
 
     var valueCodec = root.resolve(valueType, field);
     if (valueCodec == null) return null;
+
+    Codec<?> keyCodec = null;
+    if (!keyType.equals(String.class)) {
+      keyCodec = root.resolve(keyType, field);
+      if (keyCodec == null) return null;
+    }
 
     MethodHandle ctor;
     try {
@@ -80,15 +90,21 @@ class MapResolver implements CodecResolver {
       return null;
     }
 
-    return new MapCodec<>(
-        (Codec<Object>) valueCodec,
-        () -> {
-          try {
-            return (Map<String, Object>) ctor.invoke();
-          } catch (Throwable e) {
-            throw new CodecException("Problem invoking map constructor", e);
-          }
-        },
-        false);
+    if (keyCodec != null)
+      return new AnyMapCodec<>(
+          new EntryCodec<>(
+              (Codec<Object>) keyCodec, (Codec<Object>) valueCodec, keyName, valueName),
+          () -> construct(ctor));
+
+    return new MapCodec<>((Codec<Object>) valueCodec, () -> construct(ctor), false);
+  }
+
+  @SuppressWarnings("unchecked")
+  private static <K> Map<K, Object> construct(MethodHandle ctor) {
+    try {
+      return (Map<K, Object>) ctor.invoke();
+    } catch (Throwable e) {
+      throw new CodecException("Problem invoking map constructor", e);
+    }
   }
 }

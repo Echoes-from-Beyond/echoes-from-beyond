@@ -19,6 +19,7 @@
 package org.echoesfrombeyond.codec;
 
 import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.codecs.map.MapCodec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -41,6 +42,9 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @FunctionalInterface
 public interface CodecResolver {
+  String DEFAULT_MAP_KEY_NAME = "Key";
+  String DEFAULT_MAP_VALUE_NAME = "Value";
+
   /**
    * Resolves a codec, given a {@link Type} (which may contain generic information) and {@link
    * Field}.
@@ -144,7 +148,12 @@ public interface CodecResolver {
     Builder withCollectionSupport();
 
     /**
-     * Enables support for {@link Map} implementations whose key type is {@link String}.
+     * Enables support for {@link Map} implementations.
+     *
+     * <p>Maps that have a key type of {@link String} will be (de)serialized as per {@link
+     * MapCodec}. Maps that do not will be deserialized as an array of entry objects, each of which
+     * has 2 fields, named {@code Key} and {@code Value}. To change the name of these fields, see
+     * {@link Builder#withMapSupport(String, String)}
      *
      * <p>Otherwise works similarly to {@link Builder#withCollectionSupport()}, including the
      * requirement to add subtype mappings if it is desirable to resolve abstract types.
@@ -153,6 +162,19 @@ public interface CodecResolver {
      */
     @Contract("-> this")
     Builder withMapSupport();
+
+    /**
+     * Works identically to {@link Builder#withMapSupport()}, but sets the map entry key/value field
+     * names to arbitrary values instead of the default of {@code Key}/{@code Value}.
+     *
+     * @param keyName the new key field name
+     * @param valueName the new value field name
+     * @return this instance
+     * @throws IllegalArgumentException if {@code keyName.equals(valueName)}
+     * @throws NullPointerException if {@code keyName == null || valueName == null}
+     */
+    @Contract("_, _ -> this")
+    Builder withMapSupport(String keyName, String valueName);
 
     /**
      * Builds a new {@link CodecResolver}. This method may be called multiple times to construct
@@ -184,6 +206,9 @@ public interface CodecResolver {
     private boolean arraySupport;
     private boolean collectionSupport;
     private boolean mapSupport;
+
+    private String keyName = DEFAULT_MAP_KEY_NAME;
+    private String valueName = DEFAULT_MAP_VALUE_NAME;
 
     private BuilderImpl() {
       this.resolvers = new ArrayList<>();
@@ -238,6 +263,22 @@ public interface CodecResolver {
     @Override
     public Builder withMapSupport() {
       mapSupport = true;
+      keyName = DEFAULT_MAP_KEY_NAME;
+      valueName = DEFAULT_MAP_VALUE_NAME;
+      return this;
+    }
+
+    @Override
+    public Builder withMapSupport(String keyName, String valueName) {
+      Check.nonNull(keyName);
+      Check.nonNull(valueName);
+
+      if (keyName.equals(valueName))
+        throw new IllegalArgumentException("keyName may not equal valueName");
+
+      mapSupport = true;
+      this.keyName = keyName;
+      this.valueName = valueName;
       return this;
     }
 
@@ -253,7 +294,7 @@ public interface CodecResolver {
       }
       if (arraySupport) resolversCopy.add(new ArrayResolver(chained));
       if (collectionSupport) resolversCopy.add(new CollectionResolver(chained));
-      if (mapSupport) resolversCopy.add(new MapResolver(chained));
+      if (mapSupport) resolversCopy.add(new MapResolver(chained, keyName, valueName));
       if (recursiveResolution)
         resolversCopy.add(new RecursiveResolver(chained, recursiveResolutionCache));
 

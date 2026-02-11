@@ -20,46 +20,35 @@ package org.echoesfrombeyond.codec;
 
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.ExtraInfo;
-import com.hypixel.hytale.codec.WrappedCodec;
 import com.hypixel.hytale.codec.exception.CodecException;
 import com.hypixel.hytale.codec.schema.SchemaContext;
 import com.hypixel.hytale.codec.schema.config.ArraySchema;
 import com.hypixel.hytale.codec.schema.config.Schema;
 import com.hypixel.hytale.codec.util.RawJsonReader;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.Map;
 import java.util.function.Supplier;
 import org.bson.BsonArray;
 import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/**
- * Generic {@link Codec} for subclasses of {@link Collection}.
- *
- * @param <Element> the element type
- * @param <Container> the collection type
- * @see CollectionResolver
- */
 @NullMarked
-class ContainerCodec<Element extends @Nullable Object, Container extends Collection<Element>>
-    implements Codec<Container>, WrappedCodec<Element> {
-  private final Codec<Element> elementCodec;
+class AnyMapCodec<
+        Key extends @Nullable Object,
+        Value extends @Nullable Object,
+        Container extends Map<Key, Value>>
+    implements Codec<Container> {
+  private final Codec<Entry<Key, Value>> entryCodec;
   private final Supplier<Container> containerSupplier;
 
-  /**
-   * Creates a new instance of this codec.
-   *
-   * @param elementCodec the codec of the collection element type
-   * @param containerSupplier supplier used to construct the collection
-   */
-  ContainerCodec(Codec<Element> elementCodec, Supplier<Container> containerSupplier) {
-    this.elementCodec = elementCodec;
+  AnyMapCodec(Codec<Entry<Key, Value>> entryCodec, Supplier<Container> containerSupplier) {
+    this.entryCodec = entryCodec;
     this.containerSupplier = containerSupplier;
   }
 
   @Override
-  public @Nullable Container decode(BsonValue bsonValue, ExtraInfo extraInfo) {
+  public Container decode(BsonValue bsonValue, ExtraInfo extraInfo) {
     var list = bsonValue.asArray();
     if (list.isEmpty()) return containerSupplier.get();
 
@@ -69,7 +58,10 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
       extraInfo.pushIntKey(i);
 
       try {
-        out.add(elementCodec.decode(value, extraInfo));
+        var entry = entryCodec.decode(value, extraInfo);
+        if (entry == null) throw new CodecException("Missing entry", value, extraInfo, null);
+
+        out.put(entry.key(), entry.value());
       } catch (Exception e) {
         throw new CodecException("Failed to decode", value, extraInfo, e);
       } finally {
@@ -81,8 +73,7 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
   }
 
   @Override
-  public @Nullable Container decodeJson(RawJsonReader reader, ExtraInfo extraInfo)
-      throws IOException {
+  public Container decodeJson(RawJsonReader reader, ExtraInfo extraInfo) throws IOException {
     reader.expect('[');
     reader.consumeWhiteSpace();
     if (reader.tryConsume(']')) return containerSupplier.get();
@@ -94,7 +85,10 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
       extraInfo.pushIntKey(i, reader);
 
       try {
-        out.add(elementCodec.decodeJson(reader, extraInfo));
+        var entry = entryCodec.decodeJson(reader, extraInfo);
+        if (entry == null) throw new CodecException("Missing entry", reader, extraInfo, null);
+
+        out.put(entry.key(), entry.value());
         i++;
       } catch (Exception e) {
         throw new CodecException("Failed to decode", reader, extraInfo, e);
@@ -109,15 +103,15 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
   }
 
   @Override
-  public BsonValue encode(Container elements, ExtraInfo extraInfo) {
+  public BsonValue encode(Container container, ExtraInfo extraInfo) {
     var out = new BsonArray();
     var key = 0;
 
-    for (var element : elements) {
+    for (var element : container.entrySet()) {
       extraInfo.pushIntKey(key++);
 
       try {
-        out.add(elementCodec.encode(element, extraInfo));
+        out.add(entryCodec.encode(new Entry<>(element.getKey(), element.getValue()), extraInfo));
       } finally {
         extraInfo.popKey();
       }
@@ -129,13 +123,9 @@ class ContainerCodec<Element extends @Nullable Object, Container extends Collect
   @Override
   public Schema toSchema(SchemaContext schemaContext) {
     var schema = new ArraySchema();
-    schema.setTitle("Collection");
-    schema.setItem(schemaContext.refDefinition(elementCodec));
-    return schema;
-  }
+    schema.setTitle("Map");
+    schema.setItem(schemaContext.refDefinition(entryCodec));
 
-  @Override
-  public Codec<Element> getChildCodec() {
-    return elementCodec;
+    return schema;
   }
 }
