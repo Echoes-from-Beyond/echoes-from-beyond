@@ -20,6 +20,7 @@ package org.echoesfrombeyond.codec;
 
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.ExtraInfo;
+import com.hypixel.hytale.codec.WrappedCodec;
 import com.hypixel.hytale.codec.exception.CodecException;
 import com.hypixel.hytale.codec.schema.SchemaContext;
 import com.hypixel.hytale.codec.schema.config.ArraySchema;
@@ -48,7 +49,7 @@ class AnyMapCodec<
         Key extends @Nullable Object,
         Value extends @Nullable Object,
         Container extends Map<Key, Value>>
-    implements Codec<Container> {
+    implements Codec<Container>, WrappedCodec<Entry<Key, Value>> {
   private final Codec<Entry<Key, Value>> entryCodec;
   private final Supplier<Container> containerSupplier;
 
@@ -143,5 +144,10 @@ class AnyMapCodec<
     schema.setItem(schemaContext.refDefinition(entryCodec));
 
     return schema;
+  }
+
+  @Override
+  public Codec<Entry<Key, Value>> getChildCodec() {
+    return entryCodec;
   }
 }
