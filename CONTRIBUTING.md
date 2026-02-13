@@ -27,9 +27,6 @@ While you should _try_ to adhere to these guidelines, don't stress about getting
 Note: the words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are intended to be interpreted as per [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ### General
-* One SHOULD use `Optional` instead of returning `null`, except when:
-  * There is a significant and _demonstrable_ performance degradation caused by returning `Optional` compared to returning `null`.
-  * APIs that are designed to "mimic" or wrap Java APIs, like `Map#get`, MAY return `null` instead of an empty `Optional`.
 * One MUST NOT annotate anything with `@NotNull`!
   * Instead, one SHOULD apply `@NullMarked` to every class file.
     * One exception is when "unknown nullability" is actually desired throughout the entire file.
@@ -39,7 +36,7 @@ Note: the words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are intended to be i
   * One MAY use explicit nullchecks in cases where implicit ones would have lesser or no effect on nullness detection.
 * One SHOULD limit external dependencies. 
   * For example, small utility methods, even if they "duplicate" code found in external packages, are preferred.
-* Exception messages SHOULD be non-capitalized sentences without trailing punctuation.
+* Exception messages SHOULD be capitalized sentences without trailing punctuation.
 * Exception messages SHOULD be phrased in terms of what should (or should not) have happened instead.
 
 ### Testing

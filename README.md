@@ -2,7 +2,12 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-A Lovecraftian Hytale mod with an emphasis on narrative and storytelling.
+Hytale mods and supporting libraries made by the Echoes from Beyond team.
+
+This repository contains:
+* `main`: A Lovecraftian Hytale mod with an emphasis on narrative and storytelling
+* `codec`: A library which contains a system for automatically generating codecs
+* `util`: A general utility library
 
 ## Table of Contents
 
@@ -20,9 +25,11 @@ See `SECURITY.md` for our vulnerability disclosure policy.
 
 ## Background
 
-This project was made to act as an early story-based experience that will be playable before the official Adventure Mode.
+This project was originally made to act as an early story-based experience that will be playable before the official Adventure Mode.
 
 It has a very different theme from said official mode, and we intend to integrate with rather than replace it.
+
+During development, as we've identified needs that are missing from the ecosystem, we've decided to also develop supporting libraries like `codec`.
 
 ## Install
 
@@ -33,7 +40,7 @@ Alternatively, run `./gradlew check syncPlugins`. This will assemble all Hytale 
 If there are formatting errors, run `./gradlew spotlessApply` to fix them.
 
 ### Setting up a development environment
-In order to actually test the mod in-game, users need to specify their local Hytale installation. 
+In order to actually test any mods in-game, users need to specify their local Hytale installation. 
 
 To do this, create a file named `.hytale` in the root project directory (same level as this readme).
 
