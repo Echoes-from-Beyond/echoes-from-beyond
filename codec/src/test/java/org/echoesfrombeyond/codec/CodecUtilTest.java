@@ -23,7 +23,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.ExtraInfo;
 import com.hypixel.hytale.codec.RawJsonCodec;
+import com.hypixel.hytale.codec.exception.CodecValidationException;
+import com.hypixel.hytale.codec.schema.SchemaContext;
+import com.hypixel.hytale.codec.schema.config.Schema;
 import com.hypixel.hytale.codec.util.RawJsonReader;
+import com.hypixel.hytale.codec.validation.ValidationResults;
+import com.hypixel.hytale.codec.validation.Validator;
 import java.io.CharArrayReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -35,6 +40,7 @@ import java.util.Map;
 import org.bson.json.JsonWriterSettings;
 import org.echoesfrombeyond.codec.annotation.ModelBuilder;
 import org.echoesfrombeyond.codec.annotation.Skip;
+import org.echoesfrombeyond.codec.annotation.Validate;
 import org.echoesfrombeyond.codec.cache.CodecCache;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.NullUnmarked;
@@ -131,6 +137,29 @@ class CodecUtilTest {
   @NullUnmarked
   public static class AnyMap {
     public Map<Simple, Simple> Mapping;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  public static class ValidatorTest {
+    public int Value;
+
+    @Validate
+    @SuppressWarnings("unused")
+    public static Map<String, List<Validator<?>>> validators() {
+      return Map.of(
+          "Value",
+          List.of(
+              new Validator<Integer>() {
+                @Override
+                public void accept(Integer o, ValidationResults validationResults) {
+                  if (o == 42) validationResults.fail("Epic Fail");
+                }
+
+                @Override
+                public void updateSchema(SchemaContext schemaContext, Schema schema) {}
+              }));
+    }
   }
 
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
@@ -476,5 +505,17 @@ class CodecUtilTest {
             .toJson(JsonWriterSettings.builder().indent(false).build());
     assertEquals(
         "{\"Mapping\": [{\"NewKey\": {\"Value\": 10}, \"NewValue\": {\"Value\": 67}}]}", json);
+  }
+
+  @Test
+  public void validatorTest() {
+    var builderCodec = CodecUtil.modelBuilder(ValidatorTest.class, CodecResolver.PRIMITIVE);
+
+    var actual = new ValidatorTest();
+    actual.Value = 42;
+
+    var encoded = builderCodec.encode(actual, new ExtraInfo());
+    assertThrows(
+        CodecValidationException.class, () -> builderCodec.decode(encoded, new ExtraInfo()));
   }
 }

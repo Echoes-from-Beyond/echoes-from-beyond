@@ -26,7 +26,6 @@ import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 import java.util.Collection;
 import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
@@ -39,10 +38,6 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 class CollectionResolver implements CodecResolver {
-  private static class Vars {
-    private static final TypeVariable<?> ELEMENT_TYPE = Collection.class.getTypeParameters()[0];
-  }
-
   private final CodecResolver root;
 
   /**
@@ -65,7 +60,7 @@ class CollectionResolver implements CodecResolver {
     var params = TypeUtil.resolveSupertypeParameters(type, Collection.class);
     assert params != null;
 
-    var elementType = params.get(Vars.ELEMENT_TYPE);
+    var elementType = params.get(TypeVariables.COLLECTION_ELEMENT_TYPE);
     if (elementType == null) return null;
 
     var elementCodec = root.resolve(elementType, field);

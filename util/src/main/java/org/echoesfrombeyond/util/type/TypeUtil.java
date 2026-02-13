@@ -21,6 +21,7 @@ package org.echoesfrombeyond.util.type;
 import java.lang.reflect.*;
 import java.util.*;
 import org.echoesfrombeyond.util.iterable.IterableUtil;
+import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -152,11 +153,17 @@ public final class TypeUtil {
    * <p>If {@code type} is {@link GenericArrayType}, attempts to recursively resolve the raw type of
    * the generic component type, then returns the array type of that raw type (if it exists).
    *
+   * <p>If {@code type} is a {@link WildcardType}, return the result of recursively resolving the
+   * upper bounds.
+   *
    * @param type the type object
    * @return the raw type, or {@code null} if {@code type} is not a Class, ParameterizedType, or
    *     GenericArrayType whose component is the same
    */
-  public static @Nullable Class<?> getRawType(Type type) {
+  @Contract("null -> null")
+  public static @Nullable Class<?> getRawType(@Nullable Type type) {
+    if (type == null) return null;
+
     return switch (type) {
       case Class<?> cls -> cls;
       case ParameterizedType pt -> (Class<?>) pt.getRawType();
@@ -164,6 +171,7 @@ public final class TypeUtil {
         var next = getRawType(generic.getGenericComponentType());
         yield next == null ? null : next.arrayType();
       }
+      case WildcardType wt -> getRawType(wt.getUpperBounds()[0]);
       default -> null;
     };
   }
@@ -192,7 +200,7 @@ public final class TypeUtil {
       var cur = queue.removeFirst();
       var raw = getRawType(cur);
 
-      // We only add ParameterizedType and Class<?>.
+      // We only add types for which getRawType returns non-null.
       assert raw != null;
 
       if (cur instanceof ParameterizedType pt) {

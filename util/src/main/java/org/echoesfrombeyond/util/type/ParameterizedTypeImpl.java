@@ -23,14 +23,15 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
 class ParameterizedTypeImpl implements ParameterizedType {
-  private final Type owner;
+  private final @Nullable Type owner;
   private final Type raw;
   private final Type[] typeArguments;
 
-  ParameterizedTypeImpl(Type owner, Type raw, Type[] typeArguments) {
+  ParameterizedTypeImpl(@Nullable Type owner, Type raw, Type[] typeArguments) {
     this.owner = owner;
     this.raw = raw;
     this.typeArguments = typeArguments;
@@ -47,7 +48,7 @@ class ParameterizedTypeImpl implements ParameterizedType {
   }
 
   @Override
-  public Type getOwnerType() {
+  public @Nullable Type getOwnerType() {
     return owner;
   }
 

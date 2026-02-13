@@ -23,16 +23,18 @@ import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.builder.BuilderField;
 import com.hypixel.hytale.codec.exception.CodecException;
+import com.hypixel.hytale.codec.validation.Validator;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
+import java.util.Collection;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import org.echoesfrombeyond.codec.annotation.*;
 import org.echoesfrombeyond.codec.cache.CodecCache;
+import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -141,6 +143,73 @@ public final class CodecUtil {
 
     var fields = model.getDeclaredFields();
 
+    Map<String, ? extends Collection<? extends Validator<?>>> validators = null;
+
+    var methods = model.getDeclaredMethods();
+    for (var method : methods) {
+      var validate = method.getAnnotation(Validate.class);
+      if (validate == null) continue;
+
+      if (validators != null)
+        throw new IllegalArgumentException("Can't have more than one validator method");
+
+      int modifiers = method.getModifiers();
+      if (!Modifier.isStatic(modifiers) || !Modifier.isPublic(modifiers))
+        throw new IllegalArgumentException("Validator method " + method + " must be public static");
+
+      if (!Map.class.isAssignableFrom(method.getReturnType()))
+        throw new IllegalArgumentException(
+            "Validator method return type must be assignable to " + Map.class.getName());
+
+      var genericReturnType = method.getGenericReturnType();
+      var parameters = TypeUtil.resolveSupertypeParameters(genericReturnType, Map.class);
+
+      // We just checked that the return type is assignable to Map
+      assert parameters != null;
+
+      var genericKeyType = parameters.get(TypeVariables.MAP_KEY_TYPE);
+      var genericValueType = parameters.get(TypeVariables.MAP_VALUE_TYPE);
+
+      var keyType = TypeUtil.getRawType(genericKeyType);
+      var valueType = TypeUtil.getRawType(genericValueType);
+
+      if (keyType == null
+          || valueType == null
+          || !keyType.equals(String.class)
+          || !Collection.class.isAssignableFrom(valueType))
+        throw new IllegalArgumentException(
+            "Unexpected key/value type for validator method " + method);
+
+      if (genericValueType instanceof WildcardType wildcard)
+        genericValueType = wildcard.getUpperBounds()[0];
+
+      var collectionParams =
+          TypeUtil.resolveSupertypeParameters(genericValueType, Collection.class);
+      assert collectionParams != null;
+
+      var elementType =
+          TypeUtil.getRawType(collectionParams.get(TypeVariables.COLLECTION_ELEMENT_TYPE));
+      if (elementType == null || !Validator.class.isAssignableFrom(elementType))
+        throw new IllegalArgumentException(
+            "Unexpected key/value type for validator method " + method);
+
+      if (method.getParameterCount() != 0)
+        throw new IllegalArgumentException(
+            "Expected validator method "
+                + method
+                + " to have no parameters but it had "
+                + method.getParameterCount());
+
+      try {
+        validators =
+            (Map<String, ? extends Collection<? extends Validator<?>>>) method.invoke(null);
+      } catch (IllegalAccessException e) {
+        throw new RuntimeException(e);
+      } catch (InvocationTargetException e) {
+        throw new IllegalArgumentException("Validator method " + method + " threw exception", e);
+      }
+    }
+
     for (var field : fields) {
       int modifiers = field.getModifiers();
       if (Modifier.isStatic(modifiers)
@@ -188,6 +257,11 @@ public final class CodecUtil {
       var fieldDocumentation = field.getDeclaredAnnotation(Doc.class);
       if (fieldDocumentation != null)
         fieldBuilder = fieldBuilder.documentation(fieldDocumentation.value());
+
+      Collection<? extends Validator<?>> validatorsForField;
+      if (validators != null && (validatorsForField = validators.get(name)) != null)
+        for (var fieldValidator : validatorsForField)
+          fieldBuilder = fieldBuilder.addValidator((Validator<? super Object>) fieldValidator);
 
       builder = fieldBuilder.add();
     }

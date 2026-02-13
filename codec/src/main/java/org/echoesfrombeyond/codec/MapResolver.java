@@ -27,7 +27,6 @@ import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 import java.util.Map;
 import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
@@ -44,11 +43,6 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 class MapResolver implements CodecResolver {
-  private static class Vars {
-    private static final TypeVariable<?> KEY_TYPE = Map.class.getTypeParameters()[0];
-    private static final TypeVariable<?> VALUE_TYPE = Map.class.getTypeParameters()[1];
-  }
-
   private final CodecResolver root;
   private final String keyName;
   private final String valueName;
@@ -76,8 +70,8 @@ class MapResolver implements CodecResolver {
     var params = TypeUtil.resolveSupertypeParameters(type, Map.class);
     assert params != null;
 
-    var keyType = params.get(Vars.KEY_TYPE);
-    var valueType = params.get(Vars.VALUE_TYPE);
+    var keyType = params.get(TypeVariables.MAP_KEY_TYPE);
+    var valueType = params.get(TypeVariables.MAP_VALUE_TYPE);
     if (keyType == null || valueType == null) return null;
 
     var valueCodec = root.resolve(valueType, field);
