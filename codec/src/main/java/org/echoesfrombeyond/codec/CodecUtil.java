@@ -82,12 +82,12 @@ public final class CodecUtil {
 
   /**
    * Generates a {@link BuilderCodec} from an arbitrary user-defined class. The class must be
-   * public, annotated with {@link ModelBuilder}, and it must provide a public parameterless
-   * constructor.
+   * annotated with {@link ModelBuilder}, and it must provide a parameterless constructor (which may
+   * be private).
    *
-   * <p>The declared, public, non-final fields of {@code model} will be examined in order. Those
-   * annotated with {@link Skip} will be ignored. Each eligible field will be used to construct a
-   * {@link KeyedCodec} according to the following guidelines:
+   * <p>The declared, non-final fields of {@code model} will be examined in order. Those annotated
+   * with {@link Skip} will be ignored. Each eligible field will be used to construct a {@link
+   * KeyedCodec} according to the following guidelines:
    *
    * <ol>
    *   <li>If the field is annotated with {@link Name}, the value of that annotation is passed to
@@ -122,13 +122,19 @@ public final class CodecUtil {
    */
   @SuppressWarnings("unchecked")
   public static <T> BuilderCodec<T> modelBuilder(Class<T> model, CodecResolver resolver) {
+    MethodHandles.Lookup lookup;
+    try {
+      lookup = MethodHandles.privateLookupIn(model, MethodHandles.lookup());
+    } catch (IllegalAccessException e) {
+      throw new ModelException(model, "Private access must be possible");
+    }
+
     if (!model.isAnnotationPresent(ModelBuilder.class))
       throw new ModelException(model, "Must be annotated with @ModelBuilder");
 
     MethodHandle constructor;
     try {
-      constructor =
-          MethodHandles.publicLookup().findConstructor(model, MethodType.methodType(void.class));
+      constructor = lookup.findConstructor(model, MethodType.methodType(void.class));
     } catch (NoSuchMethodException _) {
       throw new ModelException(model, "Must have parameterless constructor");
     } catch (IllegalAccessException e) {
@@ -172,8 +178,8 @@ public final class CodecUtil {
       MethodHandle read;
       MethodHandle write;
       try {
-        read = MethodHandles.publicLookup().unreflectGetter(field);
-        write = MethodHandles.publicLookup().unreflectSetter(field);
+        read = lookup.unreflectGetter(field);
+        write = lookup.unreflectSetter(field);
       } catch (IllegalAccessException e) {
         throw new RuntimeException(e);
       }

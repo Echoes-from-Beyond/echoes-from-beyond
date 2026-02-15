@@ -149,6 +149,15 @@ class CodecUtilTest {
     public Map<String, String> Map;
   }
 
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class PrivateAccess {
+    private int PrivateMember;
+
+    private PrivateAccess() {}
+  }
+
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
     if (expected == null && actual == null) return;
     if (expected == null ^ actual == null) {
@@ -553,5 +562,18 @@ class CodecUtilTest {
 
     var encoded = builderCodec.encode(actual, new ExtraInfo());
     builderCodec.decode(encoded, new ExtraInfo());
+  }
+
+  @Test
+  public void privateMemberAccessIsPossible() {
+    var codec = CodecUtil.modelBuilder(PrivateAccess.class, CodecResolver.PRIMITIVE);
+
+    var actual = new PrivateAccess();
+    actual.PrivateMember = 10;
+
+    var expected = new PrivateAccess();
+    expected.PrivateMember = 10;
+
+    assertRoundTripEquals(actual, expected, codec);
   }
 }

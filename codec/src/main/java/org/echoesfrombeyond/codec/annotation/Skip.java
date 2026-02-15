@@ -27,8 +27,8 @@ import java.lang.annotation.*;
  * <p>Skipped fields will not be written to or read from during codec (de)serialization, even if
  * they appear in the input data.
  *
- * <p>Note that non-{@code public}, {@code static}, or {@code final} fields will be skipped
- * regardless, so it is redundant to apply this annotation to them.
+ * <p>Note that non-{@code static} or {@code final} fields will be skipped regardless, so it is
+ * redundant to apply this annotation to them.
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
