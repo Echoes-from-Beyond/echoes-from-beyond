@@ -23,10 +23,16 @@ import java.util.Map;
 import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * {@link ClassHierarchyMap} implementation based on an internal {@link HashMap}.
+ *
+ * @param <V> the value type
+ */
 @NullMarked
 public final class HashClassHierarchyMap<V> implements ClassHierarchyMap<V> {
   private final Map<Class<?>, V> inner;
 
+  /** Creates a new instance of this class. */
   public HashClassHierarchyMap() {
     this.inner = new HashMap<>();
   }
@@ -77,7 +83,7 @@ public final class HashClassHierarchyMap<V> implements ClassHierarchyMap<V> {
 
   @Override
   public V put(Class<?> key, V value) {
-    return inner.put(key, Check.nonNull(value));
+    return inner.put(Check.nonNull(key), Check.nonNull(value));
   }
 
   @Override

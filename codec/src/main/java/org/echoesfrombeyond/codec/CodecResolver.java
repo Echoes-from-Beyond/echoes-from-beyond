@@ -68,7 +68,7 @@ public interface CodecResolver {
    */
   CodecResolver PRIMITIVE =
       new CodecResolver() {
-        private static final Map<Class<?>, Codec<?>> PRIMITIVE_CODEC_MAP =
+        private static final Map<Type, Codec<?>> PRIMITIVE_CODEC_MAP =
             Map.ofEntries(
                 Map.entry(boolean.class, Codec.BOOLEAN),
                 Map.entry(Boolean.class, Codec.BOOLEAN),
@@ -90,8 +90,7 @@ public interface CodecResolver {
 
         @Override
         public @Nullable Codec<?> resolve(Type type, Field field) {
-          if (!(type instanceof Class<?> raw)) return null;
-          return PRIMITIVE_CODEC_MAP.get(raw);
+          return PRIMITIVE_CODEC_MAP.get(type);
         }
       };
 
@@ -153,7 +152,8 @@ public interface CodecResolver {
      * Enables "recursive resolution", that is, types annotated with {@link ModelBuilder} containing
      * types that are, themselves, annotated with {@link ModelBuilder}.
      *
-     * <p>Recursive resolution will not use any {@link CodecCache}.
+     * <p>Recursive resolution will not use any {@link CodecCache}. Use {@link
+     * Builder#withRecursiveResolution(CodecCache)} instead to specify one.
      *
      * @return this instance
      */

@@ -25,13 +25,24 @@ import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Internal {@link ParameterizedType} implementation, currently only used by {@link
+ * TypeUtil#replaceRawType(Type, Class)}.
+ */
 @NullMarked
 class ParameterizedTypeImpl implements ParameterizedType {
   private final @Nullable Type owner;
   private final Type raw;
   private final Type[] typeArguments;
 
-  ParameterizedTypeImpl(@Nullable Type owner, Type raw, Type[] typeArguments) {
+  /**
+   * Creates a new instance of this class.
+   *
+   * @param owner the owner type, which may be {@code null}
+   * @param raw the raw type, e.g. {@code List.class} for {@code List<String>}
+   * @param typeArguments the type arguments, which should match the type parameters of {@code raw}
+   */
+  ParameterizedTypeImpl(@Nullable Type owner, Class<?> raw, Type[] typeArguments) {
     this.owner = owner;
     this.raw = raw;
     this.typeArguments = typeArguments;
