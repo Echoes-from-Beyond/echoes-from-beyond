@@ -20,6 +20,8 @@ package org.echoesfrombeyond.util.type;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import org.junit.jupiter.api.Test;
 
 class TypeUtilTest {
@@ -34,6 +36,13 @@ class TypeUtilTest {
   static class C extends B {}
 
   static class Z {}
+
+  @SuppressWarnings("unused")
+  static class Param<K, V> {}
+
+  static class ParamSub<P> extends Param<String, P> {}
+
+  static final Param<Short, Integer> paramField = null;
 
   @Test
   public void inheritanceDistanceIs0ForSameClass() {
@@ -63,5 +72,17 @@ class TypeUtilTest {
   @Test
   public void inheritanceDistanceIs3ForCtoAif() {
     assertEquals(3, TypeUtil.inheritanceDistance(C.class, Aif.class));
+  }
+
+  @Test
+  public void replaceRaw() throws NoSuchFieldException {
+    var baseType = TypeUtilTest.class.getDeclaredField("paramField").getGenericType();
+
+    var replaced = TypeUtil.replaceRawType(baseType, ParamSub.class);
+    var param = assertInstanceOf(ParameterizedType.class, replaced);
+
+    assertEquals(ParamSub.class, param.getRawType());
+    assertArrayEquals(new Type[] {Integer.class}, param.getActualTypeArguments());
+    assertEquals(TypeUtilTest.class, param.getOwnerType());
   }
 }

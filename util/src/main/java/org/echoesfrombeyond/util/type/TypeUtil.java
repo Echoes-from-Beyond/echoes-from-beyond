@@ -28,6 +28,20 @@ import org.jspecify.annotations.Nullable;
 /** Utilities relating to reflection and types. */
 @NullMarked
 public final class TypeUtil {
+  /**
+   * Attempts to resolve the component type.
+   *
+   * <p>If {@code type} is a {@link Class} and {@link Class#isArray()} returns {@code true}, returns
+   * the component type; else {@code null}.
+   *
+   * <p>If {@code type} is a {@link GenericArrayType}, returns the generic component type.
+   *
+   * <p>In all other cases, returns {@code null}.
+   *
+   * @param type the type
+   * @return the component type; or {@code null} if {@code type} is not an array class or instance
+   *     of {@link GenericArrayType}.
+   */
   public static @Nullable Type getArrayComponentType(Type type) {
     return switch (type) {
       case Class<?> cls -> cls.isArray() ? cls.getComponentType() : null;
@@ -36,15 +50,65 @@ public final class TypeUtil {
     };
   }
 
-  @SuppressWarnings("SwitchStatementWithTooFewBranches")
-  public static Type replaceRawType(Type type, Class<?> raw) {
-    return switch (type) {
-      case ParameterizedType parameterizedType -> {
-        if (parameterizedType.getRawType().equals(raw)) yield type;
+  /**
+   * Attempts to replace the raw type of {@code genericSupertype} with {@code rawSubtype}.
+   *
+   * <p>If {@code rawSubtype} is not assignable to the raw type of {@code genericSupertype}, {@code
+   * genericSupertype} is returned as-is.
+   *
+   * <p>Otherwise, if {@code genericSupertype} is an instance of {@link ParameterizedType}, the
+   * returned type will have the same raw type as {@code rawSubtype}, with the (applicable) type
+   * arguments of the supertype preserved.
+   *
+   * <p>Otherwise, if {@code genericSupertype} is an instance of {@link Class}, returns {@code
+   * rawSubtype}.
+   *
+   * <p>In all other cases, returns {@code genericSupertype}.
+   *
+   * @param genericSupertype the base type
+   * @param rawSubtype the raw type
+   * @return the new type
+   */
+  public static Type replaceRawType(Type genericSupertype, Class<?> rawSubtype) {
+    return switch (genericSupertype) {
+      case ParameterizedType parameterizedSupertype -> {
+        var rawSupertype = (Class<?>) parameterizedSupertype.getRawType();
+        if (rawSupertype.equals(rawSubtype) || !rawSupertype.isAssignableFrom(rawSubtype))
+          yield genericSupertype;
+
+        var parameterMap = resolveSupertypeParameters(rawSubtype, rawSupertype);
+        assert parameterMap != null;
+
+        var supertypeParameters = Arrays.asList(rawSupertype.getTypeParameters());
+        var supertypeArguments = parameterizedSupertype.getActualTypeArguments();
+
+        var subtypeParameters = rawSubtype.getTypeParameters();
+
+        var adjustedTypeArguments = new Type[subtypeParameters.length];
+        for (int i = 0; i < adjustedTypeArguments.length; i++) {
+          Type argument = null;
+          for (var entry : parameterMap.entrySet()) {
+            if (!entry.getValue().equals(subtypeParameters[i])) continue;
+
+            var key = supertypeParameters.indexOf(entry.getKey());
+            if (key >= 0) {
+              argument = supertypeArguments[key];
+              break;
+            }
+          }
+
+          assert argument != null;
+          adjustedTypeArguments[i] =
+              argument instanceof TypeVariable<?> ? subtypeParameters[i] : argument;
+        }
+
+        var nestHost = rawSubtype.getNestHost();
         yield new ParameterizedTypeImpl(
-            parameterizedType.getOwnerType(), raw, parameterizedType.getActualTypeArguments());
+            nestHost.equals(rawSubtype) ? null : nestHost, rawSubtype, adjustedTypeArguments);
       }
-      default -> raw;
+      case Class<?> rawSupertype ->
+          rawSupertype.isAssignableFrom(rawSubtype) ? rawSubtype : genericSupertype;
+      default -> genericSupertype;
     };
   }
 
@@ -177,15 +241,15 @@ public final class TypeUtil {
   }
 
   /**
-   * Resolve the actual type parameters of the {@code base}, relative to the superclass {@code
-   * supertype}.
+   * Resolve the actual type parameters of {@code base}, relative to the superclass {@code
+   * supertype}. The returned map will always be modifiable.
    *
    * <p>If {@code base} does not subclass {@code supertype}, this method will return {@code null}.
    *
    * @param base the base class
    * @param supertype the superclass
    * @return {@code null} if {@code base} does not subclass {@code supertype}, otherwise a map
-   *     linking {@link TypeVariable} instances to actual types
+   *     linking {@link TypeVariable} instances to actual types.
    */
   public static @Nullable Map<TypeVariable<?>, Type> resolveSupertypeParameters(
       Type base, Class<?> supertype) {
@@ -203,16 +267,17 @@ public final class TypeUtil {
       // We only add types for which getRawType returns non-null.
       assert raw != null;
 
-      if (cur instanceof ParameterizedType pt) {
-        var typeVariables = raw.getTypeParameters();
-        var typeArguments = pt.getActualTypeArguments();
+      var typeVariables = raw.getTypeParameters();
+      var typeArguments =
+          cur instanceof ParameterizedType pt
+              ? pt.getActualTypeArguments()
+              : raw.getTypeParameters();
 
-        for (int i = 0; i < typeVariables.length; i++) {
-          var arg = typeArguments[i];
+      for (int i = 0; i < typeVariables.length; i++) {
+        var arg = typeArguments[i];
 
-          //noinspection SuspiciousMethodCalls
-          map.put(typeVariables[i], map.getOrDefault(arg, arg));
-        }
+        //noinspection SuspiciousMethodCalls
+        map.put(typeVariables[i], map.getOrDefault(arg, arg));
       }
 
       if (raw.equals(supertype)) return map;
