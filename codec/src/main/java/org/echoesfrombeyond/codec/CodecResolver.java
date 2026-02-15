@@ -36,8 +36,22 @@ import org.jspecify.annotations.Nullable;
  * serializing values contained in the field, as well as deserializing data that may be written to
  * the field.
  *
+ * <p>Implementations should be deterministic: given the same arguments, {@link
+ * CodecResolver#resolve(Type, Field)} should always return a codec that functions equivalently.
+ * They should also be effectively immutable: there should be no way to modify the behavior of a
+ * resolver once it has been created. Additionally, codecs returned by resolvers should themselves
+ * be immutable. Taken together, these requirements mean that resolved codecs can be safely cached
+ * in {@link CodecCache}. All resolvers provided by this library satisfy these requirements.
+ *
+ * <h1>Usage</h1>
+ *
+ * Typical usage involves using {@link CodecResolver#builder()} to construct a resolver with the
+ * desired capabilities, and storing the result in a {@code static final} field. The resolver can
+ * then be passed to {@link CodecUtil#modelBuilder(Class, CodecResolver)} or an overload.
+ *
  * @see CodecResolver#builder() builder method to compose instances of this interface
  * @see CodecUtil to use instances of this class to generate custom Codec instances
+ * @see CodecResolver#PRIMITIVE for a resolver capable of handling all primitive types
  */
 @NullMarked
 @FunctionalInterface

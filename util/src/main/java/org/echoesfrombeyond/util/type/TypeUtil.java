@@ -44,7 +44,7 @@ public final class TypeUtil {
         yield new ParameterizedTypeImpl(
             parameterizedType.getOwnerType(), raw, parameterizedType.getActualTypeArguments());
       }
-      default -> type;
+      default -> raw;
     };
   }
 

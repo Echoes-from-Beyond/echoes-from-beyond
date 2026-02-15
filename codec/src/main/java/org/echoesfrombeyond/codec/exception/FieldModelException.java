@@ -16,35 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codec;
+package org.echoesfrombeyond.codec.exception;
 
-import java.lang.reflect.TypeVariable;
-import java.util.Collection;
-import java.util.Map;
+import java.lang.reflect.Field;
+import org.echoesfrombeyond.codec.CodecResolver;
+import org.echoesfrombeyond.codec.CodecUtil;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
-/** Static {@link TypeVariable}s. */
-@NullMarked
+/** Exception thrown by {@link CodecUtil#modelBuilder(Class, CodecResolver)} and overloads. */
 @ApiStatus.Internal
-public final class TypeVariables {
-  /** Collection element type variable. */
-  public static final TypeVariable<?> COLLECTION_ELEMENT_TYPE;
-
-  /** Map key type variable. */
-  public static final TypeVariable<?> MAP_KEY_TYPE;
-
-  /** Map value type variable. */
-  public static final TypeVariable<?> MAP_VALUE_TYPE;
-
-  static {
-    var collectionParams = Collection.class.getTypeParameters();
-    var mapParams = Map.class.getTypeParameters();
-
-    COLLECTION_ELEMENT_TYPE = collectionParams[0];
-    MAP_KEY_TYPE = mapParams[0];
-    MAP_VALUE_TYPE = mapParams[1];
+@NullMarked
+public class FieldModelException extends ModelException {
+  private static String formatMessage(Field field, String message) {
+    return String.format("Model field: %s\n%s", field, message);
   }
 
-  private TypeVariables() {}
+  /**
+   * @param modelType the model type
+   * @param field the field associated with this exception
+   * @param message the error message
+   */
+  public FieldModelException(Class<?> modelType, Field field, String message) {
+    super(modelType, formatMessage(field, message));
+  }
 }

@@ -24,11 +24,7 @@ import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.ExtraInfo;
 import com.hypixel.hytale.codec.RawJsonCodec;
 import com.hypixel.hytale.codec.exception.CodecValidationException;
-import com.hypixel.hytale.codec.schema.SchemaContext;
-import com.hypixel.hytale.codec.schema.config.Schema;
 import com.hypixel.hytale.codec.util.RawJsonReader;
-import com.hypixel.hytale.codec.validation.ValidationResults;
-import com.hypixel.hytale.codec.validation.Validator;
 import java.io.CharArrayReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -40,7 +36,8 @@ import java.util.Map;
 import org.bson.json.JsonWriterSettings;
 import org.echoesfrombeyond.codec.annotation.ModelBuilder;
 import org.echoesfrombeyond.codec.annotation.Skip;
-import org.echoesfrombeyond.codec.annotation.Validate;
+import org.echoesfrombeyond.codec.annotation.validator.ValidateNonEmpty;
+import org.echoesfrombeyond.codec.annotation.validator.ValidateRequiredMapKeys;
 import org.echoesfrombeyond.codec.cache.CodecCache;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.NullUnmarked;
@@ -142,24 +139,14 @@ class CodecUtilTest {
   @ModelBuilder
   @NullUnmarked
   public static class ValidatorTest {
-    public int Value;
+    @ValidateNonEmpty public short[] Array;
+  }
 
-    @Validate
-    @SuppressWarnings("unused")
-    public static Map<String, List<Validator<?>>> validators() {
-      return Map.of(
-          "Value",
-          List.of(
-              new Validator<Integer>() {
-                @Override
-                public void accept(Integer o, ValidationResults validationResults) {
-                  if (o == 42) validationResults.fail("Epic Fail");
-                }
-
-                @Override
-                public void updateSchema(SchemaContext schemaContext, Schema schema) {}
-              }));
-    }
+  @ModelBuilder
+  @NullUnmarked
+  public static class ValidateRequiredMapKeysTest {
+    @ValidateRequiredMapKeys({"required", "key"})
+    public Map<String, String> Map;
   }
 
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
@@ -509,13 +496,62 @@ class CodecUtilTest {
 
   @Test
   public void validatorTest() {
-    var builderCodec = CodecUtil.modelBuilder(ValidatorTest.class, CodecResolver.PRIMITIVE);
+    var builderCodec =
+        CodecUtil.modelBuilder(
+            ValidatorTest.class,
+            CodecResolver.builder()
+                .chain(CodecResolver.PRIMITIVE)
+                .withArraySupport()
+                .withSubtypeMapping(Object.class, String.class)
+                .build());
 
     var actual = new ValidatorTest();
-    actual.Value = 42;
+    actual.Array = new short[0];
 
     var encoded = builderCodec.encode(actual, new ExtraInfo());
+
     assertThrows(
         CodecValidationException.class, () -> builderCodec.decode(encoded, new ExtraInfo()));
+  }
+
+  @Test
+  public void validateMapTest() {
+    var builderCodec =
+        CodecUtil.modelBuilder(
+            ValidateRequiredMapKeysTest.class,
+            CodecResolver.builder()
+                .chain(CodecResolver.PRIMITIVE)
+                .withMapSupport()
+                .withSubtypeMapping(Map.class, HashMap.class)
+                .build());
+
+    var actual = new ValidateRequiredMapKeysTest();
+    actual.Map = new HashMap<>();
+    actual.Map.put("required", "only one of the required keys...");
+
+    var encoded = builderCodec.encode(actual, new ExtraInfo());
+
+    assertThrows(
+        CodecValidationException.class, () -> builderCodec.decode(encoded, new ExtraInfo()));
+  }
+
+  @Test
+  public void validateMapTestValidatesWhenRequiredKeysExist() {
+    var builderCodec =
+        CodecUtil.modelBuilder(
+            ValidateRequiredMapKeysTest.class,
+            CodecResolver.builder()
+                .chain(CodecResolver.PRIMITIVE)
+                .withMapSupport()
+                .withSubtypeMapping(Map.class, HashMap.class)
+                .build());
+
+    var actual = new ValidateRequiredMapKeysTest();
+    actual.Map = new HashMap<>();
+    actual.Map.put("required", "required value");
+    actual.Map.put("key", "required key");
+
+    var encoded = builderCodec.encode(actual, new ExtraInfo());
+    builderCodec.decode(encoded, new ExtraInfo());
   }
 }

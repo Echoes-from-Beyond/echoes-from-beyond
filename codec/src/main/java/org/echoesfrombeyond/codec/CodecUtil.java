@@ -24,17 +24,20 @@ import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.builder.BuilderField;
 import com.hypixel.hytale.codec.exception.CodecException;
 import com.hypixel.hytale.codec.validation.Validator;
+import java.lang.annotation.Annotation;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.*;
-import java.util.Collection;
-import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import org.echoesfrombeyond.codec.annotation.*;
+import org.echoesfrombeyond.codec.annotation.validator.ValidatorSpec;
 import org.echoesfrombeyond.codec.cache.CodecCache;
-import org.echoesfrombeyond.util.type.TypeUtil;
+import org.echoesfrombeyond.codec.exception.FieldModelException;
+import org.echoesfrombeyond.codec.exception.ModelException;
+import org.echoesfrombeyond.codec.exception.ValidatorModelException;
+import org.echoesfrombeyond.codec.validator.ValidatorProvider;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -102,8 +105,15 @@ public final class CodecUtil {
    * BiConsumer, Function)}; the {@code setter} and {@code getter} parameters of this constructor
    * are generated using reflection.
    *
-   * <p>Finally, if the field is annotated with {@link Doc}, its value is passed to {@link
+   * <p>If the field is annotated with {@link Doc}, its value is passed to {@link
    * BuilderField.FieldBuilder#documentation(String)}.
+   *
+   * <p>If the field is annotated with any annotation that is itself annotated with the
+   * meta-annotation {@link ValidatorSpec}, the value of the (ValidatorSpec) annotation specifies a
+   * {@link ValidatorProvider} instance that will be used to provide a {@link Validator} for the
+   * field. Each field may contain multiple such annotations, which will provide validators
+   * in-order, which are passed to {@link BuilderField.FieldBuilder#addValidator(Validator)}. See
+   * {@link ValidatorProvider} for more details on how this process works.
    *
    * @param model the model type class
    * @param resolver the resolver used to generate {@link Codec}s based on the field type
@@ -113,17 +123,16 @@ public final class CodecUtil {
   @SuppressWarnings("unchecked")
   public static <T> BuilderCodec<T> modelBuilder(Class<T> model, CodecResolver resolver) {
     if (!model.isAnnotationPresent(ModelBuilder.class))
-      throw new IllegalArgumentException("Missing ModelBuilder annotation " + model.getName());
+      throw new ModelException(model, "Must be annotated with @ModelBuilder");
 
     MethodHandle constructor;
     try {
       constructor =
           MethodHandles.publicLookup().findConstructor(model, MethodType.methodType(void.class));
     } catch (NoSuchMethodException _) {
-      throw new IllegalArgumentException(
-          "Model missing public parameterless constructor " + model.getName());
+      throw new ModelException(model, "Must have parameterless constructor");
     } catch (IllegalAccessException e) {
-      throw new IllegalArgumentException(model.getName(), e);
+      throw new ModelException(model, "Parameterless constructor must be accessible", e);
     }
 
     var builder =
@@ -143,73 +152,6 @@ public final class CodecUtil {
 
     var fields = model.getDeclaredFields();
 
-    Map<String, ? extends Collection<? extends Validator<?>>> validators = null;
-
-    var methods = model.getDeclaredMethods();
-    for (var method : methods) {
-      var validate = method.getAnnotation(Validate.class);
-      if (validate == null) continue;
-
-      if (validators != null)
-        throw new IllegalArgumentException("Can't have more than one validator method");
-
-      int modifiers = method.getModifiers();
-      if (!Modifier.isStatic(modifiers) || !Modifier.isPublic(modifiers))
-        throw new IllegalArgumentException("Validator method " + method + " must be public static");
-
-      if (!Map.class.isAssignableFrom(method.getReturnType()))
-        throw new IllegalArgumentException(
-            "Validator method return type must be assignable to " + Map.class.getName());
-
-      var genericReturnType = method.getGenericReturnType();
-      var parameters = TypeUtil.resolveSupertypeParameters(genericReturnType, Map.class);
-
-      // We just checked that the return type is assignable to Map
-      assert parameters != null;
-
-      var genericKeyType = parameters.get(TypeVariables.MAP_KEY_TYPE);
-      var genericValueType = parameters.get(TypeVariables.MAP_VALUE_TYPE);
-
-      var keyType = TypeUtil.getRawType(genericKeyType);
-      var valueType = TypeUtil.getRawType(genericValueType);
-
-      if (keyType == null
-          || valueType == null
-          || !keyType.equals(String.class)
-          || !Collection.class.isAssignableFrom(valueType))
-        throw new IllegalArgumentException(
-            "Unexpected key/value type for validator method " + method);
-
-      if (genericValueType instanceof WildcardType wildcard)
-        genericValueType = wildcard.getUpperBounds()[0];
-
-      var collectionParams =
-          TypeUtil.resolveSupertypeParameters(genericValueType, Collection.class);
-      assert collectionParams != null;
-
-      var elementType =
-          TypeUtil.getRawType(collectionParams.get(TypeVariables.COLLECTION_ELEMENT_TYPE));
-      if (elementType == null || !Validator.class.isAssignableFrom(elementType))
-        throw new IllegalArgumentException(
-            "Unexpected key/value type for validator method " + method);
-
-      if (method.getParameterCount() != 0)
-        throw new IllegalArgumentException(
-            "Expected validator method "
-                + method
-                + " to have no parameters but it had "
-                + method.getParameterCount());
-
-      try {
-        validators =
-            (Map<String, ? extends Collection<? extends Validator<?>>>) method.invoke(null);
-      } catch (IllegalAccessException e) {
-        throw new RuntimeException(e);
-      } catch (InvocationTargetException e) {
-        throw new IllegalArgumentException("Validator method " + method + " threw exception", e);
-      }
-    }
-
     for (var field : fields) {
       int modifiers = field.getModifiers();
       if (Modifier.isStatic(modifiers)
@@ -223,7 +165,7 @@ public final class CodecUtil {
 
       var resolve = (Codec<Object>) resolver.resolve(field.getGenericType(), field);
       if (resolve == null)
-        throw new IllegalArgumentException("Could not resolve codec for field " + field);
+        throw new FieldModelException(model, field, "Field type must be resolvable");
 
       var key = new KeyedCodec<>(name, resolve, !field.isAnnotationPresent(Opt.class));
 
@@ -258,10 +200,68 @@ public final class CodecUtil {
       if (fieldDocumentation != null)
         fieldBuilder = fieldBuilder.documentation(fieldDocumentation.value());
 
-      Collection<? extends Validator<?>> validatorsForField;
-      if (validators != null && (validatorsForField = validators.get(name)) != null)
-        for (var fieldValidator : validatorsForField)
-          fieldBuilder = fieldBuilder.addValidator((Validator<? super Object>) fieldValidator);
+      for (var annotation : field.getDeclaredAnnotations()) {
+        var spec = annotation.annotationType().getDeclaredAnnotation(ValidatorSpec.class);
+        if (spec == null) continue;
+
+        Field instanceField;
+        try {
+          instanceField = spec.value().getField("INSTANCE");
+        } catch (NoSuchFieldException e) {
+          throw new ValidatorModelException(
+              model,
+              field,
+              spec,
+              annotation.annotationType(),
+              "ValidatorProvider must have a public, static field named INSTANCE");
+        }
+
+        var instanceFieldModifiers = instanceField.getModifiers();
+        if (!Modifier.isPublic(instanceFieldModifiers)
+            || !Modifier.isStatic(instanceFieldModifiers))
+          throw new ValidatorModelException(
+              model,
+              field,
+              spec,
+              annotation.annotationType(),
+              "ValidatorProvider INSTANCE field must be public static");
+
+        Object instanceFieldRaw;
+        try {
+          instanceFieldRaw = instanceField.get(null);
+        } catch (IllegalAccessException e) {
+          throw new IllegalArgumentException(e);
+        }
+
+        if (instanceFieldRaw == null)
+          throw new ValidatorModelException(
+              model,
+              field,
+              spec,
+              annotation.annotationType(),
+              "ValidatorProvider INSTANCE field must not be null");
+
+        if (!ValidatorProvider.class.isAssignableFrom(instanceFieldRaw.getClass()))
+          throw new ValidatorModelException(
+              model,
+              field,
+              spec,
+              annotation.annotationType(),
+              "ValidatorProvider INSTANCE field type must be assignable to ValidatorProvider");
+
+        var validatorProvider = (ValidatorProvider<Annotation>) instanceFieldRaw;
+
+        var validator = validatorProvider.getInstance(annotation, field);
+        if (validator == null)
+          throw new ValidatorModelException(
+              model,
+              field,
+              spec,
+              annotation.annotationType(),
+              "ValidatorProvider must be able to provide for the field");
+
+        fieldBuilder = fieldBuilder.addValidator((Validator<? super Object>) validator);
+      }
 
       builder = fieldBuilder.add();
     }

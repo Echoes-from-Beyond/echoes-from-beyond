@@ -16,21 +16,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codec.annotation;
+package org.echoesfrombeyond.codec.annotation.validator;
 
-import com.hypixel.hytale.codec.validation.Validator;
 import java.lang.annotation.*;
-import java.util.Map;
+import org.echoesfrombeyond.codec.validator.IntRangeProvider;
 
 /**
- * Applied to a {@code public static} method defined in a {@link ModelBuilder} class. Such a method
- * must take no arguments and return a {@link Map} whose key type is {@link String}, and value type
- * is a collection of anything assignable to {@link Validator}.
- *
- * <p>Each key in the returned map represents the name of a field, and the corresponding value all
- * validators that should be applied to the field.
+ * Validates that an {@code int} or {@code Integer} field is within a specified range, which may be
+ * inclusive (default) or exclusive.
  */
-@Target(ElementType.METHOD)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
+@ValidatorSpec(IntRangeProvider.class)
 @Documented
-public @interface Validate {}
+public @interface ValidateIntRange {
+  /** The minimum allowed value. */
+  int min();
+
+  /** The maximum allowed value. */
+  int max();
+
+  /** Whether {@code maximum} is inclusive (the default) or exclusive. */
+  boolean inclusive() default true;
+}
