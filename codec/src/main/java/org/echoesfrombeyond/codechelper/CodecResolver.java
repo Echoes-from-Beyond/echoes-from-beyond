@@ -43,7 +43,7 @@ import org.jspecify.annotations.Nullable;
  * be immutable. Taken together, these requirements mean that resolved codecs can be safely cached
  * in {@link CodecCache}. All resolvers provided by this library satisfy these requirements.
  *
- * <h1>Usage</h1>
+ * <h2>Usage</h2>
  *
  * Typical usage involves using {@link CodecResolver#builder()} to construct a resolver with the
  * desired capabilities, and storing the result in a {@code static final} field. The resolver can
