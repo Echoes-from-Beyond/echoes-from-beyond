@@ -54,6 +54,7 @@ public final class Plugin extends JavaPlugin {
             .withCollectionSupport()
             .withMapSupport()
             .withRecursiveResolution(cache)
+            .withSubtypeMapping(Collection.class, ArrayList.class)
             .withSubtypeMapping(List.class, ArrayList.class)
             .withSubtypeMapping(Map.class, HashMap.class)
             .withSubtypeMapping(Set.class, HashSet.class)
