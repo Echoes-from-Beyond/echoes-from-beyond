@@ -13,28 +13,23 @@ The main entrypoint of this library is the `CodecUtil.modelBuilder` static funct
 The main purpose of `modelBuilder` is to generate a `BuilderCodec` from an arbitrary class, skipping a lot of the boilerplate associated with using Hytale's builder API. For example, the following code, using CodecHelper:
 
 ```java
-import org.echoesfrombeyond.codec.Plugin;
-import org.echoesfrombeyond.codec.CodecUtil;
-import org.echoesfrombeyond.codec.annotation.*;
-import org.echoesfrombeyond.codec.annotation.validator.*;
-
 // To generate a BuilderCodec, classes must be annotated with @ModelBuilder
 @ModelBuilder
 public class DataClass {
   // Generate a codec for this class, using the shared resolver.
   public static final BuilderCodec<DataClass> CODEC = CodecUtil.modelBuilder(DataClass.class, Plugin.getSharedResolver());
-  
+
   // All non-static, non-final fields will automatically be (de)serialized by the generated codec...
-  
+
   @Doc("Specify field documentation with the Doc annotation.")
   private int IntegerValue;
-  
+
   @Doc("This is a string field.")
   private String StringValue;
-  
+
   @Doc("This is a map field.")
   private Map<String, Integer> StringToIntMap;
-  
+
   // ...however, this field will be ignored because of the Skip annotation.
   @Skip
   private String Ignored;
@@ -44,14 +39,6 @@ public class DataClass {
 Is equivalent to the "traditional" builder API:
 
 ```java
-import com.hypixel.hytale.codec.Codec;
-import com.hypixel.hytale.codec.KeyedCodec;
-import com.hypixel.hytale.codec.builder.BuilderCodec;
-import com.hypixel.hytale.codec.codecs.map.MapCodec;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class DataClass {
   public static final BuilderCodec<DataClass> CODEC = BuilderCodec.builder(DataClass.class, DataClass::new)
       .append(new KeyedCodec<>("IntegerValue", Codec.INTEGER), (self, value) -> self.IntegerValue = value, (self) -> self.IntegerValue)
@@ -216,17 +203,14 @@ If there are multiple possible mappings, the closest type in terms of inheritanc
 It's possible to specify "validator annotations", that are used to interop with Hytale's `Validator` API.
 
 ```java
-import org.echoesfrombeyond.codec.annotation.validator.*;
-import org.echoesfrombeyond.codec.annotation.*;
-
 @ModelBuilder
 public class Data {
   // Ranges are always inclusive unless otherwise specified
   // See org.echoesfrombeyond.codec.annotation.validator for other built-in validators
-  
+
   @ValidateIntRange(min = 0, max = 10)
   public int IntValue;
-  
+
   @ValidateLengthRange(min = 10, max = 15)
   public String StringValue;
 }
@@ -235,13 +219,12 @@ public class Data {
 In addition to the built-in annotations, it is possible to construct user-defined annotations that produce custom validators.
 
 ```java
-import org.echoesfrombeyond.codec.annotation.validator.*;
-
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @ValidatorSpec(CustomProvider.class) // must reference a ValidatorProvider
 @Documented
-public @interface ValidateCustom { }
+public @interface ValidateCustom {
+}
 ```
 
 ```java
