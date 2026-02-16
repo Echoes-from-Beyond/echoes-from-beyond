@@ -27,9 +27,8 @@ While you should _try_ to adhere to these guidelines, don't stress about getting
 Note: the words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are intended to be interpreted as per [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ### General
-* One MUST NOT annotate anything with `@NotNull`!
-  * Instead, one SHOULD apply `@NullMarked` to every class file.
-    * One exception is when "unknown nullability" is actually desired throughout the entire file.
+* Instead, one SHOULD apply `@NullMarked` to every class file.
+  * One exception is when "unknown nullability" is actually desired throughout the entire file.
 * One MUST use `jspecify` annotations instead of `jetbrains` where possible.
 * One MUST use explicit nullchecks to validate untrusted input, such as deserialized data from a file.
 * One SHOULD NOT use explicit nullchecks (like `Objects#requireNonNull`) in cases where implicit ones are equivalent.

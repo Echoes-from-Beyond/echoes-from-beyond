@@ -2,7 +2,7 @@
   "Group": "org.echoesfrombeyond",
   "Name": "CodecHelper",
   "Version": "0.1.0",
-  "Description": "A library for .",
+  "Description": "A utility library mod for automatically generating codecs.",
   "Authors": [
     {
       "Name": "Kyle",

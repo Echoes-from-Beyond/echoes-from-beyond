@@ -70,17 +70,17 @@ Choosing this authentication storage method will create a file named `auth.enc` 
 
 ## Usage
 
-**In-progress:** Basic examples of using our mod API.
+Consult the relevant module README for usage examples.
 
 ## API
 
-**In Progress**: We don't know what facilities Hytale provides for inter-mod communication yet.
+Consult the relevant module README for API specification.
 
 ## Contributing
 
 See [the contributing file](CONTRIBUTING.md)!
 
-PRs accepted.
+PRs and issues are accepted.
 
 Small note: If editing `README.md`, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 
