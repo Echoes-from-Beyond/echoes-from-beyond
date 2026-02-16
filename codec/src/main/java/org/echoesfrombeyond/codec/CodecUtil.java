@@ -77,7 +77,7 @@ public final class CodecUtil {
    */
   public static <T> BuilderCodec<T> modelBuilder(
       Class<T> model, CodecResolver resolver, CodecCache cache) {
-    return cache.compute(model, resolver, () -> modelBuilder(model, resolver));
+    return cache.compute(model, BuilderCodec.class, resolver, () -> modelBuilder(model, resolver));
   }
 
   /**

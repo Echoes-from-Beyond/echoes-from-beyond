@@ -19,6 +19,8 @@
 package org.echoesfrombeyond.codec.cache;
 
 import com.hypixel.hytale.codec.Codec;
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -26,6 +28,7 @@ import java.util.function.Supplier;
 import org.echoesfrombeyond.codec.CodecResolver;
 import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Standard cache implementation of {@link CodecCache}, backed by a {@link HashMap} and a {@link
@@ -33,19 +36,27 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class CodecCacheImpl implements CodecCache {
-  private record CacheKey(Class<?> model, CodecResolver resolver) {
+  private record CacheKey(
+      Class<?> model, Class<?> codec, Reference<@Nullable CodecResolver> resolver) {
     @Override
     public boolean equals(Object obj) {
-      return obj instanceof CacheKey(Class<?> otherModel, CodecResolver otherResolver)
-          && resolver == otherResolver
-          && model.equals(otherModel);
+      return obj
+              instanceof
+              CacheKey(
+                  Class<?> otherModel,
+                  Class<?> otherCodec,
+                  Reference<@Nullable CodecResolver> otherResolver)
+          && model.equals(otherModel)
+          && codec.equals(otherCodec)
+          && resolver.get() == otherResolver.get();
     }
 
     @Override
     public int hashCode() {
       var hash = 7;
       hash = 31 * hash + model.hashCode();
-      hash = 31 * hash + System.identityHashCode(resolver);
+      hash = 31 * hash + codec.hashCode();
+      hash = 31 * hash + System.identityHashCode(resolver.get());
       return hash;
     }
   }
@@ -62,8 +73,8 @@ final class CodecCacheImpl implements CodecCache {
   @Override
   @SuppressWarnings("unchecked")
   public <V, C extends Codec<V>> C compute(
-      Class<V> model, CodecResolver resolver, Supplier<C> resolveCodec) {
-    var key = new CacheKey(model, resolver);
+      Class<V> model, Class<? super C> codec, CodecResolver resolver, Supplier<C> resolveCodec) {
+    var key = new CacheKey(model, codec, new WeakReference<>(resolver));
 
     var read = rwl.readLock();
     var write = rwl.writeLock();
@@ -78,6 +89,8 @@ final class CodecCacheImpl implements CodecCache {
       read.unlock();
       readLocked = false;
       write.lock();
+
+      cache.keySet().removeIf(c -> c.resolver.refersTo(null));
 
       cached = cache.get(key);
       if (cached != null) return (C) cached;

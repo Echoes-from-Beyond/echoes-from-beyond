@@ -18,7 +18,9 @@
 
 package org.echoesfrombeyond.codec.cache;
 
+import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
 import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import java.util.function.Supplier;
 import org.echoesfrombeyond.codec.CodecResolver;
 import org.jetbrains.annotations.Contract;
@@ -48,7 +50,8 @@ public sealed interface CodecCache permits CodecCacheImpl {
    * <p>Implementations are tolerant of reentrancy: {@code resolveCodec} may directly or indirectly
    * invoke this method again.
    *
-   * @param model the codec class
+   * @param model the model class
+   * @param codec the base codec class; e.g. {@link BuilderCodec} or {@link AssetBuilderCodec}
    * @param resolver the resolver used to resolve the codec
    * @param resolveCodec the actual resolved codec
    * @return the cached or freshly-resolved codec
@@ -58,7 +61,7 @@ public sealed interface CodecCache permits CodecCacheImpl {
    *     value
    */
   <V, C extends Codec<V>> C compute(
-      Class<V> model, CodecResolver resolver, Supplier<C> resolveCodec);
+      Class<V> model, Class<? super C> codec, CodecResolver resolver, Supplier<C> resolveCodec);
 
   /**
    * @return a new {@link CodecCache} implementation

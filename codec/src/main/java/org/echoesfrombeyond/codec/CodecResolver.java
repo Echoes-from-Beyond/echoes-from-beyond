@@ -184,7 +184,9 @@ public interface CodecResolver {
     Builder withArraySupport();
 
     /**
-     * Enables support for collection resolution.
+     * Enables support for collection resolution. This will allow serialization of
+     * <i>instantiable</i> (i.e. non-abstract) types that extend {@link Collection}. They must
+     * specify a public, parameterless constructor.
      *
      * <p>Users will typically want to add one or more subtype mappings, as it is conventional to
      * use abstract types or interfaces for type declarations of collections. For example, call
@@ -337,16 +339,16 @@ public interface CodecResolver {
       var resolversCopy = new ArrayList<>(resolvers);
       var chained = new ChainedResolver(resolversCopy);
 
-      if (!subtypeMap.isEmpty()) {
-        var map = new HashClassHierarchyMap<Class<?>>();
-        for (var entry : subtypeMap.entrySet()) map.put(entry.getKey(), entry.getValue());
-        resolversCopy.add(new SubtypeResolver(chained, map));
-      }
       if (arraySupport) resolversCopy.add(new ArrayResolver(chained));
       if (collectionSupport) resolversCopy.add(new CollectionResolver(chained));
       if (mapSupport) resolversCopy.add(new MapResolver(chained, keyName, valueName));
       if (recursiveResolution)
         resolversCopy.add(new RecursiveResolver(chained, recursiveResolutionCache));
+      if (!subtypeMap.isEmpty()) {
+        var map = new HashClassHierarchyMap<Class<?>>();
+        for (var entry : subtypeMap.entrySet()) map.put(entry.getKey(), entry.getValue());
+        resolversCopy.add(new SubtypeResolver(chained, map));
+      }
 
       resolversCopy.trimToSize();
       return chained;

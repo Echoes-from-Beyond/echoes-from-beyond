@@ -21,6 +21,7 @@ package org.echoesfrombeyond.codec;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import java.util.*;
+import org.echoesfrombeyond.codec.annotation.ModelBuilder;
 import org.echoesfrombeyond.codec.cache.CodecCache;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -104,6 +105,8 @@ public final class Plugin extends JavaPlugin {
    *   <li>Set -> HashSet
    *   <li>Map -> HashMap
    * </ul>
+   *
+   * <p>Recursive {@link ModelBuilder} resolution will use {@link Plugin#getSharedCache()}.
    *
    * @return the shared codec resolver
    * @throws IllegalStateException if this plugin has not been initialized
