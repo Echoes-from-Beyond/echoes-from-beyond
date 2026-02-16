@@ -21,12 +21,13 @@ val hytalePath: Provider<File> = provider {
 }
 
 val serverJar: Provider<File> = hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.jar") }
+val serverAot: Provider<File> = hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.aot") }
 val assetsZip: Provider<File> = hytalePath.map { file -> file.resolve("Assets.zip") }
 
 val runDirectory: Directory = rootProject.layout.projectDirectory.dir("run")
 
 val copySdkTask: TaskProvider<Copy> = tasks.register("copySdk", Copy::class.java) {
-    from(serverJar, assetsZip).into(runDirectory)
+    from(serverJar, serverAot, assetsZip).into(runDirectory)
 }
 
 val syncPluginsTask: TaskProvider<Sync> = tasks.register("syncPlugins", Sync::class.java) {
@@ -53,7 +54,13 @@ tasks.register("runDevServer", JavaExec::class.java) {
     classpath = files(runDirectory.file("HytaleServer.jar"))
     workingDir = runDirectory.asFile
 
-    jvmArgs = listOf("-Xms6G", "-Xmx6G", "--enable-native-access=ALL-UNNAMED", "-ea")
+    jvmArgs = listOf("-Xms6G",
+        "-Xmx6G",
+        "-Xlog:aot",
+        "-XX:+UseCompactObjectHeaders",
+        "-XX:AOTCache=HytaleServer.aot",
+        "--enable-native-access=ALL-UNNAMED",
+        "-ea")
     args = listOf("--disable-sentry", "--assets", "Assets.zip")
 }
 
@@ -67,5 +74,6 @@ tasks.register("cleanRunDir", Delete::class.java) {
         exclude("Assets.zip")
         exclude("auth.enc")
         exclude("HytaleServer.jar")
+        exclude("HytaleServer.aot")
     })
 }
