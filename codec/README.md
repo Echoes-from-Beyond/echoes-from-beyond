@@ -2,6 +2,25 @@
 
 This library plugin is intended to reduce a lot of the boilerplate associated with constructing `BuilderCodec`s. It features an annotation-based API and uses reflection to introspect types.
 
+## Add this library to your project
+
+The plugin is available on Maven Central. To add it as a dependency with Kotlin Gradle:
+
+```kotlin
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly("org.echoesfrombeyond:codec-helper:0.1.0")
+}
+```
+
+Then, in your plugin's `manifest.json`, add the following entry to the `DependsOn` block:
+```
+"org.echoesfrombeyond:CodecHelper": "^0.1.0"
+```
+
 ## Basic usage
 
 This section covers the simplest usage of the API.

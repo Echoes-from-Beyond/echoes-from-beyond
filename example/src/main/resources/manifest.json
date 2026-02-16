@@ -1,0 +1,19 @@
+{
+  "Group": "org.echoesfrombeyond",
+  "Name": "ExamplePlugin",
+  "Version": "0.1.0",
+  "Description": "Example plugin used for testing external consumption of our libraries.",
+  "Authors": [
+    {
+      "Name": "Kyle",
+      "Email": "chemky2000@gmail.com",
+      "Url": null
+    }
+  ],
+  "Website": null,
+  "Main": "org.echoesfrombeyond.example.Plugin",
+  "ServerVersion": "*",
+  "DependsOn": {
+    "org.echoesfrombeyond:CodecHelper": "^0.1.0"
+  }
+}
