@@ -18,29 +18,29 @@
 
 package org.echoesfrombeyond.example;
 
-import com.hypixel.hytale.codec.ExtraInfo;
-import com.hypixel.hytale.server.core.plugin.JavaPlugin;
-import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
+import java.util.List;
+import java.util.Map;
+import org.echoesfrombeyond.codechelper.CodecUtil;
+import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.jspecify.annotations.NullMarked;
 
-/** Example plugin. */
+/** Basic integration test for codec-helper. */
+@SuppressWarnings({"FieldCanBeLocal", "unused", "FieldMayBeFinal"})
 @NullMarked
-@SuppressWarnings("unused")
-public class Plugin extends JavaPlugin {
-  /**
-   * Instantiated by Hytale.
-   *
-   * @param init the plugin arguments
-   */
-  public Plugin(JavaPluginInit init) {
-    super(init);
+@ModelBuilder
+public class CursedData {
+  /** The codec. */
+  public static final BuilderCodec<CursedData> CODEC =
+      CodecUtil.modelBuilder(CursedData.class, Plugin.getSharedResolver());
+
+  /** Creates a new instance of this class. */
+  public CursedData() {
+    this.Value = 10;
+    this.Cursed = Map.of(List.of("Hello"), Map.of("World", 10));
   }
 
-  @Override
-  protected void setup() {
-    CursedData.CODEC.encode(new CursedData(), new ExtraInfo());
-  }
-
-  @Override
-  protected void shutdown() {}
+  private int Value;
+  private Map<List<String>, Map<String, Integer>> Cursed;
 }
