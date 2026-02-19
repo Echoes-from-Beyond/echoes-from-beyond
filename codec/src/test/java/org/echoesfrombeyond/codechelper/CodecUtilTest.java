@@ -37,6 +37,7 @@ import org.bson.json.JsonWriterSettings;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.annotation.Skip;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateNonEmpty;
+import org.echoesfrombeyond.codechelper.annotation.validator.ValidateRegex;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateRequiredMapKeys;
 import org.echoesfrombeyond.codechelper.cache.CodecCache;
 import org.jspecify.annotations.NullMarked;
@@ -163,6 +164,14 @@ class CodecUtilTest {
   @SuppressWarnings("unused")
   public static class DirectMapping {
     private String DirectMapping;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class RegexValidator {
+    @ValidateRegex("[a-z]+")
+    public String Regex;
   }
 
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
@@ -613,5 +622,30 @@ class CodecUtilTest {
     expected.DirectMapping = "Direct Mapping";
 
     assertRoundTripEquals(data, expected, codec);
+  }
+
+  @Test
+  public void regexValidatorThrowsOnNonMatchingString() {
+    var builder = CodecResolver.PRIMITIVE;
+    var codec = CodecUtil.modelBuilder(RegexValidator.class, builder);
+
+    var data = new RegexValidator();
+    data.Regex = "A";
+
+    var json = codec.encode(data, new ExtraInfo());
+
+    assertThrows(CodecValidationException.class, () -> codec.decode(json, new ExtraInfo()));
+  }
+
+  @Test
+  public void regexValidatorDoesNotThrowOnMatchingString() {
+    var builder = CodecResolver.PRIMITIVE;
+    var codec = CodecUtil.modelBuilder(RegexValidator.class, builder);
+
+    var data = new RegexValidator();
+    data.Regex = "a";
+
+    var json = codec.encode(data, new ExtraInfo());
+    codec.decode(json, new ExtraInfo());
   }
 }
