@@ -149,6 +149,26 @@ public interface CodecResolver {
     <T> Builder withSubtypeMapping(Class<T> baseClass, Class<? extends T> subClass);
 
     /**
+     * Adds a direct mapping to the resolver.
+     *
+     * <p>If the class {@code type} is encountered during resolution, it will use {@code codec} for
+     * (de)serialization.
+     *
+     * <p>This takes precedence over all other "internal" resolvers such as those implicitly added
+     * by {@link Builder#withArraySupport()} and similar, but does <b>NOT</b> take precedence over
+     * resolvers added by {@link Builder#chain(CodecResolver)}. This allows users to "override"
+     * behavior of said resolvers.
+     *
+     * @param type the type
+     * @param codec the codec used to (de)serialize the type
+     * @return this builder
+     * @param <T> the type of mapping
+     * @throws NullPointerException if {@code type} or {@code codec} are {@code null}
+     */
+    @Contract("_, _ -> this")
+    <T> Builder withDirectMapping(Class<T> type, Codec<T> codec);
+
+    /**
      * Enables "recursive resolution", that is, types annotated with {@link ModelBuilder} containing
      * types that are, themselves, annotated with {@link ModelBuilder}.
      *
@@ -251,9 +271,11 @@ public interface CodecResolver {
   final class BuilderImpl implements Builder {
     private final List<CodecResolver> resolvers;
     private final Map<Class<?>, Class<?>> subtypeMap;
+    private final Map<Class<?>, Codec<?>> codecMap;
 
     private boolean recursiveResolution;
     private @Nullable CodecCache recursiveResolutionCache;
+    private boolean directMappingSupport;
     private boolean arraySupport;
     private boolean collectionSupport;
     private boolean mapSupport;
@@ -264,6 +286,7 @@ public interface CodecResolver {
     private BuilderImpl() {
       this.resolvers = new ArrayList<>();
       this.subtypeMap = new HashMap<>();
+      this.codecMap = new HashMap<>();
     }
 
     @Override
@@ -283,6 +306,16 @@ public interface CodecResolver {
             "Superclass " + baseClass.getName() + " cannot be equal to subclass");
 
       subtypeMap.put(baseClass, subClass);
+      return this;
+    }
+
+    @Override
+    public <T> Builder withDirectMapping(Class<T> type, Codec<T> codec) {
+      Check.nonNull(type);
+      Check.nonNull(codec);
+
+      directMappingSupport = true;
+      codecMap.put(type, codec);
       return this;
     }
 
@@ -339,6 +372,7 @@ public interface CodecResolver {
       var resolversCopy = new ArrayList<>(resolvers);
       var chained = new ChainedResolver(resolversCopy);
 
+      if (directMappingSupport) resolversCopy.add(new DirectMappingResolver(Map.copyOf(codecMap)));
       if (arraySupport) resolversCopy.add(new ArrayResolver(chained));
       if (collectionSupport) resolversCopy.add(new CollectionResolver(chained));
       if (mapSupport) resolversCopy.add(new MapResolver(chained, keyName, valueName));

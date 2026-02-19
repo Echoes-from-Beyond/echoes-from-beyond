@@ -158,6 +158,13 @@ class CodecUtilTest {
     private PrivateAccess() {}
   }
 
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class DirectMapping {
+    private String DirectMapping;
+  }
+
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
     if (expected == null && actual == null) return;
     if (expected == null ^ actual == null) {
@@ -575,5 +582,36 @@ class CodecUtilTest {
     expected.PrivateMember = 10;
 
     assertRoundTripEquals(actual, expected, codec);
+  }
+
+  @Test
+  @SuppressWarnings("DataFlowIssue")
+  public void directMappingThrowsNullPointerExceptionOnNullKey() {
+    assertThrows(
+        NullPointerException.class,
+        () -> CodecResolver.builder().withDirectMapping(null, Codec.STRING));
+  }
+
+  @Test
+  @SuppressWarnings("DataFlowIssue")
+  public void directMappingThrowsNullPointerExceptionOnNullValue() {
+    assertThrows(
+        NullPointerException.class,
+        () -> CodecResolver.builder().withDirectMapping(String.class, null));
+  }
+
+  @Test
+  public void directMappingResolvesType() {
+    var builder = CodecResolver.builder().withDirectMapping(String.class, Codec.STRING).build();
+
+    var codec = CodecUtil.modelBuilder(DirectMapping.class, builder);
+
+    var data = new DirectMapping();
+    data.DirectMapping = "Direct Mapping";
+
+    var expected = new DirectMapping();
+    expected.DirectMapping = "Direct Mapping";
+
+    assertRoundTripEquals(data, expected, codec);
   }
 }
