@@ -40,4 +40,14 @@ public class FieldModelException extends ModelException {
   public FieldModelException(Class<?> modelType, Field field, String message) {
     super(modelType, formatMessage(field, message));
   }
+
+  /**
+   * @param modelType the model type
+   * @param field the field associated with this exception
+   * @param message the error message
+   * @param cause the error cause
+   */
+  public FieldModelException(Class<?> modelType, Field field, String message, Throwable cause) {
+    super(modelType, formatMessage(field, message), cause);
+  }
 }

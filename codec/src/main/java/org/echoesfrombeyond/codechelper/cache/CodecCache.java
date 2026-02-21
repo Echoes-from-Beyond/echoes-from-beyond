@@ -23,8 +23,10 @@ import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import java.util.function.Supplier;
 import org.echoesfrombeyond.codechelper.CodecResolver;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A generic, thread-safe cache of resolved {@link Codec}s.
@@ -51,6 +53,10 @@ public sealed interface CodecCache permits CodecCacheImpl {
    * invoke this method again.
    *
    * @param model the model class
+   * @param inheritFrom the type (de)serialized by the parent codec; or {@code null} if none
+   * @param idClass the class of the id codec; typically {@code String.class}, or {@code null} if
+   *     not building an {@link AssetBuilderCodec}
+   * @param idCodec the id codec; should be {@code null} if {@code idClass} is {@code null}
    * @param codec the base codec class; e.g. {@link BuilderCodec} or {@link AssetBuilderCodec}
    * @param resolver the resolver used to resolve the codec
    * @param resolveCodec the actual resolved codec
@@ -60,8 +66,36 @@ public sealed interface CodecCache permits CodecCacheImpl {
    * @throws NullPointerException if there is a cache miss and {@code resolveCodec} yields a null
    *     value
    */
-  <V, C extends Codec<V>> C compute(
-      Class<V> model, Class<? super C> codec, CodecResolver resolver, Supplier<C> resolveCodec);
+  @ApiStatus.Internal
+  <K, V, C extends Codec<V>> C compute(
+      Class<V> model,
+      @Nullable Class<? super V> inheritFrom,
+      @Nullable Class<K> idClass,
+      @Nullable Codec<K> idCodec,
+      Class<? super C> codec,
+      CodecResolver resolver,
+      Supplier<C> resolveCodec);
+
+  /**
+   * Equivalent to {@link CodecCache#compute(Class, Class, Class, Codec, Class, CodecResolver,
+   * Supplier)}, but with {@code inheritFrom}, {@code idClass}, and {@code idCodec} set to {@code
+   * null}.
+   *
+   * @param model the model class
+   * @param codec the base codec class; e.g. {@link BuilderCodec} or {@link AssetBuilderCodec}
+   * @param resolver the resolver used to resolve the codec
+   * @param resolveCodec the actual resolved codec
+   * @return the cached or freshly-resolved codec
+   * @param <V> the type (de)serialized by the codec
+   * @param <C> the codec type
+   * @throws NullPointerException if there is a cache miss and {@code resolveCodec} yields a null
+   *     value
+   */
+  @ApiStatus.Internal
+  default <V, C extends Codec<V>> C compute(
+      Class<V> model, Class<? super C> codec, CodecResolver resolver, Supplier<C> resolveCodec) {
+    return compute(model, null, null, null, codec, resolver, resolveCodec);
+  }
 
   /**
    * @return a new {@link CodecCache} implementation

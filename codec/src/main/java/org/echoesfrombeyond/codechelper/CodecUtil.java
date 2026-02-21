@@ -18,6 +18,9 @@
 
 package org.echoesfrombeyond.codechelper;
 
+import com.hypixel.hytale.assetstore.AssetExtraInfo;
+import com.hypixel.hytale.assetstore.JsonAsset;
+import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
@@ -77,13 +80,14 @@ public final class CodecUtil {
    */
   public static <T> BuilderCodec<T> modelBuilder(
       Class<T> model, CodecResolver resolver, CodecCache cache) {
-    return cache.compute(model, BuilderCodec.class, resolver, () -> modelBuilder(model, resolver));
+    return cache.compute(
+        model, null, null, null, BuilderCodec.class, resolver, () -> modelBuilder(model, resolver));
   }
 
   /**
    * Generates a {@link BuilderCodec} from an arbitrary user-defined class. The class must be
-   * annotated with {@link ModelBuilder}, and it must provide a parameterless constructor (which may
-   * be private).
+   * annotated with {@link ModelBuilder}. If non-{@code abstract}, the class must provide a
+   * parameterless constructor.
    *
    * <p>The declared, non-final fields of {@code model} will be examined in order. Those annotated
    * with {@link Skip} will be ignored. Each eligible field will be used to construct a {@link
@@ -115,50 +119,191 @@ public final class CodecUtil {
    * in-order, which are passed to {@link BuilderField.FieldBuilder#addValidator(Validator)}. See
    * {@link ValidatorProvider} for more details on how this process works.
    *
+   * <p>If (and only if) {@code model} is abstract, the returned BuilderCodec will be abstract.
+   *
    * @param model the model type class
    * @param resolver the resolver used to generate {@link Codec}s based on the field type
    * @return the generated BuilderCodec
    * @param <T> the model type
    */
-  @SuppressWarnings("unchecked")
   public static <T> BuilderCodec<T> modelBuilder(Class<T> model, CodecResolver resolver) {
-    MethodHandles.Lookup lookup;
-    try {
-      lookup = MethodHandles.privateLookupIn(model, MethodHandles.lookup());
-    } catch (IllegalAccessException e) {
-      throw new ModelException(model, "Private access must be possible");
-    }
-
     if (!model.isAnnotationPresent(ModelBuilder.class))
       throw new ModelException(model, "Must be annotated with @ModelBuilder");
 
-    MethodHandle constructor;
+    var lookup = getLookupForModel(model);
+
+    BuilderCodec.Builder<T> builder;
+    if (Modifier.isAbstract(model.getModifiers())) builder = BuilderCodec.abstractBuilder(model);
+    else {
+      var constructor = getConstructorForModel(model, lookup);
+
+      builder =
+          BuilderCodec.builder(
+              model,
+              () -> {
+                try {
+                  return model.cast(constructor.invoke());
+                } catch (Throwable e) {
+                  throw new CodecException("Error constructing model", e);
+                }
+              });
+    }
+
+    modelFields(builder, model, resolver, lookup);
+    return builder.build();
+  }
+
+  public static <T extends JsonAsset<String>> AssetBuilderCodec<String, T> modelAssetBuilder(
+      Class<T> model, CodecResolver resolver, CodecCache cache) {
+    return cache.compute(
+        model,
+        null,
+        String.class,
+        Codec.STRING,
+        AssetBuilderCodec.class,
+        resolver,
+        () -> modelAssetBuilder(model, String.class, Codec.STRING, resolver));
+  }
+
+  public static <T extends JsonAsset<String>> AssetBuilderCodec<String, T> modelAssetBuilder(
+      Class<T> model, CodecResolver resolver) {
+    return modelAssetBuilder(model, String.class, Codec.STRING, resolver);
+  }
+
+  public static <K, T extends JsonAsset<K>> AssetBuilderCodec<K, T> modelAssetBuilder(
+      Class<T> model, Class<K> idClass, Codec<K> idCodec, CodecResolver resolver) {
+    if (!model.isAnnotationPresent(ModelBuilder.class))
+      throw new ModelException(model, "Must be annotated with @ModelBuilder");
+
+    var lookup = getLookupForModel(model);
+    var constructor = getConstructorForModel(model, lookup);
+
+    var idField = getUniqueAnnotatedField(model, Id.class, idClass);
+    var dataField = getUniqueAnnotatedField(model, Data.class, AssetExtraInfo.Data.class);
+
+    MethodHandle idRead;
+    MethodHandle idWrite;
+
+    MethodHandle dataRead;
+    MethodHandle dataWrite;
+
     try {
-      constructor = lookup.findConstructor(model, MethodType.methodType(void.class));
-    } catch (NoSuchMethodException _) {
-      throw new ModelException(model, "Must have parameterless constructor");
+      idRead = lookup.unreflectGetter(idField);
+      idWrite = lookup.unreflectSetter(idField);
     } catch (IllegalAccessException e) {
-      throw new ModelException(model, "Parameterless constructor must be accessible", e);
+      throw new FieldModelException(model, idField, "Should be able to access @Id field", e);
+    }
+
+    try {
+      dataRead = lookup.unreflectGetter(dataField);
+      dataWrite = lookup.unreflectSetter(dataField);
+    } catch (IllegalAccessException e) {
+      throw new FieldModelException(model, dataField, "Should be able to access @Data field", e);
     }
 
     var builder =
-        BuilderCodec.builder(
+        AssetBuilderCodec.builder(
             model,
             () -> {
               try {
                 return model.cast(constructor.invoke());
               } catch (Throwable e) {
-                throw new RuntimeException(e);
+                throw new CodecException("Error constructing model", e);
+              }
+            },
+            idCodec,
+            (self, value) -> {
+              try {
+                idWrite.invoke(self, value);
+              } catch (Throwable e) {
+                throw new CodecException("Couldn't write @Id field", e);
+              }
+            },
+            (self) -> {
+              try {
+                return idClass.cast(idRead.invoke(self));
+              } catch (Throwable e) {
+                throw new CodecException("Couldn't read @Id field", e);
+              }
+            },
+            (self, data) -> {
+              try {
+                dataWrite.invoke(self, data);
+              } catch (Throwable e) {
+                throw new CodecException("Couldn't write @Data field", e);
+              }
+            },
+            self -> {
+              try {
+                return (AssetExtraInfo.Data) dataRead.invoke(self);
+              } catch (Throwable e) {
+                throw new CodecException("Couldn't read @Data field", e);
               }
             });
 
+    modelFields(builder, model, resolver, lookup);
+    return builder.build();
+  }
+
+  private static Field getUniqueAnnotatedField(
+      Class<?> model, Class<? extends Annotation> annotation, Class<?> requiredType) {
+    Field found = null;
+    for (var field : model.getDeclaredFields()) {
+      if (!field.isAnnotationPresent(annotation)) continue;
+      if (found == null) {
+        found = field;
+        continue;
+      }
+
+      throw new FieldModelException(
+          model, field, "Expected to find only one @" + annotation.getCanonicalName() + " field");
+    }
+
+    if (found == null)
+      throw new ModelException(
+          model,
+          "Expected to find exactly one field annotated with @" + annotation.getCanonicalName());
+
+    if (!found.getType().equals(requiredType))
+      throw new ModelException(
+          model,
+          "@"
+              + annotation.getCanonicalName()
+              + " field type should have been "
+              + requiredType.getName());
+
+    return found;
+  }
+
+  private static MethodHandles.Lookup getLookupForModel(Class<?> model) {
+    try {
+      return MethodHandles.privateLookupIn(model, MethodHandles.lookup());
+    } catch (IllegalAccessException e) {
+      throw new ModelException(model, "Private access must be possible");
+    }
+  }
+
+  private static MethodHandle getConstructorForModel(Class<?> model, MethodHandles.Lookup lookup) {
+    try {
+      return lookup.findConstructor(model, MethodType.methodType(void.class));
+    } catch (NoSuchMethodException _) {
+      throw new ModelException(model, "Must have parameterless constructor");
+    } catch (IllegalAccessException e) {
+      throw new ModelException(model, "Parameterless constructor must be accessible", e);
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private static <T> void modelFields(
+      BuilderCodec.BuilderBase<T, ?> builder,
+      Class<T> model,
+      CodecResolver resolver,
+      MethodHandles.Lookup lookup) {
     var topLevelDocumentation = model.getDeclaredAnnotation(Doc.class);
     if (topLevelDocumentation != null)
       builder = builder.documentation(topLevelDocumentation.value());
 
-    var fields = model.getDeclaredFields();
-
-    for (var field : fields) {
+    for (var field : model.getDeclaredFields()) {
       int modifiers = field.getModifiers();
       if (Modifier.isStatic(modifiers)
           || !Modifier.isPublic(modifiers)
@@ -181,7 +326,7 @@ public final class CodecUtil {
         read = lookup.unreflectGetter(field);
         write = lookup.unreflectSetter(field);
       } catch (IllegalAccessException e) {
-        throw new RuntimeException(e);
+        throw new FieldModelException(model, field, "Should be able to access field", e);
       }
 
       var fieldBuilder =
@@ -191,14 +336,14 @@ public final class CodecUtil {
                 try {
                   write.invoke(self, value);
                 } catch (Throwable e) {
-                  throw new CodecException("Write error", e);
+                  throw new CodecException("Couldn't write to field", e);
                 }
               },
               (self) -> {
                 try {
                   return read.invoke(self);
                 } catch (Throwable e) {
-                  throw new CodecException("Read error", e);
+                  throw new CodecException("Couldn't read from field", e);
                 }
               });
 
@@ -271,7 +416,5 @@ public final class CodecUtil {
 
       builder = fieldBuilder.add();
     }
-
-    return builder.build();
   }
 }
