@@ -127,9 +127,7 @@ public final class CodecUtil {
    * @param <T> the model type
    */
   public static <T> BuilderCodec<T> modelBuilder(Class<T> model, CodecResolver resolver) {
-    if (!model.isAnnotationPresent(ModelBuilder.class))
-      throw new ModelException(model, "Must be annotated with @ModelBuilder");
-
+    checkModelPreconditions(model);
     var lookup = getLookupForModel(model);
 
     BuilderCodec.Builder<T> builder;
@@ -172,8 +170,7 @@ public final class CodecUtil {
 
   public static <K, T extends JsonAsset<K>> AssetBuilderCodec<K, T> modelAssetBuilder(
       Class<T> model, Class<K> idClass, Codec<K> idCodec, CodecResolver resolver) {
-    if (!model.isAnnotationPresent(ModelBuilder.class))
-      throw new ModelException(model, "Must be annotated with @ModelBuilder");
+    checkModelPreconditions(model);
 
     var lookup = getLookupForModel(model);
     var constructor = getConstructorForModel(model, lookup);
@@ -273,6 +270,11 @@ public final class CodecUtil {
               + requiredType.getName());
 
     return found;
+  }
+
+  private static void checkModelPreconditions(Class<?> model) {
+    if (!model.isAnnotationPresent(ModelBuilder.class))
+      throw new ModelException(model, "Must be annotated with @ModelBuilder");
   }
 
   private static MethodHandles.Lookup getLookupForModel(Class<?> model) {
