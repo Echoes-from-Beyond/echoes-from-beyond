@@ -2,15 +2,13 @@ package org.echoesfrombeyond.gradle.plugin
 
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.spotless.LineEnding
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
-import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.JavaPluginExtension
-import org.gradle.api.specs.Spec
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.api.tasks.testing.Test
@@ -33,19 +31,29 @@ class JavaConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("java-library")
         target.plugins.apply("com.diffplug.spotless")
+        target.plugins.apply("com.gradleup.shadow")
 
         target.repositories.add(target.repositories.mavenCentral())
 
         val libs = (target.extensions.getByName("versionCatalogs") as VersionCatalogsExtension)
             .named("libs")
 
-        target.dependencies.add("compileOnly", libs.findBundle("compileOnly").get())
+        fun Project.setupDependencyConfiguration(configurationName: String) {
+            val global = libs.findBundle(configurationName)
+            val local = libs.findBundle("$name-$configurationName")
 
-        target.dependencies.add("implementation", libs.findBundle("implementation").get())
-        target.dependencies.add("runtimeOnly", libs.findBundle("runtimeOnly").get())
+            global.ifPresent { provider -> dependencies.add(configurationName, provider) }
+            local.ifPresent { provider -> dependencies.add(configurationName, provider) }
+        }
 
-        target.dependencies.add("testImplementation", libs.findBundle("testImplementation").get())
-        target.dependencies.add("testRuntimeOnly", libs.findBundle("testRuntimeOnly").get())
+        target.setupDependencyConfiguration("api")
+        target.setupDependencyConfiguration("implementation")
+        target.setupDependencyConfiguration("compileOnly")
+        target.setupDependencyConfiguration("compileOnlyApi")
+        target.setupDependencyConfiguration("runtimeOnly")
+        target.setupDependencyConfiguration("testImplementation")
+        target.setupDependencyConfiguration("testCompileOnly")
+        target.setupDependencyConfiguration("testRuntimeOnly")
 
         target.extensions.configure<JavaPluginExtension>("java") {
             it.toolchain.languageVersion.set(JavaLanguageVersion.of(25))
@@ -58,7 +66,7 @@ class JavaConventionPlugin : Plugin<Project> {
             it.useJUnitPlatform()
         }
 
-        target.tasks.withType(Jar::class.java).configureEach {
+        target.tasks.withType(ShadowJar::class.java).configureEach {
             it.from(target.rootProject.layout.projectDirectory.file("LICENSE").asFile) { spec ->
                 spec.into("META-INF")
             }
@@ -126,65 +134,16 @@ class JavaConventionPlugin : Plugin<Project> {
             }
         }
 
+        target.tasks.named("shadowJar", ShadowJar::class.java).configure {
+            it.archiveClassifier.set("")
+            it.enableAutoRelocation.set(true)
+            it.relocationPrefix.set(target.provider {
+                "${target.group.toString().replace('.', '/')}/${target.name}/internaldep"
+            })
+        }
+
         target.tasks.named("jar", Jar::class.java).configure {
-            it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-            val runtimeClasspath = target.configurations.named("runtimeClasspath")
-
-            it.dependsOn(runtimeClasspath)
-
-            it.from(runtimeClasspath.map { configuration ->
-                configuration
-                    .filter { file -> file.extension == "jar" }
-                    .map { jar -> target.zipTree(jar) }
-            })
-        }
-
-        val includes = setOf("implementation", "api")
-
-        // We want to include sources and Javadoc from project dependencies declared under
-        // `implementation` or `api`. This function runs that check.
-        val spec = { name: String -> includes.contains(name) }
-
-        target.tasks.named("sourcesJar", Jar::class.java).configure {
-            it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-            // This is horribly ugly, but what it does is actually simple: collect all project
-            // dependencies and the files outputted by their `sourcesJar` tasks. This only includes
-            // the direct project dependencies, but this is fine since those also have this
-            // configuration applied.
-            it.from({
-                dependentProjects(target, spec) { project ->
-                    project.tasks.named("sourcesJar", Jar::class.java)
-                }.map { source ->
-                    target.zipTree(source.map { jar -> jar.outputs.files.singleFile })
-                }
-            })
-        }
-
-        // Instead of configuring `javadocJar`, configure `javadoc` as we can directly add new
-        // source inputs.
-        target.tasks.named("javadoc", Javadoc::class.java).configure {
-            // Similar logic to the configuration of `sourcesJar`.
-            it.source(dependentProjects(target, spec) { project ->
-                project.tasks.named("javadoc", Javadoc::class.java).map { javadoc ->
-                    javadoc.source
-                }
-            })
-        }
-    }
-}
-
-/**
- * Return a [List] made by iterating all [ProjectDependency] found in [target]'s configurations that
- * match [nameFilter], after applying the [transform] mapping function to each.
- */
-private fun <R> dependentProjects(target: Project,
-                                  nameFilter: Spec<String>,
-                                  transform: (Project) -> R): List<R> {
-    return target.configurations.named(nameFilter).flatMap { config ->
-        config.dependencies.withType(ProjectDependency::class.java).map { dependency ->
-            transform(target.project(dependency.path))
+            it.archiveClassifier.set("thin")
         }
     }
 }
@@ -205,10 +164,12 @@ fun Project.withHytaleDependency() {
         throw GradleException("Hytale plugin projects must apply JavaConventionPlugin!")
 
     repositories.exclusiveContent { exclusive ->
-        exclusive.forRepositories(repositories.maven { maven ->
-            maven.name = "hytale-pre-release"
-            maven.url = URI.create("https://maven.hytale.com/pre-release")
-        })
+        exclusive.forRepository {
+            repositories.maven { maven ->
+                maven.name = "hytale-pre-release"
+                maven.url = URI.create("https://maven.hytale.com/pre-release")
+            }
+        }
         exclusive.filter { filter -> filter.includeGroup("com.hypixel.hytale") }
     }
 
@@ -227,7 +188,7 @@ fun Project.withHytalePlugin(name: String) {
 
     val baseNameProperty = provider { version }.map { version -> "$name-$version" }
 
-    tasks.named("jar", Jar::class.java).configure { jar ->
+    tasks.named("shadowJar", ShadowJar::class.java).configure { jar ->
         jar.archiveFileName.set(baseNameProperty.map { property -> "$property.jar" })
     }
 

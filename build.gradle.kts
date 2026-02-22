@@ -1,6 +1,10 @@
 import org.gradle.internal.extensions.core.extra
 import java.nio.file.Paths
 
+allprojects {
+    group = "org.echoesfrombeyond"
+}
+
 val hytalePath: Provider<File> = provider {
     val hytaleDotfile: File = rootProject.file(".hytale")
 
@@ -35,7 +39,7 @@ val syncPluginsTask: TaskProvider<Sync> = tasks.register("syncPlugins", Sync::cl
     // case when their build script includes `withHytalePlugin`.
     from(subprojects.filter { sub -> sub.extra.has("hasPlugin") }
         .filter { sub -> sub.extra.get("hasPlugin") as? Boolean ?: false }
-        .map { sub -> sub.tasks.named("jar") })
+        .map { sub -> sub.tasks.named("shadowJar") })
         .into(runDirectory.dir("mods"))
 
     // Preserve everything except run/mods/*.jar

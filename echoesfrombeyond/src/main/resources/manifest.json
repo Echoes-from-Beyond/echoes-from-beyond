@@ -1,0 +1,29 @@
+{
+  "Group": "org.echoesfrombeyond",
+  "Name": "EchoesFromBeyond",
+  "Version": "0.1.0",
+  "Description": "A Lovecraftian Hytale mod.",
+  "Authors": [
+    {
+      "Name": "Kyle",
+      "Email": "chemky2000@gmail.com",
+      "Url": null
+    },
+    {
+      "Name": "Cobrinthine",
+      "Email": null,
+      "Url": null
+    }
+  ],
+  "Website": null,
+  "Main": "org.echoesfrombeyond.echoesfrombeyond.Plugin",
+  "ServerVersion": "*",
+  "IncludesAssetPack": true,
+  "OptionalDependencies": {
+    "Buuz135:MultipleHUD": "^1.0.3"
+  },
+  "DependsOn": {
+    "Hytale:EntityModule": "*",
+    "Hytale:BlockModule": "*"
+  }
+}
