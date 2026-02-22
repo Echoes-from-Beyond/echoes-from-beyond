@@ -34,6 +34,7 @@ import java.lang.invoke.MethodType;
 import java.lang.reflect.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import org.echoesfrombeyond.codechelper.annotation.*;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidatorSpec;
 import org.echoesfrombeyond.codechelper.cache.CodecCache;
@@ -42,6 +43,7 @@ import org.echoesfrombeyond.codechelper.exception.ModelException;
 import org.echoesfrombeyond.codechelper.exception.ValidatorModelException;
 import org.echoesfrombeyond.codechelper.validator.ValidatorProvider;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Convenience utilities for working with {@link Codec}. Contains several static Codec
@@ -65,11 +67,27 @@ public final class CodecUtil {
   /** Primitive {@code short} array codec. */
   public static final Codec<short[]> SHORT_ARRAY_CODEC = new ShortArrayCodec();
 
-  private CodecUtil() {}
+  private CodecUtil() {
+    throw new RuntimeException();
+  }
 
   /**
-   * Works the same as {@link CodecUtil#modelBuilder(Class, CodecResolver)}, but uses the provided
-   * {@link CodecCache} to cache generated codecs and prevent unnecessary resolution.
+   * Works identically to {@link CodecUtil#modelBuilder(Class, BuilderCodec, CodecResolver)} with
+   * {@code parent} set to {@code null}.
+   *
+   * @param model the model type class
+   * @param resolver the resolver used to generate {@link Codec}s based on the field type
+   * @return the generated BuilderCodec
+   * @param <T> the model type
+   */
+  public static <T> BuilderCodec<T> modelBuilder(Class<T> model, CodecResolver resolver) {
+    return modelBuilder(model, null, resolver);
+  }
+
+  /**
+   * Works the same as {@link CodecUtil#modelBuilder(Class, BuilderCodec, CodecResolver)}, but uses
+   * the provided {@link CodecCache} to cache generated codecs and prevent unnecessary resolution,
+   * and {@code parent} is set to {@code null}.
    *
    * @param model the model type
    * @param resolver the resolver
@@ -77,11 +95,39 @@ public final class CodecUtil {
    * @return a new {@link BuilderCodec}
    * @param <T> the model type, which must be annotated with {@link ModelBuilder}
    * @throws IllegalArgumentException if the codec cannot be resolved for any reason
+   * @throws NullPointerException if {@code cache} is null
    */
   public static <T> BuilderCodec<T> modelBuilder(
       Class<T> model, CodecResolver resolver, CodecCache cache) {
     return cache.compute(
-        model, null, null, null, BuilderCodec.class, resolver, () -> modelBuilder(model, resolver));
+        model, null, null, BuilderCodec.class, resolver, () -> modelBuilder(model, null, resolver));
+  }
+
+  /**
+   * Works the same as {@link CodecUtil#modelBuilder(Class, BuilderCodec, CodecResolver)}, but uses
+   * the provided {@link CodecCache} to cache generated codecs and prevent unnecessary resolution.
+   *
+   * @param model the model type
+   * @param parent the parent codec
+   * @param resolver the resolver
+   * @param cache the cache used to avoid duplicate work
+   * @return a new {@link BuilderCodec}
+   * @param <T> the model type, which must be annotated with {@link ModelBuilder}
+   * @throws IllegalArgumentException if the codec cannot be resolved for any reason
+   * @throws NullPointerException if {@code cache} is null
+   */
+  public static <T> BuilderCodec<T> modelBuilder(
+      Class<T> model,
+      @Nullable BuilderCodec<? super T> parent,
+      CodecResolver resolver,
+      CodecCache cache) {
+    return cache.compute(
+        model,
+        parent,
+        null,
+        BuilderCodec.class,
+        resolver,
+        () -> modelBuilder(model, parent, resolver));
   }
 
   /**
@@ -92,6 +138,10 @@ public final class CodecUtil {
    * <p>The declared, non-final fields of {@code model} will be examined in order. Those annotated
    * with {@link Skip} will be ignored. Each eligible field will be used to construct a {@link
    * KeyedCodec} according to the following guidelines:
+   *
+   * <p>If {@code parent} is non-null, the returned builder will inherit from it as if by {@link
+   * BuilderCodec#builder(Class, Supplier, BuilderCodec)} or {@link
+   * BuilderCodec#abstractBuilder(Class, BuilderCodec)}.
    *
    * <ol>
    *   <li>If the field is annotated with {@link Name}, the value of that annotation is passed to
@@ -122,29 +172,37 @@ public final class CodecUtil {
    * <p>If (and only if) {@code model} is abstract, the returned BuilderCodec will be abstract.
    *
    * @param model the model type class
+   * @param parent the parent codec, or {@code null} if none exists
    * @param resolver the resolver used to generate {@link Codec}s based on the field type
    * @return the generated BuilderCodec
    * @param <T> the model type
    */
-  public static <T> BuilderCodec<T> modelBuilder(Class<T> model, CodecResolver resolver) {
+  public static <T> BuilderCodec<T> modelBuilder(
+      Class<T> model, @Nullable BuilderCodec<? super T> parent, CodecResolver resolver) {
     checkModelPreconditions(model);
     var lookup = getLookupForModel(model);
 
     BuilderCodec.Builder<T> builder;
-    if (Modifier.isAbstract(model.getModifiers())) builder = BuilderCodec.abstractBuilder(model);
+    if (Modifier.isAbstract(model.getModifiers()))
+      builder =
+          parent == null
+              ? BuilderCodec.abstractBuilder(model)
+              : BuilderCodec.abstractBuilder(model, parent);
     else {
       var constructor = getConstructorForModel(model, lookup);
+      Supplier<T> supplier =
+          () -> {
+            try {
+              return model.cast(constructor.invoke());
+            } catch (Throwable e) {
+              throw new CodecException("Error constructing model", e);
+            }
+          };
 
       builder =
-          BuilderCodec.builder(
-              model,
-              () -> {
-                try {
-                  return model.cast(constructor.invoke());
-                } catch (Throwable e) {
-                  throw new CodecException("Error constructing model", e);
-                }
-              });
+          parent == null
+              ? BuilderCodec.builder(model, supplier)
+              : BuilderCodec.builder(model, supplier, parent);
     }
 
     modelFields(builder, model, resolver, lookup);
@@ -152,24 +210,102 @@ public final class CodecUtil {
   }
 
   public static <T extends JsonAsset<String>> AssetBuilderCodec<String, T> modelAssetBuilder(
+      Class<T> model,
+      @Nullable BuilderCodec<? super T> parent,
+      CodecResolver resolver,
+      CodecCache cache) {
+    return cache.compute(
+        model,
+        parent,
+        Codec.STRING,
+        AssetBuilderCodec.class,
+        resolver,
+        () -> modelAssetBuilder(model, parent, String.class, Codec.STRING, resolver));
+  }
+
+  public static <T extends JsonAsset<String>> AssetBuilderCodec<String, T> modelAssetBuilder(
+      Class<T> model, @Nullable BuilderCodec<? super T> parent, CodecResolver resolver) {
+    return modelAssetBuilder(model, parent, String.class, Codec.STRING, resolver);
+  }
+
+  public static <T extends JsonAsset<String>> AssetBuilderCodec<String, T> modelAssetBuilder(
       Class<T> model, CodecResolver resolver, CodecCache cache) {
     return cache.compute(
         model,
         null,
-        String.class,
         Codec.STRING,
         AssetBuilderCodec.class,
         resolver,
-        () -> modelAssetBuilder(model, String.class, Codec.STRING, resolver));
+        () -> modelAssetBuilder(model, null, String.class, Codec.STRING, resolver));
   }
 
   public static <T extends JsonAsset<String>> AssetBuilderCodec<String, T> modelAssetBuilder(
       Class<T> model, CodecResolver resolver) {
-    return modelAssetBuilder(model, String.class, Codec.STRING, resolver);
+    return modelAssetBuilder(model, null, String.class, Codec.STRING, resolver);
+  }
+
+  public static <K, T extends JsonAsset<K>> AssetBuilderCodec<K, T> modelAssetBuilder(
+      Class<T> model,
+      Class<K> idClass,
+      Codec<K> idCodec,
+      CodecResolver resolver,
+      CodecCache cache) {
+    return cache.compute(
+        model,
+        null,
+        idCodec,
+        AssetBuilderCodec.class,
+        resolver,
+        () -> modelAssetBuilder(model, null, idClass, idCodec, resolver));
   }
 
   public static <K, T extends JsonAsset<K>> AssetBuilderCodec<K, T> modelAssetBuilder(
       Class<T> model, Class<K> idClass, Codec<K> idCodec, CodecResolver resolver) {
+    return modelAssetBuilder(model, null, idClass, idCodec, resolver);
+  }
+
+  public static <K, T extends JsonAsset<K>> AssetBuilderCodec<K, T> modelAssetBuilder(
+      Class<T> model,
+      @Nullable BuilderCodec<? super T> parent,
+      Class<K> idClass,
+      Codec<K> idCodec,
+      CodecResolver resolver,
+      CodecCache cache) {
+    return cache.compute(
+        model,
+        parent,
+        idCodec,
+        AssetBuilderCodec.class,
+        resolver,
+        () -> modelAssetBuilder(model, parent, idClass, idCodec, resolver));
+  }
+
+  /**
+   * Works similarly to {@link CodecUtil#modelBuilder(Class, BuilderCodec, CodecResolver)} but for
+   * {@link AssetBuilderCodec} rather than {@link BuilderCodec}.
+   *
+   * <p>{@code model} must include the following elements:
+   *
+   * <ul>
+   *   <li>A non-{@code final} field of type {@code idClass} annotated with {@link Id}
+   *   <li>A non-{@code final} field of type {@link AssetExtraInfo.Data} annotated with {@link Data}
+   * </ul>
+   *
+   * @param model the model class
+   * @param parent the parent codec, or {@code null} if none exists
+   * @param idClass the id class; often this is {@code String} but it can be arbitrary types
+   * @param idCodec the codec used to (de)serialize the identifier
+   * @param resolver the resolver used to generate {@link Codec}s based on the field type
+   * @return the generated AssetBuilderCodec
+   * @param <K> the id type (often {@code String})
+   * @param <T> the asset type, which is the type being (de)serialized
+   */
+  public static <K, T extends JsonAsset<K>> AssetBuilderCodec<K, T> modelAssetBuilder(
+      Class<T> model,
+      @Nullable BuilderCodec<? super T> parent,
+      Class<K> idClass,
+      Codec<K> idCodec,
+      CodecResolver resolver) {
     checkModelPreconditions(model);
 
     var lookup = getLookupForModel(model);
@@ -198,45 +334,64 @@ public final class CodecUtil {
       throw new FieldModelException(model, dataField, "Should be able to access @Data field", e);
     }
 
+    Supplier<T> instanceSupplier =
+        () -> {
+          try {
+            return model.cast(constructor.invoke());
+          } catch (Throwable e) {
+            throw new CodecException("Error constructing model", e);
+          }
+        };
+
+    BiConsumer<T, K> idWriter =
+        (self, value) -> {
+          try {
+            idWrite.invoke(self, value);
+          } catch (Throwable e) {
+            throw new CodecException("Couldn't write @Id field", e);
+          }
+        };
+
+    Function<T, K> idReader =
+        (self) -> {
+          try {
+            return idClass.cast(idRead.invoke(self));
+          } catch (Throwable e) {
+            throw new CodecException("Couldn't read @Id field", e);
+          }
+        };
+
+    BiConsumer<T, AssetExtraInfo.Data> dataWriter =
+        (self, data) -> {
+          try {
+            dataWrite.invoke(self, data);
+          } catch (Throwable e) {
+            throw new CodecException("Couldn't write @Data field", e);
+          }
+        };
+
+    Function<T, AssetExtraInfo.Data> dataReader =
+        (self) -> {
+          try {
+            return (AssetExtraInfo.Data) dataRead.invoke(self);
+          } catch (Throwable e) {
+            throw new CodecException("Couldn't read @Data field", e);
+          }
+        };
+
     var builder =
-        AssetBuilderCodec.builder(
-            model,
-            () -> {
-              try {
-                return model.cast(constructor.invoke());
-              } catch (Throwable e) {
-                throw new CodecException("Error constructing model", e);
-              }
-            },
-            idCodec,
-            (self, value) -> {
-              try {
-                idWrite.invoke(self, value);
-              } catch (Throwable e) {
-                throw new CodecException("Couldn't write @Id field", e);
-              }
-            },
-            (self) -> {
-              try {
-                return idClass.cast(idRead.invoke(self));
-              } catch (Throwable e) {
-                throw new CodecException("Couldn't read @Id field", e);
-              }
-            },
-            (self, data) -> {
-              try {
-                dataWrite.invoke(self, data);
-              } catch (Throwable e) {
-                throw new CodecException("Couldn't write @Data field", e);
-              }
-            },
-            self -> {
-              try {
-                return (AssetExtraInfo.Data) dataRead.invoke(self);
-              } catch (Throwable e) {
-                throw new CodecException("Couldn't read @Data field", e);
-              }
-            });
+        parent == null
+            ? AssetBuilderCodec.builder(
+                model, instanceSupplier, idCodec, idWriter, idReader, dataWriter, dataReader)
+            : AssetBuilderCodec.builder(
+                model,
+                instanceSupplier,
+                parent,
+                idCodec,
+                idWriter,
+                idReader,
+                dataWriter,
+                dataReader);
 
     modelFields(builder, model, resolver, lookup);
     return builder.build();

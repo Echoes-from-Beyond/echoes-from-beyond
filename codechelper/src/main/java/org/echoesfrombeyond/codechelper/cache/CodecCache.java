@@ -53,13 +53,11 @@ public sealed interface CodecCache permits CodecCacheImpl {
    * invoke this method again.
    *
    * @param model the model class
-   * @param inheritFrom the type (de)serialized by the parent codec; or {@code null} if none
-   * @param idClass the class of the id codec; typically {@code String.class}, or {@code null} if
-   *     not building an {@link AssetBuilderCodec}
+   * @param parentCodec the parent codec; {@code null} if there is no parent
    * @param idCodec the id codec; should be {@code null} if {@code idClass} is {@code null}
-   * @param codec the base codec class; e.g. {@link BuilderCodec} or {@link AssetBuilderCodec}
+   * @param codecFamily the base codec class; e.g. {@link BuilderCodec} or {@link AssetBuilderCodec}
    * @param resolver the resolver used to resolve the codec
-   * @param resolveCodec the actual resolved codec
+   * @param resolveCodec a supplier for the actual resolved codec
    * @return the cached or freshly-resolved codec
    * @param <V> the type (de)serialized by the codec
    * @param <C> the codec type
@@ -69,22 +67,20 @@ public sealed interface CodecCache permits CodecCacheImpl {
   @ApiStatus.Internal
   <K, V, C extends Codec<V>> C compute(
       Class<V> model,
-      @Nullable Class<? super V> inheritFrom,
-      @Nullable Class<K> idClass,
+      @Nullable Codec<? super V> parentCodec,
       @Nullable Codec<K> idCodec,
-      Class<? super C> codec,
+      Class<? super C> codecFamily,
       CodecResolver resolver,
       Supplier<C> resolveCodec);
 
   /**
-   * Equivalent to {@link CodecCache#compute(Class, Class, Class, Codec, Class, CodecResolver,
-   * Supplier)}, but with {@code inheritFrom}, {@code idClass}, and {@code idCodec} set to {@code
-   * null}.
+   * Equivalent to {@link CodecCache#compute(Class, Codec, Codec, Class, CodecResolver, Supplier)},
+   * but with {@code parentCodec} and {@code idCodec} set to {@code null}.
    *
    * @param model the model class
-   * @param codec the base codec class; e.g. {@link BuilderCodec} or {@link AssetBuilderCodec}
+   * @param codecFamily the base codec class; e.g. {@link BuilderCodec} or {@link AssetBuilderCodec}
    * @param resolver the resolver used to resolve the codec
-   * @param resolveCodec the actual resolved codec
+   * @param resolveCodec a supplier for the actual resolved codec
    * @return the cached or freshly-resolved codec
    * @param <V> the type (de)serialized by the codec
    * @param <C> the codec type
@@ -93,8 +89,11 @@ public sealed interface CodecCache permits CodecCacheImpl {
    */
   @ApiStatus.Internal
   default <V, C extends Codec<V>> C compute(
-      Class<V> model, Class<? super C> codec, CodecResolver resolver, Supplier<C> resolveCodec) {
-    return compute(model, null, null, null, codec, resolver, resolveCodec);
+      Class<V> model,
+      Class<? super C> codecFamily,
+      CodecResolver resolver,
+      Supplier<C> resolveCodec) {
+    return compute(model, null, null, codecFamily, resolver, resolveCodec);
   }
 
   /**
