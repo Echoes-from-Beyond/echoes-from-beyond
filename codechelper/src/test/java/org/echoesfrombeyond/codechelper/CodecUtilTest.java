@@ -32,15 +32,17 @@ import java.io.CharArrayReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Stream;
+import org.bson.BsonArray;
+import org.bson.BsonDocument;
+import org.bson.BsonString;
 import org.bson.json.JsonWriterSettings;
 import org.echoesfrombeyond.codechelper.annotation.Data;
 import org.echoesfrombeyond.codechelper.annotation.Id;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.annotation.Skip;
+import org.echoesfrombeyond.codechelper.annotation.validator.ValidateLengthRange;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateNonEmpty;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateRegex;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateRequiredMapKeys;
@@ -49,6 +51,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 @NullMarked
 class CodecUtilTest {
@@ -222,6 +226,20 @@ class CodecUtilTest {
     private TestEnum Enum1;
     private TestEnum Enum2;
     private TestEnum Enum3;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class LengthRange {
+    @ValidateLengthRange(min = 1, max = 2)
+    private String LengthString;
+
+    @ValidateLengthRange(min = 1, max = 2)
+    private List<String> LengthList;
+
+    @ValidateLengthRange(min = 1, max = 2)
+    private Map<String, String> LengthMap;
   }
 
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
@@ -765,5 +783,82 @@ class CodecUtilTest {
     expected.Enum3 = TestEnum.VALUE_THREE;
 
     assertRoundTripEquals(data, expected, codec);
+  }
+
+  private static BsonDocument make(int strlen, int listlen, int maplen) {
+    var doc = new BsonDocument();
+    doc.put("LengthString", new BsonString("A".repeat(strlen)));
+
+    var array = new BsonArray();
+    for (int i = 0; i < listlen; i++) array.add(new BsonString(Integer.toString(i)));
+
+    doc.put("LengthList", array);
+
+    var map = new BsonDocument();
+    for (int i = 0; i < maplen; i++) map.put(Integer.toString(i), new BsonString(i + " value"));
+
+    doc.put("LengthMap", map);
+    return doc;
+  }
+
+  public static Stream<BsonDocument> lengthRangeValidatesOnCorrectLengthArgs() {
+    var documents = new ArrayList<BsonDocument>();
+    for (int i = 0; i < 2; i++) {
+      for (int j = 0; j < 2; j++) {
+        for (int k = 0; k < 2; k++) {
+          documents.add(make(i + 1, j + 1, k + 1));
+        }
+      }
+    }
+
+    return documents.stream();
+  }
+
+  public static Stream<BsonDocument> lengthRangeDoesNotValidateOnBadLengthArgs() {
+    var documents = new ArrayList<BsonDocument>();
+
+    Set<Integer> badLengths = Set.of(0, 3);
+
+    for (var strlen : badLengths) {
+      for (var listlen : badLengths) {
+        for (var maplen : badLengths) {
+          documents.add(make(strlen, listlen, maplen));
+        }
+      }
+    }
+
+    return documents.stream();
+  }
+
+  @ParameterizedTest
+  @MethodSource("lengthRangeValidatesOnCorrectLengthArgs")
+  public void lengthRangeValidatesOnCorrectLength(BsonDocument document) {
+    var resolver =
+        CodecResolver.builder()
+            .chain(CodecResolver.PRIMITIVE)
+            .withMapSupport()
+            .withCollectionSupport()
+            .withSubtypeMapping(List.class, ArrayList.class)
+            .withSubtypeMapping(Map.class, HashMap.class)
+            .build();
+    var codec = CodecUtil.modelBuilder(LengthRange.class, resolver);
+
+    assertDoesNotThrow(() -> codec.decode(document, new ExtraInfo()));
+  }
+
+  @ParameterizedTest
+  @MethodSource("lengthRangeDoesNotValidateOnBadLengthArgs")
+  public void lengthRangeDoesNotValidateOnBadLength(BsonDocument document) {
+    var resolver =
+        CodecResolver.builder()
+            .chain(CodecResolver.PRIMITIVE)
+            .withMapSupport()
+            .withCollectionSupport()
+            .withSubtypeMapping(List.class, ArrayList.class)
+            .withSubtypeMapping(Map.class, HashMap.class)
+            .build();
+    var codec = CodecUtil.modelBuilder(LengthRange.class, resolver);
+
+    assertThrows(CodecValidationException.class, () -> codec.decode(document, new ExtraInfo()));
   }
 }
