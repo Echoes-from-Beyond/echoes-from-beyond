@@ -21,6 +21,7 @@ package org.echoesfrombeyond.codechelper.validator;
 import com.hypixel.hytale.codec.schema.SchemaContext;
 import com.hypixel.hytale.codec.schema.config.ArraySchema;
 import com.hypixel.hytale.codec.schema.config.Schema;
+import com.hypixel.hytale.codec.schema.config.StringSchema;
 import com.hypixel.hytale.codec.validation.ValidationResults;
 import com.hypixel.hytale.codec.validation.Validator;
 import java.lang.reflect.Array;
@@ -65,14 +66,22 @@ public class LengthRangeProvider implements ValidatorProvider<ValidateLengthRang
 
     @Override
     public void updateSchema(SchemaContext schemaContext, Schema schema) {
-      var arraySchema = (ArraySchema) schema;
-      arraySchema.setMinItems(this.min);
-      arraySchema.setMaxItems(this.max);
+      if (schema instanceof ArraySchema arraySchema) {
+        arraySchema.setMinItems(this.min);
+        arraySchema.setMaxItems(this.max);
+      } else if (schema instanceof StringSchema stringSchema) {
+        stringSchema.setMinLength(this.min);
+        stringSchema.setMaxLength(this.max);
+      }
     }
   }
 
   private static boolean canProvideFor(Field field) {
-    return field.getType().isArray();
+    var type = field.getType();
+    return type.isArray()
+        || type.equals(String.class)
+        || Collection.class.isAssignableFrom(type)
+        || Map.class.isAssignableFrom(type);
   }
 
   private LengthRangeProvider() {}

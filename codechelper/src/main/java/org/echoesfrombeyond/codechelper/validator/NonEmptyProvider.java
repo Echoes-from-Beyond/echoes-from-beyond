@@ -21,6 +21,7 @@ package org.echoesfrombeyond.codechelper.validator;
 import com.hypixel.hytale.codec.schema.SchemaContext;
 import com.hypixel.hytale.codec.schema.config.ArraySchema;
 import com.hypixel.hytale.codec.schema.config.Schema;
+import com.hypixel.hytale.codec.schema.config.StringSchema;
 import com.hypixel.hytale.codec.validation.ValidationResults;
 import com.hypixel.hytale.codec.validation.Validator;
 import java.lang.reflect.Array;
@@ -58,6 +59,7 @@ public class NonEmptyProvider implements ValidatorProvider<ValidateNonEmpty> {
         @Override
         public void updateSchema(SchemaContext schemaContext, Schema schema) {
           if (schema instanceof ArraySchema arraySchema) arraySchema.setMinItems(1);
+          else if (schema instanceof StringSchema stringSchema) stringSchema.setMinLength(1);
         }
       };
 

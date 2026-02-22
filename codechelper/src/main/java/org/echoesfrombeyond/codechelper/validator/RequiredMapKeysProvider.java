@@ -36,12 +36,8 @@ public class RequiredMapKeysProvider implements ValidatorProvider<ValidateRequir
   public static final RequiredMapKeysProvider INSTANCE = new RequiredMapKeysProvider();
 
   private static boolean canProvideFor(Field field) {
-    if (!Map.class.isAssignableFrom(field.getType())) return false;
-
     var parameters = TypeUtil.resolveSupertypeParameters(field.getGenericType(), Map.class);
-
-    // We already checked assignability
-    assert parameters != null;
+    if (parameters == null) return false;
 
     return String.class.equals(parameters.get(TypeVariables.MAP_KEY_TYPE));
   }

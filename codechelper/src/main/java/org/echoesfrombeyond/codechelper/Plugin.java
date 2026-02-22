@@ -98,11 +98,12 @@ public final class Plugin extends JavaPlugin {
    * <p>It is also possible to obtain a new CodecResolver instance by using the builder {@link
    * CodecResolver#builder()}. The shared resolver is intended to be used by multiple plugins.
    *
-   * <p>This resolver will always support every capability specified in {@link
-   * CodecResolver.Builder}, in addition to {@link CodecResolver#PRIMITIVE}. It also defines subtype
-   * mappings for the following types:
+   * <p>This resolver will always support every capability specified by {@link
+   * CodecResolver.Builder} methods, in addition to {@link CodecResolver#PRIMITIVE}. It also defines
+   * subtype mappings for the following types:
    *
    * <ul>
+   *   <li>Collection -> ArrayList
    *   <li>List -> ArrayList
    *   <li>Set -> HashSet
    *   <li>Map -> HashMap
