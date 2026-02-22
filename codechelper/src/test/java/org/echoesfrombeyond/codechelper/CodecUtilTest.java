@@ -20,6 +20,8 @@ package org.echoesfrombeyond.codechelper;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.hypixel.hytale.assetstore.AssetExtraInfo;
+import com.hypixel.hytale.assetstore.JsonAsset;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.ExtraInfo;
 import com.hypixel.hytale.codec.RawJsonCodec;
@@ -34,6 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.bson.json.JsonWriterSettings;
+import org.echoesfrombeyond.codechelper.annotation.Data;
+import org.echoesfrombeyond.codechelper.annotation.Id;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.annotation.Skip;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateNonEmpty;
@@ -174,6 +178,22 @@ class CodecUtilTest {
     public String Regex;
   }
 
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class BasicAsset implements JsonAsset<String> {
+    @Id private String Identifier;
+    @Data private AssetExtraInfo.Data Data;
+
+    private int IntegerValue;
+    private String StringValue;
+
+    @Override
+    public String getId() {
+      return Identifier;
+    }
+  }
+
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
     if (expected == null && actual == null) return;
     if (expected == null ^ actual == null) {
@@ -222,7 +242,6 @@ class CodecUtilTest {
       int modifiers = field.getModifiers();
       if (field.isAnnotationPresent(Skip.class)
           || Modifier.isFinal(modifiers)
-          || !Modifier.isPublic(modifiers)
           || Modifier.isStatic(modifiers)) continue;
 
       try {
@@ -648,5 +667,22 @@ class CodecUtilTest {
 
     var json = codec.encode(data, new ExtraInfo());
     codec.decode(json, new ExtraInfo());
+  }
+
+  @Test
+  public void basicAssetRoundtrips() {
+    var resolver = CodecResolver.PRIMITIVE;
+
+    var codec = CodecUtil.modelAssetBuilder(BasicAsset.class, resolver);
+
+    var data = new BasicAsset();
+    data.IntegerValue = 67;
+    data.StringValue = "This value is a string!";
+
+    var expected = new BasicAsset();
+    expected.IntegerValue = 67;
+    expected.StringValue = "This value is a string!";
+
+    assertRoundTripEquals(data, expected, codec);
   }
 }

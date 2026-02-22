@@ -430,6 +430,9 @@ public final class CodecUtil {
   private static void checkModelPreconditions(Class<?> model) {
     if (!model.isAnnotationPresent(ModelBuilder.class))
       throw new ModelException(model, "Must be annotated with @ModelBuilder");
+
+    if (model.isInterface() || model.isRecord() || model.isEnum())
+      throw new ModelException(model, "Must be a class");
   }
 
   private static MethodHandles.Lookup getLookupForModel(Class<?> model) {
@@ -462,11 +465,11 @@ public final class CodecUtil {
 
     for (var field : model.getDeclaredFields()) {
       int modifiers = field.getModifiers();
-      if (Modifier.isStatic(modifiers)
-          || !Modifier.isPublic(modifiers)
-          || Modifier.isFinal(modifiers)) continue;
+      if (Modifier.isStatic(modifiers) || Modifier.isFinal(modifiers)) continue;
 
-      if (field.isAnnotationPresent(Skip.class)) continue;
+      if (field.isAnnotationPresent(Skip.class)
+          || field.isAnnotationPresent(Id.class)
+          || field.isAnnotationPresent(Data.class)) continue;
 
       var nameAnnotation = field.getDeclaredAnnotation(Name.class);
       var name = nameAnnotation == null ? field.getName() : nameAnnotation.value();

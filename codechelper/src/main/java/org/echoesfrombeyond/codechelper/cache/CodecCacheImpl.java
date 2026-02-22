@@ -23,6 +23,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Supplier;
 import org.echoesfrombeyond.codechelper.CodecResolver;
@@ -40,8 +41,8 @@ final class CodecCacheImpl implements CodecCache {
     private final Class<?> model;
     private final Class<?> codecFamily;
 
-    private final @Nullable Reference<@Nullable Codec<?>> parentCodec;
-    private final @Nullable Reference<@Nullable Codec<?>> idCodec;
+    private final @Nullable Codec<?> parentCodec;
+    private final @Nullable Codec<?> idCodec;
     private final Reference<@Nullable CodecResolver> resolver;
 
     private final int baseHash;
@@ -49,8 +50,8 @@ final class CodecCacheImpl implements CodecCache {
     private CacheKey(
         Class<?> model,
         Class<?> codecFamily,
-        @Nullable Reference<@Nullable Codec<?>> parentCodec,
-        @Nullable Reference<@Nullable Codec<?>> idCodec,
+        @Nullable Codec<?> parentCodec,
+        @Nullable Codec<?> idCodec,
         Reference<@Nullable CodecResolver> resolver) {
       this.model = model;
       this.codecFamily = codecFamily;
@@ -62,6 +63,8 @@ final class CodecCacheImpl implements CodecCache {
       var hash = 7;
       hash = 31 * hash + model.hashCode();
       hash = 31 * hash + codecFamily.hashCode();
+      hash = 31 * hash + Objects.hashCode(parentCodec);
+      hash = 31 * hash + Objects.hashCode(idCodec);
 
       this.baseHash = hash;
     }
@@ -72,29 +75,15 @@ final class CodecCacheImpl implements CodecCache {
 
       return model.equals(other.model)
           && codecFamily.equals(other.codecFamily)
-          && refSame(parentCodec, other.parentCodec)
-          && refSame(idCodec, other.idCodec)
-          && refSame(resolver, other.resolver);
+          && Objects.equals(parentCodec, other.parentCodec)
+          && Objects.equals(idCodec, other.idCodec)
+          && resolver.refersTo(other.resolver.get());
     }
 
     @Override
     public int hashCode() {
-      int hash = baseHash;
-
-      if (parentCodec != null) hash = 31 * hash + System.identityHashCode(parentCodec.get());
-      if (idCodec != null) hash = 31 * hash + System.identityHashCode(idCodec.get());
-      hash = 31 * hash + System.identityHashCode(resolver.get());
-      return hash;
+      return 31 * baseHash + System.identityHashCode(resolver.get());
     }
-  }
-
-  private static <T> boolean refSame(
-      @Nullable Reference<? super @Nullable T> first,
-      @Nullable Reference<? extends @Nullable T> second) {
-    if (first == null && second == null) return true;
-    if (first == null ^ second == null) return false;
-
-    return first.refersTo(second.get());
   }
 
   private final Map<CacheKey, Codec<?>> cache;
@@ -115,13 +104,7 @@ final class CodecCacheImpl implements CodecCache {
       Class<? super C> codecFamily,
       CodecResolver resolver,
       Supplier<C> resolveCodec) {
-    var key =
-        new CacheKey(
-            model,
-            codecFamily,
-            parentCodec == null ? null : new WeakReference<>(parentCodec),
-            idCodec == null ? null : new WeakReference<>(idCodec),
-            new WeakReference<>(resolver));
+    var key = new CacheKey(model, codecFamily, parentCodec, idCodec, new WeakReference<>(resolver));
 
     var read = rwl.readLock();
     var write = rwl.writeLock();
@@ -137,13 +120,7 @@ final class CodecCacheImpl implements CodecCache {
       readLocked = false;
       write.lock();
 
-      cache
-          .keySet()
-          .removeIf(
-              oldKey ->
-                  oldKey.resolver.refersTo(null)
-                      || (oldKey.parentCodec != null && oldKey.parentCodec.refersTo(null))
-                      || (oldKey.idCodec != null && oldKey.idCodec.refersTo(null)));
+      cache.keySet().removeIf(oldKey -> oldKey.resolver.refersTo(null));
 
       cached = cache.get(key);
       if (cached != null) return (C) cached;
