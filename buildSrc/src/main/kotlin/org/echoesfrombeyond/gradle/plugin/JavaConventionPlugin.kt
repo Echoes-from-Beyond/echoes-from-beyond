@@ -63,6 +63,7 @@ class JavaConventionPlugin : Plugin<Project> {
         }
 
         target.tasks.withType(Test::class.java).configureEach {
+            it.jvmArgs("--sun-misc-unsafe-memory-access=allow")
             it.maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
             it.useJUnitPlatform()
         }

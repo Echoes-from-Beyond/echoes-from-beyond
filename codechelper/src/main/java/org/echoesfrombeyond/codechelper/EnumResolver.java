@@ -41,7 +41,9 @@ class EnumResolver implements CodecResolver {
     this.style = style;
   }
 
+  // suppression isn't redundant, IntelliJ misses the unsafe operation (javac doesn't)
   @Override
+  @SuppressWarnings({"unchecked", "RedundantSuppression"})
   public @Nullable Codec<?> resolve(Type type, Field field) {
     var raw = TypeUtil.getRawType(type);
     if (raw == null || !raw.isEnum()) return null;

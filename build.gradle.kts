@@ -64,6 +64,7 @@ tasks.register("runDevServer", JavaExec::class.java) {
         "-XX:+UseCompactObjectHeaders",
         "-XX:AOTCache=HytaleServer.aot",
         "--enable-native-access=ALL-UNNAMED",
+        "--sun-misc-unsafe-memory-access=allow",
         "-ea")
     args = listOf("--disable-sentry", "--assets", "Assets.zip")
 }

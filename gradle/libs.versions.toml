@@ -49,7 +49,7 @@ example-compileOnly = [
 # should NOT use this feature! This feature only makes sense for "tightly coupled"
 # libraries.
 [versions]
-junit = "6.0.1"
+junit = "6.0.3"
 
 # Libraries are defined below, sorted by ascending alphabetical order of their
 # configuration keys.
@@ -94,4 +94,4 @@ shadow = { module = "com.gradleup.shadow:com.gradleup.shadow.gradle.plugin", ver
 
 # usage: code formatting plugin
 # scope: buildSrc
-spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version = "8.1.0" }
+spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version = "8.2.1" }
