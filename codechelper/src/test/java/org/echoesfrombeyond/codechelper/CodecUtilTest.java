@@ -25,6 +25,7 @@ import com.hypixel.hytale.assetstore.JsonAsset;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.ExtraInfo;
 import com.hypixel.hytale.codec.RawJsonCodec;
+import com.hypixel.hytale.codec.exception.CodecException;
 import com.hypixel.hytale.codec.exception.CodecValidationException;
 import com.hypixel.hytale.codec.util.RawJsonReader;
 import java.io.CharArrayReader;
@@ -194,6 +195,35 @@ class CodecUtilTest {
     }
   }
 
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public abstract static class InheritSuper {
+    private String SuperString;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class InheritBase extends InheritSuper {
+    private String BaseString;
+  }
+
+  public enum TestEnum {
+    ValueOne,
+    ValueTwo,
+    VALUE_THREE
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class EnumContaining {
+    private TestEnum Enum1;
+    private TestEnum Enum2;
+    private TestEnum Enum3;
+  }
+
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
     if (expected == null && actual == null) return;
     if (expected == null ^ actual == null) {
@@ -272,6 +302,7 @@ class CodecUtilTest {
     }
 
     assertDeepEquals(data, rawDecoded);
+    assertDeepEquals(expected, rawDecoded);
     return decoded;
   }
 
@@ -682,6 +713,56 @@ class CodecUtilTest {
     var expected = new BasicAsset();
     expected.IntegerValue = 67;
     expected.StringValue = "This value is a string!";
+
+    assertRoundTripEquals(data, expected, codec);
+  }
+
+  @Test
+  public void inheritFromBaseClass() {
+    var resolver = CodecResolver.PRIMITIVE;
+    var superCodec = CodecUtil.modelBuilder(InheritSuper.class, resolver);
+    var baseCodec = CodecUtil.modelBuilder(InheritBase.class, superCodec, resolver);
+
+    var data = new InheritBase();
+    data.BaseString = "BaseValue";
+    ((InheritSuper) data).SuperString = "SuperValue";
+
+    var expected = new InheritBase();
+    expected.BaseString = "BaseValue";
+    ((InheritSuper) expected).SuperString = "SuperValue";
+
+    assertRoundTripEquals(data, expected, baseCodec);
+  }
+
+  @Test
+  public void abstractClassProducesAbstractCodec() {
+    var resolver = CodecResolver.PRIMITIVE;
+    var superCodec = CodecUtil.modelBuilder(InheritSuper.class, resolver);
+
+    var data = new InheritBase();
+    data.BaseString = "BaseValue";
+    ((InheritSuper) data).SuperString = "SuperValue";
+
+    var document = superCodec.encode(data, new ExtraInfo());
+
+    assertThrows(CodecException.class, () -> superCodec.decode(document, new ExtraInfo()));
+  }
+
+  @Test
+  public void simpleEnumRoundTrips() {
+    var resolver = CodecResolver.builder().withEnumSupport().build();
+
+    var codec = CodecUtil.modelBuilder(EnumContaining.class, resolver);
+
+    var data = new EnumContaining();
+    data.Enum1 = TestEnum.ValueOne;
+    data.Enum2 = TestEnum.ValueTwo;
+    data.Enum3 = TestEnum.VALUE_THREE;
+
+    var expected = new EnumContaining();
+    expected.Enum1 = TestEnum.ValueOne;
+    expected.Enum2 = TestEnum.ValueTwo;
+    expected.Enum3 = TestEnum.VALUE_THREE;
 
     assertRoundTripEquals(data, expected, codec);
   }

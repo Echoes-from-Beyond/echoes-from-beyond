@@ -50,6 +50,7 @@ public final class Plugin extends JavaPlugin {
     SHARED_RESOLVER =
         CodecResolver.builder()
             .chain(CodecResolver.PRIMITIVE)
+            .withEnumSupport()
             .withArraySupport()
             .withCollectionSupport()
             .withMapSupport()

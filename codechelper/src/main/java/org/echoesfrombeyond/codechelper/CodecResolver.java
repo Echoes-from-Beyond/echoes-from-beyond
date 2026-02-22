@@ -19,6 +19,7 @@
 package org.echoesfrombeyond.codechelper;
 
 import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.codecs.EnumCodec;
 import com.hypixel.hytale.codec.codecs.map.MapCodec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -248,6 +249,28 @@ public interface CodecResolver {
     Builder withMapSupport(String keyName, String valueName);
 
     /**
+     * Adds enum support to the resolver, using {@link EnumCodec}.
+     *
+     * <p>The {@link EnumCodec.EnumStyle} used will be the default: {@link
+     * EnumCodec.EnumStyle#CAMEL_CASE}. Use {@link Builder#withEnumSupport(EnumCodec.EnumStyle)} to
+     * specify a different style.
+     *
+     * @return this instance
+     */
+    @Contract("-> this")
+    Builder withEnumSupport();
+
+    /**
+     * Adds enum support to the resolver, using {@link EnumCodec} and {@code style} which determines
+     * how enum constants are (de)serialized.
+     *
+     * @return this instance
+     * @throws NullPointerException if {@code style} is null
+     */
+    @Contract("_ -> this")
+    Builder withEnumSupport(EnumCodec.EnumStyle style);
+
+    /**
      * Builds a new {@link CodecResolver}. This method may be called multiple times to construct
      * multiple instances of {@link CodecResolver} with the same settings.
      *
@@ -275,10 +298,12 @@ public interface CodecResolver {
 
     private boolean recursiveResolution;
     private @Nullable CodecCache recursiveResolutionCache;
-    private boolean directMappingSupport;
     private boolean arraySupport;
     private boolean collectionSupport;
     private boolean mapSupport;
+    private boolean enumSupport;
+
+    private EnumCodec.EnumStyle enumStyle = EnumCodec.EnumStyle.CAMEL_CASE;
 
     private String keyName = DEFAULT_MAP_KEY_NAME;
     private String valueName = DEFAULT_MAP_VALUE_NAME;
@@ -314,7 +339,6 @@ public interface CodecResolver {
       Check.nonNull(type);
       Check.nonNull(codec);
 
-      directMappingSupport = true;
       codecMap.put(type, codec);
       return this;
     }
@@ -368,11 +392,28 @@ public interface CodecResolver {
     }
 
     @Override
+    public Builder withEnumSupport() {
+      enumSupport = true;
+      enumStyle = EnumCodec.EnumStyle.CAMEL_CASE;
+      return this;
+    }
+
+    @Override
+    public Builder withEnumSupport(EnumCodec.EnumStyle style) {
+      Check.nonNull(style);
+
+      enumSupport = true;
+      enumStyle = style;
+      return this;
+    }
+
+    @Override
     public CodecResolver build() {
       var resolversCopy = new ArrayList<>(resolvers);
       var chained = new ChainedResolver(resolversCopy);
 
-      if (directMappingSupport) resolversCopy.add(new DirectMappingResolver(Map.copyOf(codecMap)));
+      if (!codecMap.isEmpty()) resolversCopy.add(new DirectMappingResolver(Map.copyOf(codecMap)));
+      if (enumSupport) resolversCopy.add(new EnumResolver(enumStyle));
       if (arraySupport) resolversCopy.add(new ArrayResolver(chained));
       if (collectionSupport) resolversCopy.add(new CollectionResolver(chained));
       if (mapSupport) resolversCopy.add(new MapResolver(chained, keyName, valueName));
