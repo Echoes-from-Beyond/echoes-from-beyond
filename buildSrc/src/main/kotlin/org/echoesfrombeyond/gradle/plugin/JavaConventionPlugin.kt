@@ -51,6 +51,7 @@ class JavaConventionPlugin : Plugin<Project> {
         target.setupDependencyConfiguration("compileOnly")
         target.setupDependencyConfiguration("compileOnlyApi")
         target.setupDependencyConfiguration("runtimeOnly")
+        target.setupDependencyConfiguration("shadow")
         target.setupDependencyConfiguration("testImplementation")
         target.setupDependencyConfiguration("testCompileOnly")
         target.setupDependencyConfiguration("testRuntimeOnly")
@@ -174,7 +175,7 @@ fun Project.withHytaleDependency() {
     }
 
     val hytale = "com.hypixel.hytale:Server:latest.integration"
-    dependencies.add("compileOnly", hytale)
+    dependencies.add("shadow", hytale)
     dependencies.add("testImplementation", hytale)
 }
 
