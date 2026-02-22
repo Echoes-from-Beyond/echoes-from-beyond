@@ -37,6 +37,7 @@ import org.bson.json.JsonWriterSettings;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.annotation.Skip;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateNonEmpty;
+import org.echoesfrombeyond.codechelper.annotation.validator.ValidateRegex;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateRequiredMapKeys;
 import org.echoesfrombeyond.codechelper.cache.CodecCache;
 import org.jspecify.annotations.NullMarked;
@@ -156,6 +157,21 @@ class CodecUtilTest {
     private int PrivateMember;
 
     private PrivateAccess() {}
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class DirectMapping {
+    private String DirectMapping;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class RegexValidator {
+    @ValidateRegex("[a-z]+")
+    public String Regex;
   }
 
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
@@ -315,6 +331,7 @@ class CodecUtilTest {
     expected.StringList.add("World");
 
     var decoded = assertRoundTripEquals(actual, expected, builderCodec);
+    assertNotNull(decoded);
 
     // ensure the list is mutable
     decoded.StringList.add("!");
@@ -575,5 +592,61 @@ class CodecUtilTest {
     expected.PrivateMember = 10;
 
     assertRoundTripEquals(actual, expected, codec);
+  }
+
+  @Test
+  @SuppressWarnings("DataFlowIssue")
+  public void directMappingThrowsNullPointerExceptionOnNullKey() {
+    assertThrows(
+        NullPointerException.class,
+        () -> CodecResolver.builder().withDirectMapping(null, Codec.STRING));
+  }
+
+  @Test
+  @SuppressWarnings("DataFlowIssue")
+  public void directMappingThrowsNullPointerExceptionOnNullValue() {
+    assertThrows(
+        NullPointerException.class,
+        () -> CodecResolver.builder().withDirectMapping(String.class, null));
+  }
+
+  @Test
+  public void directMappingResolvesType() {
+    var builder = CodecResolver.builder().withDirectMapping(String.class, Codec.STRING).build();
+
+    var codec = CodecUtil.modelBuilder(DirectMapping.class, builder);
+
+    var data = new DirectMapping();
+    data.DirectMapping = "Direct Mapping";
+
+    var expected = new DirectMapping();
+    expected.DirectMapping = "Direct Mapping";
+
+    assertRoundTripEquals(data, expected, codec);
+  }
+
+  @Test
+  public void regexValidatorThrowsOnNonMatchingString() {
+    var builder = CodecResolver.PRIMITIVE;
+    var codec = CodecUtil.modelBuilder(RegexValidator.class, builder);
+
+    var data = new RegexValidator();
+    data.Regex = "A";
+
+    var json = codec.encode(data, new ExtraInfo());
+
+    assertThrows(CodecValidationException.class, () -> codec.decode(json, new ExtraInfo()));
+  }
+
+  @Test
+  public void regexValidatorDoesNotThrowOnMatchingString() {
+    var builder = CodecResolver.PRIMITIVE;
+    var codec = CodecUtil.modelBuilder(RegexValidator.class, builder);
+
+    var data = new RegexValidator();
+    data.Regex = "a";
+
+    var json = codec.encode(data, new ExtraInfo());
+    codec.decode(json, new ExtraInfo());
   }
 }

@@ -16,28 +16,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codechelper.exception;
+package org.echoesfrombeyond.codechelper;
 
+import com.hypixel.hytale.codec.Codec;
 import java.lang.reflect.Field;
-import org.echoesfrombeyond.codechelper.CodecResolver;
-import org.echoesfrombeyond.codechelper.CodecUtil;
-import org.jetbrains.annotations.ApiStatus;
+import java.lang.reflect.Type;
+import java.util.Map;
+import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
-/** Exception thrown by {@link CodecUtil#modelBuilder(Class, CodecResolver)} and overloads. */
-@ApiStatus.Internal
+/** Direct mapping resolver implementation. */
 @NullMarked
-public class FieldModelException extends ModelException {
-  private static String formatMessage(Field field, String message) {
-    return String.format("Model field: %s\n%s", field, message);
-  }
+class DirectMappingResolver implements CodecResolver {
+  private final Map<Class<?>, Codec<?>> codecs;
 
   /**
-   * @param modelType the model type
-   * @param field the field associated with this exception
-   * @param message the error message
+   * Creates a new instance of this class.
+   *
+   * @param codecs the codec mappings
    */
-  public FieldModelException(Class<?> modelType, Field field, String message) {
-    super(modelType, formatMessage(field, message));
+  DirectMappingResolver(Map<Class<?>, Codec<?>> codecs) {
+    this.codecs = codecs;
+  }
+
+  @Override
+  public @Nullable Codec<?> resolve(Type type, Field field) {
+    var raw = TypeUtil.getRawType(type);
+    return raw == null ? null : codecs.get(raw);
   }
 }
