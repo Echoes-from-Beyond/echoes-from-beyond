@@ -2,7 +2,9 @@ import org.echoesfrombeyond.gradle.plugin.JavaConventionPlugin
 import org.echoesfrombeyond.gradle.plugin.projectImplementation
 import org.echoesfrombeyond.gradle.plugin.withHytalePlugin
 
-version = "0.1.0"
+version = "0.2.0"
+
+val versionProvider: Provider<String> = provider { version as String }
 
 apply<JavaConventionPlugin>()
 
@@ -24,7 +26,7 @@ publishing {
 
       groupId = "org.echoesfrombeyond"
       artifactId = "codec-helper"
-      version = "0.1.0"
+      version = versionProvider.get()
 
       pom {
         name = "org.echoesfrombeyond:codec-helper"

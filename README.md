@@ -6,7 +6,7 @@ Hytale mods and supporting libraries made by the Echoes from Beyond team.
 
 This repository contains:
 * `main`: A Lovecraftian Hytale mod with an emphasis on narrative and storytelling
-* [codec](./codec/README.md): A library which contains a system for automatically generating codecs
+* [codechelper](./codechelper/README.md): A library which contains a system for automatically generating codecs
 * `util`: A general utility library
 
 ## Table of Contents

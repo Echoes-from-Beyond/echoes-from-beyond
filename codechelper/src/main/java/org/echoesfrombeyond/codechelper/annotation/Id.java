@@ -18,9 +18,24 @@
 
 package org.echoesfrombeyond.codechelper.annotation;
 
+import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
+import com.hypixel.hytale.codec.Codec;
 import java.lang.annotation.*;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
-/** Marks a field as the id field. */
+/**
+ * Marks a field as the identifier field.
+ *
+ * <p>There can only be one identifier field per model class. Identifier fields are ignored for
+ * field resolution. They are read from/written to as if by being assigned through {@code
+ * idGetter}/{@code idSetter} lambdas passed to {@link AssetBuilderCodec#builder(Class, Supplier,
+ * Codec, BiConsumer, Function, BiConsumer, Function)}.
+ *
+ * <p>Identifier fields are treated as regular fields unless resolving an {@link AssetBuilderCodec}
+ * or if otherwise annotated with {@link Skip}.
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

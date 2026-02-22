@@ -205,10 +205,21 @@ public final class CodecUtil {
               : BuilderCodec.builder(model, supplier, parent);
     }
 
-    modelFields(builder, model, resolver, lookup);
+    modelFields(builder, model, resolver, lookup, false);
     return builder.build();
   }
 
+  /**
+   * Equivalent to {@link CodecUtil#modelAssetBuilder(Class, BuilderCodec, Class, Codec,
+   * CodecResolver)} with {@link Codec#STRING} as the id codec and using {@code cache} to prevent
+   * duplicate codec resolution.
+   *
+   * @param model the model class
+   * @param parent the parent codec, or {@code null} if none exists
+   * @param resolver the resolver used to generate {@link Codec}s based on the field type
+   * @return the generated AssetBuilderCodec
+   * @param <T> the asset type, which is the type being (de)serialized
+   */
   public static <T extends JsonAsset<String>> AssetBuilderCodec<String, T> modelAssetBuilder(
       Class<T> model,
       @Nullable BuilderCodec<? super T> parent,
@@ -223,11 +234,32 @@ public final class CodecUtil {
         () -> modelAssetBuilder(model, parent, String.class, Codec.STRING, resolver));
   }
 
+  /**
+   * Equivalent to {@link CodecUtil#modelAssetBuilder(Class, BuilderCodec, Class, Codec,
+   * CodecResolver)} with {@link Codec#STRING} as the id codec.
+   *
+   * @param model the model class
+   * @param parent the parent codec, or {@code null} if none exists
+   * @param resolver the resolver used to generate {@link Codec}s based on the field type
+   * @return the generated AssetBuilderCodec
+   * @param <T> the asset type, which is the type being (de)serialized
+   */
   public static <T extends JsonAsset<String>> AssetBuilderCodec<String, T> modelAssetBuilder(
       Class<T> model, @Nullable BuilderCodec<? super T> parent, CodecResolver resolver) {
     return modelAssetBuilder(model, parent, String.class, Codec.STRING, resolver);
   }
 
+  /**
+   * Equivalent to {@link CodecUtil#modelAssetBuilder(Class, BuilderCodec, Class, Codec,
+   * CodecResolver)} with {@code parent} set to {@code null}, {@link Codec#STRING} as the id codec,
+   * and using {@code cache} to prevent duplicate resolution.
+   *
+   * @param model the model class
+   * @param resolver the resolver used to generate {@link Codec}s based on the field type
+   * @param cache the cache used to store codecs
+   * @return the generated AssetBuilderCodec
+   * @param <T> the asset type, which is the type being (de)serialized
+   */
   public static <T extends JsonAsset<String>> AssetBuilderCodec<String, T> modelAssetBuilder(
       Class<T> model, CodecResolver resolver, CodecCache cache) {
     return cache.compute(
@@ -239,11 +271,35 @@ public final class CodecUtil {
         () -> modelAssetBuilder(model, null, String.class, Codec.STRING, resolver));
   }
 
+  /**
+   * Equivalent to {@link CodecUtil#modelAssetBuilder(Class, BuilderCodec, Class, Codec,
+   * CodecResolver)} with {@code parent} set to {@code null} and {@link Codec#STRING} as the id
+   * codec.
+   *
+   * @param model the model class
+   * @param resolver the resolver used to generate {@link Codec}s based on the field type
+   * @return the generated AssetBuilderCodec
+   * @param <T> the asset type, which is the type being (de)serialized
+   */
   public static <T extends JsonAsset<String>> AssetBuilderCodec<String, T> modelAssetBuilder(
       Class<T> model, CodecResolver resolver) {
     return modelAssetBuilder(model, null, String.class, Codec.STRING, resolver);
   }
 
+  /**
+   * Equivalent to {@link CodecUtil#modelAssetBuilder(Class, BuilderCodec, Class, Codec,
+   * CodecResolver)} with {@code parent} set to {@code null}, and using {@code cache} to prevent
+   * duplicate resolution.
+   *
+   * @param model the model class
+   * @param idClass the id class; often this is {@code String} but it can be arbitrary types
+   * @param idCodec the codec used to (de)serialize the identifier
+   * @param resolver the resolver used to generate {@link Codec}s based on the field type
+   * @param cache the cache used to store codecs
+   * @return the generated AssetBuilderCodec
+   * @param <K> the id type (often {@code String})
+   * @param <T> the asset type, which is the type being (de)serialized
+   */
   public static <K, T extends JsonAsset<K>> AssetBuilderCodec<K, T> modelAssetBuilder(
       Class<T> model,
       Class<K> idClass,
@@ -259,11 +315,37 @@ public final class CodecUtil {
         () -> modelAssetBuilder(model, null, idClass, idCodec, resolver));
   }
 
+  /**
+   * Equivalent to {@link CodecUtil#modelAssetBuilder(Class, BuilderCodec, Class, Codec,
+   * CodecResolver)} with {@code parent} set to {@code null}.
+   *
+   * @param model the model class
+   * @param idClass the id class; often this is {@code String} but it can be arbitrary types
+   * @param idCodec the codec used to (de)serialize the identifier
+   * @param resolver the resolver used to generate {@link Codec}s based on the field type
+   * @return the generated AssetBuilderCodec
+   * @param <K> the id type (often {@code String})
+   * @param <T> the asset type, which is the type being (de)serialized
+   */
   public static <K, T extends JsonAsset<K>> AssetBuilderCodec<K, T> modelAssetBuilder(
       Class<T> model, Class<K> idClass, Codec<K> idCodec, CodecResolver resolver) {
     return modelAssetBuilder(model, null, idClass, idCodec, resolver);
   }
 
+  /**
+   * Equivalent to {@link CodecUtil#modelAssetBuilder(Class, BuilderCodec, Class, Codec,
+   * CodecResolver)} but caches resolved codecs to prevent unnecessary resolution.
+   *
+   * @param model the model class
+   * @param parent the parent codec, or {@code null} if none exists
+   * @param idClass the id class; often this is {@code String} but it can be arbitrary types
+   * @param idCodec the codec used to (de)serialize the identifier
+   * @param resolver the resolver used to generate {@link Codec}s based on the field type
+   * @param cache the cache used to store codecs
+   * @return the generated AssetBuilderCodec
+   * @param <K> the id type (often {@code String})
+   * @param <T> the asset type, which is the type being (de)serialized
+   */
   public static <K, T extends JsonAsset<K>> AssetBuilderCodec<K, T> modelAssetBuilder(
       Class<T> model,
       @Nullable BuilderCodec<? super T> parent,
@@ -393,7 +475,7 @@ public final class CodecUtil {
                 dataWriter,
                 dataReader);
 
-    modelFields(builder, model, resolver, lookup);
+    modelFields(builder, model, resolver, lookup, true);
     return builder.build();
   }
 
@@ -458,7 +540,8 @@ public final class CodecUtil {
       BuilderCodec.BuilderBase<T, ?> builder,
       Class<T> model,
       CodecResolver resolver,
-      MethodHandles.Lookup lookup) {
+      MethodHandles.Lookup lookup,
+      boolean isAsset) {
     var topLevelDocumentation = model.getDeclaredAnnotation(Doc.class);
     if (topLevelDocumentation != null)
       builder = builder.documentation(topLevelDocumentation.value());
@@ -467,9 +550,9 @@ public final class CodecUtil {
       int modifiers = field.getModifiers();
       if (Modifier.isStatic(modifiers) || Modifier.isFinal(modifiers)) continue;
 
-      if (field.isAnnotationPresent(Skip.class)
-          || field.isAnnotationPresent(Id.class)
-          || field.isAnnotationPresent(Data.class)) continue;
+      if (field.isAnnotationPresent(Skip.class)) continue;
+      if (isAsset && (field.isAnnotationPresent(Id.class) || field.isAnnotationPresent(Data.class)))
+        continue;
 
       var nameAnnotation = field.getDeclaredAnnotation(Name.class);
       var name = nameAnnotation == null ? field.getName() : nameAnnotation.value();

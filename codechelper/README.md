@@ -12,13 +12,13 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.echoesfrombeyond:codec-helper:0.1.0")
+    compileOnly("org.echoesfrombeyond:codec-helper:0.2.0")
 }
 ```
 
 Then, in your plugin's `manifest.json`, add the following entry to the `DependsOn` block:
 ```
-"org.echoesfrombeyond:CodecHelper": "^0.1.0"
+"org.echoesfrombeyond:CodecHelper": "^0.2.0"
 ```
 
 ## Basic usage
@@ -89,6 +89,26 @@ Either of these could serialize to the following JSON:
     "FirstKey": 10,
     "SecondKey": 11,
     "ThirdKey": 12
+  }
+}
+```
+
+You can also generate `AssetBuilderCodec`:
+
+```java
+@ModelBuilder
+public class MyAsset implements JsonAsset<String> {
+  public static final AssetBuilderCodec<String, MyAsset> CODEC = CodecUtil.modelAssetBuilder(MyAsset.class, Plugin.getSharedResolver());
+  
+  @Id private String Identifier;
+  @Data private AssetExtraInfo.Data Extra;
+  
+  private String SomeValue;
+  private Integer SomeOtherValue;
+  
+  @Override
+  public String getId() {
+    return Identifier;
   }
 }
 ```
@@ -265,3 +285,36 @@ public class CustomProvider implements ValidatorProvider<ValidateCustom> {
 ```
 
 Given the examples above, any fields annotated with `@ValidateCustom` will use the `Validator` returned by `getInstance`. Each field can have multiple such annotations.
+
+### Inherit from existing codecs
+
+Consider the following two classes.
+
+```java
+public abstract class SuperClass {
+  public static final BuilderCodec<SuperClass> CODEC = CodecUtil.modelBuilder(SuperClass.class, Plugin.getSharedResolver());
+  
+  private String SuperStringValue;
+  private int SuperIntValue;
+}
+```
+
+```java
+public class BaseClass extends SuperClass {
+  public static final BuilderCodec<Superclass> CODEC = CodecUtil.modelBuilder(BaseClass.class, SuperClass.CODEC, Plugin.getSharedResolver());
+  
+  private String BaseStringValue;
+}
+```
+
+`BaseClass` could serialize to the following JSON:
+
+```json
+{
+  "SuperStringValue": "Super String Value",
+  "SuperIntValue": 67,
+  "BaseStringValue": "Base String Value"
+}
+```
+
+Note that, because `SuperClass` is `abstract`, it can only be serialized through non-`abstract` subclasses that provide their own codecs.

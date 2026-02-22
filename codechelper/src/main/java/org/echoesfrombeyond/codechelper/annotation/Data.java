@@ -18,9 +18,24 @@
 
 package org.echoesfrombeyond.codechelper.annotation;
 
+import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
+import com.hypixel.hytale.codec.Codec;
 import java.lang.annotation.*;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
-/** Marks a field as the data field. */
+/**
+ * Marks a field as the data field.
+ *
+ * <p>There can only be one data field per model class. Data fields are ignored for field
+ * resolution. They are read from/written to as if by being assigned through {@code
+ * dataGetter}/{@code dataSetter} lambdas passed to {@link AssetBuilderCodec#builder(Class,
+ * Supplier, Codec, BiConsumer, Function, BiConsumer, Function)}.
+ *
+ * <p>Data fields are treated as regular fields unless resolving an {@link AssetBuilderCodec} or if
+ * otherwise annotated with {@link Skip}.
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
