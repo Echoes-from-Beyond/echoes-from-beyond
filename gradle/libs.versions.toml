@@ -70,7 +70,7 @@ junit = "6.0.3"
 [libraries]
 # usage: Automatic codec generation
 # scope: Hytale mods
-codec-helper = { module = "org.echoesfrombeyond:codec-helper", version = "0.1.0" }
+codec-helper = { module = "org.echoesfrombeyond:codec-helper", version = "0.2.0" }
 
 # usage: More annotations not included in jspecify
 # scope: everywhere
