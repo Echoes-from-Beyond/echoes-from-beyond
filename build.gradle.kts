@@ -107,14 +107,6 @@ spotless {
   lineEndings = LineEnding.UNIX
   encoding = Charsets.UTF_8
 
-  flexmark {
-    target("*.md", "*/*.md")
-    targetExclude(".*/**/*")
-    targetExclude("run/**/*")
-
-    flexmark("0.64.6").emulationProfile("GITHUB_DOC")
-  }
-
   kotlin {
     target("*/src/*/kotlin/**/*.kt")
     ktfmt("0.61")
