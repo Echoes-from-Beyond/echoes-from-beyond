@@ -15,7 +15,7 @@ Reports must use the format as provided in the [format section](#format). Please
 <details>
   <summary>Public Key</summary>
 
-  ```
+```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mDMEaVc//hYJKwYBBAHaRw8BAQdAEhs9RbWoUnn9J+CBtbA8jJZ3KyrR0VbKaYS/
@@ -31,7 +31,8 @@ dogV1ALVAQDe7ZVgYwUnjetZsLBbltc5RP3+AoPOjxCZYn4rlhRZeAEAhhA0hEZx
 ahoR0OYs+aZK3dNSYNzgBpmEZH9iB2G7ZAo=
 =DuFG
 -----END PGP PUBLIC KEY BLOCK-----
-  ```
+```
+
 </details>
 
 We will respond to reports within one week. We will follow up for more information if the report isn't actionable as-is.
@@ -41,6 +42,7 @@ Once a reported vulnerability has been resolved and a fix is available, we will 
 Unfortunately, we cannot afford to pay bounties. We will **ignore all vulnerability reports that demand payment for disclosure of some hypothetical vulnerability.**
 
 ### Format
+
 `OPTIONAL` entries may be left off as needed.
 
 ```
@@ -57,3 +59,4 @@ Reproducer: [OPTIONAL: if present, explain how to exploit the
 Key: [OPTIONAL: an ASCII-armored PGP key which we will use to encrypt
     all followup emails to your report]
 ```
+

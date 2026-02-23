@@ -17,6 +17,7 @@ dependencies {
 ```
 
 Then, in your plugin's `manifest.json`, add the following entry to the `DependsOn` block:
+
 ```
 "org.echoesfrombeyond:CodecHelper": "^0.2.0"
 ```
@@ -113,11 +114,11 @@ public class MyAsset implements JsonAsset<String> {
 }
 ```
 
-In addition to the class for which to generate a codec, `modelBuilder` also requires a `CodecResolver`. This is simply a functional interface whose only method accepts a `Type` and a `Field`, and returns a `Codec` if it is able to determine how the field should be (de)serialized; and if not, returns `null`.  
+In addition to the class for which to generate a codec, `modelBuilder` also requires a `CodecResolver`. This is simply a functional interface whose only method accepts a `Type` and a `Field`, and returns a `Codec` if it is able to determine how the field should be (de)serialized; and if not, returns `null`.
 
 The same resolver can be passed to `modelBuilder` any number of times. Resolvers should generally be stored in `static`s and reused as much as possible.
 
-The default codec resolver, which is fully-featured, can be accessed simply by calling `Plugin.getSharedResolver()`. Consult the Javadoc on that method for more details about its capabilities. 
+The default codec resolver, which is fully-featured, can be accessed simply by calling `Plugin.getSharedResolver()`. Consult the Javadoc on that method for more details about its capabilities.
 
 Otherwise, resolvers with custom capabilities can be created using the builder method `CodecResolver.builder()`. A resolver that is only capable of handling primitive/wrapper types along with String is found at `CodecResolver.PRIMITIVE`.
 
@@ -186,6 +187,7 @@ public class Outer {
   public String OuterValue;
 }
 ```
+
 ```json
 {
   "Inner": {

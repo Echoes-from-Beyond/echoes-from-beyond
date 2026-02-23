@@ -40,7 +40,8 @@ Alternatively, run `./gradlew check syncPlugins`. This will assemble all Hytale 
 If there are formatting errors, run `./gradlew spotlessApply` to fix them.
 
 ### Setting up a development environment
-In order to actually test any mods in-game, users need to specify their local Hytale installation. 
+
+In order to actually test any mods in-game, users need to specify their local Hytale installation.
 
 To do this, create a file named `.hytale` in the root project directory (same level as this readme).
 
@@ -56,7 +57,7 @@ MacOS: ~/Application Support/Hytale/install/pre-release/package/game/latest
 
 Once you have located the installation, you will need to convert the file to an _absolute path_ as appropriate for your operating system. Then, copy-paste the absolute path into the `.hytale` file.
 
-`.hytale` is gitignore'd and should not be commited to the repo, as it will be different for every user. 
+`.hytale` is gitignore'd and should not be commited to the repo, as it will be different for every user.
 
 Finally, execute `./gradlew runDevServer` to launch a Hytale server on your local machine for testing. This task will also ensure that your development server is using the same version as your client. Ensure that you apply the latest available updates/patches through the Hytale launcher _before_ running this command!
 
