@@ -109,6 +109,9 @@ spotless {
 
   flexmark {
     target("*.md", "*/*.md")
+    targetExclude(".*/**/*")
+    targetExclude("run/**/*")
+
     flexmark("0.64.6").emulationProfile("GITHUB_DOC")
   }
 
@@ -119,6 +122,9 @@ spotless {
 
   kotlinGradle {
     target("**/*.gradle.kts")
+    targetExclude(".*/**/*")
+    targetExclude("run/**/*")
+
     ktfmt("0.61")
   }
 
