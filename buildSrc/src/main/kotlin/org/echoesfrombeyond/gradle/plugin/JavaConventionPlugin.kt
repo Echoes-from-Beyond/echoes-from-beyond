@@ -177,7 +177,7 @@ fun Project.withHytaleDependency() {
     }
 
     val hytale = "com.hypixel.hytale:Server:latest.integration"
-    dependencies.add("shadow", hytale)
+    dependencies.add("compileOnly", hytale)
     dependencies.add("testImplementation", hytale)
 }
 
