@@ -24,6 +24,9 @@ publishing {
     create<MavenPublication>("mavenJava") {
       from(components["shadow"])
 
+      artifact(tasks.named("sourcesJar"))
+      artifact(tasks.named("javadocJar"))
+
       groupId = "org.echoesfrombeyond"
       artifactId = "codec-helper"
       version = versionProvider.get()

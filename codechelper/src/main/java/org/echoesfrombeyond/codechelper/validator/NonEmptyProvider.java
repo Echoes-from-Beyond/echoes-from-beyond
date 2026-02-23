@@ -53,7 +53,7 @@ public class NonEmptyProvider implements ValidatorProvider<ValidateNonEmpty> {
                 default -> o.getClass().isArray() && Array.getLength(o) == 0;
               };
 
-          if (isEmpty) validationResults.fail("Container can't be empty!");
+          if (isEmpty) validationResults.fail("Field can't be empty!");
         }
 
         @Override

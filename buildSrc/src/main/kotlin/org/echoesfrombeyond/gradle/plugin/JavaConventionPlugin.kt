@@ -142,6 +142,7 @@ class JavaConventionPlugin : Plugin<Project> {
             it.relocationPrefix.set(target.provider {
                 "${target.group.toString().replace('.', '/')}/${target.name}/internaldep"
             })
+            it.minimizeJar.set(true)
         }
 
         target.tasks.named("jar", Jar::class.java).configure {
