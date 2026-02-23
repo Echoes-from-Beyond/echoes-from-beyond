@@ -35,8 +35,7 @@ testRuntimeOnly = [
 
 # Used only in buildSrc for "implementation" (plugin) dependencies.
 build = [
-    "shadow",
-    "spotless"
+    "shadow"
 ]
 
 # Compile-only dependencies for the `example` project.
@@ -91,7 +90,3 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 # usage: including dependencies in built jar files
 # scope: plugins and libraries
 shadow = { module = "com.gradleup.shadow:com.gradleup.shadow.gradle.plugin", version = "9.3.1" }
-
-# usage: code formatting plugin
-# scope: buildSrc
-spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version = "8.2.1" }
