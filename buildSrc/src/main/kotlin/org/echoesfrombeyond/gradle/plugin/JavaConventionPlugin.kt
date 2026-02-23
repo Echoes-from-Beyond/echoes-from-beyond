@@ -51,6 +51,7 @@ class JavaConventionPlugin : Plugin<Project> {
         target.setupDependencyConfiguration("compileOnly")
         target.setupDependencyConfiguration("compileOnlyApi")
         target.setupDependencyConfiguration("runtimeOnly")
+        target.setupDependencyConfiguration("shadow")
         target.setupDependencyConfiguration("testImplementation")
         target.setupDependencyConfiguration("testCompileOnly")
         target.setupDependencyConfiguration("testRuntimeOnly")
@@ -62,6 +63,7 @@ class JavaConventionPlugin : Plugin<Project> {
         }
 
         target.tasks.withType(Test::class.java).configureEach {
+            it.jvmArgs("--sun-misc-unsafe-memory-access=allow")
             it.maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
             it.useJUnitPlatform()
         }
@@ -140,6 +142,7 @@ class JavaConventionPlugin : Plugin<Project> {
             it.relocationPrefix.set(target.provider {
                 "${target.group.toString().replace('.', '/')}/${target.name}/internaldep"
             })
+            it.minimizeJar.set(true)
         }
 
         target.tasks.named("jar", Jar::class.java).configure {
