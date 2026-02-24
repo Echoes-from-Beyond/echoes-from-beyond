@@ -35,7 +35,12 @@ testRuntimeOnly = [
 
 # Used only in buildSrc for "implementation" (plugin) dependencies.
 build = [
-    "spotless"
+    "shadow"
+]
+
+# Compile-only dependencies for the `example` project.
+example-compileOnly = [
+    "codec-helper"
 ]
 
 # If two or more related dependencies share the same version, define it here to
@@ -43,7 +48,7 @@ build = [
 # should NOT use this feature! This feature only makes sense for "tightly coupled"
 # libraries.
 [versions]
-junit = "6.0.1"
+junit = "6.0.3"
 
 # Libraries are defined below, sorted by ascending alphabetical order of their
 # configuration keys.
@@ -62,6 +67,9 @@ junit = "6.0.1"
 #
 # This is meant to make it easier to audit 3rd-party libraries in the future.
 [libraries]
+# usage: Automatic codec generation
+# scope: Hytale mods
+codec-helper = { module = "org.echoesfrombeyond:codec-helper", version = "0.2.0" }
 
 # usage: More annotations not included in jspecify
 # scope: everywhere
@@ -79,6 +87,6 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jun
 # scope: testing
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit" }
 
-# usage: code formatting plugin
-# scope: buildSrc
-spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version = "8.1.0" }
+# usage: including dependencies in built jar files
+# scope: plugins and libraries
+shadow = { module = "com.gradleup.shadow:com.gradleup.shadow.gradle.plugin", version = "9.3.1" }
