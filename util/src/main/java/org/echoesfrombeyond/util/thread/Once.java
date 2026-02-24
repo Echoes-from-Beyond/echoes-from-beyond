@@ -70,7 +70,7 @@ public final class Once<T extends @Nullable Object> implements Supplier<T> {
    * @param <T> the type returned by `getter`
    * @throws NullPointerException if {@code getter} is null
    */
-  public static <T extends @Nullable Object> Once<T> of(Supplier<T> getter) {
+  public static <T> Once<T> of(Supplier<@Nullable T> getter) {
     Check.nonNull(getter);
 
     if (getter instanceof Once<T> once) return once;

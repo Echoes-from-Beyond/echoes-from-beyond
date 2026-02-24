@@ -25,8 +25,8 @@ import com.hypixel.hytale.server.core.ui.Value;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import org.echoesfrombeyond.echoesfrombeyond.codec.SigilPoint;
-import org.echoesfrombeyond.echoesfrombeyond.sigil.SigilDrawSystem;
 import org.echoesfrombeyond.echoesfrombeyond.sigil.SigilValidation;
+import org.echoesfrombeyond.echoesfrombeyond.system.SigilDrawSystem;
 import org.jspecify.annotations.NullMarked;
 
 /**

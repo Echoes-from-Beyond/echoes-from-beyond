@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.system.sigil;
+package org.echoesfrombeyond.echoesfrombeyond.system;
 
 import com.hypixel.hytale.component.Archetype;
 import com.hypixel.hytale.component.ArchetypeChunk;
@@ -26,15 +26,14 @@ import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.CancellableEcsEvent;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import java.util.List;
-import org.echoesfrombeyond.asset.SigilPattern;
-import org.echoesfrombeyond.codec.SigilPoint;
-import org.echoesfrombeyond.sigil.SigilValidation;
+import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
+import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilQueueComponent;
+import org.echoesfrombeyond.echoesfrombeyond.sigil.SigilKey;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class SigilValidateSystem extends EntityEventSystem<EntityStore, SigilValidateSystem.Event> {
-  public SigilValidateSystem() {
+public class SigilQueueSystem extends EntityEventSystem<EntityStore, SigilQueueSystem.Event> {
+  public SigilQueueSystem() {
     super(Event.class);
   }
 
@@ -47,17 +46,11 @@ public class SigilValidateSystem extends EntityEventSystem<EntityStore, SigilVal
       Event event) {
     if (event.isCancelled()) return;
 
-    var encoded = SigilPoint.encodeArray(event.points.toArray(SigilPoint[]::new));
-    var optional = SigilValidation.canonicalize(encoded);
-
-    if (optional.isEmpty()) return;
-
-    var key = optional.get();
-    var pattern = SigilPattern.ASSET_STORE.get().getAssetMap().getSigilPattern(key);
-    if (pattern == null) return;
-
-    commandBuffer.invoke(
-        archetypeChunk.getReferenceTo(i), new SigilQueueSystem.Event(key, pattern));
+    commandBuffer
+        .ensureAndGetComponent(
+            archetypeChunk.getReferenceTo(i), SigilQueueComponent.getComponentType())
+        .patterns
+        .add(event.pattern);
   }
 
   @Override
@@ -65,16 +58,17 @@ public class SigilValidateSystem extends EntityEventSystem<EntityStore, SigilVal
     return Archetype.empty();
   }
 
-  /**
-   * Event invoked when the player first draws a Sigil. It isn't necessarily valid or even
-   * canonical.
-   */
+  /** Raise to queue a valid, canonical Sigil in the spell queue. */
   public static class Event extends CancellableEcsEvent {
-    /** Mutable list of points in the Sigil. Must not contain null elements. */
-    public final List<SigilPoint> points;
+    /** The Sigil key. */
+    public final SigilKey key;
 
-    public Event(List<SigilPoint> points) {
-      this.points = points;
+    /** The Sigil pattern. */
+    public final SigilPattern pattern;
+
+    public Event(SigilKey key, SigilPattern pattern) {
+      this.key = key;
+      this.pattern = pattern;
     }
   }
 }

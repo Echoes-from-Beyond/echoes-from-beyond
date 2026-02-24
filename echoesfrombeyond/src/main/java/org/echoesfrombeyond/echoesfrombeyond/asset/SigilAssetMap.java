@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.asset;
+package org.echoesfrombeyond.echoesfrombeyond.asset;
 
 import com.hypixel.hytale.assetstore.AssetMap;
 import com.hypixel.hytale.assetstore.codec.AssetCodec;
@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.StampedLock;
-import org.echoesfrombeyond.sigil.SigilKey;
+import org.echoesfrombeyond.echoesfrombeyond.sigil.SigilKey;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

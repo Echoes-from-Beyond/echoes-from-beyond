@@ -27,12 +27,12 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHa
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
-import org.echoesfrombeyond.component.sigil.SigilQueueComponent;
-import org.echoesfrombeyond.interaction.PlayerInstantInteraction;
-import org.echoesfrombeyond.system.sigil.EvaluateSpellSystem;
-import org.echoesfrombeyond.ui.hud.HudUtils;
-import org.echoesfrombeyond.ui.hud.SigilHud;
+import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
+import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilQueueComponent;
+import org.echoesfrombeyond.echoesfrombeyond.hud.HudUtils;
+import org.echoesfrombeyond.echoesfrombeyond.hud.SigilHud;
+import org.echoesfrombeyond.echoesfrombeyond.interaction.PlayerInstantInteraction;
+import org.echoesfrombeyond.echoesfrombeyond.system.EvaluateSpellSystem;
 import org.jspecify.annotations.NullMarked;
 
 /** Closes the Sigil HUD. This will cast any drawn Sigils. */

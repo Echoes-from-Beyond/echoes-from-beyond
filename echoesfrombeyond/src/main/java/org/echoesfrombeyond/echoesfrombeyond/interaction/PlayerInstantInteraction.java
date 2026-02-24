@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.interaction;
+package org.echoesfrombeyond.echoesfrombeyond.interaction;
 
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.logger.HytaleLogger;

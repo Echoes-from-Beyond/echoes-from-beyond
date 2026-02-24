@@ -22,7 +22,6 @@ import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.codecs.array.ArrayCodec;
 import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.echoesfrombeyond.sigil.SigilValidation;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

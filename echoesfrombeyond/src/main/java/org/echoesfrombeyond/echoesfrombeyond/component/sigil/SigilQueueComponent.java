@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.component.sigil;
+package org.echoesfrombeyond.echoesfrombeyond.component.sigil;
 
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentRegistryProxy;
@@ -24,7 +24,7 @@ import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.ArrayList;
 import java.util.List;
-import org.echoesfrombeyond.asset.SigilPattern;
+import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

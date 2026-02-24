@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.echoesfrombeyond.sigil;
+package org.echoesfrombeyond.echoesfrombeyond.system;
 
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
@@ -25,12 +25,12 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.entity.component.HeadRotation;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.codec.SigilPoint;
-import org.echoesfrombeyond.component.ComponentUtils;
-import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
-import org.echoesfrombeyond.sigil.SigilValidation;
-import org.echoesfrombeyond.ui.hud.HudUtils;
-import org.echoesfrombeyond.ui.hud.SigilHud;
+import org.echoesfrombeyond.echoesfrombeyond.codec.SigilPoint;
+import org.echoesfrombeyond.echoesfrombeyond.component.ComponentUtils;
+import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
+import org.echoesfrombeyond.echoesfrombeyond.hud.HudUtils;
+import org.echoesfrombeyond.echoesfrombeyond.hud.SigilHud;
+import org.echoesfrombeyond.echoesfrombeyond.sigil.SigilValidation;
 import org.echoesfrombeyond.util.thread.Once;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

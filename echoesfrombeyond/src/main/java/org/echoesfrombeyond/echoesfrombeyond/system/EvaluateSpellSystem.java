@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.system.sigil;
+package org.echoesfrombeyond.echoesfrombeyond.system;
 
 import com.hypixel.hytale.component.Archetype;
 import com.hypixel.hytale.component.ArchetypeChunk;
@@ -29,7 +29,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import java.util.List;
-import org.echoesfrombeyond.asset.SigilPattern;
+import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

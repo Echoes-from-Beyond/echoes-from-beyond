@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.system.sigil;
+package org.echoesfrombeyond.echoesfrombeyond.system;
 
 import com.hypixel.hytale.component.Archetype;
 import com.hypixel.hytale.component.ArchetypeChunk;
@@ -26,14 +26,15 @@ import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.CancellableEcsEvent;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.asset.SigilPattern;
-import org.echoesfrombeyond.component.sigil.SigilQueueComponent;
-import org.echoesfrombeyond.sigil.SigilKey;
+import java.util.List;
+import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
+import org.echoesfrombeyond.echoesfrombeyond.codec.SigilPoint;
+import org.echoesfrombeyond.echoesfrombeyond.sigil.SigilValidation;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class SigilQueueSystem extends EntityEventSystem<EntityStore, SigilQueueSystem.Event> {
-  public SigilQueueSystem() {
+public class SigilValidateSystem extends EntityEventSystem<EntityStore, SigilValidateSystem.Event> {
+  public SigilValidateSystem() {
     super(Event.class);
   }
 
@@ -46,11 +47,17 @@ public class SigilQueueSystem extends EntityEventSystem<EntityStore, SigilQueueS
       Event event) {
     if (event.isCancelled()) return;
 
-    commandBuffer
-        .ensureAndGetComponent(
-            archetypeChunk.getReferenceTo(i), SigilQueueComponent.getComponentType())
-        .patterns
-        .add(event.pattern);
+    var encoded = SigilPoint.encodeArray(event.points.toArray(SigilPoint[]::new));
+    var optional = SigilValidation.canonicalize(encoded);
+
+    if (optional.isEmpty()) return;
+
+    var key = optional.get();
+    var pattern = SigilPattern.ASSET_STORE.get().getAssetMap().getSigilPattern(key);
+    if (pattern == null) return;
+
+    commandBuffer.invoke(
+        archetypeChunk.getReferenceTo(i), new SigilQueueSystem.Event(key, pattern));
   }
 
   @Override
@@ -58,17 +65,16 @@ public class SigilQueueSystem extends EntityEventSystem<EntityStore, SigilQueueS
     return Archetype.empty();
   }
 
-  /** Raise to queue a valid, canonical Sigil in the spell queue. */
+  /**
+   * Event invoked when the player first draws a Sigil. It isn't necessarily valid or even
+   * canonical.
+   */
   public static class Event extends CancellableEcsEvent {
-    /** The Sigil key. */
-    public final SigilKey key;
+    /** Mutable list of points in the Sigil. Must not contain null elements. */
+    public final List<SigilPoint> points;
 
-    /** The Sigil pattern. */
-    public final SigilPattern pattern;
-
-    public Event(SigilKey key, SigilPattern pattern) {
-      this.key = key;
-      this.pattern = pattern;
+    public Event(List<SigilPoint> points) {
+      this.points = points;
     }
   }
 }

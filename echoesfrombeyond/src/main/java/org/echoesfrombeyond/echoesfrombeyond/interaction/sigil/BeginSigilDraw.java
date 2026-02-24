@@ -24,8 +24,8 @@ import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
-import org.echoesfrombeyond.component.sigil.SigilDrawComponent;
-import org.echoesfrombeyond.interaction.InteractionUtils;
+import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
+import org.echoesfrombeyond.echoesfrombeyond.interaction.InteractionUtils;
 import org.jspecify.annotations.NullMarked;
 
 /**
