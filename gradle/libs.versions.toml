@@ -38,6 +38,11 @@ build = [
     "shadow"
 ]
 
+# Compile-only dependencies for the `dialogue` project.
+dialogue-compileOnly = [
+    "codec-helper"
+]
+
 # Compile-only dependencies for the `example` project.
 example-compileOnly = [
     "codec-helper"

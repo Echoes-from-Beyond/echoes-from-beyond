@@ -1,0 +1,19 @@
+{
+  "Group": "org.echoesfrombeyond",
+  "Name": "DialogueLib",
+  "Version": "0.1.0",
+  "Description": "Library facilitating NPC dialogue.",
+  "Authors": [
+    {
+      "Name": "Kyle",
+      "Email": "chemky2000@gmail.com",
+      "Url": null
+    }
+  ],
+  "Website": null,
+  "Main": "org.echoesfrombeyond.dialoguelib.DialoguePlugin",
+  "ServerVersion": "*",
+  "DependsOn": {
+    "org.echoesfrombeyond:CodecHelper": "^0.2.0"
+  }
+}
