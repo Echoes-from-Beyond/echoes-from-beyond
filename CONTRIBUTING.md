@@ -1,6 +1,7 @@
 # Contributing
 
 ## Pull Requests
+
 Pull requests are welcome! If possible, please allow edits from maintainers, as it makes minor changes easier.
 
 Commit messages should adhere to [conventional commits guidelines](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13).
@@ -14,6 +15,7 @@ Our CI system detects invalid code style and will fail the build. Before you com
 By contributing, you agree to license the contributed code under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html#license-text). Please do not submit code under different licenses.
 
 ## AI Generated Code Policy
+
 Pull requests that contain AI generated code or documentation must be _thoroughly_ reviewed by the submitter, and they must conform to our style guide. You are expected to understand how your contribution works. "Low-effort" AI generated pull requests may be treated as spam and closed, at the discretion of the maintainers.
 
 ## Style
@@ -27,22 +29,20 @@ While you should _try_ to adhere to these guidelines, don't stress about getting
 Note: the words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are intended to be interpreted as per [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ### General
-* One SHOULD use `Optional` instead of returning `null`, except when:
-  * There is a significant and _demonstrable_ performance degradation caused by returning `Optional` compared to returning `null`.
-  * APIs that are designed to "mimic" or wrap Java APIs, like `Map#get`, MAY return `null` instead of an empty `Optional`.
-* One MUST NOT annotate anything with `@NotNull`!
-  * Instead, one SHOULD apply `@NullMarked` to every class file.
-    * One exception is when "unknown nullability" is actually desired throughout the entire file.
+
+* Instead, one SHOULD apply `@NullMarked` to every class file.
+  * One exception is when "unknown nullability" is actually desired throughout the entire file.
 * One MUST use `jspecify` annotations instead of `jetbrains` where possible.
 * One MUST use explicit nullchecks to validate untrusted input, such as deserialized data from a file.
 * One SHOULD NOT use explicit nullchecks (like `Objects#requireNonNull`) in cases where implicit ones are equivalent.
   * One MAY use explicit nullchecks in cases where implicit ones would have lesser or no effect on nullness detection.
-* One SHOULD limit external dependencies. 
+* One SHOULD limit external dependencies.
   * For example, small utility methods, even if they "duplicate" code found in external packages, are preferred.
-* Exception messages SHOULD be non-capitalized sentences without trailing punctuation.
+* Exception messages SHOULD be capitalized sentences without trailing punctuation.
 * Exception messages SHOULD be phrased in terms of what should (or should not) have happened instead.
 
 ### Testing
+
 * Non-trivial logic SHOULD be unit tested.
 * No individual unit test SHOULD take much more than half a second to complete on a relatively modern desktop computer.
   * If long-running tests are needed, they MUST be annotated with `@Disabled` so they don't slow down CI builds.
@@ -55,6 +55,7 @@ Note: the words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are intended to be i
   * Tests MUST NOT be platform-dependent.
 
 ### Documentation & Commenting
+
 * One SHOULD NOT use multiline implementation comments.
   * This does not apply to Javadoc.
   * This excludes the license header.
@@ -62,3 +63,4 @@ Note: the words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are intended to be i
 * One MAY use `// TODO` comments when reasonable.
 * One SHOULD link to existing code for further reading.
 * One SHOULD wrap comment lines at 100 characters.
+

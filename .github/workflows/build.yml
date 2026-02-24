@@ -126,4 +126,4 @@ jobs:
           cp run/mods/*.jar .runner/Server/mods/
           
           cd .runner/Server
-          ENABLE_INTEGRATION_TESTS=true java -XX:AOTCache=HytaleServer.aot --enable-native-access=ALL-UNNAMED -jar HytaleServer.jar --assets ../Assets.zip --disable-sentry --auth-mode=insecure --boot-command=integration_test --boot-command=stop
+          ENABLE_INTEGRATION_TESTS=true java -Xlog:aot -XX:+UseCompactObjectHeaders -XX:AOTCache=HytaleServer.aot --enable-native-access=ALL-UNNAMED --sun-misc-unsafe-memory-access=allow -jar HytaleServer.jar --assets ../Assets.zip --disable-sentry --auth-mode=insecure --boot-command=integration_test --boot-command=stop

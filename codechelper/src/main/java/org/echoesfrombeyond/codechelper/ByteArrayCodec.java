@@ -1,0 +1,92 @@
+/*
+ * Echoes from Beyond: Hytale Mod
+ * Copyright (C) 2025 Echoes from Beyond Team <chemky2000@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package org.echoesfrombeyond.codechelper;
+
+import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.ExtraInfo;
+import com.hypixel.hytale.codec.RawJsonCodec;
+import com.hypixel.hytale.codec.schema.SchemaContext;
+import com.hypixel.hytale.codec.schema.config.ArraySchema;
+import com.hypixel.hytale.codec.schema.config.IntegerSchema;
+import com.hypixel.hytale.codec.schema.config.Schema;
+import com.hypixel.hytale.codec.util.RawJsonReader;
+import java.io.IOException;
+import java.util.Arrays;
+import org.bson.BsonArray;
+import org.bson.BsonInt32;
+import org.bson.BsonValue;
+import org.jspecify.annotations.NullMarked;
+
+/** {@link Codec} for an array of primitive byte. */
+@NullMarked
+class ByteArrayCodec implements Codec<byte[]>, RawJsonCodec<byte[]> {
+  private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+
+  /** Creates a new instance of this class. */
+  ByteArrayCodec() {}
+
+  public byte[] decode(BsonValue bsonValue, ExtraInfo extraInfo) {
+    var array = bsonValue.asArray();
+    var result = new byte[array.size()];
+
+    for (int i = 0; i < result.length; i++) result[i] = Codec.BYTE.decode(array.get(i), extraInfo);
+    return result;
+  }
+
+  public BsonValue encode(byte[] values, ExtraInfo extraInfo) {
+    var array = new BsonArray();
+    for (var value : values) array.add(new BsonInt32(value));
+    return array;
+  }
+
+  public byte[] decodeJson(RawJsonReader reader, ExtraInfo extraInfo) throws IOException {
+    reader.expect('[');
+    reader.consumeWhiteSpace();
+    if (reader.tryConsume(']')) return EMPTY_BYTE_ARRAY;
+
+    var i = 0;
+    var result = new byte[10];
+
+    while (true) {
+      if (i == result.length) {
+        var temp = new byte[i + 1 + (i >> 1)];
+        System.arraycopy(result, 0, temp, 0, i);
+        result = temp;
+      }
+
+      result[i++] = Codec.BYTE.decodeJson(reader, extraInfo);
+      reader.consumeWhiteSpace();
+      if (reader.tryConsumeOrExpect(']', ',')) {
+        if (result.length == i) return result;
+        else return Arrays.copyOf(result, i);
+      }
+
+      reader.consumeWhiteSpace();
+    }
+  }
+
+  public Schema toSchema(SchemaContext context) {
+    var schema = new ArraySchema();
+    var item = new IntegerSchema();
+    item.setMaximum(Byte.MAX_VALUE);
+    item.setMinimum(Byte.MIN_VALUE);
+    schema.setItem(item);
+    return schema;
+  }
+}
