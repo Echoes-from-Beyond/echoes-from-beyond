@@ -33,7 +33,7 @@ val serverAot: Provider<File> =
     hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.aot") }
 val assetsZip: Provider<File> = hytalePath.map { file -> file.resolve("Assets.zip") }
 
-val runDirectory: File = file("dir")
+val runDirectory: File = file("run")
 
 val copySdkTask: TaskProvider<Copy> =
     tasks.register("copySdk", Copy::class.java) {
@@ -43,8 +43,7 @@ val copySdkTask: TaskProvider<Copy> =
 val syncPluginsTask: TaskProvider<Sync> =
     tasks.register("syncPlugins", Sync::class.java) {
       // Copy from all subprojects that have the `hasPlugin` property set to `true`. This is only
-      // the
-      // case when their build script includes `withHytalePlugin`.
+      // the case when their build script includes `withHytalePlugin`.
       from(
               subprojects
                   .filter { sub -> sub.extra.has("hasPlugin") }
@@ -53,7 +52,7 @@ val syncPluginsTask: TaskProvider<Sync> =
           )
           .into(runDirectory.resolve("mods"))
 
-      // Preserve everything except run/mods/*.jar
+      // Preserve everything except run/mods/*.jar.
       preserve {
         include { _ -> true }
         exclude("*.jar")
@@ -156,6 +155,6 @@ spotless {
         .reorderImports(false)
 
     formatAnnotations()
-    licenseHeaderFile(layout.projectDirectory.file("LICENSE_HEADER").asFile)
+    licenseHeaderFile(file("LICENSE_HEADER"))
   }
 }
