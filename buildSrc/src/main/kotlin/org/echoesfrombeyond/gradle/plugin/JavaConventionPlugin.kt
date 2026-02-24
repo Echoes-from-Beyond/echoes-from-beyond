@@ -28,6 +28,8 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion
  */
 class JavaConventionPlugin : Plugin<Project> {
   override fun apply(target: Project) {
+    target.group = "org.echoesfrombeyond"
+
     target.plugins.apply("java-library")
     target.plugins.apply("com.gradleup.shadow")
 
@@ -67,9 +69,7 @@ class JavaConventionPlugin : Plugin<Project> {
     }
 
     target.tasks.withType(ShadowJar::class.java).configureEach {
-      it.from(target.rootProject.layout.projectDirectory.file("LICENSE").asFile) { spec ->
-        spec.into("META-INF")
-      }
+      it.from(target.rootDir.resolve("LICENSE")) { spec -> spec.into("META-INF") }
     }
 
     target.tasks.withType(JavaCompile::class.java).configureEach { it.options.encoding = "UTF-8" }

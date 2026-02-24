@@ -4,10 +4,8 @@ import org.gradle.internal.extensions.core.extra
 
 plugins { id("com.diffplug.spotless") version "8.2.1" }
 
-allprojects { group = "org.echoesfrombeyond" }
-
 val hytalePath: Provider<File> = provider {
-  val hytaleDotfile: File = rootProject.file(".hytale")
+  val hytaleDotfile: File = file(".hytale")
 
   if (!hytaleDotfile.exists())
       throw GradleException(
@@ -35,7 +33,7 @@ val serverAot: Provider<File> =
     hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.aot") }
 val assetsZip: Provider<File> = hytalePath.map { file -> file.resolve("Assets.zip") }
 
-val runDirectory: Directory = rootProject.layout.projectDirectory.dir("run")
+val runDirectory: File = file("dir")
 
 val copySdkTask: TaskProvider<Copy> =
     tasks.register("copySdk", Copy::class.java) {
@@ -53,7 +51,7 @@ val syncPluginsTask: TaskProvider<Sync> =
                   .filter { sub -> sub.extra.get("hasPlugin") as? Boolean ?: false }
                   .map { sub -> sub.tasks.named("shadowJar") }
           )
-          .into(runDirectory.dir("mods"))
+          .into(runDirectory.resolve("mods"))
 
       // Preserve everything except run/mods/*.jar
       preserve {
@@ -68,8 +66,8 @@ tasks.register("runDevServer", JavaExec::class.java) {
   // Pass through commands to the Hytale server.
   standardInput = System.`in`
 
-  classpath = files(runDirectory.file("HytaleServer.jar"))
-  workingDir = runDirectory.asFile
+  classpath = files(runDirectory.resolve("HytaleServer.jar"))
+  workingDir = runDirectory
 
   jvmArgs =
       listOf(
@@ -86,11 +84,11 @@ tasks.register("runDevServer", JavaExec::class.java) {
 }
 
 tasks.register("cleanRunDir", Delete::class.java) {
-  delete(runDirectory.dir("logs"))
-  delete(runDirectory.dir("mods"))
-  delete(runDirectory.dir("universe"))
+  delete(runDirectory.resolve("logs"))
+  delete(runDirectory.resolve("mods"))
+  delete(runDirectory.resolve("universe"))
   delete(
-      runDirectory.asFileTree.matching {
+      fileTree(runDirectory).matching {
         include("*")
         exclude("*.json")
         exclude("Assets.zip")
@@ -158,6 +156,6 @@ spotless {
         .reorderImports(false)
 
     formatAnnotations()
-    licenseHeaderFile(rootProject.layout.projectDirectory.file("LICENSE_HEADER").asFile)
+    licenseHeaderFile(layout.projectDirectory.file("LICENSE_HEADER").asFile)
   }
 }
