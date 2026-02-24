@@ -4,8 +4,11 @@ import org.gradle.internal.extensions.core.extra
 
 plugins { id("com.diffplug.spotless") version "8.2.1" }
 
+val hytaleDotfile: RegularFile = layout.projectDirectory.file(".hytale")
+val runDirectory: Directory = layout.projectDirectory.dir("run")
+
 val hytalePath: Provider<File> = provider {
-  val hytaleDotfile: File = file(".hytale")
+  val hytaleDotfile: File = hytaleDotfile.asFile
 
   if (!hytaleDotfile.exists())
       throw GradleException(
@@ -33,8 +36,6 @@ val serverAot: Provider<File> =
     hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.aot") }
 val assetsZip: Provider<File> = hytalePath.map { file -> file.resolve("Assets.zip") }
 
-val runDirectory: File = file("run")
-
 val copySdkTask: TaskProvider<Copy> =
     tasks.register("copySdk", Copy::class.java) {
       from(serverJar, serverAot, assetsZip).into(runDirectory)
@@ -50,7 +51,7 @@ val syncPluginsTask: TaskProvider<Sync> =
                   .filter { sub -> sub.extra.get("hasPlugin") as? Boolean ?: false }
                   .map { sub -> sub.tasks.named("shadowJar") }
           )
-          .into(runDirectory.resolve("mods"))
+          .into(runDirectory.dir("mods"))
 
       // Preserve everything except run/mods/*.jar.
       preserve {
@@ -65,8 +66,8 @@ tasks.register("runDevServer", JavaExec::class.java) {
   // Pass through commands to the Hytale server.
   standardInput = System.`in`
 
-  classpath = files(runDirectory.resolve("HytaleServer.jar"))
-  workingDir = runDirectory
+  classpath = files(runDirectory.file("HytaleServer.jar"))
+  workingDir = runDirectory.asFile
 
   jvmArgs =
       listOf(
@@ -83,9 +84,9 @@ tasks.register("runDevServer", JavaExec::class.java) {
 }
 
 tasks.register("cleanRunDir", Delete::class.java) {
-  delete(runDirectory.resolve("logs"))
-  delete(runDirectory.resolve("mods"))
-  delete(runDirectory.resolve("universe"))
+  delete(runDirectory.dir("logs"))
+  delete(runDirectory.dir("mods"))
+  delete(runDirectory.dir("universe"))
   delete(
       fileTree(runDirectory).matching {
         include("*")
@@ -155,6 +156,6 @@ spotless {
         .reorderImports(false)
 
     formatAnnotations()
-    licenseHeaderFile(file("LICENSE_HEADER"))
+    licenseHeaderFile(layout.projectDirectory.file("LICENSE_HEADER"))
   }
 }
