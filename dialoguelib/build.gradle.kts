@@ -13,5 +13,3 @@ withPublishedPlugin(
     "A plugin facilitating NPC dialogue and other useful features.",
     "https://github.com/Echoes-from-Beyond/echoes-from-beyond/tree/main/dialogue",
 )
-
-dependencies { add("compileOnly", "org.echoesfrombeyond:codec-helper:0.1.0") }

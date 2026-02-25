@@ -38,8 +38,7 @@ build = [
     "shadow"
 ]
 
-# Compile-only dependencies for the `dialogue` project.
-dialogue-compileOnly = [
+dialoguelib-shadow = [
     "codec-helper"
 ]
 

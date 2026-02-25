@@ -18,41 +18,21 @@
 
 package org.echoesfrombeyond.dialoguelib;
 
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.server.core.Message;
-import com.hypixel.hytale.server.core.plugin.JavaPlugin;
-import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
-import org.echoesfrombeyond.codechelper.CodecResolver;
+import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-@SuppressWarnings("unused")
-public class DialoguePlugin extends JavaPlugin {
-  private static @Nullable CodecResolver RESOLVER;
+@ModelBuilder
+public class Choice {
+  public static final BuilderCodec<Choice> CODEC =
+      CodecUtil.modelBuilder(Choice.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
-  public DialoguePlugin(JavaPluginInit init) {
-    super(init);
-  }
-
-  @Override
-  protected void setup() {
-    RESOLVER =
-        CodecResolver.builder()
-            .chain(Plugin.getSharedResolver())
-            .withDirectMapping(Message.class, Message.CODEC)
-            .build();
-  }
-
-  @Override
-  protected void shutdown() {
-    RESOLVER = null;
-  }
-
-  public static CodecResolver getResolver() {
-    var resolver = RESOLVER;
-    if (resolver == null) throw new IllegalStateException("Plugin must be initialized");
-
-    return resolver;
-  }
+  @Doc("The message associated with the choice.")
+  private @Nullable Message Message;
 }
