@@ -18,21 +18,15 @@
 
 package org.echoesfrombeyond.dialoguelib;
 
-import com.hypixel.hytale.codec.builder.BuilderCodec;
-import com.hypixel.hytale.server.core.Message;
-import org.echoesfrombeyond.codechelper.CodecUtil;
-import org.echoesfrombeyond.codechelper.Plugin;
-import org.echoesfrombeyond.codechelper.annotation.Doc;
-import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
+import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
 
 @NullMarked
-@ModelBuilder
-public class Choice {
-  public static final BuilderCodec<Choice> CODEC =
-      CodecUtil.modelBuilder(Choice.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
+public interface Dialogue extends IdentifiedAsset<String> {
+  AssetCodecMapCodec<String, Dialogue> CODEC = IdentifiedAsset.assetCodec(Codec.STRING);
 
-  @Doc("The message associated with the choice.")
-  private @Nullable Message Message;
+  void display(Ref<EntityStore> activator);
 }

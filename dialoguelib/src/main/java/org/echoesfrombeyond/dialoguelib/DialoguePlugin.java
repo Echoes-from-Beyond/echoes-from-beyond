@@ -40,7 +40,10 @@ public class DialoguePlugin extends JavaPlugin {
     RESOLVER =
         CodecResolver.builder()
             .chain(Plugin.getSharedResolver())
+            .withDirectMapping(Dialogue.class, Dialogue.CODEC)
+            .withDirectMapping(DialogueChoice.class, DialogueChoice.CODEC)
             .withDirectMapping(Message.class, Message.CODEC)
+            .withDirectMapping(Trigger.class, Trigger.CODEC)
             .build();
   }
 
