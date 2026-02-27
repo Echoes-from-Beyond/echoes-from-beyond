@@ -26,5 +26,6 @@ import org.jspecify.annotations.NullMarked;
 public interface DialogueChoice extends IdentifiedAsset<String> {
   AssetCodecMapCodec<String, DialogueChoice> CODEC = IdentifiedAsset.assetCodec(Codec.STRING);
 
-  String getText();
+  // TODO: what kind of arguments here?
+  void render();
 }
