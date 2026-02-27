@@ -19,23 +19,31 @@
 package org.echoesfrombeyond.dialoguelib;
 
 import com.hypixel.hytale.assetstore.AssetExtraInfo;
-import com.hypixel.hytale.assetstore.JsonAsset;
-import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
-import com.hypixel.hytale.codec.Codec;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-public interface IdentifiedAsset<K> extends JsonAsset<K> {
-  void setId(K id);
+public abstract class IdentifiedAssetBase<K> implements IdentifiedAsset<K> {
+  private K id;
+  private AssetExtraInfo.@Nullable Data data;
 
-  void setData(AssetExtraInfo.@Nullable Data data);
+  @Override
+  public final void setId(K id) {
+    this.id = id;
+  }
 
-  AssetExtraInfo.@Nullable Data getData();
+  @Override
+  public final void setData(AssetExtraInfo.@Nullable Data data) {
+    this.data = data;
+  }
 
-  static <K, Asset extends IdentifiedAsset<K>> AssetCodecMapCodec<K, Asset> assetCodec(
-      Codec<K> codec) {
-    return new AssetCodecMapCodec<>(
-        codec, Asset::setId, Asset::getId, Asset::setData, Asset::getData);
+  @Override
+  public final AssetExtraInfo.@Nullable Data getData() {
+    return data;
+  }
+
+  @Override
+  public final K getId() {
+    return id;
   }
 }

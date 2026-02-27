@@ -45,6 +45,7 @@ public class DialoguePlugin extends JavaPlugin {
             .withDirectMapping(Message.class, Message.CODEC)
             .withDirectMapping(Trigger.class, Trigger.CODEC)
             .build();
+    Dialogue.CODEC.register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
   }
 
   @Override

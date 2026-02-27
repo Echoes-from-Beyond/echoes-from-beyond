@@ -18,27 +18,21 @@
 
 package org.echoesfrombeyond.dialoguelib;
 
-import com.hypixel.hytale.assetstore.AssetExtraInfo;
-import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
-import org.echoesfrombeyond.codechelper.annotation.Data;
-import org.echoesfrombeyond.codechelper.annotation.Id;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullUnmarked;
 
 @NullUnmarked
 @SuppressWarnings("FieldMayBeFinal")
-public class StandardDialogue implements Dialogue {
-  public static AssetBuilderCodec<String, StandardDialogue> CODEC =
-      CodecUtil.modelAssetBuilder(
+public class StandardDialogue extends IdentifiedAssetBase<@NonNull String> implements Dialogue {
+  public static BuilderCodec<StandardDialogue> CODEC =
+      CodecUtil.modelBuilder(
           StandardDialogue.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
-
-  @Id private String Identifier;
-  @Data private AssetExtraInfo.Data Data;
 
   private List<DialogueChoice> Choices;
 
@@ -47,25 +41,5 @@ public class StandardDialogue implements Dialogue {
   @Override
   public void display(@NonNull Ref<EntityStore> activator) {
     // TODO: render the choices
-  }
-
-  @Override
-  public String getId() {
-    return Identifier;
-  }
-
-  @Override
-  public void setId(String id) {
-    Identifier = id;
-  }
-
-  @Override
-  public void setData(AssetExtraInfo.@NonNull Data data) {
-    Data = data;
-  }
-
-  @Override
-  public AssetExtraInfo.Data getData() {
-    return Data;
   }
 }
