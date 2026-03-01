@@ -41,16 +41,9 @@ public class DialoguePlugin extends JavaPlugin {
   protected void setup() {
     RESOLVER =
         CodecResolver.builder()
-            .chain(CodecResolver.PRIMITIVE)
-            .withEnumSupport()
-            .withArraySupport()
             .withCollectionSupport()
-            .withMapSupport()
             .withRecursiveResolution(Plugin.getSharedCache())
-            .withSubtypeMapping(Collection.class, ArrayList.class)
             .withSubtypeMapping(List.class, ArrayList.class)
-            .withSubtypeMapping(Map.class, HashMap.class)
-            .withSubtypeMapping(Set.class, HashSet.class)
             .withDirectMapping(Dialogue.class, Dialogue.CODEC)
             .withDirectMapping(DialogueChoice.class, DialogueChoice.CODEC)
             .withDirectMapping(Message.class, Message.CODEC)

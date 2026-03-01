@@ -26,12 +26,16 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import org.echoesfrombeyond.dialoguelib.StandardDialogue;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class DialogueUI extends CustomUIPage {
-  public DialogueUI(PlayerRef playerRef) {
+public class StandardDialogueUI extends CustomUIPage {
+  private final StandardDialogue dialogue;
+
+  public StandardDialogueUI(PlayerRef playerRef, StandardDialogue dialogue) {
     super(playerRef, CustomPageLifetime.CantClose);
+    this.dialogue = dialogue;
   }
 
   @Override
@@ -39,5 +43,8 @@ public class DialogueUI extends CustomUIPage {
       Ref<EntityStore> ref,
       UICommandBuilder uiCommandBuilder,
       UIEventBuilder uiEventBuilder,
-      Store<EntityStore> store) {}
+      Store<EntityStore> store) {
+    // TODO: determine dialogue option layout
+    for (var choice : dialogue.getChoices()) choice.render(dialogue, uiCommandBuilder);
+  }
 }
