@@ -45,6 +45,9 @@ public class StandardDialogueUI extends CustomUIPage {
       UIEventBuilder uiEventBuilder,
       Store<EntityStore> store) {
     // TODO: determine dialogue option layout
-    for (var choice : dialogue.getChoices()) choice.render(dialogue, uiCommandBuilder);
+    for (var choice : dialogue.getChoices()) {
+      // TODO: render based on text
+      var text = choice.getText(dialogue);
+    }
   }
 }

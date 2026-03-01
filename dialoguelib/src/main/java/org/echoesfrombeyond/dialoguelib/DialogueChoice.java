@@ -20,12 +20,11 @@ package org.echoesfrombeyond.dialoguelib;
 
 import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
 import com.hypixel.hytale.codec.Codec;
-import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public interface DialogueChoice extends IdentifiedAsset<String> {
   AssetCodecMapCodec<String, DialogueChoice> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
-  void render(Dialogue parent, UICommandBuilder builder);
+  String getText(Dialogue parent);
 }
