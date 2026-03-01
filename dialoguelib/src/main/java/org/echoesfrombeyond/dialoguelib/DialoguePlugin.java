@@ -18,7 +18,9 @@
 
 package org.echoesfrombeyond.dialoguelib;
 
+import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
 import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import java.util.*;
@@ -50,7 +52,16 @@ public class DialoguePlugin extends JavaPlugin {
             .withDirectMapping(Trigger.class, Trigger.CODEC)
             .build();
 
-    Dialogue.CODEC.register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
+    getCodecRegistry(Dialogue.CODEC)
+        .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
+
+    getAssetRegistry()
+        .register(
+            HytaleAssetStore.builder(Dialogue.class, new DefaultAssetMap<>())
+                .setCodec(Dialogue.CODEC)
+                .setPath("Dialogue")
+                .setKeyFunction(Dialogue::getId)
+                .build());
   }
 
   @Override

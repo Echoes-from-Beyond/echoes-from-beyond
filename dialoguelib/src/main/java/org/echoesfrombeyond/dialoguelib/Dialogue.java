@@ -18,7 +18,9 @@
 
 package org.echoesfrombeyond.dialoguelib;
 
+import com.hypixel.hytale.assetstore.AssetMap;
 import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
+import com.hypixel.hytale.assetstore.map.JsonAssetWithMap;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -26,7 +28,8 @@ import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public interface Dialogue extends IdentifiedAsset<String> {
+public interface Dialogue
+    extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Dialogue>> {
   AssetCodecMapCodec<String, Dialogue> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
   @RunOnWorldThread

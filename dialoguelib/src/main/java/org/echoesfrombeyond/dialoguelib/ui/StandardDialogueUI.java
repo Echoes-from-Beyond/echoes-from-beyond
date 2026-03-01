@@ -47,7 +47,7 @@ public class StandardDialogueUI extends CustomUIPage {
     // TODO: determine dialogue option layout
     for (var choice : dialogue.getChoices()) {
       // TODO: render based on text
-      var text = choice.getText(dialogue);
+      var text = choice.getText(ref, dialogue);
     }
   }
 }
