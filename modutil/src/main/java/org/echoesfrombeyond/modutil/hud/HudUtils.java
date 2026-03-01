@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.echoesfrombeyond.hud;
+package org.echoesfrombeyond.modutil.hud;
 
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.entity.entities.Player;
@@ -25,7 +25,7 @@ import com.hypixel.hytale.server.core.entity.entities.player.hud.HudManager;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-import org.echoesfrombeyond.echoesfrombeyond.Plugin;
+import org.echoesfrombeyond.modutil.StringConstants;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -90,11 +90,13 @@ public final class HudUtils {
     }
 
     private static String hudKey(Class<?> hudClass) {
-      return Plugin.MOD_GROUP + ":" + hudClass.getName();
+      return StringConstants.GROUP_NAME + ":" + hudClass.getName();
     }
   }
 
-  private HudUtils() {}
+  private HudUtils() {
+    throw new RuntimeException();
+  }
 
   /**
    * Gets the HUD, if there is one of the specified type. If MHUD is installed, it will look up the

@@ -29,9 +29,9 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Sim
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
-import org.echoesfrombeyond.echoesfrombeyond.hud.HudUtils;
 import org.echoesfrombeyond.echoesfrombeyond.hud.SigilHud;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.InteractionUtils;
+import org.echoesfrombeyond.modutil.hud.HudUtils;
 import org.jspecify.annotations.NullMarked;
 
 /** Closes the Sigil HUD. This will cast any drawn Sigils. */

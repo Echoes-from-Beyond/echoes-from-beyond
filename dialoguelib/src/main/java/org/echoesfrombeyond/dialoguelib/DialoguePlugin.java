@@ -21,8 +21,10 @@ package org.echoesfrombeyond.dialoguelib;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import java.util.*;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -39,12 +41,22 @@ public class DialoguePlugin extends JavaPlugin {
   protected void setup() {
     RESOLVER =
         CodecResolver.builder()
-            .chain(Plugin.getSharedResolver())
+            .chain(CodecResolver.PRIMITIVE)
+            .withEnumSupport()
+            .withArraySupport()
+            .withCollectionSupport()
+            .withMapSupport()
+            .withRecursiveResolution(Plugin.getSharedCache())
+            .withSubtypeMapping(Collection.class, ArrayList.class)
+            .withSubtypeMapping(List.class, ArrayList.class)
+            .withSubtypeMapping(Map.class, HashMap.class)
+            .withSubtypeMapping(Set.class, HashSet.class)
             .withDirectMapping(Dialogue.class, Dialogue.CODEC)
             .withDirectMapping(DialogueChoice.class, DialogueChoice.CODEC)
             .withDirectMapping(Message.class, Message.CODEC)
             .withDirectMapping(Trigger.class, Trigger.CODEC)
             .build();
+
     Dialogue.CODEC.register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
   }
 
@@ -53,6 +65,7 @@ public class DialoguePlugin extends JavaPlugin {
     RESOLVER = null;
   }
 
+  @ApiStatus.Internal
   public static CodecResolver getResolver() {
     var resolver = RESOLVER;
     if (resolver == null) throw new IllegalStateException("Plugin must be initialized");

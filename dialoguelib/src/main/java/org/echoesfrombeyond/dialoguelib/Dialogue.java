@@ -22,11 +22,13 @@ import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public interface Dialogue extends IdentifiedAsset<String> {
-  AssetCodecMapCodec<String, Dialogue> CODEC = IdentifiedAsset.assetCodec(Codec.STRING);
+  AssetCodecMapCodec<String, Dialogue> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
+  @RunOnWorldThread
   void display(Ref<EntityStore> activator);
 }

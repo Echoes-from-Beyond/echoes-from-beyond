@@ -20,26 +20,36 @@ package org.echoesfrombeyond.dialoguelib;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.NullUnmarked;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.jspecify.annotations.NullMarked;
 
-@NullUnmarked
+@NullMarked
 @SuppressWarnings("FieldMayBeFinal")
-public class StandardDialogue extends IdentifiedAssetBase<@NonNull String> implements Dialogue {
-  public static BuilderCodec<StandardDialogue> CODEC =
+@ModelBuilder
+public class StandardDialogue extends IdentifiedAssetBase<String> implements Dialogue {
+  public static final BuilderCodec<StandardDialogue> CODEC =
       CodecUtil.modelBuilder(
           StandardDialogue.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
   private List<DialogueChoice> Choices;
 
-  public StandardDialogue() {}
+  public StandardDialogue() {
+    this.Choices = List.of();
+  }
 
   @Override
-  public void display(@NonNull Ref<EntityStore> activator) {
-    // TODO: render the choices
+  public void display(Ref<EntityStore> activator) {
+    var store = activator.getStore();
+    var player = store.getComponent(activator, PlayerRef.getComponentType());
+
+    // standard dialogue only works for player activators
+    if (player == null) return;
+
+    // TODO: UI
   }
 }

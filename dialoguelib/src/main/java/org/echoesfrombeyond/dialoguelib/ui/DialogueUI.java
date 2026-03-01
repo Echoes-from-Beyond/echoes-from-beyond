@@ -16,16 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib;
+package org.echoesfrombeyond.dialoguelib.ui;
 
-import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
-import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
+import com.hypixel.hytale.server.core.entity.entities.player.pages.CustomUIPage;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
+import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public interface DialogueChoice extends IdentifiedAsset<String> {
-  AssetCodecMapCodec<String, DialogueChoice> CODEC = IdentifiedAsset.codec(Codec.STRING);
+public class DialogueUI extends CustomUIPage {
+  public DialogueUI(PlayerRef playerRef) {
+    super(playerRef, CustomPageLifetime.CantClose);
+  }
 
-  void render(Dialogue parent, UICommandBuilder builder);
+  @Override
+  public void build(
+      Ref<EntityStore> ref,
+      UICommandBuilder uiCommandBuilder,
+      UIEventBuilder uiEventBuilder,
+      Store<EntityStore> store) {}
 }

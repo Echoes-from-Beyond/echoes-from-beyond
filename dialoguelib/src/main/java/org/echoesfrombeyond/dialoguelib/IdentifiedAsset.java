@@ -33,8 +33,7 @@ public interface IdentifiedAsset<K> extends JsonAsset<K> {
 
   AssetExtraInfo.@Nullable Data getData();
 
-  static <K, Asset extends IdentifiedAsset<K>> AssetCodecMapCodec<K, Asset> assetCodec(
-      Codec<K> codec) {
+  static <K, Asset extends IdentifiedAsset<K>> AssetCodecMapCodec<K, Asset> codec(Codec<K> codec) {
     return new AssetCodecMapCodec<>(
         codec, Asset::setId, Asset::getId, Asset::setData, Asset::getData);
   }

@@ -16,15 +16,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib;
+package org.echoesfrombeyond.modutil.hud;
 
-import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
-import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.server.core.entity.entities.player.hud.CustomUIHud;
+import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
+/** HUD that displays nothing. */
 @NullMarked
-public interface Trigger extends IdentifiedAsset<String> {
-  AssetCodecMapCodec<String, Trigger> CODEC = IdentifiedAsset.codec(Codec.STRING);
+public class EmptyHud extends CustomUIHud {
+  /**
+   * Creates a new instance of this class for the provided player reference.
+   *
+   * @param playerRef the player reference component
+   */
+  public EmptyHud(PlayerRef playerRef) {
+    super(playerRef);
+  }
 
-  void link(Dialogue dialogue);
+  @Override
+  protected void build(UICommandBuilder uiCommandBuilder) {
+    // no-op
+  }
 }
