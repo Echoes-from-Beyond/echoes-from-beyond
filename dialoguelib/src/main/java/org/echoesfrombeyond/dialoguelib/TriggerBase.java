@@ -19,11 +19,13 @@
 package org.echoesfrombeyond.dialoguelib;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
+import java.util.Collections;
 import java.util.Set;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateNonEmpty;
+import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 
@@ -43,6 +45,6 @@ public abstract class TriggerBase extends IdentifiedAssetBase<String> implements
 
   @Override
   public final @Unmodifiable Set<String> getTargetIds() {
-    return TargetIds;
+    return Collections.unmodifiableSet(TargetIds);
   }
 }

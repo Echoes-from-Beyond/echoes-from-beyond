@@ -26,6 +26,7 @@ import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

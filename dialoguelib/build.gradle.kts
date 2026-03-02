@@ -11,6 +11,7 @@ withHytalePlugin("DialogueLib")
 
 dependencies {
   projectImplementation(":annotation")
+  projectImplementation(":modutil")
   projectImplementation(":util")
 }
 

@@ -23,6 +23,7 @@ import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

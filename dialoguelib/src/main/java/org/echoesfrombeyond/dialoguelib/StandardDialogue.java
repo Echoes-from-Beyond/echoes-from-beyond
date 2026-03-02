@@ -32,6 +32,7 @@ import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.ui.StandardDialogueUI;
+import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 

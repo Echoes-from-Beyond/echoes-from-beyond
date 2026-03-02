@@ -28,6 +28,7 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
 import org.echoesfrombeyond.util.thread.Once;
 import org.jspecify.annotations.NullMarked;
 

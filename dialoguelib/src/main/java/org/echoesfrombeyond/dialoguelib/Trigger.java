@@ -27,6 +27,7 @@ import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import java.util.Set;
 import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
 import org.echoesfrombeyond.util.thread.Once;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
