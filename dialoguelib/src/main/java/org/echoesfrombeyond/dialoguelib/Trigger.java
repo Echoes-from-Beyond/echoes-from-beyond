@@ -18,13 +18,29 @@
 
 package org.echoesfrombeyond.dialoguelib;
 
+import com.hypixel.hytale.assetstore.AssetMap;
+import com.hypixel.hytale.assetstore.AssetRegistry;
+import com.hypixel.hytale.assetstore.AssetStore;
 import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
+import com.hypixel.hytale.assetstore.map.JsonAssetWithMap;
 import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.server.core.plugin.JavaPlugin;
+import java.util.Set;
+import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.util.thread.Once;
+import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public interface Trigger extends IdentifiedAsset<String> {
+public interface Trigger
+    extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Trigger>> {
   AssetCodecMapCodec<String, Trigger> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
-  void link(Dialogue dialogue);
+  Once<AssetStore<String, Trigger, AssetMap<String, Trigger>>> ASSET_STORE =
+      Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(Trigger.class)));
+
+  void link(JavaPlugin linker, Dialogue dialogue);
+
+  @Unmodifiable
+  Set<String> getTargetIds();
 }

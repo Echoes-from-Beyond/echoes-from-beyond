@@ -19,11 +19,13 @@
 package org.echoesfrombeyond.dialoguelib;
 
 import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
+import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.jetbrains.annotations.ApiStatus;
@@ -33,6 +35,8 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @SuppressWarnings("unused")
 public class DialoguePlugin extends JavaPlugin {
+  private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
+
   private static @Nullable CodecResolver RESOLVER;
 
   public DialoguePlugin(JavaPluginInit init) {
@@ -40,20 +44,24 @@ public class DialoguePlugin extends JavaPlugin {
   }
 
   @Override
+  public @Nullable CompletableFuture<Void> preLoad() {
+    return null;
+  }
+
+  @Override
   protected void setup() {
     RESOLVER =
         CodecResolver.builder()
+            .chain(CodecResolver.PRIMITIVE)
             .withCollectionSupport()
             .withRecursiveResolution(Plugin.getSharedCache())
             .withSubtypeMapping(List.class, ArrayList.class)
+            .withSubtypeMapping(Set.class, HashSet.class)
             .withDirectMapping(Dialogue.class, Dialogue.CODEC)
             .withDirectMapping(DialogueChoice.class, DialogueChoice.CODEC)
             .withDirectMapping(Message.class, Message.CODEC)
             .withDirectMapping(Trigger.class, Trigger.CODEC)
             .build();
-
-    getCodecRegistry(Dialogue.CODEC)
-        .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
 
     getAssetRegistry()
         .register(
@@ -62,6 +70,45 @@ public class DialoguePlugin extends JavaPlugin {
                 .setPath("Dialogue")
                 .setKeyFunction(Dialogue::getId)
                 .build());
+
+    getAssetRegistry()
+        .register(
+            HytaleAssetStore.builder(Trigger.class, new DefaultAssetMap<>())
+                .setCodec(Trigger.CODEC)
+                .setPath("DialogueTrigger")
+                .setKeyFunction(Trigger::getId)
+                .build());
+
+    getCodecRegistry(Dialogue.CODEC)
+        .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
+
+    getCodecRegistry(DialogueChoice.CODEC)
+        .register("Simple", SimpleChoice.class, SimpleChoice.CODEC);
+
+    getCodecRegistry(Trigger.CODEC).register("Join", JoinTrigger.class, JoinTrigger.CODEC);
+  }
+
+  @Override
+  protected void start() {
+    var triggerStore = Trigger.ASSET_STORE.get();
+    var dialogueStoreMap = Dialogue.ASSET_STORE.get().getAssetMap();
+
+    triggerStore
+        .getAssetMap()
+        .getAssetMap()
+        .forEach(
+            (_, trigger) -> {
+              for (var target : trigger.getTargetIds()) {
+                var referenced = dialogueStoreMap.getAsset(target);
+                if (referenced == null) {
+                  LOGGER.atWarning().log(
+                      "Trigger referenced non-existent dialogue asset " + target);
+                  continue;
+                }
+
+                trigger.link(this, referenced);
+              }
+            });
   }
 
   @Override

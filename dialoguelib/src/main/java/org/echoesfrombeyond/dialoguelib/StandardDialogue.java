@@ -29,6 +29,7 @@ import java.util.List;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.ui.StandardDialogueUI;
 import org.jetbrains.annotations.Unmodifiable;
@@ -44,8 +45,15 @@ public class StandardDialogue extends IdentifiedAssetBase<String> implements Dia
 
   private List<DialogueChoice> Choices;
 
+  @Doc(
+      """
+      The UI to render.
+      """)
+  public String UiPageName;
+
   public StandardDialogue() {
     this.Choices = List.of();
+    this.UiPageName = "";
   }
 
   @Override
@@ -69,5 +77,13 @@ public class StandardDialogue extends IdentifiedAssetBase<String> implements Dia
 
   public @Unmodifiable List<DialogueChoice> getChoices() {
     return Collections.unmodifiableList(Choices);
+  }
+
+  public void setChoices(List<DialogueChoice> choices) {
+    this.Choices = List.copyOf(choices);
+  }
+
+  public String getUiPageName() {
+    return UiPageName;
   }
 }

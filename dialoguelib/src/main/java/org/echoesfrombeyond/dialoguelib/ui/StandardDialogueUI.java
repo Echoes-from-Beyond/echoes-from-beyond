@@ -44,10 +44,19 @@ public class StandardDialogueUI extends CustomUIPage {
       UICommandBuilder uiCommandBuilder,
       UIEventBuilder uiEventBuilder,
       Store<EntityStore> store) {
-    // TODO: determine dialogue option layout
+    uiCommandBuilder.append(dialogue.getUiPageName());
+
+    var count = 0;
     for (var choice : dialogue.getChoices()) {
-      // TODO: render based on text
-      var text = choice.getText(ref, dialogue);
+      int choiceIndex = count++;
+
+      if (!choice.shouldDisplay(ref, dialogue)) continue;
+
+      var message = choice.getMessage(ref, dialogue);
+      var selector = "#Choice" + choiceIndex;
+
+      uiCommandBuilder.appendInline("#DialogueContainer", String.format("Label: %s { }", selector));
+      uiCommandBuilder.set(selector + ".Text", message);
     }
   }
 }

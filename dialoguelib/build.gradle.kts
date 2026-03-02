@@ -9,7 +9,10 @@ apply<JavaConventionPlugin>()
 
 withHytalePlugin("DialogueLib")
 
-dependencies { projectImplementation(":annotation") }
+dependencies {
+  projectImplementation(":annotation")
+  projectImplementation(":util")
+}
 
 withPublishedPlugin(
     "dialogue-lib",

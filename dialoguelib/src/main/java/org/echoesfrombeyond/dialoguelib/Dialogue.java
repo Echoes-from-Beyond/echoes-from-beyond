@@ -19,18 +19,25 @@
 package org.echoesfrombeyond.dialoguelib;
 
 import com.hypixel.hytale.assetstore.AssetMap;
+import com.hypixel.hytale.assetstore.AssetRegistry;
+import com.hypixel.hytale.assetstore.AssetStore;
 import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
 import com.hypixel.hytale.assetstore.map.JsonAssetWithMap;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
+import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.util.thread.Once;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public interface Dialogue
     extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Dialogue>> {
   AssetCodecMapCodec<String, Dialogue> CODEC = IdentifiedAsset.codec(Codec.STRING);
+
+  Once<AssetStore<String, Dialogue, AssetMap<String, Dialogue>>> ASSET_STORE =
+      Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(Dialogue.class)));
 
   @RunOnWorldThread
   void display(Ref<EntityStore> activator);
