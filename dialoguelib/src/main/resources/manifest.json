@@ -15,7 +15,6 @@
   "ServerVersion": "*",
   "IncludesAssetPack": true,
   "DependsOn": {
-    "Hytale:AssetModule": "*",
     "org.echoesfrombeyond:CodecHelper": "^0.2.0"
   }
 }

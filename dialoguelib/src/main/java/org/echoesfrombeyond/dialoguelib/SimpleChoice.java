@@ -20,7 +20,6 @@ package org.echoesfrombeyond.dialoguelib;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
@@ -30,26 +29,26 @@ import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings("FieldMayBeFinal")
 @ModelBuilder
 @Doc(
     """
     Basic dialogue choice that always displays the same message.
     """)
+@SuppressWarnings("FieldMayBeFinal")
 public class SimpleChoice extends IdentifiedAssetBase<String> implements DialogueChoice {
   public static final BuilderCodec<SimpleChoice> CODEC =
       CodecUtil.modelBuilder(
           SimpleChoice.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
   @Doc("The message.")
-  public Message Text;
+  public String Text;
 
   public SimpleChoice() {
-    this.Text = Message.empty();
+    this.Text = "";
   }
 
   @Override
-  public Message getMessage(Ref<EntityStore> activator, Dialogue parent) {
+  public String getMessage(Ref<EntityStore> activator, Dialogue parent) {
     return Text;
   }
 

@@ -21,7 +21,6 @@ package org.echoesfrombeyond.dialoguelib;
 import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
 import org.jspecify.annotations.NullMarked;
@@ -30,7 +29,7 @@ import org.jspecify.annotations.NullMarked;
 public interface DialogueChoice extends IdentifiedAsset<String> {
   AssetCodecMapCodec<String, DialogueChoice> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
-  Message getMessage(Ref<EntityStore> activator, Dialogue parent);
+  String getMessage(Ref<EntityStore> activator, Dialogue parent);
 
   void onChosen(Ref<EntityStore> activator, Dialogue parent);
 

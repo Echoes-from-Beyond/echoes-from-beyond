@@ -55,7 +55,7 @@ public class StandardDialogueUI extends CustomUIPage {
       var message = choice.getMessage(ref, dialogue);
       var selector = "#Choice" + choiceIndex;
 
-      uiCommandBuilder.appendInline("#DialogueContainer", String.format("Label: %s { }", selector));
+      uiCommandBuilder.appendInline("#DialogueContainer", String.format("Label %s { }", selector));
       uiCommandBuilder.set(selector + ".Text", message);
     }
   }
