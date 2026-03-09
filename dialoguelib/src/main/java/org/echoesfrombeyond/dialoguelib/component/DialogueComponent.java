@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadataStore;
 import org.jetbrains.annotations.ApiStatus;
@@ -34,6 +35,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
+@ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public class DialogueComponent implements Component<EntityStore> {
   public static final BuilderCodec<DialogueComponent> CODEC =
@@ -74,7 +76,7 @@ public class DialogueComponent implements Component<EntityStore> {
     return new DialogueComponent(this);
   }
 
-  public @Nullable DialogueMetadataStore getMetadata(String key) {
+  public @Nullable DialogueMetadataStore getMetadataStore(String key) {
     return MetadataStorage.get(key);
   }
 

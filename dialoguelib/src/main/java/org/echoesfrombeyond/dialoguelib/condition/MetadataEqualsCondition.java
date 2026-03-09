@@ -16,11 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib.action;
+package org.echoesfrombeyond.dialoguelib.condition;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.Objects;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
@@ -31,39 +32,38 @@ import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadata;
-import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadataStore;
 import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
 @ModelBuilder
-public class SetMetadataAction extends MetadataAccessor implements ChoiceAction {
-  public static final BuilderCodec<SetMetadataAction> CODEC =
+public class MetadataEqualsCondition extends MetadataAccessor implements ChoiceCondition {
+  public static final BuilderCodec<MetadataEqualsCondition> CODEC =
       CodecUtil.modelBuilder(
-          SetMetadataAction.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
+          MetadataEqualsCondition.class,
+          MetadataAccessor.CODEC,
+          DialoguePlugin.getResolver(),
+          Plugin.getSharedCache());
 
   @Doc(
       """
-      The metadata value to set.
+      The metadata value to compare against. If left unset, checks
+      if the actual metadata value is unset.
       """)
   public @Nullable DialogueMetadata Metadata;
 
   @Override
   @RunOnWorldThread
-  public void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
-    var meta = Metadata;
-    if (meta == null) return;
+  public boolean shouldDisplay(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
+    var component =
+        activator.getStore().getComponent(activator, DialogueComponent.getComponentType());
+    if (component == null) return false;
 
     var storeKey = MetadataStoreKey;
-    var key = storeKey == null ? parent.getId() : storeKey;
+    var metadataStore = component.getMetadataStore(storeKey == null ? parent.getId() : storeKey);
+    if (metadataStore == null) return false;
 
-    var component =
-        activator.getStore().ensureAndGetComponent(activator, DialogueComponent.getComponentType());
-
-    var metadata = component.getMetadataStore(key);
-    if (metadata == null) component.putMetadata(key, metadata = new DialogueMetadataStore());
-
-    metadata.put(MetadataKey, meta);
+    return Objects.equals(metadataStore.get(MetadataKey), Metadata);
   }
 }

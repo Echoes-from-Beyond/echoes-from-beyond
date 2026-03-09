@@ -1,11 +1,15 @@
 {
   "Id": "Test",
   "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Hello"
+  },
   "UiPageName": "Dummy.ui",
   "Choices": [
     {
-      "Type": "Standard",
-      "Text": ""
+      "Id": "Standard",
+      "Text": "Test"
     }
   ]
 }

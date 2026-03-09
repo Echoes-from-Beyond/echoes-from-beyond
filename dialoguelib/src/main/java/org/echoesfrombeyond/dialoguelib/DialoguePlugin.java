@@ -35,6 +35,7 @@ import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
 import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
 import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
+import org.echoesfrombeyond.dialoguelib.condition.MetadataEqualsCondition;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.dialoguelib.dialogue.StandardDialogue;
 import org.echoesfrombeyond.dialoguelib.metadata.BooleanMetadata;
@@ -102,6 +103,9 @@ public class DialoguePlugin extends JavaPlugin {
 
     getCodecRegistry(ChoiceAction.CODEC)
         .register("SetMetadata", SetMetadataAction.class, SetMetadataAction.CODEC);
+
+    getCodecRegistry(ChoiceCondition.CODEC)
+        .register("Equals", MetadataEqualsCondition.class, MetadataEqualsCondition.CODEC);
 
     getCodecRegistry(Dialogue.CODEC)
         .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
