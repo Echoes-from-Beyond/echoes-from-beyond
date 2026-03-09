@@ -16,28 +16,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib;
+package org.echoesfrombeyond.dialoguelib.trigger;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import java.util.Collections;
 import java.util.Set;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
-import org.echoesfrombeyond.codechelper.annotation.validator.ValidateNonEmpty;
+import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings("FieldMayBeFinal")
 @ModelBuilder
+@SuppressWarnings("FieldMayBeFinal")
 public abstract class TriggerBase extends IdentifiedAssetBase<String> implements Trigger {
   public static final BuilderCodec<TriggerBase> CODEC =
       CodecUtil.modelBuilder(
           TriggerBase.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
-  @ValidateNonEmpty private Set<String> TargetIds;
+  @Doc(
+      """
+      A set of dialogue IDs that should be activated by this trigger.
+      """)
+  private Set<String> TargetIds;
 
   protected TriggerBase() {
     this.TargetIds = Set.of();

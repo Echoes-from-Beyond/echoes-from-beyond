@@ -4,7 +4,7 @@
   "UiPageName": "Dummy.ui",
   "Choices": [
     {
-      "Type": "Simple",
+      "Type": "Standard",
       "Text": ""
     }
   ]

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib;
+package org.echoesfrombeyond.dialoguelib.trigger;
 
 import com.hypixel.hytale.assetstore.AssetMap;
 import com.hypixel.hytale.assetstore.AssetRegistry;
@@ -27,6 +27,7 @@ import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import java.util.Set;
 import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
 import org.echoesfrombeyond.util.thread.Once;
 import org.jetbrains.annotations.Unmodifiable;

@@ -25,9 +25,18 @@ import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.dialoguelib.action.AdvanceAction;
+import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
+import org.echoesfrombeyond.dialoguelib.action.CompositeAction;
+import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
+import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
+import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
+import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
+import org.echoesfrombeyond.dialoguelib.dialogue.StandardDialogue;
+import org.echoesfrombeyond.dialoguelib.trigger.JoinTrigger;
+import org.echoesfrombeyond.dialoguelib.trigger.Trigger;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -44,11 +53,6 @@ public class DialoguePlugin extends JavaPlugin {
   }
 
   @Override
-  public @Nullable CompletableFuture<Void> preLoad() {
-    return null;
-  }
-
-  @Override
   protected void setup() {
     RESOLVER =
         CodecResolver.builder()
@@ -57,6 +61,8 @@ public class DialoguePlugin extends JavaPlugin {
             .withRecursiveResolution(Plugin.getSharedCache())
             .withSubtypeMapping(List.class, ArrayList.class)
             .withSubtypeMapping(Set.class, HashSet.class)
+            .withDirectMapping(ChoiceAction.class, ChoiceAction.CODEC)
+            .withDirectMapping(ChoiceCondition.class, ChoiceCondition.CODEC)
             .withDirectMapping(Dialogue.class, Dialogue.CODEC)
             .withDirectMapping(DialogueChoice.class, DialogueChoice.CODEC)
             .withDirectMapping(Message.class, Message.CODEC)
@@ -79,11 +85,17 @@ public class DialoguePlugin extends JavaPlugin {
                 .setKeyFunction(Trigger::getId)
                 .build());
 
+    getCodecRegistry(ChoiceAction.CODEC)
+        .register("Advance", AdvanceAction.class, AdvanceAction.CODEC);
+
+    getCodecRegistry(ChoiceAction.CODEC)
+        .register("Composite", CompositeAction.class, CompositeAction.CODEC);
+
     getCodecRegistry(Dialogue.CODEC)
         .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
 
     getCodecRegistry(DialogueChoice.CODEC)
-        .register("Simple", SimpleChoice.class, SimpleChoice.CODEC);
+        .register("Standard", StandardChoice.class, StandardChoice.CODEC);
 
     getCodecRegistry(Trigger.CODEC).register("Join", JoinTrigger.class, JoinTrigger.CODEC);
   }
@@ -98,11 +110,18 @@ public class DialoguePlugin extends JavaPlugin {
         .getAssetMap()
         .forEach(
             (_, trigger) -> {
-              for (var target : trigger.getTargetIds()) {
+              var targets = trigger.getTargetIds();
+              if (targets.isEmpty())
+                LOGGER.atWarning().log(
+                    "Trigger `%s` did not reference any dialogue assets", trigger.getId());
+
+              for (var target : targets) {
                 var referenced = dialogueStoreMap.getAsset(target);
                 if (referenced == null) {
                   LOGGER.atWarning().log(
-                      "Trigger referenced non-existent dialogue asset " + target);
+                      "Trigger `%s` referenced non-existent dialogue asset `%s`",
+                      trigger.getId(), target);
+
                   continue;
                 }
 

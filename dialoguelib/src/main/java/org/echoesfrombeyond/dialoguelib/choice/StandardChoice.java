@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib;
+package org.echoesfrombeyond.dialoguelib.choice;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
@@ -25,25 +25,46 @@ import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.dialoguelib.*;
+import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
+import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
+import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
 @ModelBuilder
 @Doc(
     """
-    Basic dialogue choice that always displays the same message.
+    Standard DialogueChoice implementation. Accepts an optional
+    condition to determine if the choice should be shown, and an
+    action to take when the choice is selected.
     """)
-@SuppressWarnings("FieldMayBeFinal")
-public class SimpleChoice extends IdentifiedAssetBase<String> implements DialogueChoice {
-  public static final BuilderCodec<SimpleChoice> CODEC =
+public class StandardChoice extends IdentifiedAssetBase<String> implements DialogueChoice {
+  public static final BuilderCodec<StandardChoice> CODEC =
       CodecUtil.modelBuilder(
-          SimpleChoice.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
+          StandardChoice.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
-  @Doc("The message.")
+  @Doc("The text to display as part of the choice.")
   public String Text;
 
-  public SimpleChoice() {
+  @Doc(
+      """
+      Condition determining if this choice should appear. If left
+      absent, this choice will always be available.
+      """)
+  public @Nullable ChoiceCondition Condition;
+
+  @Doc(
+      """
+      Action that is taken when the choice is selected (e.g. clicked
+      if the dialogue is UI-based.) If left absent, selecting the
+      choice will do nothing.
+      """)
+  public @Nullable ChoiceAction Action;
+
+  public StandardChoice() {
     this.Text = "";
   }
 
@@ -53,10 +74,16 @@ public class SimpleChoice extends IdentifiedAssetBase<String> implements Dialogu
   }
 
   @Override
-  public void onChosen(Ref<EntityStore> activator, Dialogue parent) {}
+  public void onChosen(Ref<EntityStore> activator, Dialogue parent) {
+    var action = Action;
+    if (action != null) action.onChosen(activator, parent, this);
+  }
 
   @Override
   public boolean shouldDisplay(Ref<EntityStore> activator, Dialogue parent) {
-    return true;
+    var condition = Condition;
+    if (condition == null) return true;
+
+    return condition.shouldDisplay(activator, parent, this);
   }
 }

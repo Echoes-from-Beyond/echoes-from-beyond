@@ -66,7 +66,7 @@ public final class Once<T extends @Nullable Object> implements Supplier<T> {
    *
    * @param getter the getter {@link Supplier}
    * @return a Once instance
-   * @param <T> the type returned by `getter`
+   * @param <T> the type returned by {@code getter}
    * @throws NullPointerException if {@code getter} is null
    */
   public static <T extends @Nullable Object> Once<T> of(Supplier<T> getter) {

@@ -16,30 +16,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib;
+package org.echoesfrombeyond.dialoguelib.condition;
 
-import com.hypixel.hytale.assetstore.AssetMap;
-import com.hypixel.hytale.assetstore.AssetRegistry;
-import com.hypixel.hytale.assetstore.AssetStore;
 import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
-import com.hypixel.hytale.assetstore.map.JsonAssetWithMap;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.annotation.RunOnWorldThread;
-import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
+import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
-import org.echoesfrombeyond.util.thread.Once;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public interface Dialogue
-    extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Dialogue>> {
-  AssetCodecMapCodec<String, Dialogue> CODEC = IdentifiedAsset.codec(Codec.STRING);
+public interface ChoiceCondition extends IdentifiedAsset<String> {
+  AssetCodecMapCodec<String, ChoiceCondition> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
-  Once<AssetStore<String, Dialogue, AssetMap<String, Dialogue>>> ASSET_STORE =
-      Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(Dialogue.class)));
-
-  @RunOnWorldThread
-  void display(Ref<EntityStore> activator);
+  boolean shouldDisplay(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice);
 }

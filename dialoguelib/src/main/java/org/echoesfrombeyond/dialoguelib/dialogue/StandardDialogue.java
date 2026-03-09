@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib;
+package org.echoesfrombeyond.dialoguelib.dialogue;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
@@ -31,10 +31,13 @@ import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
+import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.ui.StandardDialogueUI;
 import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
 @SuppressWarnings("FieldMayBeFinal")
@@ -44,11 +47,26 @@ public class StandardDialogue extends IdentifiedAssetBase<String> implements Dia
       CodecUtil.modelBuilder(
           StandardDialogue.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
+  @Doc(
+      """
+      The "dialogue line", representing what the NPC is currently
+      saying.
+      """)
+  public @Nullable DialogueChoice Line;
+
+  @Doc(
+      """
+      Choices to potentially display. Choices may be "conditional" and
+      will only show up if their conditions are met.
+      """)
   private List<DialogueChoice> Choices;
 
   @Doc(
       """
-      The UI to render.
+      The UI to render. It must contain a group with the tag
+      #DialogueIdentifier. All dialogue choices will be dynamically
+      appended to this group. It must also contain a group with the
+      tag #DialogueLine.
       """)
   public String UiPageName;
 
