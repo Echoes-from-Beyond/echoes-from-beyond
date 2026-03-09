@@ -30,12 +30,17 @@ import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.dialoguelib.action.AdvanceAction;
 import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.dialoguelib.action.CompositeAction;
+import org.echoesfrombeyond.dialoguelib.action.SetMetadataAction;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
 import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
 import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.dialoguelib.dialogue.StandardDialogue;
+import org.echoesfrombeyond.dialoguelib.metadata.BooleanMetadata;
+import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadata;
+import org.echoesfrombeyond.dialoguelib.metadata.IntegerMetadata;
+import org.echoesfrombeyond.dialoguelib.metadata.StringMetadata;
 import org.echoesfrombeyond.dialoguelib.trigger.JoinTrigger;
 import org.echoesfrombeyond.dialoguelib.trigger.Trigger;
 import org.jetbrains.annotations.ApiStatus;
@@ -70,6 +75,7 @@ public class DialoguePlugin extends JavaPlugin {
             .withDirectMapping(DialogueChoice.class, DialogueChoice.CODEC)
             .withDirectMapping(Message.class, Message.CODEC)
             .withDirectMapping(Trigger.class, Trigger.CODEC)
+            .withDirectMapping(DialogueMetadata.class, DialogueMetadata.CODEC)
             .build();
 
     getAssetRegistry()
@@ -94,11 +100,23 @@ public class DialoguePlugin extends JavaPlugin {
     getCodecRegistry(ChoiceAction.CODEC)
         .register("Composite", CompositeAction.class, CompositeAction.CODEC);
 
+    getCodecRegistry(ChoiceAction.CODEC)
+        .register("SetMetadata", SetMetadataAction.class, SetMetadataAction.CODEC);
+
     getCodecRegistry(Dialogue.CODEC)
         .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
 
     getCodecRegistry(DialogueChoice.CODEC)
         .register("Standard", StandardChoice.class, StandardChoice.CODEC);
+
+    getCodecRegistry(DialogueMetadata.CODEC)
+        .register("String", StringMetadata.class, StringMetadata.CODEC);
+
+    getCodecRegistry(DialogueMetadata.CODEC)
+        .register("Integer", IntegerMetadata.class, IntegerMetadata.CODEC);
+
+    getCodecRegistry(DialogueMetadata.CODEC)
+        .register("Boolean", BooleanMetadata.class, BooleanMetadata.CODEC);
 
     getCodecRegistry(Trigger.CODEC).register("Join", JoinTrigger.class, JoinTrigger.CODEC);
 

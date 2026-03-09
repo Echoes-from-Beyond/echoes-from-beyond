@@ -16,46 +16,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib.action;
+package org.echoesfrombeyond.dialoguelib.metadata;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
-import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import java.util.Collections;
-import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
-import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
-import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
-import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 
-@NullMarked
 @ModelBuilder
-public class CompositeAction implements ChoiceAction {
-  public static final BuilderCodec<CompositeAction> CODEC =
+@NullMarked
+@SuppressWarnings("FieldMayBeFinal")
+public final class BooleanMetadata implements DialogueMetadata {
+  public static final BuilderCodec<BooleanMetadata> CODEC =
       CodecUtil.modelBuilder(
-          CompositeAction.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
+          BooleanMetadata.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
-  private List<ChoiceAction> Choices;
+  public boolean Value;
 
-  public CompositeAction() {
-    this.Choices = List.of();
+  @Override
+  public boolean asBoolean() {
+    return Value;
   }
 
   @Override
-  public void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
-    var choices = Choices;
-    for (var child : choices) child.onChosen(activator, parent, choice);
-  }
-
-  public @Unmodifiable List<ChoiceAction> getChoices() {
-    return Collections.unmodifiableList(Choices);
-  }
-
-  public void setChoices(List<ChoiceAction> choices) {
-    this.Choices = List.copyOf(choices);
+  @SuppressWarnings("MethodDoesntCallSuperMethod")
+  public DialogueMetadata clone() {
+    var newMetadata = new BooleanMetadata();
+    newMetadata.Value = Value;
+    return newMetadata;
   }
 }

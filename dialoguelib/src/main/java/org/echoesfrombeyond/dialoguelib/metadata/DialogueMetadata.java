@@ -16,20 +16,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib.action;
+package org.echoesfrombeyond.dialoguelib.metadata;
 
 import com.hypixel.hytale.codec.lookup.BuilderCodecMapCodec;
-import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.annotation.RunOnWorldThread;
-import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
-import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public interface ChoiceAction {
-  BuilderCodecMapCodec<ChoiceAction> CODEC = new BuilderCodecMapCodec<>();
+public sealed interface DialogueMetadata extends Cloneable
+    permits StringMetadata, IntegerMetadata, BooleanMetadata {
+  BuilderCodecMapCodec<DialogueMetadata> CODEC = new BuilderCodecMapCodec<>();
 
-  @RunOnWorldThread
-  void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice);
+  default String asString() {
+    throw new IllegalStateException();
+  }
+
+  default int asInteger() {
+    throw new IllegalStateException();
+  }
+
+  default boolean asBoolean() {
+    throw new IllegalStateException();
+  }
+
+  DialogueMetadata clone();
 }

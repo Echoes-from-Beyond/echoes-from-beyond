@@ -18,17 +18,15 @@
 
 package org.echoesfrombeyond.dialoguelib.choice;
 
-import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
-import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.lookup.BuilderCodecMapCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
-import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public interface DialogueChoice extends IdentifiedAsset<String> {
-  AssetCodecMapCodec<String, DialogueChoice> CODEC = IdentifiedAsset.codec(Codec.STRING);
+public interface DialogueChoice {
+  BuilderCodecMapCodec<DialogueChoice> CODEC = new BuilderCodecMapCodec<>();
 
   String getMessage(Ref<EntityStore> activator, Dialogue parent);
 

@@ -29,7 +29,6 @@ import org.echoesfrombeyond.dialoguelib.*;
 import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
-import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -41,7 +40,7 @@ import org.jspecify.annotations.Nullable;
     condition to determine if the choice should be shown, and an
     action to take when the choice is selected.
     """)
-public class StandardChoice extends IdentifiedAssetBase<String> implements DialogueChoice {
+public class StandardChoice implements DialogueChoice {
   public static final BuilderCodec<StandardChoice> CODEC =
       CodecUtil.modelBuilder(
           StandardChoice.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

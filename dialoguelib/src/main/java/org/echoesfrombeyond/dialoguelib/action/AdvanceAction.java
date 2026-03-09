@@ -28,12 +28,11 @@ import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
-import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 @ModelBuilder
-public class AdvanceAction extends IdentifiedAssetBase<String> implements ChoiceAction {
+public class AdvanceAction implements ChoiceAction {
   private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
   public static final BuilderCodec<AdvanceAction> CODEC =
@@ -52,8 +51,7 @@ public class AdvanceAction extends IdentifiedAssetBase<String> implements Choice
     var nextDialogue = Dialogue.ASSET_STORE.get().getAssetMap().getAsset(next);
 
     if (nextDialogue == null) {
-      LOGGER.atWarning().log(
-          "AdvanceAction `%s` references non-existent dialogue `%s`", getId(), next);
+      LOGGER.atWarning().log("AdvanceAction references non-existent dialogue `%s`", next);
       return;
     }
 
