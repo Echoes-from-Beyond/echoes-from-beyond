@@ -50,7 +50,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
       UICommandBuilder uiCommandBuilder,
       UIEventBuilder uiEventBuilder,
       Store<EntityStore> store) {
-    uiCommandBuilder.append(dialogue.getUiPageName());
+    uiCommandBuilder.append(dialogue.UiPageName);
 
     var line = dialogue.Line;
     if (line != null) {
@@ -59,7 +59,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
     }
 
     var count = 0;
-    for (var choice : dialogue.getChoices()) {
+    for (var choice : dialogue.Choices) {
       int choiceIndex = count++;
 
       if (!choice.shouldDisplay(ref, dialogue)) continue;
@@ -79,7 +79,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
   @Override
   public void handleDataEvent(
       Ref<EntityStore> ref, Store<EntityStore> store, StandardDialogueUI.Data data) {
-    var choices = dialogue.getChoices();
+    var choices = dialogue.Choices;
     int index = data.Choice;
 
     // Length check in case the client sends a bogus value for Choice.

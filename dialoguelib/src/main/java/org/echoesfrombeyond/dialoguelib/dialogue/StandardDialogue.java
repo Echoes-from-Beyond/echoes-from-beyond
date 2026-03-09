@@ -18,24 +18,24 @@
 
 package org.echoesfrombeyond.dialoguelib.dialogue;
 
-import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.assetstore.AssetExtraInfo;
+import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.protocol.packets.interface_.Page;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import java.util.Collections;
 import java.util.List;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Data;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
+import org.echoesfrombeyond.codechelper.annotation.Id;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.ui.StandardDialogueUI;
-import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
-import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -45,12 +45,15 @@ import org.jspecify.annotations.Nullable;
     what the NPC is saying) and a list of options that may be chosen.
     """)
 @NullMarked
-@SuppressWarnings("FieldMayBeFinal")
 @ModelBuilder
-public class StandardDialogue extends IdentifiedAssetBase<String> implements Dialogue {
-  public static final BuilderCodec<StandardDialogue> CODEC =
-      CodecUtil.modelBuilder(
+@SuppressWarnings("FieldMayBeFinal")
+public class StandardDialogue implements Dialogue {
+  public static final AssetBuilderCodec<String, StandardDialogue> CODEC =
+      CodecUtil.modelAssetBuilder(
           StandardDialogue.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
+
+  @Id private @Nullable String Id;
+  @Data private AssetExtraInfo.@Nullable Data Data;
 
   @Doc(
       """
@@ -64,7 +67,7 @@ public class StandardDialogue extends IdentifiedAssetBase<String> implements Dia
       Choices to potentially display. Choices may be "conditional" and
       will only show up if their conditions are met.
       """)
-  private List<DialogueChoice> Choices;
+  public List<DialogueChoice> Choices;
 
   @Doc(
       """
@@ -99,15 +102,23 @@ public class StandardDialogue extends IdentifiedAssetBase<String> implements Dia
     pageManager.openCustomPage(activator, store, new StandardDialogueUI(playerRef, this));
   }
 
-  public @Unmodifiable List<DialogueChoice> getChoices() {
-    return Collections.unmodifiableList(Choices);
+  @Override
+  public void setId(String id) {
+    this.Id = id;
   }
 
-  public void setChoices(List<DialogueChoice> choices) {
-    this.Choices = List.copyOf(choices);
+  @Override
+  public void setData(AssetExtraInfo.@Nullable Data data) {
+    this.Data = data;
   }
 
-  public String getUiPageName() {
-    return UiPageName;
+  @Override
+  public AssetExtraInfo.@Nullable Data getData() {
+    return Data;
+  }
+
+  @Override
+  public @Nullable String getId() {
+    return Id;
   }
 }

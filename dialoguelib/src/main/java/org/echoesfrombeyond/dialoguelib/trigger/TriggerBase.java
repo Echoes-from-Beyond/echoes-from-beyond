@@ -26,14 +26,13 @@ import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
-import org.echoesfrombeyond.modutil.asset.IdentifiedAssetBase;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
-public abstract class TriggerBase extends IdentifiedAssetBase<String> implements Trigger {
+public abstract class TriggerBase implements Trigger {
   public static final BuilderCodec<TriggerBase> CODEC =
       CodecUtil.modelBuilder(
           TriggerBase.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
