@@ -25,8 +25,8 @@ import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
-@ModelBuilder
 @NullMarked
+@ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public final class IntegerMetadata implements DialogueMetadata {
   public static final BuilderCodec<IntegerMetadata> CODEC =
@@ -50,5 +50,15 @@ public final class IntegerMetadata implements DialogueMetadata {
     var newMetadata = new IntegerMetadata();
     newMetadata.Value = Value;
     return newMetadata;
+  }
+
+  @Override
+  public int hashCode() {
+    return Integer.hashCode(Value);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof IntegerMetadata other && Value == other.Value;
   }
 }

@@ -25,8 +25,8 @@ import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
-@ModelBuilder
 @NullMarked
+@ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public final class BooleanMetadata implements DialogueMetadata {
   public static final BuilderCodec<BooleanMetadata> CODEC =
@@ -46,5 +46,15 @@ public final class BooleanMetadata implements DialogueMetadata {
     var newMetadata = new BooleanMetadata();
     newMetadata.Value = Value;
     return newMetadata;
+  }
+
+  @Override
+  public int hashCode() {
+    return Boolean.hashCode(Value);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof BooleanMetadata other && Value == other.Value;
   }
 }

@@ -19,14 +19,15 @@
 package org.echoesfrombeyond.dialoguelib.metadata;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
+import java.util.Objects;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
-@ModelBuilder
 @NullMarked
+@ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public final class StringMetadata implements DialogueMetadata {
   public static final BuilderCodec<StringMetadata> CODEC =
@@ -50,5 +51,15 @@ public final class StringMetadata implements DialogueMetadata {
     var newMetadata = new StringMetadata();
     newMetadata.Value = Value;
     return newMetadata;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(Value);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof StringMetadata other && Objects.equals(Value, other.Value);
   }
 }
