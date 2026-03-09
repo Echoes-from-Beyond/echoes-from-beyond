@@ -41,7 +41,6 @@ public class DialogueComponent implements Component<EntityStore> {
       CodecUtil.modelBuilder(
           DialogueComponent.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
-
   public static final BuilderCodecMapCodec<DialogueMetadata> METADATA_CODEC;
 
   private static @Nullable ComponentType<EntityStore, DialogueComponent> TYPE;
@@ -98,12 +97,19 @@ public class DialogueComponent implements Component<EntityStore> {
     return MetadataStorage.get(key);
   }
 
-  public sealed interface DialogueMetadata extends Cloneable permits StringMetadata, IntegerMetadata, BooleanMetadata {
-    default String asString() { throw new IllegalStateException(); }
+  public sealed interface DialogueMetadata extends Cloneable
+      permits StringMetadata, IntegerMetadata, BooleanMetadata {
+    default String asString() {
+      throw new IllegalStateException();
+    }
 
-    default int asInteger() { throw new IllegalStateException(); }
+    default int asInteger() {
+      throw new IllegalStateException();
+    }
 
-    default boolean asBoolean() { throw new IllegalStateException(); }
+    default boolean asBoolean() {
+      throw new IllegalStateException();
+    }
 
     DialogueMetadata clone();
   }
