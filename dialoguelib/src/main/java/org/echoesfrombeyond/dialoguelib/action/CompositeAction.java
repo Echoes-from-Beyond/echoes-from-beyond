@@ -21,17 +21,20 @@ package org.echoesfrombeyond.dialoguelib.action;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import java.util.Collections;
 import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
-import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 
+@Doc(
+    """
+    ChoiceAction that sequentially executes a series of child actions.
+    """)
 @NullMarked
 @ModelBuilder
 public class CompositeAction implements ChoiceAction {
@@ -39,23 +42,20 @@ public class CompositeAction implements ChoiceAction {
       CodecUtil.modelBuilder(
           CompositeAction.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
-  private List<ChoiceAction> Choices;
+  @Doc(
+      """
+      The list of actions to run when this one is activated. These are
+      executed in-order.
+      """)
+  public List<ChoiceAction> Actions;
 
   public CompositeAction() {
-    this.Choices = List.of();
+    this.Actions = List.of();
   }
 
   @Override
   public void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
-    var choices = Choices;
+    var choices = Actions;
     for (var child : choices) child.onChosen(activator, parent, choice);
-  }
-
-  public @Unmodifiable List<ChoiceAction> getChoices() {
-    return Collections.unmodifiableList(Choices);
-  }
-
-  public void setChoices(List<ChoiceAction> choices) {
-    this.Choices = List.copyOf(choices);
   }
 }

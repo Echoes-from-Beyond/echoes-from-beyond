@@ -1,7 +1,5 @@
 {
   "Id": "Join",
   "Type": "Join",
-  "TargetIds": [
-    "Join"
-  ]
+  "TargetIds": []
 }

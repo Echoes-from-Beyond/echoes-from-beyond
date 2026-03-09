@@ -39,6 +39,11 @@ import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+@Doc(
+    """
+    Dialogue implementation that is UI-based. Presents a "line" (e.g.
+    what the NPC is saying) and a list of options that may be chosen.
+    """)
 @NullMarked
 @SuppressWarnings("FieldMayBeFinal")
 @ModelBuilder

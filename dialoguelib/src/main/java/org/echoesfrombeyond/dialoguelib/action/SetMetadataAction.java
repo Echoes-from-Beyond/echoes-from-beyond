@@ -34,6 +34,11 @@ import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+@Doc(
+    """
+    ChoiceAction that sets a metadata value directly. Metadata is
+    persistent and will be stored on the activating entity.
+    """)
 @NullMarked
 @ModelBuilder
 public class SetMetadataAction extends MetadataAccessor implements ChoiceAction {

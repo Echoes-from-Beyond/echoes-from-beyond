@@ -24,12 +24,17 @@ import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 
+@Doc(
+    """
+    ChoiceAction that opens up another dialogue.
+    """)
 @NullMarked
 @ModelBuilder
 public class AdvanceAction implements ChoiceAction {
@@ -39,6 +44,11 @@ public class AdvanceAction implements ChoiceAction {
       CodecUtil.modelBuilder(
           AdvanceAction.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
+  @Doc(
+      """
+      Identifier of the dialogue to open when this action is
+      executed.
+      """)
   public String Next;
 
   public AdvanceAction() {

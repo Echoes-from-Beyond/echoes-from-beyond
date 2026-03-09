@@ -26,6 +26,7 @@ import java.util.Map;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
@@ -34,6 +35,11 @@ import org.echoesfrombeyond.dialoguelib.metadata.StringMetadata;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+@Doc(
+    """
+    A DialogueChoice that delegates to one of a number of child
+    choices based on a dialogue metadata value.
+    """)
 @NullMarked
 @ModelBuilder
 public class SelectChoice extends MetadataAccessor implements DialogueChoice {
@@ -44,6 +50,19 @@ public class SelectChoice extends MetadataAccessor implements DialogueChoice {
           DialoguePlugin.getResolver(),
           Plugin.getSharedCache());
 
+  @Doc(
+      """
+      The choice that is shown when no choice from Options is
+      selected. If unspecified, no choice will be displayed unless
+      a key in Options matches the metadata value.
+      """)
+  public @Nullable DialogueChoice Default;
+
+  @Doc(
+      """
+      A mapping of possible metadata values to the choices that should
+      be displayed when the actual value is equal to them.
+      """)
   public Map<String, DialogueChoice> Options;
 
   public SelectChoice() {
@@ -52,18 +71,17 @@ public class SelectChoice extends MetadataAccessor implements DialogueChoice {
 
   @RunOnWorldThread
   private @Nullable DialogueChoice findDelegate(Ref<EntityStore> activator, Dialogue parent) {
-    if (!(getMetadata(activator, parent) instanceof StringMetadata stringMetadata)) return null;
+    if (!(getMetadata(activator, parent) instanceof StringMetadata stringMetadata)) return Default;
 
-    return Options.get(stringMetadata.Value);
+    var result = Options.get(stringMetadata.Value);
+    return result == null ? Default : result;
   }
 
   @Override
   @RunOnWorldThread
   public String getMessage(Ref<EntityStore> activator, Dialogue parent) {
     var delegate = findDelegate(activator, parent);
-    if (delegate == null) return "";
-
-    return delegate.getMessage(activator, parent);
+    return delegate == null ? "" : delegate.getMessage(activator, parent);
   }
 
   @Override

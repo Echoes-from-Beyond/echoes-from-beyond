@@ -35,6 +35,11 @@ import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+@Doc(
+    """
+    ChoiceCondition that can be used to only display a choice if
+    specific metadata is equal to a value.
+    """)
 @NullMarked
 @ModelBuilder
 public class MetadataEqualsCondition extends MetadataAccessor implements ChoiceCondition {

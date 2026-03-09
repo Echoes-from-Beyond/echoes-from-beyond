@@ -31,7 +31,8 @@ import org.jspecify.annotations.NullMarked;
 
 @Doc(
     """
-    Trigger to activate dialogue whenever the player first joins the server.
+    Trigger to activate dialogue whenever a player first joins the
+    server.
     """)
 @NullMarked
 @ModelBuilder

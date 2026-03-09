@@ -21,6 +21,7 @@ package org.echoesfrombeyond.dialoguelib.metadata;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
@@ -56,20 +57,20 @@ public abstract class MetadataAccessor {
     this.MetadataKey = "";
   }
 
+  @RunOnWorldThread
   public @Nullable DialogueMetadata getMetadata(Ref<EntityStore> activator, Dialogue parent) {
-    var store = activator.getStore();
-    var component = store.getComponent(activator, DialogueComponent.getComponentType());
+    var component =
+        activator.getStore().getComponent(activator, DialogueComponent.getComponentType());
     if (component == null) return null;
 
     var storeKey = MetadataStoreKey;
-    var key = storeKey == null ? parent.getId() : storeKey;
-
-    var metadataStore = component.getMetadataStore(key);
+    var metadataStore = component.getMetadataStore(storeKey == null ? parent.getId() : storeKey);
     if (metadataStore == null) return null;
 
     return metadataStore.get(MetadataKey);
   }
 
+  @RunOnWorldThread
   public @Nullable DialogueMetadata putMetadata(
       Ref<EntityStore> activator, Dialogue parent, DialogueMetadata metadata) {
     var storeKey = MetadataStoreKey;
