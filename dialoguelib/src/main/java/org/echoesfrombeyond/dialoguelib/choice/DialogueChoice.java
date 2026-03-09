@@ -21,6 +21,7 @@ package org.echoesfrombeyond.dialoguelib.choice;
 import com.hypixel.hytale.codec.lookup.BuilderCodecMapCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 
@@ -28,9 +29,12 @@ import org.jspecify.annotations.NullMarked;
 public interface DialogueChoice {
   BuilderCodecMapCodec<DialogueChoice> CODEC = new BuilderCodecMapCodec<>();
 
+  @RunOnWorldThread
   String getMessage(Ref<EntityStore> activator, Dialogue parent);
 
+  @RunOnWorldThread
   void onChosen(Ref<EntityStore> activator, Dialogue parent);
 
+  @RunOnWorldThread
   boolean shouldDisplay(Ref<EntityStore> activator, Dialogue parent);
 }

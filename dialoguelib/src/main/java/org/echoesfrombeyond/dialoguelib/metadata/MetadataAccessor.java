@@ -19,11 +19,15 @@
 package org.echoesfrombeyond.dialoguelib.metadata;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
+import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
+import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -50,5 +54,34 @@ public abstract class MetadataAccessor {
 
   public MetadataAccessor() {
     this.MetadataKey = "";
+  }
+
+  public @Nullable DialogueMetadata getMetadata(Ref<EntityStore> activator, Dialogue parent) {
+    var store = activator.getStore();
+    var component = store.getComponent(activator, DialogueComponent.getComponentType());
+    if (component == null) return null;
+
+    var storeKey = MetadataStoreKey;
+    var key = storeKey == null ? parent.getId() : storeKey;
+
+    var metadataStore = component.getMetadataStore(key);
+    if (metadataStore == null) return null;
+
+    return metadataStore.get(MetadataKey);
+  }
+
+  public @Nullable DialogueMetadata putMetadata(
+      Ref<EntityStore> activator, Dialogue parent, DialogueMetadata metadata) {
+    var storeKey = MetadataStoreKey;
+    var actualStoreKey = storeKey == null ? parent.getId() : storeKey;
+
+    var component =
+        activator.getStore().ensureAndGetComponent(activator, DialogueComponent.getComponentType());
+
+    var metadataStore = component.getMetadataStore(actualStoreKey);
+    if (metadataStore == null)
+      component.putMetadataStore(actualStoreKey, metadataStore = new DialogueMetadataStore());
+
+    return metadataStore.put(MetadataKey, metadata);
   }
 }

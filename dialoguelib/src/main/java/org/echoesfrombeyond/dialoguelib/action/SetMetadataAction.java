@@ -28,10 +28,8 @@ import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
-import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadata;
-import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadataStore;
 import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -55,15 +53,6 @@ public class SetMetadataAction extends MetadataAccessor implements ChoiceAction 
     var meta = Metadata;
     if (meta == null) return;
 
-    var storeKey = MetadataStoreKey;
-    var key = storeKey == null ? parent.getId() : storeKey;
-
-    var component =
-        activator.getStore().ensureAndGetComponent(activator, DialogueComponent.getComponentType());
-
-    var metadata = component.getMetadataStore(key);
-    if (metadata == null) component.putMetadata(key, metadata = new DialogueMetadataStore());
-
-    metadata.put(MetadataKey, meta);
+    putMetadata(activator, parent, meta);
   }
 }

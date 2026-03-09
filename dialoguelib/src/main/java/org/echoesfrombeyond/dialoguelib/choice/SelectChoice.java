@@ -16,45 +16,67 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.dialoguelib.condition;
+package org.echoesfrombeyond.dialoguelib.choice;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
-import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
-import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
-import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadata;
 import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
+import org.echoesfrombeyond.dialoguelib.metadata.StringMetadata;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
 @ModelBuilder
-public class MetadataEqualsCondition extends MetadataAccessor implements ChoiceCondition {
-  public static final BuilderCodec<MetadataEqualsCondition> CODEC =
+public class SelectChoice extends MetadataAccessor implements DialogueChoice {
+  public static final BuilderCodec<SelectChoice> CODEC =
       CodecUtil.modelBuilder(
-          MetadataEqualsCondition.class,
+          SelectChoice.class,
           MetadataAccessor.CODEC,
           DialoguePlugin.getResolver(),
           Plugin.getSharedCache());
 
-  @Doc(
-      """
-      The metadata value to compare against. If left unset, checks
-      if the actual metadata value is unset.
-      """)
-  public @Nullable DialogueMetadata Metadata;
+  public Map<String, DialogueChoice> Options;
+
+  public SelectChoice() {
+    this.Options = new HashMap<>();
+  }
+
+  @RunOnWorldThread
+  private @Nullable DialogueChoice findDelegate(Ref<EntityStore> activator, Dialogue parent) {
+    if (!(getMetadata(activator, parent) instanceof StringMetadata stringMetadata)) return null;
+
+    return Options.get(stringMetadata.Value);
+  }
 
   @Override
   @RunOnWorldThread
-  public boolean shouldDisplay(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
-    return Objects.equals(getMetadata(activator, parent), Metadata);
+  public String getMessage(Ref<EntityStore> activator, Dialogue parent) {
+    var delegate = findDelegate(activator, parent);
+    if (delegate == null) return "";
+
+    return delegate.getMessage(activator, parent);
+  }
+
+  @Override
+  @RunOnWorldThread
+  public void onChosen(Ref<EntityStore> activator, Dialogue parent) {
+    var delegate = findDelegate(activator, parent);
+    if (delegate != null) delegate.onChosen(activator, parent);
+  }
+
+  @Override
+  @RunOnWorldThread
+  public boolean shouldDisplay(Ref<EntityStore> activator, Dialogue parent) {
+    var delegate = findDelegate(activator, parent);
+    return delegate != null && delegate.shouldDisplay(activator, parent);
   }
 }

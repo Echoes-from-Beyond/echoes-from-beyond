@@ -80,7 +80,7 @@ public class DialogueComponent implements Component<EntityStore> {
     return MetadataStorage.get(key);
   }
 
-  public @Nullable DialogueMetadataStore putMetadata(String key, DialogueMetadataStore store) {
+  public @Nullable DialogueMetadataStore putMetadataStore(String key, DialogueMetadataStore store) {
     return MetadataStorage.put(key, store);
   }
 }
