@@ -32,6 +32,7 @@ import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.dialoguelib.action.CompositeAction;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
+import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
 import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.dialoguelib.dialogue.StandardDialogue;
@@ -58,9 +59,11 @@ public class DialoguePlugin extends JavaPlugin {
         CodecResolver.builder()
             .chain(CodecResolver.PRIMITIVE)
             .withCollectionSupport()
+            .withMapSupport()
             .withRecursiveResolution(Plugin.getSharedCache())
             .withSubtypeMapping(List.class, ArrayList.class)
             .withSubtypeMapping(Set.class, HashSet.class)
+            .withSubtypeMapping(Map.class, HashMap.class)
             .withDirectMapping(ChoiceAction.class, ChoiceAction.CODEC)
             .withDirectMapping(ChoiceCondition.class, ChoiceCondition.CODEC)
             .withDirectMapping(Dialogue.class, Dialogue.CODEC)
@@ -98,6 +101,9 @@ public class DialoguePlugin extends JavaPlugin {
         .register("Standard", StandardChoice.class, StandardChoice.CODEC);
 
     getCodecRegistry(Trigger.CODEC).register("Join", JoinTrigger.class, JoinTrigger.CODEC);
+
+    var entityStoreRegistry = getEntityStoreRegistry();
+    DialogueComponent.register(entityStoreRegistry);
   }
 
   @Override
