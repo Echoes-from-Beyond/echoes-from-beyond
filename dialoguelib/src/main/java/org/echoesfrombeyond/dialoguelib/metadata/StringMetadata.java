@@ -36,6 +36,7 @@ public final class StringMetadata implements DialogueMetadata {
 
   public String Value;
 
+  @SuppressWarnings("unused")
   public StringMetadata() {
     this.Value = "";
   }
@@ -47,9 +48,7 @@ public final class StringMetadata implements DialogueMetadata {
   @Override
   @SuppressWarnings("MethodDoesntCallSuperMethod")
   public DialogueMetadata clone() {
-    var newMetadata = new StringMetadata();
-    newMetadata.Value = Value;
-    return newMetadata;
+    return new StringMetadata(Value);
   }
 
   @Override

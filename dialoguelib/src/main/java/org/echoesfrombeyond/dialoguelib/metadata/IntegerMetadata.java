@@ -35,6 +35,7 @@ public final class IntegerMetadata implements DialogueMetadata {
 
   public int Value;
 
+  @SuppressWarnings("unused")
   public IntegerMetadata() {}
 
   public IntegerMetadata(int initial) {
@@ -44,9 +45,7 @@ public final class IntegerMetadata implements DialogueMetadata {
   @Override
   @SuppressWarnings("MethodDoesntCallSuperMethod")
   public DialogueMetadata clone() {
-    var newMetadata = new IntegerMetadata();
-    newMetadata.Value = Value;
-    return newMetadata;
+    return new IntegerMetadata(Value);
   }
 
   @Override

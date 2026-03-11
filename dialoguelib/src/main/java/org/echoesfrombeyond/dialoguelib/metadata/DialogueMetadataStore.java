@@ -46,16 +46,37 @@ public class DialogueMetadataStore implements Cloneable {
     return Metadata.remove(key);
   }
 
-  public @Nullable DialogueMetadata putString(String key, String value) {
-    return Metadata.put(key, new StringMetadata(value));
+  public void putString(String key, String value) {
+    Metadata.compute(
+        key,
+        (_, old) -> {
+          if (!(old instanceof StringMetadata stringMetadata)) return new StringMetadata(value);
+
+          stringMetadata.Value = value;
+          return old;
+        });
   }
 
-  public @Nullable DialogueMetadata putInteger(String key, int value) {
-    return Metadata.put(key, new IntegerMetadata(value));
+  public void putInteger(String key, int value) {
+    Metadata.compute(
+        key,
+        (_, old) -> {
+          if (!(old instanceof IntegerMetadata integerMetadata)) return new IntegerMetadata(value);
+
+          integerMetadata.Value = value;
+          return old;
+        });
   }
 
-  public @Nullable DialogueMetadata putBoolean(String key, boolean value) {
-    return Metadata.put(key, new BooleanMetadata(value));
+  public void putBoolean(String key, boolean value) {
+    Metadata.compute(
+        key,
+        (_, old) -> {
+          if (!(old instanceof BooleanMetadata metadata)) return new BooleanMetadata(value);
+
+          metadata.Value = value;
+          return old;
+        });
   }
 
   @Override

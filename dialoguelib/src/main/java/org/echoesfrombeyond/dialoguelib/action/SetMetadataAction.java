@@ -37,7 +37,8 @@ import org.jspecify.annotations.Nullable;
 @Doc(
     """
     ChoiceAction that sets a metadata value directly. Metadata is
-    persistent and will be stored on the activating entity.
+    persistent and will be stored in a component on the activating
+    entity.
     """)
 @NullMarked
 @ModelBuilder
@@ -59,6 +60,7 @@ public class SetMetadataAction extends MetadataAccessor implements ChoiceAction 
   @Override
   @RunOnWorldThread
   public void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
-    putMetadata(activator, parent, Metadata);
+    var meta = Metadata;
+    putMetadata(activator, parent, meta == null ? null : meta.clone());
   }
 }

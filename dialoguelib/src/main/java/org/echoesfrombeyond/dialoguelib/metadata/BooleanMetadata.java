@@ -35,6 +35,7 @@ public final class BooleanMetadata implements DialogueMetadata {
 
   public boolean Value;
 
+  @SuppressWarnings("unused")
   public BooleanMetadata() {}
 
   public BooleanMetadata(boolean initial) {
@@ -44,9 +45,7 @@ public final class BooleanMetadata implements DialogueMetadata {
   @Override
   @SuppressWarnings("MethodDoesntCallSuperMethod")
   public DialogueMetadata clone() {
-    var newMetadata = new BooleanMetadata();
-    newMetadata.Value = Value;
-    return newMetadata;
+    return new BooleanMetadata(Value);
   }
 
   @Override

@@ -15,6 +15,7 @@
   "ServerVersion": "2026.03.05-9fdc5985d",
   "IncludesAssetPack": true,
   "DependsOn": {
+    "Hytale:NPC": "*",
     "org.echoesfrombeyond:CodecHelper": "^0.2.0"
   }
 }

@@ -24,6 +24,7 @@ import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.npc.NPCPlugin;
 import java.util.*;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.Plugin;
@@ -41,6 +42,7 @@ import org.echoesfrombeyond.dialoguelib.metadata.BooleanMetadata;
 import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadata;
 import org.echoesfrombeyond.dialoguelib.metadata.IntegerMetadata;
 import org.echoesfrombeyond.dialoguelib.metadata.StringMetadata;
+import org.echoesfrombeyond.dialoguelib.npc.BuilderOpenDialogue;
 import org.echoesfrombeyond.dialoguelib.trigger.JoinTrigger;
 import org.echoesfrombeyond.dialoguelib.trigger.Trigger;
 import org.jetbrains.annotations.ApiStatus;
@@ -138,6 +140,8 @@ public class DialoguePlugin extends JavaPlugin {
 
     var entityStoreRegistry = getEntityStoreRegistry();
     DialogueComponent.register(entityStoreRegistry);
+
+    NPCPlugin.get().registerCoreComponentType("OpenDialogue", BuilderOpenDialogue::new);
   }
 
   @Override
