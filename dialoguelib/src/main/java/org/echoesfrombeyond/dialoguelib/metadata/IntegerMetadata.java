@@ -35,13 +35,10 @@ public final class IntegerMetadata implements DialogueMetadata {
 
   public int Value;
 
-  public IntegerMetadata() {
-    this.Value = 0;
-  }
+  public IntegerMetadata() {}
 
-  @Override
-  public int asInteger() {
-    return Value;
+  public IntegerMetadata(int initial) {
+    this.Value = initial;
   }
 
   @Override

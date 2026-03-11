@@ -26,17 +26,5 @@ public sealed interface DialogueMetadata extends Cloneable
     permits StringMetadata, IntegerMetadata, BooleanMetadata {
   BuilderCodecMapCodec<DialogueMetadata> CODEC = new BuilderCodecMapCodec<>();
 
-  default String asString() {
-    throw new IllegalStateException();
-  }
-
-  default int asInteger() {
-    throw new IllegalStateException();
-  }
-
-  default boolean asBoolean() {
-    throw new IllegalStateException();
-  }
-
   DialogueMetadata clone();
 }

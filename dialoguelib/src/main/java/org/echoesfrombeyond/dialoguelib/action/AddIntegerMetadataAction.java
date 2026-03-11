@@ -69,11 +69,7 @@ public class AddIntegerMetadataAction extends MetadataAccessor implements Choice
   @RunOnWorldThread
   public void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
     var metadata = getMetadata(activator, parent);
-    if (metadata == null) {
-      var newMetadata = new IntegerMetadata();
-      newMetadata.Value = Initial;
-      putMetadata(activator, parent, metadata = newMetadata);
-    }
+    if (metadata == null) putMetadata(activator, parent, metadata = new IntegerMetadata(Initial));
 
     if (!(metadata instanceof IntegerMetadata integerMetadata)) return;
     integerMetadata.Value += Delta;

@@ -35,9 +35,10 @@ public final class BooleanMetadata implements DialogueMetadata {
 
   public boolean Value;
 
-  @Override
-  public boolean asBoolean() {
-    return Value;
+  public BooleanMetadata() {}
+
+  public BooleanMetadata(boolean initial) {
+    this.Value = initial;
   }
 
   @Override

@@ -47,24 +47,15 @@ public class DialogueMetadataStore implements Cloneable {
   }
 
   public @Nullable DialogueMetadata putString(String key, String value) {
-    var metadata = new StringMetadata();
-    metadata.Value = value;
-
-    return Metadata.put(key, metadata);
+    return Metadata.put(key, new StringMetadata(value));
   }
 
   public @Nullable DialogueMetadata putInteger(String key, int value) {
-    var metadata = new IntegerMetadata();
-    metadata.Value = value;
-
-    return Metadata.put(key, metadata);
+    return Metadata.put(key, new IntegerMetadata(value));
   }
 
   public @Nullable DialogueMetadata putBoolean(String key, boolean value) {
-    var metadata = new BooleanMetadata();
-    metadata.Value = value;
-
-    return Metadata.put(key, metadata);
+    return Metadata.put(key, new BooleanMetadata(value));
   }
 
   @Override

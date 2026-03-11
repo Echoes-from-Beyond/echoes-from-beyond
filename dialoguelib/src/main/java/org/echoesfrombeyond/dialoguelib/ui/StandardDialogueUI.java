@@ -31,6 +31,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.dialogue.StandardDialogue;
 import org.jspecify.annotations.NullMarked;
@@ -94,6 +95,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
   }
 
   @SuppressWarnings("unused")
+  @ModelBuilder
   public static final class Data {
     public static final BuilderCodec<Data> CODEC =
         CodecUtil.modelBuilder(Data.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

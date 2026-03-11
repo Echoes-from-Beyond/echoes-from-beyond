@@ -40,9 +40,8 @@ public final class StringMetadata implements DialogueMetadata {
     this.Value = "";
   }
 
-  @Override
-  public String asString() {
-    return Value;
+  public StringMetadata(String initial) {
+    this.Value = initial;
   }
 
   @Override
