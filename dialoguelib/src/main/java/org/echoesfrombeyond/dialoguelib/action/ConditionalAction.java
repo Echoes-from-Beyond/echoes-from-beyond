@@ -28,37 +28,54 @@ import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
+import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
-import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadata;
-import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @Doc(
     """
-    ChoiceAction that sets a metadata value directly. Metadata is
-    persistent and will be stored on the activating entity.
+    ChoiceAction that only activates a delegate if a condition is met.
     """)
 @NullMarked
 @ModelBuilder
-public class SetMetadataAction extends MetadataAccessor implements ChoiceAction {
-  public static final BuilderCodec<SetMetadataAction> CODEC =
+public class ConditionalAction implements ChoiceAction {
+  public static final BuilderCodec<ConditionalAction> CODEC =
       CodecUtil.modelBuilder(
-          SetMetadataAction.class,
-          MetadataAccessor.CODEC,
-          DialoguePlugin.getResolver(),
-          Plugin.getSharedCache());
+          ConditionalAction.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
   @Doc(
       """
-      The metadata value to set. If unspecified, will remove the
-      metadata instead.
+      The ChoiceCondition. If absent, the condition is always
+      considered to be met.
       """)
-  public @Nullable DialogueMetadata Metadata;
+  public @Nullable ChoiceCondition Condition;
+
+  @Doc(
+      """
+      ChoiceAction to execute if the condition is met. If absent,
+      nothing will happen if the condition is met.
+      """)
+  public @Nullable ChoiceAction IfMet;
+
+  @Doc(
+      """
+      ChoiceAction to execute if the condition is not met. If absent,
+      nothing will happen if the condition is not met.
+      """)
+  public @Nullable ChoiceAction IfNotMet;
 
   @Override
   @RunOnWorldThread
   public void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
-    putMetadata(activator, parent, Metadata);
+    var condition = Condition;
+    var met = IfMet;
+    var notMet = IfNotMet;
+
+    var shouldDisplay = condition == null || condition.shouldDisplay(activator, parent, choice);
+
+    if (shouldDisplay) {
+      if (met != null) met.onChosen(activator, parent, choice);
+    } else if (notMet != null) notMet.onChosen(activator, parent, choice);
   }
 }

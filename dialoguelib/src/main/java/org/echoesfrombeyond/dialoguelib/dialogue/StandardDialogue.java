@@ -25,6 +25,7 @@ import com.hypixel.hytale.protocol.packets.interface_.Page;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.ArrayList;
 import java.util.List;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.CodecUtil;
@@ -58,7 +59,7 @@ public class StandardDialogue implements Dialogue {
   @Doc(
       """
       The "dialogue line", representing what the NPC is currently
-      saying.
+      saying. If absent, nothing will be displayed.
       """)
   public @Nullable DialogueChoice Line;
 
@@ -79,7 +80,7 @@ public class StandardDialogue implements Dialogue {
   public String UiPageName;
 
   public StandardDialogue() {
-    this.Choices = List.of();
+    this.Choices = new ArrayList<>();
     this.UiPageName = "";
   }
 

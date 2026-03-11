@@ -27,15 +27,13 @@ import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import java.util.*;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.Plugin;
-import org.echoesfrombeyond.dialoguelib.action.AdvanceAction;
-import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
-import org.echoesfrombeyond.dialoguelib.action.CompositeAction;
-import org.echoesfrombeyond.dialoguelib.action.SetMetadataAction;
+import org.echoesfrombeyond.dialoguelib.action.*;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.choice.SelectChoice;
 import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
 import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
 import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
+import org.echoesfrombeyond.dialoguelib.condition.CompareIntegerCondition;
 import org.echoesfrombeyond.dialoguelib.condition.MetadataEqualsCondition;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.dialoguelib.dialogue.StandardDialogue;
@@ -67,6 +65,7 @@ public class DialoguePlugin extends JavaPlugin {
             .chain(CodecResolver.PRIMITIVE)
             .withCollectionSupport()
             .withMapSupport()
+            .withEnumSupport()
             .withRecursiveResolution(Plugin.getSharedCache())
             .withSubtypeMapping(List.class, ArrayList.class)
             .withSubtypeMapping(Set.class, HashSet.class)
@@ -100,13 +99,22 @@ public class DialoguePlugin extends JavaPlugin {
         .register("Advance", AdvanceAction.class, AdvanceAction.CODEC);
 
     getCodecRegistry(ChoiceAction.CODEC)
+        .register("AdjustInteger", AddIntegerMetadataAction.class, AddIntegerMetadataAction.CODEC);
+
+    getCodecRegistry(ChoiceAction.CODEC)
         .register("Composite", CompositeAction.class, CompositeAction.CODEC);
+
+    getCodecRegistry(ChoiceAction.CODEC)
+        .register("Conditional", ConditionalAction.class, ConditionalAction.CODEC);
 
     getCodecRegistry(ChoiceAction.CODEC)
         .register("SetMetadata", SetMetadataAction.class, SetMetadataAction.CODEC);
 
     getCodecRegistry(ChoiceCondition.CODEC)
         .register("Equals", MetadataEqualsCondition.class, MetadataEqualsCondition.CODEC);
+
+    getCodecRegistry(ChoiceCondition.CODEC)
+        .register("CompareInteger", CompareIntegerCondition.class, CompareIntegerCondition.CODEC);
 
     getCodecRegistry(Dialogue.CODEC)
         .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);

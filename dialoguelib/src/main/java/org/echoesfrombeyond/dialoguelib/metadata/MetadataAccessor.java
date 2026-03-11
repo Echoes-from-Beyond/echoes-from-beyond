@@ -44,21 +44,24 @@ public abstract class MetadataAccessor {
       The metadata "store key". If unspecified, all metadata values
       will be "local" to the dialogue asset. This is equivalent to
       having the group key set to the dialogue asset's ID key.
+
+      Setting this value to something other than the default allows
+      separate dialogue to access the same metadata.
       """)
   public @Nullable String MetadataStoreKey;
 
   @Doc(
       """
-      The key associated with the metadata.
+      The key used to look up the metadata in the store. If left
+      absent, attempting to read or write metadata will do nothing.
       """)
-  public String MetadataKey;
-
-  public MetadataAccessor() {
-    this.MetadataKey = "";
-  }
+  public @Nullable String MetadataKey;
 
   @RunOnWorldThread
   public @Nullable DialogueMetadata getMetadata(Ref<EntityStore> activator, Dialogue parent) {
+    var key = MetadataKey;
+    if (key == null) return null;
+
     var component =
         activator.getStore().getComponent(activator, DialogueComponent.getComponentType());
     if (component == null) return null;
@@ -67,12 +70,15 @@ public abstract class MetadataAccessor {
     var metadataStore = component.getMetadataStore(storeKey == null ? parent.getId() : storeKey);
     if (metadataStore == null) return null;
 
-    return metadataStore.get(MetadataKey);
+    return metadataStore.get(key);
   }
 
   @RunOnWorldThread
   public @Nullable DialogueMetadata putMetadata(
-      Ref<EntityStore> activator, Dialogue parent, DialogueMetadata metadata) {
+      Ref<EntityStore> activator, Dialogue parent, @Nullable DialogueMetadata metadata) {
+    var key = MetadataKey;
+    if (key == null) return null;
+
     var storeKey = MetadataStoreKey;
     var actualStoreKey = storeKey == null ? parent.getId() : storeKey;
 
@@ -83,6 +89,6 @@ public abstract class MetadataAccessor {
     if (metadataStore == null)
       component.putMetadataStore(actualStoreKey, metadataStore = new DialogueMetadataStore());
 
-    return metadataStore.put(MetadataKey, metadata);
+    return metadata == null ? metadataStore.remove(key) : metadataStore.put(key, metadata);
   }
 }

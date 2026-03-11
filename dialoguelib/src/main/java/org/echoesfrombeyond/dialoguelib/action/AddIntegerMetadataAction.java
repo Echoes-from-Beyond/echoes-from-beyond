@@ -29,36 +29,53 @@ import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
-import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadata;
+import org.echoesfrombeyond.dialoguelib.metadata.IntegerMetadata;
 import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
 
 @Doc(
     """
-    ChoiceAction that sets a metadata value directly. Metadata is
-    persistent and will be stored on the activating entity.
+    ChoiceAction that can add or subtract from integer metadata.
     """)
 @NullMarked
 @ModelBuilder
-public class SetMetadataAction extends MetadataAccessor implements ChoiceAction {
-  public static final BuilderCodec<SetMetadataAction> CODEC =
+public class AddIntegerMetadataAction extends MetadataAccessor implements ChoiceAction {
+  public static final BuilderCodec<AddIntegerMetadataAction> CODEC =
       CodecUtil.modelBuilder(
-          SetMetadataAction.class,
+          AddIntegerMetadataAction.class,
           MetadataAccessor.CODEC,
           DialoguePlugin.getResolver(),
           Plugin.getSharedCache());
 
   @Doc(
       """
-      The metadata value to set. If unspecified, will remove the
-      metadata instead.
+      How much to adjust the metadata by. If unspecified, increases
+      the value by 1.
       """)
-  public @Nullable DialogueMetadata Metadata;
+  public int Delta;
+
+  @Doc(
+      """
+      If the metadata entry does not exist yet, it is initialized to
+      this value. If unspecified, the initial value will be 0.
+      """)
+  public int Initial;
+
+  public AddIntegerMetadataAction() {
+    this.Delta = 1;
+  }
 
   @Override
   @RunOnWorldThread
   public void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
-    putMetadata(activator, parent, Metadata);
+    var metadata = getMetadata(activator, parent);
+    if (metadata == null) {
+      var newMetadata = new IntegerMetadata();
+      newMetadata.Value = Initial;
+      putMetadata(activator, parent, metadata = newMetadata);
+    }
+
+    if (!(metadata instanceof IntegerMetadata integerMetadata)) return;
+    integerMetadata.Value += Delta;
   }
 }
