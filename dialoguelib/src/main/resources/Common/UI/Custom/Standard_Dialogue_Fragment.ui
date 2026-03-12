@@ -4,6 +4,7 @@ Button {
   LayoutMode: Top;
   Label #DialogueLabel {
     Style: (
+      Wrap: true,
       FontSize: 23,
       TextColor: #ffffff,
       RenderBold: true
