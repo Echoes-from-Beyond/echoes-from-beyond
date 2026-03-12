@@ -41,6 +41,7 @@ import org.jspecify.annotations.Nullable;
 public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogueUI.Data> {
   public static final String DIALOGUE_LINE_SELECTOR = "#DialogueLine";
   public static final String DIALOGUE_CONTAINER_SELECTOR = "#DialogueContainer";
+  public static final String DIALOGUE_BUTTON_SELECTOR = "#DialogueButton";
   public static final String DIALOGUE_LABEL_SELECTOR = "#DialogueLabel";
 
   private final StandardDialogue dialogue;
@@ -71,18 +72,18 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
       if (!choice.shouldDisplay(ref, dialogue)) continue;
 
       var message = choice.getMessage(ref, dialogue);
-      var buttonSelector = "#Button" + choiceIndex;
+      var groupSelector = "#Group" + choiceIndex;
 
       uiCommandBuilder.appendInline(
-          DIALOGUE_CONTAINER_SELECTOR, String.format("Button %s { }", buttonSelector));
+          DIALOGUE_CONTAINER_SELECTOR, String.format("Group %s { }", groupSelector));
 
       uiCommandBuilder.append(
-          DIALOGUE_CONTAINER_SELECTOR + " " + buttonSelector, dialogue.UiFragment);
+          DIALOGUE_CONTAINER_SELECTOR + " " + groupSelector, dialogue.UiFragment);
 
       uiCommandBuilder.set(
           DIALOGUE_CONTAINER_SELECTOR
               + " "
-              + buttonSelector
+              + groupSelector
               + " "
               + DIALOGUE_LABEL_SELECTOR
               + ".Text",
@@ -90,7 +91,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
       uiEventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
-          DIALOGUE_CONTAINER_SELECTOR + " " + buttonSelector,
+          DIALOGUE_CONTAINER_SELECTOR + " " + groupSelector + " " + DIALOGUE_BUTTON_SELECTOR,
           EventData.of("Choice", Integer.toString(choiceIndex)));
     }
   }

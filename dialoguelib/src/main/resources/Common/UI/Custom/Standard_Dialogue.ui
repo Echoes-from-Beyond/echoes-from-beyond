@@ -1,2 +1,5 @@
 Group #DialogueLine { }
-Group #DialogueContainer { }
+Group #DialogueContainer {
+  Anchor: (Width: 650, Height: 300);
+  Padding: (Horizontal: 30);
+}

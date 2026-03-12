@@ -1,1 +1,9 @@
-Label #DialogueLabel { }
+Button #DialogueButton {
+  Label #DialogueLabel {
+    Style: (
+      FontSize: 23,
+      TextColor: #ffffff,
+      RenderBold: true
+    );
+  }
+}

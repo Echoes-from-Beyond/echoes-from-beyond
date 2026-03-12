@@ -74,7 +74,7 @@ public class StandardDialogue implements Dialogue {
   @Doc(
       """
       The UI to render. It must contain a group with the tag
-      #DialogueIdentifier. All dialogue choices will be dynamically
+      #DialogueContainer. All dialogue choices will be dynamically
       appended to this group. It must also contain a group with the
       tag #DialogueLine. If left absent, defaults to
       Standard_Dialogue.ui.
@@ -83,9 +83,11 @@ public class StandardDialogue implements Dialogue {
 
   @Doc(
       """
-      UI specifying the formatting of the dialogue choices. The UI
-      file must contain a Label with the tag #DialogueLabel. If left
-      absent, defaults to Standard_Dialogue_Fragment.ui.
+      UI file path specifying the formatting of the dialogue choices.
+      The UI file must contain a Button with the tag #DialogueButton,
+      and a Label with the tag #DialogueLabel (the label may or may
+      not be contained in the button). If unspecified, defaults to
+      Standard_Dialogue_Fragment.ui.
       """)
   public String UiFragment;
 
