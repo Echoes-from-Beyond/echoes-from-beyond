@@ -2,11 +2,11 @@ $C = "Common.ui";
 
 // standard = for dialogue with animations
 // must not overwhelm the rest of the UI, and must leave enough of a viewport for the rest of the world
-Group #DialogueContainer {
+Group {
   Anchor: (Bottom: 30, Width: 1400, Height: 285);
 
   Group #DialogueLine { }
-  Group #DialogueChoicesContainer {
+  Group {
     LayoutMode: TopScrolling;
     ScrollbarStyle: $C.@TranslucentScrollbarStyle;
 

@@ -5,6 +5,10 @@
     {
       "Id": "Standard",
       "Text": "Test Dialogue"
+    },
+    {
+      "Id": "Standard",
+      "Text": "Test Dialogue 2"
     }
   ]
 }

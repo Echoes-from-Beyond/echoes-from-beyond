@@ -41,7 +41,6 @@ import org.jspecify.annotations.Nullable;
 public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogueUI.Data> {
   public static final String DIALOGUE_LINE_SELECTOR = "#DialogueLine";
   public static final String DIALOGUE_CHOICES_SELECTOR = "#DialogueChoices";
-  public static final String DIALOGUE_BUTTON_SELECTOR = "#DialogueButton";
   public static final String DIALOGUE_LABEL_SELECTOR = "#DialogueLabel";
 
   private final StandardDialogue dialogue;
@@ -72,21 +71,16 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
       if (!choice.shouldDisplay(ref, dialogue)) continue;
 
-      prefixCount++;
-
-      String prefix = prefixCount + ". ";
-      var message = prefix + choice.getMessage(ref, dialogue);
-      var indexSelector =  DIALOGUE_CHOICES_SELECTOR + "[" + choiceIndex + "]";
+      var message = (++prefixCount + ". ") + choice.getMessage(ref, dialogue);
+      var indexSelector = DIALOGUE_CHOICES_SELECTOR + "[" + (prefixCount - 1) + "]";
 
       uiCommandBuilder.append(DIALOGUE_CHOICES_SELECTOR, dialogue.UiFragment);
 
-      uiCommandBuilder.set(
-          indexSelector + " " + DIALOGUE_LABEL_SELECTOR + ".Text",
-          message);
+      uiCommandBuilder.set(indexSelector + " " + DIALOGUE_LABEL_SELECTOR + ".Text", message);
 
       uiEventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
-          indexSelector + " " + DIALOGUE_BUTTON_SELECTOR,
+          indexSelector,
           EventData.of("Choice", Integer.toString(choiceIndex)));
     }
   }

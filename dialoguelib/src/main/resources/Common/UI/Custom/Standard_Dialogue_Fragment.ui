@@ -1,4 +1,4 @@
-Button #DialogueButton {
+Button {
   Anchor: (Full: 0);
   LayoutMode: Top;
   Padding: 2;
