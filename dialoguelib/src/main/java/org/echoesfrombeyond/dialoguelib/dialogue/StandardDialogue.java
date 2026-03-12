@@ -74,7 +74,7 @@ public class StandardDialogue implements Dialogue {
   @Doc(
       """
       The UI to render. It must contain a group with the tag
-      #DialogueContainer. All dialogue choices will be dynamically
+      #DialogueChoices. All dialogue choices will be dynamically
       appended to this group. It must also contain a group with the
       tag #DialogueLine. If left absent, defaults to
       Standard_Dialogue.ui.
