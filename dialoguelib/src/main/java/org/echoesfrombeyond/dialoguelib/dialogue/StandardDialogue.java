@@ -76,7 +76,8 @@ public class StandardDialogue implements Dialogue {
       The UI to render. It must contain a group with the tag
       #DialogueIdentifier. All dialogue choices will be dynamically
       appended to this group. It must also contain a group with the
-      tag #DialogueLine.
+      tag #DialogueLine. If left absent, defaults to
+      StandardDialogue.ui.
       """)
   public String UiPageName;
 
@@ -89,7 +90,7 @@ public class StandardDialogue implements Dialogue {
 
   public StandardDialogue() {
     this.Choices = new ArrayList<>();
-    this.UiPageName = "";
+    this.UiPageName = "StandardDialogue.ui";
     this.Lifetime = CustomPageLifetime.CantClose;
   }
 

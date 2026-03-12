@@ -1,7 +1,6 @@
 {
   "Type": "Standard",
   "Id": "Test",
-  "UiPageName": "Dummy.ui",
   "Choices": [
     {
       "Id": "Standard",

@@ -30,13 +30,16 @@ import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class OpenDialogue extends ActionBase {
-  private final @Nullable Dialogue dialogue;
+  private final BuilderOpenDialogue builder;
 
   public OpenDialogue(BuilderOpenDialogue builderActionBase) {
     super(builderActionBase);
+    this.builder = builderActionBase;
+  }
 
-    var key = builderActionBase.dialogueKey;
-    this.dialogue = key == null ? null : Dialogue.ASSET_STORE.get().getAssetMap().getAsset(key);
+  private @Nullable Dialogue getDialogue() {
+    var key = builder.dialogueKey;
+    return key == null ? null : Dialogue.ASSET_STORE.get().getAssetMap().getAsset(key);
   }
 
   @Override
@@ -46,6 +49,7 @@ public class OpenDialogue extends ActionBase {
       InfoProvider sensorInfo,
       double dt,
       Store<EntityStore> store) {
+    var dialogue = getDialogue();
     var player = role.getStateSupport().getInteractionIterationTarget();
     if (dialogue != null && player != null) dialogue.display(player);
 
