@@ -77,9 +77,17 @@ public class StandardDialogue implements Dialogue {
       #DialogueIdentifier. All dialogue choices will be dynamically
       appended to this group. It must also contain a group with the
       tag #DialogueLine. If left absent, defaults to
-      StandardDialogue.ui.
+      Standard_Dialogue.ui.
       """)
-  public String UiPageName;
+  public String UiPage;
+
+  @Doc(
+      """
+      UI specifying the formatting of the dialogue choices. The UI
+      file must contain a Label with the tag #DialogueLabel. If left
+      absent, defaults to Standard_Dialogue_Fragment.ui.
+      """)
+  public String UiFragment;
 
   @Doc(
       """
@@ -90,7 +98,8 @@ public class StandardDialogue implements Dialogue {
 
   public StandardDialogue() {
     this.Choices = new ArrayList<>();
-    this.UiPageName = "StandardDialogue.ui";
+    this.UiPage = "Standard_Dialogue.ui";
+    this.UiFragment = "Standard_Dialogue_Fragment.ui";
     this.Lifetime = CustomPageLifetime.CantClose;
   }
 

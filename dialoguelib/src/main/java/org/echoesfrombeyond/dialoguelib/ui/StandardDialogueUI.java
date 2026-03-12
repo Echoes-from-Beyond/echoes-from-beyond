@@ -41,6 +41,7 @@ import org.jspecify.annotations.Nullable;
 public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogueUI.Data> {
   public static final String DIALOGUE_LINE_SELECTOR = "#DialogueLine";
   public static final String DIALOGUE_CONTAINER_SELECTOR = "#DialogueContainer";
+  public static final String DIALOGUE_LABEL_SELECTOR = "#DialogueLabel";
 
   private final StandardDialogue dialogue;
 
@@ -55,7 +56,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
       UICommandBuilder uiCommandBuilder,
       UIEventBuilder uiEventBuilder,
       Store<EntityStore> store) {
-    uiCommandBuilder.append(dialogue.UiPageName);
+    uiCommandBuilder.append(dialogue.UiPage);
 
     var line = dialogue.Line;
     if (line != null) {
@@ -71,19 +72,25 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
       var message = choice.getMessage(ref, dialogue);
       var buttonSelector = "#Button" + choiceIndex;
-      var labelSelector = "#Label" + choiceIndex;
 
       uiCommandBuilder.appendInline(
-          DIALOGUE_CONTAINER_SELECTOR,
-          String.format("Button %s { Label %s { } }", buttonSelector, labelSelector));
+          DIALOGUE_CONTAINER_SELECTOR, String.format("Button %s { }", buttonSelector));
+
+      uiCommandBuilder.append(
+          DIALOGUE_CONTAINER_SELECTOR + " " + buttonSelector, dialogue.UiFragment);
 
       uiCommandBuilder.set(
-          DIALOGUE_CONTAINER_SELECTOR + " " + buttonSelector + " " + labelSelector + ".Text",
+          DIALOGUE_CONTAINER_SELECTOR
+              + " "
+              + buttonSelector
+              + " "
+              + DIALOGUE_LABEL_SELECTOR
+              + ".Text",
           message);
 
       uiEventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
-          buttonSelector,
+          DIALOGUE_CONTAINER_SELECTOR + " " + buttonSelector,
           EventData.of("Choice", Integer.toString(choiceIndex)));
     }
   }
