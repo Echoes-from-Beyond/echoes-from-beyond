@@ -84,9 +84,9 @@ public class StandardDialogue implements Dialogue {
   @Doc(
       """
       UI file path specifying the formatting of the dialogue choices.
-      The UI file must contain a Button with the tag #DialogueButton,
-      and a Label with the tag #DialogueLabel (the label may or may
-      not be contained in the button). If unspecified, defaults to
+      The UI file must contain only a single top-level Button and a
+      Label with the tag #DialogueLabel (the label may or may not be
+      contained in the button). If unspecified, defaults to
       Standard_Dialogue_Fragment.ui.
       """)
   public String UiFragment;
