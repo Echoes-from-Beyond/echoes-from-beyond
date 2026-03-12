@@ -1,7 +1,7 @@
 Button {
-  Anchor: (Full: 0);
+  Anchor: (Width: 1200);
+  Padding: (Horizontal: 20, Vertical: 15);
   LayoutMode: Top;
-  Padding: 2;
   Label #DialogueLabel {
     Style: (
       FontSize: 23,

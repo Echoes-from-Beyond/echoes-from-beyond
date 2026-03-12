@@ -6,12 +6,9 @@ Group {
   Anchor: (Bottom: 30, Width: 1400, Height: 285);
 
   Group #DialogueLine { }
-  Group {
-    LayoutMode: TopScrolling;
-    ScrollbarStyle: $C.@TranslucentScrollbarStyle;
-
-    Group #DialogueChoices {
-      Padding: (Horizontal: 20);
-    }
-  }
+   Group #DialogueChoices {
+     LayoutMode: TopScrolling;
+     ScrollbarStyle: $C.@TranslucentScrollbarStyle;
+     Padding: (Horizontal: 20);
+   }
 }
