@@ -29,12 +29,14 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.OptionalInt;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.dialogue.StandardDialogue;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogueUI.Data> {
@@ -67,12 +69,15 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
       var message = choice.getMessage(ref, dialogue);
       var selector = "#Choice" + choiceIndex;
+      var buttonSelector = selector + "Btn";
 
-      uiCommandBuilder.appendInline("#DialogueContainer", String.format("Label %s { }", selector));
+      uiCommandBuilder.appendInline(
+          "#DialogueContainer",
+          String.format("Button %s { Label %s { } }", buttonSelector, selector));
       uiCommandBuilder.set(selector + ".Text", message);
       uiEventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
-          selector,
+          buttonSelector,
           EventData.of("Choice", Integer.toString(choiceIndex)));
     }
   }
@@ -80,11 +85,21 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
   @Override
   public void handleDataEvent(
       Ref<EntityStore> ref, Store<EntityStore> store, StandardDialogueUI.Data data) {
+    var indexOptional = data.getChoice();
+    if (indexOptional.isEmpty()) {
+      sendUpdate();
+      return;
+    }
+
+    int index = indexOptional.getAsInt();
+
     var choices = dialogue.Choices;
-    int index = data.Choice;
 
     // Length check in case the client sends a bogus value for Choice.
-    if (index < 0 || index >= choices.size()) return;
+    if (index < 0 || index >= choices.size()) {
+      sendUpdate();
+      return;
+    }
 
     var choice = choices.get(index);
 
@@ -92,6 +107,8 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
     // send whatever it wants: a hacked client could craft malicious event data to choose a dialogue
     // that shouldn't be available.
     if (choice.shouldDisplay(ref, dialogue)) choice.onChosen(ref, dialogue);
+
+    sendUpdate();
   }
 
   @SuppressWarnings("unused")
@@ -100,6 +117,17 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
     public static final BuilderCodec<Data> CODEC =
         CodecUtil.modelBuilder(Data.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
-    public int Choice;
+    public @Nullable String Choice;
+
+    public OptionalInt getChoice() {
+      var choice = Choice;
+      if (choice == null || choice.length() > 256) return OptionalInt.empty();
+
+      try {
+        return OptionalInt.of(Integer.parseInt(Choice));
+      } catch (NumberFormatException _) {
+        return OptionalInt.empty();
+      }
+    }
   }
 }
