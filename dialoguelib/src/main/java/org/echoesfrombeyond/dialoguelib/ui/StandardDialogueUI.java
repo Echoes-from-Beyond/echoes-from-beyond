@@ -66,15 +66,15 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
     }
 
     var count = 0;
-    var prefix_count = 0;
+    var prefixCount = 0;
     for (var choice : dialogue.Choices) {
       int choiceIndex = count++;
 
       if (!choice.shouldDisplay(ref, dialogue)) continue;
 
-      int choiceDisplayIndex = prefix_count++;
+      prefixCount++;
 
-      String prefix = choiceDisplayIndex + ". ";
+      String prefix = prefixCount + ". ";
       var message = prefix + choice.getMessage(ref, dialogue);
       var groupSelector = "#Group" + choiceIndex;
 
