@@ -33,6 +33,12 @@ import org.echoesfrombeyond.util.thread.Once;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * A global trigger of dialogue.
+ *
+ * <p>Triggers generally link up dialogue activation to an event or system. For example, {@link
+ * JoinTrigger} activates dialogue for all joining players.
+ */
 @NullMarked
 public interface Trigger
     extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Trigger>> {

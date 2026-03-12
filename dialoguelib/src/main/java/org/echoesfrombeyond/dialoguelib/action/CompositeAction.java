@@ -21,6 +21,7 @@ package org.echoesfrombeyond.dialoguelib.action;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.ArrayList;
 import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
@@ -50,7 +51,7 @@ public class CompositeAction implements ChoiceAction {
   public List<ChoiceAction> Actions;
 
   public CompositeAction() {
-    this.Actions = List.of();
+    this.Actions = new ArrayList<>();
   }
 
   @Override
