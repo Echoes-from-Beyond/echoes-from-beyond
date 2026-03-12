@@ -36,10 +36,22 @@ val serverAot: Provider<File> =
     hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.aot") }
 val assetsZip: Provider<File> = hytalePath.map { file -> file.resolve("Assets.zip") }
 
-val copySdkTask: TaskProvider<Copy> =
-    tasks.register("copySdk", Copy::class.java) {
-      from(serverJar, serverAot, assetsZip).into(runDirectory)
+val checkHytalePath: TaskProvider<DefaultTask> =
+    tasks.register("checkHytalePath", DefaultTask::class.java) {
+      inputs.files(serverJar, serverAot, assetsZip)
+      outputs.files(serverJar, serverAot, assetsZip)
+
+      doLast {
+        if (inputs.files.any { file -> !file.exists() })
+            throw GradleException(
+                "One or more required server files could not be found; check that the contents " +
+                    "of the .hytale file point to a valid Hytale installation"
+            )
+      }
     }
+
+val copySdkTask: TaskProvider<Copy> =
+    tasks.register("copySdk", Copy::class.java) { from(checkHytalePath).into(runDirectory) }
 
 val syncPluginsTask: TaskProvider<Sync> =
     tasks.register("syncPlugins", Sync::class.java) {

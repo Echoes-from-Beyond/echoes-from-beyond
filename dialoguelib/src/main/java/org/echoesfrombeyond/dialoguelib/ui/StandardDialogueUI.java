@@ -81,16 +81,10 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
       uiCommandBuilder.appendInline(
           DIALOGUE_CHOICES_SELECTOR, String.format("Group %s { }", groupSelector));
 
-      uiCommandBuilder.append(
-          DIALOGUE_CHOICES_SELECTOR + " " + groupSelector, dialogue.UiFragment);
+      uiCommandBuilder.append(DIALOGUE_CHOICES_SELECTOR + " " + groupSelector, dialogue.UiFragment);
 
       uiCommandBuilder.set(
-          DIALOGUE_CHOICES_SELECTOR
-              + " "
-              + groupSelector
-              + " "
-              + DIALOGUE_LABEL_SELECTOR
-              + ".Text",
+          DIALOGUE_CHOICES_SELECTOR + " " + groupSelector + " " + DIALOGUE_LABEL_SELECTOR + ".Text",
           message);
 
       uiEventBuilder.addEventBinding(
