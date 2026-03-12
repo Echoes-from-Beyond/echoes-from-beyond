@@ -71,7 +71,8 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
       if (!choice.shouldDisplay(ref, dialogue)) continue;
 
-      var message = choice.getMessage(ref, dialogue);
+      String prefix = count + ". ";
+      var message = prefix + choice.getMessage(ref, dialogue);
       var groupSelector = "#Group" + choiceIndex;
 
       uiCommandBuilder.appendInline(
