@@ -21,6 +21,7 @@ package org.echoesfrombeyond.dialoguelib.dialogue;
 import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
 import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.Page;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
@@ -79,9 +80,17 @@ public class StandardDialogue implements Dialogue {
       """)
   public String UiPageName;
 
+  @Doc(
+      """
+      The lifetime of the UI. If left unspecified, defaults to
+      CantClose.
+      """)
+  public CustomPageLifetime Lifetime;
+
   public StandardDialogue() {
     this.Choices = new ArrayList<>();
     this.UiPageName = "";
+    this.Lifetime = CustomPageLifetime.CantClose;
   }
 
   @Override

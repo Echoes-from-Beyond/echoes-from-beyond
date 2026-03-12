@@ -21,7 +21,6 @@ package org.echoesfrombeyond.dialoguelib.ui;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
-import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
@@ -40,10 +39,13 @@ import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogueUI.Data> {
+  public static final String DIALOGUE_LINE_SELECTOR = "#DialogueLine";
+  public static final String DIALOGUE_CONTAINER_SELECTOR = "#DialogueContainer";
+
   private final StandardDialogue dialogue;
 
   public StandardDialogueUI(PlayerRef playerRef, StandardDialogue dialogue) {
-    super(playerRef, CustomPageLifetime.CantClose, Data.CODEC);
+    super(playerRef, dialogue.Lifetime, Data.CODEC);
     this.dialogue = dialogue;
   }
 
@@ -57,8 +59,8 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
     var line = dialogue.Line;
     if (line != null) {
-      uiCommandBuilder.appendInline("#DialogueLine", "Label #Line { }");
-      uiCommandBuilder.set("#Line.Text", line.getMessage(ref, dialogue));
+      uiCommandBuilder.appendInline(DIALOGUE_LINE_SELECTOR, "Label #Line { }");
+      uiCommandBuilder.set(DIALOGUE_LINE_SELECTOR + " #Line.Text", line.getMessage(ref, dialogue));
     }
 
     var count = 0;
@@ -68,13 +70,17 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
       if (!choice.shouldDisplay(ref, dialogue)) continue;
 
       var message = choice.getMessage(ref, dialogue);
-      var selector = "#Choice" + choiceIndex;
-      var buttonSelector = selector + "Btn";
+      var buttonSelector = "#Button" + choiceIndex;
+      var labelSelector = "#Label" + choiceIndex;
 
       uiCommandBuilder.appendInline(
-          "#DialogueContainer",
-          String.format("Button %s { Label %s { } }", buttonSelector, selector));
-      uiCommandBuilder.set(selector + ".Text", message);
+          DIALOGUE_CONTAINER_SELECTOR,
+          String.format("Button %s { Label %s { } }", buttonSelector, labelSelector));
+
+      uiCommandBuilder.set(
+          DIALOGUE_CONTAINER_SELECTOR + " " + buttonSelector + " " + labelSelector + ".Text",
+          message);
+
       uiEventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
           buttonSelector,
@@ -82,24 +88,16 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
     }
   }
 
-  @Override
-  public void handleDataEvent(
-      Ref<EntityStore> ref, Store<EntityStore> store, StandardDialogueUI.Data data) {
+  private void handleData(Ref<EntityStore> ref, StandardDialogueUI.Data data) {
     var indexOptional = data.getChoice();
-    if (indexOptional.isEmpty()) {
-      sendUpdate();
-      return;
-    }
+    if (indexOptional.isEmpty()) return;
 
     int index = indexOptional.getAsInt();
 
     var choices = dialogue.Choices;
 
     // Length check in case the client sends a bogus value for Choice.
-    if (index < 0 || index >= choices.size()) {
-      sendUpdate();
-      return;
-    }
+    if (index < 0 || index >= choices.size()) return;
 
     var choice = choices.get(index);
 
@@ -107,7 +105,12 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
     // send whatever it wants: a hacked client could craft malicious event data to choose a dialogue
     // that shouldn't be available.
     if (choice.shouldDisplay(ref, dialogue)) choice.onChosen(ref, dialogue);
+  }
 
+  @Override
+  public void handleDataEvent(
+      Ref<EntityStore> ref, Store<EntityStore> store, StandardDialogueUI.Data data) {
+    handleData(ref, data);
     sendUpdate();
   }
 
@@ -121,7 +124,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
     public OptionalInt getChoice() {
       var choice = Choice;
-      if (choice == null || choice.length() > 256) return OptionalInt.empty();
+      if (choice == null || choice.length() > 16) return OptionalInt.empty();
 
       try {
         return OptionalInt.of(Integer.parseInt(Choice));
