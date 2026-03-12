@@ -76,20 +76,17 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
       String prefix = prefixCount + ". ";
       var message = prefix + choice.getMessage(ref, dialogue);
-      var groupSelector = "#Group" + choiceIndex;
+      var indexSelector =  DIALOGUE_CHOICES_SELECTOR + "[" + choiceIndex + "]";
 
-      uiCommandBuilder.appendInline(
-          DIALOGUE_CHOICES_SELECTOR, String.format("Group %s { }", groupSelector));
-
-      uiCommandBuilder.append(DIALOGUE_CHOICES_SELECTOR + " " + groupSelector, dialogue.UiFragment);
+      uiCommandBuilder.append(DIALOGUE_CHOICES_SELECTOR, dialogue.UiFragment);
 
       uiCommandBuilder.set(
-          DIALOGUE_CHOICES_SELECTOR + " " + groupSelector + " " + DIALOGUE_LABEL_SELECTOR + ".Text",
+          indexSelector + " " + DIALOGUE_LABEL_SELECTOR + ".Text",
           message);
 
       uiEventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
-          DIALOGUE_CHOICES_SELECTOR + " " + groupSelector + " " + DIALOGUE_BUTTON_SELECTOR,
+          indexSelector + " " + DIALOGUE_BUTTON_SELECTOR,
           EventData.of("Choice", Integer.toString(choiceIndex)));
     }
   }
