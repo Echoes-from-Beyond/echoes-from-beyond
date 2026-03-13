@@ -1,8 +1,7 @@
 package org.echoesfrombeyond.gradle.plugin
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import java.nio.file.Files
-import java.nio.file.Path
+import java.net.URI
 import kotlin.jvm.java
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
@@ -125,21 +124,19 @@ fun Project.withHytaleDependency() {
   if (plugins.withType(JavaConventionPlugin::class.java).isEmpty())
       throw GradleException("Hytale plugin projects must apply JavaConventionPlugin!")
 
-  val hytaleJar = provider {
-    val dotfile = rootDir.resolve(".hytale")
-    if (!dotfile.exists()) throw GradleException("Missing .hytale file!")
-
-    val contents = dotfile.readText(Charsets.UTF_8).trim()
-    val hytaleServer = Path.of(contents).resolve("Server").resolve("HytaleServer.jar")
-
-    if (!Files.exists(hytaleServer))
-        throw GradleException("Path specified in .hytale does not point to a valid installation!")
-
-    hytaleServer
+  repositories.exclusiveContent { exclusive ->
+    exclusive.forRepository {
+      repositories.maven { maven ->
+        maven.name = "hytale-pre-release"
+        maven.url = URI.create("https://maven.hytale.com/pre-release")
+      }
+    }
+    exclusive.filter { filter -> filter.includeGroup("com.hypixel.hytale") }
   }
 
-  dependencies.add("compileOnly", files(hytaleJar))
-  dependencies.add("testImplementation", files(hytaleJar))
+  val hytale = "com.hypixel.hytale:Server:latest.integration"
+  dependencies.add("compileOnly", hytale)
+  dependencies.add("testImplementation", hytale)
 }
 
 /**
