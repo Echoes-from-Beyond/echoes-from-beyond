@@ -3,7 +3,7 @@ import java.nio.file.Paths
 import org.echoesfrombeyond.gradle.plugin.HytaleDecompiler
 import org.gradle.internal.extensions.core.extra
 
-plugins { id("com.diffplug.spotless") version "8.2.1" }
+plugins { id("com.diffplug.spotless") version "8.3.0" }
 
 apply<HytaleDecompiler>()
 
