@@ -42,6 +42,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
   public static final String DIALOGUE_LINE_SELECTOR = "#DialogueLine";
   public static final String DIALOGUE_CHOICES_SELECTOR = "#DialogueChoices";
   public static final String DIALOGUE_LABEL_SELECTOR = "#DialogueLabel";
+  public static final String DIALOGUE_BUTTON_SELECTOR = "#DialogueButton";
 
   private final StandardDialogue dialogue;
 
@@ -80,7 +81,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
       uiEventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
-          indexSelector,
+          indexSelector + " " + DIALOGUE_BUTTON_SELECTOR,
           EventData.of("Choice", Integer.toString(choiceIndex)));
     }
   }

@@ -1,16 +1,20 @@
 $C = "Common.ui";
 
-Button {
+Group {
   Anchor: (Width: 1200);
-  Padding: (Horizontal: 20, Vertical: 15);
-  LayoutMode: Top;
-  Style: $C.@DefaultButtonStyle;
-  Label #DialogueLabel {
-    Style: (
-      Wrap: true,
-      FontSize: 23,
-      TextColor: #ffffff,
-      RenderBold: true
-    );
+  Padding: (Vertical: 10);
+  Button #DialogueButton {
+    Anchor: (Full: 0);
+    Padding: (Horizontal: 20, Vertical: 15);
+    LayoutMode: Top;
+    Style: $C.@DefaultButtonStyle;
+    Label #DialogueLabel {
+      Style: (
+        Wrap: true,
+        FontSize: 23,
+        TextColor: #ffffff,
+        RenderBold: true
+      );
+    }
   }
 }
