@@ -28,13 +28,10 @@ Group #DialogueContainer {
   $C.@DecoratedContainer {
     Anchor: (Width: 1400, Height: 385);
     Group #DialogueLine { }
-    Group #DialogueChoicesContainer {
+    Group #DialogueChoices {
       LayoutMode: TopScrolling;
       ScrollbarStyle: $C.@TranslucentScrollbarStyle;
-
-      Group #DialogueChoices {
-        Padding: (Horizontal: 20);
-      }
+      Padding: (Horizontal: 20);
     }
   }
 }

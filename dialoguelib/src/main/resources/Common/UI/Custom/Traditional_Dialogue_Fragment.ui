@@ -1,13 +1,14 @@
 $C = "Common.ui";
 
 Button #DialogueButton {
-  Anchor: (Full: 0);
+  Anchor: (Width: 1200);
+  Padding: (Horizontal: 20, Vertical: 15);
   LayoutMode: Top;
-  Padding: 2;
   // there's a ClearButtonStyle but it causes an exception...
   Style: $C.@DefaultButtonStyle;
   Label #DialogueLabel {
     Style: (
+      Wrap: true,
       FontSize: 23,
       TextColor: #ffffff,
       RenderBold: true
