@@ -1,8 +1,11 @@
 import com.diffplug.spotless.LineEnding
 import java.nio.file.Paths
+import org.echoesfrombeyond.gradle.plugin.HytaleDecompiler
 import org.gradle.internal.extensions.core.extra
 
-plugins { id("com.diffplug.spotless") version "8.2.1" }
+plugins { id("com.diffplug.spotless") version "8.3.0" }
+
+apply<HytaleDecompiler>()
 
 val hytaleDotfile: RegularFile = layout.projectDirectory.file(".hytale")
 val runDirectory: Directory = layout.projectDirectory.dir("run")
@@ -159,3 +162,5 @@ spotless {
     licenseHeaderFile(layout.projectDirectory.file("LICENSE_HEADER"))
   }
 }
+
+tasks.named("decompileHytale").configure { inputs.file(serverJar) }
