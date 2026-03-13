@@ -35,7 +35,8 @@ testRuntimeOnly = [
 
 # Used only in buildSrc for "implementation" (plugin) dependencies.
 build = [
-    "shadow"
+    "shadow",
+    "vineflower"
 ]
 
 # Compile-only dependencies for the `example` project.
@@ -90,3 +91,7 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 # usage: including dependencies in built jar files
 # scope: plugins and libraries
 shadow = { module = "com.gradleup.shadow:com.gradleup.shadow.gradle.plugin", version = "9.3.1" }
+
+# usage: decompiling Hytale
+# scope: root project
+vineflower = { module = "org.vineflower:vineflower", version = "1.11.2" }
