@@ -77,7 +77,7 @@ public class StandardDialogue implements Dialogue {
       #DialogueChoices. All dialogue choices will be dynamically
       appended to this group. It must also contain a group with the
       tag #DialogueLine. If left absent, defaults to
-      Standard_Dialogue.ui.
+      Cinematic_Dialogue.ui.
       """)
   public String UiPage;
 
@@ -87,7 +87,7 @@ public class StandardDialogue implements Dialogue {
       The UI file must contain only a single top-level Button and a
       Label with the tag #DialogueLabel (the label may or may not be
       contained in the button). If unspecified, defaults to
-      Standard_Dialogue_Fragment.ui.
+      Cinematic_Dialogue_Fragment.ui.
       """)
   public String UiFragment;
 
@@ -100,8 +100,8 @@ public class StandardDialogue implements Dialogue {
 
   public StandardDialogue() {
     this.Choices = new ArrayList<>();
-    this.UiPage = "Standard_Dialogue.ui";
-    this.UiFragment = "Standard_Dialogue_Fragment.ui";
+    this.UiPage = "Cinematic_Dialogue.ui";
+    this.UiFragment = "Cinematic_Dialogue_Fragment.ui";
     this.Lifetime = CustomPageLifetime.CantClose;
   }
 
