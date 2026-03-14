@@ -1,7 +1,7 @@
 $C = "Common.ui";
 
 Group {
-  Anchor: (Width: 1200);
+  Anchor: (Width: 1350);
   Padding: (Vertical: 10);
   Button #DialogueButton {
     Anchor: (Full: 0);

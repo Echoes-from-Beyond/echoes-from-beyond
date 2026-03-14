@@ -4,8 +4,19 @@ $C = "Common.ui";
 // must not overwhelm the rest of the UI, and must leave enough of a viewport for the rest of the world
 Group {
   Anchor: (Bottom: 30, Width: 1400, Height: 285);
+  LayoutMode: Top;
 
-  Group #DialogueLine { }
+  Group {
+    Padding: (Horizontal: 15, Vertical: 15);
+    Label #DialogueLine {
+      Style: (
+        Wrap: true,
+        FontSize: 24,
+        TextColor: #ffffff,
+        RenderBold: true
+      );
+    }
+  }
   Group #DialogueChoices {
     LayoutMode: TopScrolling;
     ScrollbarStyle: $C.@TranslucentScrollbarStyle;

@@ -61,8 +61,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
     var line = dialogue.Line;
     if (line != null) {
-      uiCommandBuilder.appendInline(DIALOGUE_LINE_SELECTOR, "Label #Line { }");
-      uiCommandBuilder.set(DIALOGUE_LINE_SELECTOR + " #Line.Text", line.getMessage(ref, dialogue));
+      uiCommandBuilder.set(DIALOGUE_LINE_SELECTOR + ".Text", line.getMessage(ref, dialogue));
     }
 
     var count = 0;

@@ -2,7 +2,7 @@ $C = "Common.ui";
 
 // for VN/JRPG-style dialogue with sprites behind an opaque box
 Group #DialogueContainer {
-  Anchor: (Bottom: 30, Width: 1400, Height: 485);
+  Anchor: (Bottom: 30, Width: 1400, Height: 425);
   LayoutMode: Top;
   Group #DialogueNameContainer {
     Anchor: (Left: 0, Width: 350, Height: 100);
@@ -26,12 +26,25 @@ Group #DialogueContainer {
     }
   }
   $C.@DecoratedContainer {
-    Anchor: (Width: 1400, Height: 385);
-    Group #DialogueLine { }
-    Group #DialogueChoices {
-      LayoutMode: TopScrolling;
-      ScrollbarStyle: $C.@TranslucentScrollbarStyle;
-      Padding: (Horizontal: 20);
+    Anchor: (Width: 1400, Height: 325);
+    Group {
+      LayoutMode: Top;
+      Group {
+        Padding: (Horizontal: 15, Vertical: 15);
+        Label #DialogueLine {
+          Style: (
+            Wrap: true,
+            FontSize: 24,
+            TextColor: #ffffff,
+            RenderBold: true
+          );
+        }
+      }
+      Group #DialogueChoices {
+        LayoutMode: TopScrolling;
+        ScrollbarStyle: $C.@TranslucentScrollbarStyle;
+        Padding: (Horizontal: 20);
+      }
     }
   }
 }
