@@ -112,6 +112,9 @@ public class DialoguePlugin extends JavaPlugin {
     getCodecRegistry(ChoiceAction.CODEC)
         .register("SetMetadata", SetMetadataAction.class, SetMetadataAction.CODEC);
 
+    getCodecRegistry(ChoiceAction.CODEC)
+        .register("Close", CloseDialogueAction.class, CloseDialogueAction.CODEC);
+
     getCodecRegistry(ChoiceCondition.CODEC)
         .register("Equals", MetadataEqualsCondition.class, MetadataEqualsCondition.CODEC);
 
