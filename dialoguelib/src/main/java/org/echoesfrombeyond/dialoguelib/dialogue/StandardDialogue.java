@@ -22,7 +22,6 @@ import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
-import com.hypixel.hytale.protocol.packets.interface_.Page;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -115,13 +114,9 @@ public class StandardDialogue implements Dialogue {
     // standard dialogue only works for player activators that can be sent packets
     if (player == null || playerRef == null) return;
 
-    var pageManager = player.getPageManager();
-    var customPage = pageManager.getCustomPage();
-
-    // close the current page if it's the same type
-    if (customPage instanceof StandardDialogueUI) pageManager.setPage(activator, store, Page.None);
-
-    pageManager.openCustomPage(activator, store, new StandardDialogueUI(playerRef, this));
+    player
+        .getPageManager()
+        .openCustomPage(activator, store, new StandardDialogueUI(playerRef, this));
   }
 
   @Override
