@@ -22,10 +22,13 @@ import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.JsonAsset;
 import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
 import com.hypixel.hytale.codec.Codec;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
+@ApiStatus.Internal
+@ApiStatus.NonExtendable
 public interface IdentifiedAsset<K> extends JsonAsset<K> {
   void setId(K id);
 
