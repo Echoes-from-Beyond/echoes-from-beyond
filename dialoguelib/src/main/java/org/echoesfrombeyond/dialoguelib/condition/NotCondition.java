@@ -29,7 +29,6 @@ import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
-import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -39,13 +38,10 @@ import org.jspecify.annotations.Nullable;
     """)
 @NullMarked
 @ModelBuilder
-public class NotCondition extends MetadataAccessor implements ChoiceCondition {
+public class NotCondition implements ChoiceCondition {
   public static final BuilderCodec<NotCondition> CODEC =
       CodecUtil.modelBuilder(
-          NotCondition.class,
-          MetadataAccessor.CODEC,
-          DialoguePlugin.getResolver(),
-          Plugin.getSharedCache());
+          NotCondition.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
   @Doc(
       """
