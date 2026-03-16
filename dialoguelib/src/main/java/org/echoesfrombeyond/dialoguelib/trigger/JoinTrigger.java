@@ -20,10 +20,11 @@ package org.echoesfrombeyond.dialoguelib.trigger;
 
 import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
+import com.hypixel.hytale.assetstore.map.CaseInsensitiveHashStrategy;
 import com.hypixel.hytale.event.EventRegistration;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
-import java.util.HashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 import java.util.Map;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
@@ -52,7 +53,9 @@ public class JoinTrigger extends TriggerBase {
   @Id private @Nullable String Id;
   @Data private AssetExtraInfo.@Nullable Data Data;
 
-  @Skip private final Map<String, EventRegistration<?, ?>> registered = new HashMap<>();
+  @Skip
+  private final Map<String, EventRegistration<?, ?>> registered =
+      new Object2ObjectOpenCustomHashMap<>(CaseInsensitiveHashStrategy.getInstance());
 
   @Override
   public void link(JavaPlugin linker, Dialogue dialogue) {

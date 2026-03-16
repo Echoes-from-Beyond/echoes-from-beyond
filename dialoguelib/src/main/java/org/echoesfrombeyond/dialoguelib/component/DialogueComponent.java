@@ -58,6 +58,7 @@ public class DialogueComponent implements Component<EntityStore> {
 
   private Map<String, DialogueMetadataStore> MetadataStorage;
 
+  @SuppressWarnings("unused")
   public DialogueComponent() {
     this.MetadataStorage = new HashMap<>();
   }

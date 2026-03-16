@@ -18,14 +18,18 @@
 
 package org.echoesfrombeyond.dialoguelib.trigger;
 
+import com.hypixel.hytale.assetstore.map.CaseInsensitiveHashStrategy;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 import java.util.Collections;
 import java.util.Set;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.codechelper.annotation.Skip;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
+import org.echoesfrombeyond.util.thread.Once;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 
@@ -43,12 +47,25 @@ public abstract class TriggerBase implements Trigger {
       """)
   private Set<String> TargetIds;
 
+  @Skip
+  private final Once<Set<String>> caseInsensitiveIds =
+      Once.of(
+          () -> {
+            var set =
+                Collections.<String>newSetFromMap(
+                    new Object2ObjectOpenCustomHashMap<>(
+                        TargetIds.size(), CaseInsensitiveHashStrategy.getInstance()));
+            set.addAll(TargetIds);
+
+            return set;
+          });
+
   protected TriggerBase() {
     this.TargetIds = Set.of();
   }
 
   @Override
   public final @Unmodifiable Set<String> getTargetIds() {
-    return Collections.unmodifiableSet(TargetIds);
+    return Collections.unmodifiableSet(caseInsensitiveIds.get());
   }
 }
