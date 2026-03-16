@@ -42,8 +42,7 @@ public abstract class MetadataAccessor {
   @Doc(
       """
       The metadata "store key". If unspecified, all metadata values
-      will be "local" to the dialogue asset. This is equivalent to
-      having the group key set to the dialogue asset's ID key.
+      will be "local" to the dialogue asset.
 
       Setting this value to something other than the default allows
       separate dialogue to access the same metadata.
@@ -57,6 +56,10 @@ public abstract class MetadataAccessor {
       """)
   public @Nullable String MetadataKey;
 
+  private static String formatId(String dialogueId) {
+    return "$" + dialogueId;
+  }
+
   @RunOnWorldThread
   public @Nullable DialogueMetadata getMetadata(Ref<EntityStore> activator, Dialogue parent) {
     var key = MetadataKey;
@@ -67,7 +70,8 @@ public abstract class MetadataAccessor {
     if (component == null) return null;
 
     var storeKey = MetadataStoreKey;
-    var metadataStore = component.getMetadataStore(storeKey == null ? parent.getId() : storeKey);
+    var metadataStore =
+        component.getMetadataStore(storeKey == null ? formatId(parent.getId()) : storeKey);
     if (metadataStore == null) return null;
 
     return metadataStore.get(key);
@@ -80,7 +84,7 @@ public abstract class MetadataAccessor {
     if (key == null) return null;
 
     var storeKey = MetadataStoreKey;
-    var actualStoreKey = storeKey == null ? parent.getId() : storeKey;
+    var actualStoreKey = storeKey == null ? formatId(parent.getId()) : storeKey;
 
     var component =
         activator.getStore().ensureAndGetComponent(activator, DialogueComponent.getComponentType());
