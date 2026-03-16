@@ -26,10 +26,11 @@ Group #DialogueContainer {
     }
   }
   $C.@DecoratedContainer {
-    Anchor: (Width: 1400, Height: 325);
+    Anchor: (Width: 1400, Height: 350);
     Group {
       LayoutMode: Top;
       Group {
+        Anchor: (Height: 125);
         Padding: (Horizontal: 15, Vertical: 15);
         Label #DialogueLine {
           Style: (
@@ -41,6 +42,7 @@ Group #DialogueContainer {
         }
       }
       Group #DialogueChoices {
+        Anchor: (Height: 195);
         LayoutMode: TopScrolling;
         ScrollbarStyle: $C.@TranslucentScrollbarStyle;
         Padding: (Horizontal: 20);
