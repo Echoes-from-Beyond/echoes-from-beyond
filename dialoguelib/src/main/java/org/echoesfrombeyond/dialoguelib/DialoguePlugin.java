@@ -18,6 +18,9 @@
 
 package org.echoesfrombeyond.dialoguelib;
 
+import com.hypixel.hytale.assetstore.event.LoadedAssetsEvent;
+import com.hypixel.hytale.assetstore.event.RemovedAssetsEvent;
+import com.hypixel.hytale.assetstore.map.CaseInsensitiveHashStrategy;
 import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
 import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.Message;
@@ -25,6 +28,7 @@ import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.npc.NPCPlugin;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 import java.util.*;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.Plugin;
@@ -55,6 +59,7 @@ public class DialoguePlugin extends JavaPlugin {
   private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
   private static @Nullable CodecResolver RESOLVER;
+  private static @Nullable Map<String, Trigger> TRIGGERS;
 
   public DialoguePlugin(JavaPluginInit init) {
     super(init);
@@ -81,6 +86,8 @@ public class DialoguePlugin extends JavaPlugin {
             .withDirectMapping(DialogueMetadata.class, DialogueMetadata.CODEC)
             .build();
 
+    TRIGGERS = new Object2ObjectOpenCustomHashMap<>(CaseInsensitiveHashStrategy.getInstance());
+
     getAssetRegistry()
         .register(
             HytaleAssetStore.builder(Dialogue.class, new DefaultAssetMap<>())
@@ -94,6 +101,7 @@ public class DialoguePlugin extends JavaPlugin {
             HytaleAssetStore.builder(Trigger.class, new DefaultAssetMap<>())
                 .setCodec(Trigger.CODEC)
                 .setPath("DialogueTrigger")
+                .loadsAfter(Dialogue.class)
                 .setKeyFunction(Trigger::getId)
                 .build());
 
@@ -145,41 +153,97 @@ public class DialoguePlugin extends JavaPlugin {
     DialogueComponent.register(entityStoreRegistry);
 
     NPCPlugin.get().registerCoreComponentType("OpenDialogue", BuilderOpenDialogue::new);
+
+    getEventRegistry()
+        .register(LoadedAssetsEvent.class, Trigger.class, this::onTriggerAssetsLoaded);
+
+    getEventRegistry()
+        .register(LoadedAssetsEvent.class, Dialogue.class, this::onDialogueAssetsLoaded);
+
+    getEventRegistry()
+        .register(RemovedAssetsEvent.class, Trigger.class, this::onTriggerAssetsRemoved);
+
+    getEventRegistry()
+        .register(RemovedAssetsEvent.class, Dialogue.class, this::onDialogueAssetsRemoved);
   }
 
-  @Override
-  protected void start() {
-    var triggerStore = Trigger.ASSET_STORE.get();
+  private void onTriggerAssetsLoaded(
+      LoadedAssetsEvent<String, Trigger, DefaultAssetMap<String, Trigger>> event) {
     var dialogueStoreMap = Dialogue.ASSET_STORE.get().getAssetMap();
+    var triggers = event.getLoadedAssets();
 
-    triggerStore
-        .getAssetMap()
-        .getAssetMap()
-        .forEach(
-            (_, trigger) -> {
-              var targets = trigger.getTargetIds();
-              if (targets.isEmpty())
-                LOGGER.atWarning().log(
-                    "Trigger `%s` did not reference any dialogue assets", trigger.getId());
+    var triggersSet = TRIGGERS;
+    if (triggersSet != null) {
+      synchronized (triggersSet) {
+        triggersSet.putAll(triggers);
+      }
+    }
 
-              for (var target : targets) {
-                var referenced = dialogueStoreMap.getAsset(target);
-                if (referenced == null) {
-                  LOGGER.atWarning().log(
-                      "Trigger `%s` referenced non-existent dialogue asset `%s`",
-                      trigger.getId(), target);
+    for (var entry : triggers.entrySet()) {
+      var trigger = entry.getValue();
+      var targets = trigger.getTargetIds();
 
-                  continue;
-                }
+      if (targets.isEmpty())
+        LOGGER.atWarning().log(
+            "Trigger `%s` did not reference any dialogue assets", trigger.getId());
 
-                trigger.link(this, referenced);
-              }
-            });
+      for (var target : targets) {
+        var referenced = dialogueStoreMap.getAsset(target);
+        if (referenced == null) {
+          LOGGER.atWarning().log(
+              "Trigger `%s` referenced non-existent dialogue asset `%s`", trigger.getId(), target);
+
+          continue;
+        }
+
+        trigger.link(this, referenced);
+      }
+    }
+  }
+
+  private void onDialogueAssetsLoaded(
+      LoadedAssetsEvent<String, Dialogue, DefaultAssetMap<String, Dialogue>> event) {
+    if (event.isInitial()) return;
+
+    var triggers = Trigger.ASSET_STORE.get().getAssetMap().getAssetMap().values();
+
+    for (var dialogue : event.getLoadedAssets().values()) {
+      for (var trigger : triggers) {
+        if (!trigger.getTargetIds().contains(dialogue.getId())) continue;
+
+        trigger.link(this, dialogue);
+      }
+    }
+  }
+
+  private void onTriggerAssetsRemoved(
+      RemovedAssetsEvent<String, Trigger, DefaultAssetMap<String, Trigger>> event) {
+    var triggers = TRIGGERS;
+    if (triggers == null) return;
+
+    synchronized (triggers) {
+      for (var removed : event.getRemovedAssets()) {
+        var trigger = triggers.remove(removed);
+        if (trigger == null) continue;
+
+        trigger.unlinkAll();
+      }
+    }
+  }
+
+  private void onDialogueAssetsRemoved(
+      RemovedAssetsEvent<String, Dialogue, DefaultAssetMap<String, Dialogue>> event) {
+    var triggers = Trigger.ASSET_STORE.get().getAssetMap().getAssetMap().values();
+
+    for (var removed : event.getRemovedAssets())
+      for (var trigger : triggers)
+        if (trigger.getTargetIds().contains(removed)) trigger.unlink(removed);
   }
 
   @Override
   protected void shutdown() {
     RESOLVER = null;
+    TRIGGERS = null;
   }
 
   @ApiStatus.Internal

@@ -49,6 +49,10 @@ public interface Trigger
 
   void link(JavaPlugin linker, Dialogue dialogue);
 
+  void unlink(String dialogueId);
+
+  void unlinkAll();
+
   @Unmodifiable
   Set<String> getTargetIds();
 }

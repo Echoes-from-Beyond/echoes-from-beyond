@@ -20,16 +20,17 @@ package org.echoesfrombeyond.dialoguelib.trigger;
 
 import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
+import com.hypixel.hytale.event.EventRegistration;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
+import java.util.HashMap;
+import java.util.Map;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
-import org.echoesfrombeyond.codechelper.annotation.Data;
-import org.echoesfrombeyond.codechelper.annotation.Doc;
-import org.echoesfrombeyond.codechelper.annotation.Id;
-import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.codechelper.annotation.*;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
+import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -51,11 +52,39 @@ public class JoinTrigger extends TriggerBase {
   @Id private @Nullable String Id;
   @Data private AssetExtraInfo.@Nullable Data Data;
 
+  @Skip private final Map<String, EventRegistration<?, ?>> registered = new HashMap<>();
+
   @Override
   public void link(JavaPlugin linker, Dialogue dialogue) {
-    linker
-        .getEventRegistry()
-        .registerGlobal(PlayerReadyEvent.class, ready -> dialogue.display(ready.getPlayerRef()));
+    var id = dialogue.getId();
+
+    synchronized (registered) {
+      if (registered.containsKey(id)) return;
+
+      registered.put(
+          id,
+          Check.nonNull(
+              linker
+                  .getEventRegistry()
+                  .registerGlobal(
+                      PlayerReadyEvent.class, ready -> dialogue.display(ready.getPlayerRef()))));
+    }
+  }
+
+  @Override
+  public void unlink(String dialogueId) {
+    synchronized (registered) {
+      var registration = registered.remove(dialogueId);
+      if (registration != null) registration.unregister();
+    }
+  }
+
+  @Override
+  public void unlinkAll() {
+    synchronized (registered) {
+      for (var registration : registered.values()) registration.unregister();
+      registered.clear();
+    }
   }
 
   @Override
