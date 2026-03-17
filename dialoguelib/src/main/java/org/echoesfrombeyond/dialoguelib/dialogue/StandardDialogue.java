@@ -65,6 +65,13 @@ public class StandardDialogue implements Dialogue {
 
   @Doc(
       """
+      The "dialogue name", representing the name of the NPC. If
+      absent, nothing will be displayed.
+      """)
+  public @Nullable DialogueChoice Name;
+
+  @Doc(
+      """
       Choices to potentially display. Choices may be "conditional" and
       will only show up if their conditions are met.
       """)

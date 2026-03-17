@@ -40,6 +40,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogueUI.Data> {
   public static final String DIALOGUE_LINE_SELECTOR = "#DialogueLine";
+  public static final String DIALOGUE_NAME_SELECTOR = "#DialogueName";
   public static final String DIALOGUE_CHOICES_SELECTOR = "#DialogueChoices";
   public static final String DIALOGUE_LABEL_SELECTOR = "#DialogueLabel";
   public static final String DIALOGUE_BUTTON_SELECTOR = "#DialogueButton";
@@ -60,9 +61,13 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
     uiCommandBuilder.append(dialogue.UiPage);
 
     var line = dialogue.Line;
-    if (line != null) {
+    var name = dialogue.Name;
+
+    if (line != null)
       uiCommandBuilder.set(DIALOGUE_LINE_SELECTOR + ".Text", line.getMessage(ref, dialogue));
-    }
+
+    if (name != null)
+      uiCommandBuilder.set(DIALOGUE_NAME_SELECTOR + ".Text", name.getMessage(ref, dialogue));
 
     var count = 0;
     var prefixCount = 0;
