@@ -78,7 +78,7 @@ public class JoinTrigger extends TriggerBase {
   public void unlink(String dialogueId) {
     synchronized (registered) {
       var registration = registered.remove(dialogueId);
-      if (registration != null) registration.unregister();
+      if (registration != null && registration.isRegistered()) registration.unregister();
     }
   }
 

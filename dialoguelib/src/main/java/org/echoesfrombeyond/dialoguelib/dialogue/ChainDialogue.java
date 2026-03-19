@@ -21,33 +21,33 @@ package org.echoesfrombeyond.dialoguelib.dialogue;
 import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
 import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.server.core.entity.entities.Player;
-import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.ArrayList;
 import java.util.List;
-import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.*;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
-import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
-import org.echoesfrombeyond.dialoguelib.ui.StandardDialogueUI;
+import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-@Doc(
-    """
-    Dialogue implementation that is UI-based. Presents a "line" (e.g.
-    what the NPC is saying) and a list of options that may be chosen.
-    """)
 @NullMarked
-@ModelBuilder
-@SuppressWarnings("FieldMayBeFinal")
-public class StandardDialogue extends UIDialogueBase implements Dialogue {
-  public static final AssetBuilderCodec<String, StandardDialogue> CODEC =
+public class ChainDialogue extends UIDialogueBase implements Dialogue {
+  @ModelBuilder
+  public static class Entry {
+    public String Name;
+    public String Line;
+
+    public Entry() {
+      this.Name = "";
+      this.Line = "";
+    }
+  }
+
+  public static final AssetBuilderCodec<String, ChainDialogue> CODEC =
       CodecUtil.modelAssetBuilder(
-          StandardDialogue.class,
+          ChainDialogue.class,
           UIDialogueBase.CODEC,
           DialoguePlugin.getResolver(),
           Plugin.getSharedCache());
@@ -55,56 +55,66 @@ public class StandardDialogue extends UIDialogueBase implements Dialogue {
   @Id private @Nullable String Id;
   @Data private AssetExtraInfo.@Nullable Data Data;
 
-  @Doc(
-      """
-      The "dialogue line", representing what the NPC is currently
-      saying. If absent, nothing will be displayed.
-      """)
-  @Opt
-  public @Nullable DialogueChoice Line;
+  public List<Entry> Entries;
+  public @Nullable Dialogue End;
 
-  @Doc(
-      """
-      The "dialogue name", representing the name of the NPC. If
-      absent, nothing will be displayed.
-      """)
-  @Opt
-  public @Nullable DialogueChoice Name;
+  public String AdvanceText;
 
-  @Doc(
-      """
-      Choices to potentially display. Choices may be "conditional" and
-      will only show up if their conditions are met.
-      """)
-  public List<DialogueChoice> Choices;
-
-  public StandardDialogue() {
-    this.Choices = new ArrayList<>();
+  public ChainDialogue() {
+    this.Entries = new ArrayList<>();
+    this.AdvanceText = "Continue";
   }
 
   @Override
-  @RunOnWorldThread
   public void display(Ref<EntityStore> activator) {
-    var store = activator.getStore();
-    var player = store.getComponent(activator, Player.getComponentType());
-    var playerRef = store.getComponent(activator, PlayerRef.getComponentType());
+    var entries = Entries;
+    var end = End;
 
-    // standard dialogue only works for player activators that can be sent packets
-    if (player == null || playerRef == null) return;
+    if (entries.isEmpty() || end == null) return;
 
-    player
-        .getPageManager()
-        .openCustomPage(activator, store, new StandardDialogueUI(playerRef, this));
+    var dialogue = new StandardDialogue();
+    var first = dialogue;
+
+    for (int i = 0; i < entries.size(); i++) {
+      init(dialogue, entries.get(i));
+
+      StandardDialogue nextStandard = null;
+      var next = i < entries.size() - 1 ? (nextStandard = new StandardDialogue()) : end;
+
+      var advance = new StandardChoice();
+      advance.Text = AdvanceText;
+      advance.Action = (player, _, _) -> next.display(player);
+
+      dialogue.Choices.add(advance);
+      dialogue = nextStandard;
+    }
+
+    first.display(activator);
+  }
+
+  private void init(StandardDialogue dialogue, Entry entry) {
+    var nameChoice = new StandardChoice();
+    var lineChoice = new StandardChoice();
+
+    nameChoice.Text = entry.Name;
+    lineChoice.Text = entry.Line;
+
+    dialogue.Name = nameChoice;
+    dialogue.Line = lineChoice;
+
+    dialogue.UiPage = UiPage;
+    dialogue.UiFragment = UiFragment;
+    dialogue.Lifetime = Lifetime;
   }
 
   @Override
   public void setId(String id) {
-    this.Id = id;
+    Id = id;
   }
 
   @Override
   public void setData(AssetExtraInfo.@Nullable Data data) {
-    this.Data = data;
+    Data = data;
   }
 
   @Override
