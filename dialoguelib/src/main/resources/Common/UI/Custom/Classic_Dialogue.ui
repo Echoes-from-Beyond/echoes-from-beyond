@@ -10,7 +10,6 @@ Group #DialogueContainer {
     $C.@DecoratedContainer {
       Label #DialogueName {
         Anchor: (Full: 0);
-        Text: "Placeholder";
         Style: (
           FontSize: 24,
           VerticalAlignment: Center,

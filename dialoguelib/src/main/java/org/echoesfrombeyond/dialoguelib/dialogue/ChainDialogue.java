@@ -33,6 +33,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
+@ModelBuilder
 public class ChainDialogue extends UIDialogueBase implements Dialogue {
   @ModelBuilder
   public static class Entry {

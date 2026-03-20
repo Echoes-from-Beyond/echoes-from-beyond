@@ -23,11 +23,13 @@ import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.annotation.Opt;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
+@ModelBuilder
 public abstract class UIDialogueBase {
   public static final BuilderCodec<UIDialogueBase> CODEC =
       CodecUtil.modelBuilder(
