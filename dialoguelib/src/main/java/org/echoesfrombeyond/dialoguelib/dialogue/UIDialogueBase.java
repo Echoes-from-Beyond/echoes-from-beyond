@@ -66,8 +66,8 @@ public abstract class UIDialogueBase {
   public CustomPageLifetime Lifetime;
 
   public UIDialogueBase() {
-    this.UiPage = "Cinematic_Dialogue.ui";
-    this.UiFragment = "Cinematic_Dialogue_Fragment.ui";
+    this.UiPage = "Classic_Dialogue.ui";
+    this.UiFragment = "Classic_Dialogue_Fragment.ui";
     this.Lifetime = CustomPageLifetime.CantClose;
   }
 }
