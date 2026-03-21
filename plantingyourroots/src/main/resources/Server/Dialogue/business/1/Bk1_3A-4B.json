@@ -1,0 +1,37 @@
+{
+  "Type": "Chain",
+  "Id": "Bk1_3A-4B",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "It doesn't take her long to catch onto your intent, so she withdraws her limb.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Right. Someone like you wouldn't know anything about the conventions of a polite society."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_3AB"
+        }
+      }
+    ]
+  }
+}

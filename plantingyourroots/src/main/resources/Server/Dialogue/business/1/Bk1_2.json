@@ -17,7 +17,7 @@
       "Text": "I'm just trying to meet my neighbors.",
       "Action": {
         "Id": "Advance",
-        "Next": "Bk1_3AB"
+        "Next": "Bk1_3A"
       }
     },
     {

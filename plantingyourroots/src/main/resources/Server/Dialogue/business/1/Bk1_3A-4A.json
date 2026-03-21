@@ -1,0 +1,37 @@
+{
+  "Type": "Chain",
+  "Id": "Bk1_3A-4A",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "Her grip is strong, firm -- well-practiced in the gesture. That makes sense, of course, as a large business magnate like her must meet with tens of people per day.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "And all of those would solely judge her on first impressions, or at least that's your understanding of human businesses; Kweebecs probably have their own procedures. Either way, a good handshake goes a long way."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_3AB"
+        }
+      }
+    ]
+  }
+}
