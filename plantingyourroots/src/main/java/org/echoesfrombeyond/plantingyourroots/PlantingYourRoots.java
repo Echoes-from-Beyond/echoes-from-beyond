@@ -20,11 +20,9 @@ package org.echoesfrombeyond.plantingyourroots;
 
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import java.util.concurrent.CompletableFuture;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-
-import java.util.concurrent.CompletableFuture;
-
 
 @SuppressWarnings("unused")
 @NullMarked
