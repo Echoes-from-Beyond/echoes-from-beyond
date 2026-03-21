@@ -7,5 +7,6 @@ include(
     "echoesfrombeyond",
     "example",
     "modutil",
+    "plantingyourroots",
     "util",
 )
