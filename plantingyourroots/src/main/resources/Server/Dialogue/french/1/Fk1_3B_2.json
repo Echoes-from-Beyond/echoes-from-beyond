@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_3B_2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "But that can still change in time, non ? You just keep visiting me, and we will build a bond to last for the ages."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_3B_3"
+      }
+    }
+  ]
+}

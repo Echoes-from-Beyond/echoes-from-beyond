@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_2-L1_2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I could've shown you around ma petite retraite. You could've had a taste of mes baguettes. This delicious bouteille de vin from my homeland."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_1_2"
+      }
+    }
+  ]
+}

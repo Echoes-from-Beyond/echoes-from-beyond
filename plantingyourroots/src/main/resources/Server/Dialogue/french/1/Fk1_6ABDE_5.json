@@ -1,0 +1,23 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6ABDE_5",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Au revoir, and remember that you are always welcome chez-moi !"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "End",
+      "Action": {
+        "Id": "Close"
+      }
+    }
+  ]
+}

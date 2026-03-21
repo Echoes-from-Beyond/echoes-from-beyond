@@ -1,0 +1,54 @@
+{
+  "Type": "Standard",
+  "Id": "Bk1_2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Nevermind that. Are you going to tell me why you're actually here, or?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Business Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "I'm just trying to meet my neighbors.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Bk1_3A"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I heard that you're hot, so I had to see it for myself.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Bk1_3B"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I think that I made a mistake.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Bk_Relationship",
+            "MetadataStore": "BUSINESS_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Bk_Dislike"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_3C"
+          }
+        ]
+      }
+    }
+  ]
+}

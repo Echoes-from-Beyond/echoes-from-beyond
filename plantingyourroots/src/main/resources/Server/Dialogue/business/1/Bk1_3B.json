@@ -1,0 +1,68 @@
+{
+  "Type": "Chain",
+  "Id": "Bk1_3B",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Ooh. Well, that's a nice change of pace. Other Kweebecs like to tell me that I'm 'past my prime' and whatnot.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Even when no one's asking for nor cares about their opinion. The gall.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I'll let you in on a little secret, sprout. I haven't been interested for the past fifty years. I'm still not interested."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Aww, really?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_3B-4ABC"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I was just curious. I wasn't planning on getting together with you.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_3B-4B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I never said that I wasn't disappointed.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_3B-4C"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Yeah, and I thought that until I saw that you look more like a year-old barrel of compost.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_3B-4C"
+        }
+      }
+    ]
+  }
+}

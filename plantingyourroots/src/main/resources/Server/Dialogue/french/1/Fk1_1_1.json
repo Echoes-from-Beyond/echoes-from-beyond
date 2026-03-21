@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_1_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "But it is clearly not enough. I thought you would have seen it as soon as you climbed up, and recognised « a fellow » in me."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_1_2"
+      }
+    }
+  ]
+}

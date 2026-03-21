@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6D_2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Wiped out humans' most advanced civilisation just like that, oui ? It is hard to imagine that some groups managed to survive anyway, when so many around them had fallen."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6D_3"
+      }
+    }
+  ]
+}

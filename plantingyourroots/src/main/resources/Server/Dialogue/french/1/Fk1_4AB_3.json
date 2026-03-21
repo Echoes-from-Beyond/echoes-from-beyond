@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_4AB_3",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I will spare you les détails, but know that others still see me as sort of an « intruder » in their space."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_4AB_4"
+      }
+    }
+  ]
+}

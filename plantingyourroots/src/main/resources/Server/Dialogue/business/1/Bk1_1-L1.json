@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Bk1_1-L1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Is this your first time among Kweebecs? Look around and you tell me."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Business Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Bk1_1_1"
+      }
+    }
+  ]
+}

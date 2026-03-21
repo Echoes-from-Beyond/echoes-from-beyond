@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_0_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "This cheerful fellow bounces on the spot almost as soon as you walk up to him."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Narrator"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_0_2"
+      }
+    }
+  ]
+}

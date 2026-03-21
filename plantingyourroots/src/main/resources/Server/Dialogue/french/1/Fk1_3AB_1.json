@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_3AB_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "He pauses for a bit, as if ashamed to ask his next question."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Narrator"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_3AB_2"
+      }
+    }
+  ]
+}

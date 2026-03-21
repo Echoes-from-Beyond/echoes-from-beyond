@@ -1,0 +1,37 @@
+{
+  "Type": "Chain",
+  "Id": "Bk1_3B-4B",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Sprout, you are so adorable.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Let me guess. This is your first time being rejected, so now you're lashing out 'cause your wittle heart hurts. Aww."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_3B-4ABC"
+        }
+      }
+    ]
+  }
+}

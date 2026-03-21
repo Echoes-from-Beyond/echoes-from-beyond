@@ -1,0 +1,48 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_0_4",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I thought I made mon foyer distinctif enough, but it seems that I have some more work ahead of me !"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Yeah... it's definitely unique.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_1ACD_1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "How are you not embarrassed of this hole?",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_1B_1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Wow, it shows so much personality!",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_1ACD_1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I do genuinely like it.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_1ACD_1"
+      }
+    }
+  ]
+}

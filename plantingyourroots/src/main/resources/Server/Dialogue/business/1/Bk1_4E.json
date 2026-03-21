@@ -1,0 +1,58 @@
+{
+  "Type": "Chain",
+  "Id": "Bk1_4E",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Oh.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "A foreboding pause takes over the conversation. Some kind of emotion quirks a muscle in her brow, but she keeps enough composure to stop the rest of it from showing.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "You're... one of those.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "And then it's all negated when she lets a momentary snarl through. She doesn't maintain it long, though -- just enough to let you know that she highly dislikes you.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Her hand waves to the side as if that's where she threw her unvoiced thoughts away. The bark on her face contorts into that same semi-friendliness as before, though each proceeding word is infused with an undertone of... something."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_5"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "Type": "Chain",
+  "Id": "Bk1_4BC",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "You are always going to be someone's worm, unless you get lucky in life and inherit a whole lot of your ancestor's money.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "You can either kick back and relax from the moment of your germination, or you can get into investing and pretend that it's the same thing as any real work.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "But because you're so uneducated -- or you hold a worthless degree thanks to your connections -- when you attempt to do anything more than throw money at the rest of us, we have to start playing games around you--",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "--just so you don't kill any momentum that us real professionals had! Insecure twigs!",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If only I was so lucky. If only..."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Do you think that you'd do better if you grew up in wealth?",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Bk_Private",
+              "MetadataStore": "BUSINESS_KWEEBEC",
+              "Metadata": {
+                "Id": "Integer",
+                "Value": 1
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Bk1_4BC-5A"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Sounds to me like you're just not working hard enough.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Bk_Public",
+              "MetadataStore": "BUSINESS_KWEEBEC",
+              "Metadata": {
+                "Id": "Integer",
+                "Value": 1
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Bk1_4BC-5B"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

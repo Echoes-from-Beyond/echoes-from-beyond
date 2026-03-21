@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_5_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Besides being my signaling stratégie ? Well, there are two autre reasons for it. Un: they remind me of where I come from. Not that I forget, but c'est très réconfortant."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_5_2"
+      }
+    }
+  ]
+}

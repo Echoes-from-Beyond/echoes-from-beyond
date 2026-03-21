@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_2_2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Both of us are étrangers to this village. And I have expérience with how they like to greet us new ones."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_2_3"
+      }
+    }
+  ]
+}

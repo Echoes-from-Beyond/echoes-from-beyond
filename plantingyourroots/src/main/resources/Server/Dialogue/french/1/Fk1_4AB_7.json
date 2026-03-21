@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_4AB_7",
+  "Line": {
+    "Id": "Standard",
+    "Text": "So if you are not very lucky with vos voisins, I want you to know that you have a retraite ici. And anyone else like us."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Why are there so many flags, anyway?",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_5_1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6C-7_8",
+  "Line": {
+    "Id": "Standard",
+    "Text": "So let us not talk about that place again. I will do my best not to bring it up."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6C-7_9"
+      }
+    }
+  ]
+}

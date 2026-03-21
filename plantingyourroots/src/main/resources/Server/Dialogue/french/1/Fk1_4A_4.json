@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_4A_4",
+  "Line": {
+    "Id": "Standard",
+    "Text": "--but I just wish to prevent what had happened to me."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_4AB_1"
+      }
+    }
+  ]
+}

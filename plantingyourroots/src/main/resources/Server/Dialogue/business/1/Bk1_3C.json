@@ -1,0 +1,23 @@
+{
+  "Type": "Standard",
+  "Id": "Bk1_3C",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Yes, I'm inclined to agree. Now, please leave before I let the Council know that you've been harassing their VIP."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Business Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "End",
+      "Action": {
+        "Id": "Close"
+      }
+    }
+  ]
+}

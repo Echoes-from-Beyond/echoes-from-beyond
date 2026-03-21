@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_2-L1_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "With a delay, I'm certain. Imagine how many conversations we could have had in this time."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_2-L1_2"
+      }
+    }
+  ]
+}

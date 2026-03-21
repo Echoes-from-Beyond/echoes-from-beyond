@@ -1,0 +1,75 @@
+{
+  "Type": "Standard",
+  "Id": "Bk1_1_1",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "Better yet, how did you get past Receptionist Kweebec?"
+    },
+    "MetadataKey": "Bk1_1-L1",
+    "Options": {
+      "Bk1_1-L1": {
+        "Id": "Standard",
+        "Text": "Now, don't change the topic."
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Business Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Is everyone here named after, like, one specific character trait?",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataKey": "Bk1_1-L1"
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Bk1_1-L1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Bk1_1-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_1-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Yeah, they just kinda let me through.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Bk1_2A"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I didn't even talk to them.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Bk1_2A"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I scaled the building like a ninja.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Bk1_2B"
+      }
+    }
+  ]
+}

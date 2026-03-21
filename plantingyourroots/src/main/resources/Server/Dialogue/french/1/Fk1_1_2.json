@@ -1,0 +1,59 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_1_2",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "But now you're here, so all is well. Oui ?"
+    },
+    "MetadataKey": "Fk1_2-L1",
+    "Options": {
+      "Fk1_2-L1": {
+        "Id": "Standard",
+        "Text": "Unacceptable ! I was raised to treat mes visiteurs correctly, but this confusion is not giving me that chance."
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "I did come over as soon as I got up, though.",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataKey": "Fk1_2-L1"
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk1_2-L1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk1_2-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_2-L1_1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Why am I so special?",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_2_1"
+      }
+    }
+  ]
+}

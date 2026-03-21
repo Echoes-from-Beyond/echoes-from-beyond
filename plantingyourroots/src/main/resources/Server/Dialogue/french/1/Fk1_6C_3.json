@@ -1,0 +1,40 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6C_3",
+  "Line": {
+    "Id": "Standard",
+    "Text": "You would not be from the province of Québec ?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Bonjour.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6C-7A_1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Nah, I'm from somewhere more *normal*.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6C-7B_1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Nah, I'm from Saskweetchewan.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6C-7C_1"
+      }
+    }
+  ]
+}

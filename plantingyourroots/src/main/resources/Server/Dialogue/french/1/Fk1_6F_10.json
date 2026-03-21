@@ -1,0 +1,23 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6F_10",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I will see you tomorrow. Hopefully I will not have cauchemars about the  Void sneaking into Kweebdrasil."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "End",
+      "Action": {
+        "Id": "Close"
+      }
+    }
+  ]
+}

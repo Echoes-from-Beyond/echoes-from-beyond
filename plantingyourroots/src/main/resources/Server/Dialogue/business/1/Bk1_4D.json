@@ -1,0 +1,87 @@
+{
+  "Type": "Chain",
+  "Id": "Bk1_4D",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Ha! I've been offered millions for my share of the company. And none managed to tempt me.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "But when some no-name human offers to give me nothing in return except... except phrasing it as if it'd somehow be for my benefit -- well, how could I say no?",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "I do commend you on that attitude, sprout. You wouldn't believe how far you can get in life by annoying everyone into obeying your whims.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Just be reasonable about it. I have a choice to retire with or without you in the mix."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "If you have enough to retire, why don't you do it? It doesn't sound like you love your job.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Bk_Private",
+              "MetadataStore": "BUSINESS_KWEEBEC",
+              "Metadata": {
+                "Id": "Integer",
+                "Value": 1
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Bk1_4D-5A"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I think that something got lost in translation. I was dead serious.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Bk_Public",
+              "MetadataStore": "BUSINESS_KWEEBEC",
+              "Metadata": {
+                "Id": "Integer",
+                "Value": 1
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Bk1_4D-5B"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_5_3",
+  "Line": {
+    "Id": "Standard",
+    "Text": "It is a cord for humans, oui ? When you are first born, you sprout a cord to connect you to votre mère. This is why you carry your babies around so much."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_5_4"
+      }
+    }
+  ]
+}

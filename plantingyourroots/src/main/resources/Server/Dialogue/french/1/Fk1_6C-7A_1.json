@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6C-7A_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Mon ami, why are you trying to deceive me ? Your accent is all wrong."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "How can you tell that from a single word?",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6C-7A_2"
+      }
+    }
+  ]
+}

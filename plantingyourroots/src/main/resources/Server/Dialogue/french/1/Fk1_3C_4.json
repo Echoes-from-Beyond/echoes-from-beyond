@@ -1,0 +1,23 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_3C_4",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Away with you ! Au revoir !"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "End",
+      "Action": {
+        "Id": "Close"
+      }
+    }
+  ]
+}

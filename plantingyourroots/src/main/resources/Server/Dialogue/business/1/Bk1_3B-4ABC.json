@@ -1,0 +1,65 @@
+{
+  "Type": "Chain",
+  "Id": "Bk1_3B-4ABC",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Yes, well, I do respect the hustle.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "You're far from the first to have sniffed out my wealth and thought, 'well, that rich old lady has no one else up there. I bet she's sooo lonely.'",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "All I can say is that you better spend that time on something more productive, hm? There are more efficient ways to grind some wealth than by throwing yourself at women.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "She glares at you like she can't decide whether to throw you out, or entertain you further. Or, more accurately, whether she'll continue allowing *you* to entertain *her*.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "Whatever response you prepared is killed by her commanding presence. Kweebecs normally act like what you'd expect out of little tree elves: they are whimsical, demure.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "She defies that stereotype in a way that no other Kweebec will, and that's enough to utterly short-circuit your brain."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_3AB"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6ABDE_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Sorrow creeps into the corners of his eyes, creasing them and transporting the mind beyond someplace dimensions away."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Narrator"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6ABDE_2"
+      }
+    }
+  ]
+}

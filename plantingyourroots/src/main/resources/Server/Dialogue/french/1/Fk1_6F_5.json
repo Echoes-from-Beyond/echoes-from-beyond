@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6F_5",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Mon ami, you are a human so you are probably not aware of these things. But it is not good to bring up the Void around Kweebecs."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6F_6"
+      }
+    }
+  ]
+}

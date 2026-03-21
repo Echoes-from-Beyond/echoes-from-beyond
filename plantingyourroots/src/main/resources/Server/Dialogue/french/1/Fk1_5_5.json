@@ -1,0 +1,120 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_5_5",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Anyway, I should not steal all l'attention from you. Where do you come from?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "From a boring little town in Middle-of-Nowhere, Emerald Wilds. If you can't tell, my life wasn't a very exciting one.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Origin",
+            "MetadataStore": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Zone1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6A_1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "My family are nomads in Howling Sands. That kind of environment left me with very little time for anything but survival, so I had to go my own way for the sake of my sanity.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Origin",
+            "MetadataStore": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Zone2"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6B_1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Spent my whole childhood in Whisperfrost, and boy am I glad that I'm not freezing to death virtually every winter anymore.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Origin",
+            "MetadataStore": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Zone3"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6C_1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "It's complicated. Basically, my great-grandmother is one of the few who survived the collapse of Crucible.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Origin",
+            "MetadataStore": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Zone4"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6D_1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I don't think I've ever felt tied to a single place. Nothing really stands out.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6E_1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I'm a spawn of Varyn himself.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6F_1"
+      }
+    }
+  ]
+}

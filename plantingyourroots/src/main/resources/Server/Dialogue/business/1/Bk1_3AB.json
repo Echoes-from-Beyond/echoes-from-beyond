@@ -1,0 +1,113 @@
+{
+  "Type": "Chain",
+  "Id": "Bk1_0",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "I suppose that I need a bit of a break, anyway. At this rate, I'm going to lose my voice long before I reach my tree-phase.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Every splinter in me wants to tell you to get lost. That time is money. But if even my own people can't respect that...",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Sprout, if you want some advice, only get into a leadership role if you really want the dough. Otherwise all you do all day is get sucked into useless meetings and manage your own managers.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Sometimes they're the ones responsible for those meetings. Sometimes it's one of your investors who just had this brilliant idea--",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "--and then you have to spend the whole day talking them down from it, or else it'd sink your company."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Boo-hoo, poor you. In the real world, we have to worry about more than just 'annoying meetings'.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_4A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "You make it sound like you're a loser either way. Someone always has the upper branch on you.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_4B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Say what you want, but it's either that, or those managers work you to the bone.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_4C"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "If you can't handle the heat, I'd be willing to take it off your hands...",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_4D"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I'd probably relate if I worked a day of my life.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Bk_Origin",
+              "MetadataStore": "BUSINESS_KWEEBEC",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Bk_Nepo-Baby"
+              }
+            },
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Bk_Public",
+              "MetadataStore": "BUSINESS_KWEEBEC",
+              "Metadata": {
+                "Id": "Integer",
+                "Value": 1
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Bk1_4E"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

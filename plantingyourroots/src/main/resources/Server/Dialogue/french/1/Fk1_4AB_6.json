@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_4AB_6",
+  "Line": {
+    "Id": "Standard",
+    "Text": "--Kweebecs, many of the locals think that I have come to take space from Kweebdrasil's seedlings. And seedlings of their seedlings. But you see how much room there still is on the tree, oui ?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_4AB_7"
+      }
+    }
+  ]
+}

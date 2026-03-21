@@ -1,0 +1,68 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_2_6",
+  "Line": {
+    "Id": "Standard",
+    "Text": "--I wish to make friends. So you never have to feel seul during your stay."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Sure, we can be friends.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Relationship",
+            "MetadataStore": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Friend"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_3A_1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I appreciate that, but I don't really know you.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_3B_1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I didn't come all the way over here just to hang out with Fr*nchmen. Are you kidding me?",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Relationship",
+            "MetadataStore": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Anger"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_3C_1"
+          }
+        ]
+      }
+    }
+  ]
+}

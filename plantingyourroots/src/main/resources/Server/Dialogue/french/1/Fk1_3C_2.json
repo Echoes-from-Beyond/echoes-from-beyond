@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_3C_2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "His positive disposition instantly evaporates. In his eyes, you can see that he's imagining cracking you like a baguette."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Narrator"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_3C_3"
+      }
+    }
+  ]
+}

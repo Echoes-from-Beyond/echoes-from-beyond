@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_2_4",
+  "Line": {
+    "Id": "Standard",
+    "Text": "The other half do not even want to approach you, and think you will sort everything out yourself. Maybe you find your way around Kweebdrasil. Maybe you drop off instead. But they do not care."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_2_5"
+      }
+    }
+  ]
+}

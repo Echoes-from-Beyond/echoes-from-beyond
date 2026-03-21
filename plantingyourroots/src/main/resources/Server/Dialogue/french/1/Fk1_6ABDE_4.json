@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6ABDE_4",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Well, I think that I am reaching the end of my réserves sociales. I wish I had more time for you, mon ami, but I have had a busy day today. I feel like mes nerfs are about to shut down."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6ABDE_5"
+      }
+    }
+  ]
+}

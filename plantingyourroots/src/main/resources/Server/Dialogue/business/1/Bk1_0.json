@@ -1,0 +1,94 @@
+{
+  "Type": "Chain",
+  "Id": "Bk1_0",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "It seems that you have walked in on something. A tall, proud Kweebec is pacing up and down the meeting room, yelling at a glowing rune in her hand.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "--that was our rainy day fund! Not a 'buy another car for Finance Kweebec' fund!",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Giving yourself a massive bonus would've been okay five years ago, but we can't afford that right now. Do you understand? We're being attacked on all fronts. Peartree Incorporated's new--",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "She pauses, and though you can't hear whomever she's talking to, you can see her whole body tensing while her trek continues. Up and down, up and down -- yet, she somehow doesn't notice you in meantime.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Our marketing department's produced some pretty concerning charts-- No, no, no, if you can't be bothered to read-- That's what I was saying! Our magic cloud is bleeding out. Peartree put out their own 'solution' with 'better value'--",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "You can whine about 'hearsay' all you want, but the fact is that our customers are jumping ship. Over a quarter of Indigo infra will be spun down soon--",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "Yes! It is 'insane', but it's also the reality of it. You wouldn't be surprised if you read any of the messages I've sent you.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Business Kweebec",
+      "Line": "What I want to know is how Peartree could've developed their stuff in secret, over all these years, and then have such a successful surprise launch. They didn't even do anything to market it properly. Meanwhile, we've had--",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "--yes, the campaign is still ongoing. Mhm. And how can these total *aphids* put out something so 'good' that a quarter of magic institutes want to leave a mature, well-established platform?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Hi?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_1"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Let her continue ranting.]",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Bk1_1A"
+        }
+      }
+    ]
+  }
+}

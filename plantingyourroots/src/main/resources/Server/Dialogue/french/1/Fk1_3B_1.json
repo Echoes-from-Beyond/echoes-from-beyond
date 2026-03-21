@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_3B_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I wish you were wrong, but it is true that we are étrangers to each other as much as we are to other Kweebecs."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_3B_2"
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_3AB_4",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Have you not seen one of mes drapeaux-- one of my flags waving at you as you walk up the branch below?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Is that all there is to you? Being French and roleplaying as a greeter for the newcomers?",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_4A_1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I only noticed these banners around your home. I don't think that they're visible from the lower level.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_4B_1"
+      }
+    }
+  ]
+}

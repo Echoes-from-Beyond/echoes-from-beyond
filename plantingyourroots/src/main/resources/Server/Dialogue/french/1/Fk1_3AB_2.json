@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_3AB_2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "But tell me, please, if you have any suggestions for improving my ... reach, is the word."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_3AB_3"
+      }
+    }
+  ]
+}

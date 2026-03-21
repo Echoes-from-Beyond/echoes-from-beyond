@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_2_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "We are all spécial in our own ways, non ? But that is not what I meant."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_2_2"
+      }
+    }
+  ]
+}

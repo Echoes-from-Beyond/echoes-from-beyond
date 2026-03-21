@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6F_8",
+  "Line": {
+    "Id": "Standard",
+    "Text": "It did not stop him and his minions from being so vindicatif. To him, we are Gaia, and so we must die for his mission terrible."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_6F_9"
+      }
+    }
+  ]
+}

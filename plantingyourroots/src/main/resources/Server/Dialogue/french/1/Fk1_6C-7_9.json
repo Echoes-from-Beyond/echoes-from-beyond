@@ -1,0 +1,23 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_6C-7_9",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I must go cool off. See me tomorrow, after a night's rest. Bonne nuit !"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "End",
+      "Action": {
+        "Id": "Close"
+      }
+    }
+  ]
+}

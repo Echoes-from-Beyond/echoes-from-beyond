@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Bk1_4B",
+  "Line": {
+    "Id": "Standard",
+    "Text": "That's just the reality of it."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Business Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Bk1_4BC"
+      }
+    }
+  ]
+}

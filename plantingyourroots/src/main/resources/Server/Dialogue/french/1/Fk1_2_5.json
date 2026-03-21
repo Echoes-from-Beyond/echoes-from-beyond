@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk1_2_5",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I wish to correctement ... er, greet you correctly. I wish for you to know that you can always talk to me if something is déroutant. But most of all--"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_2_6"
+      }
+    }
+  ]
+}
