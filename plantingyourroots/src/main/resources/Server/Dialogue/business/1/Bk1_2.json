@@ -22,7 +22,7 @@
     },
     {
       "Id": "Standard",
-      "Text": "I heard that you're hot, so I had to see it for myself.",
+      "Text": "I heard that you're beautiful, so I had to see it for myself.",
       "Action": {
         "Id": "Advance",
         "Next": "Bk1_3B"
@@ -35,9 +35,9 @@
         "Id": "Composite",
         "Actions": [
           {
-            "Id": "SetMetadata",
+            "Id": "AdjustInteger",
             "MetadataKey": "Bk_Relationship",
-            "MetadataStore": "BUSINESS_KWEEBEC",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
             "Metadata": {
               "Id": "String",
               "Value": "Bk_Dislike"

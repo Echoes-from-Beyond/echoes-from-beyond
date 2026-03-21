@@ -33,7 +33,7 @@
         "Id": "Composite",
         "Actions": [
           {
-            "Id": "SetMetadata",
+            "Id": "AdjustInteger",
             "MetadataKey": "Bk1_1-L1",
             "Metadata": {
               "Id": "String",

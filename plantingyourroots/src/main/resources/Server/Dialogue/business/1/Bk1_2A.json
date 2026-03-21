@@ -5,7 +5,7 @@
     {
       "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Oh, wow. Can't avoid incompetence even in the one person I personally manage.",
+      "Line": "Oh, wow. Can't avoid incompetence even in the one tree I personally manage.",
       "UiPage": "Classic_Dialogue.ui",
       "UiFragment": "Classic_Dialogue_Fragment.ui"
     }

@@ -84,22 +84,19 @@
           "Id": "Composite",
           "Actions": [
             {
-              "Id": "SetMetadata",
+              "Id": "AdjustInteger",
               "MetadataKey": "Bk_Origin",
-              "MetadataStore": "BUSINESS_KWEEBEC",
+              "MetadataStoreKey": "BUSINESS_KWEEBEC",
               "Metadata": {
                 "Id": "String",
                 "Value": "Bk_Nepo-Baby"
               }
             },
             {
-              "Id": "SetMetadata",
+              "Id": "AdjustInteger",
               "MetadataKey": "Bk_Public",
-              "MetadataStore": "BUSINESS_KWEEBEC",
-              "Metadata": {
-                "Id": "Integer",
-                "Value": 1
-              }
+              "MetadataStoreKey": "BUSINESS_KWEEBEC",
+              "Delta": 1
             },
             {
               "Id": "Advance",

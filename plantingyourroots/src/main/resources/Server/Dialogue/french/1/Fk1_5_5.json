@@ -21,7 +21,7 @@
           {
             "Id": "SetMetadata",
             "MetadataKey": "Fk_Origin",
-            "MetadataStore": "FRENCH_KWEEBEC",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
             "Metadata": {
               "Id": "String",
               "Value": "Fk_Zone1"
@@ -43,7 +43,7 @@
           {
             "Id": "SetMetadata",
             "MetadataKey": "Fk_Origin",
-            "MetadataStore": "FRENCH_KWEEBEC",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
             "Metadata": {
               "Id": "String",
               "Value": "Fk_Zone2"
@@ -65,7 +65,7 @@
           {
             "Id": "SetMetadata",
             "MetadataKey": "Fk_Origin",
-            "MetadataStore": "FRENCH_KWEEBEC",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
             "Metadata": {
               "Id": "String",
               "Value": "Fk_Zone3"
@@ -87,7 +87,7 @@
           {
             "Id": "SetMetadata",
             "MetadataKey": "Fk_Origin",
-            "MetadataStore": "FRENCH_KWEEBEC",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
             "Metadata": {
               "Id": "String",
               "Value": "Fk_Zone4"

@@ -21,7 +21,7 @@
           {
             "Id": "SetMetadata",
             "MetadataKey": "Fk_Relationship",
-            "MetadataStore": "FRENCH_KWEEBEC",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
             "Metadata": {
               "Id": "String",
               "Value": "Fk_Friend"
@@ -51,7 +51,7 @@
           {
             "Id": "SetMetadata",
             "MetadataKey": "Fk_Relationship",
-            "MetadataStore": "FRENCH_KWEEBEC",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
             "Metadata": {
               "Id": "String",
               "Value": "Fk_Anger"
