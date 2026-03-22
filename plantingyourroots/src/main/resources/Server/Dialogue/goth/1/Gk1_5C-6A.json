@@ -1,0 +1,43 @@
+{
+  "Type": "Chain",
+  "Id": "Gk1_5C-6A",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "'I commented on a music subculture but it's not about the music.'",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "For the love of all that is green, where do they get you people?",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "She strolls away, cradling her forehead all the while. Whatever you meant, you've become a pain in her root."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

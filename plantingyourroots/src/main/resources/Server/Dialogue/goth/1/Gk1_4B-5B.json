@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Gk1_4B-5B",
+  "Line": {
+    "Id": "Standard",
+    "Text": "That'll make you wiser than most of your peers."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Goth Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Gk1_4B-5"
+      }
+    }
+  ]
+}

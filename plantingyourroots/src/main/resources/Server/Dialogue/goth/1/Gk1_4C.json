@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Gk1_4C",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Says who? Look, half of 'you can't do this' and 'you can't do that' is completely arbitrary. Watch this:"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Goth Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Gk1_4BCD"
+      }
+    }
+  ]
+}

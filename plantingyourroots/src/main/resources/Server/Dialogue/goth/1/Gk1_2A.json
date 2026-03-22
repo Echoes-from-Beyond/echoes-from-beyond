@@ -1,0 +1,51 @@
+{
+  "Type": "Chain",
+  "Id": "Gk1_2A",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "Uh-huh?",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "She aims a rather suspicious squint your way. But what else can you say?",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "You can't even justify your social ineptitude to yourself. It just seemed right to do in the moment. Like it'd match her vibe.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You wouldn't want this baddie to think that you're a poser or something, right?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gk1_2ABCD"
+        }
+      }
+    ]
+  }
+}

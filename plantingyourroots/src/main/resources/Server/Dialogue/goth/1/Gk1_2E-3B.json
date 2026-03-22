@@ -1,0 +1,61 @@
+{
+  "Type": "Chain",
+  "Id": "Gk1_2E-3B",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "Is that so?",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Before we get ahead of ourselves, let's just forget about my overreaction. Should we start over?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Sure. I like your orchid.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gk1_4A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Nice weather today, isn't it?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gk1_4B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "You can't force that kind of thing.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gk1_4C"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Shrug. All of these options suck.]",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gk1_4D"
+        }
+      }
+    ]
+  }
+}

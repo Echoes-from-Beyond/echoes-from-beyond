@@ -1,0 +1,57 @@
+{
+  "Type": "Chain",
+  "Id": "Gk1_2E-3C",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "Whatever you say.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "Her growing disinterest radiates harder than the sun.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "If you're already making leaps without bothering to get to know me, I don't think that we're very like-minded. And too many people in my life are interested in the idea of me, not what I am.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "Sometimes negatively. Sometimes... I don't like calling this 'positive', because you are just annoying me.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Thanks, I guess. But also no thanks."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

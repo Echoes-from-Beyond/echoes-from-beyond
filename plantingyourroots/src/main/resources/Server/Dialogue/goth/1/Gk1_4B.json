@@ -1,0 +1,58 @@
+{
+  "Type": "Chain",
+  "Id": "Gk1_4B",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "You really caught her off-guard with this one, judging from the fleeting astonishment across her face. Being 'memorably boring' is certainly a strategy.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "Really? That's the best you can do?",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "Fine. If you're that interested in weather, then you're probably not surprised to know that it's pretty much always like this up here. And if you're brave enough to peek over the edge, you'll notice that we are above most clouds.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "You ever wonder about those wispy ones, though? Cirrus or whatever they're called. You see them mostly during hot summers. They do look very refreshing for a bunch of clouds, don't they?",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Stick around for long enough, and then we'll see what you think of ice mists."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Ice mists?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gk1_4B_1"
+        }
+      }
+    ]
+  }
+}

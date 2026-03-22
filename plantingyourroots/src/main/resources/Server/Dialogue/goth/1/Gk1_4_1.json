@@ -1,0 +1,151 @@
+{
+  "Type": "Standard",
+  "Id": "Gk1_4_1",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "Even if you don't actually care about growing flowers, you could fetch a decent price for them. Or social clout, if your human friends have any taste in fine botany."
+    },
+    "MetadataKey": "Gk1_4_1",
+    "Options": {
+      "Gk1_4-L1": {
+        "Id": "Standard",
+        "Text": "I recognize that look. Don't worry, black orchids are one of the few Void-touched flowers that aren't dripping with thorns and neurotoxins. Completely safe for animals... though I haven't had the heart to test that with grounded plants."
+      },
+      "Gk1_4-L2": {
+        "Id": "Standard",
+        "Text": "Regardless, it would be a shame to let them decay after all I did to get them to this point. Not to mention that it's such a huge taboo for us that even I feel weird about it."
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Goth Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "What makes these so special?",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataKey": "Gk1_4_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Gk1_4-L1"
+          }
+        }
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk1_4_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk1_4-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "You'd give your flowers away, just like that?",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataKey": "Gk1_4_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Gk1_4-L2"
+          }
+        }
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk1_4_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk1_4-L2"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4-L2"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Well, I'd be honored.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Gk_Friend",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_5A"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "No, sorry. Gardening is not for me.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Gk_Friend",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_5B"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I don't want your emo hand-me-downs.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Gk_Judgy",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_5C"
+          }
+        ]
+      }
+    }
+  ]
+}

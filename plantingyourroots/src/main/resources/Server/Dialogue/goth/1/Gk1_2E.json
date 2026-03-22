@@ -1,0 +1,130 @@
+{
+  "Type": "Chain",
+  "Id": "Gk1_2E",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "I... Thanks?",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "Uh, oh. Other than a stutter, she hardly reacts to your confession.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "Look. I know how this goes.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "I'm flattered, but I'm not going to be that 'weirdo girlfriend' you can show off to your friends.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "Or the 'crazy chick' you're going to gossip about for seasons to come.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If that was your plan, feel free to stop wasting your breath. It's not going to happen."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "It was just a compliment. I didn't mean to imply anything more than that.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gk1_2E-3A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Whoa, hold up! I was saying that as one goth to another.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Gk_Relationship",
+              "MetadataStoreKey": "GOTH_KWEEBEC",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Gk_Wannabe"
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Gk1_2E-3B"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Oh, come on. I wouldn't do that.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Gk_Relationship",
+              "MetadataStoreKey": "GOTH_KWEEBEC",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Gk_Unrequited"
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Gk1_2E-3C"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Fair enough. [Leave]",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Gk_Relationship",
+              "MetadataStoreKey": "GOTH_KWEEBEC",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Gk_Unrequited"
+              }
+            },
+            {
+              "Id": "Close"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

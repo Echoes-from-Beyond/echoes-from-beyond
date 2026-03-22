@@ -1,0 +1,44 @@
+{
+  "Type": "Chain",
+  "Id": "Gk1_4",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "You probably saw my humble garden on your way here. I have a couple of them growing in excess.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "For one reason or another, the rest of the Kweebecs feel uncomfortable around them. I might have to get rid of them in the near future.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If you want, you could take a few back to your home. Find a new garden for them so I don't have to throw them into compost."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gk1_4_1"
+        }
+      }
+    ]
+  }
+}

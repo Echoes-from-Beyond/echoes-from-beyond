@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Gk1_4B-5",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Anyway, I know -- hope -- that you're not actually interested in prattling about the weather. Still, consider that as a friendly warning."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Goth Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Gk1_4BCD"
+      }
+    }
+  ]
+}

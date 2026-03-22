@@ -35,7 +35,7 @@
         "Id": "Composite",
         "Actions": [
           {
-            "Id": "AdjustInteger",
+            "Id": "SetMetadata",
             "MetadataKey": "Bk_Relationship",
             "MetadataStoreKey": "BUSINESS_KWEEBEC",
             "Metadata": {

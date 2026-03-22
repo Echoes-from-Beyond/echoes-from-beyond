@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Gk1_2B",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Lose the tone. Usually it's the opposite, but I don't think that I'm the weirdo here."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Goth Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Gk1_2ABCD"
+      }
+    }
+  ]
+}

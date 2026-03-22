@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Gk1_2D",
+  "Line": {
+    "Id": "Standard",
+    "Text": "What else am I supposed to do? You barged into *my* personal space."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Goth Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Gk1_2ABCD"
+      }
+    }
+  ]
+}

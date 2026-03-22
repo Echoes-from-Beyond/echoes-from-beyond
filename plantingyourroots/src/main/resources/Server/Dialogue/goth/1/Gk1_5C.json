@@ -1,0 +1,102 @@
+{
+  "Type": "Chain",
+  "Id": "Gk1_5C",
+  "Entries": [
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "'Emo hand-me-downs?'",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Narrator",
+      "Line": "She glares at you in silence, either thoroughly confused or infuriated by your remark. It takes her a good half-minute to take a side.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "I've nothing against emos, but you seem to think that I should.",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    },
+    {
+      "Id": "Standard",
+      "Name": "Goth Kweebec",
+      "Line": "Besides, an 'expert' like yourself should be able to tell that I don't look at all like I listen to My Kweemical Romance on repeat. But even if I did, so what?",
+      "UiPage": "Classic_Dialogue.ui",
+      "UiFragment": "Classic_Dialogue_Fragment.ui"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If you're so bored you're passing judgement on other people's music tastes, you're in a dire need of a new hobby."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "It's not about the music...",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Gk_Relationship",
+              "MetadataStoreKey": "GOTH_KWEEBEC",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Gk_Dislike"
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Gk1_5C-6A"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I've literally never met anyone who does things that you do, and isn't just into it for attention.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataKey": "Gk_Relationship",
+              "MetadataStoreKey": "GOTH_KWEEBEC",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Gk_Dislike"
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Gk1_2ABCD-3B"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Sorry, I was trying to be funny.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gk1_5C-6C"
+        }
+      }
+    ]
+  }
+}
