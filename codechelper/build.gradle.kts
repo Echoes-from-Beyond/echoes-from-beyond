@@ -7,7 +7,7 @@ version = "0.2.1"
 
 apply<JavaConventionPlugin>()
 
-withHytalePlugin("CodecHelper")
+withHytalePlugin("CodecHelper", "2026.02.19-1a311a592")
 
 withPublishedPlugin(
     "codec-helper",

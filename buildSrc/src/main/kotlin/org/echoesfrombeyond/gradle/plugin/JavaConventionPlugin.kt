@@ -119,33 +119,52 @@ fun DependencyHandler.projectImplementation(path: String) {
 /**
  * Adds a dependency on Hytale, but does not make this project a plugin like [withHytalePlugin]
  * would.
+ *
+ * @param hytaleVersion the hytale version to depend on
+ * @param prerelease whether to use the prerelease Hytale branch; default to false
  */
-fun Project.withHytaleDependency() {
+fun Project.withHytaleDependency(hytaleVersion: String, prerelease: Boolean = false) {
   if (plugins.withType(JavaConventionPlugin::class.java).isEmpty())
       throw GradleException("Hytale plugin projects must apply JavaConventionPlugin!")
 
   repositories.exclusiveContent { exclusive ->
     exclusive.forRepository {
       repositories.maven { maven ->
-        maven.name = "hytale-pre-release"
-        maven.url = URI.create("https://maven.hytale.com/pre-release")
+        maven.name =
+            if (prerelease) {
+              "hytale-pre-release"
+            } else {
+              "hytale-release"
+            }
+        maven.url =
+            URI.create(
+                if (prerelease) {
+                  "https://maven.hytale.com/pre-release"
+                } else {
+                  "https://maven.hytale.com/release"
+                }
+            )
       }
     }
     exclusive.filter { filter -> filter.includeGroup("com.hypixel.hytale") }
   }
 
-  val hytale = "com.hypixel.hytale:Server:latest.integration"
+  val hytale = "com.hypixel.hytale:Server:$hytaleVersion"
   dependencies.add("compileOnly", hytale)
   dependencies.add("testImplementation", hytale)
+
+  extra["hytaleVersion"] = hytaleVersion
+  extra["hytalePrerelease"] = prerelease
 }
 
 /**
  * Specifies that this project produces a Hytale plugin. Implies [withHytaleDependency].
  *
  * @param name the name of the plugin
+ * @param prerelease whether to use the prerelease Hytale branch; default to false
  */
-fun Project.withHytalePlugin(name: String) {
-  withHytaleDependency()
+fun Project.withHytalePlugin(name: String, hytaleVersion: String, prerelease: Boolean = false) {
+  withHytaleDependency(hytaleVersion, prerelease)
 
   val baseNameProperty = provider { version }.map { version -> "$name-$version" }
 
