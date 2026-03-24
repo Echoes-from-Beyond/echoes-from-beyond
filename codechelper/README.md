@@ -12,14 +12,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.echoesfrombeyond:codec-helper:0.2.0")
+    compileOnly("org.echoesfrombeyond:codec-helper:0.2.1")
 }
 ```
 
 Then, in your plugin's `manifest.json`, add the following entry to the `DependsOn` block:
 
 ```
-"org.echoesfrombeyond:CodecHelper": "^0.2.0"
+"org.echoesfrombeyond:CodecHelper": "^0.2.1"
 ```
 
 ## Basic usage
