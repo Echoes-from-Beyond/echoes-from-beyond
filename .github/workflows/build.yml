@@ -37,7 +37,7 @@ jobs:
           chmod +x hytale-downloader-linux-amd64
           
           set +e
-          ./hytale-downloader-linux-amd64 -skip-update-check -patchline pre-release -print-version > version
+          ./hytale-downloader-linux-amd64 -skip-update-check -patchline release -print-version > version
           exit_code=$?
           set -e
           
