@@ -3,12 +3,14 @@ package org.echoesfrombeyond.gradle.plugin
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import java.net.URI
 import kotlin.jvm.java
+import org.gradle.api.Action
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.api.java.archives.Manifest
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -166,18 +168,31 @@ fun Project.withHytaleDependency(hytaleVersion: String, prerelease: Boolean = fa
 fun Project.withHytalePlugin(name: String, hytaleVersion: String, prerelease: Boolean = false) {
   withHytaleDependency(hytaleVersion, prerelease)
 
-  val baseNameProperty = provider { version }.map { version -> "$name-$version" }
+  val versionProvider = provider { version }
+  val baseNameProperty = versionProvider.map { version -> "$name-$version" }
+
+  val commonManifest: Action<Manifest> = { manifest ->
+    manifest.attributes(
+        mapOf(
+            Pair("Implementation-Version", versionProvider.get()),
+            Pair("Hytale-Version", hytaleVersion),
+        )
+    )
+  }
 
   tasks.named("shadowJar", ShadowJar::class.java).configure { jar ->
     jar.archiveFileName.set(baseNameProperty.map { property -> "$property.jar" })
+    jar.manifest(commonManifest)
   }
 
   tasks.named("sourcesJar", Jar::class.java).configure { jar ->
     jar.archiveFileName.set(baseNameProperty.map { property -> "$property-sources.jar" })
+    jar.manifest(commonManifest)
   }
 
   tasks.named("javadocJar", Jar::class.java).configure { jar ->
     jar.archiveFileName.set(baseNameProperty.map { property -> "$property-javadoc.jar" })
+    jar.manifest(commonManifest)
   }
 
   extra["hasPlugin"] = true
