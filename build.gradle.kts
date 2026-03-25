@@ -216,32 +216,13 @@ class Util {
 val validateVersions: TaskProvider<DefaultTask> =
     tasks.register("validateVersions", DefaultTask::class.java) {
       group = "verification"
-      inputs.files(versionReport)
-
-      doLast {
-        val gson = Gson()
-        val errorMessages = mutableListOf<Pair<String, String>>()
-
-        Files.newBufferedReader(inputs.files.singleFile.toPath(), StandardCharsets.UTF_8)
-            .use { reader -> gson.fromJson(reader, JsonArray::class.java) }
-            .map { element -> element.asJsonObject }
-            .forEach { report -> Util.checkVersion(report, errorMessages, null) }
-
-        Util.maybeThrowErrors(errorMessages)
-      }
-    }
-
-tasks.check.configure { dependsOn(validateVersions) }
-
-val validateHytaleVersions: TaskProvider<DefaultTask> =
-    tasks.register("validateHytaleVersions", DefaultTask::class.java) {
-      group = "verification"
       inputs.file(
           serverJar.map { jar ->
             zipTree(jar).matching { include("META-INF/MANIFEST.MF") }.singleFile
           }
       )
       inputs.files(versionReport)
+      outputs.files()
 
       doLast {
         val gson = Gson()
@@ -291,9 +272,7 @@ val syncPluginsTask: TaskProvider<Sync> =
     }
 
 tasks.register("runDevServer", JavaExec::class.java) {
-  dependsOn(validateHytaleVersions)
-
-  inputs.files(copySdkTask, syncPluginsTask)
+  inputs.files(copySdkTask, syncPluginsTask, validateVersions)
 
   // Pass through commands to the Hytale server.
   standardInput = System.`in`
