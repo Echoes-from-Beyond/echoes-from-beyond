@@ -221,7 +221,7 @@ val validateVersions: TaskProvider<DefaultTask> =
             zipTree(jar).matching { include("META-INF/MANIFEST.MF") }.singleFile
           }
       )
-      inputs.files(versionReport)
+      inputs.file(versionReport.map { task -> task.outputs.files.singleFile })
       outputs.files()
 
       doLast {
