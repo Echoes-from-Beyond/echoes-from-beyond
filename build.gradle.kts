@@ -195,7 +195,7 @@ class Util {
         errors.add(
             Pair(
                 fileName,
-                "Plugin version mismatch: `manifest.json` specifies $manifestVersion while Gradle specifies ${jsonVersion.asString}",
+                "Plugin version mismatch: `manifest.json` specifies ${jsonVersion.asString} while Gradle specifies $manifestVersion",
             )
         )
         return
