@@ -3,25 +3,16 @@
   "Id": "Bk1_4D-5A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Oh, I'm sure. These kinds of statement are never entirely unserious.  Maybe you feel a little spiteful about me, even.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Oh, I'm sure. These kinds of statement are never entirely unserious.  Maybe you feel a little spiteful about me, even."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "I did also just say that you can do wonders by annoying people, but there are limits to it. Very few are so gullible that you can talk them into anything that way.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I did also just say that you can do wonders by annoying people, but there are limits to it. Very few are so gullible that you can talk them into anything that way."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Sometimes you just lose respect for yourself if you keep insisting. At least if you don't have actual 'gifts' to grease some hands with.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Sometimes you just lose respect for yourself if you keep insisting. At least if you don't have actual 'gifts' to grease some hands with."
     }
   ],
   "AdvanceText": "Continue",

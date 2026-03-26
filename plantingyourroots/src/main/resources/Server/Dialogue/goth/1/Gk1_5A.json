@@ -3,18 +3,12 @@
   "Id": "Gk1_5A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Then we have a deal.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Then we have a deal."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "But if you let them starve, I'll find you and give you a taste of your own fertilizer. That is a threat.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "But if you let them starve, I'll find you and give you a taste of your own fertilizer. That is a threat."
     }
   ],
   "AdvanceText": "Continue",

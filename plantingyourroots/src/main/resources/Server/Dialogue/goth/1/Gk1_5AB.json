@@ -3,53 +3,32 @@
   "Id": "Gk1_5AB",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "What really sucks is that Kweebdrasil itself is fine with it. It's even helping me nurture my garden -- it straight up told me that it loves the challenge of growing 'our wacky cousins', as it put it.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "What really sucks is that Kweebdrasil itself is fine with it. It's even helping me nurture my garden -- it straight up told me that it loves the challenge of growing 'our wacky cousins', as it put it."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "But according to the Council, I'm 'stressing it out'. Even though Kweebdrasil can and has tried to speak for itself.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "But according to the Council, I'm 'stressing it out'. Even though Kweebdrasil can and has tried to speak for itself."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Like, you have to be a special kind of entitled if you think that your fifty-year-old stump can speak for an Ancient two hundred times your age. Hello?!",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Like, you have to be a special kind of entitled if you think that your fifty-year-old stump can speak for an Ancient two hundred times your age. Hello?!"
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "And now, every so often, one of them comes over here to ask questions -- very loaded ones -- about whether I'm ashamed about 'rotting my home from inside out'.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "And now, every so often, one of them comes over here to ask questions -- very loaded ones -- about whether I'm ashamed about 'rotting my home from inside out'."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "If you didn't shove your anthers so far down your style--",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "If you didn't shove your anthers so far down your style--"
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "Eyes closed, she takes a deep breath. Next time that they open, you can see that the act hasn't achieved much.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Eyes closed, she takes a deep breath. Next time that they open, you can see that the act hasn't achieved much."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "I'm sorry, I've been antsy all day. Come see me tomorrow if you want to chat.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I'm sorry, I've been antsy all day. Come see me tomorrow if you want to chat."
     }
   ],
   "AdvanceText": "Continue",

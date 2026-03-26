@@ -3,18 +3,12 @@
   "Id": "Gk1_2ABCD-3B",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "You are so predictable.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You are so predictable."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "You know, you have a choice not to waste your tiny human lifespan on harassing random people who haven't done anything to you.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You know, you have a choice not to waste your tiny human lifespan on harassing random people who haven't done anything to you."
     }
   ],
   "AdvanceText": "Continue",

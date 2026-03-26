@@ -3,25 +3,16 @@
   "Id": "Gk1_2E-3A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "Silence stretches between you two while she thinks of an answer, seemingly not believing you at first.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Silence stretches between you two while she thinks of an answer, seemingly not believing you at first."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Really?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Really?"
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "I... I might be a little jumpy today, to be honest.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I... I might be a little jumpy today, to be honest."
     }
   ],
   "AdvanceText": "Continue",

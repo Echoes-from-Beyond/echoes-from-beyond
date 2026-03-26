@@ -3,11 +3,8 @@
   "Id": "Bk1_3A-4B",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "It doesn't take her long to catch onto your intent, so she withdraws her limb.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "It doesn't take her long to catch onto your intent, so she withdraws her limb."
     }
   ],
   "AdvanceText": "Continue",

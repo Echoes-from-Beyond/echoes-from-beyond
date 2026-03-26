@@ -3,25 +3,16 @@
   "Id": "Gk1_2ABCD",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Look. I know how this goes.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Look. I know how this goes."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "You showed up to a community full of normal-looking Kweebecs. Of course you gotta find out what's going on with the one overt freak.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You showed up to a community full of normal-looking Kweebecs. Of course you gotta find out what's going on with the one overt freak."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "And I've already heard it all, you know. \"Oh, she just wants attention.\" \"Oh, she's so scary. Will she clip my shoots in my sleep or something?\"",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "And I've already heard it all, you know. \"Oh, she just wants attention.\" \"Oh, she's so scary. Will she clip my shoots in my sleep or something?\""
     }
   ],
   "AdvanceText": "Continue",

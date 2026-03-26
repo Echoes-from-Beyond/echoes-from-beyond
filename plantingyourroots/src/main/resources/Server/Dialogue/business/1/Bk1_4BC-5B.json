@@ -3,25 +3,16 @@
   "Id": "Bk1_4BC-5B",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "She sizes you up. Whatever she sees in meantime brings an unsettling grin to her face.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "She sizes you up. Whatever she sees in meantime brings an unsettling grin to her face."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "What do you know about working hard? You're neither self-made nor otherwise.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "What do you know about working hard? You're neither self-made nor otherwise."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "I know that you're trying to mock me, but it'd be more effective if it didn't come off like a shrub calling a fern short.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I know that you're trying to mock me, but it'd be more effective if it didn't come off like a shrub calling a fern short."
     }
   ],
   "AdvanceText": "Continue",

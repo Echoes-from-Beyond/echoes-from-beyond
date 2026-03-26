@@ -3,11 +3,8 @@
   "Id": "Gk1_4B-5A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Hah. I mean, if you want to give it a try the next time there's an ice mist, be my guest.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Hah. I mean, if you want to give it a try the next time there's an ice mist, be my guest."
     }
   ],
   "AdvanceText": "Continue",

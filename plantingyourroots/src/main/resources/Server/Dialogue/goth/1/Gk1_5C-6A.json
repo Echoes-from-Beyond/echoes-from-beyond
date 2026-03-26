@@ -3,18 +3,12 @@
   "Id": "Gk1_5C-6A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "'I commented on a music subculture but it's not about the music.'",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "'I commented on a music subculture but it's not about the music.'"
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "For the love of all that is green, where do they get you people?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "For the love of all that is green, where do they get you people?"
     }
   ],
   "AdvanceText": "Continue",

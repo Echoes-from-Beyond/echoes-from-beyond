@@ -3,18 +3,12 @@
   "Id": "Bk1_4A-5A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "...touché.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "...touché."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Let that be your first lesson, then. My peers are not eager for competition. It usually means less money to go around.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Let that be your first lesson, then. My peers are not eager for competition. It usually means less money to go around."
     }
   ],
   "AdvanceText": "Continue",

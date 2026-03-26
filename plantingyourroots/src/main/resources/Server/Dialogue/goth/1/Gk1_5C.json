@@ -3,32 +3,20 @@
   "Id": "Gk1_5C",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "'Emo hand-me-downs?'",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "'Emo hand-me-downs?'"
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "She glares at you in silence, either thoroughly confused or infuriated by your remark. It takes her a good half-minute to take a side.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "She glares at you in silence, either thoroughly confused or infuriated by your remark. It takes her a good half-minute to take a side."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "I've nothing against emos, but you seem to think that I should.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I've nothing against emos, but you seem to think that I should."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Besides, an 'expert' like yourself should be able to tell that I don't look at all like I listen to My Kweemical Romance on repeat. But even if I did, so what?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Besides, an 'expert' like yourself should be able to tell that I don't look at all like I listen to My Kweemical Romance on repeat. But even if I did, so what?"
     }
   ],
   "AdvanceText": "Continue",

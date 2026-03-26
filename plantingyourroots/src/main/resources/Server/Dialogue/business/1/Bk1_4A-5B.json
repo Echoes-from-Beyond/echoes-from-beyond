@@ -3,18 +3,12 @@
   "Id": "Bk1_4A-5B",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "If you've already given up, then why are you complaining about the state of your affairs?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "If you've already given up, then why are you complaining about the state of your affairs?"
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Some trees, I swear. You moan about the world without even making an attempt to take charge of your situation.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Some trees, I swear. You moan about the world without even making an attempt to take charge of your situation."
     }
   ],
   "AdvanceText": "Continue",

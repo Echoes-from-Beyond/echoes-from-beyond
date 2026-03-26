@@ -3,18 +3,12 @@
   "Id": "Gk1_5C-6C",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "I've been foraged by dying bees with a better sense of humor.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I've been foraged by dying bees with a better sense of humor."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Look, I'll... assume that your intentions are genuine. It's our first time meeting, and you are awkward as Void.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Look, I'll... assume that your intentions are genuine. It's our first time meeting, and you are awkward as Void."
     }
   ],
   "AdvanceText": "Continue",

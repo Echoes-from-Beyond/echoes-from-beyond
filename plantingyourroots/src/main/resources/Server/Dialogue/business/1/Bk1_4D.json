@@ -3,25 +3,16 @@
   "Id": "Bk1_4D",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Ha! I've been offered millions for my share of the company. And none managed to tempt me.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Ha! I've been offered millions for my share of the company. And none managed to tempt me."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "But when some no-name human offers to give me nothing in return except... except phrasing it as if it'd somehow be for my benefit -- well, how could I say no?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "But when some no-name human offers to give me nothing in return except... except phrasing it as if it'd somehow be for my benefit -- well, how could I say no?"
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "I do commend you on that attitude, sprout. You wouldn't believe how far you can get in life by annoying everyone into obeying your whims.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I do commend you on that attitude, sprout. You wouldn't believe how far you can get in life by annoying everyone into obeying your whims."
     }
   ],
   "AdvanceText": "Continue",

@@ -3,25 +3,16 @@
   "Id": "Gk1_1",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "And that's what you do. A 'conversation' that never even began comes to a screeching halt.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "And that's what you do. A 'conversation' that never even began comes to a screeching halt."
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "You notice more details about her: her real leaf woven into the bouquet on her head, the tacked-on claws on her hands as if she is an animal, the thorns scattered about her entire frame--",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You notice more details about her: her real leaf woven into the bouquet on her head, the tacked-on claws on her hands as if she is an animal, the thorns scattered about her entire frame--"
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "--her posture straightening in tandem with a frown on her face.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "--her posture straightening in tandem with a frown on her face."
     }
   ],
   "AdvanceText": "Continue",

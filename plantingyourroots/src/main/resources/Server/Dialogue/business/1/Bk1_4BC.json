@@ -3,32 +3,20 @@
   "Id": "Bk1_4BC",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "You are always going to be someone's worm, unless you get lucky in life and inherit a whole lot of your ancestor's money.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You are always going to be someone's worm, unless you get lucky in life and inherit a whole lot of your ancestor's money."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "You can either kick back and relax from the moment of your germination, or you can get into investing and pretend that it's the same thing as any real work.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You can either kick back and relax from the moment of your germination, or you can get into investing and pretend that it's the same thing as any real work."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "But because you're so uneducated -- or you hold a worthless degree thanks to your connections -- when you attempt to do anything more than throw money at the rest of us, we have to start playing games around you--",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "But because you're so uneducated -- or you hold a worthless degree thanks to your connections -- when you attempt to do anything more than throw money at the rest of us, we have to start playing games around you--"
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "--just so you don't kill any momentum that us real professionals had! Insecure twigs!",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "--just so you don't kill any momentum that us real professionals had! Insecure twigs!"
     }
   ],
   "AdvanceText": "Continue",

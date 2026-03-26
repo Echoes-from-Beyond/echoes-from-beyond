@@ -3,11 +3,8 @@
   "Id": "Gk1_4-L2",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "If the Council get their leaves rustled over my garden again, what else am I supposed to do?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "If the Council get their leaves rustled over my garden again, what else am I supposed to do?"
     }
   ],
   "AdvanceText": "Continue",

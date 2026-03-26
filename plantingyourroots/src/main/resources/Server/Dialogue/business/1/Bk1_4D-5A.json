@@ -3,32 +3,20 @@
   "Id": "Bk1_4D-5A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "You're right about one part: I don't love my job all that much. But then again, who does? There's a reason why you're never advised to turn a cherished hobby into work.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You're right about one part: I don't love my job all that much. But then again, who does? There's a reason why you're never advised to turn a cherished hobby into work."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Well, nosy relatives aside.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Well, nosy relatives aside."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Sprout, you have to understand that I'm one of those trees who need to keep busy their entire lives. For someone like me, there are only two pathways after retirement:",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Sprout, you have to understand that I'm one of those trees who need to keep busy their entire lives. For someone like me, there are only two pathways after retirement:"
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "I either get antsy and go back to work in a smaller company, or I get involved in investing and philanthropy. Even if there are examples of... people who put very little effort into that last two--",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I either get antsy and go back to work in a smaller company, or I get involved in investing and philanthropy. Even if there are examples of... people who put very little effort into that last two--"
     }
   ],
   "AdvanceText": "Continue",

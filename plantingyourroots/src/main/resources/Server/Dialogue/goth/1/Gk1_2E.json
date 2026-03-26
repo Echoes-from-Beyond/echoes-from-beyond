@@ -3,39 +3,24 @@
   "Id": "Gk1_2E",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "I... Thanks?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I... Thanks?"
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "Uh, oh. Other than a stutter, she hardly reacts to your confession.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Uh, oh. Other than a stutter, she hardly reacts to your confession."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Look. I know how this goes.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Look. I know how this goes."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "I'm flattered, but I'm not going to be that 'weirdo girlfriend' you can show off to your friends.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I'm flattered, but I'm not going to be that 'weirdo girlfriend' you can show off to your friends."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Or the 'crazy chick' you're going to gossip about for seasons to come.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Or the 'crazy chick' you're going to gossip about for seasons to come."
     }
   ],
   "AdvanceText": "Continue",

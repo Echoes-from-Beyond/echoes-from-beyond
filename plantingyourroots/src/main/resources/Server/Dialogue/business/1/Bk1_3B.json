@@ -3,18 +3,12 @@
   "Id": "Bk1_3B",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Ooh. Well, that's a nice change of pace. Other Kweebecs like to tell me that I'm 'past my prime' and whatnot.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Ooh. Well, that's a nice change of pace. Other Kweebecs like to tell me that I'm 'past my prime' and whatnot."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Even when no one's asking for nor cares about their opinion. The gall.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Even when no one's asking for nor cares about their opinion. The gall."
     }
   ],
   "AdvanceText": "Continue",

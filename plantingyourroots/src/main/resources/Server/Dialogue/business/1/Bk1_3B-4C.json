@@ -3,11 +3,8 @@
   "Id": "Bk1_3B-4B",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Sprout, you are so adorable.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Sprout, you are so adorable."
     }
   ],
   "AdvanceText": "Continue",

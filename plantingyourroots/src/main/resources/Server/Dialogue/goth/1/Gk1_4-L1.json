@@ -3,25 +3,16 @@
   "Id": "Gk1_4-L1",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "They don't sprout naturally, and it's hard to get them to spread. None of my friends have ever seen them form a seed. I know from experience that they're very stubborn about growing a keiki.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "They don't sprout naturally, and it's hard to get them to spread. None of my friends have ever seen them form a seed. I know from experience that they're very stubborn about growing a keiki."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "They also come about only in very specific conditions: Void-infused soil, where a patch of normal flowers was already growing. Even though adult orchids are one of the few who can survive the magic, absolutely no new plant is able to germinate in there.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "They also come about only in very specific conditions: Void-infused soil, where a patch of normal flowers was already growing. Even though adult orchids are one of the few who can survive the magic, absolutely no new plant is able to germinate in there."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Combine that with the fact that most Void infusion happens during Outlander rites, and by the time that they're done setting up, those guys pluck everything out. You have to either get lucky, or catch them at a particular time.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Combine that with the fact that most Void infusion happens during Outlander rites, and by the time that they're done setting up, those guys pluck everything out. You have to either get lucky, or catch them at a particular time."
     }
   ],
   "AdvanceText": "Continue",

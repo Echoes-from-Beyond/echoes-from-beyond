@@ -3,18 +3,12 @@
   "Id": "Gk1_4",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "You probably saw my humble garden on your way here. I have a couple of them growing in excess.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You probably saw my humble garden on your way here. I have a couple of them growing in excess."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "For one reason or another, the rest of the Kweebecs feel uncomfortable around them. I might have to get rid of them in the near future.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "For one reason or another, the rest of the Kweebecs feel uncomfortable around them. I might have to get rid of them in the near future."
     }
   ],
   "AdvanceText": "Continue",

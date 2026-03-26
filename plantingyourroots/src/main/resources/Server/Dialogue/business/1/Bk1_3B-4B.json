@@ -3,11 +3,8 @@
   "Id": "Bk1_3B-4B",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Don't give me that. I've been around for a long time -- people of all races are as transparent as morning dew to me.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Don't give me that. I've been around for a long time -- people of all races are as transparent as morning dew to me."
     }
   ],
   "AdvanceText": "Continue",

@@ -3,18 +3,12 @@
   "Id": "Bk1_1A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "I guess it makes sense, though. Peartree's always had a cult riding their roots. They somehow project this unshakeable image of being a 'luxury brand'--",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I guess it makes sense, though. Peartree's always had a cult riding their roots. They somehow project this unshakeable image of being a 'luxury brand'--"
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "Her fingers curl into quotation marks so forcefully it's like she's trying to rip the phloem out of the rival executives' throats.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Her fingers curl into quotation marks so forcefully it's like she's trying to rip the phloem out of the rival executives' throats."
     }
   ],
   "AdvanceText": "Continue",

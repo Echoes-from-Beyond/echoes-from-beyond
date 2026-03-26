@@ -3,11 +3,8 @@
   "Id": "Gk1_2ABCD-3A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Then you have a strange way of introducing yourself.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Then you have a strange way of introducing yourself."
     }
   ],
   "AdvanceText": "Continue",

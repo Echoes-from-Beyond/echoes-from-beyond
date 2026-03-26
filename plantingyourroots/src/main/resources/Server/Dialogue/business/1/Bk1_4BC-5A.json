@@ -3,32 +3,20 @@
   "Id": "Bk1_4BC-5A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "I know what you're getting at, but people overplay the whole 'nature versus nurture' thing. If you really look into it, a lot of traits are inherent to an individual.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I know what you're getting at, but people overplay the whole 'nature versus nurture' thing. If you really look into it, a lot of traits are inherent to an individual."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "There have even been scientific experiments, ridiculous as it sounds since most Kweebecs are equivalent to your... human hippies, I think. But in the races that produce twinned seedlings, the seedlings of the bunch--",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "There have even been scientific experiments, ridiculous as it sounds since most Kweebecs are equivalent to your... human hippies, I think. But in the races that produce twinned seedlings, the seedlings of the bunch--"
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "--were separated, given to different groves, and what do you know? Same personalities. The only reason they wouldn't have that normally is because of sibling competition. Everyone has to be unique or whatever.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "--were separated, given to different groves, and what do you know? Same personalities. The only reason they wouldn't have that normally is because of sibling competition. Everyone has to be unique or whatever."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "All I'm saying is that us people who germinated for that kind of environment -- wealth and power -- would thrive in it. We'd know how to make good use of it.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "All I'm saying is that us people who germinated for that kind of environment -- wealth and power -- would thrive in it. We'd know how to make good use of it."
     }
   ],
   "AdvanceText": "Continue",

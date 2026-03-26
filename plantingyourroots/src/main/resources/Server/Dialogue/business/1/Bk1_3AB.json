@@ -3,32 +3,20 @@
   "Id": "Bk1_3AB",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "I suppose that I need a bit of a break, anyway. At this rate, I'm going to lose my voice long before I reach my tree-phase.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "I suppose that I need a bit of a break, anyway. At this rate, I'm going to lose my voice long before I reach my tree-phase."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Every splinter in me wants to tell you to get lost. That time is money. But if even my own people can't respect that...",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Every splinter in me wants to tell you to get lost. That time is money. But if even my own people can't respect that..."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Sprout, if you want some advice, only get into a leadership role if you really want the dough. Otherwise all you do all day is get sucked into useless meetings and manage your own managers.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Sprout, if you want some advice, only get into a leadership role if you really want the dough. Otherwise all you do all day is get sucked into useless meetings and manage your own managers."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Sometimes they're the ones responsible for those meetings. Sometimes it's one of your investors who just had this brilliant idea--",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Sometimes they're the ones responsible for those meetings. Sometimes it's one of your investors who just had this brilliant idea--"
     }
   ],
   "AdvanceText": "Continue",

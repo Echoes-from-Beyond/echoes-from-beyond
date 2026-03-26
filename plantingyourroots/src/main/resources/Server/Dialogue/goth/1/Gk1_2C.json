@@ -3,11 +3,8 @@
   "Id": "Gk1_2C",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Sure. What, did you come up to me just to zone out right then and there?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Sure. What, did you come up to me just to zone out right then and there?"
     }
   ],
   "AdvanceText": "Continue",

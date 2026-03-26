@@ -3,11 +3,8 @@
   "Id": "Gk1_2E-3B",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Is that so?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Is that so?"
     }
   ],
   "AdvanceText": "Continue",

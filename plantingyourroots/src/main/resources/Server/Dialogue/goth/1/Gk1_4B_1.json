@@ -3,39 +3,24 @@
   "Id": "Gk1_4B_1",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Imagine that you're cutting your nails... or picking at your skin... or whatever humans do for relaxation. It's warm outside, but inside is hotter than a volcano -- so you might as well get some fresh air.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Imagine that you're cutting your nails... or picking at your skin... or whatever humans do for relaxation. It's warm outside, but inside is hotter than a volcano -- so you might as well get some fresh air."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "You just so happen to be in the canopy of an eons-old Kweebec Ancient, and it's at least a little chillier up here than what all of those losers on the ground have to deal with.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You just so happen to be in the canopy of an eons-old Kweebec Ancient, and it's at least a little chillier up here than what all of those losers on the ground have to deal with."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "It's not enough, though. Unlike below, there's no point to hoping for a serious cover of clouds up here. There's a minor drought, too, so Kweebdrasil can't pull up too much water for you to bathe in.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "It's not enough, though. Unlike below, there's no point to hoping for a serious cover of clouds up here. There's a minor drought, too, so Kweebdrasil can't pull up too much water for you to bathe in."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "But something managed to form up here. You know better than to hope for them to puff up as much as rain clouds do, but water is water. And the wisps of a cirrus seem to have caught onto the tree.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "But something managed to form up here. You know better than to hope for them to puff up as much as rain clouds do, but water is water. And the wisps of a cirrus seem to have caught onto the tree."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "You run out. You tear all your pointless coverings off yourself, like those Ferans from a while ago, and welcome the cloud...",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You run out. You tear all your pointless coverings off yourself, like those Ferans from a while ago, and welcome the cloud..."
     }
   ],
   "AdvanceText": "Continue",

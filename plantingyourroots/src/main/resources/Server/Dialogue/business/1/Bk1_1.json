@@ -3,39 +3,24 @@
   "Id": "Bk1_1",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "She stops in her tracks, noticing you at long last.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "She stops in her tracks, noticing you at long last."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Should you be here?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Should you be here?"
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "No, not you! I have something to deal with at home. I'll call you back in an hour.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "No, not you! I have something to deal with at home. I'll call you back in an hour."
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "After that last bit, which doesn't seem to have been aimed at you, the light of the rune in her hand dies down.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "After that last bit, which doesn't seem to have been aimed at you, the light of the rune in her hand dies down."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "...or hopefully never.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "...or hopefully never."
     }
   ],
   "AdvanceText": "Continue",

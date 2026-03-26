@@ -3,32 +3,20 @@
   "Id": "Bk1_4A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "What would you know about 'the real world'? I don't even need to look at you to tell that you are one of those people who sleepwalk through their entire lives.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "What would you know about 'the real world'? I don't even need to look at you to tell that you are one of those people who sleepwalk through their entire lives."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "What do you even do all day? 'Explore'? Attend Slothian soap operas? Pretend that you're happy about having no standing at all, and being crushed under the roots of those who hold all the power?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "What do you even do all day? 'Explore'? Attend Slothian soap operas? Pretend that you're happy about having no standing at all, and being crushed under the roots of those who hold all the power?"
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Which is not even that hard to seize, by the way. You could have all this--",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Which is not even that hard to seize, by the way. You could have all this--"
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "Her hand sweeps across her opulent penthouse, but you have a feeling that she actually meant to sweep it across the whole world.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Her hand sweeps across her opulent penthouse, but you have a feeling that she actually meant to sweep it across the whole world."
     }
   ],
   "AdvanceText": "Continue",

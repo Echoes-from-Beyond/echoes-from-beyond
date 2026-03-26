@@ -3,32 +3,20 @@
   "Id": "Bk1_5",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "Well, I think that you've taken enough of my time.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Well, I think that you've taken enough of my time."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "You did visit me at an opportune time, but that's rare for someone with my kind of work schedule. I'd suggest to at least make an appointment next time. Definitely don't just barge in.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You did visit me at an opportune time, but that's rare for someone with my kind of work schedule. I'd suggest to at least make an appointment next time. Definitely don't just barge in."
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "That somehow sounds more like a threat than an actual suggestion.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "That somehow sounds more like a threat than an actual suggestion."
     },
     {
-      "Id": "Standard",
       "Name": "Business Kweebec",
-      "Line": "But what's the point? Security and law enforcement on Kweebdrasil practically don't exist.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "But what's the point? Security and law enforcement on Kweebdrasil practically don't exist."
     }
   ],
   "AdvanceText": "Continue",

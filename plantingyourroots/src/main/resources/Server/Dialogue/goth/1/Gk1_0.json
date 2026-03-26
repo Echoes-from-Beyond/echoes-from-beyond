@@ -3,39 +3,24 @@
   "Id": "Gk1_0",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "You've seen some zany Kweebecs in your time, but none were quite as striking as this one.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "You've seen some zany Kweebecs in your time, but none were quite as striking as this one."
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "The makeup covering her bark does not exist to hide, but to make a statement. What statement that is -- well, it's hard to tell at a first glance.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "The makeup covering her bark does not exist to hide, but to make a statement. What statement that is -- well, it's hard to tell at a first glance."
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "Does she mean to intimidate? Is this an expression of her tortured soul? Or does she merely find beauty in the macabre?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Does she mean to intimidate? Is this an expression of her tortured soul? Or does she merely find beauty in the macabre?"
     },
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "Whatever the case may be, she is not volunteering an answer. Instead, the black of her sunglasses peels your skin away layer by layer, just to burn holes into your very soul.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Whatever the case may be, she is not volunteering an answer. Instead, the black of her sunglasses peels your skin away layer by layer, just to burn holes into your very soul."
     },
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "Good morning..?",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Good morning..?"
     }
   ],
   "AdvanceText": "Continue",

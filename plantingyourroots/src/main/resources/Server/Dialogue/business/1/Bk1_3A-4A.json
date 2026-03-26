@@ -3,11 +3,8 @@
   "Id": "Bk1_3A-4A",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Narrator",
-      "Line": "Her grip is strong, firm -- well-practiced in the gesture. That makes sense, of course, as a large business magnate like her must meet with tens of people per day.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "Her grip is strong, firm -- well-practiced in the gesture. That makes sense, of course, as a large business magnate like her must meet with tens of people per day."
     }
   ],
   "AdvanceText": "Continue",

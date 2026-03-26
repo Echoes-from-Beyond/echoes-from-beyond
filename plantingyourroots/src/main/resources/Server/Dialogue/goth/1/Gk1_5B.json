@@ -3,11 +3,8 @@
   "Id": "Gk1_5B",
   "Entries": [
     {
-      "Id": "Standard",
       "Name": "Goth Kweebec",
-      "Line": "That's fine. I'd rather you say that now before you end up killing my friends or whatever.",
-      "UiPage": "Classic_Dialogue.ui",
-      "UiFragment": "Classic_Dialogue_Fragment.ui"
+      "Line": "That's fine. I'd rather you say that now before you end up killing my friends or whatever."
     }
   ],
   "AdvanceText": "Continue",
