@@ -105,53 +105,31 @@ public class DialoguePlugin extends JavaPlugin {
                 .build());
 
     getCodecRegistry(ChoiceAction.CODEC)
-        .register("Advance", AdvanceAction.class, AdvanceAction.CODEC);
-
-    getCodecRegistry(ChoiceAction.CODEC)
-        .register("AdjustInteger", AddIntegerMetadataAction.class, AddIntegerMetadataAction.CODEC);
-
-    getCodecRegistry(ChoiceAction.CODEC)
-        .register("Composite", CompositeAction.class, CompositeAction.CODEC);
-
-    getCodecRegistry(ChoiceAction.CODEC)
-        .register("Conditional", ConditionalAction.class, ConditionalAction.CODEC);
-
-    getCodecRegistry(ChoiceAction.CODEC)
+        .register("AdjustInteger", AddIntegerMetadataAction.class, AddIntegerMetadataAction.CODEC)
+        .register("Advance", AdvanceAction.class, AdvanceAction.CODEC)
+        .register("Close", CloseDialogueAction.class, CloseDialogueAction.CODEC)
+        .register("Composite", CompositeAction.class, CompositeAction.CODEC)
+        .register("Conditional", ConditionalAction.class, ConditionalAction.CODEC)
         .register("SetMetadata", SetMetadataAction.class, SetMetadataAction.CODEC);
 
-    getCodecRegistry(ChoiceAction.CODEC)
-        .register("Close", CloseDialogueAction.class, CloseDialogueAction.CODEC);
-
     getCodecRegistry(ChoiceCondition.CODEC)
-        .register("Equals", MetadataEqualsCondition.class, MetadataEqualsCondition.CODEC);
-
-    getCodecRegistry(ChoiceCondition.CODEC)
-        .register("CompareInteger", CompareIntegerCondition.class, CompareIntegerCondition.CODEC);
-
-    getCodecRegistry(ChoiceCondition.CODEC).register("Not", NotCondition.class, NotCondition.CODEC);
-
-    getCodecRegistry(ChoiceCondition.CODEC)
-        .register("Boolean", BooleanCondition.class, BooleanCondition.CODEC);
+        .register("Boolean", BooleanCondition.class, BooleanCondition.CODEC)
+        .register("CompareInteger", CompareIntegerCondition.class, CompareIntegerCondition.CODEC)
+        .register("Equals", MetadataEqualsCondition.class, MetadataEqualsCondition.CODEC)
+        .register("Not", NotCondition.class, NotCondition.CODEC);
 
     getCodecRegistry(Dialogue.CODEC)
+        .register("Chain", ChainDialogue.class, ChainDialogue.CODEC)
         .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
 
-    getCodecRegistry(Dialogue.CODEC).register("Chain", ChainDialogue.class, ChainDialogue.CODEC);
-
     getCodecRegistry(DialogueChoice.CODEC)
+        .register("Select", SelectChoice.class, SelectChoice.CODEC)
         .register("Standard", StandardChoice.class, StandardChoice.CODEC);
 
-    getCodecRegistry(DialogueChoice.CODEC)
-        .register("Select", SelectChoice.class, SelectChoice.CODEC);
-
     getCodecRegistry(DialogueMetadata.CODEC)
+        .register("Boolean", BooleanMetadata.class, BooleanMetadata.CODEC)
+        .register("Integer", IntegerMetadata.class, IntegerMetadata.CODEC)
         .register("String", StringMetadata.class, StringMetadata.CODEC);
-
-    getCodecRegistry(DialogueMetadata.CODEC)
-        .register("Integer", IntegerMetadata.class, IntegerMetadata.CODEC);
-
-    getCodecRegistry(DialogueMetadata.CODEC)
-        .register("Boolean", BooleanMetadata.class, BooleanMetadata.CODEC);
 
     getCodecRegistry(Trigger.CODEC).register("Join", JoinTrigger.class, JoinTrigger.CODEC);
 
