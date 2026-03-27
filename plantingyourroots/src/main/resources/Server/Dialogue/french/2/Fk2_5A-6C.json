@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5A-6C",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "It is aioli, oui ? A dip from southern France that you--"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You do not sound very, erm, content."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5A-6BC"
+        }
+      }
+    ]
+  }
+}

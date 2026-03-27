@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_2B",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Êtes-vous sérieux !?"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Mon ami, you need to learn how to live a little ! Ketchup ? Ouf !"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Do not worry, I will expand your palate. Starting from today."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "He grumbles something to himself. You vaguely recognize a French expletive."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_2"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_1A",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "The loaf feels light in your hand, and the texture of the crust has you feel like one good squeeze could grind it down to crumbs."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The first bite you take only affirms that theory -- the sound of crunching overpowers the rest of the world while your tongue seems to dig every granule of salt out of the dough."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The inside, however, is soft and fluffy. Once you dig through the golden crust, what remains is refreshing in comparison. Much nicer on your teeth, too."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The baguette is still warm, though you are unsure whether this is due to its freshness, or the few rays of the sun that penetrate both the leaves and French Kweebec's makeshift tent baked the stone surface that the bread formerly rested on."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "But even though he had just asked you to do this very thing, French Kweebec is looking at you as if you've gone mad."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Mon ami, have you not even thought to break le pain ? Or serve it with a sauce ? Or make a sandwich out of it ?"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I am not familiar with your eating ... habitudes, but please let me show you a better way ! Especially if this is your first taste of French cuisine. Let me not give you the impression that we gobble on raw bread like the sans-goût de l'Angleterre."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Whether you protest it or not, he drags you downstairs by force."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_1"
+        }
+      }
+    ]
+  }
+}

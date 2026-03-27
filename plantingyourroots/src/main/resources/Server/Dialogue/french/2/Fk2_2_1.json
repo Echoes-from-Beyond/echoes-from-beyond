@@ -1,0 +1,74 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_2_1",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "So begins the process of grinding garlic down into mushy paste. His other hand roots around the base of the bowl, holding it steady while the plant is being bashed against the walls of the thing."
+    },
+    "MetadataKey": "Fk2_2_1",
+    "Options": {
+      "Fk2_2-L1": {
+        "Id": "Standard",
+        "Text": "He shakes his head at your question with an earnest smile."
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Narrator"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Isn't this, like, cannibalism for Kweebecs?",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataKey": "Fk2_2_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_2-L1"
+          }
+        }
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_2_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_2-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_2-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "[Clasp your hand over his.]",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_3A"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "[Continue watching him.]",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_3B"
+      }
+    }
+  ]
+}

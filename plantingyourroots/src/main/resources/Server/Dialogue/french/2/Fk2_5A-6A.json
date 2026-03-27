@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5A-6A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Ahh ! I am very happy to hear that !"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If you have any demandes spéciales in the future, please come to me ! I will do my best to oblige."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5"
+        }
+      }
+    ]
+  }
+}

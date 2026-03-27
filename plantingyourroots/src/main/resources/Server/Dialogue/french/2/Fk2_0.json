@@ -1,0 +1,69 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_0",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "You find French Kweebec lounging about by the pond above his home. The flag used as a canopy in the corner couldn't make its ownership more obvious."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The more time you spend nearby, however, you are hit with the intense smells of lavender and freshly baked pastries. Indeed, the table at the back is host to a row of crispy, golden baguettes."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Is French Kweebec expecting some kind of a social gathering?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Not",
+          "Delegate": {
+            "Id": "Equals",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Anger"
+            }
+          }
+        },
+        "Action": {
+          "Id": "Advance",
+          "$Comment": "Route if FK is angry at player",
+          "Next": "Fk2_0_var1"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Relationship",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk_Anger"
+          }
+        },
+        "Action": {
+          "Id": "Advance",
+          "$Comment": "Default (not angry) route",
+          "Next": "Fk2_0_var2"
+        }
+      }
+    ]
+  }
+}

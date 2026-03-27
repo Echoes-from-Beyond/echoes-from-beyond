@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_4",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "You pick the baguette with the nicest coloration out of the pile. A small chunk of it cracks effortlessly in your hands, and skims the top of the pale sauce."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "French Kweebec appears to be waiting for you to take the first bite. He gestures as much once you make eye contact."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "[What's with the hesitation? Just go for it.]",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Nah, you can't do this.] I'm not hungry.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5B"
+        }
+      }
+    ]
+  }
+}

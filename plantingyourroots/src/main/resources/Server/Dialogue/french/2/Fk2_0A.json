@@ -1,0 +1,37 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_0A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Then why do you keep coming around ? Do you have nothing else to amuse yourself with ?"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Kweemericans, I swear ! If no one is ragebaiting you, you ragebait yourself ! Créatures misérables !"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You disgust me."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

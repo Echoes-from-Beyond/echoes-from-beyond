@@ -1,0 +1,110 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_0_2",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "So if you wish to have a taste of ma cuisine, please, treat yourself !"
+    },
+    "MetadataKey": "Fk2_0_2",
+    "Options": {
+      "Fk2_0-L1": {
+        "Id": "Standard",
+        "Text": "I hope that I have changed your mind, if you held those beliefs yourself."
+      },
+      "Fk2_0-L2": {
+        "Id": "Standard",
+        "Text": "Well, I will say that very few stick around."
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Why does no one visit you?",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataKey": "Fk2_0_2",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_0-L1"
+          }
+        }
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_0_2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_0-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_0-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "What about your friends?",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataKey": "Fk2_0_2",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_0-L2"
+          }
+        }
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_0_2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_0-L2"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_0-L2"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "[They look great! Just grab one.]",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_1A"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Bread without any sides doesn't sound too appetizing.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_1B"
+      }
+    }
+  ]
+}

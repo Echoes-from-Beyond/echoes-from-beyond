@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_2C",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I shall !"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It is a hot day, so perhaps you would like something to cool you off."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I probably did too much baking, anyway."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_2"
+        }
+      }
+    ]
+  }
+}

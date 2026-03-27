@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_0_var2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Ah, mon ami ! You came by again."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_0_1"
+      }
+    }
+  ]
+}

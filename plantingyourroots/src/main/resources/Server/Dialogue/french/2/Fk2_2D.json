@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_2D",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "So ..?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You stare at him. He stares at you. It's *really* awkward."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "With an inkling of a grimace, he reaches for the countertops and begins working on something of his own."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_2"
+        }
+      }
+    ]
+  }
+}

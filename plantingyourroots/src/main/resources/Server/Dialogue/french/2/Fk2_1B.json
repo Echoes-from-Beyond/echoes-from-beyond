@@ -1,0 +1,46 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_1B",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Well, of course that is not what I am asking of you ! I am introducing you to true French cooking, not ... whatever they eat up north of la Manche."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I have not prepared anything for the occasion, as chez-moi feels like the inside of un four. But perhaps it has cooled down since I stepped out."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Well, if not, I have lots of vin left in my hidden-- Nevermind !"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Come along, and I will cook anything that delights your heart. Perhaps I could teach you, too, so you know whenever you are in mood for a filling dîner."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Even if you want to refuse, he speeds off downstairs without checking anything with you. Whether you are enthusiastic about it or not, there's little else to do around here -- so you follow after him."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_1"
+        }
+      }
+    ]
+  }
+}

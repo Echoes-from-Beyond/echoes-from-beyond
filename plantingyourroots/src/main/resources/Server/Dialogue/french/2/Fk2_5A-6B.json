@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5A-6B",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "Your simple statement appears to have shattered his entire world. It shouldn't be that big of a deal, should it?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Just that ? You did not--"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5A-6BC"
+        }
+      }
+    ]
+  }
+}

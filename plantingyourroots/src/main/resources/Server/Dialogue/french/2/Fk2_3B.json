@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_3B",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "For what it's worth, French Kweebec is very meticulous about his work. No chunk of garlic bigger than a grain of sand is allowed to persist."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You watch him swirl the pestle in circles about the bowl, each seeming to intensify the aroma of garlic around the hollow. Hope that French Kweebec likes the smell -- or at least, that he has some kind of air freshener. There *are* those bushes of lavender outside."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The tree in question is concentrating very intently on the paste, having his reddish brows knitted together, his mouth pursed and his eyes -- those resembling a distant nebula, as is the case with Kweebecs -- following the motion of his instrument."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "He doesn't seem winded despite the power he's pouring into the act. His breath appears to be even, and his elbow still hasn't locked in place; you heard that Kweebecs need to take special care of their joints, due to their tree-like nature."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_3"
+        }
+      }
+    ]
+  }
+}

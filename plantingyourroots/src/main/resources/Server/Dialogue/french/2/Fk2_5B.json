@@ -1,0 +1,46 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5B",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Are you sure ? Not even une bouchée ? Right after--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He fails to fool himself out of seeing the resolve on your face. If it isn't for his beret, you'd probably see his leaves sagging in disappointment."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Very well. If it is a bad time ..."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "That doesn't console him at all."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If there is anything else you'd want ..."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5"
+        }
+      }
+    ]
+  }
+}

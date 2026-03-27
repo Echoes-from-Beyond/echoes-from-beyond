@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_0B",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I do not understand what la blague was supposed to be. If you truly believe that it is hilarant to make fun of someone's origines..."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Perhaps you just parrot even less funny people, without understanding what you are doing. Should I presume your innocence ?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "His eyes wander over the pond for a moment."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Oui, I will give you another chance. We shall make amends as long as you respect mes limites, as I am trying to do for you."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_0_1"
+        }
+      }
+    ]
+  }
+}

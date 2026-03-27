@@ -1,0 +1,46 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_3A",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "Underneath the glove, his limb feels rather tough. The bark on some of the other Kweebecs, whose hands you've shaken, typically resembles the squishiness of a flower's stalk."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "French Kweebec must be decently old, then -- or perhaps he wears reinforced gloves for some reason. Or maybe that's just what happens when a Kweebec's body part can't photosynthesize, as something tells you that this guy spends most of his time in this costume."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Regardless, unfortunately for you -- or fortunately, if you're put off by that fact -- French Kweebec stops all motion moments later. His other hand unlatches to gently peel your fingers off."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I appreciate the help, mon ami, but this is not the way to do it. You are putting more effort on ma main."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If he thought anything else of the gesture, he gives you no indication. He simply returns to the grind."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_3"
+        }
+      }
+    ]
+  }
+}

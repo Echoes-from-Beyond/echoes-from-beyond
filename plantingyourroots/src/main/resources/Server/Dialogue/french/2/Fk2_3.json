@@ -1,0 +1,71 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_3",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "The condiment is finished when he slowly introduces olive oil, from a bottle that he'd apparently been keeping shoved into some corner somewhere. Rather than mashing the garlic, the pestle now serves to combine the two."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Once he's satisfied with its consistency, he gestures for you to leave. French Kweebec follows right behind, directing you back to the pond with taps on your shoulder."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It is a beautiful day, is it not ? In these conditions, I like to sit and take in l'air frais."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Your specific destination is the table set that sits right up against the water. He puts the bowl down in the middle, and reaches for the baguettes that no one has touched in the meantime."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "And I am very happy to have someone to share it with !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "But I wanted ketchup...",
+        "Condition": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Taste",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk_Ketchup"
+          }
+        },
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_4A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Dig in.]",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_4"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Ugh. You suppose that you have to try, at least.]",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_4"
+        }
+      }
+    ]
+  }
+}

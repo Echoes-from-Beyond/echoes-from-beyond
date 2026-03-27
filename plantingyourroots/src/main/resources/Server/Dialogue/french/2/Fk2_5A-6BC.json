@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5A-6BC",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I knew that this was trop simple ! What was going through ma tête ?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I am sorry for the disappointing meal. If you have any suggestions for the future ..."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5"
+        }
+      }
+    ]
+  }
+}

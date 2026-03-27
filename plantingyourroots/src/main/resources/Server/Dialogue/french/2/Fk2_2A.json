@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_2A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "That is exactly what I was thinking !"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "What else is so perfect for a summer's day, eh ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_2"
+        }
+      }
+    ]
+  }
+}

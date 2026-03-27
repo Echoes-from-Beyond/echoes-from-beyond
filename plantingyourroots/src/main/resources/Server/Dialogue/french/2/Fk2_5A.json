@@ -1,0 +1,77 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5A",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "Backed by the relative flavorlessness of the bread, the oil and garlic fight for dominance in your mouth. Aioli is refreshing in the sense that it feels somewhat cooler than the baguette itself, but you suspect that it will linger on your tongue for hours."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "It's *very* creamy for something made out of crushed solids, however. Its two ingredients emulsified together such that you can barely tell them apart, except for the taste. Whatever your verdict, this was definitely made with precision and care."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Once you finish the chunk, French Kweebec seems positively buzzing with excitement."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "And ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "It's very delicious!",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "AdjustInteger",
+              "MetadataKey": "Fk_Romance",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "Delta": 1
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk2_5A-6A"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "It's okay.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5A-6B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Meh?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5A-6B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Man, what even is this?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5A-6C"
+        }
+      }
+    ]
+  }
+}

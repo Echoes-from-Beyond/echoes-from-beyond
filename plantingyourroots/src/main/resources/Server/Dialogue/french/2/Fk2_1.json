@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_1",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "French Kweebec's home is everything you expect. A conspicuous flag hangs over his bed, but the rest of it is pretty standard for a Kweebec. Roots and vines hang off of every surface, potted plants stand where the first two couldn't catch on--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "--and, of course, a fully-kitted kitchen is embedded in a crevice. It seems that heat is still emanating from an ash-covered oven, however long it was since French Kweebec had it on."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You can't focus on it for too long, though, as pungent spices soon assault your nostrils."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "C'est tolérable."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_1_1"
+        }
+      }
+    ]
+  }
+}

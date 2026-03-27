@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_0-L1",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I do not think that I am being intentionally avoided, if that is what you wonder. Mon étang is simply too ... out of way."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Those seeking refreshments or peace can instead go to the shrine of Gaia right in front of my home. Gym Kweebec's place is another popular spot pour excursions."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Then there are cultural reasons. Kweebecs share more with each other than some of the other species, but it is hard for us to get used to étrangers. I take ... more mental effort than to visit votre relatifs."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "There is a few with very skewed views of les Français, who think that I must be prétentieux and insufferable just because I take pride in who I am. But there are not many of those."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_0_2"
+        }
+      }
+    ]
+  }
+}

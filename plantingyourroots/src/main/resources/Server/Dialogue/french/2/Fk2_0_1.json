@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_0_1",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "What fortunate timing this is, because I have made a ... erm, I fear I have been utterly insensé as of late."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I started baking and baking, and could not stop myself. I must have made like three rounds of baguettes before I realised, « who are you going to share this with, you crétin ? »"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I put them out here for everyone to enjoy if they wish, but no one ever comes up."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Business Kweebec passes through sometimes, but that is très rare. I would not dream of interrupting someone that occupée, anyway."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_0_2"
+        }
+      }
+    ]
+  }
+}

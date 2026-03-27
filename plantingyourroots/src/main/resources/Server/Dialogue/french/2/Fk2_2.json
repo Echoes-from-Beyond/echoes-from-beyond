@@ -1,0 +1,50 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_2",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "He plucks one of the bulbs of garlic that hang over the stove, and sets it upon the stone."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "This one is so easy to make. I almost feel ashamed that I am not showing you something more compliqué. Something that would challenge you."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "But neither of us feels like putting in effort today, oui ?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Thanks to his clearly practiced hands, the skin of the garlic disappears in no time. The peel probably ends up somewhere on... oh wow, you can't even begin to guess what the assemblage of dust and powders on the floor is made out of."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Ah, forget what I said. I will grind it for you."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Several cloves are chucked into a bowl that almost seems to have manifested out of nowhere. Likewise, French Kweebec is now holding a pestle that you hadn't seen anywhere before."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_2_1"
+        }
+      }
+    ]
+  }
+}
