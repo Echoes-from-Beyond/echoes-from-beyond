@@ -21,6 +21,7 @@ package org.echoesfrombeyond.plantingyourroots;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import java.util.concurrent.CompletableFuture;
+import org.echoesfrombeyond.plantingyourroots.command.ReadyForLove;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -46,6 +47,8 @@ public class PlantingYourRoots extends JavaPlugin {
   @Override
   protected void setup() {
     super.setup();
+
+    getCommandRegistry().registerCommand(new ReadyForLove());
   }
 
   @Override

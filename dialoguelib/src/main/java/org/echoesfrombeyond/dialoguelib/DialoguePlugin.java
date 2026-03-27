@@ -37,10 +37,7 @@ import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.choice.SelectChoice;
 import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
 import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
-import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
-import org.echoesfrombeyond.dialoguelib.condition.CompareIntegerCondition;
-import org.echoesfrombeyond.dialoguelib.condition.MetadataEqualsCondition;
-import org.echoesfrombeyond.dialoguelib.condition.NotCondition;
+import org.echoesfrombeyond.dialoguelib.condition.*;
 import org.echoesfrombeyond.dialoguelib.dialogue.ChainDialogue;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.dialoguelib.dialogue.StandardDialogue;
@@ -132,6 +129,9 @@ public class DialoguePlugin extends JavaPlugin {
         .register("CompareInteger", CompareIntegerCondition.class, CompareIntegerCondition.CODEC);
 
     getCodecRegistry(ChoiceCondition.CODEC).register("Not", NotCondition.class, NotCondition.CODEC);
+
+    getCodecRegistry(ChoiceCondition.CODEC)
+        .register("Boolean", BooleanCondition.class, BooleanCondition.CODEC);
 
     getCodecRegistry(Dialogue.CODEC)
         .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
