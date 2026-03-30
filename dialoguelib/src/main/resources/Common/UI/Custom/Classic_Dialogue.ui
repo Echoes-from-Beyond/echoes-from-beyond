@@ -1,6 +1,8 @@
 $C = "Common.ui";
 
-Group #Sprite { }
+Group #Sprite {
+  Anchor: (Bottom: 30, Width: 792, Height: 950);
+}
 
 // for VN/JRPG-style dialogue with sprites behind an opaque box
 Group #DialogueContainer {
