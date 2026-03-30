@@ -23,6 +23,8 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
+import com.hypixel.hytale.server.core.ui.PatchStyle;
+import com.hypixel.hytale.server.core.ui.Value;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
@@ -44,6 +46,7 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
   public static final String DIALOGUE_CHOICES_SELECTOR = "#DialogueChoices";
   public static final String DIALOGUE_LABEL_SELECTOR = "#DialogueLabel";
   public static final String DIALOGUE_BUTTON_SELECTOR = "#DialogueButton";
+  public static final String SPRITE_SELECTOR = "#Sprite";
 
   private final StandardDialogue dialogue;
 
@@ -62,12 +65,20 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
     var line = dialogue.Line;
     var name = dialogue.Name;
+    var sprite = dialogue.Sprite;
 
     if (line != null)
       uiCommandBuilder.set(DIALOGUE_LINE_SELECTOR + ".Text", line.getMessage(ref, dialogue));
 
     if (name != null)
       uiCommandBuilder.set(DIALOGUE_NAME_SELECTOR + ".Text", name.getMessage(ref, dialogue));
+
+    if (sprite != null) {
+      var patchStyle = new PatchStyle();
+      patchStyle.setTexturePath(Value.of(sprite));
+
+      uiCommandBuilder.setObject(SPRITE_SELECTOR + ".Background", patchStyle);
+    }
 
     var count = 0;
     var prefixCount = 0;

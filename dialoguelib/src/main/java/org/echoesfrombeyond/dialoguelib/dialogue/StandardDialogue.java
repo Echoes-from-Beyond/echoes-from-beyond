@@ -73,6 +73,16 @@ public class StandardDialogue extends UIDialogueBase implements Dialogue {
 
   @Doc(
       """
+      The sprite to be displayed for this dialogue. If absent,
+      nothing will be displayed. If present, there must be a Group
+      with the #Sprite tag, whose background will be set to the image
+      specified by this field.
+      """)
+  @Opt
+  public @Nullable String Sprite;
+
+  @Doc(
+      """
       Choices to potentially display. Choices may be "conditional" and
       will only show up if their conditions are met.
       """)

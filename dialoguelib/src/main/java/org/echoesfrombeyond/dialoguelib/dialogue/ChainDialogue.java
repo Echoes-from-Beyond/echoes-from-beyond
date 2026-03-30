@@ -40,6 +40,8 @@ public class ChainDialogue extends UIDialogueBase implements Dialogue {
     public String Name;
     public String Line;
 
+    @Opt public @Nullable String Sprite;
+
     public Entry() {
       this.Name = "";
       this.Line = "";
@@ -102,6 +104,7 @@ public class ChainDialogue extends UIDialogueBase implements Dialogue {
 
     dialogue.Name = nameChoice;
     dialogue.Line = lineChoice;
+    dialogue.Sprite = entry.Sprite;
 
     dialogue.UiPage = UiPage;
     dialogue.UiFragment = UiFragment;
