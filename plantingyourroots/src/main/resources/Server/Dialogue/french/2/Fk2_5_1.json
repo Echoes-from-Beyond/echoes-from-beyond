@@ -1,0 +1,290 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_5_1",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "Mon ami, if I may ask, can you offer me a distraction ? Give me something to think about that is not mes pensées."
+    },
+    "MetadataKey": "Fk2_5_1",
+    "Options": {
+      "Fk2_5-L1": {
+        "Id": "Standard",
+        "Text": "What my home is, back in France ... it is peu difficile to talk about."
+      },
+      "Fk2_5-L2": {
+        "Id": "Standard",
+        "Text": "C'est très irritant."
+      },
+      "Fk2_5-L3": {
+        "Id": "Standard",
+        "Text": "--eh, maybe that is not a story for lunchtime."
+      },
+      "Fk2_5-L4": {
+        "Id": "Standard",
+        "Text": "Ah, I am sorry. I did not wish to imply that you would make the same error. It is just something that has plagued my life as of late."
+      },
+      "Fk2_5-L5": {
+        "Id": "Standard",
+        "Text": "Mon ami, that is exactly what I need a distraction from."
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "What's with the flags?",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Equals",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Cautious"
+            }
+          },
+          {
+            "Id": "Not",
+            "Delegate": {
+              "Id": "Equals",
+              "MetadataKey": "Fk2_5_1-prg1"
+            }
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1-prg1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg1"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "You said that there were two reasons for the flags, but you only gave me one.",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Not",
+            "Delegate": {
+              "Id": "Equals",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "MetadataKey": "Fk_Relationship",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Fk_Cautious"
+              }
+            }
+          },
+          {
+            "Id": "Not",
+            "Delegate": {
+              "Id": "Equals",
+              "MetadataKey": "Fk2_5_1-prg2"
+            }
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1-prg2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg2"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5-L2"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5-L2"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "You said that there were two reasons for the flags, but you only gave me one.",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Equals",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Cautious"
+            }
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg1"
+            }
+          },
+          {
+            "Id": "Not",
+            "Delegate": {
+              "Id": "Equals",
+              "MetadataKey": "Fk2_5_1-prg2"
+            }
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1-prg2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg2"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5-L2"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5-L2"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Who made the tower?",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Not",
+            "Delegate": {
+              "Id": "Equals",
+              "MetadataKey": "Fk2_5_1-prg3"
+            }
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1-prg3",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg3"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5-L3"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5-L3"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Who made the tower?",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Not",
+            "Delegate": {
+              "Id": "Equals",
+              "MetadataKey": "Fk2_5_1-prg3"
+            }
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1-prg3",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg3"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5-L3"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5-L3"
+          }
+        ]
+      }
+    }
+  ]
+}

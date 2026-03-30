@@ -11,6 +11,7 @@
   },
   "UiPage": "Classic_Dialogue.ui",
   "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Kweebec_French_Happy.png",
   "Choices": [
     {
       "Id": "Standard",
