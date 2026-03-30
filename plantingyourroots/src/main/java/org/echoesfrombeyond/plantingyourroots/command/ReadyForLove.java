@@ -18,8 +18,11 @@
 
 package org.echoesfrombeyond.plantingyourroots.command;
 
+import com.hypixel.hytale.builtin.instances.InstancesPlugin;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
+import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
+import org.echoesfrombeyond.plantingyourroots.PlantingYourRoots;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
@@ -31,5 +34,21 @@ public class ReadyForLove extends CommandBase {
   @Override
   protected void executeSync(CommandContext commandContext) {
     if (!commandContext.isPlayer()) return;
+
+    var playerRef = commandContext.senderAsPlayerRef();
+    if (playerRef == null) return;
+
+    var store = playerRef.getStore();
+    var currentWorld = store.getExternalData().getWorld();
+
+    currentWorld.execute(
+        () -> {
+          var transform = store.getComponent(playerRef, TransformComponent.getComponentType());
+          if (transform == null) return;
+
+          var returnPoint = transform.getTransform().clone();
+          InstancesPlugin.teleportPlayerToLoadingInstance(
+              playerRef, store, PlantingYourRoots.get().getKweebdrasil(), returnPoint);
+        });
   }
 }
