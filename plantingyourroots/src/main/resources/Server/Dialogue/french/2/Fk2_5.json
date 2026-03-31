@@ -1,0 +1,46 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Baking baguettes is more of a ... réponse au stress for me. I insist that this is not all I ever do !"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "And I am not usually so extra about it, either."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "His fingers play along the edges of the table, but he makes no attempt to reach for his handiwork: neither the baguettes nor the condiment."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The two of you look onto the replica Eiffel Tower, if that's what you could call this cobbled structure, and sit in silence. Whether you're comfortable like this or not, he certainly isn't."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "After a prolonged amount of fidgeting, he clears his throat."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5_1"
+        }
+      }
+    ]
+  }
+}
