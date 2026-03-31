@@ -35,7 +35,6 @@ import org.jspecify.annotations.Nullable;
 public class PlantingYourRoots extends JavaPlugin {
   private static @Nullable PlantingYourRoots INSTANCE;
 
-  private final Object sync = new Object();
   private final Once<CompletableFuture<World>> kweebdrasil =
       Once.of(
           () -> {
@@ -59,11 +58,6 @@ public class PlantingYourRoots extends JavaPlugin {
   }
 
   @Override
-  public @Nullable CompletableFuture<Void> preLoad() {
-    return super.preLoad();
-  }
-
-  @Override
   protected void setup() {
     super.setup();
     getCommandRegistry().registerCommand(new ReadyForLove());
@@ -72,12 +66,6 @@ public class PlantingYourRoots extends JavaPlugin {
   @Override
   protected void start() {
     super.start();
-  }
-
-  @Override
-  protected void shutdown() {
-    super.shutdown();
-    INSTANCE = null;
   }
 
   public CompletableFuture<World> getKweebdrasil() {

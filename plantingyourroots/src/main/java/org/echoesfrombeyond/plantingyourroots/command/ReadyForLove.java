@@ -41,6 +41,8 @@ public class ReadyForLove extends CommandBase {
     var store = playerRef.getStore();
     var currentWorld = store.getExternalData().getWorld();
 
+    if (currentWorld.getName().equals("Kweebdrasil")) return;
+
     currentWorld.execute(
         () -> {
           var transform = store.getComponent(playerRef, TransformComponent.getComponentType());
