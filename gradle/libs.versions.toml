@@ -70,7 +70,7 @@ junit = "6.0.3"
 [libraries]
 # usage: Automatic codec generation
 # scope: Hytale mods
-codec-helper = { module = "org.echoesfrombeyond:codec-helper", version = "0.2.0" }
+codec-helper = { module = "org.echoesfrombeyond:codec-helper", version = "0.2.2" }
 
 # usage: More annotations not included in jspecify
 # scope: everywhere
@@ -90,7 +90,7 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 
 # usage: including dependencies in built jar files
 # scope: plugins and libraries
-shadow = { module = "com.gradleup.shadow:com.gradleup.shadow.gradle.plugin", version = "9.3.1" }
+shadow = { module = "com.gradleup.shadow:com.gradleup.shadow.gradle.plugin", version = "9.4.1" }
 
 # usage: decompiling Hytale
 # scope: root project
