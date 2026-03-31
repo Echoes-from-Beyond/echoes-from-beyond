@@ -3,4 +3,4 @@ import org.echoesfrombeyond.gradle.plugin.withHytaleDependency
 
 apply<JavaConventionPlugin>()
 
-withHytaleDependency("2026.02.19-1a311a592")
+withHytaleDependency("2026.03.26-89796e57b")
