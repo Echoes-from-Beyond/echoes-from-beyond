@@ -17,6 +17,7 @@
   "DependsOn": {
     "Hytale:InstancesPlugin": "*",
     "Hytale:NPCPlugin": "*",
-    "org.echoesfrombeyond:CodecHelper": "^0.2.0"
+    "org.echoesfrombeyond:CodecHelper": "^0.2.0",
+    "org.echoesfrombeyond:DialogueLib": "^0.1.0"
   }
 }

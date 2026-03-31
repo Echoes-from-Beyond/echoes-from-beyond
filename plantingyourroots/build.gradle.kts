@@ -8,4 +8,10 @@ apply<JavaConventionPlugin>()
 
 withHytalePlugin("PlantingYourRoots", "2026.03.26-89796e57b")
 
-dependencies { projectImplementation(":util") }
+dependencies {
+  projectImplementation(":annotation")
+  projectImplementation(":util")
+
+  // temporary: once published we can add to libs.versions.toml
+  add("shadow", project(":dialoguelib"))
+}

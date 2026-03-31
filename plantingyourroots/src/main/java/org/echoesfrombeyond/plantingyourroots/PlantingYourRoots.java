@@ -25,7 +25,10 @@ import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import java.util.concurrent.CompletableFuture;
+import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.plantingyourroots.command.ReadyForLove;
+import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
+import org.echoesfrombeyond.plantingyourroots.dialogue.AppendDiaryEntry;
 import org.echoesfrombeyond.util.thread.Once;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -60,6 +63,13 @@ public class PlantingYourRoots extends JavaPlugin {
   @Override
   protected void setup() {
     super.setup();
+
+    getCodecRegistry(ChoiceAction.CODEC)
+        .register("AppendDiary", AppendDiaryEntry.class, AppendDiaryEntry.CODEC);
+
+    var entityStoreRegistry = getEntityStoreRegistry();
+    RootsComponent.register(entityStoreRegistry);
+
     getCommandRegistry().registerCommand(new ReadyForLove());
   }
 

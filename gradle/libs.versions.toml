@@ -40,13 +40,18 @@ build = [
     "vineflower"
 ]
 
-# Compile-only dependencies for the `dialoguelib` project.
+# shadow dependencies for the `dialoguelib` project.
 dialoguelib-shadow = [
     "codec-helper"
 ]
 
 # Compile-only dependencies for the `example` project.
 example-compileOnly = [
+    "codec-helper"
+]
+
+# shadow dependencies for the `plantingyourroots` project.
+plantingyourroots-shadow = [
     "codec-helper"
 ]
 
