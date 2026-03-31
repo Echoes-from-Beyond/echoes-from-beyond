@@ -1,7 +1,7 @@
 {
   "Group": "org.echoesfrombeyond",
   "Name": "CodecHelper",
-  "Version": "0.2.1",
+  "Version": "0.2.2",
   "Description": "A utility library mod for automatically generating codecs.",
   "Authors": [
     {
@@ -17,5 +17,5 @@
   ],
   "Website": null,
   "Main": "org.echoesfrombeyond.codechelper.Plugin",
-  "ServerVersion": "2026.02.19-1a311a592"
+  "ServerVersion": "2026.03.26-89796e57b"
 }

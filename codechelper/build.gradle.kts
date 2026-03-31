@@ -3,11 +3,11 @@ import org.echoesfrombeyond.gradle.plugin.projectImplementation
 import org.echoesfrombeyond.gradle.plugin.withHytalePlugin
 import org.echoesfrombeyond.gradle.plugin.withPublishedPlugin
 
-version = "0.2.1"
+version = "0.2.2"
 
 apply<JavaConventionPlugin>()
 
-withHytalePlugin("CodecHelper", "2026.02.19-1a311a592")
+withHytalePlugin("CodecHelper", "2026.03.26-89796e57b")
 
 withPublishedPlugin(
     "codec-helper",
