@@ -5,9 +5,13 @@
 Hytale mods and supporting libraries made by the Echoes from Beyond team.
 
 This repository contains:
-* `main`: A Lovecraftian Hytale mod with an emphasis on narrative and storytelling
+* `annotation`: Annotations meant for documenting mod code.
 * [codechelper](./codechelper/README.md): A library which contains a system for automatically generating codecs
-* `util`: A general utility library
+* [dialoguelib](./dialoguelib/README.md): A library mod which supports flexible and advanced NPC dialogue.
+* `echoesfrombeyond`: A Lovecraftian Hytale mod with an emphasis on narrative and storytelling
+* `example`: A simple test mod which consumes some of the other mods in this repository
+* `modutil`: Shared code for Hytale mods
+* `util`: A general-purpose utility library that doesn't depend on Hytale
 
 ## Table of Contents
 
