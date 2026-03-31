@@ -40,7 +40,8 @@ build = [
     "vineflower"
 ]
 
-dialoguelib-shadow = [
+# Compile-only dependencies for the `dialoguelib` project.
+dialoguelib-compileOnly = [
     "codec-helper"
 ]
 
