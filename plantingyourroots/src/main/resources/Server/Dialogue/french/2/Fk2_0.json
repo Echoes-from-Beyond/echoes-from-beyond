@@ -29,15 +29,12 @@
         "Id": "Standard",
         "Text": "Continue",
         "Condition": {
-          "Id": "Not",
-          "Delegate": {
-            "Id": "Equals",
-            "MetadataStoreKey": "FRENCH_KWEEBEC",
-            "MetadataKey": "Fk_Relationship",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk_Anger"
-            }
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Relationship",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk_Anger"
           }
         },
         "Action": {
@@ -50,12 +47,15 @@
         "Id": "Standard",
         "Text": "Continue",
         "Condition": {
-          "Id": "Equals",
-          "MetadataStoreKey": "FRENCH_KWEEBEC",
-          "MetadataKey": "Fk_Relationship",
-          "Metadata": {
-            "Id": "String",
-            "Value": "Fk_Anger"
+          "Id": "Not",
+          "Delegate": {
+            "Id": "Equals",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Anger"
+            }
           }
         },
         "Action": {

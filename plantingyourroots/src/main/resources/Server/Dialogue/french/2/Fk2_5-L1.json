@@ -1,0 +1,46 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5-L1",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Well, one of the reasons is to remind me of h-home."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He stutters towards the end of his sentence, and his eyes wander far away from you. Not physically -- thank the elements -- but they follow his mind to some different dimension altogether."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "When he returns, he adopts this expression that lingers somewhere between sorrow and anger. Not one aimed at you, though. At least, you can't think of a reason why it would be."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I am sorry. This is reminding me of something not so nice."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "The flags represent my home, so I do not ever forget where I come from."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5_1"
+        }
+      }
+    ]
+  }
+}

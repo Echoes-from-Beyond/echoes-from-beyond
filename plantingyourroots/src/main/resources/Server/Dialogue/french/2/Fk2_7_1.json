@@ -1,0 +1,89 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_7_1",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "To us, the québécois are what Outlanders are to you."
+    },
+    "MetadataKey": "Fk2_7_1",
+    "Options": {
+      "Fk2_7-L1": {
+        "Id": "Standard",
+        "Text": "And yet they insist on their French ancestry. Un affront !"
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "I don't think that's what the Quiet Revolution was about..?",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataKey": "Fk2_7_1"
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_7_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_7-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_7-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Now *that* is a deranged comparison.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Truth",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_8A"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "No, no, I can kinda see it.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Complex",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_8B"
+          }
+        ]
+      }
+    }
+  ]
+}

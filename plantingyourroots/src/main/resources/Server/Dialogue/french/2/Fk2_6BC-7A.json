@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_6BC-7A",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Merci. I truly cannot express how much that means to me."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_5_1"
+      }
+    }
+  ]
+}

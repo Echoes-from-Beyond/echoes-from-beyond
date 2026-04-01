@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_8_var3",
+  "Line": {
+    "Id": "Standard",
+    "Text": "You hesitate, but you are a friend to me."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_8_1"
+      }
+    }
+  ]
+}

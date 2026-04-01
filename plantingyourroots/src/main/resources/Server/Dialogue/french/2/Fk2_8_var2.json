@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_8_var2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I am glad to have called you my friend."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_8_1"
+      }
+    }
+  ]
+}

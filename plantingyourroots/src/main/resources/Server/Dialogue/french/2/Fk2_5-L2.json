@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5-L2",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Ah, le deuxième is simple. There is a few people who harbor sentiments négatifs for who I am. Someone has gone through my things at night, too, and did not leave them in good condition."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I spite them with mes drapeaux. For any that they take down, I put up une version plus grande."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I think I may know who l'auteur principal is."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Whatever the answer, he isn't providing it. He just shakes his head to himself."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5_1"
+        }
+      }
+    ]
+  }
+}

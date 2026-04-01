@@ -1,0 +1,151 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_8",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Les Outlanders have rejected the good of l'humanité in favor of your -- our -- ancient enemy. So have the québécois rejected their prior community, one that is always happy to welcome its own, so that they can mingle better with the Fennish."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "With each day that they sit and do nothing about their condition, they contribute more against French interests and toward the royalty of l'Angleterre. Oui, Outlanders are more ... involved than that, but you can see les similitudes."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I understand that part of that is how they have been raised. Siècles of ownership by the Fennish have dulled their senses and ambition. Like how the Void brought ruination upon its human cult."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "But it is easily resolved by a willpower that they do not possess !"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It is ... tragique, oui. They could have been a people as beautiful as their land, and their country as successful and opportune as their expeditions promised."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Though he was rather incensed this whole time, his eyes now adopt a sad crease. His gaze falls upon the long-forgotten meal before you: your half-broken baguette and the garlic dip."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "But before you comment -- and I see that you are preparing one -- I must thank you for the talk. You have relieved me of a great stone upon mon coeur."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Relationship",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk_Cautious"
+          }
+        },
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "MetadataKey": "Fk_Relationship",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Fk_Friend"
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk2_8_var1"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Relationship",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk_Friend"
+          }
+        },
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "Advance",
+              "Next": "Fk2_8_var2"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Boolean",
+          "Kind": "And",
+          "Conditions": [
+            {
+              "Id": "Not",
+              "Delegate": {
+                "Id": "Equals",
+                "MetadataStoreKey": "FRENCH_KWEEBEC",
+                "MetadataKey": "Fk_Relationship",
+                "Metadata": {
+                  "Id": "String",
+                  "Value": "Fk_Cautious"
+                }
+              }
+            },
+            {
+              "Id": "Not",
+              "Delegate": {
+                "Id": "Equals",
+                "MetadataStoreKey": "FRENCH_KWEEBEC",
+                "MetadataKey": "Fk_Relationship",
+                "Metadata": {
+                  "Id": "String",
+                  "Value": "Fk_Friend"
+                }
+              }
+            }
+          ]
+        },
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "MetadataKey": "Fk_Relationship",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Fk_Friend"
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk2_8_var3"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

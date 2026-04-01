@@ -1,0 +1,50 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5-L3",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "The one across the pond ? That is my work."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Le tour Eiffel is very recognisable, oui ? It evokes the image of a candlelit dinner by the water, with the tower rising in the background."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "The actual origines of the building are not very romantique. You will hear theories about it being a historical investment scam, or a stamen-measuring contest between artistes that France was tricked into funding."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "And if you bring up their dame da fer, Parisiens will scoff at you. The monument is only romantique when it does not tower over you every day of votre vie. Also when it does not attract many touristes inconsidérés."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "But spend a lifetime away from it, and it invites un nostalgie intense in you. It is also a novelty for the others, so building it is a win-win for me and Kweebdrasil."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Bringing all that cobblestone was not fun ! The last time that Kweebdrasil had un ascenseur, it was difficult to signal to the operators all the way from the roots. The wood also rotted so bad that some Ferans--"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5_1"
+        }
+      }
+    ]
+  }
+}

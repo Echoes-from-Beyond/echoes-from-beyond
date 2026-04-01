@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_7-L1",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Perhaps not, but it perfectly describes the québécois attitude to their lives."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Instead of taking your fate in your own hands, you suffer in silence until your problems solve themselves on their own. This is not the French way !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_7_1"
+        }
+      }
+    ]
+  }
+}

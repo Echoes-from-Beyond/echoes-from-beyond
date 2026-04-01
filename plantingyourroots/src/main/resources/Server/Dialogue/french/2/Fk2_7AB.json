@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_7AB",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I am unsure about your awareness of politique européenne, but you have to understand that Great Fen et France are sworn enemies. We would all rather die than feel the unseasoned soup-fingers of the Fennish intruding on our rights."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "But Québec is a colony de France that lives controlled by a Fennish colony -- the most of the rest of Whisperfrost. Yet, while we overthrew our despots siècles ago, Québec is still refusing to make even an honest effort."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_7"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_6A_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "It is exactement as it sounds."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "You told me about your family visiting it. I don't know what happened, but surely it's not healthy to dwell on that non-stop.",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "MetadataKey": "Fk_Origin",
+        "Metadata": {
+          "Id": "String",
+          "Value": "Fk_Zone3"
+        }
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_7A"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "But why do you care so much?",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_7B"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Okay, and?",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_7AB"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I can't believe it. After decades of trying and failing, you'd think that they'd know when to stop.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_7C"
+      }
+    }
+  ]
+}

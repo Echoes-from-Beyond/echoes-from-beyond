@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_7C",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Oui ! It would seem that we are in an agreement."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "It is not so much about them trying, but how pathetique they end up doing so. They try to break away from their masters and the masters of their masters -- the monarchs of Great Fen -- but they put no heart into it !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_7"
+        }
+      }
+    ]
+  }
+}

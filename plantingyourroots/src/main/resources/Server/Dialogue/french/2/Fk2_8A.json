@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_8A",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Hold your tongue ! It fits more than it would seem at a first ... erm, sight."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_8"
+      }
+    }
+  ]
+}

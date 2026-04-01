@@ -1,0 +1,50 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_5-L4",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Oh ! Well, I am most familiar with French cuisine, but I can try my hand at anything."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Except Whisperfrost ! Some Kweebecs insist that I should be well-versed in that ... that *slop* because of one notorious province and our supposed « similarity. »"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Am I meant to know what in Gaia's name un « timbit » is supposed to be ? And do not get me started on la farce that is poutine."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Ouf ! Even son nom sounds like one of their bizarre exclamations."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "And maple syrup !? Humans like you probably do not understand, as it is a delicacy for you too, but this is like drinking your own sang for us. They relish it !"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Both his face and hands are clenched far tighter than they should be. He eventually notices this himself, and forces his body to relax against the back of his seat."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_5_1"
+        }
+      }
+    ]
+  }
+}

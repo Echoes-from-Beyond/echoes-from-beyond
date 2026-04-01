@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_8B",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Of course you do. It seems to be both tree and human nature to stray from what is juste in some groups."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_8"
+      }
+    }
+  ]
+}

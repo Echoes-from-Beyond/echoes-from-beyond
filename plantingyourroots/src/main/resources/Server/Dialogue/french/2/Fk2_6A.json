@@ -1,0 +1,78 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_6A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Really ? Can you not think of anything else to chat about ?"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I-- I am sorry. I did not mean for that to come out so accusatoire. I am happy that you offered to listen, but it is not something I want to--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "His eyes squeeze closed, enough that the wrinkles show through his evenly-applied foundation. French Kweebec scoffs to himself before taking a deep breath."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "You are right. You did not say it, but I think that this is not making me a great partenaire in conversation. So, let us talk about the one thing that mon esprit obstiné cannot let go of."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Earlier, our one brave courrier climbed the tree. Normalement, this is a joyous occasion, but he brought some nouvelles terribles. It has haunted me since."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The air is silent again, but for the chatter of distant Kweebecs and the overly loud creaking of their decrepit market. French Kweebec deliberates on his next words but, for a time, his restless fingers put in way more effort than his tongue."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "This goes on for so long that your mind involuntarily flits through the possibilities. Are berets outlawed? Was France set ablaze by another revolution?  Was his family fed to a Trork woodchipper?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Just as your thoughts turn more and more bizarre, he speaks up--"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Québec is seeking independence again."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "...and?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_6A_1"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "So?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_6A_1"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "WHAT?!",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_6A_1"
+        }
+      }
+    ]
+  }
+}

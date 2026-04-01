@@ -1,0 +1,82 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_6BC",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Who knows what would happen if you let me be ? I could cover l'arbre entier in mes baguettes."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "And then who would eat them ? Are they to waste and decay ?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Non ! That is not how you treat your food."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Well, we can't have that.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_6BC-7A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "How is that my problem?",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "MetadataKey": "Fk_Relationship",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Fk_Disappointment"
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk2_6BC-7B"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Don't even bother responding to that.]",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "MetadataKey": "Fk_Relationship",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Fk_Disappointment"
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk2_6BC-7B"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

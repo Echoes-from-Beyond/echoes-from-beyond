@@ -55,11 +55,8 @@
             }
           },
           {
-            "Id": "Not",
-            "Delegate": {
-              "Id": "Equals",
-              "MetadataKey": "Fk2_5_1-prg1"
-            }
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg1"
           }
         ]
       },
@@ -109,11 +106,8 @@
             }
           },
           {
-            "Id": "Not",
-            "Delegate": {
-              "Id": "Equals",
-              "MetadataKey": "Fk2_5_1-prg2"
-            }
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg2"
           }
         ]
       },
@@ -168,11 +162,8 @@
             }
           },
           {
-            "Id": "Not",
-            "Delegate": {
-              "Id": "Equals",
-              "MetadataKey": "Fk2_5_1-prg2"
-            }
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg2"
           }
         ]
       },
@@ -210,11 +201,8 @@
         "Kind": "And",
         "Conditions": [
           {
-            "Id": "Not",
-            "Delegate": {
-              "Id": "Equals",
-              "MetadataKey": "Fk2_5_1-prg3"
-            }
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg3"
           }
         ]
       },
@@ -246,17 +234,14 @@
     },
     {
       "Id": "Standard",
-      "Text": "Who made the tower?",
+      "Text": "What else can you cook?",
       "Condition": {
         "Id": "Boolean",
         "Kind": "And",
         "Conditions": [
           {
-            "Id": "Not",
-            "Delegate": {
-              "Id": "Equals",
-              "MetadataKey": "Fk2_5_1-prg3"
-            }
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg4"
           }
         ]
       },
@@ -265,10 +250,10 @@
         "Actions": [
           {
             "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1-prg3",
+            "MetadataKey": "Fk2_5_1-prg4",
             "Metadata": {
               "Id": "String",
-              "Value": "Fk2_5_1-prg3"
+              "Value": "Fk2_5_1-prg4"
             }
           },
           {
@@ -276,12 +261,238 @@
             "MetadataKey": "Fk2_5_1",
             "Metadata": {
               "Id": "String",
-              "Value": "Fk2_5-L3"
+              "Value": "Fk2_5-L4"
             }
           },
           {
             "Id": "Advance",
-            "Next": "Fk2_5-L3"
+            "Next": "Fk2_5-L4"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Why are you so anxious?",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg5"
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1-prg5",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg5"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5-L5"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5_1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I can tell that something's really bothering you. Do you want to talk about it?",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg2"
+            }
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg3",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg3"
+            }
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg4",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg4"
+            }
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg5",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg5"
+            }
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_6A"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Nah.",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Equals",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Friend"
+            }
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg1"
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg2"
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg3"
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg4"
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg5"
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg6"
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk2_State",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Initial-Rejection"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1-prg6",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg6"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6B"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Nah.",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Not",
+            "Delegate": {
+              "Id": "Equals",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "MetadataKey": "Fk_Relationship",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Fk_Friend"
+              }
+            }
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg1"
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg2"
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg3"
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg4"
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg5"
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk2_5_1-prg6"
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk2_5_1-prg6",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk2_5_1-prg6"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk2_State",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Initial-Rejection"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6C"
           }
         ]
       }

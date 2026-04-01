@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_6C",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Mon ami, I understand that we barely know each other, but I beg you that you do not go right now."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_6BC"
+      }
+    }
+  ]
+}

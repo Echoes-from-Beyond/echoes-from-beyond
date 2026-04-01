@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_7A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Oh, ma famille is fine. They are just ... forever scarred by their trip, but they are otherwise bien."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "That is not what I wanted to get at."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk2_7AB"
+        }
+      }
+    ]
+  }
+}

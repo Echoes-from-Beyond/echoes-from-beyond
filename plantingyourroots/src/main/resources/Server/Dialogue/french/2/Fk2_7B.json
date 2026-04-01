@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_7B",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I'll have you know that I care *appropriately.* Gah, let me explain !"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_7AB"
+      }
+    }
+  ]
+}

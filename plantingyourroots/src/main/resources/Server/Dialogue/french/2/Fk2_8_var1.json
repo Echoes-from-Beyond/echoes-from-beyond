@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk2_8_var1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "We had a rocky start, but I am willing to call you my friend !"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk2_8_1"
+      }
+    }
+  ]
+}

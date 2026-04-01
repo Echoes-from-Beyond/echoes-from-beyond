@@ -1,0 +1,33 @@
+{
+  "Type": "Chain",
+  "Id": "Fk2_6BC-7B",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "But ..."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You are already halfway down the stairs by the time that he utters that. It doesn't take him long to recognize the futility of saying anything further."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}
