@@ -1,5 +1,7 @@
 package org.echoesfrombeyond.gradle.plugin
 
+import com.diffplug.gradle.spotless.SpotlessExtension
+import com.diffplug.spotless.LineEnding
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import java.net.URI
 import kotlin.jvm.java
@@ -39,8 +41,9 @@ class JavaConventionPlugin : Plugin<Project> {
   override fun apply(target: Project) {
     target.group = "org.echoesfrombeyond"
 
-    target.plugins.apply("java-library")
+    target.plugins.apply("com.diffplug.spotless")
     target.plugins.apply("com.gradleup.shadow")
+    target.plugins.apply("java-library")
 
     target.repositories.add(target.repositories.mavenCentral())
 
@@ -110,6 +113,37 @@ class JavaConventionPlugin : Plugin<Project> {
     }
 
     target.tasks.named("jar", Jar::class.java).configure { it.archiveClassifier.set("thin") }
+
+    target.extensions.configure(SpotlessExtension::class.java) { spotless ->
+      spotless.lineEndings = LineEnding.UNIX
+      spotless.encoding = Charsets.UTF_8
+
+      spotless.kotlinGradle { kotlinGradle ->
+        kotlinGradle.target("*.gradle.kts")
+        kotlinGradle.ktfmt("0.61")
+      }
+
+      spotless.json { json ->
+        json.target("src/*/resources/**/*.json")
+        json.gson().version("2.13.2").indentWithSpaces(2)
+      }
+
+      spotless.java { java ->
+        java.target("src/*/java/**/*.java")
+        java.removeUnusedImports()
+        java.importOrder(
+            "java|javax",
+            "",
+            "org.echoesfrombeyond",
+            "\\#java\\#javax",
+            "\\#",
+            "\\#org.echoesfrombeyond",
+        )
+        java.googleJavaFormat("1.33.0").reflowLongStrings().reorderImports(false)
+        java.formatAnnotations()
+        java.licenseHeaderFile(target.rootDir.resolve("LICENSE_HEADER"))
+      }
+    }
   }
 }
 

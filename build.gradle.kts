@@ -1,3 +1,5 @@
+import com.diffplug.gradle.spotless.SpotlessExtension
+import com.diffplug.gradle.spotless.SpotlessPlugin
 import com.diffplug.spotless.LineEnding
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -12,9 +14,9 @@ import java.nio.file.StandardOpenOption
 import java.util.jar.Manifest
 import org.echoesfrombeyond.gradle.plugin.HytaleDecompiler
 
-plugins { id("com.diffplug.spotless") version "8.3.0" }
-
 apply<HytaleDecompiler>()
+
+apply<SpotlessPlugin>()
 
 val hytaleDotfile: RegularFile = layout.projectDirectory.file(".hytale")
 val runDirectory: Directory = layout.projectDirectory.dir("run")
@@ -322,65 +324,16 @@ tasks.register("cleanRunDir", Delete::class.java) {
   )
 }
 
+tasks.named("decompileHytale").configure { inputs.file(serverJar) }
+
 repositories { mavenCentral() }
 
-spotless {
+extensions.configure(SpotlessExtension::class.java) {
   lineEndings = LineEnding.UNIX
   encoding = Charsets.UTF_8
 
-  kotlin {
-    target("*/src/*/kotlin/**/*.kt")
-    ktfmt("0.61")
-  }
-
   kotlinGradle {
-    target("**/*.gradle.kts")
-    targetExclude(".*/**/*")
-    targetExclude("run/**/*")
-
+    target("*.gradle.kts")
     ktfmt("0.61")
-  }
-
-  json {
-    target("*/src/*/resources/**/*.json")
-    gson().indentWithSpaces(2).version("2.13.2")
-  }
-
-  java {
-    target("*/src/*/java/**/*.java")
-
-    // Always clean these up first.
-    removeUnusedImports()
-
-    // Order useful imports according to the outline below.
-    //
-    // - Non-static imports:
-    //   - Anything in `java` or `javax`
-    //   - Everything else that isn't specified
-    //   - Anything in `org.echoesfrombeyond`
-    // - Static imports:
-    //   - Anything in `java` or `javax`
-    //   - Everything else that isn't specified
-    //   - Anything in `org.echoesfrombeyond`
-    importOrder(
-        "java|javax",
-        "",
-        "org.echoesfrombeyond",
-        "\\#java\\#javax",
-        "\\#",
-        "\\#org.echoesfrombeyond",
-    )
-
-    googleJavaFormat("1.33.0")
-        .reflowLongStrings()
-
-        // We already reordered imports according to our own scheme, so disable Google's import
-        // reordering.
-        .reorderImports(false)
-
-    formatAnnotations()
-    licenseHeaderFile(layout.projectDirectory.file("LICENSE_HEADER"))
   }
 }
-
-tasks.named("decompileHytale").configure { inputs.file(serverJar) }

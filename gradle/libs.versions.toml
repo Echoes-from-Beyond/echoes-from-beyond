@@ -37,6 +37,7 @@ testRuntimeOnly = [
 build = [
     "gson",
     "shadow",
+    "spotless",
     "vineflower"
 ]
 
@@ -61,6 +62,7 @@ plantingyourroots-shadow = [
 # libraries.
 [versions]
 junit = "6.0.3"
+spotless = "8.4.0"
 
 # Libraries are defined below, sorted by ascending alphabetical order of their
 # configuration keys.
@@ -107,6 +109,15 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 # scope: plugins and libraries
 shadow = { module = "com.gradleup.shadow:com.gradleup.shadow.gradle.plugin", version = "9.4.1" }
 
+# usage: code formatting
+# scope: build script
+spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version.ref = "spotless" }
+
 # usage: decompiling Hytale
 # scope: root project
 vineflower = { module = "org.vineflower:vineflower", version = "1.11.2" }
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version = "2.3.0" }
+
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

@@ -1,8 +1,15 @@
+import com.diffplug.spotless.LineEnding
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
-plugins { id("org.jetbrains.kotlin.jvm") version "2.3.0" }
+plugins {
+  alias(libs.plugins.kotlin)
+  alias(libs.plugins.spotless)
+}
 
-repositories { gradlePluginPortal() }
+repositories {
+  gradlePluginPortal()
+  mavenCentral()
+}
 
 dependencies {
   val libs = project.extensions.getByName<VersionCatalogsExtension>("versionCatalogs").named("libs")
@@ -13,3 +20,18 @@ dependencies {
 }
 
 project.extensions.configure<KotlinJvmProjectExtension>("kotlin") { jvmToolchain(25) }
+
+spotless {
+  lineEndings = LineEnding.UNIX
+  encoding = Charsets.UTF_8
+
+  kotlin {
+    target("src/*/kotlin/**/*.kt")
+    ktfmt("0.61")
+  }
+
+  kotlinGradle {
+    target("*.gradle.kts")
+    ktfmt("0.61")
+  }
+}
