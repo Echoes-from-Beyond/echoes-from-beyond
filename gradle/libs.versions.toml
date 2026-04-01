@@ -118,6 +118,6 @@ spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin
 vineflower = { module = "org.vineflower:vineflower", version = "1.11.2" }
 
 [plugins]
-kotlin = { id = "org.jetbrains.kotlin.jvm", version = "2.3.0" }
+kotlin = { id = "org.jetbrains.kotlin.jvm", version = "2.3.20" }
 
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
