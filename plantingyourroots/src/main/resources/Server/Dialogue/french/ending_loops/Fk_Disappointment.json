@@ -1,0 +1,41 @@
+{
+  "Type": "Chain",
+  "Id": "Fk_Disappointment",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "At odds with your initial meeting, French Kweebec is not very enthusiastic the next time that you find him."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Ah, mon ami. You have not come at a good moment, I am afraid."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "My thoughts are stuck in un circuit of their own. I must take some time to deal with them."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Je vous prie de m'excuser."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}
