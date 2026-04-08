@@ -1,0 +1,79 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_3_1",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "You're not sure why you suddenly care about the smell. For all you know, the breeze could've carried it from the lower branches. It could also just be the remains of French Kweebec's breakfast. One that wouldn't have entirely involved baguettes."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "French Kweebec immediately notices you moving away from his table. He opens his mouth to say something, but relaxes shortly after. Did he think that you were about to leave?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Still you feel his gaze on you while you look around, from the musty bread to the twigs in the canopy. Most of the scent was lost with the wind, yet you're convinced that you're still able to catch some of it. Or maybe the last of the breeze still lingers in your nostrils."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You look over and under the shelves on the back wall, and repeat the same procedure for the bread-bearing table in the corner. Nothing. Nothing in the passage. Nothing around the water -- though you're not sure why you expected to find anything there."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "When you think that you catch it again, the scent -- or perhaps just your imagination -- guides you to a clump of leaves hanging right over the lavender planters."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "[Who cares? Just trample all over the flowers.]",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "SetMetadata",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "MetadataKey": "Fk_Lavender",
+              "Metadata": {
+                "Id": "String",
+                "Value": "Fk_Trampled"
+              }
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk3_4A"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Don't be a bramble. Find some other way to reach it.]",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "AdjustInteger",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "MetadataKey": "Fk_Romance",
+              "Delta": 1
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk3_4B"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

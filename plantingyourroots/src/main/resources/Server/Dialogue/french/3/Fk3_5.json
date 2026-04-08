@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_5",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Now that we have those désagréables out of the way, forgive me if I assume that you are not able to sit still and enjoy the nature right now."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "And forget what just happened, s'il vous plaît."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "However confident he now tries to project himself as, his voice is clearly shaking."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_5_1"
+        }
+      }
+    ]
+  }
+}

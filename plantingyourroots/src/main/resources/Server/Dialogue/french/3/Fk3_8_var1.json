@@ -1,0 +1,89 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_8_var1",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "He pushes a hand out to you, and hesitates for a moment. Whatever he initially meant to do, it becomes a rush to reach you and envelop you in a hug so tight that air is forcefully expelled out of your lungs."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You are crushed against his chest, which is so sturdy it's almost like parts of French Kweebec have already turned into a tree -- a *tree* tree, not whatever younger Kweebecs are. The sensation worsens when his limbs press against your back."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Even if you're enjoying this absolute monster of an embrace, it's a simple biological fact that you need to breathe. In your desperate attempt to regain at least some oxygen, you wind up squirming further into his thin shirt, and are subject to every ridge in the way."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You've never really been hugged by a Kweebec before, only a human; or, at least, another warm-blooded species. It feels wrong that, as burly as this tree is, he's indistinguishable from the air around you temperature-wise."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "But even though he is neither soft nor warm, his affection seems to bleed right into you: from plant to animal. And so you relax in his strong arms, surprised that his own breaths are as perceptible as they are, or that Kweebecs draw breaths the way you understand them at all."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Then again, you can't see any leaves on him to facilitate their more standard manner of gas exchange. You wonder what kind of Kweebec he is, knowing that they're able to mimic virtually any (non-sapient) tree species on Orbis."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Those thoughts have to wait, however, as he pulls you off himself shortly after you make yourself comfortable. He assumes a sheepish grin and, on his left side, you see a spot of auburn where his foundation is smeared."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I am very sorry ! I really appreciate you, so I--"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Oh, erm, a bit of mon maquillage is on your cheek."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "However rough his embrace was, his now hand gently touches the affected spot -- or so you presume, since there's no nearby mirror. It would seem that you are finally living the French romance of your dreams."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Until he starts trying to *swat* the makeup off, as if your face is a despicable little mosquito. He doesn't appear to mind your discomfort, since he continues his work with intense concentration."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "By the time that he's done, you feel like you rolled your cheek in thistle. The thorny kind."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "There ! You would think that un Français would know to take care around his face, because in France, we greet with kisses."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "E-erm, before you freak out, I do not intend to do that here ! I know that this is strange for you--"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Forget it !"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Mildly embarrassed, he storms off downstairs. You suppose that this is it for the day."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_3C",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Surely you do not mean that !"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Many share, erm ... une idée that uniqueness does not exist anymore, and saying anything in contraire is like being délirant."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "But that is a stance délirant itself to have ! No one is a product of same exactement circumstances. By nature, everyone has a different story to tell."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_3"
+        }
+      }
+    ]
+  }
+}

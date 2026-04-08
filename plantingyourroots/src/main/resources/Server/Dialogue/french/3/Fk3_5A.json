@@ -1,0 +1,58 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_5A",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "He doesn't immediately respond but for a sigh of relief. A frown, the one that budded in meantime, disappears into his perfectly white face."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It is ... it is très difficile to explain. I was ... there is a Kweebec delicacy that I know some humans abhor. But it is undeniably a great fertilizer for plants."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I do not wish to expose you to it. I saw you approaching and I tried to hide it, but I am at a loss for cachettes possibles around ici. So ..."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "... it is a rotting deer carcass."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "As disgusting as that thought is, you can't help but note that this doesn't make sense in the least. For one reason or another, you've been exposed to plenty of rotten flesh during your journeys, and its nauseating, sweet-sour smell is burned into your memory."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Whatever this is resembles a... decent meal, for the lack of a better term. There's a hint of meat, certainly, but it's something *cooked* rather than festering. And it's not like Kweebdrasil's height can stop animals from decomposing normally."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Juuust in case that he's not lying about it, however, you decide not to investigate any further. Either way, it seems that his nerves -- whatever passes for nerves in a tree -- are about to combust out of anxiety."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "It would be very bad for a human, but it is good for our symbiotes. Oui ? Like our less sapient cousins, our role in Gaia's ecosystem is to recycle."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_5"
+        }
+      }
+    ]
+  }
+}

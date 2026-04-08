@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_7A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I have thought about it many times. And other possibilités beside. I am not sure what I did to have you assume that I am ignorant of it."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Perhaps some of it is deserved. Perhaps I have been moping, like you say."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "But do not presume that you know my life after trois rencontres. Or that mes problèmes are as easily fixed as you imply."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_7"
+        }
+      }
+    ]
+  }
+}

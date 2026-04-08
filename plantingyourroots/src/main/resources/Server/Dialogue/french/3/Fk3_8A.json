@@ -1,0 +1,59 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_8A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "That is the sweetest thing I have been told in some time ... even if that is a bit pathetique. Oui ?"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "For me, not for--"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Ah, it is not meant to be an insult to you. What kind of a host would I be if I ..?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Not",
+          "Delegate": {
+            "Id": "Equals",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Lavender"
+          }
+        },
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_8A_var1"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Lavender"
+        },
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_8A_var2"
+        }
+      }
+    ]
+  }
+}

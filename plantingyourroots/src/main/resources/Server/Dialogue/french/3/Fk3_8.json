@@ -1,0 +1,59 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_8",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I shall let you go now. I am aware that we have not spent that long in here, and I regret that. But I must take some time to myself, if you do not mind."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Merci beaucoup for the time you have given me, though."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "CompareInteger",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Romance",
+          "Comparison": "GreaterThanOrEqualTo",
+          "Value": 5
+        },
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_8_var1"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Not",
+          "Delegate": {
+            "Id": "CompareInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Romance",
+            "Comparison": "GreaterThanOrEqualTo",
+            "Value": 5
+          }
+        },
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_8_var2"
+        }
+      }
+    ]
+  }
+}

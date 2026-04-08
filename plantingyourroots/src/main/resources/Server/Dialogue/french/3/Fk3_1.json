@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_1",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Well, I have had a long think after the last time. And I realised something of importance."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "We spent most of our time talking about me, and I have not given you any of the spotlight. Inacceptable, non ? You should have pointed it out to me."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_1_1"
+        }
+      }
+    ]
+  }
+}

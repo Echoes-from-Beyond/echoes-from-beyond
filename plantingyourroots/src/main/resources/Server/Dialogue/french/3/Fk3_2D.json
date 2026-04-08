@@ -1,0 +1,50 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_2D",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "You don't last a second into your story without messing up in some way. French Kweebec adopts a strange, but distinctively negative expression on his face -- that of either disgust or sadness -- when you mention the essence of a Whisperfrostian's life."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Hockey, the weirdly emphasized donut scene, the blizzards that could turn 5 degrees Celsius into -60 at the drop of a tuque, maple syrup-- well, he as a Kweebec has a reason to be offended by that one."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Still his displeasure persists as you move on to other matters, whether wholesome (the wildlife that surrounds just about every Whisperfrostian's home) or otherwise (the constant raids and destruction by the maddened Outlanders)."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "At one point it seems that he has lost himself deep within his head, and spares your conversation no attention. No matter what you do from then on -- wave at him, question him, or take your story into a weird direction -- he appears to be done with your short meeting."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "There's no point to continuing if he doesn't care, so you opt to wait for him to break out of his stupor. If he ever does."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Just as you begin toying with the possibility of leaving, or perhaps calling for medical assistance of some kind, he addresses you as if nothing happened."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_2ABCDE"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_5B",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "You lunge for the leaves and, for a second, you think that he's dramatically screaming 'NOOO' like he's in some theatrical production. If he truly did, this is now drowned out by the shattering of a plate upon the floor."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "As you originally suspected, the source of the smell is his breakfast. Apparently, he hid the leftovers in the branches overhead for some reason, and you ended up knocking them off."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You play with the idea of apologizing for ruining the rest of his meal, until you notice what it is: between the shards of whatever light material their dishes are made out of, yellow slices of potato gleam in the occasional sunray."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The perfectly moist fries are soaked in a thick, dark-brown liquid that reminds you of gravy -- it certainly smells like it -- and chunks of something pale intermingle with the rest of it... oh."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It is not what it looks like !"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "After the 'passion' he flaunted in your last conversation, you find yourself so shocked that there's only one thing you can say."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "You're eating poutine.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_5B_1"
+        }
+      }
+    ]
+  }
+}

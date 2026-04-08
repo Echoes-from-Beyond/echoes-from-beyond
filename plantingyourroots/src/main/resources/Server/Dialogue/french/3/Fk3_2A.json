@@ -1,0 +1,50 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_2A",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "You regale him with a tale common to most lone-wolf adventurers of Orbis. So common, in fact, that part of you is convinced that French Kweebec has heard it a million times before."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Regardless of whether he really did or not, he gives you his rapt attention while you describe the very essence of your kind of lifestyle: the aimless exploration, hoping that you'll come across an ancient dungeon--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "--filled to the brim with the powerful relics of a time long passed, or perhaps a beautiful vista in the endless, untamed wilderness that continues to cover the surface of a planet that seems to be embroiled in some sort of an apocalypse every few centuries."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Then there are your grand fights in the hearts of Outlander townships, your raids on dragon nests and the effort of combatting Void invasions--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "--you don't tell him that you are rather fond of *cheesing*, so most of those battles barely ever count as a fair challenge--"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "--and the uphill climb that is attempting to acquire the coveted Harvest Trophy: Gaia's reward to those who further her mission of Life. He seems to be especially delighted with that one, which is typical of a Kweebec."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_2ABCDE"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_2E",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "Your origin is similar to most people born within Devastated Lands -- rather, underneath it. Like many refugees from Crucible, your ancestors have been naturalized to the Slothian society, and that status had been passed down to you."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "French Kweebec reacts accordingly: there is a misconception that it's nigh impossible to survive within the underground jungles, those evocative of Orbis' brutal prehistory, but that isn't the case when your community is used to living among treetops and over sizable bodies of water."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Sure it's a little boring when the glitter and sparkle of most of those crystal-laden caverns remain inaccessible, and the only flying dinosaurs -- all piscivores, thankfully -- are too shy to approach anything vaguely man-made."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "But for a species descended from an animal famous for being slow and sleepy, Slothians know how to have fun. They've invented many kinds of board games to occupy their time, and swinging across the high canopies is a popular, if deadly sport."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Somehow, you doubt that French Kweebec would like you to report on either of those. It's difficult, however, to come up with any more interesting happenings in your village: mostly, it's about humanoids of either species falling to their deaths after a platform collapses."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "All local festivities inevitably involved martial arts, but for one reason or another, you never found yourself able to participate in one. And the most 'scandal' that ever took place was when that one Slothian business mogul travelled over on a holiday, and everyone lost their minds about hosting an important personality."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You think that his businesses are headquartered somewhere in Whisperfrost. However, mentioning as much has French Kweebec narrow his eyes in... recognition, it seems, followed by the beginnings of a sneer. Does the Slothian have a bad reputation or something?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "To be honest, all you know about him is that, allegedly, he had a chronic addiction to social media; in the context of modern Orbis, those are public noticeboards where people pretty much just insult each other. The holiday was part of an effort to combat his condition."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_2ABCDE"
+        }
+      }
+    ]
+  }
+}

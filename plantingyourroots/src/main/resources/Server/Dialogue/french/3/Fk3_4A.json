@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_4A",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "The pleasant aroma of freshly-crushed lavenders soon replaces the savory tones in the air. What *isn't* pleasant, however--"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "What are you doing !?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "His chair shrieks across the wood as it flies back, preceded by French Kweebec rising to his feet with the forcefulness of a rampaging wolf."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Is this some bizarre human concept of entertainment ? To ruin someone's jardin out of boredom ? If you are feeling understimulated, you could have--"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_4"
+        }
+      }
+    ]
+  }
+}

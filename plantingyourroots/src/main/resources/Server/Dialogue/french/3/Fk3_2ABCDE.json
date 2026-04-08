@@ -1,0 +1,73 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_2ABCDE",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "You have definitely led une vie intéressante."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I did sense some undue humilité in your words. If I am right, my advice is that you should not worry at all ! During my long travels, I have talked with many from different walks of life."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I have come to understand what « boring » truly means, and you are far from reaching even un pourcentage de la définition."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Point taken.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_3"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "You might be reading too much into this.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_3B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Nope. I'm as boring as they come.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_3C"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "No offense, man, but it doesn't take much to be more interesting that the Fr*nch.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "AdjustInteger",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "MetadataKey": "Fk_Complex",
+              "Delta": 1
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk3_3D"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

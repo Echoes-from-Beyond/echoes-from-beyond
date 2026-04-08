@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_8B",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I beg you to understand that I am not doing this on purpose. I am sure that it must be irritant. I would probably be annoyed too, if I was you."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Things like these can be easy to hide until you get a dash of hope. And when that proves to be décevant, as it has been in my case, you are not able to slip into your disguise as easily as before."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_8"
+        }
+      }
+    ]
+  }
+}

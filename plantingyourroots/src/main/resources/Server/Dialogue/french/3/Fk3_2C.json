@@ -1,0 +1,50 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_2C",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "The Howling Sands are an arid, hot place -- a nightmare in Kweebecs' eyes. The tree before you reacts accordingly as you regale him of the first thing that comes to your mind: the nigh intolerable weather."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Once you pass over that hurdle, you talk about the oases hidden within endless dunes of sand: the pits in the sun-baked ground full of glistening water; a precious commodity in those lands. Perhaps even a hardy Kweebec could survive there for some time."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "(With a vaguely horrified look on his face, French Kweebec shakes his head at that notion.)"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "But that image of idyll is quickly shattered when you mention the reigning emperors of the desert: the Scaraks. Despite how long it's been since their hiveminds last formed an intelligent society, the insects continue subjugating most denizens of the region."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "While the vulpine folk are adept at slaughtering those brutal creatures, you can't even find respite in Feran encampments. Despite being the desert's apex predators both by physical and magical means, they are too skittish to trust anyone but their closest relatives."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "And thus life continues. Through the harsh sandstorms, you search for water and a viable hunting ground, leaving only when you utterly deplete one of the two. Then you brave the scalding, bug-covered horizon all over again."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_2ABCDE"
+        }
+      }
+    ]
+  }
+}

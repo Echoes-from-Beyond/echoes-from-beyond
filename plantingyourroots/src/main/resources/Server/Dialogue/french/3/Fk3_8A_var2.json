@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk3_8A_var2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Non, how about I stop making it worse ?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk3_8"
+      }
+    }
+  ]
+}

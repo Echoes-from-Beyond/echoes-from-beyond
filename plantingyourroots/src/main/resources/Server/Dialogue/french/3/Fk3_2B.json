@@ -1,0 +1,54 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_2B",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "Being a Kweebec, particularly that from France, he most likely knows the Emerald Wilds better than you do. You're not sure what news you could possibly bring to him -- or, indeed, whether he would put up with you retelling all of his ancestral knowledge for the sake of conversation."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Either way, you give it a shot. You tell him of the mountains that surround your home within a vaguely heart-shaped valley: a feature that seems weirdly common for this kind of biome, from what you've heard."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "If this was in France, you would not have any peace from les touristes !"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You led a simple life in comparison to some of the more advanced human societies. There was no bureaucracy, no industry -- just you, your community, and your cozy little farm."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "But there was nothing else to do. Sure, you didn't feel that way as a child, but there seemed to be an unspoken law that your youthful antics are something to 'grow out of' once you reach adulthood."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "What then? Humans are not built to stay as idle as a Kweebec Ancient, even if your grandparents' long excursions to the couch were trying to prove otherwise. And there was only so much farming you can do with the four-five crops that existed in your vicinity."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "There was but a single option in your eyes. Go explore the rest of the little world you've seen from your village. If you ever come back to farming, you'll definitely have a more exotic offering of produce."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_2ABCDE"
+        }
+      }
+    ]
+  }
+}

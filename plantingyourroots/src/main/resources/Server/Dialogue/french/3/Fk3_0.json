@@ -1,0 +1,66 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_0",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "French Kweebec seems to be in much higher spirits today. He wears a faint, pleased smile while looking over his pond, leaning back against his chair in a rather casual manner."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You can't help but notice that the table in the back is still crammed with baguettes. You wonder whether he stress-baked another few batches, or these are the same specimens from last time. Were they just lying here, exposed to the elements?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "(Eugh.)"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Ah, salut ! Ça va ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "I'm doing great, now that you're here. [Wink at him.]",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_1A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Today has been a good day.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_1B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I'm okay.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_1C"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Doom and gloom have been my only company since birth.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_1D"
+        }
+      }
+    ]
+  }
+}

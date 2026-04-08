@@ -1,0 +1,85 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_7",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Very well. I suppose that I should offer you une explication, so that I at least quit being so déroutant."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I only ask you to be patient, because this is hard for me to talk about. I would also be très reconnaissant if you keep this between us. I do not wish for pity from others."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "His eyes seem more interested in the way that his makeshift tent ripples in the breeze, which now blows that earlier scent away from you. His gloved hands anxiously tap against the edge of his table."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I had very few opportunities since I was a seedling. Even this move to Kweebdrasil happened quite late in ma vie, and some of it is my fault."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I love my country, and I tried so hard to make mes aspirations work there. But it was all for nothing. Eventually, I had to make a decision that ... still pains me, to be honest, but I thought that it was for the best."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Now I fear that I made it too late. I wish to leave mon héritage before I take root, but I am limited for time to cause any impact upon the world. I am not even sure how to begin."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Perhaps I am trop ambitieux, but my wish is to not be forgotten like so many autre Kweebecs in their seniority. And if I cannot do something so simple as to integrate with cette communauté ici, what am I able to do ? I am not managing to be memorable for a small branchful."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I assure you, I am not looking for your help. This is my own bataille. But this is what I deal with, if that clears it for you."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "But I *want* to help you. I care about you.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "AdjustInteger",
+              "MetadataKey": "Fk_Romance",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "Delta": 1
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk3_8A"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Fair enough.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_8"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Whether you intended to or not, you were making it my problem either way. You keep zoning out during our chats.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_8B"
+        }
+      }
+    ]
+  }
+}

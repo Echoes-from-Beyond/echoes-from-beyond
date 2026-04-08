@@ -1,0 +1,55 @@
+{
+  "Type": "Standard",
+  "Id": "Fk3_5_1",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "Are there any other burning curiosities you have about me, before you go snooping too far again ?"
+    },
+    "MetadataKey": "Fk3_5_1",
+    "Options": {
+      "Fk3_5-L1": {
+        "Id": "Standard",
+        "Text": "I may have to make today's conversation short. If there is anything still bothering you, you should say it."
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Nah, I'm good.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk3_5_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk3_5-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_5-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Where exactly do you come from? Other than 'somewhere in France'.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk3_6"
+      }
+    }
+  ]
+}

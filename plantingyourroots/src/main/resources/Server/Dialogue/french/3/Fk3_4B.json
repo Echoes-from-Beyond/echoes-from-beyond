@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_4B",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "You maneuver yourself around a planter's stone frame, twisting around and across to a raised section of wood behind it. During your acrobatics, you notice that French Kweebec is beaming a strange expression your way."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He seems to appreciate the fact that you are taking care not to destroy his plants, but he's lost as to why you're messing around in the first place."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Mon ami, if you wish to pass by, you can just go around the--"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_4"
+        }
+      }
+    ]
+  }
+}

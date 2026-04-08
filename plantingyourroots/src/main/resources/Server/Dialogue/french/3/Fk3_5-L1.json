@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk3_5-L1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Do not worry about upsetting me more, if that is what this is about. But I have seen you looking at me out of les coins de votre yeux."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk3_5_1"
+      }
+    }
+  ]
+}

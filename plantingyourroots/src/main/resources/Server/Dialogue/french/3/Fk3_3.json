@@ -1,0 +1,58 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_3",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Regardless, I feel like I have not properly expressed ma gratitude pour these conversations. My days on Kweebdrasil are quite lonely."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Your visits, even as few as they are, have made them more bearable. Merci beaucoup."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You descend into a comfortable silence, neither of you knowing how to -- or caring to -- switch over to a more discussable topic. A light breeze rustles the leaves overhead, scattering sunrays over the pond so that short-lived glimmers appear upon the calm water."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "As the two of you watch over this haven, a thought suddenly pops in your mind. You've noticed it, haven't you? The strange dissonance between French Kweebec's pride in his country, and his reluctance to talk much about it."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Perhaps he feels like he can't trust you yet, but how much trust do you really need to, for example, talk about France's overall culture? The most he did was wave a glass of wine at you, make you a relatively stereotypical meal--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "--and give you an overview of the Eiffel Tower. Despite his insistence, it does not seem like he said much about France. Even the supposed 'politics' have all been centered around Québec."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "In fact, it seems like he's more eager to talk about the Whisperfrost province than his own country. You at least know enough about France to say that most of them don't just protest Québec's existence all day."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Another breeze blows a savory smell in your direction. Its quality makes you doubt that it originates from the copious amounts of bread, and the table before the French Kweebec is empty. Curious."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "[Look around for its source.]",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_3_1"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_1D",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "That is ..."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Are you certain ? You appeared fine hier ..?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Ah, I see. You have become un expert in hiding it after all these years. I understand."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_1"
+        }
+      }
+    ]
+  }
+}

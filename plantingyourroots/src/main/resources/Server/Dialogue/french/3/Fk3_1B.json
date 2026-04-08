@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk3_1B",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Magnifique ! I hope that it will only get better from here."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk3_1"
+      }
+    }
+  ]
+}

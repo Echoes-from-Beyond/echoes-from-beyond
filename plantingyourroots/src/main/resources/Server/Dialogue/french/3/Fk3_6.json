@@ -1,0 +1,69 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_6",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I ..."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Mon ami, I understand what you are trying to ask. But please also understand that this is difficile for me to talk about."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Even though a return is all that mon coeur yearns for, France has no room for someone like me. And this is something that haunts my days."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "The best I can do is build mes petits monuments and treat myself with the smells of home, like la lavande that you must have noticed by now."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "But thinking about it more than that is ... well, it hurts a lot."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I know that this sounds very, erm, hypocrite because I am forcing my home upon the rest of you, with all les drapeaux and very French décor, and even the waftings of ma cuisine. But the easiest way I can explain it to you is that I want to be French, without being too reminded of it."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "You should really try to sort out whatever this is. Have you thought that maybe you don't have company because you mope around too much?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_7A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "If you need to get something off your chest, I'd be willing to hear you out.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "AdjustInteger",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "MetadataKey": "Fk_Romance",
+              "Delta": 1
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk3_7B"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

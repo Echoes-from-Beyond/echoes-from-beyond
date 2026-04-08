@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_7B",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Mon ami, have you not had enough last time ? I have told you that I wish to focus on you ... err, besides the incident from a moment ago."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I truly do appreciate it, but I do not wish this to mean that I take away all l'attention from you and you are resigned to ... "
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Ahh, I did just encourage this, did I not ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_7"
+        }
+      }
+    ]
+  }
+}

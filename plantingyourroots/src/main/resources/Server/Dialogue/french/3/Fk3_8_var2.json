@@ -1,0 +1,33 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_8_var2",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "He nods at you and grapples your hand with one of his own, which squeezes harder than a vice. It makes you wonder how many of these tree elves understand that humans are much squishier than them, so treating them the same as their bark-covered kin isn't the greatest of ideas."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Mercifully, he lets go of you after a few seconds. But you swear that you can already see the purpling of a bruise on your hand."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

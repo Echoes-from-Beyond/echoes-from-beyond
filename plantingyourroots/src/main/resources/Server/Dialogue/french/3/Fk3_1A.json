@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk3_1A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "If that is really the case, then you must somehow be lonelier than I am !"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Erm ... eh-heh-heh ..."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk3_1"
+        }
+      }
+    ]
+  }
+}

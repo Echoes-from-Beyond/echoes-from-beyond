@@ -1,0 +1,75 @@
+{
+  "Type": "Standard",
+  "Id": "Fk3_1_var1",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "Tell me more about where you come from."
+    },
+    "MetadataKey": "Fk3_1_var1",
+    "Options": {
+      "Fk3_1-L1": {
+        "Id": "Standard",
+        "Text": "For better or for worse, that is a significant part of la identité Française. In autre words, you have learned more about France than you might think !"
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Really? I didn't get the impression that we talked that much about you.",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk3_1_var1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk3_1-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_1-L1_var1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "[Indulge him.]",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_2A"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I don't like taking about myself.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk3_2F"
+      }
+    }
+  ]
+}
+

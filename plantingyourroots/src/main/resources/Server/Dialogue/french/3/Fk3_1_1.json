@@ -1,0 +1,198 @@
+{
+  "Type": "Standard",
+  "Id": "Fk3_1_1",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "Tell me more about where you come from."
+    },
+    "MetadataKey": "Fk3_1_1",
+    "Options": {
+      "Fk3_1-L1": {
+        "Id": "Standard",
+        "Text": "For better or for worse, that is a significant part of la identité Française. In autre words, you have learned more about France than you might think !"
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "$Comment": "NO ORIGIN ROUTE",
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "MetadataKey": "Fk_Origin"
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk3_1_var1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Really? I didn't get the impression that we talked that much about you.",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Origin"
+        }
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk3_1_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk3_1-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_1-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "[Indulge him.]",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "MetadataKey": "Fk_Origin",
+        "Metadata": {
+          "Id": "String",
+          "Value": "Fk_Zone1"
+        }
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_2B"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "[Indulge him.]",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "MetadataKey": "Fk_Origin",
+        "Metadata": {
+          "Id": "String",
+          "Value": "Fk_Zone2"
+        }
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_2C"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "[Indulge him.]",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "MetadataKey": "Fk_Origin",
+        "Metadata": {
+          "Id": "String",
+          "Value": "Fk_Zone3"
+        }
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_2D"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "[Indulge him.]",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "MetadataKey": "Fk_Origin",
+        "Metadata": {
+          "Id": "String",
+          "Value": "Fk_Zone4"
+        }
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_2E"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I don't like taking about myself.",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Origin"
+        }
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk3_2F"
+      }
+    }
+  ]
+}
+
