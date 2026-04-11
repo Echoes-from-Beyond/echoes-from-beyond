@@ -1,0 +1,59 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_8",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Well, since you're such good friends now... at least from his perspective, I'd like you to gently steer him away from all of this."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Originally, this whole French thing helped him feel a little better about himself. Now it's doing the opposite."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "CompareInteger",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Romance",
+          "Comparison": "GreaterThanOrEqualTo",
+          "Value": 5
+        },
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_8_var1"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Not",
+          "Delegate": {
+            "Id": "CompareInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Romance",
+            "Comparison": "GreaterThanOrEqualTo",
+            "Value": 5
+          }
+        },
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_8_var2"
+        }
+      }
+    ]
+  }
+}

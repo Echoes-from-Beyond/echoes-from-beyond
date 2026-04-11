@@ -1,0 +1,74 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_2",
+  "Entries": [
+    {
+      "Name": "???",
+      "Line": "Sleeping."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He doesn't elaborate on that. Instead, he just smirks and takes another bite out of his meal."
+    },
+    {
+      "Name": "???",
+      "Line": "I see the issue here. Let me introduce myself proper."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Bonjour, I'm Québec Kweebec. « French » Kweebec's twin brother."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He takes a deep, dramatic bow that accentuates the fuzz on his chest, and sends a chunk of cheese flying to the side. Maybe he should've considered putting the fork down beforehand."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "It takes him a moment to assume his previous pose again, though his slouch has somehow increased tenfold. His legs cross in a manner that perfectly compliments his rather relaxed state of dress."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "How does that even work?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_3A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I knew it.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_3B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Huuuh?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_3C"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Well, you're the hotter one for sure.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_3D"
+        }
+      }
+    ]
+  }
+}

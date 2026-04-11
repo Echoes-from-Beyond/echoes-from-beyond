@@ -1,0 +1,82 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_0",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "After you spend all day looking around, you come across French Kweebec in possibly the most out-of-way location on the entire tree. *In* the tree, if you prefer."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Or... hold on, is that really French Kweebec? At first, you saw a figure clad in black overalls: a very distinctive feature in a Kweebec settlement where most others prefer to be covered in fellow plants. Well, unprocessed ones."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "But then you notice that this tree is way too laid-back to be your French beau. With the striped shirt now loosely tied around his hips, and his roots planted firmly on a bench, his figure seems far bulkier and more imposing than you were led to believe by his... persona? Cosplay?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "All that meticulously applied makeup had disappeared into the ether, to the point that you can barely recognize the face it once hid. Sure, the characteristic mustache is still there, and his eyebrows are as arched as ever, but it somehow just seems wrong to be able to see his true, auburn bark."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "His beard -- whatever Kweebec 'bFk4_0.jsoneards' are supposed to be -- is faded around the edges, receding in the path of the hardened bark that is overtaking his head. It's still smooth enough that you haven't been able to spot a single bump out of line on his foundation."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "This right here is one of the most reliable signifiers of a Kweebec's age... well, besides cutting one up and examining the rings in the wood. But let's not be rude to Kweebdrasil here. The point is, you have quite the elderly gentleman in front of you -- an impression you can't say you've gotten from your earlier interactions."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You just realize something. You have never seen French Kweebec's leaves until now, hidden as they were under that beret, and something -- you're not sure what -- feels off about them. Indeed, they imply that he's a maple Kweebec."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "It's true that Kweebecs form symbiotic relationships with other plants. That's why many of them, despite basically being trees, end up blooming flowers that are far removed from their woody cousins. But those never include other trees, right?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "At least, you can't remember hearing about any Kweebec growing another tree within itself. Ground plants of both wacky and banal varieties, sure. To your knowledge, however, there are none that can perfectly mimic an aging maple leaf."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The Kweebec appears to be in middle of dinner, which he slowly plucks off the plate that he holds in one hand. Your eyes meet, but all that he offers you is a momentary shock; in contrast to his excessive politeness from before, he's now intent on finishing his food."
+    },
+    {
+      "Name": "???",
+      "Line": "Well, I guess I've been found. Hello there, buddy."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "He doesn't speak with French Kweebec's cute accent -- or annoying and overdone, if you're so inclined -- but it's definitely still non-local. That R wasn't pronounced like he's going to hack up a lungful of phlegm, for one."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Uh... you're looking a little different today.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_1A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I see no problems here whatsoever.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_1B"
+        }
+      }
+    ]
+  }
+}

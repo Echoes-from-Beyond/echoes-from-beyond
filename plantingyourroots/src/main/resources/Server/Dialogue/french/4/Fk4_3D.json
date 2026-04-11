@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_3D",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Thanks..?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You can't tell whether he's cringing to death on the inside, or he's somehow genuinely confused by your remark."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Uh... you're looking a little different today.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_1A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I see no problems here whatsoever.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_3"
+        }
+      }
+    ]
+  }
+}

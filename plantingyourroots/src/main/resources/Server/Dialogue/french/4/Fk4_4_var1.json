@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_4_var1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Blaming that Trork ambassador for everything is something that he must've picked up from the locals, but I don't think that poor man ever interacted with Canuck Kweebec. No one forced anyone into cooking poutine."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_4_1"
+      }
+    }
+  ]
+}

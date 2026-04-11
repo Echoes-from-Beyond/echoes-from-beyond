@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_1-L2",
+  "Entries": [
+    {
+      "Name": "???",
+      "Line": "I haven't been at a Tim Kweertons ever since we left Whisperfrost. Even before that... eh."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I'll tell you a secret. It's all fast food trash, but there's a perception that if it's not Kweemerican, it's somehow automatically better. If the coffee is not Slothbucks, it's automatically the greatest thing you've ever had."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "???"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_1_2"
+        }
+      }
+    ]
+  }
+}

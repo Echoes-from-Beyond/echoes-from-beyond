@@ -1,0 +1,189 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_1_2",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "So?"
+    },
+    "MetadataKey": "Fk4_1_2",
+    "Options": {
+      "Fk4_1-L1": {
+        "Id": "Standard",
+        "Text": "I think that you confused me for someone else."
+      },
+      "Fk4_1-L2": {
+        "Id": "Standard",
+        "Text": "Why are you asking me, friend? Am I that painfully Canuck?"
+      },
+      "Fk4_1-L3": {
+        "Id": "Standard",
+        "Text": "Ah. He's at it again, isn't he?"
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "???"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "I just knew that you were TOO French to be real.",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk4_1_2-prg1"
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk4_1_2-prg1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk4_1_2-prg1"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk4_1_2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk4_1-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk4_1-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Are you also secretly a regular at Tim Kweertons?",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk4_1_2-prg2"
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk4_1_2-prg2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk4_1_2-prg2"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk4_1_2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk4_1-L2"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk4_1-L2"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "What happened to all that smack-talking about Quebec?",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk4_1_2-prg3"
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk4_1_2-prg3",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk4_1_2-prg3"
+            }
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk4_1_2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk4_1-L3"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk4_1-L3"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "If you're not French Kweebec, where's he?",
+      "Condition": {
+        "Id": "Boolean",
+        "Kind": "And",
+        "Conditions": [
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk4_1_2-prg1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk4_1_2-prg1"
+            }
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk4_1_2-prg2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk4_1_2-prg2"
+            }
+          },
+          {
+            "Id": "Equals",
+            "MetadataKey": "Fk4_1_2-prg3",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk4_1_2-prg3"
+            }
+          }
+        ]
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_2"
+      }
+    }
+  ]
+}

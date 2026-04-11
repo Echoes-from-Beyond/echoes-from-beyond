@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_1_1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "You get a sudden, strange feeling that this hole is a portal to a parallel reality. You know that this doesn't make any rational sense -- magic of that caliber vanished with Gaia -- but a part of you continues to wonder..."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Narrator"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_1_2"
+      }
+    }
+  ]
+}

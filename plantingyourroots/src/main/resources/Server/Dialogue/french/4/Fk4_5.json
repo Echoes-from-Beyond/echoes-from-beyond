@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_5",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "I don't know how familiar you are with us, but very few Kweebecs experience ambition the way that humans-- *some* humans do. I wouldn't really know enough to say why that is. Probably something to do with the fact that we evolved from plants."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Besides maybe a bunch of seaweed, what other plantfolk moves about? Our primitive cousins sit in whatever spot they dropped on. Meanwhile, animals were practically created to look for newer and better homes their whole lives."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Most of my species is lazy as Void, let's be honest here.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_6A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Let him continue.]",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_6"
+        }
+      }
+    ]
+  }
+}

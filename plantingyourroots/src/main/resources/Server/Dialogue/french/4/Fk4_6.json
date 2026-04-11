@@ -1,0 +1,74 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_6",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "And my brother happens to be one of the more ambitious ones, which is, hmm, a problem when you germinate in middle of nowhere. I do mean « middle of nowhere. » Right up against the glaciers."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "The Ancients that take root there are few, and it's usually individuals that haven't thought everything through. Then their sproutlings have to deal with the consequences."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Our grove was small, and our parent withered some years after we dropped. Turns out that just 'cause there's less competition up there, it doesn't mean that the soil quality is any good."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "For us, it's hard to leave when everyone else is far away, and there are Outlanders on the way. That meant that we spent most of our time just trying to survive and, for a long time, without an elder to sing to us."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "And if you're super remote, any tech or... any kinda development made by the rest of Whisperfrost basically never reaches you. Obviously, Canuck Kweebec wasn't happy with that arrangement."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "He wanted to *mean* something to the world. I kinda accepted our fate a long time ago, but I think that it didn't help him that he got a lot of time to brood as well. I was the one in charge back then, so."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "I myself was ready to bail much earlier, but we had some disagreements. Since he already has lofty goals in life, he was afraid that some Outlander with an axe would end it all sooner than our circumstances could."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "When we finally did grow an anther, all that lifelong angst bounced back and now he's lashing out by being very, very aggressively French. It's as ridiculous as it sounds."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "So do you just like... hide out here while he does his thing?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_7A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "How come I've never seen the two of you together?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_7AB"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "What's the point of telling me all of this?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_7C"
+        }
+      }
+    ]
+  }
+}

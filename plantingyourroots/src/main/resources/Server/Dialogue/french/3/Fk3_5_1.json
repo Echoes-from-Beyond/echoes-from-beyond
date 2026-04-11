@@ -25,6 +25,10 @@
     {
       "Id": "Standard",
       "Text": "Nah, I'm good.",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataKey": "Fk3_5_1"
+      },
       "Action": {
         "Id": "Composite",
         "Actions": [

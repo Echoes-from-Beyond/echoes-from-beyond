@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_7AB",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I just don't really... how do I explain this to you, eh?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_7"
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_3",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "My brother may have left out a detail here and there. He's as French as any other French-Whisperfrostian, even if he's been hard at work trying to deny one half of that title."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "You can see it, right? No one talks the way that he does. It's like-- Gaia beloved, it's like when they need you to know that a character is exotic in theatrical shows, so all of their lines are gunked up with foreign words."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "And who goes full mime if they're not actively performing, you know?"
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Something tells me that I don't even need to comment on that whole deal with him and French flags. I mean, he even imported a bunch of coloured water lilies so that he can have one in water. I haven't seen that kind of patriotism outside of some Kweemericans, right?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "But no matter how much effort he puts into the whole shtick, it never seems to stick properly."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "But why would he do that?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_4"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I don't know. He seems plenty French to me.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_4A"
+        }
+      }
+    ]
+  }
+}

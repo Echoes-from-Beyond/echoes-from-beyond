@@ -1,0 +1,33 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_8_1",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "I have to finish my food before he wakes up. I'm sorry for rushing through this but, you know, Gaia's mandate and all."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Maybe you and I will eventually be able to get up to something proper. Come see me when you remember more of Orbis."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

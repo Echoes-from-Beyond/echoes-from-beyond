@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_3C",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Is it really that shocking? Come on."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_3"
+      }
+    }
+  ]
+}

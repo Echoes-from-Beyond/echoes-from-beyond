@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_4A",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Sure. If you don't think about it."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_4"
+      }
+    }
+  ]
+}

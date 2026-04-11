@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_1A",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I'm not sure what you mean. I don't think we've met before."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "???"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_1"
+      }
+    }
+  ]
+}

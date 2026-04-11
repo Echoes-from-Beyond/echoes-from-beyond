@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_5B",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Heh. Thank you."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Sorry. To me that feels more like a fact of life than some special virtue, so it's hard to... accept compliments, I guess. It's like someone's congratulating you for being very consistent at breathing or whatever."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_5"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_7_1",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Plot convenience."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You wait for the punchline to his joke, or perhaps an actual explanation. When none of it comes for far too long to be comfortable, it's Quebec Kweebec who breaks your stare; his lips then curl into a compost-eating grin."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Well, I have to tease you at some point, eh? Wish I had more opportunities for that, but Gaia has placed a tight quota on your attention."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Maybe, some day, I'll be one of your objectives as well."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "As it is right now, I have to ask you to take care of Canuck Kweebec. Like I've been trying to say, this whole French thing is a coping mechanism for him. At some point along the way, he's picked up on... hmm."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "It's a lot of boring history that you don't want me to get into, but for obvious reasons, we have a special relationship with France. Mostly 'cause, in the past, their upper class saw us as this great joke of a people."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "And the circumstances that we grew up in has kind of... affirmed that for him. So he developed this idea that if we were « really » French, our community would have had too much dignity to let us go on like that."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Except he was denied that by being sown in the supposed land of village idiots. It doesn't help that Québec is the butt of the joke across the rest of Whisperfrost, which he's also taking way too close to heart."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "(Even if we, in my humble opinion, are the only ones keeping it real in that Gaia-forsaken place.)"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_7_2"
+        }
+      }
+    ]
+  }
+}

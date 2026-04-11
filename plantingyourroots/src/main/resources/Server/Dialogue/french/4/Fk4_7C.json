@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_7C",
+  "Line": {
+    "Id": "Standard",
+    "Text": "The point is that I'm worried about where all of this is going to go. For both of us."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_7"
+      }
+    }
+  ]
+}

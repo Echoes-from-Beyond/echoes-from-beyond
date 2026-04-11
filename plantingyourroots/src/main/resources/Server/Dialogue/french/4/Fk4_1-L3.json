@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_1-L3",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Now, why would--?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "???"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_1_2"
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_1B",
+  "Entries": [
+    {
+      "Name": "???",
+      "Line": "Yeah..? Why would there be a problem?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "In retrospect, that is a bizarre thing to say out of nowhere."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_1"
+        }
+      }
+    ]
+  }
+}

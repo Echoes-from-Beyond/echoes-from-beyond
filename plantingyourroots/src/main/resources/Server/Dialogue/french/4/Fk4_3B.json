@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_3B",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I'd be more surprised if you didn't, honestly. I mean, what kind of supposed European would spend so much energy trying to keep up with news from our homeland? And then spend even more energy finding ways to be upset about it?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_3"
+      }
+    }
+  ]
+}

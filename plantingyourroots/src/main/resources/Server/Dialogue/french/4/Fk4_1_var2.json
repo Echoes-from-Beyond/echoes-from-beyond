@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_1_var2",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "It's... is that poutine? The plate bears fries that are, well, fried to perfection, the gravy thick, and the cheese curds far too fresh for something that can't be easily sourced atop a tree. This isn't actually some obscure French dish that superficially resembles that of the Québécois, right?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Yet, despite his (or his lookalike's) rant from a while back, he's munching on this thing with as much gusto as he devoured... well, as you'd imagine that he would devour one of his precious baguettes, sans anxiety."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_1_1"
+        }
+      }
+    ]
+  }
+}

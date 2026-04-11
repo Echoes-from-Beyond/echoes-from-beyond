@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_7",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "I know from experience that most humans glaze over when you try to talk to them about plant biology. Maybe, in the future, I'll tell you more. When we are less subject to time constraints."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "I have it in good faith that Gaia wants to keep your mission sweet and short. Hug some trees, eh? After all, the only reason you're here is to prove a point about what her fellow Avatars can get up to on Orbis."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Listen. When Orbis is a little more secure in itself, I'll have more to say. Or maybe you can't remember all our previous conversations, just like how you can't remember half of the planet. Either way, we'll take our time to know each other."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You could also try teleporting into an alternate reality where the Avatars aren't having some massive contest of theirs. I wouldn't know how you'd go about that, though."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "How do you even know this?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_7_1"
+        }
+      }
+    ]
+  }
+}

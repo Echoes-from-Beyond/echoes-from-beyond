@@ -1,0 +1,67 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_7_2",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "I feel like we should've visited France at least once, before it got too late. Wonder what he would've thought of the French people's supposed nobility then."
+    },
+    "MetadataKey": "Fk4_7_2",
+    "Options": {
+      "Fk4_7-L1": {
+        "Id": "Standard",
+        "Text": "And before you mention it, I know. We look good for a half-Ancient."
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "What do you mean by 'too late'?",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataKey": "Fk4_7_2"
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk4_7_2",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk4_7-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk4_7-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "So what do you expect me to do?",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_8"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Get to the point.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_8"
+      }
+    }
+  ]
+}

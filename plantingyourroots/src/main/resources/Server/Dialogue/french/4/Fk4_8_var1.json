@@ -1,0 +1,45 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_8_var1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "He really likes you, and I think that you might be able to do way more than I could. If for no other reason than the fact that your presence quickens the flow of his sucrose."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Poutine"
+        }
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_8_1_var1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "MetadataKey": "Fk_Poutine"
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_8_1_var2"
+      }
+    }
+  ]
+}

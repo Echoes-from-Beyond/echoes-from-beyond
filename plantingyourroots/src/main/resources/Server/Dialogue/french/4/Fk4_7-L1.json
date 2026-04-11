@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_7-L1",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "We're so old that we're about to take root, buddy. I'm sure that that fact isn't helping either of our situations."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "We don't have time to see much of Orbis. I honestly question whether we can even go back to Québec one last time before the soil becomes too much to resist."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_7_2"
+        }
+      }
+    ]
+  }
+}

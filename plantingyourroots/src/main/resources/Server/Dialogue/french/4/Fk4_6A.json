@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_6A",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Ha. Well, I'm not disagreeing. I know enough to say that most human societies are led only by a select few individuals."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "No offence."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "The distinction I'm trying to make is that driven Kweebecs are even rarer than driven humans."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_6"
+        }
+      }
+    ]
+  }
+}

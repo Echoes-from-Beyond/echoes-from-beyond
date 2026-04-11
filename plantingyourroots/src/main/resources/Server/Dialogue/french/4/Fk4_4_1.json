@@ -1,0 +1,46 @@
+{
+  "Type": "Chain",
+  "Id": "Fk4_4_1",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "You see, it's a combination of, like, having this idea that to be French means to scoff at anything deemed « derivative » of France, and just him hating Québec specifically for not giving him the life he wanted."
+    },
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "In a way, you can think of him deluding himself into somehow thinking that random food is beneath him because it's not « noble » enough, as well as him being so aggressively homesick that he feels as passionate as he does about it. Or comes off that way, I mean."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Ironically, it's also the one thing we still bond over. He's too proud now to lift a finger for it himself, but he misses the food from our seedhood. I do my best to recreate it."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Why do you bother if he's so ungrateful about it?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_5A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I admire your persistence.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk4_5B"
+        }
+      }
+    ]
+  }
+}

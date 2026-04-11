@@ -1,0 +1,45 @@
+{
+  "Type": "Standard",
+  "Id": "Fk4_8_var2",
+  "Line": {
+    "Id": "Standard",
+    "Text": "He respects you well enough, and I can't make a dent in him, so I'd like you to give it a try."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Poutine"
+        }
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_8_1_var1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "MetadataKey": "Fk_Poutine"
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk4_8_1_var2"
+      }
+    }
+  ]
+}
