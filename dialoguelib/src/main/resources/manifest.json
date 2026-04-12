@@ -16,6 +16,6 @@
   "IncludesAssetPack": true,
   "DependsOn": {
     "Hytale:NPC": "*",
-    "org.echoesfrombeyond:CodecHelper": "^0.2.0"
+    "org.echoesfrombeyond:CodecHelper": "^0.2.2"
   }
 }

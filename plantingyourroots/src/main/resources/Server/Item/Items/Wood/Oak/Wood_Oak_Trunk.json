@@ -1,0 +1,125 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Wood_Oak_Trunk.name",
+    "Description": "server.items.Wood_Oak_Trunk.description"
+  },
+  "ItemLevel": 10,
+  "Icon": "Icons/ItemsGenerated/Wood_Oak_Trunk.png",
+  "Categories": [
+    "Blocks.Plants"
+  ],
+  "FuelQuality": 9.0,
+  "PlayerAnimationsId": "Block",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Group": "Wood",
+    "Flags": {},
+    "Gathering": {
+      "Tools": [
+        {
+          "Type": "Scraper",
+          "State": "Stripped",
+          "DropList": "Bark"
+        }
+      ],
+      "Breaking": {
+        "ItemId": "Wood_Oak_Trunk",
+        "GatherType": "Woods"
+      },
+      "Physics": {
+        "ItemId": "Wood_Oak_Trunk"
+      },
+      "UseDefaultDropWhenPlaced": true
+    },
+    "VariantRotation": "Pipe",
+    "BlockParticleSetId": "Wood",
+    "Textures": [
+      {
+        "Sides": "BlockTextures/Wood_Trunk_Oak_Side.png",
+        "UpDown": "BlockTextures/Wood_Trunk_Oak_Top.png",
+        "Weight": 1
+      }
+    ],
+    "ParticleColor": "#633625",
+    "BlockSoundSetId": "Wood",
+    "MaxSupportDistance": 5,
+    "State": {
+      "Definitions": {
+        "Stripped": {
+          "Textures": [
+            {
+              "Sides": "BlockTextures/Stripped_Log_Side.png",
+              "UpDown": "BlockTextures/Stripped_Log_Side.png",
+              "Weight": 1
+            }
+          ],
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Woods",
+              "ItemId": "Wood_Stripped_Deco"
+            }
+          },
+          "BlockEntity": {
+            "Components": {
+              "FarmingBlock": {}
+            }
+          },
+          "Farming": {
+            "Stages": {
+              "Default": [
+                {
+                  "Type": "BlockState",
+                  "State": "Stripped",
+                  "Duration": {
+                    "Min": 1000,
+                    "Max": 3000
+                  }
+                },
+                {
+                  "Type": "BlockState",
+                  "State": "default",
+                  "SoundEventId": "SFX_Wood_Hit"
+                }
+              ]
+            },
+            "StartingStageSet": "Default"
+          }
+        }
+      }
+    },
+    "BlockBreakingDecalId": "Breaking_Decals_Wood",
+    "IgnoreSupportWhenPlaced": true
+  },
+  "ResourceTypes": [
+    {
+      "Id": "Wood_Hardwood"
+    },
+    {
+      "Id": "Wood_Hardwood_Trunk"
+    },
+    {
+      "Id": "Wood_Trunk"
+    },
+    {
+      "Id": "Wood_All"
+    },
+    {
+      "Id": "Fuel"
+    },
+    {
+      "Id": "Charcoal"
+    }
+  ],
+  "Tags": {
+    "Type": [
+      "Wood",
+      "Sap_Source",
+      "Trunk"
+    ],
+    "Family": [
+      "Oak"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood"
+}

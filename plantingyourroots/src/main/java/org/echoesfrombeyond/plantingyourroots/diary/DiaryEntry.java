@@ -25,7 +25,6 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @ModelBuilder
 public class DiaryEntry implements Cloneable {
-  public int Day;
   public @Nullable String SpokeTo;
   public @Nullable String Title;
   public @Nullable String Entry;

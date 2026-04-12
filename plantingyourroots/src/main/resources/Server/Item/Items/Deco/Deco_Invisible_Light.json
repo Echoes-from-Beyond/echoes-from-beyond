@@ -1,0 +1,62 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Deco_Lantern.name"
+  },
+  "Icon": "Icons/ItemsGenerated/Deco_Lantern.png",
+  "Categories": [
+    "Blocks.Deco",
+    "Furniture.Lighting",
+    "Blocks.Deco"
+  ],
+  "BlockType": {
+    "Material": "Empty",
+    "DrawType": "Empty",
+    "Opacity": "Transparent",
+    "CustomModelTexture": [
+      {
+        "Weight": 1,
+        "Texture": "Blocks/Decorative_Sets/Village/Lantern_Texture.png"
+      }
+    ],
+    "HitboxType": "Plant_Full",
+    "Light": {
+      "Radius": 0,
+      "Color": "#dca"
+    },
+    "Flags": {},
+    "Gathering": {
+      "Soft": {}
+    },
+    "BlockParticleSetId": "Dust",
+    "BlockSoundSetId": "Wood",
+    "CustomModel": "Blocks/Decorative_Sets/Village/Lantern.blockymodel",
+    "State": {
+      "Definitions": {
+        "On": {
+          "AmbientSoundEventId": "SFX_Torch_Default_Loop"
+        },
+        "Off": {
+          "InteractionHint": "server.interactionHints.turnon",
+          "Light": null,
+          "Particles": null,
+          "InteractionSoundEventId": "SFX_Torch_Off",
+          "AmbientSoundEventId": null,
+          "CustomModelAnimation": "Blocks/Animations/Light/Light_Off.blockyanim"
+        }
+      }
+    },
+    "CustomModelScale": 0.8,
+    "IgnoreSupportWhenPlaced": true,
+    "CubeShadingMode": "Fullbright"
+  },
+  "PlayerAnimationsId": "Block",
+  "Tags": {
+    "Type": [
+      "Deco"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood",
+  "Light": {
+    "Radius": 20
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Leaves_Oak.name"
+  },
+  "Categories": [
+    "Blocks.Plants"
+  ],
+  "Icon": "Icons/ItemsGenerated/Plant_Oak_Leaves.png",
+  "PlayerAnimationsId": "Item",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Foliage/Leaves/Ball.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Leaves/Ball_Textures/Oak.png",
+        "Weight": 1
+      }
+    ],
+    "Opacity": "Cutout",
+    "Group": "@Tech",
+    "Effect": [
+      "Wind"
+    ],
+    "Flags": {},
+    "RandomRotation": "YawPitchRollStep1",
+    "Gathering": {
+      "Tools": [
+        {
+          "Type": "Shears"
+        }
+      ],
+      "Soft": {
+        "DropList": "Tree_Leaves"
+      },
+      "Physics": {
+        "DropList": "Tree_Leaves_Physics"
+      },
+      "UseDefaultDropWhenPlaced": true
+    },
+    "PlacementSettings": {
+      "AllowBreakReplace": true
+    },
+    "BlockParticleSetId": "Leaves",
+    "ParticleColor": "#4b8519",
+    "MaxSupportDistance": 4,
+    "BlockSoundSetId": "Leaves",
+    "IgnoreSupportWhenPlaced": true
+  },
+  "Tags": {
+    "Type": [
+      "Plant"
+    ],
+    "Family": [
+      "Leaves"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Foliage"
+}

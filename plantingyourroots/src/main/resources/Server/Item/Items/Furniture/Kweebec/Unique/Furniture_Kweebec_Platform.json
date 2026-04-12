@@ -1,0 +1,80 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Furniture_Kweebec_Platform.name"
+  },
+  "PlayerAnimationsId": "Block",
+  "Categories": [
+    "Furniture.Shelves"
+  ],
+  "Set": "Furniture_Kweebec",
+  "Icon": "Icons/ItemsGenerated/Furniture_Kweebec_Platform.png",
+  "IconProperties": {
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Scale": 0.58823,
+    "Translation": [
+      0,
+      -24.6
+    ]
+  },
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "BlockParticleSetId": "Wood",
+    "CustomModel": "Blocks/Decorative_Sets/Kweebec/Platform.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Decorative_Sets/Kweebec/Platform_default.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {},
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Woods"
+      }
+    },
+    "Supporting": {
+      "Up": [
+        {
+          "FaceType": "Full"
+        }
+      ],
+      "CardinalDirections": [
+        {
+          "FaceType": "Platform"
+        }
+      ]
+    },
+    "Group": "Wood",
+    "HitboxType": "Platform_Thick",
+    "Material": "Solid",
+    "Opacity": "Transparent",
+    "ParticleColor": "#88642f",
+    "VariantRotation": "Wall",
+    "BlockSoundSetId": "Wood"
+  },
+  "ResourceTypes": [
+    {
+      "Id": "Fuel"
+    },
+    {
+      "Id": "Charcoal"
+    }
+  ],
+  "Tags": {
+    "Type": [
+      "Furniture"
+    ],
+    "Family": [
+      "Kweebec"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood"
+}

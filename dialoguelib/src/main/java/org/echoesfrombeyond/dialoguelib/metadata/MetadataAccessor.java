@@ -46,6 +46,10 @@ public abstract class MetadataAccessor {
 
       Setting this value to something other than the default allows
       separate dialogue to access the same metadata.
+
+      Keys that start with '$', followed by a (case sensitive)
+      dialogue identifier, will point to the metadata of that dialogue
+      asset.
       """)
   public @Nullable String MetadataStoreKey;
 

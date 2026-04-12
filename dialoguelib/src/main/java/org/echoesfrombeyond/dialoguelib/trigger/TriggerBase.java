@@ -57,7 +57,7 @@ public abstract class TriggerBase implements Trigger {
                         TargetIds.size(), CaseInsensitiveHashStrategy.getInstance()));
             set.addAll(TargetIds);
 
-            return set;
+            return Collections.unmodifiableSet(set);
           });
 
   protected TriggerBase() {
@@ -66,6 +66,6 @@ public abstract class TriggerBase implements Trigger {
 
   @Override
   public final @Unmodifiable Set<String> getTargetIds() {
-    return Collections.unmodifiableSet(caseInsensitiveIds.get());
+    return caseInsensitiveIds.get();
   }
 }
