@@ -39,11 +39,12 @@ public class ReadyForLove extends CommandBase {
     if (playerRef == null) return;
 
     var store = playerRef.getStore();
-    var currentWorld = store.getExternalData().getWorld();
+    var world = store.getExternalData().getWorld();
+    var roots = PlantingYourRoots.get();
 
-    if (currentWorld.getName().equals("Kweebdrasil")) return;
+    if (roots.isKweebdrasilInstance(world)) return;
 
-    currentWorld.execute(
+    world.execute(
         () -> {
           var transform = store.getComponent(playerRef, TransformComponent.getComponentType());
           if (transform == null) return;
