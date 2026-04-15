@@ -39,15 +39,7 @@ public class CleanWorldSystem extends StoreSystem<EntityStore> {
   private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
   @Override
-  public void onSystemAddedToStore(Store<EntityStore> store) {
-    var world = store.getExternalData().getWorld();
-    var roots = PlantingYourRoots.get();
-
-    if (!roots.isKweebdrasilInstance(world)) return;
-
-    LOGGER.at(Level.INFO).log("Adding Kweebdrasil instance...");
-    roots.addKweebdrasilInstance(world.getWorldConfig().getUuid());
-  }
+  public void onSystemAddedToStore(Store<EntityStore> store) {}
 
   @Override
   public void onSystemRemovedFromStore(Store<EntityStore> store) {

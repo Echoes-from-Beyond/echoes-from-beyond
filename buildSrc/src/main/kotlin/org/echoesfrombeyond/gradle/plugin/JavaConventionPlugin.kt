@@ -125,6 +125,7 @@ class JavaConventionPlugin : Plugin<Project> {
 
       spotless.json { json ->
         json.target("src/*/resources/**/*.json")
+        json.target("src/*/resources/**/*.bson")
         json.gson().version("2.13.2").indentWithSpaces(2)
       }
 

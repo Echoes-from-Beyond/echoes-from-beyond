@@ -30,6 +30,13 @@
     }
   },
   "IsSpawnMarkersEnabled": true,
-  "DeleteOnRemove": false,
+  "DeleteOnRemove": true,
+  "Instance": {
+    "RemovalConditions": [
+      {
+        "Type": "WorldEmpty"
+      }
+    ]
+  },
   "Version": 2
 }

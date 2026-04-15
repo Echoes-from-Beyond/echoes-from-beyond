@@ -24,7 +24,9 @@ import com.hypixel.hytale.component.ComponentRegistryProxy;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
@@ -54,25 +56,49 @@ public class RootsComponent implements Component<EntityStore> {
     return type;
   }
 
+  @ModelBuilder
+  public static class Dateable implements Cloneable {
+    public int Stage;
+    public boolean TalkedTo;
+
+    public Dateable() {
+      this.Stage = 1;
+    }
+
+    @Override
+    public Dateable clone() {
+      try {
+        return (Dateable) super.clone();
+      } catch (CloneNotSupportedException e) {
+        throw new AssertionError();
+      }
+    }
+  }
+
   public int Day;
   public List<DiaryEntry> DiaryEntries;
+  public Map<String, Dateable> Dateables;
 
   @SuppressWarnings("unused")
   public RootsComponent() {
     this.Day = 1;
     this.DiaryEntries = new ArrayList<>();
+    this.Dateables = new HashMap<>();
   }
 
   public RootsComponent(RootsComponent other) {
     this.Day = other.Day;
     this.DiaryEntries = new ArrayList<>(other.DiaryEntries.size());
+    this.Dateables = new HashMap<>(other.Dateables.size());
 
     for (var otherEntry : other.DiaryEntries) this.DiaryEntries.add(otherEntry.clone());
+    for (var otherEntry : other.Dateables.entrySet())
+      this.Dateables.put(otherEntry.getKey(), otherEntry.getValue().clone());
   }
 
   @Override
   @SuppressWarnings("MethodDoesntCallSuperMethod")
-  public Component<EntityStore> clone() {
+  public RootsComponent clone() {
     return new RootsComponent(this);
   }
 }

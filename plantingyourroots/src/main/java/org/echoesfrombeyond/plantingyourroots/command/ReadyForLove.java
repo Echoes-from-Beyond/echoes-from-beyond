@@ -19,10 +19,12 @@
 package org.echoesfrombeyond.plantingyourroots.command;
 
 import com.hypixel.hytale.builtin.instances.InstancesPlugin;
+import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
 import org.echoesfrombeyond.plantingyourroots.PlantingYourRoots;
+import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
@@ -40,18 +42,22 @@ public class ReadyForLove extends CommandBase {
 
     var store = playerRef.getStore();
     var world = store.getExternalData().getWorld();
-    var roots = PlantingYourRoots.get();
+    var plugin = PlantingYourRoots.get();
 
-    if (roots.isKweebdrasilInstance(world)) return;
+    if (plugin.isKweebdrasilInstance(world)) {
+      commandContext.sendMessage(Message.parse("You are already in Kweebdrasil!"));
+      return;
+    }
 
     world.execute(
         () -> {
           var transform = store.getComponent(playerRef, TransformComponent.getComponentType());
           if (transform == null) return;
 
+          var roots = store.ensureAndGetComponent(playerRef, RootsComponent.getComponentType());
           var returnPoint = transform.getTransform().clone();
           InstancesPlugin.teleportPlayerToLoadingInstance(
-              playerRef, store, PlantingYourRoots.get().getKweebdrasil(), returnPoint);
+              playerRef, store, plugin.getKweebdrasil(roots.clone()), returnPoint);
         });
   }
 }

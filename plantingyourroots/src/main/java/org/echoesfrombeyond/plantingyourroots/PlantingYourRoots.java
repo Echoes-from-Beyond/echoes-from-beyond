@@ -34,15 +34,17 @@ import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.NPCPlugin;
+import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.plantingyourroots.command.ReadyForLove;
+import org.echoesfrombeyond.plantingyourroots.component.KindComponent;
 import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
 import org.echoesfrombeyond.plantingyourroots.dialogue.AppendDiaryEntry;
+import org.echoesfrombeyond.plantingyourroots.dialogue.MarkTalkedTo;
 import org.echoesfrombeyond.plantingyourroots.interaction.AdvanceDayInteraction;
 import org.echoesfrombeyond.plantingyourroots.system.CleanWorldSystem;
 import org.jspecify.annotations.NullMarked;
@@ -51,12 +53,12 @@ import org.jspecify.annotations.Nullable;
 @SuppressWarnings("unused")
 @NullMarked
 public class PlantingYourRoots extends JavaPlugin {
-  public static String KWEEBDRASIL_GAMEPLAY_CONFIG_NAME = "Kweebdrasil";
-  public static int FINAL_DAY = 5;
+  public static final String KWEEBDRASIL_GAMEPLAY_CONFIG_NAME = "Kweebdrasil";
 
-  private record Spawn(String name, Vector3d position, Vector3f rotation) {}
+  private record Spawn(String type, Vector3d position, Vector3f rotation) {}
 
-  private static final Int2ObjectMap<List<Spawn>> SPAWNS = new Int2ObjectOpenHashMap<>();
+  private static final RootsComponent.Dateable DEFAULT_DATEABLE = new RootsComponent.Dateable();
+  private static final Map<String, Int2ObjectMap<Spawn>> SPAWNS = new HashMap<>();
 
   static {
     // TODO: init spawns
@@ -69,6 +71,7 @@ public class PlantingYourRoots extends JavaPlugin {
   public PlantingYourRoots(JavaPluginInit init) {
     super(init);
     INSTANCE = this;
+
     this.entities = new HashMap<>();
   }
 
@@ -87,17 +90,37 @@ public class PlantingYourRoots extends JavaPlugin {
         .register("AdvanceDay", AdvanceDayInteraction.class, AdvanceDayInteraction.CODEC);
 
     getCodecRegistry(ChoiceAction.CODEC)
-        .register("AppendDiary", AppendDiaryEntry.class, AppendDiaryEntry.CODEC);
+        .register("AppendDiary", AppendDiaryEntry.class, AppendDiaryEntry.CODEC)
+        .register("MarkTalkedTo", MarkTalkedTo.class, MarkTalkedTo.CODEC);
 
     getEntityStoreRegistry().registerSystem(new CleanWorldSystem());
 
     var entityStoreRegistry = getEntityStoreRegistry();
     RootsComponent.register(entityStoreRegistry);
+    KindComponent.register(entityStoreRegistry);
 
     getCommandRegistry().registerCommand(new ReadyForLove());
   }
 
-  public CompletableFuture<World> getKweebdrasil() {
+  private static @Nullable UUID spawnDateable(
+      Store<EntityStore> storeStore, String kind, Spawn spawn) {
+    var pair =
+        NPCPlugin.get().spawnNPC(storeStore, spawn.type, null, spawn.position, spawn.rotation);
+    if (pair == null) return null;
+
+    var newEntityRef = pair.first();
+
+    var uuid = storeStore.getComponent(newEntityRef, UUIDComponent.getComponentType());
+    assert uuid != null;
+
+    var kindComponent = new KindComponent();
+    kindComponent.Kind = kind;
+
+    storeStore.putComponent(newEntityRef, KindComponent.getComponentType(), kindComponent);
+    return uuid.getUuid();
+  }
+
+  public CompletableFuture<World> getKweebdrasil(RootsComponent roots) {
     var defaultWorld = Universe.get().getDefaultWorld();
     if (defaultWorld == null) throw new IllegalStateException("Default world must exist");
 
@@ -107,9 +130,26 @@ public class PlantingYourRoots extends JavaPlugin {
             (world, err) -> {
               if (err != null || world == null) return;
 
-              synchronized (entities) {
-                entities.put(world.getWorldConfig().getUuid(), new ArrayList<>());
-              }
+              world.execute(
+                  () -> {
+                    var uuids = new ArrayList<UUID>();
+                    for (var entry : SPAWNS.entrySet()) {
+                      var kind = entry.getKey();
+                      var spawnsForStage = entry.getValue();
+
+                      var stage = roots.Dateables.getOrDefault(kind, DEFAULT_DATEABLE).Stage;
+
+                      if (!spawnsForStage.containsKey(stage)) continue;
+                      var spawn = spawnsForStage.get(stage);
+
+                      var uuid = spawnDateable(world.getEntityStore().getStore(), kind, spawn);
+                      if (uuid != null) uuids.add(uuid);
+                    }
+
+                    synchronized (entities) {
+                      entities.put(world.getWorldConfig().getUuid(), uuids);
+                    }
+                  });
             });
   }
 
@@ -120,29 +160,9 @@ public class PlantingYourRoots extends JavaPlugin {
         .equals(PlantingYourRoots.KWEEBDRASIL_GAMEPLAY_CONFIG_NAME);
   }
 
-  public void addKweebdrasilInstance(UUID uuid) {
-    synchronized (entities) {
-      entities.put(uuid, new ArrayList<>());
-    }
-  }
-
   public void removeKweebdrasilInstance(UUID uuid) {
     synchronized (entities) {
       entities.remove(uuid);
-    }
-  }
-
-  private static void spawnEntitiesForDay(Store<EntityStore> store, int day, List<UUID> uuids) {
-    var entities = SPAWNS.get(day);
-    if (entities == null) return;
-
-    for (var entity : entities) {
-      var spawn =
-          NPCPlugin.get().spawnNPC(store, entity.name, null, entity.position, entity.rotation);
-      if (spawn == null) continue;
-
-      var uuid = store.getComponent(spawn.first(), UUIDComponent.getComponentType());
-      if (uuid != null) uuids.add(uuid.getUuid());
     }
   }
 
@@ -150,11 +170,6 @@ public class PlantingYourRoots extends JavaPlugin {
   public void advanceDay(CommandBuffer<EntityStore> buffer, RootsComponent roots) {
     var world = buffer.getStore().getExternalData().getWorld();
     if (!isKweebdrasilInstance(world)) return;
-
-    if (roots.Day >= FINAL_DAY) {
-      // TODO: "win" logic
-      return;
-    }
 
     List<UUID> spawnedEntities;
     synchronized (entities) {
@@ -164,15 +179,51 @@ public class PlantingYourRoots extends JavaPlugin {
     if (spawnedEntities == null) return;
 
     var store = world.getEntityStore();
+    var storeStore = store.getStore();
+
+    var npcComponentType = NPCEntity.getComponentType();
+    assert npcComponentType != null;
+
     Ref<?>[] entitiesToRemove =
         spawnedEntities.stream()
             .map(store::getRefFromUUID)
             .filter(Objects::nonNull)
             .filter(Ref::isValid)
+            .filter(
+                ref -> {
+                  var npc = storeStore.getComponent(ref, npcComponentType);
+                  var kind = storeStore.getComponent(ref, KindComponent.getComponentType());
+
+                  if (npc == null || kind == null || kind.Kind == null) return false;
+
+                  var dateable = roots.Dateables.get(kind.Kind);
+                  return dateable != null && dateable.TalkedTo;
+                })
             .toArray(Ref<?>[]::new);
 
     //noinspection unchecked
-    store.getStore().removeEntities((Ref<EntityStore>[]) entitiesToRemove, RemoveReason.UNLOAD);
-    spawnEntitiesForDay(store.getStore(), ++roots.Day, spawnedEntities);
+    for (var holder :
+        storeStore.removeEntities((Ref<EntityStore>[]) entitiesToRemove, RemoveReason.REMOVE)) {
+      var npc = holder.getComponent(npcComponentType);
+      var kind = holder.getComponent(KindComponent.getComponentType());
+
+      if (npc == null || kind == null || kind.Kind == null) continue;
+
+      var dateable = roots.Dateables.computeIfAbsent(kind.Kind, _ -> new RootsComponent.Dateable());
+      var stage = dateable.Stage;
+
+      var spawnsForStage = SPAWNS.get(kind.Kind);
+      if (spawnsForStage == null) continue;
+
+      var newSpawn =
+          spawnsForStage.containsKey(stage + 1)
+              ? spawnsForStage.get(stage + 1)
+              : spawnsForStage.get(-1);
+
+      var uuid = spawnDateable(storeStore, kind.Kind, newSpawn);
+      if (uuid != null) spawnedEntities.add(uuid);
+
+      dateable.Stage++;
+    }
   }
 }
