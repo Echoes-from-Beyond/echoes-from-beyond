@@ -46,7 +46,8 @@ public class AdvanceDayInteraction extends SimpleInstantInteraction {
     if (buffer == null) return;
 
     var roots = PlantingYourRoots.get();
-    if (!roots.isKweebdrasilInstance(buffer.getStore().getExternalData().getWorld())) return;
+    var world = buffer.getStore().getExternalData().getWorld();
+    if (!roots.isKweebdrasilInstance(world)) return;
 
     roots.advanceDay(
         buffer,

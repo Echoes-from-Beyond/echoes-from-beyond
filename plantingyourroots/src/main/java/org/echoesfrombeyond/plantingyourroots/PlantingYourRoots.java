@@ -31,6 +31,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.plantingyourroots.command.ReadyForLove;
 import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
@@ -43,7 +44,7 @@ import org.jspecify.annotations.Nullable;
 @SuppressWarnings("unused")
 @NullMarked
 public class PlantingYourRoots extends JavaPlugin {
-  public static String KWEEBDRASIL_GAMEPLAY_CONFIG = "Kweebdrasil";
+  public static String KWEEBDRASIL_GAMEPLAY_CONFIG_NAME = "Kweebdrasil";
 
   private static @Nullable PlantingYourRoots INSTANCE;
 
@@ -105,7 +106,7 @@ public class PlantingYourRoots extends JavaPlugin {
     return world
         .getWorldConfig()
         .getGameplayConfig()
-        .equals(PlantingYourRoots.KWEEBDRASIL_GAMEPLAY_CONFIG);
+        .equals(PlantingYourRoots.KWEEBDRASIL_GAMEPLAY_CONFIG_NAME);
   }
 
   public void addKweebdrasilInstance(UUID uuid) {
@@ -120,32 +121,27 @@ public class PlantingYourRoots extends JavaPlugin {
     }
   }
 
+  @RunOnWorldThread
   public void advanceDay(CommandBuffer<EntityStore> buffer, RootsComponent roots) {
     var world = buffer.getStore().getExternalData().getWorld();
     if (!isKweebdrasilInstance(world)) return;
 
     List<UUID> spawnedEntities;
     synchronized (entities) {
-      var worldUuid = world.getWorldConfig().getUuid();
-      spawnedEntities = entities.get(worldUuid);
+      spawnedEntities = entities.get(world.getWorldConfig().getUuid());
     }
 
     if (spawnedEntities == null || spawnedEntities.isEmpty()) return;
 
-    world.execute(
-        () -> {
-          var store = world.getEntityStore();
-          Ref<?>[] entitiesToRemove =
-              spawnedEntities.stream()
-                  .map(store::getRefFromUUID)
-                  .filter(Objects::nonNull)
-                  .filter(Ref::isValid)
-                  .toArray(Ref<?>[]::new);
+    var store = world.getEntityStore();
+    Ref<?>[] entitiesToRemove =
+        spawnedEntities.stream()
+            .map(store::getRefFromUUID)
+            .filter(Objects::nonNull)
+            .filter(Ref::isValid)
+            .toArray(Ref<?>[]::new);
 
-          //noinspection unchecked
-          store
-              .getStore()
-              .removeEntities((Ref<EntityStore>[]) entitiesToRemove, RemoveReason.UNLOAD);
-        });
+    //noinspection unchecked
+    store.getStore().removeEntities((Ref<EntityStore>[]) entitiesToRemove, RemoveReason.UNLOAD);
   }
 }
