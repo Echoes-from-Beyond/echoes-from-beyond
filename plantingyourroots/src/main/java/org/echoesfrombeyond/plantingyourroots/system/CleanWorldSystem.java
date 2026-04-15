@@ -44,6 +44,8 @@ public class CleanWorldSystem extends StoreSystem<EntityStore> {
     var roots = PlantingYourRoots.get();
 
     if (!roots.isKweebdrasilInstance(world)) return;
+
+    LOGGER.at(Level.INFO).log("Adding Kweebdrasil instance...");
     roots.addKweebdrasilInstance(world.getWorldConfig().getUuid());
   }
 
@@ -54,7 +56,7 @@ public class CleanWorldSystem extends StoreSystem<EntityStore> {
 
     if (!roots.isKweebdrasilInstance(world)) return;
 
-    LOGGER.at(Level.INFO).log("Cleaning up Kweebdrasil instance...");
+    LOGGER.at(Level.INFO).log("Removing Kweebdrasil instance...");
     roots.removeKweebdrasilInstance(world.getWorldConfig().getUuid());
   }
 

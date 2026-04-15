@@ -22,13 +22,20 @@ import com.hypixel.hytale.builtin.instances.InstancesPlugin;
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.RemoveReason;
+import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.math.vector.Transform;
+import com.hypixel.hytale.math.vector.Vector3d;
+import com.hypixel.hytale.math.vector.Vector3f;
+import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.npc.NPCPlugin;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
@@ -45,6 +52,15 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class PlantingYourRoots extends JavaPlugin {
   public static String KWEEBDRASIL_GAMEPLAY_CONFIG_NAME = "Kweebdrasil";
+  public static int FINAL_DAY = 5;
+
+  private record Spawn(String name, Vector3d position, Vector3f rotation) {}
+
+  private static final Int2ObjectMap<List<Spawn>> SPAWNS = new Int2ObjectOpenHashMap<>();
+
+  static {
+    // TODO: init spawns
+  }
 
   private static @Nullable PlantingYourRoots INSTANCE;
 
@@ -79,11 +95,6 @@ public class PlantingYourRoots extends JavaPlugin {
     RootsComponent.register(entityStoreRegistry);
 
     getCommandRegistry().registerCommand(new ReadyForLove());
-  }
-
-  @Override
-  protected void start() {
-    super.start();
   }
 
   public CompletableFuture<World> getKweebdrasil() {
@@ -121,17 +132,36 @@ public class PlantingYourRoots extends JavaPlugin {
     }
   }
 
+  private static void spawnEntitiesForDay(Store<EntityStore> store, int day, List<UUID> uuids) {
+    var entities = SPAWNS.get(day);
+    if (entities == null) return;
+
+    for (var entity : entities) {
+      var spawn =
+          NPCPlugin.get().spawnNPC(store, entity.name, null, entity.position, entity.rotation);
+      if (spawn == null) continue;
+
+      var uuid = store.getComponent(spawn.first(), UUIDComponent.getComponentType());
+      if (uuid != null) uuids.add(uuid.getUuid());
+    }
+  }
+
   @RunOnWorldThread
   public void advanceDay(CommandBuffer<EntityStore> buffer, RootsComponent roots) {
     var world = buffer.getStore().getExternalData().getWorld();
     if (!isKweebdrasilInstance(world)) return;
+
+    if (roots.Day >= FINAL_DAY) {
+      // TODO: "win" logic
+      return;
+    }
 
     List<UUID> spawnedEntities;
     synchronized (entities) {
       spawnedEntities = entities.get(world.getWorldConfig().getUuid());
     }
 
-    if (spawnedEntities == null || spawnedEntities.isEmpty()) return;
+    if (spawnedEntities == null) return;
 
     var store = world.getEntityStore();
     Ref<?>[] entitiesToRemove =
@@ -143,5 +173,6 @@ public class PlantingYourRoots extends JavaPlugin {
 
     //noinspection unchecked
     store.getStore().removeEntities((Ref<EntityStore>[]) entitiesToRemove, RemoveReason.UNLOAD);
+    spawnEntitiesForDay(store.getStore(), ++roots.Day, spawnedEntities);
   }
 }
