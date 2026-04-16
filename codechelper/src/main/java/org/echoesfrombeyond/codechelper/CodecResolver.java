@@ -24,6 +24,7 @@ import com.hypixel.hytale.codec.codecs.map.MapCodec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.*;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.cache.CodecCache;
 import org.echoesfrombeyond.util.Check;
@@ -254,6 +255,9 @@ public interface CodecResolver {
      * <p>The {@link EnumCodec.EnumStyle} used will be the default: {@link
      * EnumCodec.EnumStyle#CAMEL_CASE}. Use {@link Builder#withEnumSupport(EnumCodec.EnumStyle)} to
      * specify a different style.
+     *
+     * <p>Enum constants may be documented by annotating them with {@link Doc}. This behaves as if
+     * by calling {@link EnumCodec#documentKey(Enum, String)} with the annotated constant.
      *
      * @return this instance
      */
