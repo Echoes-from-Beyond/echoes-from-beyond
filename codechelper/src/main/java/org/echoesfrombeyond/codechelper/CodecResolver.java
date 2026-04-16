@@ -268,6 +268,9 @@ public interface CodecResolver {
      * Adds enum support to the resolver, using {@link EnumCodec} and {@code style} which determines
      * how enum constants are (de)serialized.
      *
+     * <p>Enum constants may be documented by annotating them with {@link Doc}. This behaves as if
+     * by calling {@link EnumCodec#documentKey(Enum, String)} with the annotated constant.
+     *
      * @return this instance
      * @throws NullPointerException if {@code style} is null
      */
