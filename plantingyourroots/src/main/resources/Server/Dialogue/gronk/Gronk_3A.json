@@ -1,0 +1,44 @@
+{
+  "Type": "Chain",
+  "Id": "Gronk_3A",
+  "Entries": [
+    {
+      "Name": "Gronk",
+      "Line": "Hmm? Does human also have trouble with running-trees?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "It seems Gronk did not understand that particular idiom."
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Running-trees treat human better than Trork, but still not well enough!"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Name": {
+      "Id": "Standard",
+      "Text": "Gronk"
+    },
+    "Line": {
+      "Id": "Standard",
+      "Text": "Tall tree home very dangerous for all outsiders! Many fall and running-trees not care."
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gronk_3"
+        }
+      }
+    ]
+  }
+}

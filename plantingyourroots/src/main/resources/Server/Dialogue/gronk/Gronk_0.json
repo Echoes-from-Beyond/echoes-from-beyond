@@ -1,0 +1,60 @@
+{
+  "Type": "Chain",
+  "Id": "Gronk_0",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "This imposing Trork is an unexpected sight, considering their kind's... strained relationship with the Kweebecs."
+    },
+    {
+      "Name": "Trork",
+      "Line": "..."
+    },
+    {
+      "Name": "Trork",
+      "Line": "..."
+    },
+    {
+      "Name": "Trork",
+      "Line": "Hurr?"
+    },
+    {
+      "Name": "Trork",
+      "Line": "Sorry. Gronk not see you there."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "AAAAAAAAAAAAAAAAAAA RUN THERE'S A TRORK IN THE MARKET",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gronk_1A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "*Slowly back away*",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gronk_1B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "What's a Trork doing in Kweebdrasil?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gronk_1"
+        }
+      }
+    ]
+  }
+}

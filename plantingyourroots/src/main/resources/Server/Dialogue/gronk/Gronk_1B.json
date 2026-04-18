@@ -1,0 +1,36 @@
+{
+  "Type": "Chain",
+  "Id": "Gronk_1B",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "The Trork silently brings the palm of his large hand to his face, in the evidently-universal gesture of exasperation."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "At least human not yell like the last one."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "If human not here to buy treasure from Gronk, why climb down so far?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "How are you here?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gronk_1"
+        }
+      }
+    ]
+  }
+}

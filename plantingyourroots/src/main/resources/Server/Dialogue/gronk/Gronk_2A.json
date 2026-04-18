@@ -1,0 +1,76 @@
+{
+  "Type": "Chain",
+  "Id": "Gronk_2A",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "Gronk narrows his eyes at you, as if deciding whether to take your question seriously."
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Does human really not know?"
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Kweeza is food invented by famous chef Gorgon Trorksay."
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Trorksay usually respected but sometimes he make... strange concoction. Difficult food easy for him, simple meal hard. Once Trorksay even burn simple meal!"
+    },
+    {
+      "Name": "Gronk",
+      "Line": "But Trorksy made very bad mistake one time, when searching for still-plants... what does French one call them? Own-yo?"
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Trorksay pick own-yo, then chop to pieces..."
+    },
+    {
+      "Name": "Gronk",
+      "Line": "But! Trorksay realize his mistake! He not pick own-yo but small running-plant!"
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Running-plant now dead, but Trorksay not waste food! So Trorksay make famous Kweeza from dead running-plant."
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Gronk hear Kweeza tasty, but! Trork not normally eat running-plant! Only sometimes cut very ancient one to make shelter."
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Human also cut old tree, and running-plant forgives! Why running-plant forgive human but not Trork?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Gronk continues to rant for a while about his mistreatment at the hands (branches?) of Kweebecs."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Kweebecs, am I right or am I right?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gronk_3A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "The market DOES feel pretty dangerous...",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gronk_3"
+        }
+      }
+    ]
+  }
+}

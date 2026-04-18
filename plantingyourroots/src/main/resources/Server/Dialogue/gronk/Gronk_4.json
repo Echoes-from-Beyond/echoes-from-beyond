@@ -1,0 +1,23 @@
+{
+  "Type": "Standard",
+  "Id": "Gronk_4",
+  "Name": {
+    "Id": "Standard",
+    "Text": "Gronk"
+  },
+  "Line": {
+    "Id": "Standard",
+    "Text": "Ahh. Gronk understand. At least talk was good. Visitors not come often! Gronk would fall asleep if not for fear of shoddy market falling down!"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "[leave]",
+      "Action": {
+        "Id": "Close"
+      }
+    }
+  ]
+}

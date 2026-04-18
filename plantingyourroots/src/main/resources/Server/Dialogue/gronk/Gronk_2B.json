@@ -1,0 +1,48 @@
+{
+  "Type": "Chain",
+  "Id": "Gronk_2B",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "Gronk scowls. You've clearly landed on a sensitive topic."
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Running-plant elders not like Trok. So they put Gronk in worse place in market!"
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Shoddy running-plant home nearly fall apart! And they hope Gronk fall first."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "At least someone recognizes the precarious nature of Kweebec architecture. You had almost managed to convince yourself that Kweebdrasil's market merely appeared to be a total deathtrap."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Kweebecs, am I right or am I right?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gronk_3A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "The market DOES feel pretty dangerous...",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gronk_3"
+        }
+      }
+    ]
+  }
+}

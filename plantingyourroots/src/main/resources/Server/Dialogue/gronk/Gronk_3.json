@@ -1,0 +1,40 @@
+{
+  "Type": "Chain",
+  "Id": "Gronk_3",
+  "Entries": [
+    {
+      "Name": "Gronk",
+      "Line": "Running-trees fall too, but rarely hurt. Young ones are light as feather! Old ones are springy, land without damage. Ancient ones might crack but rarely move, so not at risk."
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Running-trees know this, invite guest anyway. Market at least could have been safe on ground!"
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Ahh, but Gronk talk too much, lose track of purpose! Does human like treasure? Gronk give big discount for heavy item!"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The Trork's assorted treasures are quite shiny and appealing, though unfortunately your assignment on Kweebdrasil did not include the provision of any gold or commodities for barter."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Sorry, I don't have anything to pay with.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Gronk_4"
+        }
+      }
+    ]
+  }
+}
