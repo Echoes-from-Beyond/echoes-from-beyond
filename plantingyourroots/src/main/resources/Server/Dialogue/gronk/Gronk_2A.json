@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Gronk_2A",
   "Entries": [
     {
       "Name": "Narrator",
@@ -41,10 +40,6 @@
     {
       "Name": "Gronk",
       "Line": "Human also cut old tree, and running-plant forgives! Why running-plant forgive human but not Trork?"
-    },
-    {
-      "Name": "Narrator",
-      "Line": "Gronk continues to rant for a while about his mistreatment at the hands (branches?) of Kweebecs."
     }
   ],
   "AdvanceText": "Continue",
@@ -52,6 +47,14 @@
   "UiFragment": "Classic_Dialogue_Fragment.ui",
   "End": {
     "Type": "Standard",
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "Line": {
+      "Id": "Standard",
+      "Text": "Gronk continues to rant for a while about his mistreatment at the hands (branches?) of Kweebecs."
+    },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
     "Choices": [

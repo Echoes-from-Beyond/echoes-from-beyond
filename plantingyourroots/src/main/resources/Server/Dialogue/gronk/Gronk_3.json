@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Gronk_3",
   "Entries": [
     {
       "Name": "Gronk",
@@ -13,10 +12,6 @@
     {
       "Name": "Gronk",
       "Line": "Ahh, but Gronk talk too much, lose track of purpose! Does human like treasure? Gronk give big discount for heavy item!"
-    },
-    {
-      "Name": "Narrator",
-      "Line": "The Trork's assorted treasures are quite shiny and appealing, though unfortunately your assignment on Kweebdrasil did not include the provision of any gold or commodities for barter."
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +19,14 @@
   "UiFragment": "Classic_Dialogue_Fragment.ui",
   "End": {
     "Type": "Standard",
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "Line": {
+      "Id": "Standard",
+      "Text": "The Trork's assorted treasures are quite shiny and appealing, though unfortunately your assignment on Kweebdrasil did not include the provision of any gold or commodities for barter."
+    },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
     "Choices": [

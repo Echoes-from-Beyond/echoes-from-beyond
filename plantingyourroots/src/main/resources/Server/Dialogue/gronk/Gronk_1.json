@@ -1,14 +1,9 @@
 {
   "Type": "Chain",
-  "Id": "Gronk_1",
   "Entries": [
     {
       "Name": "Gronk",
       "Line": "Gronk here by ancient-tree permission. Gronk sell treasure in market, give some to running-plants."
-    },
-    {
-      "Name": "Gronk",
-      "Line": "And, before human ask, Gronk not here to make Kweeza!"
     }
   ],
   "AdvanceText": "Continue",
@@ -18,6 +13,14 @@
     "Type": "Standard",
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Name": {
+      "Id": "Standard",
+      "Text": "Gronk"
+    },
+    "Line": {
+      "Id": "Standard",
+      "Text": "And, before human ask, Gronk not here to make Kweeza!"
+    },
     "Choices": [
       {
         "Id": "Standard",

@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Gronk_1A",
   "Entries": [
     {
       "Name": "Narrator",
@@ -13,10 +12,6 @@
     {
       "Name": "Gronk",
       "Line": "Why do all human react same to Gronk?"
-    },
-    {
-      "Name": "Gronk",
-      "Line": "Gronk hurt no-one, but human and running-plants always assume before asking!"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +19,14 @@
   "UiFragment": "Classic_Dialogue_Fragment.ui",
   "End": {
     "Type": "Standard",
+    "Name": {
+      "Id": "Standard",
+      "Text": "Gronk"
+    },
+    "Line": {
+      "Id": "Standard",
+      "Text": "Gronk hurt no-one, but human and running-plants always assume before asking!"
+    },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
     "Choices": [

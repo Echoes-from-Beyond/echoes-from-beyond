@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Gronk_1B",
   "Entries": [
     {
       "Name": "Narrator",
@@ -8,11 +7,11 @@
     },
     {
       "Name": "Narrator",
-      "Line": "At least human not yell like the last one."
+      "Line": "At least human not yell like last one."
     },
     {
       "Name": "Narrator",
-      "Line": "If human not here to buy treasure from Gronk, why climb down so far?"
+      "Line": "If human not buy treasure from Gronk, why climb down so far?"
     }
   ],
   "AdvanceText": "Continue",
@@ -20,6 +19,14 @@
   "UiFragment": "Classic_Dialogue_Fragment.ui",
   "End": {
     "Type": "Standard",
+    "Name": {
+      "Id": "Standard",
+      "Text": "Gronk"
+    },
+    "Line": {
+      "Id": "Standard",
+      "Text": "Gronk hurt no-one, but human and running-plants always assume before asking!"
+    },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
     "Choices": [
