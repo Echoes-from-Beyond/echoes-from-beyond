@@ -9,7 +9,7 @@
   "StartState": "Idle",
   "DefaultNPCAttitude": "Ignore",
   "DefaultPlayerAttitude": "Neutral",
-  "Appearance": "Kweebec_Sapling_Orange",
+  "Appearance": "Trork_Brawler",
   "DropList": "Drop_Klops_Merchant",
   "MaxHealth": 74,
   "DisableDamageGroups": [
