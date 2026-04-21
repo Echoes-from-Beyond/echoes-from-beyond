@@ -36,7 +36,7 @@ public class CompositeMerger<T> implements InheritMerger<T> {
   @Override
   public @Nullable T merge(@Nullable T value, @Nullable T parentValue) {
     T running = value;
-    for (var merger : mergers) running = merger.merge(value, parentValue);
+    for (var merger : mergers) running = merger.merge(running, parentValue);
     return running;
   }
 
