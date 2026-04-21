@@ -23,18 +23,10 @@
     "Choices": [
       {
         "Id": "Standard",
-        "Text": "Uh... you're looking a little different today.",
+        "Text": "Continue",
         "Action": {
           "Id": "Advance",
-          "Next": "Fk4_1A"
-        }
-      },
-      {
-        "Id": "Standard",
-        "Text": "I see no problems here whatsoever.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_3"
+          "Next": "Fk4_4"
         }
       }
     ]
