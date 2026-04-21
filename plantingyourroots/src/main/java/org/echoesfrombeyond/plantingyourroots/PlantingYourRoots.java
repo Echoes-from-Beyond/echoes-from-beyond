@@ -189,6 +189,8 @@ public class PlantingYourRoots extends JavaPlugin {
     var npcComponentType = NPCEntity.getComponentType();
     assert npcComponentType != null;
 
+    roots.Day++;
+
     Ref<?>[] entitiesToRemove =
         spawnedEntities.stream()
             .map(store::getRefFromUUID)
