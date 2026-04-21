@@ -39,6 +39,11 @@ public class NonNullProvider implements ValidatorProvider<ValidateNonNull> {
   private NonNullProvider() {}
 
   @Override
+  public Class<ValidateNonNull> getArgsType() {
+    return ValidateNonNull.class;
+  }
+
+  @Override
   public @Nullable Validator<?> getInstance(ValidateNonNull args, Field field) {
     return canProvideFor(field) ? Validators.nonNull() : null;
   }

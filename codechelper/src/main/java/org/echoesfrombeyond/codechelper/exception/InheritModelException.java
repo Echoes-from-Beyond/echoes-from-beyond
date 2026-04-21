@@ -22,25 +22,25 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.CodecUtil;
-import org.echoesfrombeyond.codechelper.annotation.validator.ValidatorSpec;
+import org.echoesfrombeyond.codechelper.annotation.inherit.InheritSpec;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /** Exception thrown by {@link CodecUtil#modelBuilder(Class, CodecResolver)} and overloads. */
 @ApiStatus.Internal
 @NullMarked
-public class ValidatorModelException extends FieldModelException {
+public class InheritModelException extends FieldModelException {
   private static String formatMessage(
-      ValidatorSpec spec, Class<? extends Annotation> annotationType, String message) {
+      InheritSpec spec, Class<? extends Annotation> annotationType, String message) {
     return String.format(
-        "ValidatorProvider: %s\nValidator annotation: %s\n%s",
+        "InheritMergerProvider: %s\nInheritMerger annotation: %s\n%s",
         spec.value(), annotationType.getName(), message);
   }
 
-  public ValidatorModelException(
+  public InheritModelException(
       Class<?> modelType,
       Field field,
-      ValidatorSpec spec,
+      InheritSpec spec,
       Class<? extends Annotation> annotationType,
       String message,
       Throwable e) {

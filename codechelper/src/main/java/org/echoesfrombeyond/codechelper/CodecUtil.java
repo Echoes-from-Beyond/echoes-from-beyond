@@ -36,11 +36,13 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import org.echoesfrombeyond.codechelper.annotation.*;
+import org.echoesfrombeyond.codechelper.annotation.inherit.InheritSpec;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidatorSpec;
 import org.echoesfrombeyond.codechelper.cache.CodecCache;
-import org.echoesfrombeyond.codechelper.exception.FieldModelException;
-import org.echoesfrombeyond.codechelper.exception.ModelException;
-import org.echoesfrombeyond.codechelper.exception.ValidatorModelException;
+import org.echoesfrombeyond.codechelper.exception.*;
+import org.echoesfrombeyond.codechelper.inherit.CompositeMerger;
+import org.echoesfrombeyond.codechelper.inherit.InheritMerger;
+import org.echoesfrombeyond.codechelper.provider.Provider;
 import org.echoesfrombeyond.codechelper.validator.ValidatorProvider;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -536,6 +538,91 @@ public final class CodecUtil {
   }
 
   @SuppressWarnings("unchecked")
+  private static <T>
+      BuilderField.FieldBuilder<T, Object, ? extends BuilderCodec.BuilderBase<T, ?>>
+          createFieldBuilder(
+              Class<?> model,
+              Field field,
+              BuilderCodec.BuilderBase<T, ?> builder,
+              KeyedCodec<Object> key,
+              MethodHandle write,
+              MethodHandle read) {
+    InheritMerger<Object> combinedMerger = null;
+    for (var annotation : field.getDeclaredAnnotations()) {
+      var spec = annotation.annotationType().getDeclaredAnnotation(InheritSpec.class);
+      if (spec == null) continue;
+
+      InheritMerger<Object> merger;
+      try {
+        var singleton = Provider.loadSingleton(spec.value());
+        merger = (InheritMerger<Object>) Provider.provide(singleton, annotation, field);
+      } catch (ProviderException e) {
+        throw new InheritModelException(
+            model, field, spec, annotation.annotationType(), "Failed to load InheritMerger", e);
+      }
+
+      if (combinedMerger == null) combinedMerger = merger;
+      else if (combinedMerger instanceof CompositeMerger<Object> composite)
+        composite.addMerger(merger);
+      else {
+        var newMerger = new CompositeMerger<>();
+        newMerger.addMerger(combinedMerger);
+        newMerger.addMerger(merger);
+        combinedMerger = newMerger;
+      }
+    }
+
+    BiConsumer<T, Object> writer =
+        (self, value) -> {
+          try {
+            write.invoke(self, value);
+          } catch (Throwable e) {
+            throw new CodecException("Couldn't write to field", e);
+          }
+        };
+
+    Function<T, Object> reader =
+        self -> {
+          try {
+            return read.invoke(self);
+          } catch (Throwable e) {
+            throw new CodecException("Couldn't read from field", e);
+          }
+        };
+
+    var finalCombinedMerger = combinedMerger;
+    return finalCombinedMerger == null
+        ? builder.append(key, writer, reader)
+        : builder.appendInherited(
+            key,
+            writer,
+            reader,
+            (self, parent) -> {
+              Object selfValue;
+              Object parentValue;
+              try {
+                selfValue = read.invoke(self);
+              } catch (Throwable e) {
+                throw new CodecException("Couldn't read from self during merge", e);
+              }
+
+              try {
+                parentValue = read.invoke(parent);
+              } catch (Throwable e) {
+                throw new CodecException("Couldn't read from parent during merge", e);
+              }
+
+              var merged = finalCombinedMerger.merge(selfValue, parentValue);
+
+              try {
+                write.invoke(self, merged);
+              } catch (Throwable e) {
+                throw new CodecException("Couldn't write to field during merge", e);
+              }
+            });
+  }
+
+  @SuppressWarnings("unchecked")
   private static <T> void modelFields(
       BuilderCodec.BuilderBase<T, ?> builder,
       Class<T> model,
@@ -572,23 +659,7 @@ public final class CodecUtil {
         throw new FieldModelException(model, field, "Should be able to access field", e);
       }
 
-      var fieldBuilder =
-          builder.append(
-              key,
-              (self, value) -> {
-                try {
-                  write.invoke(self, value);
-                } catch (Throwable e) {
-                  throw new CodecException("Couldn't write to field", e);
-                }
-              },
-              (self) -> {
-                try {
-                  return read.invoke(self);
-                } catch (Throwable e) {
-                  throw new CodecException("Couldn't read from field", e);
-                }
-              });
+      var fieldBuilder = createFieldBuilder(model, field, builder, key, write, read);
 
       var fieldDocumentation = field.getDeclaredAnnotation(Doc.class);
       if (fieldDocumentation != null)
@@ -598,61 +669,14 @@ public final class CodecUtil {
         var spec = annotation.annotationType().getDeclaredAnnotation(ValidatorSpec.class);
         if (spec == null) continue;
 
-        Field instanceField;
+        Validator<?> validator;
         try {
-          instanceField = spec.value().getField("INSTANCE");
-        } catch (NoSuchFieldException e) {
+          var singleton = Provider.loadSingleton(spec.value());
+          validator = Provider.provide(singleton, annotation, field);
+        } catch (ProviderException e) {
           throw new ValidatorModelException(
-              model,
-              field,
-              spec,
-              annotation.annotationType(),
-              "ValidatorProvider must have a public, static field named INSTANCE");
+              model, field, spec, annotation.annotationType(), "Failed to load Validator", e);
         }
-
-        var instanceFieldModifiers = instanceField.getModifiers();
-        if (!Modifier.isPublic(instanceFieldModifiers)
-            || !Modifier.isStatic(instanceFieldModifiers))
-          throw new ValidatorModelException(
-              model,
-              field,
-              spec,
-              annotation.annotationType(),
-              "ValidatorProvider INSTANCE field must be public static");
-
-        Object instanceFieldRaw;
-        try {
-          instanceFieldRaw = instanceField.get(null);
-        } catch (IllegalAccessException e) {
-          throw new IllegalArgumentException(e);
-        }
-
-        if (instanceFieldRaw == null)
-          throw new ValidatorModelException(
-              model,
-              field,
-              spec,
-              annotation.annotationType(),
-              "ValidatorProvider INSTANCE field must not be null");
-
-        if (!ValidatorProvider.class.isAssignableFrom(instanceFieldRaw.getClass()))
-          throw new ValidatorModelException(
-              model,
-              field,
-              spec,
-              annotation.annotationType(),
-              "ValidatorProvider INSTANCE field type must be assignable to ValidatorProvider");
-
-        var validatorProvider = (ValidatorProvider<Annotation>) instanceFieldRaw;
-
-        var validator = validatorProvider.getInstance(annotation, field);
-        if (validator == null)
-          throw new ValidatorModelException(
-              model,
-              field,
-              spec,
-              annotation.annotationType(),
-              "ValidatorProvider must be able to provide for the field");
 
         fieldBuilder = fieldBuilder.addValidator((Validator<? super Object>) validator);
       }

@@ -74,6 +74,11 @@ public class NonEmptyProvider implements ValidatorProvider<ValidateNonEmpty> {
   private NonEmptyProvider() {}
 
   @Override
+  public Class<ValidateNonEmpty> getArgsType() {
+    return ValidateNonEmpty.class;
+  }
+
+  @Override
   public @Nullable Validator<?> getInstance(ValidateNonEmpty ignored, Field field) {
     return canProvideFor(field) ? VALIDATOR_INSTANCE : null;
   }
