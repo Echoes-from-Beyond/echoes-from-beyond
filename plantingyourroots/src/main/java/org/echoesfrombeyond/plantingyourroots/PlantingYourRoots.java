@@ -40,11 +40,13 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
+import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
+import org.echoesfrombeyond.plantingyourroots.action.AppendDiaryEntry;
+import org.echoesfrombeyond.plantingyourroots.action.MarkTalkedTo;
 import org.echoesfrombeyond.plantingyourroots.command.ReadyForLove;
 import org.echoesfrombeyond.plantingyourroots.component.KindComponent;
 import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
-import org.echoesfrombeyond.plantingyourroots.dialogue.AppendDiaryEntry;
-import org.echoesfrombeyond.plantingyourroots.dialogue.MarkTalkedTo;
+import org.echoesfrombeyond.plantingyourroots.condition.TalkedToCondition;
 import org.echoesfrombeyond.plantingyourroots.interaction.AdvanceDayInteraction;
 import org.echoesfrombeyond.plantingyourroots.system.CleanWorldSystem;
 import org.jspecify.annotations.NullMarked;
@@ -92,6 +94,9 @@ public class PlantingYourRoots extends JavaPlugin {
     getCodecRegistry(ChoiceAction.CODEC)
         .register("AppendDiary", AppendDiaryEntry.class, AppendDiaryEntry.CODEC)
         .register("MarkTalkedTo", MarkTalkedTo.class, MarkTalkedTo.CODEC);
+
+    getCodecRegistry(ChoiceCondition.CODEC)
+        .register("TalkedTo", TalkedToCondition.class, TalkedToCondition.CODEC);
 
     getEntityStoreRegistry().registerSystem(new CleanWorldSystem());
 
