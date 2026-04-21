@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_2A-3C",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Ah, I see. I understand. One of the recent Whisperfrostian voyageurs has talked up their ... « délicatesse. » Oui ?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "It is a sign of an intrepid adventurer to want to experience things for yourself, but ..."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_2A-3BC"
+        }
+      }
+    ]
+  }
+}

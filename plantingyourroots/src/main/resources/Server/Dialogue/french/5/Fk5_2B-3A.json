@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_2B-3A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I shall take that as un compliment. Merci."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I hope that I, erm, also give you a reason to stay."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "A sheepish smile blooms on his face, though tinged with the same caution that he greeted you with."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_2B_1"
+        }
+      }
+    ]
+  }
+}

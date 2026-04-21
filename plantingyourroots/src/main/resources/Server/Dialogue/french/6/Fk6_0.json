@@ -1,0 +1,74 @@
+{
+  "Type": "Chain",
+  "Id": "Fk6_0",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "When you come over again, French-- Canuck Kweebec gives you no mind. He's too enamored with his pond. Yet, it's not like he hasn't noticed you at all."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "When he next speaks, you notice that he's keeping up the accent of a Frenchman. It is, however, significantly more demure than before. Some habits die hard, apparently."
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "I have been thinking. And I have realised that this French thing has not been working well."
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "I wanted to feel like ... someone, before I forever take root. Someone interesting, if I am not able to attain any degree of importance in time."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You hear a deep sigh before he turns around to face you, except his eyes remain downcast."
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "For most of my life, I was as unremarkable as you can imagine a Kweebec to be. So, I have assumed une personnalité."
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "I know. « Being French » does not sound like one on its own, but it is eye-catching, non ? Les Français are met with as much respect as dérision, even if you only hear about the second one on Kweebdrasil."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Who, outside of it, cares about my backwater ? Or-- non, who thinks more of it than a joke ? Even if les plébéiens make many comments about France too, it is still seen as a place of high culture and high fashion."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Canuck Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Who cares? Just own up to it.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk6_1"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Don't let a bunch of strangers and their presumptions make you upend your whole life.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk6_1A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "But Quebec is also pretty cool. You have... uh... hmm...",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk6_1B"
+        }
+      }
+    ]
+  }
+}

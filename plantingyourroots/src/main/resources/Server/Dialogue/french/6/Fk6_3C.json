@@ -1,0 +1,49 @@
+{
+  "Type": "Chain",
+  "Id": "Fk6_3C",
+  "Entries": [
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "You did not have to say it like that !"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "But I understand. Well, I wish a good life for you."
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Perhaps ... non. I get it."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He walks away, crestfallen-- leaf-fallen?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Not that it matters, but this is the last time you'll see him. You didn't think that 'identity crisis' was a tree species, but you're surely glad to be finally rid of him."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "... oui ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

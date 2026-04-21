@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk5_1A-2A",
+  "Line": {
+    "Id": "Standard",
+    "Text": "That may be so, but not many can pronounce it with as much care and skill as you did."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk5_1"
+      }
+    }
+  ]
+}

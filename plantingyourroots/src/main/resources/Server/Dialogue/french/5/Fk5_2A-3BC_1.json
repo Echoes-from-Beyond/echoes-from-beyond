@@ -1,0 +1,38 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_2A-3BC_1",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Non ! Do not even suggest something like that."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Les Français would never allow something of such bad qualité to intrude upon our economy. Les Québécois can keep their slop to themselves."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Or other Whisperfrostians ! Whoever came up with that place."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "I'm surprised that you even tried their food, then.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_2A-3BC_2"
+        }
+      }
+    ]
+  }
+}

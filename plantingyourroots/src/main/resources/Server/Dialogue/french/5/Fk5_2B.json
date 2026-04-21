@@ -1,0 +1,76 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_2B",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Then it looks like we are in the same bateau, I think you say. For all my time here, I have not explored Kweebdrasil much."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "If I knew that someone like you was coming to visit, I would have put more effort into it. But I am no prophète, oui ?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If I was, I would have tried to bear people's strange looks."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "If I knew that someone like you lived up here, I would have come sooner.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "AdjustInteger",
+              "MetadataKey": "Fk_Romance",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "Delta": 1
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk5_2B-3A"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I get it. Crowds aren't my thing either.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "AdjustInteger",
+              "MetadataKey": "Fk_Romance",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "Delta": 1
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk5_2B-3B"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I get it. Crowds aren't my thing either.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_2B-3C"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_1-L1",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Mon ami, we are both too young to die ! Mon écorce is hard enough that I would split in half if I was to fall."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "What is there to do, anyway ? Le Trork sells same things all day because not many Kweebecs have use for l'or, and notre marchands sell anything that ..."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "One of his hands pans across the canopy."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "... you can see from here and pick up yourself."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_1_1"
+        }
+      }
+    ]
+  }
+}

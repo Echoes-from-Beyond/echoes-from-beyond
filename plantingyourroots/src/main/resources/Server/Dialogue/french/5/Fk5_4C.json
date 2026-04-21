@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_4C",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "..."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He is visibly fighting back a grimace of some kind. His face twists this and that way, until he manages to produce a neutral, if tense, line across his mouth."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "If I have truly done so, then I must apologise. But it was not my intention !"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "It just so happens to be at the forefront of mes pensées. I have told you why, oui ? It is world politique !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Do you know who that Kweebec is, then?",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_4"
+        }
+      }
+    ]
+  }
+}

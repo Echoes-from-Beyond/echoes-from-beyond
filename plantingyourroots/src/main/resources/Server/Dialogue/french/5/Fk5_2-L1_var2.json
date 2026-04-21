@@ -1,0 +1,34 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_2-L1_var2",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Why do you lie ? I am sure in what I heard downstairs."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If you have teamed up with un contrebandier to steal from mon stockage, I only need to ask Kweebdrasil for their identité. L'arbre sees all and hears all on itself."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_2B_2"
+        }
+      }
+    ]
+  }
+}

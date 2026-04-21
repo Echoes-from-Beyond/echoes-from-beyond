@@ -1,0 +1,50 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_1A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Ahh, it makes me so happy to hear that you are learning !"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Perhaps you will soon be fluent in ma belle langue !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Okay, but 'bonjour' is the one word everyone knows.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_1A-2A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Maybe you can be my teacher.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_1A-2B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Oh, elements help me.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_1A-2C"
+        }
+      }
+    ]
+  }
+}

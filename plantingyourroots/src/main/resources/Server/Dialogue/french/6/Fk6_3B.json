@@ -1,0 +1,53 @@
+{
+  "Type": "Chain",
+  "Id": "Fk6_3B",
+  "Entries": [
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "I meant--"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Ah, I see. Well, I cannot say that I am not a little disappointed."
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "It is not your fault ! Mes attentes-- I thought that maybe--"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "What I want to say is that I do not have a lot of opportunités to find kinship. For the same reason that I am unable to make my mark on le monde."
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "I was hoping that ... erm, not that you are easy to--"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Perhaps I should leave you to it. It would be awkward for me, and you may have better luck with some of the other trees."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Au revoir. You will be in my thoughts."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Canuck Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

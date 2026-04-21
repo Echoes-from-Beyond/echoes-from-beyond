@@ -1,0 +1,39 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_5A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I would not call ma histoire that « tragique » in any way. It is as simple as this : I sprout in a underdeveloped region of France, struggle to plant mes racines in autre parts, then move abroad."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "It is not as dramatique as you imply."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "I heard that you did all of that... in Quebec.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "Advance",
+              "Next": "Fk5_5A_1"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

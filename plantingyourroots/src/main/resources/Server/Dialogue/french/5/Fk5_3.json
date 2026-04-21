@@ -1,0 +1,50 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_3",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Mon frère ?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "A long pause stretches between the two of you. At several points, it seems that French Kweebec will blurt something out, but he never does; only when he shakes his head does he come up with a response."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "All of ma famille is back in France. We are not very close, but I would know if there is another Français on Kweebdrasil."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Is this something that he has told you ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "He said that he's from Quebec. And so are you.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_3_1"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "The best part is that I heard you're not even French.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk5_3_1"
+        }
+      }
+    ]
+  }
+}

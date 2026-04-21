@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk5_2B-3C",
+  "Line": {
+    "Id": "Standard",
+    "Text": "If my problems are so hard to hear out, why do you come by ? It is easier to forget about me if I bother you. Anyway ... "
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk5_2B_1"
+      }
+    }
+  ]
+}

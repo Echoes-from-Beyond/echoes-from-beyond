@@ -1,0 +1,49 @@
+{
+  "Type": "Standard",
+  "Id": "Fk6_2B",
+  "Line": {
+    "Id": "Standard",
+    "Text": "He squeezes his eyes shut and looks away for a second. Something eats at him from the inside."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Narrator"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "CompareInteger",
+        "MetadataKey": "Fk_Romance",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "Comparison": "GreaterThanOrEqualTo",
+        "Value": 5
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk6_2_var1"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "CompareInteger",
+          "MetadataKey": "Fk_Romance",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "Comparison": "GreaterThanOrEqualTo",
+          "Value": 5
+        }
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk6_2_var2"
+      }
+    }
+  ]
+}

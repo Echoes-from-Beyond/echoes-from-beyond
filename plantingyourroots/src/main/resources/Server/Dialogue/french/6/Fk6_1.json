@@ -1,0 +1,74 @@
+{
+  "Type": "Chain",
+  "Id": "Fk6_1",
+  "Entries": [
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Non, I do not wish to hear it. You have hurt me at a much deeper niveau than you can imagine."
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "But perhaps I needed that. Hmm."
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Ah, he has probably already shown you. But I will accentuate."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Canuck Kweebec bows his head before taking his beret in one hand. A pile of red leaves spills out when he pulls it off his scalp, dangling off of a patch of bark that he didn't think to cover in foundation."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "For a moment, he seems like a herald of fall, the season of hot chocolate and the decay of plants into their true, golden and brown selves. Kweebecs don't work like that, though. It's also still middle of the summer."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "There's something strangely touching about the gesture, almost like he, with the simple act of revealing his lineage as a sugar maple, has laid his soul bare before you. And now he expects you to enact your will upon it; whatever you do, he'll roll with the punches."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "His puppy eyes -- or whatever the plant equivalent of a puppy is -- uphold that impression even further."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I should probably return to mon jardin d'origine. I have not been lucky there, but I have been even less lucky here. Oui ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Canuck Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Let's blow this joint.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk6_2A"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "I'll kind of miss you.",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk6_2B"
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Best of luck!",
+        "Action": {
+          "Id": "Advance",
+          "Next": "Fk6_2C"
+        }
+      }
+    ]
+  }
+}

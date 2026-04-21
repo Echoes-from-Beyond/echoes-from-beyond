@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk5_2B-3B",
+  "Line": {
+    "Id": "Standard",
+    "Text": "The crowds are not what I meant, though they do not help."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk5_2B_1"
+      }
+    }
+  ]
+}

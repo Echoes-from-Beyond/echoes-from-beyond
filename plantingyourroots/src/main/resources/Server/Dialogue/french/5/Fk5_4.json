@@ -1,0 +1,76 @@
+{
+  "Type": "Chain",
+  "Id": "Fk5_4",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "He is someone I know, but thought that he would not ... try to meddle with ma vie."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It is best to ignore him. That tree has made it sa mission to-- to--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "When he realizes that he doesn't have a good answer to that one, his hands start shaking. An irritated grumble snaps out of him like thunder."
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "That Québécois makes up récits in his head and expects the rest of le monde to follow ! What an individual exemplaire of his soon-to-be -- ha ! -- « country. »"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Forget it ! I do not want to talk about him."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "I got a summary of your tragic backstory, alright? You can come clean with it.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "AdjustInteger",
+              "MetadataKey": "Fk_Truth",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "Delta": 1
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk5_5A"
+            }
+          ]
+        }
+      },
+      {
+        "Id": "Standard",
+        "Text": "Sure, but you should do something about it. Or just learn how to ignore him. No point being upset over a troll.",
+        "Action": {
+          "Id": "Composite",
+          "Actions": [
+            {
+              "Id": "AdjustInteger",
+              "MetadataKey": "Fk_Complex",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "Delta": 1
+            },
+            {
+              "Id": "Advance",
+              "Next": "Fk5_5B"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

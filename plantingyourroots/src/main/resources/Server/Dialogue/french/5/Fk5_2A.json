@@ -1,0 +1,60 @@
+{
+  "Type": "Standard",
+  "Id": "Fk5_2A",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Tim Kweertons ? What do you imply ?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Well, you know. To remind you of home. [Wink even harder.]",
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Complex",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2A-3A"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I'm just feeling a bit homesick.",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataKey": "Fk_Origin",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "Metadata": {
+          "Id": "String",
+          "Value": "Fk_Zone3"
+        }
+      },
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk5_2A-3B"
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "I heard something about it recently, so I'm curious.",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk5_2A-3C"
+      }
+    }
+  ]
+}

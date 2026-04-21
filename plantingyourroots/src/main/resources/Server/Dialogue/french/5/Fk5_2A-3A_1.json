@@ -1,0 +1,59 @@
+{
+  "Type": "Standard",
+  "Id": "Fk5_2A-3A_1",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "I do not understand what is so funny about insinuating that I am Whisperfrostian. Will you be the one to tell me, or will you giggle to yourself like the rest ?"
+    },
+    "MetadataKey": "Fk5_2A-3A_1",
+    "Options": {
+      "Fk5_2A-3A-L1": {
+        "Id": "Standard",
+        "Text": "If you choose to believe that this is inconcevable to you, that is your problem."
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "I'm not buying this anymore. How many people actually think of doing that?",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataKey": "Fk5_2A-3A_1"
+      },
+      "Action": {
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk5_2A-3A_1",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk5_2A-3A-L1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2A-3A-L1"
+          }
+        ]
+      }
+    },
+    {
+      "Id": "Standard",
+      "Text": "How come you know about Tim Kweertons?",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk5_2A-3A_2"
+      }
+    }
+  ]
+}

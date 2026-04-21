@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Id": "Fk5_2A-3A-L1",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I do not need you to « buy » anything. It happens often enough that it is frustrating."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Classic_Dialogue.ui",
+  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk5_2A-3A_1"
+      }
+    }
+  ]
+}
