@@ -21,17 +21,20 @@ package org.echoesfrombeyond.dialoguelib.condition;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.OptionalInt;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.codechelper.annotation.Opt;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.dialoguelib.metadata.IntegerMetadata;
 import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @Doc(
     """
@@ -39,6 +42,9 @@ import org.jspecify.annotations.NullMarked;
     is less than, greater than, or equal to a specified value. This
     condition will always fail if the metadata exists and isn't an
     integer.
+
+    May be used to compare metadata against a constant value, or some
+    other metadata.
     """)
 @NullMarked
 @ModelBuilder
@@ -50,27 +56,27 @@ public class CompareIntegerCondition extends MetadataAccessor implements ChoiceC
           DialoguePlugin.getResolver(),
           Plugin.getSharedCache());
 
-  public enum Compare {
-    LessThan,
-    GreaterThan,
-    LessThanOrEqualTo,
-    GreaterThanOrEqualTo,
-    EqualTo
-  }
-
   @Doc(
       """
       The comparison type; for example, if LessThan, the condition
       will check [metadata] < Value. If unspecified, the default is
       EqualTo.
+
+      If the metadata pointed at by StoreKey and MetadataKey exists
+      but is not the right type, this condition will always return
+      false.
       """)
-  public Compare Comparison;
+  public BooleanCompare Comparison;
 
   @Doc(
       """
       The value to compare against. If unspecified, defaults to 0.
       This is always on the right side of the operator specified by
       Comparison.
+
+      If OtherMetadataKey is set, and it points to a metadata key that
+      is also an integer, then the value of that other metadata will
+      be used as the right-hand side of the comparison operation.
       """)
   public int Value;
 
@@ -78,11 +84,37 @@ public class CompareIntegerCondition extends MetadataAccessor implements ChoiceC
       """
       If set to true, this choice will display when the metadata value
       is missing. If unspecified, defaults to false.
+
+      This is only considered for the first (left-hand side) metadata.
+      If OtherMetadataKey is non-null but the value does not exist,
+      the condition will always evaluate to false.
       """)
+  @Opt
   public boolean AbsentShouldDisplay;
 
+  @Doc(
+      """
+      The store key of the other metadata to compare against. Works
+      the same as StoreKey does.
+      """)
+  @Opt
+  public @Nullable String OtherMetadataStoreKey;
+
+  @Doc(
+      """
+      The key of the other metadata to compare against. Works the
+      same as MetadataKey does.
+
+      If unspecified, will use the constant Value as the right-hand
+      side of the comparison operation. If specified, but the actual
+      metadata is missing or not the right type, the comparison will
+      always evaluate to false.
+      """)
+  @Opt
+  public @Nullable String OtherMetadataKey;
+
   public CompareIntegerCondition() {
-    this.Comparison = Compare.EqualTo;
+    this.Comparison = BooleanCompare.EqualTo;
   }
 
   @Override
@@ -93,12 +125,26 @@ public class CompareIntegerCondition extends MetadataAccessor implements ChoiceC
 
     if (!(value instanceof IntegerMetadata integerMetadata)) return false;
 
-    return switch (Comparison) {
-      case LessThan -> integerMetadata.Value < Value;
-      case GreaterThan -> integerMetadata.Value > Value;
-      case LessThanOrEqualTo -> integerMetadata.Value <= Value;
-      case GreaterThanOrEqualTo -> integerMetadata.Value >= Value;
-      case EqualTo -> integerMetadata.Value == Value;
-    };
+    var otherMetadataStoreKey = OtherMetadataStoreKey;
+    var otherMetadataKey = OtherMetadataKey;
+
+    OptionalInt otherValueOptional =
+        otherMetadataKey == null
+            ? OptionalInt.of(Value)
+            : (new MetadataAccessor() {
+                      {
+                        MetadataStoreKey = otherMetadataStoreKey;
+                        MetadataKey = otherMetadataKey;
+                      }
+                    }.getMetadata(activator, parent)
+                    instanceof IntegerMetadata otherIntegerMetadata
+                ? OptionalInt.of(otherIntegerMetadata.Value)
+                : OptionalInt.empty());
+
+    // return false when the other metadata has its key specified but does not exist, or if it does
+    // exist and is the wrong type
+    if (otherValueOptional.isEmpty()) return false;
+
+    return Comparison.compare(integerMetadata.Value, otherValueOptional.getAsInt());
   }
 }

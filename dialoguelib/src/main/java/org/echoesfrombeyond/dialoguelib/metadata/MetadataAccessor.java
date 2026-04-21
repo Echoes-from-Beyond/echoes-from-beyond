@@ -35,6 +35,8 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @ModelBuilder
 public abstract class MetadataAccessor {
+  public static final String ASSET_STORE_KEY_PREFIX = "$$";
+
   public static final BuilderCodec<MetadataAccessor> CODEC =
       CodecUtil.modelBuilder(
           MetadataAccessor.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
@@ -42,12 +44,12 @@ public abstract class MetadataAccessor {
   @Doc(
       """
       The metadata "store key". If unspecified, all metadata values
-      will be "local" to the dialogue asset.
+      will be "local" to the dialogue asset in which they are defined.
 
       Setting this value to something other than the default allows
       separate dialogue to access the same metadata.
 
-      Keys that start with '$', followed by a (case sensitive)
+      Keys that start with '$$', followed by a (case insensitive)
       dialogue identifier, will point to the metadata of that dialogue
       asset.
       """)
@@ -61,7 +63,28 @@ public abstract class MetadataAccessor {
   public @Nullable String MetadataKey;
 
   private static String formatId(String dialogueId) {
-    return "$" + dialogueId;
+    var builder = new StringBuilder(ASSET_STORE_KEY_PREFIX.length() + dialogueId.length());
+    builder.append(ASSET_STORE_KEY_PREFIX);
+
+    // this is done instead of String#toLowerCase because we want to mimic the way Hytale's
+    // case-insensitive hash strategy works, warts and all
+    for (int i = 0; i < dialogueId.length(); i++)
+      builder.append(Character.toLowerCase(dialogueId.charAt(i)));
+
+    return builder.toString();
+  }
+
+  private @Nullable String readStoreKey() {
+    var current = MetadataStoreKey;
+    if (current == null) return null;
+
+    if (!current.startsWith(ASSET_STORE_KEY_PREFIX)) return current;
+
+    var builder = new StringBuilder(current.length() - ASSET_STORE_KEY_PREFIX.length());
+    for (int i = ASSET_STORE_KEY_PREFIX.length(); i < current.length(); i++)
+      builder.append(Character.toLowerCase(current.charAt(i)));
+
+    return builder.toString();
   }
 
   @RunOnWorldThread
@@ -73,7 +96,7 @@ public abstract class MetadataAccessor {
         activator.getStore().getComponent(activator, DialogueComponent.getComponentType());
     if (component == null) return null;
 
-    var storeKey = MetadataStoreKey;
+    var storeKey = readStoreKey();
     var metadataStore =
         component.getMetadataStore(storeKey == null ? formatId(parent.getId()) : storeKey);
     if (metadataStore == null) return null;
@@ -87,7 +110,7 @@ public abstract class MetadataAccessor {
     var key = MetadataKey;
     if (key == null) return null;
 
-    var storeKey = MetadataStoreKey;
+    var storeKey = readStoreKey();
     var actualStoreKey = storeKey == null ? formatId(parent.getId()) : storeKey;
 
     var component =
