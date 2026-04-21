@@ -19,6 +19,7 @@
 package org.echoesfrombeyond.codechelper.inherit;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import org.echoesfrombeyond.codechelper.annotation.inherit.InheritMergeList;
 import org.jspecify.annotations.NullMarked;
@@ -35,17 +36,27 @@ public class ListMerger implements InheritMergerProvider<InheritMergeList> {
     return InheritMergeList.class;
   }
 
-  private static class MergerImpl implements InheritMerger<List<Object>> {
-    private final int index;
-
-    private MergerImpl(int index) {
-      this.index = index;
-    }
-
+  private record MergerImpl(int index) implements InheritMerger<List<Object>> {
     @Override
+    @SuppressWarnings("unchecked")
     public @Nullable List<Object> merge(
         @Nullable List<Object> value, @Nullable List<Object> parentValue) {
-      if (value == null || parentValue == null) return value;
+      if (parentValue == null || parentValue.isEmpty()) return value;
+
+      // if value is null, it should have the same type as the parent value
+      if (value == null) {
+        try {
+          var newList =
+              (List<Object>) parentValue.getClass().getDeclaredConstructor().newInstance();
+          newList.addAll(parentValue);
+          return newList;
+        } catch (NoSuchMethodException
+            | InvocationTargetException
+            | InstantiationException
+            | IllegalAccessException _) {
+          return null;
+        }
+      }
 
       value.addAll(Math.min(Math.max(index, 0), value.size()), parentValue);
       return value;
