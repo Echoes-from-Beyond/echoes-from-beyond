@@ -229,6 +229,7 @@ public class PlantingYourRoots extends JavaPlugin {
       if (uuid != null) spawnedEntities.add(uuid);
 
       dateable.Stage++;
+      dateable.TalkedTo = false;
     }
   }
 }
