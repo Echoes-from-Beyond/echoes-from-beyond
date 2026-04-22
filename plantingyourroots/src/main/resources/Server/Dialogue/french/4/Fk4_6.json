@@ -4,31 +4,38 @@
   "Entries": [
     {
       "Name": "Quebec Kweebec",
-      "Line": "And my brother happens to be one of the more ambitious ones, which is, hmm, a problem when you germinate in middle of nowhere. I do mean « middle of nowhere. » Right up against the glaciers."
+      "Line": "And my brother happens to be one of the more ambitious ones, which is, hmm, a problem when you germinate in middle of nowhere. I do mean « middle of nowhere. » Right up against the glaciers.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "The Ancients that take root there are few, and it's usually individuals that haven't thought everything through. Then their sproutlings have to deal with the consequences."
+      "Line": "The Ancients that take root there are few, and it's usually individuals that haven't thought everything through. Then their sproutlings have to deal with the consequences.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "Our grove was small, and our parent withered some years after we dropped. Turns out that just 'cause there's less competition up there, it doesn't mean that the soil quality is any good."
+      "Line": "Our grove was small, and our parent withered some years after we dropped. Turns out that just 'cause there's less competition up there, it doesn't mean that the soil quality is any good.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "For us, it's hard to leave when everyone else is far away, and there are Outlanders everywhere. That meant that we spent most of our time just trying to survive and, for a long time, without an elder to sing to us."
+      "Line": "For us, it's hard to leave when everyone else is far away, and there are Outlanders everywhere. That meant that we spent most of our time just trying to survive and, for a long time, without an elder to sing to us.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "And if you're super remote, any tech or... any kinda development made by the rest of Whisperfrost basically never reaches you. Obviously, Canuck Kweebec wasn't happy with that arrangement."
+      "Line": "And if you're super remote, any tech or... any kinda development made by the rest of Whisperfrost basically never reaches you. Obviously, Canuck Kweebec wasn't happy with that arrangement.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "He wanted to *mean* something to the world. I kinda accepted our fate a long time ago, but I think that it didn't help him that he got a lot of time to brood as well. I was the one in charge back then, so."
+      "Line": "He wanted to *mean* something to the world. I kinda accepted our fate a long time ago, but I think that it didn't help him that he got a lot of time to brood as well. I was the one in charge back then, so.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "I myself was ready to bail much earlier, but we had some disagreements. Since he already has lofty goals in life, he was afraid that some Outlander with an axe would end it all sooner than our circumstances could."
+      "Line": "I myself was ready to bail much earlier, but we had some disagreements. Since he already has lofty goals in life, he was afraid that some Outlander with an axe would end it all sooner than our circumstances could.",
+      "Sprite":"sprites/Placeholder.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -44,6 +51,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {
         "Id": "Standard",

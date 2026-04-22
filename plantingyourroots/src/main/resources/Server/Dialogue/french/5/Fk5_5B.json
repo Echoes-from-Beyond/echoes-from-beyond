@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "C'est difficile when that tree is a parasite. More literally than I am confortable with."
+      "Line": "C'est difficile when that tree is a parasite. More literally than I am confortable with.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I do not have the same options that people normally do. It is not like cutting off une mauvaise amitié from your branches."
+      "Line": "I do not have the same options that people normally do. It is not like cutting off une mauvaise amitié from your branches.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

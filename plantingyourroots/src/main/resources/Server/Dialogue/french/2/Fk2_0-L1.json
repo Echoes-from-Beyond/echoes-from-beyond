@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "I do not think that I am being intentionally avoided, if that is what you wonder. Mon étang is simply too ... out of way."
+      "Line": "I do not think that I am being intentionally avoided, if that is what you wonder. Mon étang is simply too ... out of way.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Those seeking refreshments or peace can instead go to the shrine of Gaia below my home. Gym Kweebec's place is another popular spot pour excursions."
+      "Line": "Those seeking refreshments or peace can instead go to the shrine of Gaia below my home. Gym Kweebec's place is another popular spot pour excursions.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Then there are cultural reasons. Kweebecs share more with each other than some of the other species, but it is hard for us to get used to étrangers. I take ... more mental effort than to visit votre relatifs."
+      "Line": "Then there are cultural reasons. Kweebecs share more with each other than some of the other species, but it is hard for us to get used to étrangers. I take ... more mental effort than to visit votre relatifs.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -4,39 +4,48 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Did he ? Gah, I feel like I am repeating myself."
+      "Line": "Did he ? Gah, I feel like I am repeating myself.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "What if I called you ... Fennish Human ? Or Danish Human, even though you are neither ?"
+      "Line": "What if I called you ... Fennish Human ? Or Danish Human, even though you are neither ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Him saying that does not change la réalité. I have been French Kweebec toute ma vie, not whatever autre nom he decides to assign to me."
+      "Line": "Him saying that does not change la réalité. I have been French Kweebec toute ma vie, not whatever autre nom he decides to assign to me.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I have been trying to be authentique with you. I can guarantee you that : it is not my intention to hide behind lies, or whatever he might say."
+      "Line": "I have been trying to be authentique with you. I can guarantee you that : it is not my intention to hide behind lies, or whatever he might say.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Now, I must go wash off that ... ideé from mon esprit."
+      "Line": "Now, I must go wash off that ... ideé from mon esprit.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Ah, I have not had escargot in some time. Do the Québécois know how to make *that* ? Non !"
+      "Line": "Ah, I have not had escargot in some time. Do the Québécois know how to make *that* ? Non !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Come, I will show you."
+      "Line": "Come, I will show you.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "He scampers off towards his home, leaving you in the proverbial dust to ponder upon what happened -- and to be so grossed out from learning his snail-eating habits that you vow never to visit him again. What's next? Sautéed magma toads?"
+      "Line": "He scampers off towards his home, leaving you in the proverbial dust to ponder upon what happened -- and to be so grossed out from learning his snail-eating habits that you vow never to visit him again. What's next? Sautéed magma toads?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "Well, it looks like he couldn't admit to it. You messed up at some point, whether by teasing him too hard or playing along with his complex. He's now firmly rooted in his dubious Frenchness."
+      "Line": "Well, it looks like he couldn't admit to it. You messed up at some point, whether by teasing him too hard or playing along with his complex. He's now firmly rooted in his dubious Frenchness.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -52,6 +61,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

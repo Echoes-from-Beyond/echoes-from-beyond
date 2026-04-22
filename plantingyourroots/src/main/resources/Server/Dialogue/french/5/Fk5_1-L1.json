@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Mon ami, we are both too young to die ! Mon écorce is hard enough that I would split in half if I was to fall."
+      "Line": "Mon ami, we are both too young to die ! Mon écorce is hard enough that I would split in half if I was to fall.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "What is there to do, anyway ? Le Trork sells same things all day because not many Kweebecs have use for l'or, and notre marchands sell anything that ..."
+      "Line": "What is there to do, anyway ? Le Trork sells same things all day because not many Kweebecs have use for l'or, and notre marchands sell anything that ...",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "One of his hands pans across the canopy."
+      "Line": "One of his hands pans across the canopy.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

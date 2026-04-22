@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "I shall take that as un compliment. Merci."
+      "Line": "I shall take that as un compliment. Merci.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I hope that I, erm, also give you a reason to stay."
+      "Line": "I hope that I, erm, also give you a reason to stay.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

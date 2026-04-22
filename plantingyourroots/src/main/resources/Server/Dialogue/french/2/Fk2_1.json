@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "French Kweebec's home is everything you expect. A conspicuous flag hangs over his bed, but the rest of it is pretty standard for a Kweebec. Roots and vines hang off of every surface, potted plants stand where the first two couldn't catch on--"
+      "Line": "French Kweebec's home is everything you expect. A conspicuous flag hangs over his bed, but the rest of it is pretty standard for a Kweebec. Roots and vines hang off of every surface, potted plants stand where the first two couldn't catch on--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "--and, of course, a fully-kitted kitchen is embedded in a crevice. It seems that heat is still emanating from an ash-covered oven, however long it was since French Kweebec had it on."
+      "Line": "--and, of course, a fully-kitted kitchen is embedded in a crevice. It seems that heat is still emanating from an ash-covered oven, however long it was since French Kweebec had it on.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "You can't focus on it for too long, though, as pungent spices soon assault your nostrils."
+      "Line": "You can't focus on it for too long, though, as pungent spices soon assault your nostrils.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

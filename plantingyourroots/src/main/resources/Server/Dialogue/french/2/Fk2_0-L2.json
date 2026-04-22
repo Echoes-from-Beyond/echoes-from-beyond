@@ -4,7 +4,8 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "He hesitates about his answer for a little too long, letting out a meaningless sound here and there."
+      "Line": "He hesitates about his answer for a little too long, letting out a meaningless sound here and there.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -20,6 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

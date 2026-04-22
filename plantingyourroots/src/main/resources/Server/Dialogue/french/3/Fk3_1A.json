@@ -4,7 +4,8 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "If that is really the case, then you must somehow be lonelier than I am !"
+      "Line": "If that is really the case, then you must somehow be lonelier than I am !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -20,6 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

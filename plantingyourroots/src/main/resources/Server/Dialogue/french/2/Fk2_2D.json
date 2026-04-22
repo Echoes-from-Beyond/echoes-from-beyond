@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "So ..?"
+      "Line": "So ..?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "You stare at him. He stares at you. It's *really* awkward."
+      "Line": "You stare at him. He stares at you. It's *really* awkward.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -4,7 +4,8 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "It's poutine! And here he is, gobbling on it himself: the plate carries a portion that somehow looks even more delectable than what you knocked off the tree. The fries are, well, fried to perfection, the gravy thick, and the cheese curds far too fresh for something that can't be easily sourced atop a tree."
+      "Line": "It's poutine! And here he is, gobbling on it himself: the plate carries a portion that somehow looks even more delectable than what you knocked off the tree. The fries are, well, fried to perfection, the gravy thick, and the cheese curds far too fresh for something that can't be easily sourced atop a tree.",
+      "Sprite":"sprites/Placeholder.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -20,6 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {
         "Id": "Standard",

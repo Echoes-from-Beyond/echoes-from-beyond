@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "Backed by the relative flavorlessness of the bread, the oil and garlic fight for dominance in your mouth. Aioli is refreshing in the sense that it feels somewhat cooler than the baguette itself, but you suspect that it will linger on your tongue for hours."
+      "Line": "Backed by the relative flavorlessness of the bread, the oil and garlic fight for dominance in your mouth. Aioli is refreshing in the sense that it feels somewhat cooler than the baguette itself, but you suspect that it will linger on your tongue for hours.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "It's *very* creamy for something made out of crushed solids, however. Its two ingredients emulsified together such that you can barely tell them apart, except for the taste. Whatever your verdict, this was definitely made with precision and care."
+      "Line": "It's *very* creamy for something made out of crushed solids, however. Its two ingredients emulsified together such that you can barely tell them apart, except for the taste. Whatever your verdict, this was definitely made with precision and care.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "Once you finish the chunk, French Kweebec seems positively buzzing with excitement."
+      "Line": "Once you finish the chunk, French Kweebec seems positively buzzing with excitement.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

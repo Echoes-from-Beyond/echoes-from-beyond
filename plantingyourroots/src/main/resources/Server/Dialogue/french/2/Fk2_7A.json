@@ -4,7 +4,8 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Oh, ma famille is fine. They are just ... forever scarred by their trip, but they are otherwise bien."
+      "Line": "Oh, ma famille is fine. They are just ... forever scarred by their trip, but they are otherwise bien.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -20,6 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

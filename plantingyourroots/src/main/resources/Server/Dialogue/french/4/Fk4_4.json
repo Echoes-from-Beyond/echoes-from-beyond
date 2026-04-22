@@ -4,27 +4,33 @@
   "Entries": [
     {
       "Name": "Quebec Kweebec",
-      "Line": "It's complicated. All of it. His obsession with France and his... I guess, aspiration to be *French* French."
+      "Line": "It's complicated. All of it. His obsession with France and his... I guess, aspiration to be *French* French.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "It's his own business, so he should be the one to tell you. But I know from experience that he'll never get to it."
+      "Line": "It's his own business, so he should be the one to tell you. But I know from experience that he'll never get to it.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Narrator",
-      "Line": "He puts his plate away somewhere in this clutter, and sighs. For a while, there's no sound but that of him scratching his forehead."
+      "Line": "He puts his plate away somewhere in this clutter, and sighs. For a while, there's no sound but that of him scratching his forehead.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "You've been talking a lot lately, so I guess that I should be honest about the whole situation. I know that I just compared it to some kind of a performance, but Canuck Kweebec is actually very genuine about what he's doing. In his own way."
+      "Line": "You've been talking a lot lately, so I guess that I should be honest about the whole situation. I know that I just compared it to some kind of a performance, but Canuck Kweebec is actually very genuine about what he's doing. In his own way.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "His feelings on our homeland are complicated, like I said. Some of it for a good reason, some of it for... well, because he had a lot of time to overthink a few things, to put it mildly. And no one to challenge him on it."
+      "Line": "His feelings on our homeland are complicated, like I said. Some of it for a good reason, some of it for... well, because he had a lot of time to overthink a few things, to put it mildly. And no one to challenge him on it.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "I do what I can, but we've spent a decade like this. He probably needs to hear it from someone... how do I say it, external."
+      "Line": "I do what I can, but we've spent a decade like this. He probably needs to hear it from someone... how do I say it, external.",
+      "Sprite":"sprites/Placeholder.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -40,6 +46,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {
         "Id": "Standard",

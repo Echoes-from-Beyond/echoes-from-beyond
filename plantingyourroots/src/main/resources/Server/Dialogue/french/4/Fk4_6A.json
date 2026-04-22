@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "Quebec Kweebec",
-      "Line": "Ha. Well, I'm not disagreeing. I know enough to say that most human societies are led only by a select few individuals."
+      "Line": "Ha. Well, I'm not disagreeing. I know enough to say that most human societies are led only by a select few individuals.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "No offence."
+      "Line": "No offence.",
+      "Sprite":"sprites/Placeholder.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {
         "Id": "Standard",

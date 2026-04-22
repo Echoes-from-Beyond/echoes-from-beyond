@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Surely you do not mean that !"
+      "Line": "Surely you do not mean that !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Many share, erm ... une idée that uniqueness does not exist anymore, and saying anything in contraire is like being délirant."
+      "Line": "Many share, erm ... une idée that uniqueness does not exist anymore, and saying anything in contraire is like being délirant.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

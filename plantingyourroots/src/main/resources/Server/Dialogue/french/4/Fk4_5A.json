@@ -4,7 +4,8 @@
   "Entries": [
     {
       "Name": "Quebec Kweebec",
-      "Line": "Because I care about him. He probably puts on this happy persona for you, like he does to everyone else, but it's hard to actually make him feel that way. So, I like to take every opportunity to do so."
+      "Line": "Because I care about him. He probably puts on this happy persona for you, like he does to everyone else, but it's hard to actually make him feel that way. So, I like to take every opportunity to do so.",
+      "Sprite":"sprites/Placeholder.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -20,6 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {
         "Id": "Standard",

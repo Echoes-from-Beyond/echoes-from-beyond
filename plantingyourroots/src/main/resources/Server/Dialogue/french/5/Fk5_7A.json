@@ -4,51 +4,63 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "He freezes on the spot, as if you somehow managed to cast a spell on him. His brow quirks momentarily, but whatever that was supposed to signify, it fades away when he gives into utter incredulousness."
+      "Line": "He freezes on the spot, as if you somehow managed to cast a spell on him. His brow quirks momentarily, but whatever that was supposed to signify, it fades away when he gives into utter incredulousness.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "You do understand that him saying that does not mean that it reflects la réalité, oui ? It is like-- like--"
+      "Line": "You do understand that him saying that does not mean that it reflects la réalité, oui ? It is like-- like--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Gah ! You are not convinced. He wormed deep into votre cerveau and is not letting go. What can I do to ..?"
+      "Line": "Gah ! You are not convinced. He wormed deep into votre cerveau and is not letting go. What can I do to ..?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "His hands fly out to either side, and slap against his hips in their return. An agonized expression settles down on his face."
+      "Line": "His hands fly out to either side, and slap against his hips in their return. An agonized expression settles down on his face.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Fine ! There is no use denying it anymore."
+      "Line": "Fine ! There is no use denying it anymore.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "I am indeed ... not as French as I want to be. But tell me : if you were to grow up in the Outlands, and you do not identify with whatever became of that cult, would you not want to pretend that you are un humain normal instead ?"
+      "Line": "I am indeed ... not as French as I want to be. But tell me : if you were to grow up in the Outlands, and you do not identify with whatever became of that cult, would you not want to pretend that you are un humain normal instead ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Non, do not even answer that. I am sure that you are tempted to preach about how it is not the same thing, or that I cannot simply choose to be what I am. I do not wish to hear it."
+      "Line": "Non, do not even answer that. I am sure that you are tempted to preach about how it is not the same thing, or that I cannot simply choose to be what I am. I do not wish to hear it.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "The life I sprouted into was épouvantable ! Completely ! It is bad enough that you denied me the little joy I had in living like someone better."
+      "Line": "The life I sprouted into was épouvantable ! Completely ! It is bad enough that you denied me the little joy I had in living like someone better.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "And it is not like I am not French at all. All I have showed you is real, and experienced, and--"
+      "Line": "And it is not like I am not French at all. All I have showed you is real, and experienced, and--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Ahh !"
+      "Line": "Ahh !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "He draws in an audible breath, which appears to calm him down at least somewhat. But after a single blink, his entire expression collapses into that of all-encompassing shame, and his body shakes like it's ready to bolt out of here."
+      "Line": "He draws in an audible breath, which appears to calm him down at least somewhat. But after a single blink, his entire expression collapses into that of all-encompassing shame, and his body shakes like it's ready to bolt out of here.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "In the end, that's what he does. Well, not before mumbling something out -- sans his theatrical accent."
+      "Line": "In the end, that's what he does. Well, not before mumbling something out -- sans his theatrical accent.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -64,6 +76,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "I have thought about it many times. And other possibilités beside. I am not sure what I did to have you assume that I am ignorant of it."
+      "Line": "I have thought about it many times. And other possibilités beside. I am not sure what I did to have you assume that I am ignorant of it.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Perhaps some of it is deserved. Perhaps I have been moping, like you say."
+      "Line": "Perhaps some of it is deserved. Perhaps I have been moping, like you say.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -4,23 +4,28 @@
   "Entries": [
     {
       "Name": "Canuck Kweebec",
-      "Line": "You did not have to say it like that !"
+      "Line": "You did not have to say it like that !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "But I understand. Well, I wish a good life for you."
+      "Line": "But I understand. Well, I wish a good life for you.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Perhaps ... non. I get it."
+      "Line": "Perhaps ... non. I get it.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "He walks away, crestfallen-- leaf-fallen?"
+      "Line": "He walks away, crestfallen-- leaf-fallen?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "Not that it matters, but this is the last time you'll see him. You didn't think that 'identity crisis' was a tree species, but you're surely glad to be finally rid of him."
+      "Line": "Not that it matters, but this is the last time you'll see him. You didn't think that 'identity crisis' was a tree species, but you're surely glad to be finally rid of him.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -36,6 +41,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

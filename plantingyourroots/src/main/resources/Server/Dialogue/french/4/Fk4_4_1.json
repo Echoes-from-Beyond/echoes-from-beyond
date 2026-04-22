@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "Quebec Kweebec",
-      "Line": "You see, it's a combination of, like, having this idea that to be French means to scoff at anything deemed « derivative » of France, and just him hating Québec specifically for not giving him the life he wanted."
+      "Line": "You see, it's a combination of, like, having this idea that to be French means to scoff at anything deemed « derivative » of France, and just him hating Québec specifically for not giving him the life he wanted.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "In a way, you can think of him deluding himself into somehow thinking that random food is beneath him because it's not « noble » enough, as well as him being so aggressively homesick that he feels as passionate as he does about it. Or comes off that way, I mean."
+      "Line": "In a way, you can think of him deluding himself into somehow thinking that random food is beneath him because it's not « noble » enough, as well as him being so aggressively homesick that he feels as passionate as he does about it. Or comes off that way, I mean.",
+      "Sprite":"sprites/Placeholder.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {
         "Id": "Standard",

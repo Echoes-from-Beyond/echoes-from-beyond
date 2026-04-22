@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Now that we have those désagréables out of the way, forgive me if I assume that you are not able to sit still and enjoy the nature right now."
+      "Line": "Now that we have those désagréables out of the way, forgive me if I assume that you are not able to sit still and enjoy the nature right now.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "And forget what just happened, s'il vous plaît."
+      "Line": "And forget what just happened, s'il vous plaît.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

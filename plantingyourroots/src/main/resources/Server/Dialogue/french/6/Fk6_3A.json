@@ -4,63 +4,78 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "You aren't given a verbal answer, but one that involves a hand gently latching onto your chin. It tugs you closer to Canuck Kweebec while it climbs upward, eventually cupping one of your cheeks."
+      "Line": "You aren't given a verbal answer, but one that involves a hand gently latching onto your chin. It tugs you closer to Canuck Kweebec while it climbs upward, eventually cupping one of your cheeks.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "Your eyes meet the amber galaxy that exists within his own. You never appreciated how alien Kweebec eyes are: the way that they better resemble globules of sparkling liquid than what you'd find in an animal."
+      "Line": "Your eyes meet the amber galaxy that exists within his own. You never appreciated how alien Kweebec eyes are: the way that they better resemble globules of sparkling liquid than what you'd find in an animal.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "It doesn't take him long to close the last bit of distance between the two of you, at which point you can swear that your heart skips a beat. A tough branch comes to rest against your back in the same moment that you feel lips of bark seizing your own."
+      "Line": "It doesn't take him long to close the last bit of distance between the two of you, at which point you can swear that your heart skips a beat. A tough branch comes to rest against your back in the same moment that you feel lips of bark seizing your own.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "(Someone else in your position would complain about how it feels more like kissing a rock than an actual being, but you don't have a point of reference if you've made it this far into the mod.)"
+      "Line": "(Someone else in your position would complain about how it feels more like kissing a rock than an actual being, but you don't have a point of reference if you've made it this far into the mod.)",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "It feels like a few splinters already managed to embed themselves into one of your lips, but whatever. You'll live. Only you and a sentient maple tree exist in this moment."
+      "Line": "It feels like a few splinters already managed to embed themselves into one of your lips, but whatever. You'll live. Only you and a sentient maple tree exist in this moment.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "Speaking of, you catch a whiff of that syrupy sweetness in his breath, and part of you realizes that you've never considered what Kweebec saliva is made out of. Do they even salivate? Is this appropriate to think about right now?"
+      "Line": "Speaking of, you catch a whiff of that syrupy sweetness in his breath, and part of you realizes that you've never considered what Kweebec saliva is made out of. Do they even salivate? Is this appropriate to think about right now?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "Well, if it *is* maple syrup, who cares where it comes from? That thing is freaking delicious."
+      "Line": "Well, if it *is* maple syrup, who cares where it comes from? That thing is freaking delicious.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "Before you are able to take any action about your morbid curiosity, he breaks off your kiss. He does it so forcefully that you would've fallen back if not for the arm still wrapped around you."
+      "Line": "Before you are able to take any action about your morbid curiosity, he breaks off your kiss. He does it so forcefully that you would've fallen back if not for the arm still wrapped around you.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Je suis désolé ! I was so joyous in the moment that--"
+      "Line": "Je suis désolé ! I was so joyous in the moment that--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "You interrupt him by sliding a glove off his now-free hand, and grabbing onto the strong twigs that are revealed in the process. Wherever that thing ends up, you neither look nor care."
+      "Line": "You interrupt him by sliding a glove off his now-free hand, and grabbing onto the strong twigs that are revealed in the process. Wherever that thing ends up, you neither look nor care.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "It's a bit different like this. It doesn't change the fact that he's cold-blooded -- cold-sapped? -- but holding the bare bark makes you feel a genuine connection with this plant. Like you don't hail from two different biological kingdoms."
+      "Line": "It's a bit different like this. It doesn't change the fact that he's cold-blooded -- cold-sapped? -- but holding the bare bark makes you feel a genuine connection with this plant. Like you don't hail from two different biological kingdoms.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "Like you're able to see yourself devoting a significant amount of time to whatever's blossoming between you two."
+      "Line": "Like you're able to see yourself devoting a significant amount of time to whatever's blossoming between you two.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "Whether from rain or your personal troubles, you feel that this tree will try his best to shelter you from it all. In fact, he seems to demonstrate that when he leans in again."
+      "Line": "Whether from rain or your personal troubles, you feel that this tree will try his best to shelter you from it all. In fact, he seems to demonstrate that when he leans in again.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Is it too soon to call you mon amour ? I have not had much, erm ..."
+      "Line": "Is it too soon to call you mon amour ? I have not had much, erm ...",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "He doesn't even give you an opportunity to answer before he sweeps you off your feet and tangles his branches in your hair."
+      "Line": "He doesn't even give you an opportunity to answer before he sweeps you off your feet and tangles his branches in your hair.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -76,6 +91,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

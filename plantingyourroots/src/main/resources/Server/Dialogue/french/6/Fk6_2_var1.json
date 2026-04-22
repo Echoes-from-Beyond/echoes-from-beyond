@@ -4,35 +4,43 @@
   "Entries": [
     {
       "Name": "Canuck Kweebec",
-      "Line": "I must confess something."
+      "Line": "I must confess something.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "I can see that you are un vagabond like me, and I have enjoyed our time. I do not suppose that you have already settled yourself on Kweebdrasil ?"
+      "Line": "I can see that you are un vagabond like me, and I have enjoyed our time. I do not suppose that you have already settled yourself on Kweebdrasil ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Well, if you are fine to search for yet another home, I would like you to join me. I, erm ..."
+      "Line": "Well, if you are fine to search for yet another home, I would like you to join me. I, erm ...",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "I would like to know you better. And what better way to bond than to be lost in the wilds, with only each other for company and with dangers surrounding us at every corner ?"
+      "Line": "I would like to know you better. And what better way to bond than to be lost in the wilds, with only each other for company and with dangers surrounding us at every corner ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Ah, what I mean to say is--"
+      "Line": "Ah, what I mean to say is--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "You have, erm, ignited la flamme in my heartwood, and I would like to stoke it--"
+      "Line": "You have, erm, ignited la flamme in my heartwood, and I would like to stoke it--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Non ! That sounds even worse !"
+      "Line": "Non ! That sounds even worse !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Ah, you can tell I am not really French. Romance does not come naturally to me."
+      "Line": "Ah, you can tell I am not really French. Romance does not come naturally to me.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -48,6 +56,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

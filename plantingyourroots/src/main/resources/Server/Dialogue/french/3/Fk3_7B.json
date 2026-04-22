@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Mon ami, have you not had enough last time ? I have told you that I wish to focus on you ... err, besides the incident from a moment ago."
+      "Line": "Mon ami, have you not had enough last time ? I have told you that I wish to focus on you ... err, besides the incident from a moment ago.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I truly do appreciate it, but I do not wish this to mean that I take away all l'attention from you and you are resigned to ... "
+      "Line": "I truly do appreciate it, but I do not wish this to mean that I take away all l'attention from you and you are resigned to ... ",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

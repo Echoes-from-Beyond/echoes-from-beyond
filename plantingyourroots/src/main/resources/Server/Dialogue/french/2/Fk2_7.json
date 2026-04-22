@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "What do they mean by « Quiet Revolution » ? You take your protests to the streets and your kings to the guillotine ! You do not sit in a basement, eat poutine, and hope that they magically go away."
+      "Line": "What do they mean by « Quiet Revolution » ? You take your protests to the streets and your kings to the guillotine ! You do not sit in a basement, eat poutine, and hope that they magically go away.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "It is truly embarrassing for France that our own descendants would behave this way. We have perfected la formule, but crossing the ocean has évidemment scrambled leur esprits !"
+      "Line": "It is truly embarrassing for France that our own descendants would behave this way. We have perfected la formule, but crossing the ocean has évidemment scrambled leur esprits !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

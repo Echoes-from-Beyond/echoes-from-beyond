@@ -4,19 +4,23 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Well, of course that is not what I am asking of you ! I am introducing you to true French cooking, not ... whatever they eat up north of la Manche."
+      "Line": "Well, of course that is not what I am asking of you ! I am introducing you to true French cooking, not ... whatever they eat up north of la Manche.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I have not prepared anything for the occasion, as chez-moi feels like the inside of un four. But perhaps it has cooled down since I stepped out."
+      "Line": "I have not prepared anything for the occasion, as chez-moi feels like the inside of un four. But perhaps it has cooled down since I stepped out.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Well, if not, I have lots of vin left in my hidden-- Nevermind !"
+      "Line": "Well, if not, I have lots of vin left in my hidden-- Nevermind !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Come along, and I will cook anything that delights your heart. Perhaps I could teach you, too, so you know whenever you are in mood for a filling dîner."
+      "Line": "Come along, and I will cook anything that delights your heart. Perhaps I could teach you, too, so you know whenever you are in mood for a filling dîner.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -32,6 +36,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

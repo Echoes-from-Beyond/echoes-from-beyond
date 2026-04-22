@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Non ! Do not even suggest something like that."
+      "Line": "Non ! Do not even suggest something like that.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Les Français would never allow something of such bad qualité to intrude upon our economy. Les Québécois can keep their slop to themselves."
+      "Line": "Les Français would never allow something of such bad qualité to intrude upon our economy. Les Québécois can keep their slop to themselves.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Tried their ..?"
+      "Line": "Tried their ..?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "He suddenly freezes, mouth ajar, as if caught in a lie. Or maybe he's just shocked at your audacity to suggest something like that."
+      "Line": "He suddenly freezes, mouth ajar, as if caught in a lie. Or maybe he's just shocked at your audacity to suggest something like that.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I have too much dignité for that ! I am relaying to you what I was told by those with less ... erm, respect de soi."
+      "Line": "I have too much dignité for that ! I am relaying to you what I was told by those with less ... erm, respect de soi.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

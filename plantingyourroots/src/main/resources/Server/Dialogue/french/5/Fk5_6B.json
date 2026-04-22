@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Character ? The only personnage I assume is that of myself !"
+      "Line": "Character ? The only personnage I assume is that of myself !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "If you think that this is somehow a sign of me being false, then it is up to you to convince yourself otherwise. I do not know what else I can tell you."
+      "Line": "If you think that this is somehow a sign of me being false, then it is up to you to convince yourself otherwise. I do not know what else I can tell you.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I find much confort in my bark. What you think of as « exagéré » is what I have been surrounded with for most of my life. The smells, the clothing, l'atmosphère ..."
+      "Line": "I find much confort in my bark. What you think of as « exagéré » is what I have been surrounded with for most of my life. The smells, the clothing, l'atmosphère ...",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

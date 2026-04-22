@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "What fortunate timing this is, because I have made a ... erm, I fear I have been utterly insensé as of late."
+      "Line": "What fortunate timing this is, because I have made a ... erm, I fear I have been utterly insensé as of late.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I started baking and baking, and could not stop myself. I must have made like three rounds of baguettes before I realised, « who are you going to share this with, you crétin ? »"
+      "Line": "I started baking and baking, and could not stop myself. I must have made like three rounds of baguettes before I realised, « who are you going to share this with, you crétin ? »",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I put them out here for everyone to enjoy if they wish, but no one ever comes up."
+      "Line": "I put them out here for everyone to enjoy if they wish, but no one ever comes up.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

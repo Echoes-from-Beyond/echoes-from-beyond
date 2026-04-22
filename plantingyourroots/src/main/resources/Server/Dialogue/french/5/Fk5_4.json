@@ -4,19 +4,23 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "He is someone I know, but thought that he would not ... try to meddle with ma vie."
+      "Line": "He is someone I know, but thought that he would not ... try to meddle with ma vie.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "It is best to ignore him. That tree has made it sa mission to-- to--"
+      "Line": "It is best to ignore him. That tree has made it sa mission to-- to--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "When he realizes that he doesn't have a good answer to that one, his hands start shaking. An irritated grumble snaps out of him like thunder."
+      "Line": "When he realizes that he doesn't have a good answer to that one, his hands start shaking. An irritated grumble snaps out of him like thunder.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "That Québécois makes up récits in his head and expects the rest of le monde to follow ! What an individual exemplaire of his soon-to-be -- ha ! -- « country. »"
+      "Line": "That Québécois makes up récits in his head and expects the rest of le monde to follow ! What an individual exemplaire of his soon-to-be -- ha ! -- « country. »",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -32,6 +36,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "French Kweebec seems to be in much higher spirits today. He wears a faint, pleased smile while looking over his pond, leaning back against his chair in a rather casual manner."
+      "Line": "French Kweebec seems to be in much higher spirits today. He wears a faint, pleased smile while looking over his pond, leaning back against his chair in a rather casual manner.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "You can't help but notice that the table in the back is still crammed with baguettes. You wonder whether he stress-baked another few batches, or these are the same specimens from last time. Were they just lying here, exposed to the elements?"
+      "Line": "You can't help but notice that the table in the back is still crammed with baguettes. You wonder whether he stress-baked another few batches, or these are the same specimens from last time. Were they just lying here, exposed to the elements?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "(Eugh.)"
+      "Line": "(Eugh.)",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

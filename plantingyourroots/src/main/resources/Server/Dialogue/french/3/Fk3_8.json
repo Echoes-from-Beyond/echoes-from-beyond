@@ -4,7 +4,8 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "I shall let you go now. I am aware that we have not spent that long in here, and I regret that. But I must take some time to myself, if you do not mind."
+      "Line": "I shall let you go now. I am aware that we have not spent that long in here, and I regret that. But I must take some time to myself, if you do not mind.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -20,6 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

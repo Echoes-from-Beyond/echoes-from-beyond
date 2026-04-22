@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "I am relieved ! Ouf. It makes me happy that you are not so crédule like some."
+      "Line": "I am relieved ! Ouf. It makes me happy that you are not so crédule like some.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "There is a few, the same ones who dislike my Frenchness, who are targeting me with pranks and diffamation. I apparemment seem like un stéréotype of some kind."
+      "Line": "There is a few, the same ones who dislike my Frenchness, who are targeting me with pranks and diffamation. I apparemment seem like un stéréotype of some kind.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "The annoying Français, is what I mean. I have been told that my clothing is not helping."
+      "Line": "The annoying Français, is what I mean. I have been told that my clothing is not helping.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Who knows what would happen if you let me be ? I could cover l'arbre entier in mes baguettes."
+      "Line": "Who knows what would happen if you let me be ? I could cover l'arbre entier in mes baguettes.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "And then who would eat them ? Are they to waste and decay ?"
+      "Line": "And then who would eat them ? Are they to waste and decay ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -4,23 +4,28 @@
   "Entries": [
     {
       "Name": "???",
-      "Line": "Sleeping."
+      "Line": "Sleeping.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Narrator",
-      "Line": "He doesn't elaborate on that. Instead, he just smirks and takes another bite out of his meal."
+      "Line": "He doesn't elaborate on that. Instead, he just smirks and takes another bite out of his meal.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "???",
-      "Line": "I see the issue here. Let me introduce myself proper."
+      "Line": "I see the issue here. Let me introduce myself proper.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "Bonjour, I'm Québec Kweebec. « French » Kweebec's twin brother."
+      "Line": "Bonjour, I'm Québec Kweebec. « French » Kweebec's twin brother.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Narrator",
-      "Line": "He takes a deep, dramatic bow that accentuates the fuzz on his chest, and sends a chunk of cheese flying to the side. Maybe he should've considered putting the fork down beforehand."
+      "Line": "He takes a deep, dramatic bow that accentuates the fuzz on his chest, and sends a chunk of cheese flying to the side. Maybe he should've considered putting the fork down beforehand.",
+      "Sprite":"sprites/Placeholder.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -36,6 +41,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {
         "Id": "Standard",

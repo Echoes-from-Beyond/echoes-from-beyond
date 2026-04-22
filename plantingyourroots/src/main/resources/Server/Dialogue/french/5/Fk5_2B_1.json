@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Since we stand here without une destination, I should ask you a strange question."
+      "Line": "Since we stand here without une destination, I should ask you a strange question.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I have une cachette on the tree, in a crevice that was not used for some time by anyone else. It is where I keep le vin, because it is cooler than chez-moi."
+      "Line": "I have une cachette on the tree, in a crevice that was not used for some time by anyone else. It is where I keep le vin, because it is cooler than chez-moi.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "When I went there for a refill, I noticed that one of mes caisses was opened. I ..."
+      "Line": "When I went there for a refill, I noticed that one of mes caisses was opened. I ...",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

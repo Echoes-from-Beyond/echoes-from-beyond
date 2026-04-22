@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Êtes-vous sérieux !?"
+      "Line": "Êtes-vous sérieux !?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Mon ami, you need to learn how to live a little ! Ketchup ? Ouf !"
+      "Line": "Mon ami, you need to learn how to live a little ! Ketchup ? Ouf !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Do not worry, I will expand your palate. Starting from today."
+      "Line": "Do not worry, I will expand your palate. Starting from today.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "He is utterly flabbergasted by whatever you just said."
+      "Line": "He is utterly flabbergasted by whatever you just said.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Mon ami, are you ... how do you say, having a stroke ?"
+      "Line": "Mon ami, are you ... how do you say, having a stroke ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "It is a stroke, oui ? When the brain of un animal is all wilted ?"
+      "Line": "It is a stroke, oui ? When the brain of un animal is all wilted ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

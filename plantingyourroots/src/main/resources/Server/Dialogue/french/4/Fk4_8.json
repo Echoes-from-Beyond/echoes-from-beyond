@@ -4,7 +4,8 @@
   "Entries": [
     {
       "Name": "Quebec Kweebec",
-      "Line": "Well, since you're such good friends now... at least from his perspective, I'd like you to gently steer him away from all of this."
+      "Line": "Well, since you're such good friends now... at least from his perspective, I'd like you to gently steer him away from all of this.",
+      "Sprite":"sprites/Placeholder.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -20,6 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {
         "Id": "Standard",

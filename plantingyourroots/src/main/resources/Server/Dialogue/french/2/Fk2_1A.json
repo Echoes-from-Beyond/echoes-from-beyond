@@ -4,31 +4,38 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "The loaf feels light in your hand, and the texture of the crust has you feel like one good squeeze could grind it down to crumbs."
+      "Line": "The loaf feels light in your hand, and the texture of the crust has you feel like one good squeeze could grind it down to crumbs.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "The first bite you take only affirms that theory -- the sound of crunching overpowers the rest of the world while your tongue seems to dig every granule of salt out of the dough."
+      "Line": "The first bite you take only affirms that theory -- the sound of crunching overpowers the rest of the world while your tongue seems to dig every granule of salt out of the dough.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "The inside, however, is soft and fluffy. Once you dig through the golden crust, what remains is refreshing in comparison. Much nicer on your teeth, too."
+      "Line": "The inside, however, is soft and fluffy. Once you dig through the golden crust, what remains is refreshing in comparison. Much nicer on your teeth, too.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "The baguette is still warm, though you are unsure whether this is due to its freshness, or the few rays of the sun that penetrate both the leaves and French Kweebec's makeshift tent baked the stone surface that the bread formerly rested on."
+      "Line": "The baguette is still warm, though you are unsure whether this is due to its freshness, or the few rays of the sun that penetrate both the leaves and French Kweebec's makeshift tent baked the stone surface that the bread formerly rested on.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "But even though he had just asked you to do this very thing, French Kweebec is looking at you as if you've gone mad."
+      "Line": "But even though he had just asked you to do this very thing, French Kweebec is looking at you as if you've gone mad.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Mon ami, have you not even thought to break le pain ? Or serve it with a sauce ? Or make a sandwich out of it ?"
+      "Line": "Mon ami, have you not even thought to break le pain ? Or serve it with a sauce ? Or make a sandwich out of it ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I am not familiar with your eating ... habitudes, but please let me show you a better way ! Especially if this is your first taste of French cuisine. Let me not give you the impression that we gobble on raw bread like the sans-goût de l'Angleterre."
+      "Line": "I am not familiar with your eating ... habitudes, but please let me show you a better way ! Especially if this is your first taste of French cuisine. Let me not give you the impression that we gobble on raw bread like the sans-goût de l'Angleterre.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -44,6 +51,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

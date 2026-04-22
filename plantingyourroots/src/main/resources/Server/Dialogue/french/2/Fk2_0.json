@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "You find French Kweebec lounging about by the pond above his home. The flag used as a canopy in the corner couldn't make its ownership more obvious."
+      "Line": "You find French Kweebec lounging about by the pond above his home. The flag used as a canopy in the corner couldn't make its ownership more obvious.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "The more time you spend nearby, however, you are hit with the intense smells of lavender and freshly baked pastries. Indeed, the table at the back is host to a row of crispy, golden baguettes."
+      "Line": "The more time you spend nearby, however, you are hit with the intense smells of lavender and freshly baked pastries. Indeed, the table at the back is host to a row of crispy, golden baguettes.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

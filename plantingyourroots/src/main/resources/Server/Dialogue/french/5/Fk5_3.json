@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Mon frère ?"
+      "Line": "Mon frère ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "A long pause stretches between the two of you. At several points, it seems that French Kweebec will blurt something out, but he never does; only when he shakes his head does he come up with a response."
+      "Line": "A long pause stretches between the two of you. At several points, it seems that French Kweebec will blurt something out, but he never does; only when he shakes his head does he come up with a response.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "All of ma famille is back in France. We are not very close, but I would know if there is another Français on Kweebdrasil."
+      "Line": "All of ma famille is back in France. We are not very close, but I would know if there is another Français on Kweebdrasil.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

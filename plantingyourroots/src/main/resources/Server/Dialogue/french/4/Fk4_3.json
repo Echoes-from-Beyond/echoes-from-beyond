@@ -4,19 +4,23 @@
   "Entries": [
     {
       "Name": "Quebec Kweebec",
-      "Line": "My brother may have left out a detail here and there. He's as French as any other French-Whisperfrostian, even if he's been hard at work trying to deny one half of that title."
+      "Line": "My brother may have left out a detail here and there. He's as French as any other French-Whisperfrostian, even if he's been hard at work trying to deny one half of that title.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "You can see it, right? No one talks the way that he does. It's like-- Gaia beloved, it's like when they need you to know that a character is exotic in theatrical shows, so all of their lines are gunked up with foreign words."
+      "Line": "You can see it, right? No one talks the way that he does. It's like-- Gaia beloved, it's like when they need you to know that a character is exotic in theatrical shows, so all of their lines are gunked up with foreign words.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "And who goes full mime if they're not actively performing, you know?"
+      "Line": "And who goes full mime if they're not actively performing, you know?",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "Something tells me that I don't even need to comment on that whole deal with him and French flags. I mean, he even imported a bunch of coloured water lilies so that he can have one in water. I haven't seen that kind of patriotism outside of some Kweemericans, right?"
+      "Line": "Something tells me that I don't even need to comment on that whole deal with him and French flags. I mean, he even imported a bunch of coloured water lilies so that he can have one in water. I haven't seen that kind of patriotism outside of some Kweemericans, right?",
+      "Sprite":"sprites/Placeholder.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -32,6 +36,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {
         "Id": "Standard",

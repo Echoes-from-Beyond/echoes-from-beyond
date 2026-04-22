@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "French Kweebec's expression completely shatters. At first, he's shocked -- moments after, however, his bark folds into a frown."
+      "Line": "French Kweebec's expression completely shatters. At first, he's shocked -- moments after, however, his bark folds into a frown.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "What do you mean ? I *am* French. It is très flagrant, non ?"
+      "Line": "What do you mean ? I *am* French. It is très flagrant, non ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

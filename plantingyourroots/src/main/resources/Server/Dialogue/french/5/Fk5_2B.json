@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Then it looks like we are in the same bateau, I think you say. For all my time here, I have not explored Kweebdrasil much."
+      "Line": "Then it looks like we are in the same bateau, I think you say. For all my time here, I have not explored Kweebdrasil much.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "If I knew that someone like you was coming to visit, I would have put more effort into it. But I am no prophète, oui ?"
+      "Line": "If I knew that someone like you was coming to visit, I would have put more effort into it. But I am no prophète, oui ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

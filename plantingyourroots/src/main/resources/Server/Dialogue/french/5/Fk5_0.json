@@ -4,19 +4,23 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "Things are back to normal today, with the exception of a frown that mars French Kweebec's face."
+      "Line": "Things are back to normal today, with the exception of a frown that mars French Kweebec's face.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "The moment that he sees you, it disappears in favor of a small smile. However, he isn't able to keep it up for long; the whole of his attention is diverted into his eyes, which regard you with some unknown expectation."
+      "Line": "The moment that he sees you, it disappears in favor of a small smile. However, he isn't able to keep it up for long; the whole of his attention is diverted into his eyes, which regard you with some unknown expectation.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Ah, bonjour."
+      "Line": "Ah, bonjour.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Narrator",
-      "Line": "You can't help but notice the uncanny resemblance between him and that Quebec Kweebec dude from last time. Them being twins doesn't mean that they ought to style their mustaches identically... right?"
+      "Line": "You can't help but notice the uncanny resemblance between him and that Quebec Kweebec dude from last time. Them being twins doesn't mean that they ought to style their mustaches identically... right?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -32,6 +36,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

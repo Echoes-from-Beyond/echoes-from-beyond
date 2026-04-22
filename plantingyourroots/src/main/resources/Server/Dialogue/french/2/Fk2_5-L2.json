@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "Ah, le deuxième is simple. There is a few people who harbor sentiments négatifs for who I am. Someone has gone through my things at night, too, and did not leave them in good condition."
+      "Line": "Ah, le deuxième is simple. There is a few people who harbor sentiments négatifs for who I am. Someone has gone through my things at night, too, and did not leave them in good condition.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I spite them with mes drapeaux. For any that they take down, I put up une version plus grande."
+      "Line": "I spite them with mes drapeaux. For any that they take down, I put up une version plus grande.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I think I may know who l'auteur principal is."
+      "Line": "I think I may know who l'auteur principal is.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

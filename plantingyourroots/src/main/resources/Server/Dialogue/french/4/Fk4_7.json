@@ -4,15 +4,18 @@
   "Entries": [
     {
       "Name": "Quebec Kweebec",
-      "Line": "I know from experience that most humans glaze over when you try to talk to them about plant biology. Maybe, in the future, I'll tell you more. When we are less subject to time constraints."
+      "Line": "I know from experience that most humans glaze over when you try to talk to them about plant biology. Maybe, in the future, I'll tell you more. When we are less subject to time constraints.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "I have it in good faith that Gaia wants to keep your mission sweet and short. Hug some trees, eh? After all, the only reason you're here is to prove a point about what her fellow Avatars can get up to on Orbis."
+      "Line": "I have it in good faith that Gaia wants to keep your mission sweet and short. Hug some trees, eh? After all, the only reason you're here is to prove a point about what her fellow Avatars can get up to on Orbis.",
+      "Sprite":"sprites/Placeholder.png"
     },
     {
       "Name": "Quebec Kweebec",
-      "Line": "Listen. When Orbis is a little more secure in itself, I'll have more to say. Or maybe you can't remember all our previous conversations, just like how you can't remember half of the planet. Either way, we'll take our time to know each other."
+      "Line": "Listen. When Orbis is a little more secure in itself, I'll have more to say. Or maybe you can't remember all our previous conversations, just like how you can't remember half of the planet. Either way, we'll take our time to know each other.",
+      "Sprite":"sprites/Placeholder.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -28,6 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {
         "Id": "Standard",

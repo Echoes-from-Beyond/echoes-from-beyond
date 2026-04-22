@@ -4,27 +4,33 @@
   "Entries": [
     {
       "Name": "Canuck Kweebec",
-      "Line": "I meant--"
+      "Line": "I meant--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Ah, I see. Well, I cannot say that I am not a little disappointed."
+      "Line": "Ah, I see. Well, I cannot say that I am not a little disappointed.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "It is not your fault ! Mes attentes-- I thought that maybe--"
+      "Line": "It is not your fault ! Mes attentes-- I thought that maybe--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "What I want to say is that I do not have a lot of opportunités to find kinship. For the same reason that I am unable to make my mark on le monde."
+      "Line": "What I want to say is that I do not have a lot of opportunités to find kinship. For the same reason that I am unable to make my mark on le monde.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "I was hoping that ... erm, not that you are easy to--"
+      "Line": "I was hoping that ... erm, not that you are easy to--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "Canuck Kweebec",
-      "Line": "Perhaps I should leave you to it. It would be awkward for me, and you may have better luck with some of the other trees."
+      "Line": "Perhaps I should leave you to it. It would be awkward for me, and you may have better luck with some of the other trees.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -40,6 +46,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

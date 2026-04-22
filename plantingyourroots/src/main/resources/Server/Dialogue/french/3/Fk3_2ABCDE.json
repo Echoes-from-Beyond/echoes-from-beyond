@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "French Kweebec",
-      "Line": "You have definitely led une vie intéressante."
+      "Line": "You have definitely led une vie intéressante.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "I did sense some undue humilité in your words. If I am right, my advice is that you should not worry at all ! During my long travels, I have talked with many from different walks of life."
+      "Line": "I did sense some undue humilité in your words. If I am right, my advice is that you should not worry at all ! During my long travels, I have talked with many from different walks of life.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",
