@@ -15,7 +15,7 @@
     {
       "Name": "French Kweebec",
       "Line": "Then there are cultural reasons. Kweebecs share more with each other than some of the other species, but it is hard for us to get used to étrangers. I take ... more mental effort than to visit votre relatifs.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -31,7 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -5,17 +5,17 @@
     {
       "Name": "French Kweebec",
       "Line": "...",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "Narrator",
       "Line": "He is visibly fighting back a grimace of some kind. His face twists this and that way, until he manages to produce a neutral, if tense, line across his mouth.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "If I have truly done so, then I must apologise. But it was not my intention !",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -31,7 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
     "Choices": [
       {
         "Id": "Standard",

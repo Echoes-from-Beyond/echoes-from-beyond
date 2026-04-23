@@ -5,12 +5,12 @@
     {
       "Name": "Narrator",
       "Line": "Your origin is similar to most people born within Devastated Lands -- rather, underneath it. Like many refugees from Crucible, your ancestors have been naturalized to the Slothian society, and that status had been passed down to you.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
       "Line": "French Kweebec reacts accordingly: there is a misconception that it's nigh impossible to survive within the underground jungles, those evocative of Orbis' brutal prehistory, but that isn't the case when your community is used to living among treetops and over sizable bodies of water.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
@@ -35,7 +35,7 @@
     {
       "Name": "Narrator",
       "Line": "You think that his businesses are headquartered somewhere in Whisperfrost. However, mentioning as much has French Kweebec narrow his eyes in... recognition, it seems, followed by the beginnings of a sneer. Does the Slothian have a bad reputation or something?",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -51,7 +51,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
     "Choices": [
       {
         "Id": "Standard",

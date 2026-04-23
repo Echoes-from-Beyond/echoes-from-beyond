@@ -5,7 +5,7 @@
     {
       "Name": "French Kweebec",
       "Line": "Mon ami, I must insist that you quit such jokes ! They are overused and of poor humour.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -21,7 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
     "Choices": [
       {
         "Id": "Standard",

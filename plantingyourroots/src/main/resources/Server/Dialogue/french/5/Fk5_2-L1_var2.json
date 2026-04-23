@@ -5,7 +5,7 @@
     {
       "Name": "French Kweebec",
       "Line": "Why do you lie ? I am sure in what I heard downstairs.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -21,7 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
     "Choices": [
       {
         "Id": "Standard",

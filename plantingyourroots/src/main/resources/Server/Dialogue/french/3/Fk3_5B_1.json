@@ -5,42 +5,42 @@
     {
       "Name": "French Kweebec",
       "Line": "I would never ! Let me-- let me explain first.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "It is that Trork below ! Le marchand that they practically keep as un otage.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "Well, they do not keep enough of an eye upon him, since they let him do what Trorks do best: harass Kweebecs aléatoires. And what is the funniest thing in le monde ? Make the French guy cook une repas québécoise !",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "I assure you, I have only had a single bite to ensure that it is as high-quality as ... poutine (ouf) can be. I refuse to serve déchets in any situation ! In fact, I have made it better than *they* ever could !",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "But then the Trork changed his mind. Said that this is « such a Kweebec food » and that he only eats meat. So now I do not know what I can do with this.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "Narrator",
       "Line": "His eyes communicate that he's desperate for you to believe him, and he evidently frustrated himself to the point that a build-up of tears is making them glossier than they already are. He's deeply embarrassed.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "Give me... give me a moment.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
       "Line": "Minutes pass after he averts his gaze from you, and his face sinks into his gloved hands. He makes no sound but that of wrinkling latex whenever his head occasionally shakes in his despair.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -56,7 +56,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
     "Choices": [
       {
         "Id": "Standard",

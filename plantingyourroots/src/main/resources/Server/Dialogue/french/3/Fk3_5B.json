@@ -5,27 +5,24 @@
     {
       "Name": "Narrator",
       "Line": "You lunge for the leaves and, for a second, you think that he's dramatically screaming 'NOOO' like he's in some theatrical production. If he truly did, this is now drowned out by the shattering of a plate upon the floor.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
-      "Line": "As you originally suspected, the source of the smell is his breakfast. Apparently, he hid the leftovers in the branches overhead for some reason, and you ended up knocking them off.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Line": "As you originally suspected, the source of the smell is his breakfast. Apparently, he hid the leftovers in the branches overhead for some reason, and you ended up knocking them off."
     },
     {
       "Name": "Narrator",
-      "Line": "You play with the idea of apologizing for ruining the rest of his meal, until you notice what it is: between the shards of whatever light material their dishes are made out of, yellow slices of potato gleam in the occasional sunray.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Line": "You play with the idea of apologizing for ruining the rest of his meal, until you notice what it is: between the shards of whatever light material their dishes are made out of, yellow slices of potato gleam in the occasional sunray."
     },
     {
       "Name": "Narrator",
-      "Line": "The perfectly moist fries are soaked in a thick, dark-brown liquid that reminds you of gravy -- it certainly smells like it -- and chunks of something pale intermingle with the rest of it... oh.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Line": "The perfectly moist fries are soaked in a thick, dark-brown liquid that reminds you of gravy -- it certainly smells like it -- and chunks of something pale intermingle with the rest of it... oh."
     },
     {
       "Name": "French Kweebec",
       "Line": "It is not what it looks like !",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -41,7 +38,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -5,12 +5,12 @@
     {
       "Name": "French Kweebec",
       "Line": "Surely you do not mean that !",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "Many share, erm ... une idée that uniqueness does not exist anymore, and saying anything in contraire is like being délirant.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",

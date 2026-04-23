@@ -4,8 +4,7 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "You maneuver yourself around a planter's stone frame, twisting around and across to a raised section of wood behind it. During your acrobatics, you notice that French Kweebec is beaming a strange expression your way.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Line": "You maneuver yourself around a planter's stone frame, twisting around and across to a raised section of wood behind it. During your acrobatics, you notice that French Kweebec is beaming a strange expression your way."
     },
     {
       "Name": "Narrator",
@@ -26,7 +25,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
     "Choices": [
       {
         "Id": "Standard",

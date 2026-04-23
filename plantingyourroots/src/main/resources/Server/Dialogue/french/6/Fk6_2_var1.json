@@ -5,7 +5,7 @@
     {
       "Name": "Canuck Kweebec",
       "Line": "I must confess something.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Canuck Kweebec",
@@ -35,12 +35,12 @@
     {
       "Name": "Canuck Kweebec",
       "Line": "Non ! That sounds even worse !",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Canuck Kweebec",
       "Line": "Ah, you can tell I am not really French. Romance does not come naturally to me.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",

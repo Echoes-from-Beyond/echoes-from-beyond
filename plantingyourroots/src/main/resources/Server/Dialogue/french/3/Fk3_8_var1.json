@@ -40,12 +40,12 @@
     {
       "Name": "French Kweebec",
       "Line": "I am very sorry ! I really appreciate you, so I--",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "Oh, erm, a bit of mon maquillage is on your cheek.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
@@ -70,12 +70,12 @@
     {
       "Name": "French Kweebec",
       "Line": "E-erm, before you freak out, I do not intend to do that here ! I know that this is strange for you--",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "Forget it !",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -91,7 +91,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
     "Choices": [
       {
         "Id": "Standard",

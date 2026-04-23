@@ -10,22 +10,22 @@
     {
       "Name": "French Kweebec",
       "Line": "Except Whisperfrost ! Some Kweebecs insist that I should be well-versed in that ... that *slop* because of one notorious province and our supposed « similarity. »",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "Am I meant to know what in Gaia's name un « timbit » is supposed to be ? And do not get me started on la farce that is poutine.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "Ouf ! Even son nom sounds like one of their bizarre exclamations.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "And maple syrup !? Humans like you probably do not understand, as it is a delicacy for you too, but this is like drinking your own sang for us. They relish it !",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -41,7 +41,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
     "Choices": [
       {
         "Id": "Standard",

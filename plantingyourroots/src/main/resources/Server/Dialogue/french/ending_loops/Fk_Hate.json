@@ -4,11 +4,13 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "French Kweebec frowns the moment that he sees you, clenching his hands into two balls of pure bark."
+      "Line": "French Kweebec frowns the moment that he sees you, clenching his hands into two balls of pure bark.",
+      "Sprite": "sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
-      "Line": "Not again ! Away with you !"
+      "Line": "Not again ! Away with you !",
+      "Sprite": "sprites/Kweebec_French_Angry.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -24,6 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
     "Choices": [
       {
         "Id": "Standard",

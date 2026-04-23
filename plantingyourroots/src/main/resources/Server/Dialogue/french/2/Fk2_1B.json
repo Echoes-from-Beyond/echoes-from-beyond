@@ -5,7 +5,7 @@
     {
       "Name": "French Kweebec",
       "Line": "Well, of course that is not what I am asking of you ! I am introducing you to true French cooking, not ... whatever they eat up north of la Manche.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
@@ -36,7 +36,6 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
     "Choices": [
       {
         "Id": "Standard",

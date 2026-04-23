@@ -5,12 +5,12 @@
     {
       "Name": "Narrator",
       "Line": "The condiment is finished when he slowly introduces olive oil, from a bottle that he'd apparently been keeping shoved into some corner somewhere. Rather than mashing the garlic, the pestle now serves to combine the two.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
       "Line": "Once he's satisfied with its consistency, he gestures for you to leave. French Kweebec follows right behind, directing you back to the pond with taps on your shoulder.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",

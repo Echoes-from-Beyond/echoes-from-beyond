@@ -5,12 +5,12 @@
     {
       "Name": "Narrator",
       "Line": "French Kweebec's expression completely shatters. At first, he's shocked -- moments after, however, his bark folds into a frown.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "What do you mean ? I *am* French. It is très flagrant, non ?",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -26,7 +26,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
     "Choices": [
       {
         "Id": "Standard",

@@ -5,27 +5,27 @@
     {
       "Name": "French Kweebec",
       "Line": "I ...",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "Mon ami, I understand what you are trying to ask. But please also understand that this is difficile for me to talk about.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "Even though a return is all that mon coeur yearns for, France has no room for someone like me. And this is something that haunts my days.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "The best I can do is build mes petits monuments and treat myself with the smells of home, like la lavande that you must have noticed by now.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "But thinking about it more than that is ... well, it hurts a lot.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -41,7 +41,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
     "Choices": [
       {
         "Id": "Standard",

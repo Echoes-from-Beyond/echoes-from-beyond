@@ -10,17 +10,15 @@
     {
       "Name": "Narrator",
       "Line": "French Kweebec immediately notices you moving away from his table. He opens his mouth to say something, but relaxes shortly after. Did he think that you were about to leave?",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
-      "Line": "Still you feel his gaze on you while you look around, from the musty bread to the twigs in the canopy. Most of the scent was lost with the wind, yet you're convinced that you're still able to catch some of it. Or maybe the last of the breeze still lingers in your nostrils.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Line": "Still you feel his gaze on you while you look around, from the musty bread to the twigs in the canopy. Most of the scent was lost with the wind, yet you're convinced that you're still able to catch some of it. Or maybe the last of the breeze still lingers in your nostrils."
     },
     {
       "Name": "Narrator",
-      "Line": "You look over and under the shelves on the back wall, and repeat the same procedure for the bread-bearing table in the corner. Nothing. Nothing in the passage. Nothing around the water -- though you're not sure why you expected to find anything there.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Line": "You look over and under the shelves on the back wall, and repeat the same procedure for the bread-bearing table in the corner. Nothing. Nothing in the passage. Nothing around the water -- though you're not sure why you expected to find anything there."
     }
   ],
   "AdvanceText": "Continue",
@@ -36,7 +34,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
     "Choices": [
       {
         "Id": "Standard",

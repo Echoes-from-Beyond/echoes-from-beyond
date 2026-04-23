@@ -15,7 +15,7 @@
     {
       "Name": "Narrator",
       "Line": "(Eugh.)",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",

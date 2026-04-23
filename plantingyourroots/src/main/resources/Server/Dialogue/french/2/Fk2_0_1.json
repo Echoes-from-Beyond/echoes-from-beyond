@@ -5,7 +5,7 @@
     {
       "Name": "French Kweebec",
       "Line": "What fortunate timing this is, because I have made a ... erm, I fear I have been utterly insensé as of late.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
@@ -15,7 +15,7 @@
     {
       "Name": "French Kweebec",
       "Line": "I put them out here for everyone to enjoy if they wish, but no one ever comes up.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -31,7 +31,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
     "Choices": [
       {
         "Id": "Standard",

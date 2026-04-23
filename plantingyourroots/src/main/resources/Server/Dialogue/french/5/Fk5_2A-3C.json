@@ -5,7 +5,7 @@
     {
       "Name": "French Kweebec",
       "Line": "Ah, I see. I understand. One of the recent Whisperfrostian voyageurs has talked up their ... « délicatesse. » Oui ?",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -21,7 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
     "Choices": [
       {
         "Id": "Standard",

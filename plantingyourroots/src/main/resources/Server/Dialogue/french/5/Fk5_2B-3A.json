@@ -10,7 +10,7 @@
     {
       "Name": "French Kweebec",
       "Line": "I hope that I, erm, also give you a reason to stay.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",

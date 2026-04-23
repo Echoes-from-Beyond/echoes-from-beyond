@@ -3,7 +3,7 @@
   "Id": "Fk1_6F_10",
   "Line": {
     "Id": "Standard",
-    "Text": "I will see you tomorrow. Hopefully I will not have cauchemars about the  Void sneaking into Kweebdrasil."
+    "Text": "I will see you tomorrow. Hopefully I will not have cauchemars about the Void sneaking into Kweebdrasil."
   },
   "Name": {
     "Id": "Standard",
@@ -11,7 +11,7 @@
   },
   "UiPage": "Classic_Dialogue.ui",
   "UiFragment": "Classic_Dialogue_Fragment.ui",
-  "Sprite": "sprites/Kweebec_French_Happy.png",
+  "Sprite": "sprites/Kweebec_French_Sad.png",
   "Choices": [
     {
       "Id": "Standard",

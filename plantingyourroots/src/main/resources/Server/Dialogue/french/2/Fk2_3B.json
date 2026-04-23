@@ -5,17 +5,17 @@
     {
       "Name": "Narrator",
       "Line": "For what it's worth, French Kweebec is very meticulous about his work. No chunk of garlic bigger than a grain of sand is allowed to persist.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
       "Line": "You watch him swirl the pestle in circles about the bowl, each seeming to intensify the aroma of garlic around the hollow. Hope that French Kweebec likes the smell -- or at least, that he has some kind of air freshener. There *are* those bushes of lavender outside.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
       "Line": "The tree in question is concentrating very intently on the paste, having his reddish brows knitted together, his mouth pursed and his eyes -- those resembling a distant nebula, as is the case with Kweebecs -- following the motion of his instrument.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",

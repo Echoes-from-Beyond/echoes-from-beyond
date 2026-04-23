@@ -5,7 +5,7 @@
     {
       "Name": "Narrator",
       "Line": "Things are back to normal today, with the exception of a frown that mars French Kweebec's face.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
@@ -15,12 +15,12 @@
     {
       "Name": "French Kweebec",
       "Line": "Ah, bonjour.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
       "Line": "You can't help but notice the uncanny resemblance between him and that Quebec Kweebec dude from last time. Them being twins doesn't mean that they ought to style their mustaches identically... right?",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -36,7 +36,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
     "Choices": [
       {
         "Id": "Standard",

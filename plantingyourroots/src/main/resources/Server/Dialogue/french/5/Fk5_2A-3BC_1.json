@@ -5,12 +5,12 @@
     {
       "Name": "French Kweebec",
       "Line": "Non ! Do not even suggest something like that.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     },
     {
       "Name": "French Kweebec",
       "Line": "Les Français would never allow something of such bad qualité to intrude upon our economy. Les Québécois can keep their slop to themselves.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Angry.png"
     }
   ],
   "AdvanceText": "Continue",

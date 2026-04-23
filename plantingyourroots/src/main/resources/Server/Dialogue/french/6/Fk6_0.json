@@ -5,37 +5,37 @@
     {
       "Name": "Narrator",
       "Line": "When you come over again, French-- Canuck Kweebec gives you no mind. He's too enamored with his pond. Yet, it's not like he hasn't noticed you at all.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
       "Line": "When he next speaks, you notice that he's keeping up the accent of a Frenchman. It is, however, significantly more demure than before. Some habits die hard, apparently.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Canuck Kweebec",
       "Line": "I have been thinking. And I have realised that this French thing has not been working well.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Canuck Kweebec",
       "Line": "I wanted to feel like ... someone, before I forever take root. Someone interesting, if I am not able to attain any degree of importance in time.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
       "Line": "You hear a deep sigh before he turns around to face you, except his eyes remain downcast.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Canuck Kweebec",
       "Line": "For most of my life, I was as unremarkable as you can imagine a Kweebec to be. So, I have assumed une personnalité.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Canuck Kweebec",
       "Line": "I know. « Being French » does not sound like one on its own, but it is eye-catching, non ? Les Français are met with as much respect as dérision, even if you only hear about the second one on Kweebdrasil.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -51,7 +51,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
     "Choices": [
       {
         "Id": "Standard",

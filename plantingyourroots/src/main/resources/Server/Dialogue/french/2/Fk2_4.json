@@ -4,8 +4,7 @@
   "Entries": [
     {
       "Name": "Narrator",
-      "Line": "You pick the baguette with the nicest coloration out of the pile. A small chunk of it cracks effortlessly in your hands, and skims the top of the pale sauce.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Line": "You pick the baguette with the nicest coloration out of the pile. A small chunk of it cracks effortlessly in your hands, and skims the top of the pale sauce."
     }
   ],
   "AdvanceText": "Continue",

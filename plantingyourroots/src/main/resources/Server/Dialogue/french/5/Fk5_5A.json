@@ -5,7 +5,7 @@
     {
       "Name": "French Kweebec",
       "Line": "I would not call ma histoire that « tragique » in any way. It is as simple as this : I sprout in a underdeveloped region of France, struggle to plant mes racines in autre parts, then move abroad.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -21,7 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
     "Choices": [
       {
         "Id": "Standard",

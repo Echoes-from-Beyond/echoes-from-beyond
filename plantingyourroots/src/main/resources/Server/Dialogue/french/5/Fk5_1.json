@@ -5,7 +5,7 @@
     {
       "Name": "Narrator",
       "Line": "French Kweebec relaxes for a moment, though some wariness remains in his expression.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "French Kweebec",
@@ -15,7 +15,7 @@
     {
       "Name": "French Kweebec",
       "Line": "... but I am not sure how one has « fun » on Kweebdrasil. In un sens social, I mean.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",

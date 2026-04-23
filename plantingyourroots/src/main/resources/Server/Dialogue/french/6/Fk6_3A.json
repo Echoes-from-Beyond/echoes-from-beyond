@@ -10,7 +10,7 @@
     {
       "Name": "Narrator",
       "Line": "Your eyes meet the amber galaxy that exists within his own. You never appreciated how alien Kweebec eyes are: the way that they better resemble globules of sparkling liquid than what you'd find in an animal.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",
@@ -70,7 +70,7 @@
     {
       "Name": "Canuck Kweebec",
       "Line": "Is it too soon to call you mon amour ? I have not had much, erm ...",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     },
     {
       "Name": "Narrator",

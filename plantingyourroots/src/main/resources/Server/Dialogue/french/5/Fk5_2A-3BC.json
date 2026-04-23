@@ -5,7 +5,7 @@
     {
       "Name": "French Kweebec",
       "Line": "If you somehow find a Tim Kweertons around here -- I do not believe you can, because there is a lack of Kweemerican chains too -- I would prefer it if you leave me out of it.",
-      "Sprite":"sprites/Kweebec_French_Happy.png"
+      "Sprite":"sprites/Kweebec_French_Sad.png"
     }
   ],
   "AdvanceText": "Continue",
@@ -21,7 +21,7 @@
     },
     "UiPage": "Classic_Dialogue.ui",
     "UiFragment": "Classic_Dialogue_Fragment.ui",
-    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
     "Choices": [
       {
         "Id": "Standard",
