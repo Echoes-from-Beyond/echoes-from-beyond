@@ -20,24 +20,22 @@ package org.echoesfrombeyond.plantingyourroots.interaction;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.protocol.InteractionType;
-import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
-import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.modules.entity.teleport.Teleport;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.plantingyourroots.PlantingYourRoots;
-import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
 import org.jspecify.annotations.NullMarked;
 
 @ModelBuilder
 @NullMarked
-public class AdvanceDayInteraction extends SimpleInstantInteraction {
-  public static final BuilderCodec<AdvanceDayInteraction> CODEC =
+public class TeleportToSpawnInteraction extends SimpleInstantInteraction {
+  public static final BuilderCodec<TeleportToSpawnInteraction> CODEC =
       CodecUtil.modelBuilder(
-          AdvanceDayInteraction.class, Plugin.getSharedResolver(), Plugin.getSharedCache());
+          TeleportToSpawnInteraction.class, Plugin.getSharedResolver(), Plugin.getSharedCache());
 
   @Override
   protected void firstRun(
@@ -51,19 +49,19 @@ public class AdvanceDayInteraction extends SimpleInstantInteraction {
     var world = buffer.getStore().getExternalData().getWorld();
     if (!plugin.isKweebdrasilInstance(world)) return;
 
-    var roots =
-        buffer.ensureAndGetComponent(
-            interactionContext.getEntity(), RootsComponent.getComponentType());
+    var spawnProvider = world.getWorldConfig().getSpawnProvider();
+    if (spawnProvider == null) return;
 
-    if (roots.Dateables.values().stream().noneMatch(dateable -> dateable.TalkedTo)) {
-      var ref = interactionContext.getEntity();
-      var player = buffer.getComponent(ref, Player.getComponentType());
-      if (player == null) return;
+    var ref = interactionContext.getEntity();
+    var spawnPoint = spawnProvider.getSpawnPoint(ref, buffer);
 
-      player.sendMessage(Message.raw("You haven't talked to anyone yet today!"));
-      return;
-    }
-
-    plugin.advanceDay(buffer, roots);
+    world.execute(
+        () -> {
+          var teleport = Teleport.createForPlayer(spawnPoint);
+          world
+              .getEntityStore()
+              .getStore()
+              .addComponent(ref, Teleport.getComponentType(), teleport);
+        });
   }
 }

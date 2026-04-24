@@ -48,6 +48,7 @@ import org.echoesfrombeyond.plantingyourroots.component.KindComponent;
 import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
 import org.echoesfrombeyond.plantingyourroots.condition.TalkedToCondition;
 import org.echoesfrombeyond.plantingyourroots.interaction.AdvanceDayInteraction;
+import org.echoesfrombeyond.plantingyourroots.interaction.TeleportToSpawnInteraction;
 import org.echoesfrombeyond.plantingyourroots.system.CleanWorldSystem;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -89,7 +90,9 @@ public class PlantingYourRoots extends JavaPlugin {
     super.setup();
 
     getCodecRegistry(Interaction.CODEC)
-        .register("AdvanceDay", AdvanceDayInteraction.class, AdvanceDayInteraction.CODEC);
+        .register("AdvanceDay", AdvanceDayInteraction.class, AdvanceDayInteraction.CODEC)
+        .register(
+            "TeleportToSpawn", TeleportToSpawnInteraction.class, TeleportToSpawnInteraction.CODEC);
 
     getCodecRegistry(ChoiceAction.CODEC)
         .register("AppendDiary", AppendDiaryEntry.class, AppendDiaryEntry.CODEC)
@@ -188,8 +191,6 @@ public class PlantingYourRoots extends JavaPlugin {
 
     var npcComponentType = NPCEntity.getComponentType();
     assert npcComponentType != null;
-
-    roots.Day++;
 
     Ref<?>[] entitiesToRemove =
         spawnedEntities.stream()
