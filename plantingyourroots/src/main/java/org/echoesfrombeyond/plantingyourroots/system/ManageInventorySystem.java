@@ -36,7 +36,8 @@ public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
   private static final Set<Dependency<EntityStore>> DEPENDENCIES =
       Set.of(
           new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerRemovedSystem.class),
-          new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerAddedSystem.class));
+          new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerAddedSystem.class),
+          new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerInitSystem.class));
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static void loadOldInventory(Holder<EntityStore> holder, RootsComponent roots) {
@@ -45,7 +46,10 @@ public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
       var type = InventoryComponent.EVERYTHING[i];
 
       Component<EntityStore> copy;
-      if (old == null || (copy = old.clone()) == null) holder.tryRemoveComponent(type);
+      if (old == null || (copy = old.clone()) == null) {
+        var component = holder.getComponent(type);
+        if (component != null) component.getInventory().clear();
+      }
       else holder.putComponent((ComponentType) type, copy);
     }
     roots.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
