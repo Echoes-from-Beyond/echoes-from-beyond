@@ -18,7 +18,6 @@
 
 package org.echoesfrombeyond.plantingyourroots.system;
 
-import com.hypixel.hytale.component.Archetype;
 import com.hypixel.hytale.component.ArchetypeChunk;
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Store;
@@ -33,8 +32,6 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public class PreventItemDropInKweebdrasilSystem
     extends EntityEventSystem<EntityStore, DropItemEvent.PlayerRequest> {
-  private static final Query<EntityStore> QUERY = Archetype.of(Player.getComponentType());
-
   public PreventItemDropInKweebdrasilSystem() {
     super(DropItemEvent.PlayerRequest.class);
   }
@@ -52,6 +49,6 @@ public class PreventItemDropInKweebdrasilSystem
 
   @Override
   public Query<EntityStore> getQuery() {
-    return QUERY;
+    return Query.and(Player.getComponentType());
   }
 }
