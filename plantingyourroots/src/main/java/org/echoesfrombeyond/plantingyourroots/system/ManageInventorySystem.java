@@ -49,8 +49,7 @@ public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
       if (old == null || (copy = old.clone()) == null) {
         var component = holder.getComponent(type);
         if (component != null) component.getInventory().clear();
-      }
-      else holder.putComponent((ComponentType) type, copy);
+      } else holder.putComponent((ComponentType) type, copy);
     }
     roots.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
   }
