@@ -24,6 +24,7 @@ import com.hypixel.hytale.component.dependency.Order;
 import com.hypixel.hytale.component.dependency.SystemDependency;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
+import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.modules.entity.player.PlayerSystems;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.Set;
@@ -37,19 +38,23 @@ public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
       Set.of(
           new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerRemovedSystem.class),
           new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerAddedSystem.class),
+          new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerSpawnedSystem.class),
           new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerInitSystem.class));
 
-  @SuppressWarnings({"rawtypes", "unchecked"})
   private static void loadOldInventory(Holder<EntityStore> holder, RootsComponent roots) {
     for (int i = 0; i < InventoryComponent.EVERYTHING.length; i++) {
       var old = roots.OldInventory[i];
       var type = InventoryComponent.EVERYTHING[i];
 
-      Component<EntityStore> copy;
-      if (old == null || (copy = old.clone()) == null) {
+      InventoryComponent copy;
+      if (old == null || (copy = (InventoryComponent) old.clone()) == null) {
         var component = holder.getComponent(type);
         if (component != null) component.getInventory().clear();
-      } else holder.putComponent((ComponentType) type, copy);
+      } else {
+        var inventory = holder.ensureAndGetComponent(type).getInventory();
+        inventory.clear();
+        ItemContainer.copy(copy.getInventory(), inventory, null);
+      }
     }
     roots.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
   }
@@ -61,14 +66,16 @@ public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
     var roots = holder.getComponent(RootsComponent.getComponentType());
     assert roots != null;
 
-    if (!plugin.isKweebdrasilInstance(store.getExternalData().getWorld())) {
+    var world = store.getExternalData().getWorld();
+    if (!plugin.isKweebdrasilInstance(world)) {
       if (roots.HasOldInventory) loadOldInventory(holder, roots);
       roots.HasOldInventory = false;
       return;
     }
 
     for (int i = 0; i < InventoryComponent.EVERYTHING.length; i++) {
-      var component = holder.getComponent(InventoryComponent.EVERYTHING[i]);
+      var type = InventoryComponent.EVERYTHING[i];
+      var component = holder.getComponent(type);
       roots.OldInventory[i] = component == null ? null : (InventoryComponent) component.clone();
 
       if (component != null) component.getInventory().clear();
