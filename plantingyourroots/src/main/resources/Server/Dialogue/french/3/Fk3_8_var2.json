@@ -27,8 +27,17 @@
         "Id": "Standard",
         "Text": "End",
         "Action": {
-          "Id": "Close"
-        }
+        "Id": "Composite",
+        "Actions": [
+          {
+            "Id": "MarkTalkedTo",
+            "Kind": "French_Kweebec"
+          },
+          {
+            "Id": "Close"
+          }
+        ]
+      }
       }
     ]
   }
