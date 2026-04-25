@@ -19,6 +19,7 @@
 package org.echoesfrombeyond.plantingyourroots;
 
 import com.hypixel.hytale.builtin.instances.InstancesPlugin;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.lookup.BuilderCodecMapCodec;
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
@@ -38,6 +39,8 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.NPCPlugin;
 import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
@@ -124,13 +127,32 @@ public class PlantingYourRoots extends JavaPlugin {
     getCodecRegistry(ChoiceCondition.CODEC)
         .register("TalkedTo", TalkedToCondition.class, TalkedToCondition.CODEC);
 
-    getCodecRegistry(inventoryComponentCodec)
-        .register("Hotbar", InventoryComponent.Hotbar.class, InventoryComponent.Hotbar.CODEC)
-        .register("Armor", InventoryComponent.Armor.class, InventoryComponent.Armor.CODEC)
-        .register("Backpack", InventoryComponent.Backpack.class, InventoryComponent.Backpack.CODEC)
-        .register("Storage", InventoryComponent.Storage.class, InventoryComponent.Storage.CODEC)
-        .register("Tool", InventoryComponent.Tool.class, InventoryComponent.Tool.CODEC)
-        .register("Utility", InventoryComponent.Utility.class, InventoryComponent.Utility.CODEC);
+    var inventoryCodecRegistry = getCodecRegistry(inventoryComponentCodec);
+    for (var inventoryComponentType : InventoryComponent.EVERYTHING) {
+      var type = inventoryComponentType.getTypeClass();
+
+      Field field;
+      try {
+        field = type.getDeclaredField("CODEC");
+      } catch (NoSuchFieldException e) {
+        continue;
+      }
+
+      int modifiers = field.getModifiers();
+      if (!Modifier.isStatic(modifiers) || !Modifier.isPublic(modifiers)) continue;
+
+      Object value;
+      try {
+        value = field.get(null);
+      } catch (IllegalAccessException e) {
+        continue;
+      }
+
+      if (value == null || !BuilderCodec.class.isAssignableFrom(value.getClass())) continue;
+
+      //noinspection unchecked,rawtypes
+      inventoryCodecRegistry.register(type.getSimpleName(), (Class) type, (BuilderCodec) value);
+    }
 
     var entityStoreRegistry = getEntityStoreRegistry();
     RootsComponent.register(entityStoreRegistry);
