@@ -128,6 +128,53 @@ public interface CodecResolver {
     Builder chain(CodecResolver resolver);
 
     /**
+     * Applies commonly used settings to this builder. Users wanting a "batteries included" resolver
+     * that can handle most types without additional setup should call this method.
+     *
+     * <p>Calling this method will reset all settings previously applied to this builder. This
+     * includes clearing chained resolvers, subtype mappings, and direct mappings. Anything added
+     * after this function call will, of course, remain intact.
+     *
+     * <p>The following settings will be applied:
+     *
+     * <ul>
+     *   <li>{@link CodecResolver#PRIMITIVE} will be chained as if by calling {@link
+     *       Builder#chain(CodecResolver)}
+     *   <li>The following subtype mappings will be registered:
+     *       <ul>
+     *         <li>{@link List} -> {@link ArrayList}
+     *         <li>{@link Set} -> {@link HashSet}
+     *         <li>{@link Collection} -> {@link ArrayList}
+     *         <li>{@link Map} -> {@link HashMap}
+     *       </ul>
+     *   <li>Recursive resolution will be enabled as if by calling {@link
+     *       Builder#withRecursiveResolution()} (note that no cache is used; see {@link
+     *       Builder#withStandardSettings(CodecCache)})
+     *   <li>Array support will be enabled as if by calling {@link Builder#withArraySupport()}
+     *   <li>Collection support will be enabled as if by calling {@link
+     *       Builder#withCollectionSupport()}
+     *   <li>Map support will be enabled as if by calling {@link Builder#withMapSupport()}
+     *   <li>Enum support will be enabled as if by calling {@link Builder#withEnumSupport()}
+     * </ul>
+     *
+     * @return this instance
+     */
+    @Contract("-> this")
+    Builder withStandardSettings();
+
+    /**
+     * Works identically to {@link Builder#withStandardSettings()}, but uses the provided {@link
+     * CodecCache} during recursive resolution, as if by calling {@link
+     * Builder#withRecursiveResolution(CodecCache)}.
+     *
+     * @param cache the cache to use
+     * @return this instance
+     * @throws NullPointerException if {@code cache} is null
+     */
+    @Contract("_ -> this")
+    Builder withStandardSettings(CodecCache cache);
+
+    /**
      * Adds a subtype mapping.
      *
      * <p>When the resulting resolver encounters a field of type {@code baseClass}, it will instead
@@ -307,13 +354,13 @@ public interface CodecResolver {
     private @Nullable CodecCache recursiveResolutionCache;
     private boolean arraySupport;
     private boolean collectionSupport;
+
     private boolean mapSupport;
-    private boolean enumSupport;
-
-    private EnumCodec.EnumStyle enumStyle = EnumCodec.EnumStyle.CAMEL_CASE;
-
     private String keyName = DEFAULT_MAP_KEY_NAME;
     private String valueName = DEFAULT_MAP_VALUE_NAME;
+
+    private boolean enumSupport;
+    private EnumCodec.EnumStyle enumStyle = EnumCodec.EnumStyle.CAMEL_CASE;
 
     private BuilderImpl() {
       this.resolvers = new ArrayList<>();
@@ -324,6 +371,44 @@ public interface CodecResolver {
     @Override
     public Builder chain(CodecResolver resolver) {
       resolvers.add(Check.nonNull(resolver));
+      return this;
+    }
+
+    private void applyStandardSettings() {
+      resolvers.clear();
+      subtypeMap.clear();
+      codecMap.clear();
+
+      resolvers.add(CodecResolver.PRIMITIVE);
+
+      subtypeMap.put(List.class, ArrayList.class);
+      subtypeMap.put(Set.class, HashSet.class);
+      subtypeMap.put(Collection.class, ArrayList.class);
+      subtypeMap.put(Map.class, HashMap.class);
+
+      recursiveResolution = true;
+      recursiveResolutionCache = null;
+      arraySupport = true;
+      collectionSupport = true;
+      mapSupport = true;
+      keyName = DEFAULT_MAP_KEY_NAME;
+      valueName = DEFAULT_MAP_VALUE_NAME;
+      enumSupport = true;
+      enumStyle = EnumCodec.EnumStyle.CAMEL_CASE;
+    }
+
+    @Override
+    public Builder withStandardSettings() {
+      applyStandardSettings();
+      return this;
+    }
+
+    @Override
+    public Builder withStandardSettings(CodecCache cache) {
+      Check.nonNull(cache);
+
+      applyStandardSettings();
+      recursiveResolutionCache = cache;
       return this;
     }
 
