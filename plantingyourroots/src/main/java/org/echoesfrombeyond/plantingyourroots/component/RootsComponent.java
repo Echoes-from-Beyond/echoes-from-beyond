@@ -80,6 +80,7 @@ public class RootsComponent implements Component<EntityStore> {
   public List<DiaryEntry> DiaryEntries;
   public Map<String, Dateable> Dateables;
   public @Nullable InventoryComponent[] OldInventory;
+  public boolean HasOldInventory;
 
   @SuppressWarnings("unused")
   public RootsComponent() {
@@ -87,6 +88,7 @@ public class RootsComponent implements Component<EntityStore> {
     this.DiaryEntries = new ArrayList<>();
     this.Dateables = new HashMap<>();
     this.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
+    this.HasOldInventory = false;
   }
 
   public RootsComponent(RootsComponent other) {
@@ -105,6 +107,7 @@ public class RootsComponent implements Component<EntityStore> {
               ? null
               : (InventoryComponent) otherInventoryComponent.clone();
     }
+    this.HasOldInventory = other.HasOldInventory;
   }
 
   @Override

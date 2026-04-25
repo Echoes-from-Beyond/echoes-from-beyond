@@ -34,15 +34,35 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
   private static final Set<Dependency<EntityStore>> DEPENDENCIES =
-      Set.of(new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerRemovedSystem.class));
+      Set.of(
+          new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerRemovedSystem.class),
+          new SystemDependency<>(Order.BEFORE, PlayerSystems.PlayerAddedSystem.class));
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  private static void loadOldInventory(Holder<EntityStore> holder, RootsComponent roots) {
+    for (int i = 0; i < InventoryComponent.EVERYTHING.length; i++) {
+      var old = roots.OldInventory[i];
+      var type = InventoryComponent.EVERYTHING[i];
+
+      Component<EntityStore> copy;
+      if (old == null || (copy = old.clone()) == null) holder.tryRemoveComponent(type);
+      else holder.putComponent((ComponentType) type, copy);
+    }
+    roots.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
+  }
 
   @Override
   public void onEntityAdd(Holder<EntityStore> holder, AddReason reason, Store<EntityStore> store) {
     var plugin = PlantingYourRoots.get();
-    if (!plugin.isKweebdrasilInstance(store.getExternalData().getWorld())) return;
 
     var roots = holder.getComponent(RootsComponent.getComponentType());
     assert roots != null;
+
+    if (!plugin.isKweebdrasilInstance(store.getExternalData().getWorld())) {
+      if (roots.HasOldInventory) loadOldInventory(holder, roots);
+      roots.HasOldInventory = false;
+      return;
+    }
 
     for (int i = 0; i < InventoryComponent.EVERYTHING.length; i++) {
       var component = holder.getComponent(InventoryComponent.EVERYTHING[i]);
@@ -50,33 +70,13 @@ public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
 
       if (component != null) component.getInventory().clear();
     }
+
+    roots.HasOldInventory = true;
   }
 
   @Override
-  @SuppressWarnings({"rawtypes", "unchecked"})
   public void onEntityRemoved(
-      Holder<EntityStore> holder, RemoveReason reason, Store<EntityStore> store) {
-    var plugin = PlantingYourRoots.get();
-    if (!plugin.isKweebdrasilInstance(store.getExternalData().getWorld())) return;
-
-    var roots = holder.getComponent(RootsComponent.getComponentType());
-    assert roots != null;
-
-    var oldInventory = roots.OldInventory;
-    for (int i = 0; i < InventoryComponent.EVERYTHING.length; i++) {
-      var old = oldInventory[i];
-      var type = InventoryComponent.EVERYTHING[i];
-
-      if (old == null) holder.tryRemoveComponent(type);
-      else {
-        var copy = old.clone();
-        if (copy == null) holder.tryRemoveComponent(type);
-        else holder.putComponent((ComponentType) type, copy);
-      }
-    }
-
-    roots.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
-  }
+      Holder<EntityStore> holder, RemoveReason reason, Store<EntityStore> store) {}
 
   @Override
   public Query<EntityStore> getQuery() {

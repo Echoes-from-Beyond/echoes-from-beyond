@@ -19,6 +19,7 @@
 package org.echoesfrombeyond.plantingyourroots;
 
 import com.hypixel.hytale.builtin.instances.InstancesPlugin;
+import com.hypixel.hytale.codec.lookup.BuilderCodecMapCodec;
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.RemoveReason;
@@ -76,12 +77,14 @@ public class PlantingYourRoots extends JavaPlugin {
   private static @Nullable PlantingYourRoots INSTANCE;
 
   private final Map<UUID, List<UUID>> entities;
+  private final BuilderCodecMapCodec<InventoryComponent> inventoryComponentCodec;
 
   public PlantingYourRoots(JavaPluginInit init) {
     super(init);
     INSTANCE = this;
 
     this.entities = new HashMap<>();
+    this.inventoryComponentCodec = new BuilderCodecMapCodec<>();
   }
 
   public static PlantingYourRoots get() {
@@ -106,7 +109,7 @@ public class PlantingYourRoots extends JavaPlugin {
             .withSubtypeMapping(List.class, ArrayList.class)
             .withSubtypeMapping(Set.class, HashSet.class)
             .withSubtypeMapping(Map.class, HashMap.class)
-            .withDirectMapping(InventoryComponent.class, InventoryComponent.CODEC)
+            .withDirectMapping(InventoryComponent.class, inventoryComponentCodec)
             .build();
 
     getCodecRegistry(Interaction.CODEC)
@@ -120,6 +123,14 @@ public class PlantingYourRoots extends JavaPlugin {
 
     getCodecRegistry(ChoiceCondition.CODEC)
         .register("TalkedTo", TalkedToCondition.class, TalkedToCondition.CODEC);
+
+    getCodecRegistry(inventoryComponentCodec)
+        .register("Hotbar", InventoryComponent.Hotbar.class, InventoryComponent.Hotbar.CODEC)
+        .register("Armor", InventoryComponent.Armor.class, InventoryComponent.Armor.CODEC)
+        .register("Backpack", InventoryComponent.Backpack.class, InventoryComponent.Backpack.CODEC)
+        .register("Storage", InventoryComponent.Storage.class, InventoryComponent.Storage.CODEC)
+        .register("Tool", InventoryComponent.Tool.class, InventoryComponent.Tool.CODEC)
+        .register("Utility", InventoryComponent.Utility.class, InventoryComponent.Utility.CODEC);
 
     var entityStoreRegistry = getEntityStoreRegistry();
     RootsComponent.register(entityStoreRegistry);
