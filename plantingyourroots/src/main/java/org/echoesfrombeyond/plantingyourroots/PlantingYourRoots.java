@@ -67,22 +67,9 @@ public class PlantingYourRoots extends JavaPlugin {
 
   private static final RootsComponent.Dateable DEFAULT_DATEABLE = new RootsComponent.Dateable();
   private static final Map<String, Int2ObjectMap<Spawn>> SPAWNS = new HashMap<>();
-  private static final CodecResolver RESOLVER;
+  private static @Nullable CodecResolver RESOLVER;
 
   static {
-    RESOLVER =
-        CodecResolver.builder()
-            .chain(CodecResolver.PRIMITIVE)
-            .withCollectionSupport()
-            .withMapSupport()
-            .withEnumSupport()
-            .withRecursiveResolution(Plugin.getSharedCache())
-            .withSubtypeMapping(List.class, ArrayList.class)
-            .withSubtypeMapping(Set.class, HashSet.class)
-            .withSubtypeMapping(Map.class, HashMap.class)
-            .withDirectMapping(InventoryComponent.class, InventoryComponent.CODEC)
-            .build();
-
     // TODO: init spawns
   }
 
@@ -108,6 +95,20 @@ public class PlantingYourRoots extends JavaPlugin {
   protected void setup() {
     super.setup();
 
+    RESOLVER =
+        CodecResolver.builder()
+            .chain(CodecResolver.PRIMITIVE)
+            .withCollectionSupport()
+            .withMapSupport()
+            .withEnumSupport()
+            .withArraySupport()
+            .withRecursiveResolution(Plugin.getSharedCache())
+            .withSubtypeMapping(List.class, ArrayList.class)
+            .withSubtypeMapping(Set.class, HashSet.class)
+            .withSubtypeMapping(Map.class, HashMap.class)
+            .withDirectMapping(InventoryComponent.class, InventoryComponent.CODEC)
+            .build();
+
     getCodecRegistry(Interaction.CODEC)
         .register("AdvanceDay", AdvanceDayInteraction.class, AdvanceDayInteraction.CODEC)
         .register(
@@ -120,13 +121,13 @@ public class PlantingYourRoots extends JavaPlugin {
     getCodecRegistry(ChoiceCondition.CODEC)
         .register("TalkedTo", TalkedToCondition.class, TalkedToCondition.CODEC);
 
-    getEntityStoreRegistry().registerSystem(new CleanWorldSystem());
-    getEntityStoreRegistry().registerSystem(new PreventItemDropInKweebdrasilSystem());
-    getEntityStoreRegistry().registerSystem(new ManageInventorySystem());
-
     var entityStoreRegistry = getEntityStoreRegistry();
     RootsComponent.register(entityStoreRegistry);
     KindComponent.register(entityStoreRegistry);
+
+    getEntityStoreRegistry().registerSystem(new CleanWorldSystem());
+    getEntityStoreRegistry().registerSystem(new PreventItemDropInKweebdrasilSystem());
+    getEntityStoreRegistry().registerSystem(new ManageInventorySystem());
 
     getCommandRegistry().registerCommand(new ReadyForLove());
   }
@@ -196,6 +197,8 @@ public class PlantingYourRoots extends JavaPlugin {
   }
 
   public static CodecResolver getResolver() {
+    var resolver = RESOLVER;
+    if (resolver == null) throw new IllegalStateException("Plugin has not been initialized yet");
     return RESOLVER;
   }
 

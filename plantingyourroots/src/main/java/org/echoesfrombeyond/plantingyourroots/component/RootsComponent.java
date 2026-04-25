@@ -24,12 +24,14 @@ import com.hypixel.hytale.component.ComponentRegistryProxy;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.plantingyourroots.PlantingYourRoots;
 import org.echoesfrombeyond.plantingyourroots.diary.DiaryEntry;
+import org.echoesfrombeyond.util.Check;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -44,8 +46,10 @@ public class RootsComponent implements Component<EntityStore> {
   private static @Nullable ComponentType<EntityStore, RootsComponent> TYPE;
 
   @ApiStatus.Internal
+  // reason: arrays of abstract types do not validate correctly due to a Hytale bug
+  @SuppressWarnings("removal")
   public static void register(ComponentRegistryProxy<EntityStore> proxy) {
-    TYPE = proxy.registerComponent(RootsComponent.class, "RootsComponent", CODEC);
+    TYPE = proxy.registerComponent(RootsComponent.class, "RootsComponent", CODEC, true);
   }
 
   public static ComponentType<EntityStore, RootsComponent> getComponentType() {
@@ -77,7 +81,7 @@ public class RootsComponent implements Component<EntityStore> {
   public int Day;
   public List<DiaryEntry> DiaryEntries;
   public Map<String, Dateable> Dateables;
-  public @Nullable InventoryComponent[] OldInventory;
+  public InventoryComponent[] OldInventory;
 
   @SuppressWarnings("unused")
   public RootsComponent() {
@@ -85,6 +89,22 @@ public class RootsComponent implements Component<EntityStore> {
     this.DiaryEntries = new ArrayList<>();
     this.Dateables = new HashMap<>();
     this.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
+
+    for (int i = 0; i < InventoryComponent.EVERYTHING.length; i++) {
+      var type = InventoryComponent.EVERYTHING[i];
+      InventoryComponent init;
+      try {
+        init = (InventoryComponent) type.getTypeClass().getConstructor().newInstance();
+      } catch (InstantiationException
+          | IllegalAccessException
+          | InvocationTargetException
+          | NoSuchMethodException e) {
+        throw new RuntimeException(
+            "Expected InventoryComponent implementation to have a parameterless constructor");
+      }
+
+      this.OldInventory[i] = init;
+    }
   }
 
   public RootsComponent(RootsComponent other) {
@@ -98,10 +118,7 @@ public class RootsComponent implements Component<EntityStore> {
     this.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
     for (int i = 0; i < InventoryComponent.EVERYTHING.length; i++) {
       var otherInventoryComponent = other.OldInventory[i];
-      this.OldInventory[i] =
-          otherInventoryComponent == null
-              ? null
-              : (InventoryComponent) otherInventoryComponent.clone();
+      this.OldInventory[i] = (InventoryComponent) Check.nonNull(otherInventoryComponent.clone());
     }
   }
 
