@@ -50,6 +50,7 @@ import org.echoesfrombeyond.plantingyourroots.condition.TalkedToCondition;
 import org.echoesfrombeyond.plantingyourroots.interaction.AdvanceDayInteraction;
 import org.echoesfrombeyond.plantingyourroots.interaction.TeleportToSpawnInteraction;
 import org.echoesfrombeyond.plantingyourroots.system.CleanWorldSystem;
+import org.echoesfrombeyond.plantingyourroots.system.PreventItemDropInKweebdrasilSystem;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -102,6 +103,7 @@ public class PlantingYourRoots extends JavaPlugin {
         .register("TalkedTo", TalkedToCondition.class, TalkedToCondition.CODEC);
 
     getEntityStoreRegistry().registerSystem(new CleanWorldSystem());
+    getEntityStoreRegistry().registerSystem(new PreventItemDropInKweebdrasilSystem());
 
     var entityStoreRegistry = getEntityStoreRegistry();
     RootsComponent.register(entityStoreRegistry);
