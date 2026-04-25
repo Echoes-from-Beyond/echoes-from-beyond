@@ -1,0 +1,41 @@
+{
+  "Type": "Chain",
+  "Id": "Councilor1_0",
+  "Entries": [
+    {
+      "Name": "Kweebec Councilor",
+      "Line": "Are you the one prophesized by the Great Old--?"
+    },
+    {
+      "Name": "Kweebec Councilor",
+      "Line": "No, you are too squishy even for a human. Where is that metal bark that your kind adores?"
+    },
+    {
+      "Name": "Kweebec Councilor",
+      "Line": "You know, because you leathery folk can't grow your own."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Heh. Imagine being meaty."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Kweebec Councilor"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

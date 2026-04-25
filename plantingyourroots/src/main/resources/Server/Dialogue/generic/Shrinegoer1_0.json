@@ -1,0 +1,37 @@
+{
+  "Type": "Chain",
+  "Id": "Shrinegoer1_0",
+  "Entries": [
+    {
+      "Name": "Kweebec",
+      "Line": "I sometimes see that French guy crawling around by those orange mushrooms. You know, the glowing polypores that grow on Kweebdrasil."
+    },
+    {
+      "Name": "Kweebec",
+      "Line": "I don't know what he does there, and I'm not sure if I want to. One time, I saw him shirtless. Doing exercises and stuff while jumping around."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "He never takes that beret off, though. I don't think that anyone has ever seen his leaves, even though Kweebecs are usually proud to show off our ancestry."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Kweebec"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

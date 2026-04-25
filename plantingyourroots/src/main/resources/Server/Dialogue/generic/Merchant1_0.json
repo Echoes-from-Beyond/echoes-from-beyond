@@ -1,0 +1,41 @@
+{
+  "Type": "Chain",
+  "Id": "Merchant1_0",
+  "Entries": [
+    {
+      "Name": "Kweebec Merchant",
+      "Line": "I wish I had a rich patron like Artist Kweebec."
+    },
+    {
+      "Name": "Kweebec Merchant",
+      "Line": "Huh? Oh, no. She's not a 'dateable', whatever that means. She's just a tree who left us ages ago for some project in Howling Sands."
+    },
+    {
+      "Name": "Kweebec Merchant",
+      "Line": "Some weird production about people who live in this futuristic take on the Void. It's called 'Sand Wars', I think."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "It's coarse, and rough, and irritating... and it's spammed everywhere. The show, I mean. Not the sand."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Kweebec Merchant"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "Type": "Chain",
+  "Id": "Councilor3_0",
+  "Entries": [
+    {
+      "Name": "Kweebec Councilor",
+      "Line": "Hey there. I haven't seen you on Kweebdrasil before. Be welcome!"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Oh, and ignore the other councilors if you can. They sag under pressure like saplings in a hurricane."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Kweebec Councilor"
+    },
+    "UiPage": "Classic_Dialogue.ui",
+    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Action": {
+          "Id": "Close"
+        }
+      }
+    ]
+  }
+}
