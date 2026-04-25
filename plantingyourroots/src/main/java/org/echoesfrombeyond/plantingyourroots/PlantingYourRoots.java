@@ -39,6 +39,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.NPCPlugin;
 import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.*;
@@ -74,7 +75,37 @@ public class PlantingYourRoots extends JavaPlugin {
   private static @Nullable CodecResolver RESOLVER;
 
   static {
-    // TODO: init spawns
+    var frenchSpawns = new Int2ObjectOpenHashMap<Spawn>();
+
+    // fallback value
+    frenchSpawns.put(
+        -1,
+        new Spawn("French_Kweebec", new Vector3d(32.53, 210.0, -21.27), new Vector3f(-3, 0, 0)));
+
+    // the spawnpoints of different variations of the same character
+    // internally, each conversation is handled by a different NPC
+    frenchSpawns.put(
+        0, new Spawn("French_Kweebec", new Vector3d(32.53, 210.0, -21.27), new Vector3f(-3, 0, 0)));
+    frenchSpawns.put(
+        1,
+        new Spawn("French_Kweebec_2", new Vector3d(31.42, 222.0, -37.46), new Vector3f(-3, 0, 0)));
+    frenchSpawns.put(
+        2,
+        new Spawn(
+            "French_Kweebec_3", new Vector3d(28.32, 222.0, -38.87), new Vector3f(-1.5f, 0, 0)));
+    frenchSpawns.put(
+        3,
+        new Spawn(
+            "French_Kweebec_4", new Vector3d(38.84, 124.0, -16.4), new Vector3f(-1.5f, 0, 0)));
+    frenchSpawns.put(
+        4,
+        new Spawn("French_Kweebec_5", new Vector3d(29.6, 222.0, -37.23), new Vector3f(-3, 0, 0)));
+    frenchSpawns.put(
+        5,
+        new Spawn("French_Kweebec_6", new Vector3d(22.5, 207.0, -28.44), new Vector3f(1.5f, 0, 0)));
+
+    // unify all the NPCs into the same character
+    SPAWNS.put("French_Kweebec", frenchSpawns);
   }
 
   private static @Nullable PlantingYourRoots INSTANCE;
