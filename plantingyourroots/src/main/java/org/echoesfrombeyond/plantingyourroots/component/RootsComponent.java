@@ -22,14 +22,13 @@ import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentRegistryProxy;
 import com.hypixel.hytale.component.ComponentType;
+import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.plantingyourroots.PlantingYourRoots;
 import org.echoesfrombeyond.plantingyourroots.diary.DiaryEntry;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
@@ -40,7 +39,7 @@ import org.jspecify.annotations.Nullable;
 public class RootsComponent implements Component<EntityStore> {
   public static final BuilderCodec<RootsComponent> CODEC =
       CodecUtil.modelBuilder(
-          RootsComponent.class, Plugin.getSharedResolver(), Plugin.getSharedCache());
+          RootsComponent.class, PlantingYourRoots.getResolver(), Plugin.getSharedCache());
 
   private static @Nullable ComponentType<EntityStore, RootsComponent> TYPE;
 
@@ -78,12 +77,14 @@ public class RootsComponent implements Component<EntityStore> {
   public int Day;
   public List<DiaryEntry> DiaryEntries;
   public Map<String, Dateable> Dateables;
+  public @Nullable InventoryComponent[] OldInventory;
 
   @SuppressWarnings("unused")
   public RootsComponent() {
     this.Day = 1;
     this.DiaryEntries = new ArrayList<>();
     this.Dateables = new HashMap<>();
+    this.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
   }
 
   public RootsComponent(RootsComponent other) {
@@ -94,6 +95,14 @@ public class RootsComponent implements Component<EntityStore> {
     for (var otherEntry : other.DiaryEntries) this.DiaryEntries.add(otherEntry.clone());
     for (var otherEntry : other.Dateables.entrySet())
       this.Dateables.put(otherEntry.getKey(), otherEntry.getValue().clone());
+    this.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
+    for (int i = 0; i < InventoryComponent.EVERYTHING.length; i++) {
+      var otherInventoryComponent = other.OldInventory[i];
+      this.OldInventory[i] =
+          otherInventoryComponent == null
+              ? null
+              : (InventoryComponent) otherInventoryComponent.clone();
+    }
   }
 
   @Override

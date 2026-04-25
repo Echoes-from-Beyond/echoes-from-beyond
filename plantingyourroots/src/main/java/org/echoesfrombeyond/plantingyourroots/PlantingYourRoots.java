@@ -27,6 +27,7 @@ import com.hypixel.hytale.math.vector.Transform;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.math.vector.Vector3f;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
+import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
@@ -39,6 +40,8 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
+import org.echoesfrombeyond.codechelper.CodecResolver;
+import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
 import org.echoesfrombeyond.plantingyourroots.action.AppendDiaryEntry;
@@ -50,6 +53,7 @@ import org.echoesfrombeyond.plantingyourroots.condition.TalkedToCondition;
 import org.echoesfrombeyond.plantingyourroots.interaction.AdvanceDayInteraction;
 import org.echoesfrombeyond.plantingyourroots.interaction.TeleportToSpawnInteraction;
 import org.echoesfrombeyond.plantingyourroots.system.CleanWorldSystem;
+import org.echoesfrombeyond.plantingyourroots.system.ManageInventorySystem;
 import org.echoesfrombeyond.plantingyourroots.system.PreventItemDropInKweebdrasilSystem;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -63,8 +67,22 @@ public class PlantingYourRoots extends JavaPlugin {
 
   private static final RootsComponent.Dateable DEFAULT_DATEABLE = new RootsComponent.Dateable();
   private static final Map<String, Int2ObjectMap<Spawn>> SPAWNS = new HashMap<>();
+  private static final CodecResolver RESOLVER;
 
   static {
+    RESOLVER =
+        CodecResolver.builder()
+            .chain(CodecResolver.PRIMITIVE)
+            .withCollectionSupport()
+            .withMapSupport()
+            .withEnumSupport()
+            .withRecursiveResolution(Plugin.getSharedCache())
+            .withSubtypeMapping(List.class, ArrayList.class)
+            .withSubtypeMapping(Set.class, HashSet.class)
+            .withSubtypeMapping(Map.class, HashMap.class)
+            .withDirectMapping(InventoryComponent.class, InventoryComponent.CODEC)
+            .build();
+
     // TODO: init spawns
   }
 
@@ -104,6 +122,7 @@ public class PlantingYourRoots extends JavaPlugin {
 
     getEntityStoreRegistry().registerSystem(new CleanWorldSystem());
     getEntityStoreRegistry().registerSystem(new PreventItemDropInKweebdrasilSystem());
+    getEntityStoreRegistry().registerSystem(new ManageInventorySystem());
 
     var entityStoreRegistry = getEntityStoreRegistry();
     RootsComponent.register(entityStoreRegistry);
@@ -174,6 +193,10 @@ public class PlantingYourRoots extends JavaPlugin {
     synchronized (entities) {
       entities.remove(uuid);
     }
+  }
+
+  public static CodecResolver getResolver() {
+    return RESOLVER;
   }
 
   @RunOnWorldThread

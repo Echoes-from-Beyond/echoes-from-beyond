@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public class CleanWorldSystem extends StoreSystem<EntityStore> {
   private static final Set<Dependency<EntityStore>> DEPENDENCIES =
-      Set.of(new SystemDependency<>(Order.AFTER, PlayerSavingSystems.WorldRemovedSystem.class));
+      Set.of(new SystemDependency<>(Order.BEFORE, PlayerSavingSystems.WorldRemovedSystem.class));
 
   private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
@@ -44,12 +44,12 @@ public class CleanWorldSystem extends StoreSystem<EntityStore> {
   @Override
   public void onSystemRemovedFromStore(Store<EntityStore> store) {
     var world = store.getExternalData().getWorld();
-    var roots = PlantingYourRoots.get();
+    var plugin = PlantingYourRoots.get();
 
-    if (!roots.isKweebdrasilInstance(world)) return;
+    if (!plugin.isKweebdrasilInstance(world)) return;
 
     LOGGER.at(Level.INFO).log("Removing Kweebdrasil instance...");
-    roots.removeKweebdrasilInstance(world.getWorldConfig().getUuid());
+    plugin.removeKweebdrasilInstance(world.getWorldConfig().getUuid());
   }
 
   @Override
