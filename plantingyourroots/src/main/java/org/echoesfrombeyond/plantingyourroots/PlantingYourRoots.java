@@ -98,6 +98,7 @@ public class PlantingYourRoots extends JavaPlugin {
   }
 
   @Override
+  @SuppressWarnings({"rawtypes", "unchecked"})
   protected void setup() {
     super.setup();
 
@@ -150,7 +151,6 @@ public class PlantingYourRoots extends JavaPlugin {
 
       if (value == null || !BuilderCodec.class.isAssignableFrom(value.getClass())) continue;
 
-      //noinspection unchecked,rawtypes
       inventoryCodecRegistry.register(type.getSimpleName(), (Class) type, (BuilderCodec) value);
     }
 
@@ -236,6 +236,7 @@ public class PlantingYourRoots extends JavaPlugin {
   }
 
   @RunOnWorldThread
+  @SuppressWarnings("unchecked")
   public void advanceDay(CommandBuffer<EntityStore> buffer, RootsComponent roots) {
     var world = buffer.getStore().getExternalData().getWorld();
     if (!isKweebdrasilInstance(world)) return;
@@ -270,7 +271,6 @@ public class PlantingYourRoots extends JavaPlugin {
                 })
             .toArray(Ref<?>[]::new);
 
-    //noinspection unchecked
     for (var holder :
         storeStore.removeEntities((Ref<EntityStore>[]) entitiesToRemove, RemoveReason.REMOVE)) {
       var npc = holder.getComponent(npcComponentType);

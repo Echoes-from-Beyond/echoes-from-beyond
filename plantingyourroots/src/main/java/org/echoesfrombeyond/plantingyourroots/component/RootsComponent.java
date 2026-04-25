@@ -44,10 +44,8 @@ public class RootsComponent implements Component<EntityStore> {
   private static @Nullable ComponentType<EntityStore, RootsComponent> TYPE;
 
   @ApiStatus.Internal
-  // reason: arrays of abstract types do not validate correctly due to a Hytale bug
-  @SuppressWarnings("removal")
   public static void register(ComponentRegistryProxy<EntityStore> proxy) {
-    TYPE = proxy.registerComponent(RootsComponent.class, "RootsComponent", CODEC, true);
+    TYPE = proxy.registerComponent(RootsComponent.class, "RootsComponent", CODEC);
   }
 
   public static ComponentType<EntityStore, RootsComponent> getComponentType() {
