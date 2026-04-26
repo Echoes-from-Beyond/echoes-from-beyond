@@ -55,7 +55,7 @@ public class AdvanceDayInteraction extends SimpleInstantInteraction {
         buffer.ensureAndGetComponent(
             interactionContext.getEntity(), RootsComponent.getComponentType());
 
-    if (PlantingYourRoots.SPAWNS.keySet().stream()
+    if (PlantingYourRoots.DATEABLE_SPAWNS.keySet().stream()
         .noneMatch(
             kind ->
                 roots.Dateables.getOrDefault(kind, PlantingYourRoots.DEFAULT_DATEABLE).TalkedTo)) {

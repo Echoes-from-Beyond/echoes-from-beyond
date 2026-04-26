@@ -72,7 +72,8 @@ public class PlantingYourRoots extends JavaPlugin {
   public record Spawn(String type, Vector3d position, Vector3f rotation) {}
 
   public static final RootsComponent.Dateable DEFAULT_DATEABLE = new RootsComponent.Dateable();
-  public static final Map<String, Int2ObjectMap<Spawn>> SPAWNS = new HashMap<>();
+  public static final Map<String, Int2ObjectMap<Spawn>> DATEABLE_SPAWNS = new HashMap<>();
+  public static final List<Spawn> STATIC_NPCS = new ArrayList<>();
 
   private static @Nullable CodecResolver RESOLVER;
 
@@ -107,7 +108,7 @@ public class PlantingYourRoots extends JavaPlugin {
         new Spawn("French_Kweebec_6", new Vector3d(22.5, 207.0, -28.44), new Vector3f(1.5f, 0, 0)));
 
     // unify all the NPCs into the same character
-    SPAWNS.put("French_Kweebec", frenchSpawns);
+    DATEABLE_SPAWNS.put("French_Kweebec", frenchSpawns);
   }
 
   private static @Nullable PlantingYourRoots INSTANCE;
@@ -231,7 +232,8 @@ public class PlantingYourRoots extends JavaPlugin {
               world.execute(
                   () -> {
                     var uuids = new ArrayList<UUID>();
-                    for (var entry : SPAWNS.entrySet()) {
+                    var storeStore = world.getEntityStore().getStore();
+                    for (var entry : DATEABLE_SPAWNS.entrySet()) {
                       var kind = entry.getKey();
                       var spawnsForStage = entry.getValue();
 
@@ -240,9 +242,13 @@ public class PlantingYourRoots extends JavaPlugin {
                       if (!spawnsForStage.containsKey(stage)) continue;
                       var spawn = spawnsForStage.get(stage);
 
-                      var uuid = spawnDateable(world.getEntityStore().getStore(), kind, spawn);
+                      var uuid = spawnDateable(storeStore, kind, spawn);
                       if (uuid != null) uuids.add(uuid);
                     }
+
+                    for (var spawn : STATIC_NPCS)
+                      NPCPlugin.get()
+                          .spawnNPC(storeStore, spawn.type, null, spawn.position, spawn.rotation);
 
                     synchronized (entities) {
                       entities.put(world.getWorldConfig().getUuid(), uuids);
@@ -316,7 +322,7 @@ public class PlantingYourRoots extends JavaPlugin {
       var dateable = roots.Dateables.computeIfAbsent(kind.Kind, _ -> new RootsComponent.Dateable());
       var stage = dateable.Stage;
 
-      var spawnsForStage = SPAWNS.get(kind.Kind);
+      var spawnsForStage = DATEABLE_SPAWNS.get(kind.Kind);
       if (spawnsForStage == null) continue;
 
       var newSpawn =
