@@ -31,6 +31,7 @@ import org.echoesfrombeyond.codechelper.annotation.Opt;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
+import org.echoesfrombeyond.dialoguelib.metadata.DialogueMetadata;
 import org.echoesfrombeyond.dialoguelib.metadata.IntegerMetadata;
 import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
 import org.jspecify.annotations.NullMarked;
@@ -76,21 +77,26 @@ public class CompareIntegerCondition extends MetadataAccessor implements ChoiceC
 
       If OtherMetadataKey is set, and it points to a metadata key that
       is also an integer, then the value of that other metadata will
-      be used as the right-hand side of the comparison operation.
+      be used as the right-hand side of the comparison operation. This
+      field will be ignored in that case.
       """)
   public int Value;
 
   @Doc(
       """
-      If set to true, this choice will display when the metadata value
-      is missing. If unspecified, defaults to false.
-
-      This is only considered for the first (left-hand side) metadata.
-      If OtherMetadataKey is non-null but the value does not exist,
-      the condition will always evaluate to false.
+      The value to use if the metadata pointed at by MetadataKey is
+      missing (null). Defaults to 0.
       """)
   @Opt
-  public boolean AbsentShouldDisplay;
+  public int DefaultMetadataValue;
+
+  @Doc(
+      """
+      The value to use if the metadata pointed at by
+      OtherMetadataKey is missing (null). Defaults to 0.
+      """)
+  @Opt
+  public int DefaultOtherMetadataValue;
 
   @Doc(
       """
@@ -121,28 +127,31 @@ public class CompareIntegerCondition extends MetadataAccessor implements ChoiceC
   @RunOnWorldThread
   public boolean shouldDisplay(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
     var value = getMetadata(activator, parent);
-    if (value == null) return AbsentShouldDisplay;
+    if (value == null) value = new IntegerMetadata(DefaultMetadataValue);
 
     if (!(value instanceof IntegerMetadata integerMetadata)) return false;
 
     var otherMetadataStoreKey = OtherMetadataStoreKey;
     var otherMetadataKey = OtherMetadataKey;
 
+    DialogueMetadata otherMetadata;
     OptionalInt otherValueOptional =
         otherMetadataKey == null
             ? OptionalInt.of(Value)
-            : (new MetadataAccessor() {
-                      {
-                        MetadataStoreKey = otherMetadataStoreKey;
-                        MetadataKey = otherMetadataKey;
-                      }
-                    }.getMetadata(activator, parent)
+            : ((otherMetadata =
+                        new MetadataAccessor() {
+                          {
+                            MetadataStoreKey = otherMetadataStoreKey;
+                            MetadataKey = otherMetadataKey;
+                          }
+                        }.getMetadata(activator, parent))
                     instanceof IntegerMetadata otherIntegerMetadata
                 ? OptionalInt.of(otherIntegerMetadata.Value)
-                : OptionalInt.empty());
+                : (otherMetadata == null
+                    ? OptionalInt.of(DefaultOtherMetadataValue)
+                    : OptionalInt.empty()));
 
-    // return false when the other metadata has its key specified but does not exist, or if it does
-    // exist and is the wrong type
+    // return false if the OtherMetadata is not an integer (and thus can't be compared)
     if (otherValueOptional.isEmpty()) return false;
 
     return Comparison.compare(integerMetadata.Value, otherValueOptional.getAsInt());
