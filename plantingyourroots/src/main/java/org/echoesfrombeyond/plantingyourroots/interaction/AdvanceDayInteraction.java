@@ -55,9 +55,11 @@ public class AdvanceDayInteraction extends SimpleInstantInteraction {
         buffer.ensureAndGetComponent(
             interactionContext.getEntity(), RootsComponent.getComponentType());
 
-    if (roots.Dateables.values().stream().noneMatch(dateable -> dateable.TalkedTo)) {
-      var ref = interactionContext.getEntity();
-      var player = buffer.getComponent(ref, Player.getComponentType());
+    if (PlantingYourRoots.SPAWNS.keySet().stream()
+        .noneMatch(
+            kind ->
+                roots.Dateables.getOrDefault(kind, PlantingYourRoots.DEFAULT_DATEABLE).TalkedTo)) {
+      var player = buffer.getComponent(interactionContext.getEntity(), Player.getComponentType());
       if (player == null) return;
 
       player.sendMessage(Message.raw("You haven't talked to anyone yet today!"));

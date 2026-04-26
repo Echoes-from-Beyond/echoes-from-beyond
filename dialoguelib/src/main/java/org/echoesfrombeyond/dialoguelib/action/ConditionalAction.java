@@ -26,6 +26,7 @@ import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.codechelper.annotation.Opt;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
@@ -49,6 +50,7 @@ public class ConditionalAction implements ChoiceAction {
       The ChoiceCondition. If absent, the condition is always
       considered to be met.
       """)
+  @Opt
   public @Nullable ChoiceCondition Condition;
 
   @Doc(
@@ -56,6 +58,7 @@ public class ConditionalAction implements ChoiceAction {
       ChoiceAction to execute if the condition is met. If absent,
       nothing will happen if the condition is met.
       """)
+  @Opt
   public @Nullable ChoiceAction IfMet;
 
   @Doc(
@@ -63,6 +66,7 @@ public class ConditionalAction implements ChoiceAction {
       ChoiceAction to execute if the condition is not met. If absent,
       nothing will happen if the condition is not met.
       """)
+  @Opt
   public @Nullable ChoiceAction IfNotMet;
 
   @Override

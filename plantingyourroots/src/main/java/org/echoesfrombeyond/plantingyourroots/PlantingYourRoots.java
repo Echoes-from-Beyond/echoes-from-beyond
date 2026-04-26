@@ -69,10 +69,11 @@ import org.jspecify.annotations.Nullable;
 public class PlantingYourRoots extends JavaPlugin {
   public static final String KWEEBDRASIL_GAMEPLAY_CONFIG_NAME = "Kweebdrasil";
 
-  private record Spawn(String type, Vector3d position, Vector3f rotation) {}
+  public record Spawn(String type, Vector3d position, Vector3f rotation) {}
 
   public static final RootsComponent.Dateable DEFAULT_DATEABLE = new RootsComponent.Dateable();
-  private static final Map<String, Int2ObjectMap<Spawn>> SPAWNS = new HashMap<>();
+  public static final Map<String, Int2ObjectMap<Spawn>> SPAWNS = new HashMap<>();
+
   private static @Nullable CodecResolver RESOLVER;
 
   static {
