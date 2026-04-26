@@ -41,7 +41,7 @@ public abstract class UIDialogueBase {
       #DialogueChoices. All dialogue choices will be dynamically
       appended to this group. It must also contain a group with the
       tag #DialogueLine. If left absent, defaults to
-      Cinematic_Dialogue.ui.
+      Classic_Dialogue.ui.
       """)
   @Opt
   public String UiPage;
@@ -52,7 +52,7 @@ public abstract class UIDialogueBase {
       The UI file must contain only a single top-level Button and a
       Label with the tag #DialogueLabel (the label may or may not be
       contained in the button). If unspecified, defaults to
-      Cinematic_Dialogue_Fragment.ui.
+      Classic_Dialogue_Fragment.ui.
       """)
   @Opt
   public String UiFragment;
