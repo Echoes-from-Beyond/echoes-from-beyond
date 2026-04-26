@@ -60,10 +60,6 @@ public class RootsComponent implements Component<EntityStore> {
     public int Stage;
     public boolean TalkedTo;
 
-    public Dateable() {
-      this.Stage = 1;
-    }
-
     @Override
     public Dateable clone() {
       try {

@@ -57,6 +57,7 @@ import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
 import org.echoesfrombeyond.plantingyourroots.condition.TalkedToCondition;
 import org.echoesfrombeyond.plantingyourroots.interaction.AdvanceDayInteraction;
 import org.echoesfrombeyond.plantingyourroots.interaction.TeleportToSpawnInteraction;
+import org.echoesfrombeyond.plantingyourroots.npc.BuilderRootsOpenDialogue;
 import org.echoesfrombeyond.plantingyourroots.system.CleanWorldSystem;
 import org.echoesfrombeyond.plantingyourroots.system.ManageInventorySystem;
 import org.echoesfrombeyond.plantingyourroots.system.PreventItemDropInKweebdrasilSystem;
@@ -70,7 +71,7 @@ public class PlantingYourRoots extends JavaPlugin {
 
   private record Spawn(String type, Vector3d position, Vector3f rotation) {}
 
-  private static final RootsComponent.Dateable DEFAULT_DATEABLE = new RootsComponent.Dateable();
+  public static final RootsComponent.Dateable DEFAULT_DATEABLE = new RootsComponent.Dateable();
   private static final Map<String, Int2ObjectMap<Spawn>> SPAWNS = new HashMap<>();
   private static @Nullable CodecResolver RESOLVER;
 
@@ -194,6 +195,8 @@ public class PlantingYourRoots extends JavaPlugin {
     getEntityStoreRegistry().registerSystem(new ManageInventorySystem());
 
     getCommandRegistry().registerCommand(new ReadyForLove());
+
+    NPCPlugin.get().registerCoreComponentType("RootsOpenDialogue", BuilderRootsOpenDialogue::new);
   }
 
   private static @Nullable UUID spawnDateable(
