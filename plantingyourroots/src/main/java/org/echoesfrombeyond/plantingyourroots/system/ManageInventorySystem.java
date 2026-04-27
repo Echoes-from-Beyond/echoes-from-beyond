@@ -61,7 +61,8 @@ public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
   }
 
   private static void addKweebdrasilItems(Holder<EntityStore> holder) {
-    var inventory = holder.ensureAndGetComponent(InventoryComponent.Hotbar.getComponentType()).getInventory();
+    var inventory =
+        holder.ensureAndGetComponent(InventoryComponent.Hotbar.getComponentType()).getInventory();
 
     inventory.addItemStack(new ItemStack("Kweebdrasil_Spawn", 1));
     inventory.addItemStack(new ItemStack("Kweebdrasil_Exit", 1));
