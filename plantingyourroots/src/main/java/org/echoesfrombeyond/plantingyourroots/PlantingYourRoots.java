@@ -342,6 +342,9 @@ public class PlantingYourRoots extends JavaPlugin {
 
       if (npc == null || kind == null || kind.Kind == null) continue;
 
+      var oldUuid = holder.getComponent(UUIDComponent.getComponentType());
+      if (oldUuid != null) spawnedEntities.remove(oldUuid.getUuid());
+
       var dateable = roots.Dateables.computeIfAbsent(kind.Kind, _ -> new RootsComponent.Dateable());
       var stage = dateable.Stage;
 

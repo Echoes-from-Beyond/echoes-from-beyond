@@ -47,10 +47,9 @@ public class ExitKweebdrasilInteraction extends SimpleInstantInteraction {
     var buffer = interactionContext.getCommandBuffer();
     if (buffer == null) return;
 
-    var plugin = PlantingYourRoots.get();
-    var world = buffer.getStore().getExternalData().getWorld();
     var ref = interactionContext.getEntity();
-    if (!plugin.isKweebdrasilInstance(world)) {
+    if (!PlantingYourRoots.get()
+        .isKweebdrasilInstance(buffer.getStore().getExternalData().getWorld())) {
       var player = buffer.getComponent(ref, Player.getComponentType());
       if (player != null)
         player.sendMessage(Message.raw("This item cannot be used outside of Kweebdrasil!"));
