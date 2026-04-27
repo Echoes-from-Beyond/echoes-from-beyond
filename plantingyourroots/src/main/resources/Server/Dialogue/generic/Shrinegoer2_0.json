@@ -11,6 +11,8 @@
       "Line": "How do you even, like, go without ever seeing your geat-grandseedlings? And great-great-grandseedlings?"
     }
   ],
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
   "AdvanceText": "Continue",
   "End": {
     "Type": "Standard",
