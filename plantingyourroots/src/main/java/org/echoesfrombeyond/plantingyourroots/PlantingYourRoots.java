@@ -109,6 +109,26 @@ public class PlantingYourRoots extends JavaPlugin {
 
     // unify all the NPCs into the same character
     DATEABLE_SPAWNS.put("French_Kweebec", frenchSpawns);
+
+    STATIC_NPCS.add(new Spawn("Gronk", new Vector3d(28.47, 188.0, 12.12), new Vector3f(0, 0, 0)));
+    STATIC_NPCS.add(
+        new Spawn("Councilor1", new Vector3d(31.39, 156.0, -14.7), new Vector3f(0, 0, 0)));
+    STATIC_NPCS.add(
+        new Spawn("Councilor2", new Vector3d(34.6, 156.0, -14.7), new Vector3f(0, 0, 0)));
+    STATIC_NPCS.add(
+        new Spawn("Councilor3", new Vector3d(23.63, 158.0, -12.63), new Vector3f(0, 0, 0)));
+    STATIC_NPCS.add(
+        new Spawn("Feran_Traveller", new Vector3d(29.54, 202.0, -18.23), new Vector3f(0, 0, 0)));
+    STATIC_NPCS.add(new Spawn("Merchant1", new Vector3d(25.8, 195.0, 8.74), new Vector3f(0, 0, 0)));
+    STATIC_NPCS.add(
+        new Spawn("Merchant2", new Vector3d(24.54, 202.0, 9.34), new Vector3f(0, 0, 0)));
+    STATIC_NPCS.add(
+        new Spawn("Receptionist", new Vector3d(150.46, 285.0, 11.69), new Vector3f(0, 0, 0)));
+    STATIC_NPCS.add(new Spawn("Sentry1", new Vector3d(-19.5, 149.0, 16.9), new Vector3f(0, 0, 0)));
+    STATIC_NPCS.add(
+        new Spawn("Shrinegoer1", new Vector3d(1.42, 151.0, -1.56), new Vector3f(0, 0, 0)));
+    STATIC_NPCS.add(
+        new Spawn("Shrinegoer2", new Vector3d(-5.27, 151.0, 4.45), new Vector3f(0, 0, 0)));
   }
 
   private static @Nullable PlantingYourRoots INSTANCE;
