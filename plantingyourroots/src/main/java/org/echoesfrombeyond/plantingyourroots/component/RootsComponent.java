@@ -29,7 +29,6 @@ import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.plantingyourroots.PlantingYourRoots;
-import org.echoesfrombeyond.plantingyourroots.diary.DiaryEntry;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -71,26 +70,24 @@ public class RootsComponent implements Component<EntityStore> {
   }
 
   public int Day;
-  public List<DiaryEntry> DiaryEntries;
   public Map<String, Dateable> Dateables;
   public @Nullable InventoryComponent[] OldInventory;
   public boolean HasOldInventory;
+  public boolean HasJoinedKweebdrasil;
 
   @SuppressWarnings("unused")
   public RootsComponent() {
     this.Day = 1;
-    this.DiaryEntries = new ArrayList<>();
     this.Dateables = new HashMap<>();
     this.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
     this.HasOldInventory = false;
+    this.HasJoinedKweebdrasil = false;
   }
 
   public RootsComponent(RootsComponent other) {
     this.Day = other.Day;
-    this.DiaryEntries = new ArrayList<>(other.DiaryEntries.size());
     this.Dateables = new HashMap<>(other.Dateables.size());
 
-    for (var otherEntry : other.DiaryEntries) this.DiaryEntries.add(otherEntry.clone());
     for (var otherEntry : other.Dateables.entrySet())
       this.Dateables.put(otherEntry.getKey(), otherEntry.getValue().clone());
     this.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
@@ -102,6 +99,7 @@ public class RootsComponent implements Component<EntityStore> {
               : (InventoryComponent) otherInventoryComponent.clone();
     }
     this.HasOldInventory = other.HasOldInventory;
+    this.HasJoinedKweebdrasil = other.HasJoinedKweebdrasil;
   }
 
   @Override

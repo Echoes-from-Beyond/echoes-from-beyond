@@ -48,7 +48,6 @@ import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
-import org.echoesfrombeyond.plantingyourroots.action.AppendDiaryEntry;
 import org.echoesfrombeyond.plantingyourroots.action.MarkTalkedTo;
 import org.echoesfrombeyond.plantingyourroots.command.ReadyForLove;
 import org.echoesfrombeyond.plantingyourroots.component.KindComponent;
@@ -179,7 +178,6 @@ public class PlantingYourRoots extends JavaPlugin {
             "ExitKweebdrasil", ExitKweebdrasilInteraction.class, ExitKweebdrasilInteraction.CODEC);
 
     getCodecRegistry(ChoiceAction.CODEC)
-        .register("AppendDiary", AppendDiaryEntry.class, AppendDiaryEntry.CODEC)
         .register("MarkTalkedTo", MarkTalkedTo.class, MarkTalkedTo.CODEC);
 
     getCodecRegistry(ChoiceCondition.CODEC)

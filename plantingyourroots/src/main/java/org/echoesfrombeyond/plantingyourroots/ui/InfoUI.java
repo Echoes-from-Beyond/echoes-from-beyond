@@ -29,15 +29,25 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class DiaryUI extends CustomUIPage {
-  public DiaryUI(PlayerRef playerRef) {
+public class InfoUI extends CustomUIPage {
+  private final String title;
+  private final String message;
+
+  public InfoUI(PlayerRef playerRef, String title, String message) {
     super(playerRef, CustomPageLifetime.CanDismiss);
+
+    this.title = title;
+    this.message = message;
   }
 
   @Override
   public void build(
-      Ref<EntityStore> player,
-      UICommandBuilder commandBuilder,
-      UIEventBuilder eventBuilder,
-      Store<EntityStore> store) {}
+      Ref<EntityStore> ref,
+      UICommandBuilder uiCommandBuilder,
+      UIEventBuilder uiEventBuilder,
+      Store<EntityStore> store) {
+    uiCommandBuilder.append("Info.ui");
+    uiCommandBuilder.set("#TitleLabel.Text", title);
+    uiCommandBuilder.set("#MessageLabel.Text", message);
+  }
 }
