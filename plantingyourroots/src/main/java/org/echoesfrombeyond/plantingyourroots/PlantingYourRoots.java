@@ -56,6 +56,7 @@ import org.echoesfrombeyond.plantingyourroots.component.KindComponent;
 import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
 import org.echoesfrombeyond.plantingyourroots.condition.TalkedToCondition;
 import org.echoesfrombeyond.plantingyourroots.interaction.AdvanceDayInteraction;
+import org.echoesfrombeyond.plantingyourroots.interaction.ExitKweebdrasilInteraction;
 import org.echoesfrombeyond.plantingyourroots.interaction.TeleportToSpawnInteraction;
 import org.echoesfrombeyond.plantingyourroots.npc.BuilderRootsOpenDialogue;
 import org.echoesfrombeyond.plantingyourroots.system.CleanWorldSystem;
@@ -174,7 +175,9 @@ public class PlantingYourRoots extends JavaPlugin {
     getCodecRegistry(Interaction.CODEC)
         .register("AdvanceDay", AdvanceDayInteraction.class, AdvanceDayInteraction.CODEC)
         .register(
-            "TeleportToSpawn", TeleportToSpawnInteraction.class, TeleportToSpawnInteraction.CODEC);
+            "TeleportToSpawn", TeleportToSpawnInteraction.class, TeleportToSpawnInteraction.CODEC)
+        .register(
+            "ExitKweebdrasil", ExitKweebdrasilInteraction.class, ExitKweebdrasilInteraction.CODEC);
 
     getCodecRegistry(ChoiceAction.CODEC)
         .register("AppendDiary", AppendDiaryEntry.class, AppendDiaryEntry.CODEC)

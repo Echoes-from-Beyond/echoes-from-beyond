@@ -8,5 +8,14 @@
   "MaxStack": 1,
   "Categories": [
     "Items.Example"
-  ]
+  ],
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "ExitKweebdrasil"
+        }
+      ]
+    }
+  }
 }
