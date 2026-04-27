@@ -17,7 +17,7 @@
   ],
   "Website": null,
   "Main": "org.echoesfrombeyond.echoesfrombeyond.Plugin",
-  "ServerVersion": "*",
+  "ServerVersion": "2026.03.26-89796e57b",
   "IncludesAssetPack": true,
   "OptionalDependencies": {
     "Buuz135:MultipleHUD": "^1.0.3"
