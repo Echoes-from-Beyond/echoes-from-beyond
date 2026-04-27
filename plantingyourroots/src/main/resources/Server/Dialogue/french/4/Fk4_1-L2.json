@@ -19,8 +19,8 @@
       "Id": "Standard",
       "Text": "???"
     },
-    "UiPage": "Classic_Dialogue.ui",
-    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
     "Sprite": "sprites/Placeholder.png",
     "Choices": [
       {

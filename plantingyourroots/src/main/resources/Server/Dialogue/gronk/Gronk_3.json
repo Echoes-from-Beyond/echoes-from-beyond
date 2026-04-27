@@ -15,8 +15,8 @@
     }
   ],
   "AdvanceText": "Continue",
-  "UiPage": "Classic_Dialogue.ui",
-  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
   "End": {
     "Type": "Standard",
     "Name": {
@@ -27,8 +27,8 @@
       "Id": "Standard",
       "Text": "The Trork's assorted treasures are quite shiny and appealing, though unfortunately your assignment on Kweebdrasil did not include the provision of any gold or commodities for barter."
     },
-    "UiPage": "Classic_Dialogue.ui",
-    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
     "Choices": [
       {
         "Id": "Standard",

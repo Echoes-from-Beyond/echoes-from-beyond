@@ -15,8 +15,8 @@
     }
   ],
   "AdvanceText": "Continue",
-  "UiPage": "Classic_Dialogue.ui",
-  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
   "End": {
     "Type": "Standard",
     "Name": {
@@ -27,8 +27,8 @@
       "Id": "Standard",
       "Text": "At least someone recognizes the precarious nature of Kweebec architecture. You had almost managed to convince yourself that Kweebdrasil's market merely appeared to be a total deathtrap."
     },
-    "UiPage": "Classic_Dialogue.ui",
-    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
     "Choices": [
       {
         "Id": "Standard",

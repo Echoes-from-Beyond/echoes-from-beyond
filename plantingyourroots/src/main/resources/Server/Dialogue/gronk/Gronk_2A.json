@@ -43,8 +43,8 @@
     }
   ],
   "AdvanceText": "Continue",
-  "UiPage": "Classic_Dialogue.ui",
-  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
   "End": {
     "Type": "Standard",
     "Name": {
@@ -55,8 +55,8 @@
       "Id": "Standard",
       "Text": "Gronk continues to rant for a while about his mistreatment at the hands (branches?) of Kweebecs."
     },
-    "UiPage": "Classic_Dialogue.ui",
-    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
     "Choices": [
       {
         "Id": "Standard",

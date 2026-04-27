@@ -8,8 +8,8 @@
     "Id": "Standard",
     "Text": "Ahh. Gronk understand. At least talk was good. Visitors not come often! Gronk would fall asleep if not for fear of shoddy market falling down!"
   },
-  "UiPage": "Classic_Dialogue.ui",
-  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
   "Choices": [
     {
       "Id": "Standard",

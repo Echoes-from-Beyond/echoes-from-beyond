@@ -38,8 +38,8 @@
       "Id": "Standard",
       "Text": "Narrator"
     },
-    "UiPage": "Classic_Dialogue.ui",
-    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
     "Choices": [
       {
         "Id": "Standard",

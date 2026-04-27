@@ -7,12 +7,12 @@
     }
   ],
   "AdvanceText": "Continue",
-  "UiPage": "Classic_Dialogue.ui",
-  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
   "End": {
     "Type": "Standard",
-    "UiPage": "Classic_Dialogue.ui",
-    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
     "Name": {
       "Id": "Standard",
       "Text": "Gronk"

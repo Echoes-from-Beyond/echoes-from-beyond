@@ -15,8 +15,8 @@
     }
   ],
   "AdvanceText": "Continue",
-  "UiPage": "Classic_Dialogue.ui",
-  "UiFragment": "Classic_Dialogue_Fragment.ui",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
   "End": {
     "Type": "Standard",
     "Name": {
@@ -27,8 +27,8 @@
       "Id": "Standard",
       "Text": "Tall tree home very dangerous for all outsiders! Many fall and running-trees not care."
     },
-    "UiPage": "Classic_Dialogue.ui",
-    "UiFragment": "Classic_Dialogue_Fragment.ui",
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
     "Choices": [
       {
         "Id": "Standard",
