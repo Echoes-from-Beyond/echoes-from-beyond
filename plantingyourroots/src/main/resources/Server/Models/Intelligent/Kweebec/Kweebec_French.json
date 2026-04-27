@@ -25,42 +25,6 @@
     {
       "Model": "NPC/Intelligent/Kweebec_Rootling/Kweebec_Rootling_Eyes.blockymodel",
       "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Eyes.png"
-    },
-    {
-      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Pant_Thigh.blockymodel",
-      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
-    },
-    {
-      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Pants_Waist.blockymodel",
-      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
-    },
-    {
-      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Scarf.blockymodel",
-      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
-    },
-    {
-      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.blockymodel",
-      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
-    },
-    {
-      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt_Shoulder_L.blockymodel",
-      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
-    },
-    {
-      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt_Shoulder_R.blockymodel",
-      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
-    },
-    {
-      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirtsleeve_L.blockymodel",
-      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
-    },
-    {
-      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirtsleeve_R.blockymodel",
-      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
-    },
-    {
-      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Suspenders.blockymodel",
-      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
     }
   ],
   "AnimationSets": {

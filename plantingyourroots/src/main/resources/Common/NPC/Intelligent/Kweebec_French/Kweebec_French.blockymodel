@@ -72,6 +72,57 @@
           "children": [
             {
               "id": "3",
+              "name": "Pants-Waist",
+              "position": {"x": 0, "y": 15, "z": -4.2941},
+              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+              "shape": {
+                "type": "box",
+                "offset": {"x": 0, "y": -15.5, "z": 4},
+                "stretch": {"x": 1, "y": 1, "z": 1},
+                "settings": {
+                  "isPiece": false,
+                  "size": {"x": 24, "y": 15, "z": 18}
+                },
+                "textureLayout": {
+                  "back": {
+                    "offset": {"x": 0, "y": 110},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "right": {
+                    "offset": {"x": 0, "y": 110},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "front": {
+                    "offset": {"x": 0, "y": 110},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "left": {
+                    "offset": {"x": 0, "y": 110},
+                    "mirror": {"x": false, "y": false},
+                    "angle": 0
+                  },
+                  "top": {
+                    "offset": {"x": 24, "y": 128},
+                    "mirror": {"x": true, "y": true},
+                    "angle": 0
+                  },
+                  "bottom": {
+                    "offset": {"x": 24, "y": 110},
+                    "mirror": {"x": true, "y": false},
+                    "angle": 0
+                  }
+                },
+                "unwrapMode": "custom",
+                "visible": true,
+                "doubleSided": false,
+                "shadingMode": "flat"
+              }
+            },
+            {
+              "id": "4",
               "name": "Belly",
               "position": {"x": 0, "y": 6, "z": -10},
               "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -122,7 +173,7 @@
               },
               "children": [
                 {
-                  "id": "4",
+                  "id": "5",
                   "name": "Chest",
                   "position": {"x": 0, "y": 5, "z": -4.2941},
                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -173,7 +224,7 @@
                   },
                   "children": [
                     {
-                      "id": "5",
+                      "id": "6",
                       "name": "Head",
                       "position": {"x": 0, "y": 12.78579, "z": -2.25882},
                       "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -224,7 +275,7 @@
                       },
                       "children": [
                         {
-                          "id": "6",
+                          "id": "7",
                           "name": "R-Eyebrow-Attachment",
                           "position": {"x": -8, "y": 6, "z": 15.2},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -243,7 +294,7 @@
                           }
                         },
                         {
-                          "id": "7",
+                          "id": "8",
                           "name": "L-Eyebrow-Attachment",
                           "position": {"x": 8, "y": 6, "z": 15.2},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -262,7 +313,7 @@
                           }
                         },
                         {
-                          "id": "8",
+                          "id": "9",
                           "name": "R-Eye-Attachment",
                           "position": {"x": -7, "y": -4, "z": 14.4},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -281,7 +332,7 @@
                           }
                         },
                         {
-                          "id": "9",
+                          "id": "10",
                           "name": "L-Eye-Attachment",
                           "position": {"x": 7, "y": -4, "z": 14.4},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -300,7 +351,7 @@
                           }
                         },
                         {
-                          "id": "10",
+                          "id": "11",
                           "name": "Mouth-Attachment",
                           "position": {"x": 0, "y": -10, "z": 15.1},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -319,7 +370,7 @@
                           }
                         },
                         {
-                          "id": "11",
+                          "id": "12",
                           "name": "L-Eyelid",
                           "position": {"x": 8, "y": 2, "z": 14.9},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -346,7 +397,7 @@
                           }
                         },
                         {
-                          "id": "12",
+                          "id": "13",
                           "name": "R-Eyelid",
                           "position": {"x": -8, "y": 2, "z": 14.9},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -373,7 +424,7 @@
                           }
                         },
                         {
-                          "id": "13",
+                          "id": "14",
                           "name": "L-Eyelid-Bot",
                           "position": {"x": 8, "y": -8, "z": 14.8},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -400,7 +451,7 @@
                           }
                         },
                         {
-                          "id": "14",
+                          "id": "15",
                           "name": "R-Eyelid-Bot",
                           "position": {"x": -8, "y": -8, "z": 14.8},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -427,7 +478,7 @@
                           }
                         },
                         {
-                          "id": "15",
+                          "id": "16",
                           "name": "R-Ear",
                           "position": {"x": -13.06031, "y": -6.66964, "z": -1.54398},
                           "orientation": {"x": 0.12854, "y": -0.02267, "z": 0.17216, "w": 0.97638},
@@ -473,7 +524,7 @@
                           },
                           "children": [
                             {
-                              "id": "16",
+                              "id": "17",
                               "name": "R-Ear2",
                               "position": {"x": -7.49123, "y": 7.74939, "z": 1.82047},
                               "orientation": {"x": 0, "y": 0, "z": -0.08716, "w": 0.99619},
@@ -500,7 +551,7 @@
                               },
                               "children": [
                                 {
-                                  "id": "17",
+                                  "id": "18",
                                   "name": "R-Ear2-Back",
                                   "position": {"x": 4, "y": 0, "z": -0.01},
                                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -529,7 +580,7 @@
                               ]
                             },
                             {
-                              "id": "18",
+                              "id": "19",
                               "name": "R-Ear-Protection",
                               "position": {"x": 2.0037, "y": 8.37623, "z": 1},
                               "orientation": {"x": 0, "y": 0, "z": 0.08716, "w": 0.99619},
@@ -580,7 +631,7 @@
                               }
                             },
                             {
-                              "id": "19",
+                              "id": "20",
                               "name": "R-Ear-Protection2",
                               "position": {"x": -9.68256, "y": 7.54458, "z": 0.77328},
                               "orientation": {"x": 0.00157, "y": 0.03603, "z": -0.04359, "w": 0.9984},
@@ -633,7 +684,7 @@
                           ]
                         },
                         {
-                          "id": "20",
+                          "id": "21",
                           "name": "Head-Top",
                           "position": {"x": 0, "y": 9.10603, "z": 15.04046},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -652,7 +703,7 @@
                           },
                           "children": [
                             {
-                              "id": "21",
+                              "id": "22",
                               "name": "Head-Top2",
                               "position": {"x": -0.67954, "y": 7, "z": 0},
                               "orientation": {"x": -0.30071, "y": 0, "z": 0, "w": 0.95372},
@@ -671,7 +722,7 @@
                               }
                             },
                             {
-                              "id": "22",
+                              "id": "23",
                               "name": "Head-Top3",
                               "position": {"x": 0.0232, "y": 0.72412, "z": -3.4693},
                               "orientation": {"x": -0.20219, "y": -0.01544, "z": -0.07458, "w": 0.97638},
@@ -692,7 +743,7 @@
                           ]
                         },
                         {
-                          "id": "23",
+                          "id": "24",
                           "name": "R-Head-Top",
                           "position": {"x": -16, "y": 15, "z": 0},
                           "orientation": {"x": 0.12279, "y": -0.69636, "z": 0.12279, "w": 0.69636},
@@ -711,7 +762,7 @@
                           }
                         },
                         {
-                          "id": "24",
+                          "id": "25",
                           "name": "L-Ear",
                           "position": {"x": 13.06031, "y": -6.66964, "z": -1.54398},
                           "orientation": {"x": 0.12854, "y": 0.02267, "z": -0.17216, "w": 0.97638},
@@ -757,7 +808,7 @@
                           },
                           "children": [
                             {
-                              "id": "25",
+                              "id": "26",
                               "name": "L-Ear2",
                               "position": {"x": 7.49123, "y": 7.74939, "z": 1.82047},
                               "orientation": {"x": 0, "y": 0, "z": 0.08716, "w": 0.99619},
@@ -784,7 +835,7 @@
                               },
                               "children": [
                                 {
-                                  "id": "26",
+                                  "id": "27",
                                   "name": "L-Ear2-Back",
                                   "position": {"x": -4, "y": 0, "z": -0.01},
                                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -813,7 +864,7 @@
                               ]
                             },
                             {
-                              "id": "27",
+                              "id": "28",
                               "name": "L-Ear-Protection",
                               "position": {"x": -2.00369, "y": 8.37623, "z": 1},
                               "orientation": {"x": 0, "y": 0, "z": -0.08716, "w": 0.99619},
@@ -864,7 +915,7 @@
                               }
                             },
                             {
-                              "id": "28",
+                              "id": "29",
                               "name": "L-Ear-Protection2",
                               "position": {"x": 9.68256, "y": 7.54458, "z": 0.77328},
                               "orientation": {"x": 0.00157, "y": -0.03603, "z": 0.04359, "w": 0.9984},
@@ -917,7 +968,7 @@
                           ]
                         },
                         {
-                          "id": "29",
+                          "id": "30",
                           "name": "L-Head-Top",
                           "position": {"x": 16, "y": 15, "z": 0},
                           "orientation": {"x": 0.12279, "y": 0.69636, "z": -0.12279, "w": 0.69636},
@@ -936,7 +987,7 @@
                           }
                         },
                         {
-                          "id": "30",
+                          "id": "31",
                           "name": "Beret",
                           "position": {"x": 0, "y": -16, "z": -2},
                           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -955,7 +1006,7 @@
                           },
                           "children": [
                             {
-                              "id": "31",
+                              "id": "32",
                               "name": "beret--C1",
                               "position": {"x": 15, "y": 64, "z": 25},
                               "orientation": {"x": 0, "y": 0, "z": 0.08716, "w": 0.99619},
@@ -1007,7 +1058,7 @@
                               }
                             },
                             {
-                              "id": "32",
+                              "id": "33",
                               "name": "weird_thing--C2",
                               "position": {"x": -2, "y": 34, "z": -1},
                               "orientation": {"x": 0, "y": 0, "z": 0.10887, "w": 0.99406},
@@ -1063,7 +1114,7 @@
                       ]
                     },
                     {
-                      "id": "33",
+                      "id": "34",
                       "name": "Neck",
                       "position": {"x": 0, "y": 5.15587, "z": -1.00001},
                       "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -1101,10 +1152,121 @@
                         "visible": true,
                         "doubleSided": false,
                         "shadingMode": "flat"
-                      }
+                      },
+                      "children": [
+                        {
+                          "id": "35",
+                          "name": "Scarf",
+                          "position": {"x": 0, "y": -6, "z": -0.00001},
+                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                          "shape": {
+                            "type": "box",
+                            "offset": {"x": 0, "y": 1, "z": 0},
+                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "settings": {
+                              "isPiece": false,
+                              "size": {"x": 16, "y": 16, "z": 16}
+                            },
+                            "textureLayout": {
+                              "back": {
+                                "offset": {"x": 93, "y": 128},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "right": {
+                                "offset": {"x": 77, "y": 128},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "front": {
+                                "offset": {"x": 125, "y": 128},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "left": {
+                                "offset": {"x": 109, "y": 128},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "top": {
+                                "offset": {"x": 109, "y": 128},
+                                "mirror": {"x": true, "y": true},
+                                "angle": 0
+                              },
+                              "bottom": {
+                                "offset": {"x": 125, "y": 112},
+                                "mirror": {"x": true, "y": false},
+                                "angle": 0
+                              }
+                            },
+                            "unwrapMode": "custom",
+                            "visible": true,
+                            "doubleSided": false,
+                            "shadingMode": "flat"
+                          },
+                          "children": [
+                            {
+                              "id": "36",
+                              "name": "Scarf-End-1--C1",
+                              "position": {"x": 10, "y": 4.84413, "z": 10.2941},
+                              "orientation": {"x": -0.49703, "y": 0.03723, "z": 0.1023, "w": 0.86088},
+                              "shape": {
+                                "type": "quad",
+                                "offset": {"x": 0, "y": 2, "z": 0},
+                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                "settings": {
+                                  "isPiece": false,
+                                  "size": {"x": 8, "y": 12},
+                                  "normal": "+Z",
+                                  "isStaticBox": true
+                                },
+                                "textureLayout": {
+                                  "front": {
+                                    "offset": {"x": 152, "y": 138},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  }
+                                },
+                                "unwrapMode": "custom",
+                                "visible": true,
+                                "doubleSided": true,
+                                "shadingMode": "flat"
+                              }
+                            },
+                            {
+                              "id": "37",
+                              "name": "Scarf-End-2--C2",
+                              "position": {"x": 12, "y": 0.84413, "z": 13.2941},
+                              "orientation": {"x": -0.21515, "y": 0.06627, "z": 0.08637, "w": 0.97049},
+                              "shape": {
+                                "type": "quad",
+                                "offset": {"x": 1, "y": 1, "z": 0},
+                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                "settings": {
+                                  "isPiece": false,
+                                  "size": {"x": 4, "y": 6},
+                                  "normal": "+Z",
+                                  "isStaticBox": true
+                                },
+                                "textureLayout": {
+                                  "front": {
+                                    "offset": {"x": 144, "y": 138},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  }
+                                },
+                                "unwrapMode": "custom",
+                                "visible": true,
+                                "doubleSided": true,
+                                "shadingMode": "flat"
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
-                      "id": "34",
+                      "id": "38",
                       "name": "R-Shoulder",
                       "position": {"x": -11, "y": 5.5, "z": -1.00001},
                       "orientation": {"x": 0, "y": 0, "z": -0.17365, "w": 0.98481},
@@ -1123,7 +1285,7 @@
                       },
                       "children": [
                         {
-                          "id": "35",
+                          "id": "39",
                           "name": "R-Arm",
                           "position": {"x": -2.74311, "y": -6.09374, "z": 0.36734},
                           "orientation": {"x": 0.02181, "y": 0, "z": 0, "w": 0.99976},
@@ -1174,7 +1336,7 @@
                           },
                           "children": [
                             {
-                              "id": "36",
+                              "id": "40",
                               "name": "R-Forearm",
                               "position": {"x": -1, "y": -10.817, "z": -1.011},
                               "orientation": {"x": -0.04362, "y": 0, "z": 0, "w": 0.99905},
@@ -1225,7 +1387,7 @@
                               },
                               "children": [
                                 {
-                                  "id": "37",
+                                  "id": "41",
                                   "name": "R-Hand",
                                   "position": {"x": -0.5, "y": -11, "z": 0.50001},
                                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -1276,7 +1438,7 @@
                                   },
                                   "children": [
                                     {
-                                      "id": "38",
+                                      "id": "42",
                                       "name": "R-Attachment",
                                       "position": {"x": 0, "y": 0, "z": 0},
                                       "orientation": {"x": 0.70711, "y": 0, "z": 0, "w": 0.70711},
@@ -1297,7 +1459,7 @@
                                   ]
                                 },
                                 {
-                                  "id": "39",
+                                  "id": "43",
                                   "name": "R-Arm-Bark",
                                   "position": {"x": -3.48366, "y": 13, "z": 0.5},
                                   "orientation": {"x": 0, "y": -0.70711, "z": 0, "w": 0.70711},
@@ -1316,7 +1478,7 @@
                                   }
                                 },
                                 {
-                                  "id": "40",
+                                  "id": "44",
                                   "name": "R-Plates",
                                   "position": {"x": -5.74882, "y": -4.24483, "z": 1.68049},
                                   "orientation": {"x": 0.07996, "y": 0.0141, "z": 0.17307, "w": 0.98156},
@@ -1335,7 +1497,7 @@
                                   }
                                 },
                                 {
-                                  "id": "41",
+                                  "id": "45",
                                   "name": "R-Plates2",
                                   "position": {"x": -5.77456, "y": 7.33045, "z": -3.7187},
                                   "orientation": {"x": -0.14984, "y": 0.06743, "z": 0.15874, "w": 0.97355},
@@ -1352,11 +1514,62 @@
                                     "doubleSided": false,
                                     "shadingMode": "flat"
                                   }
+                                },
+                                {
+                                  "id": "46",
+                                  "name": "R-Shirt",
+                                  "position": {"x": -0.5, "y": 10, "z": -0.5},
+                                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                  "shape": {
+                                    "type": "box",
+                                    "offset": {"x": 0.5, "y": -13, "z": 0.5},
+                                    "stretch": {"x": 1, "y": 1, "z": 1},
+                                    "settings": {
+                                      "isPiece": false,
+                                      "size": {"x": 9, "y": 20, "z": 11}
+                                    },
+                                    "textureLayout": {
+                                      "back": {
+                                        "offset": {"x": 12, "y": 73},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "right": {
+                                        "offset": {"x": 1, "y": 73},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "front": {
+                                        "offset": {"x": 32, "y": 73},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "left": {
+                                        "offset": {"x": 21, "y": 73},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "top": {
+                                        "offset": {"x": 21, "y": 73},
+                                        "mirror": {"x": true, "y": true},
+                                        "angle": 0
+                                      },
+                                      "bottom": {
+                                        "offset": {"x": 30, "y": 62},
+                                        "mirror": {"x": true, "y": false},
+                                        "angle": 0
+                                      }
+                                    },
+                                    "unwrapMode": "custom",
+                                    "visible": true,
+                                    "doubleSided": false,
+                                    "shadingMode": "flat"
+                                  }
                                 }
                               ]
                             },
                             {
-                              "id": "42",
+                              "id": "47",
                               "name": "R-ShoulderPlate",
                               "position": {"x": 0.23205, "y": 15.79423, "z": 0},
                               "orientation": {"x": 0, "y": 0, "z": -0.25882, "w": 0.96593},
@@ -1373,13 +1586,64 @@
                                 "doubleSided": false,
                                 "shadingMode": "flat"
                               }
+                            },
+                            {
+                              "id": "48",
+                              "name": "R-Shirtsleeve",
+                              "position": {"x": 3.48622, "y": 7, "z": 5},
+                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                              "shape": {
+                                "type": "box",
+                                "offset": {"x": -3.5, "y": -7, "z": -5},
+                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                "settings": {
+                                  "isPiece": false,
+                                  "size": {"x": 11, "y": 32, "z": 12}
+                                },
+                                "textureLayout": {
+                                  "back": {
+                                    "offset": {"x": 33, "y": 61},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "right": {
+                                    "offset": {"x": 13, "y": 61},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "front": {
+                                    "offset": {"x": 24, "y": 61},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "left": {
+                                    "offset": {"x": 1, "y": 61},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "top": {
+                                    "offset": {"x": 0, "y": 61},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "bottom": {
+                                    "offset": {"x": 100, "y": 176},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  }
+                                },
+                                "unwrapMode": "custom",
+                                "visible": true,
+                                "doubleSided": false,
+                                "shadingMode": "flat"
+                              }
                             }
                           ]
                         }
                       ]
                     },
                     {
-                      "id": "43",
+                      "id": "49",
                       "name": "L-Shoulder",
                       "position": {"x": 11, "y": 5.5, "z": -1.00001},
                       "orientation": {"x": 0, "y": 0, "z": 0.17365, "w": 0.98481},
@@ -1398,7 +1662,7 @@
                       },
                       "children": [
                         {
-                          "id": "44",
+                          "id": "50",
                           "name": "L-Arm",
                           "position": {"x": 2.74311, "y": -6.09374, "z": 0.36734},
                           "orientation": {"x": 0.02181, "y": 0, "z": 0, "w": 0.99976},
@@ -1449,7 +1713,7 @@
                           },
                           "children": [
                             {
-                              "id": "45",
+                              "id": "51",
                               "name": "L-Forearm",
                               "position": {"x": 1, "y": -10.817, "z": -1.011},
                               "orientation": {"x": -0.04362, "y": 0, "z": 0, "w": 0.99905},
@@ -1500,7 +1764,7 @@
                               },
                               "children": [
                                 {
-                                  "id": "46",
+                                  "id": "52",
                                   "name": "L-Hand",
                                   "position": {"x": 0, "y": -11, "z": 0.00001},
                                   "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
@@ -1551,7 +1815,7 @@
                                   },
                                   "children": [
                                     {
-                                      "id": "47",
+                                      "id": "53",
                                       "name": "L-Attachment",
                                       "position": {"x": 0, "y": 0, "z": 0},
                                       "orientation": {"x": 0.70711, "y": 0, "z": 0, "w": 0.70711},
@@ -1572,7 +1836,7 @@
                                   ]
                                 },
                                 {
-                                  "id": "48",
+                                  "id": "54",
                                   "name": "L-Arm-Bark",
                                   "position": {"x": 2.98366, "y": 13, "z": 0},
                                   "orientation": {"x": 0, "y": 0.70711, "z": 0, "w": 0.70711},
@@ -1591,7 +1855,7 @@
                                   }
                                 },
                                 {
-                                  "id": "49",
+                                  "id": "55",
                                   "name": "L-Plates",
                                   "position": {"x": 5.24882, "y": -4.24483, "z": 1.18049},
                                   "orientation": {"x": 0.07996, "y": -0.0141, "z": -0.17307, "w": 0.98156},
@@ -1608,10 +1872,378 @@
                                     "doubleSided": false,
                                     "shadingMode": "flat"
                                   }
+                                },
+                                {
+                                  "id": "56",
+                                  "name": "L-Shirt",
+                                  "position": {"x": -0.48622, "y": 10, "z": -1},
+                                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                                  "shape": {
+                                    "type": "box",
+                                    "offset": {"x": 0, "y": -13, "z": 0.5},
+                                    "stretch": {"x": 1, "y": 1, "z": 1},
+                                    "settings": {
+                                      "isPiece": false,
+                                      "size": {"x": 10, "y": 20, "z": 11}
+                                    },
+                                    "textureLayout": {
+                                      "back": {
+                                        "offset": {"x": 11, "y": 74},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "right": {
+                                        "offset": {"x": 0, "y": 74},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "front": {
+                                        "offset": {"x": 32, "y": 74},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "left": {
+                                        "offset": {"x": 21, "y": 74},
+                                        "mirror": {"x": false, "y": false},
+                                        "angle": 0
+                                      },
+                                      "top": {
+                                        "offset": {"x": 21, "y": 74},
+                                        "mirror": {"x": true, "y": true},
+                                        "angle": 0
+                                      },
+                                      "bottom": {
+                                        "offset": {"x": 31, "y": 63},
+                                        "mirror": {"x": true, "y": false},
+                                        "angle": 0
+                                      }
+                                    },
+                                    "unwrapMode": "custom",
+                                    "visible": true,
+                                    "doubleSided": false,
+                                    "shadingMode": "flat"
+                                  }
                                 }
                               ]
+                            },
+                            {
+                              "id": "57",
+                              "name": "L-Shirtsleeve",
+                              "position": {"x": 4, "y": 7, "z": 5},
+                              "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                              "shape": {
+                                "type": "box",
+                                "offset": {"x": -3.5, "y": -7, "z": -5},
+                                "stretch": {"x": 1, "y": 1, "z": 1},
+                                "settings": {
+                                  "isPiece": false,
+                                  "size": {"x": 11, "y": 32, "z": 12}
+                                },
+                                "textureLayout": {
+                                  "back": {
+                                    "offset": {"x": 33, "y": 61},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "right": {
+                                    "offset": {"x": 13, "y": 61},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "front": {
+                                    "offset": {"x": 24, "y": 61},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "left": {
+                                    "offset": {"x": 1, "y": 61},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "top": {
+                                    "offset": {"x": 0, "y": 61},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  },
+                                  "bottom": {
+                                    "offset": {"x": 99, "y": 179},
+                                    "mirror": {"x": false, "y": false},
+                                    "angle": 0
+                                  }
+                                },
+                                "unwrapMode": "custom",
+                                "visible": true,
+                                "doubleSided": false,
+                                "shadingMode": "flat"
+                              }
                             }
                           ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "58",
+                      "name": "Shirt",
+                      "position": {"x": 0, "y": -11, "z": -4.00001},
+                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                      "shape": {
+                        "type": "quad",
+                        "offset": {"x": 0, "y": 6, "z": 13.2941},
+                        "stretch": {"x": 1, "y": 1, "z": 1},
+                        "settings": {
+                          "isPiece": false,
+                          "size": {"x": 24, "y": 28},
+                          "normal": "+Z"
+                        },
+                        "textureLayout": {
+                          "front": {
+                            "offset": {"x": 0, "y": 61},
+                            "mirror": {"x": false, "y": false},
+                            "angle": 0
+                          }
+                        },
+                        "unwrapMode": "custom",
+                        "visible": true,
+                        "doubleSided": true,
+                        "shadingMode": "flat"
+                      },
+                      "children": [
+                        {
+                          "id": "59",
+                          "name": "Shirt-Back--C1",
+                          "position": {"x": 0, "y": -14, "z": -19},
+                          "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                          "shape": {
+                            "type": "quad",
+                            "offset": {"x": 0, "y": 14, "z": 0},
+                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "settings": {
+                              "isPiece": false,
+                              "size": {"x": 24, "y": 28},
+                              "normal": "+Z",
+                              "isStaticBox": true
+                            },
+                            "textureLayout": {
+                              "front": {
+                                "offset": {"x": 0, "y": 61},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              }
+                            },
+                            "unwrapMode": "custom",
+                            "visible": true,
+                            "doubleSided": true,
+                            "shadingMode": "flat"
+                          }
+                        },
+                        {
+                          "id": "60",
+                          "name": "R-Shirt-Side--C2",
+                          "position": {"x": -12, "y": -11, "z": -9},
+                          "orientation": {"x": 0, "y": 0.70711, "z": 0, "w": 0.70711},
+                          "shape": {
+                            "type": "quad",
+                            "offset": {"x": 0.5, "y": 11, "z": 0},
+                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "settings": {
+                              "isPiece": false,
+                              "size": {"x": 19, "y": 28},
+                              "normal": "+Z",
+                              "isStaticBox": true
+                            },
+                            "textureLayout": {
+                              "front": {
+                                "offset": {"x": 23, "y": 0},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              }
+                            },
+                            "unwrapMode": "custom",
+                            "visible": true,
+                            "doubleSided": true,
+                            "shadingMode": "flat"
+                          }
+                        },
+                        {
+                          "id": "61",
+                          "name": "L-Shirt-Side--C3",
+                          "position": {"x": 12, "y": -11, "z": -9},
+                          "orientation": {"x": 0, "y": 0.70711, "z": 0, "w": 0.70711},
+                          "shape": {
+                            "type": "quad",
+                            "offset": {"x": 0.5, "y": 11, "z": 0},
+                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "settings": {
+                              "isPiece": false,
+                              "size": {"x": 19, "y": 28},
+                              "normal": "+Z",
+                              "isStaticBox": true
+                            },
+                            "textureLayout": {
+                              "front": {
+                                "offset": {"x": 24, "y": 61},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              }
+                            },
+                            "unwrapMode": "custom",
+                            "visible": true,
+                            "doubleSided": true,
+                            "shadingMode": "flat"
+                          }
+                        },
+                        {
+                          "id": "62",
+                          "name": "Shirt-Top--C4",
+                          "position": {"x": 9, "y": 14, "z": -9},
+                          "orientation": {"x": -0.70711, "y": 0, "z": 0, "w": 0.70711},
+                          "shape": {
+                            "type": "quad",
+                            "offset": {"x": -9, "y": 0.5, "z": 0},
+                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "settings": {
+                              "isPiece": false,
+                              "size": {"x": 24, "y": 19},
+                              "normal": "+Z",
+                              "isStaticBox": true
+                            },
+                            "textureLayout": {
+                              "front": {
+                                "offset": {"x": 1, "y": 63},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              }
+                            },
+                            "unwrapMode": "custom",
+                            "visible": true,
+                            "doubleSided": true,
+                            "shadingMode": "flat"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "63",
+                      "name": "Suspenders",
+                      "position": {"x": 4, "y": -17, "z": 8.99999},
+                      "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                      "shape": {
+                        "type": "none",
+                        "offset": {"x": 0, "y": 0, "z": 0},
+                        "stretch": {"x": 1, "y": 1, "z": 1},
+                        "settings": {
+                          "isPiece": false
+                        },
+                        "textureLayout": {},
+                        "unwrapMode": "custom",
+                        "visible": true,
+                        "doubleSided": false,
+                        "shadingMode": "flat"
+                      },
+                      "children": [
+                        {
+                          "id": "64",
+                          "name": "Suspender-L--C1",
+                          "position": {"x": 0, "y": -2.5, "z": -9.5},
+                          "orientation": {"x": 0, "y": 0, "z": -0.0654, "w": 0.99786},
+                          "shape": {
+                            "type": "box",
+                            "offset": {"x": 0, "y": 14.5, "z": 0},
+                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "settings": {
+                              "isPiece": false,
+                              "size": {"x": 2, "y": 30, "z": 21},
+                              "isStaticBox": true
+                            },
+                            "textureLayout": {
+                              "back": {
+                                "offset": {"x": 166, "y": 162},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "right": {
+                                "offset": {"x": 145, "y": 162},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "front": {
+                                "offset": {"x": 189, "y": 162},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "left": {
+                                "offset": {"x": 168, "y": 162},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "top": {
+                                "offset": {"x": 168, "y": 162},
+                                "mirror": {"x": true, "y": true},
+                                "angle": 0
+                              },
+                              "bottom": {
+                                "offset": {"x": 170, "y": 141},
+                                "mirror": {"x": true, "y": false},
+                                "angle": 0
+                              }
+                            },
+                            "unwrapMode": "custom",
+                            "visible": true,
+                            "doubleSided": false,
+                            "shadingMode": "flat"
+                          }
+                        },
+                        {
+                          "id": "65",
+                          "name": "Suspender-R--C2",
+                          "position": {"x": -9, "y": -2.5, "z": -9.5},
+                          "orientation": {"x": 0, "y": 0, "z": 0.0654, "w": 0.99786},
+                          "shape": {
+                            "type": "box",
+                            "offset": {"x": 1, "y": 14.5, "z": 0},
+                            "stretch": {"x": 1, "y": 1, "z": 1},
+                            "settings": {
+                              "isPiece": false,
+                              "size": {"x": 2, "y": 30, "z": 21},
+                              "isStaticBox": true
+                            },
+                            "textureLayout": {
+                              "back": {
+                                "offset": {"x": 166, "y": 162},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "right": {
+                                "offset": {"x": 145, "y": 162},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "front": {
+                                "offset": {"x": 189, "y": 162},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "left": {
+                                "offset": {"x": 168, "y": 162},
+                                "mirror": {"x": false, "y": false},
+                                "angle": 0
+                              },
+                              "top": {
+                                "offset": {"x": 168, "y": 162},
+                                "mirror": {"x": true, "y": true},
+                                "angle": 0
+                              },
+                              "bottom": {
+                                "offset": {"x": 170, "y": 141},
+                                "mirror": {"x": true, "y": false},
+                                "angle": 0
+                              }
+                            },
+                            "unwrapMode": "custom",
+                            "visible": true,
+                            "doubleSided": false,
+                            "shadingMode": "flat"
+                          }
                         }
                       ]
                     }
@@ -1620,7 +2252,7 @@
               ]
             },
             {
-              "id": "50",
+              "id": "66",
               "name": "R-Thigh",
               "position": {"x": -7, "y": -4, "z": 1.03674},
               "orientation": {"x": -0.02181, "y": 0, "z": 0, "w": 0.99976},
@@ -1671,7 +2303,7 @@
               },
               "children": [
                 {
-                  "id": "51",
+                  "id": "67",
                   "name": "R-Calf",
                   "position": {"x": -0.18299, "y": -8.08859, "z": 2},
                   "orientation": {"x": 0.04362, "y": 0, "z": 0, "w": 0.99905},
@@ -1722,7 +2354,7 @@
                   },
                   "children": [
                     {
-                      "id": "52",
+                      "id": "68",
                       "name": "R-Back-Foot",
                       "position": {"x": 0.00872, "y": -6.65903, "z": -3.83101},
                       "orientation": {"x": 0.04624, "y": 0.00154, "z": -0.02904, "w": 0.99851},
@@ -1773,7 +2405,7 @@
                       }
                     },
                     {
-                      "id": "53",
+                      "id": "69",
                       "name": "R-Knee",
                       "position": {"x": -0.26783, "y": 16, "z": 3.67033},
                       "orientation": {"x": -0.1949, "y": 0, "z": 0, "w": 0.98082},
@@ -1792,7 +2424,7 @@
                       }
                     },
                     {
-                      "id": "54",
+                      "id": "70",
                       "name": "R-Foot",
                       "position": {"x": -0.38299, "y": -9, "z": -0.25149},
                       "orientation": {"x": 0, "y": 0.0192, "z": 0, "w": 0.99982},
@@ -1811,7 +2443,7 @@
                       },
                       "children": [
                         {
-                          "id": "55",
+                          "id": "71",
                           "name": "R-Foot-Toe1--C1",
                           "position": {"x": -6.26503, "y": -3.95138, "z": 6.24491},
                           "orientation": {"x": -0.049, "y": -0.12416, "z": -0.02229, "w": 0.9908},
@@ -1863,7 +2495,7 @@
                           }
                         },
                         {
-                          "id": "56",
+                          "id": "72",
                           "name": "R-Foot-Toe2--C2",
                           "position": {"x": 4.64846, "y": -4.18892, "z": 6.52655},
                           "orientation": {"x": -0.0312, "y": 0.09933, "z": 0.02908, "w": 0.99414},
@@ -1921,7 +2553,7 @@
               ]
             },
             {
-              "id": "57",
+              "id": "73",
               "name": "L-Thigh",
               "position": {"x": 7, "y": -4, "z": 1.03674},
               "orientation": {"x": -0.02181, "y": 0, "z": 0, "w": 0.99976},
@@ -1972,7 +2604,7 @@
               },
               "children": [
                 {
-                  "id": "58",
+                  "id": "74",
                   "name": "L-Calf",
                   "position": {"x": 0.18299, "y": -8.08859, "z": 2},
                   "orientation": {"x": 0.04362, "y": 0, "z": 0, "w": 0.99905},
@@ -2023,7 +2655,7 @@
                   },
                   "children": [
                     {
-                      "id": "59",
+                      "id": "75",
                       "name": "L-Back-Foot",
                       "position": {"x": -0.00872, "y": -6.65903, "z": -3.83101},
                       "orientation": {"x": 0.04624, "y": -0.00154, "z": 0.02904, "w": 0.99851},
@@ -2074,7 +2706,7 @@
                       }
                     },
                     {
-                      "id": "60",
+                      "id": "76",
                       "name": "L-Knee",
                       "position": {"x": 0.26783, "y": 16, "z": 3.67033},
                       "orientation": {"x": -0.1949, "y": 0, "z": 0, "w": 0.98082},
@@ -2093,7 +2725,7 @@
                       }
                     },
                     {
-                      "id": "61",
+                      "id": "77",
                       "name": "L-Foot",
                       "position": {"x": 0.38299, "y": -9, "z": -0.25149},
                       "orientation": {"x": 0, "y": -0.0192, "z": 0, "w": 0.99982},
@@ -2112,7 +2744,7 @@
                       },
                       "children": [
                         {
-                          "id": "62",
+                          "id": "78",
                           "name": "L-Foot-Toe1--C1",
                           "position": {"x": 6.26503, "y": -3.95138, "z": 6.24491},
                           "orientation": {"x": -0.049, "y": 0.12416, "z": 0.02229, "w": 0.9908},
@@ -2164,7 +2796,7 @@
                           }
                         },
                         {
-                          "id": "63",
+                          "id": "79",
                           "name": "L-Foot-Toe2--C2",
                           "position": {"x": -4.64846, "y": -4.18892, "z": 6.52655},
                           "orientation": {"x": -0.0312, "y": -0.09933, "z": -0.02908, "w": 0.99414},
@@ -2218,6 +2850,25 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "id": "80",
+                  "name": "L-Pant-Thigh",
+                  "position": {"x": 0, "y": 11, "z": 0},
+                  "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
+                  "shape": {
+                    "type": "none",
+                    "offset": {"x": 0, "y": 0, "z": 0},
+                    "stretch": {"x": 1, "y": 1, "z": 1},
+                    "settings": {
+                      "isPiece": false
+                    },
+                    "textureLayout": {},
+                    "unwrapMode": "custom",
+                    "visible": true,
+                    "doubleSided": false,
+                    "shadingMode": "flat"
+                  }
                 }
               ]
             }
