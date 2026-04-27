@@ -1,0 +1,75 @@
+{
+  "Parent": "Player",
+  "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French.blockymodel",
+  "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French.png",
+  "EyeHeight": 1.7,
+  "CrouchOffset": -0.2,
+  "HitBox": {
+    "Max": {
+      "X": 0.3,
+      "Y": 2,
+      "Z": 0.3
+    },
+    "Min": {
+      "X": -0.3,
+      "Y": 0,
+      "Z": -0.3
+    }
+  },
+  "DetailBoxes": {},
+  "DefaultAttachments": [
+    {
+      "Model": "NPC/Intelligent/Kweebec_Rootling/Kweebec_Rootling_Mouth.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_Rootling/Kweebec_Mouth.png"
+    },
+    {
+      "Model": "NPC/Intelligent/Kweebec_Rootling/Kweebec_Rootling_Eyes.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Eyes.png"
+    },
+    {
+      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Pant_Thigh.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
+    },
+    {
+      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Pants_Waist.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
+    },
+    {
+      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Scarf.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
+    },
+    {
+      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
+    },
+    {
+      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt_Shoulder_L.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
+    },
+    {
+      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt_Shoulder_R.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
+    },
+    {
+      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirtsleeve_L.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
+    },
+    {
+      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirtsleeve_R.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
+    },
+    {
+      "Model": "NPC/Intelligent/Kweebec_French/Kweebec_French_Suspenders.blockymodel",
+      "Texture": "NPC/Intelligent/Kweebec_French/Kweebec_French_Shirt.png"
+    }
+  ],
+  "AnimationSets": {
+    "Wave": {
+      "Animations": [
+        {
+          "Animation": "NPC/Intelligent/Kweebec_Sapling/Animations/Flavor/Wave.blockyanim"
+        }
+      ]
+    }
+  }
+}
