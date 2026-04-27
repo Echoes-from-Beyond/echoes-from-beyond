@@ -236,19 +236,12 @@ public class PlantingYourRoots extends JavaPlugin {
 
               var roots = store.ensureAndGetComponent(ref, RootsComponent.getComponentType());
               var playerRef = store.getComponent(ref, PlayerRef.getComponentType());
-              if (roots.HasJoinedKweebdrasil || playerRef == null) return;
+              if (/* roots.HasJoinedKweebdrasil || */ playerRef == null) return;
 
               ready
                   .getPlayer()
                   .getPageManager()
-                  .openCustomPage(
-                      ref,
-                      store,
-                      new InfoUI(
-                          playerRef,
-                          "Welcome to Kweebdrasil",
-                          "HOW MANY layers of IRONY are you on? Like, maybe five or six right now"
-                              + " my dude"));
+                  .openCustomPage(ref, store, new InfoUI(playerRef, "Welcome to Kweebdrasil!", "According to all known laws of aviation, there is no way a bee should be able to fly. The bee, of course, flies anyway, because bees don't care what humans think."));
 
               roots.HasJoinedKweebdrasil = true;
             });
