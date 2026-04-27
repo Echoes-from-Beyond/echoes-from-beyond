@@ -59,6 +59,7 @@ import org.echoesfrombeyond.plantingyourroots.interaction.AdvanceDayInteraction;
 import org.echoesfrombeyond.plantingyourroots.interaction.TeleportToSpawnInteraction;
 import org.echoesfrombeyond.plantingyourroots.npc.BuilderRootsOpenDialogue;
 import org.echoesfrombeyond.plantingyourroots.system.CleanWorldSystem;
+import org.echoesfrombeyond.plantingyourroots.system.InitializeKweebdrasilSystem;
 import org.echoesfrombeyond.plantingyourroots.system.ManageInventorySystem;
 import org.echoesfrombeyond.plantingyourroots.system.PreventItemDropInKweebdrasilSystem;
 import org.jspecify.annotations.NullMarked;
@@ -215,6 +216,7 @@ public class PlantingYourRoots extends JavaPlugin {
     getEntityStoreRegistry().registerSystem(new CleanWorldSystem());
     getEntityStoreRegistry().registerSystem(new PreventItemDropInKweebdrasilSystem());
     getEntityStoreRegistry().registerSystem(new ManageInventorySystem());
+    getEntityStoreRegistry().registerSystem(new InitializeKweebdrasilSystem());
 
     getCommandRegistry().registerCommand(new ReadyForLove());
 
@@ -243,38 +245,36 @@ public class PlantingYourRoots extends JavaPlugin {
     var defaultWorld = Universe.get().getDefaultWorld();
     if (defaultWorld == null) throw new IllegalStateException("Default world must exist");
 
-    return InstancesPlugin.get()
-        .spawnInstance("Kweebdrasil", defaultWorld, new Transform())
-        .whenComplete(
-            (world, err) -> {
-              if (err != null || world == null) return;
+    return InstancesPlugin.get().spawnInstance("Kweebdrasil", defaultWorld, new Transform());
+  }
 
-              world.execute(
-                  () -> {
-                    var uuids = new ArrayList<UUID>();
-                    var storeStore = world.getEntityStore().getStore();
-                    for (var entry : DATEABLE_SPAWNS.entrySet()) {
-                      var kind = entry.getKey();
-                      var spawnsForStage = entry.getValue();
+  public void initializeKweebdrasil(World world, RootsComponent roots) {
+    var rootsFinal = roots.clone();
 
-                      var stage = roots.Dateables.getOrDefault(kind, DEFAULT_DATEABLE).Stage;
+    world.execute(
+        () -> {
+          var uuids = new ArrayList<UUID>();
+          var storeStore = world.getEntityStore().getStore();
+          for (var entry : DATEABLE_SPAWNS.entrySet()) {
+            var kind = entry.getKey();
+            var spawnsForStage = entry.getValue();
 
-                      if (!spawnsForStage.containsKey(stage)) continue;
-                      var spawn = spawnsForStage.get(stage);
+            var stage = rootsFinal.Dateables.getOrDefault(kind, DEFAULT_DATEABLE).Stage;
 
-                      var uuid = spawnDateable(storeStore, kind, spawn);
-                      if (uuid != null) uuids.add(uuid);
-                    }
+            if (!spawnsForStage.containsKey(stage)) continue;
+            var spawn = spawnsForStage.get(stage);
 
-                    for (var spawn : STATIC_NPCS)
-                      NPCPlugin.get()
-                          .spawnNPC(storeStore, spawn.type, null, spawn.position, spawn.rotation);
+            var uuid = spawnDateable(storeStore, kind, spawn);
+            if (uuid != null) uuids.add(uuid);
+          }
 
-                    synchronized (entities) {
-                      entities.put(world.getWorldConfig().getUuid(), uuids);
-                    }
-                  });
-            });
+          for (var spawn : STATIC_NPCS)
+            NPCPlugin.get().spawnNPC(storeStore, spawn.type, null, spawn.position, spawn.rotation);
+
+          synchronized (entities) {
+            entities.put(world.getWorldConfig().getUuid(), uuids);
+          }
+        });
   }
 
   public boolean isKweebdrasilInstance(World world) {
