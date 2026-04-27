@@ -251,7 +251,7 @@ public class PlantingYourRoots extends JavaPlugin {
                           "Welcome to Kweebdrasil!",
                           "Your task here is quite simple: go hug some trees in Gaia's name. One of"
                               + " the possible recipients of your love can be found around here..."
-                              + " or you can just explore the treeand chat with other creatures."
+                              + " or you can just explore the tree and chat with other creatures."
                               + " Remember to advance the day once you exhaust your"
                               + " conversation(s)!"));
 
