@@ -51,6 +51,7 @@ import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
 import org.echoesfrombeyond.plantingyourroots.action.MarkTalkedTo;
+import org.echoesfrombeyond.plantingyourroots.command.ClearKweebdrasilProgress;
 import org.echoesfrombeyond.plantingyourroots.command.ReadyForLove;
 import org.echoesfrombeyond.plantingyourroots.component.KindComponent;
 import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
@@ -222,6 +223,7 @@ public class PlantingYourRoots extends JavaPlugin {
     getEntityStoreRegistry().registerSystem(new InitializeKweebdrasilSystem());
 
     getCommandRegistry().registerCommand(new ReadyForLove());
+    getCommandRegistry().registerCommand(new ClearKweebdrasilProgress());
 
     NPCPlugin.get().registerCoreComponentType("RootsOpenDialogue", BuilderRootsOpenDialogue::new);
 

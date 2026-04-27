@@ -7,7 +7,7 @@ $C.@DecoratedContainer {
 
   Group {
     Anchor: (Full: 0);
-    Padding: (Left: 10, Top: 15, Bottom: 15, Right: 10);
+    Padding: (Left: 10, Top: 15, Bottom: 25, Right: 10);
     LayoutMode: Top;
 
     Label #TitleLabel {
