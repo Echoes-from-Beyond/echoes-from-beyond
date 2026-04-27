@@ -300,7 +300,7 @@ public class PlantingYourRoots extends JavaPlugin {
 
   @RunOnWorldThread
   @SuppressWarnings("unchecked")
-  public void advanceDay(World world, RootsComponent roots) {
+  public void advanceDay(World world, UUID playerUUID) {
     if (!isKweebdrasilInstance(world)) return;
 
     List<UUID> spawnedEntities;
@@ -312,6 +312,12 @@ public class PlantingYourRoots extends JavaPlugin {
 
     var store = world.getEntityStore();
     var storeStore = store.getStore();
+
+    var player = store.getRefFromUUID(playerUUID);
+    if (player == null) return;
+
+    var roots = storeStore.getComponent(player, RootsComponent.getComponentType());
+    if (roots == null) return;
 
     var npcComponentType = NPCEntity.getComponentType();
     assert npcComponentType != null;

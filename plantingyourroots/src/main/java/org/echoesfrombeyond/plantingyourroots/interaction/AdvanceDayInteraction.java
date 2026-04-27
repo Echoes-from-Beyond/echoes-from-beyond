@@ -22,6 +22,7 @@ import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
+import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.entity.teleport.Teleport;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
@@ -78,7 +79,10 @@ public class AdvanceDayInteraction extends SimpleInstantInteraction {
     var teleport = Teleport.createForPlayer(spawnPoint);
     buffer.addComponent(ref, Teleport.getComponentType(), teleport);
 
-    var rootsCopy = roots.clone();
-    world.execute(() -> plugin.advanceDay(world, rootsCopy));
+    var uuidComponent = buffer.getComponent(ref, UUIDComponent.getComponentType());
+    if (uuidComponent != null) {
+      var uuid = uuidComponent.getUuid();
+      world.execute(() -> plugin.advanceDay(world, uuid));
+    }
   }
 }
