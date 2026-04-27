@@ -28,10 +28,12 @@ import com.hypixel.hytale.math.vector.Transform;
 import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.math.vector.Vector3f;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
+import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -61,6 +63,7 @@ import org.echoesfrombeyond.plantingyourroots.system.CleanWorldSystem;
 import org.echoesfrombeyond.plantingyourroots.system.InitializeKweebdrasilSystem;
 import org.echoesfrombeyond.plantingyourroots.system.ManageInventorySystem;
 import org.echoesfrombeyond.plantingyourroots.system.PreventItemDropInKweebdrasilSystem;
+import org.echoesfrombeyond.plantingyourroots.ui.InfoUI;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -221,6 +224,34 @@ public class PlantingYourRoots extends JavaPlugin {
     getCommandRegistry().registerCommand(new ReadyForLove());
 
     NPCPlugin.get().registerCoreComponentType("RootsOpenDialogue", BuilderRootsOpenDialogue::new);
+
+    getEventRegistry()
+        .registerGlobal(
+            PlayerReadyEvent.class,
+            (ready) -> {
+              var ref = ready.getPlayerRef();
+              var store = ref.getStore();
+              if (!PlantingYourRoots.get()
+                  .isKweebdrasilInstance(store.getExternalData().getWorld())) return;
+
+              var roots = store.ensureAndGetComponent(ref, RootsComponent.getComponentType());
+              var playerRef = store.getComponent(ref, PlayerRef.getComponentType());
+              if (roots.HasJoinedKweebdrasil || playerRef == null) return;
+
+              ready
+                  .getPlayer()
+                  .getPageManager()
+                  .openCustomPage(
+                      ref,
+                      store,
+                      new InfoUI(
+                          playerRef,
+                          "Welcome to Kweebdrasil",
+                          "HOW MANY layers of IRONY are you on? Like, maybe five or six right now"
+                              + " my dude"));
+
+              roots.HasJoinedKweebdrasil = true;
+            });
   }
 
   private static @Nullable UUID spawnDateable(

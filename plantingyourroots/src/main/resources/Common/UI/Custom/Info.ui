@@ -18,8 +18,9 @@ $C.@DecoratedContainer {
   }
 
   Label #MessageLabel {
-    Style (
-      FontSize: 16
+    Style: (
+      FontSize: 16,
+      Wrap: true
     );
   }
 }
