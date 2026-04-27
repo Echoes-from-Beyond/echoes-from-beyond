@@ -1,9 +1,9 @@
 $C = "Common.ui";
 
 @DefaultButtonStyle = ButtonStyle(
-  Default: (Background: PatchStyle(TexturePath: "Demo/Primary_Square.png", Border: @ButtonBorder);),
-  Hovered: (Background: PatchStyle(TexturePath: "Demo/Primary_Square_Hovered.png", Border: @ButtonBorder);),
-  Pressed: (Background: PatchStyle(TexturePath: "Demo/Primary_Square_Pressed.png", Border: @ButtonBorder);),
+  Default: (Background: PatchStyle(TexturePath: "Demo/Primary_Square.png", Border: $C.@ButtonBorder)),
+  Hovered: (Background: PatchStyle(TexturePath: "Demo/Primary_Square_Hovered.png", Border: $C.@ButtonBorder)),
+  Pressed: (Background: PatchStyle(TexturePath: "Demo/Primary_Square_Pressed.png", Border: $C.@ButtonBorder)),
   Disabled: (Background: $C.@DefaultSquareButtonDisabledBackground),
   Sounds: $C.@ButtonSounds,
 );

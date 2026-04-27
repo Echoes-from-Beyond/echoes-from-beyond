@@ -8,7 +8,6 @@ $C = "Common.ui";
 
   Group #Content {
     LayoutMode: Top;
-    Anchor: (Top: @TitleHeight);
     Padding: @ContentPadding;
     Background: (TexturePath: "Demo/ContainerPatch.png", Border: 23);
   }
@@ -19,7 +18,7 @@ $C = "Common.ui";
       Default: (Background: "Common/ContainerCloseButton.png"),
       Hovered: (Background: "Common/ContainerCloseButtonHovered.png"),
       Pressed: (Background: "Common/ContainerCloseButtonPressed.png"),
-      Sounds: @ButtonsCancel
+      Sounds: $C.@ButtonsCancel
     );
     Visible: @CloseButton;
   }
