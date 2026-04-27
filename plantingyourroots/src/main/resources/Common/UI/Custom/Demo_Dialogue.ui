@@ -6,8 +6,15 @@ $C = "Common.ui";
   @ContentPadding = Padding(Full: 9 + 8);
   @CloseButton = false;
 
+  Group #Title {
+    Anchor: (Height: $C.@TitleHeight, Top: 0);
+    Background: (TexturePath: "Demo/ContainerHeader.png", HorizontalBorder: 50, VerticalBorder: 0);
+    Padding: (Top: 7);
+  }
+
   Group #Content {
     LayoutMode: Top;
+    Anchor: (Top: $C.@TitleHeight);
     Padding: @ContentPadding;
     Background: (TexturePath: "Demo/ContainerPatch.png", Border: 23);
   }
