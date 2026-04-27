@@ -49,11 +49,15 @@ public class AdvanceDayInteraction extends SimpleInstantInteraction {
 
     var plugin = PlantingYourRoots.get();
     var world = buffer.getStore().getExternalData().getWorld();
-    if (!plugin.isKweebdrasilInstance(world)) return;
+    var ref = interactionContext.getEntity();
+    if (!plugin.isKweebdrasilInstance(world)) {
+      var player = buffer.getComponent(ref, Player.getComponentType());
+      if (player != null)
+        player.sendMessage(Message.raw("This item cannot be used outside of Kweebdrasil!"));
+      return;
+    }
 
-    var roots =
-        buffer.ensureAndGetComponent(
-            interactionContext.getEntity(), RootsComponent.getComponentType());
+    var roots = buffer.ensureAndGetComponent(ref, RootsComponent.getComponentType());
 
     if (PlantingYourRoots.DATEABLE_SPAWNS.keySet().stream()
         .noneMatch(

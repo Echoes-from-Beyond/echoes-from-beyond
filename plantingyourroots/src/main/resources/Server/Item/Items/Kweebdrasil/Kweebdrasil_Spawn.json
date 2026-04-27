@@ -1,0 +1,21 @@
+{
+  "TranslationProperties": {
+    "Name": "Teleport to Spawn",
+    "Description": "Return to the Kweebdrasil spawn."
+  },
+  "Icon": "Icons/ItemsGenerated/Kweebdrasil_Spawn.png",
+  "Quality": "Common",
+  "MaxStack": 1,
+  "Categories": [
+    "Items.Example"
+  ],
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "TeleportToSpawn"
+        }
+      ]
+    }
+  }
+}

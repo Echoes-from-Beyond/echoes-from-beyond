@@ -20,7 +20,9 @@ package org.echoesfrombeyond.plantingyourroots.interaction;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.protocol.InteractionType;
+import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
+import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.entity.teleport.Teleport;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
@@ -47,12 +49,17 @@ public class TeleportToSpawnInteraction extends SimpleInstantInteraction {
 
     var plugin = PlantingYourRoots.get();
     var world = buffer.getStore().getExternalData().getWorld();
-    if (!plugin.isKweebdrasilInstance(world)) return;
+    var ref = interactionContext.getEntity();
+    if (!plugin.isKweebdrasilInstance(world)) {
+      var player = buffer.getComponent(ref, Player.getComponentType());
+      if (player != null)
+        player.sendMessage(Message.raw("This item cannot be used outside of Kweebdrasil!"));
+      return;
+    }
 
     var spawnProvider = world.getWorldConfig().getSpawnProvider();
     if (spawnProvider == null) return;
 
-    var ref = interactionContext.getEntity();
     var spawnPoint = spawnProvider.getSpawnPoint(ref, buffer);
 
     world.execute(

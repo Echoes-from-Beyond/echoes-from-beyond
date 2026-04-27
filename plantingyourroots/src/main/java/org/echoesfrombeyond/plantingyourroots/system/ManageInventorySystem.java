@@ -24,6 +24,7 @@ import com.hypixel.hytale.component.dependency.Order;
 import com.hypixel.hytale.component.dependency.SystemDependency;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
+import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.modules.entity.player.PlayerSystems;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -59,6 +60,15 @@ public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
     roots.OldInventory = new InventoryComponent[InventoryComponent.EVERYTHING.length];
   }
 
+  private static void addKweebdrasilItems(Holder<EntityStore> holder) {
+    var inventory =
+        holder.ensureAndGetComponent(InventoryComponent.Hotbar.getComponentType()).getInventory();
+
+    inventory.addItemStack(new ItemStack("Kweebdrasil_Spawn", 1));
+    inventory.addItemStack(new ItemStack("Kweebdrasil_Exit", 1));
+    inventory.addItemStack(new ItemStack("Kweebdrasil_Diary", 1));
+  }
+
   @Override
   public void onEntityAdd(Holder<EntityStore> holder, AddReason reason, Store<EntityStore> store) {
     var plugin = PlantingYourRoots.get();
@@ -82,6 +92,7 @@ public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
     }
 
     roots.HasOldInventory = true;
+    addKweebdrasilItems(holder);
   }
 
   @Override
