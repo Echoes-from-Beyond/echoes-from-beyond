@@ -35,7 +35,7 @@ public final class DialogueExistsAssetValidator extends AssetValidator {
 
   @Override
   public boolean test(String s) {
-    return Dialogue.ASSET_STORE.get().getAssetMap().getAsset(s) != null;
+    return Dialogue.getDialogue(s) != null;
   }
 
   @Override

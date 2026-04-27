@@ -42,12 +42,36 @@ public class RootsOpenDialogue extends ActionBase {
 
   private @Nullable Dialogue getDialogue() {
     var key = builder.dialogueKey;
-    return key == null ? null : Dialogue.ASSET_STORE.get().getAssetMap().getAsset(key);
+    return key == null ? null : Dialogue.getDialogue(key);
   }
 
   private @Nullable Dialogue getTalkedToDialogue() {
     var key = builder.talkedToDialogueKey;
-    return key == null ? null : Dialogue.ASSET_STORE.get().getAssetMap().getAsset(key);
+    return key == null ? null : Dialogue.getDialogue(key);
+  }
+
+  private BuilderRootsOpenDialogue.@Nullable EndingLoops getEndingLoops() {
+    return builder.endingLoops.build();
+  }
+
+  private void showEndingLoopOrDialogue(Ref<EntityStore> player, @Nullable Dialogue current) {
+    if (current == null) return;
+
+    var endingLoops = getEndingLoops();
+    if (endingLoops == null) {
+      current.display(player);
+      return;
+    }
+
+    var endingLoop = endingLoops.getEndingLoop(player, current);
+
+    Dialogue endingDialogue;
+    if (endingLoop != null && (endingDialogue = Dialogue.getDialogue(endingLoop)) != null) {
+      endingDialogue.display(player);
+      return;
+    }
+
+    current.display(player);
   }
 
   @Override
@@ -60,8 +84,6 @@ public class RootsOpenDialogue extends ActionBase {
     var player = role.getStateSupport().getInteractionIterationTarget();
     if (player == null) return super.execute(ref, role, sensorInfo, dt, store);
 
-    var talkedToDialogue = getTalkedToDialogue();
-
     var kind = store.getComponent(ref, KindComponent.getComponentType());
     if (kind != null
         && store
@@ -69,13 +91,12 @@ public class RootsOpenDialogue extends ActionBase {
             .Dateables
             .getOrDefault(kind.Kind, PlantingYourRoots.DEFAULT_DATEABLE)
             .TalkedTo) {
-      if (talkedToDialogue != null) talkedToDialogue.display(player);
+      var talkedTo = getTalkedToDialogue();
+      if (talkedTo != null) talkedTo.display(player);
       return super.execute(ref, role, sensorInfo, dt, store);
     }
 
-    var dialogue = getDialogue();
-    if (dialogue != null) dialogue.display(player);
-
+    showEndingLoopOrDialogue(player, getDialogue());
     return super.execute(ref, role, sensorInfo, dt, store);
   }
 }

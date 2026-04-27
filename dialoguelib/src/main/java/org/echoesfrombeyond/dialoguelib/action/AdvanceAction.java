@@ -58,7 +58,7 @@ public class AdvanceAction implements ChoiceAction {
   @Override
   public void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
     var next = Next;
-    var nextDialogue = Dialogue.ASSET_STORE.get().getAssetMap().getAsset(next);
+    var nextDialogue = Dialogue.getDialogue(next);
 
     if (nextDialogue == null) {
       LOGGER.atWarning().log("AdvanceAction references non-existent dialogue `%s`", next);

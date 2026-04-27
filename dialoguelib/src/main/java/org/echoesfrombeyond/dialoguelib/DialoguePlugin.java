@@ -153,7 +153,7 @@ public class DialoguePlugin extends JavaPlugin {
 
   private void onTriggerAssetsLoaded(
       LoadedAssetsEvent<String, Trigger, DefaultAssetMap<String, Trigger>> event) {
-    var dialogueStoreMap = Dialogue.ASSET_STORE.get().getAssetMap();
+    var dialogueStoreMap = Dialogue.getDialogueStore();
     var triggers = event.getLoadedAssets();
 
     var triggersSet = TRIGGERS;
@@ -172,7 +172,7 @@ public class DialoguePlugin extends JavaPlugin {
             "Trigger `%s` did not reference any dialogue assets", trigger.getId());
 
       for (var target : targets) {
-        var referenced = dialogueStoreMap.getAsset(target);
+        var referenced = Dialogue.getDialogue(target);
         if (referenced == null) {
           LOGGER.atWarning().log(
               "Trigger `%s` referenced non-existent dialogue asset `%s`", trigger.getId(), target);

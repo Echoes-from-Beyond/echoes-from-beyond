@@ -1,0 +1,23 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "[Dialogue for already having talked to FK]"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Kweebec_French_Happy.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "End",
+      "Action": {
+        "Id": "Close"
+      }
+    }
+  ]
+}

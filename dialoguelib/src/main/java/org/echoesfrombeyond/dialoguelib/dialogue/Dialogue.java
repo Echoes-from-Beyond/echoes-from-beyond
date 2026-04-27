@@ -30,15 +30,28 @@ import org.echoesfrombeyond.annotation.RunOnWorldThread;
 import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Check;
 import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
 import org.echoesfrombeyond.util.thread.Once;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public interface Dialogue
     extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Dialogue>> {
   AssetCodecMapCodec<String, Dialogue> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
-  Once<AssetStore<String, Dialogue, AssetMap<String, Dialogue>>> ASSET_STORE =
-      Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(Dialogue.class)));
+  class Internal {
+    @ApiStatus.Internal
+    private static final Once<AssetStore<String, Dialogue, AssetMap<String, Dialogue>>>
+        ASSET_STORE = Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(Dialogue.class)));
+  }
+
+  static @Nullable Dialogue getDialogue(String asset) {
+    return Internal.ASSET_STORE.get().getAssetMap().getAsset(asset);
+  }
+
+  static AssetStore<String, Dialogue, AssetMap<String, Dialogue>> getDialogueStore() {
+    return Internal.ASSET_STORE.get();
+  }
 
   @RunOnWorldThread
   void display(Ref<EntityStore> activator);

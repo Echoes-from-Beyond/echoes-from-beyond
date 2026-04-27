@@ -39,7 +39,7 @@ public class OpenDialogue extends ActionBase {
 
   private @Nullable Dialogue getDialogue() {
     var key = builder.dialogueKey;
-    return key == null ? null : Dialogue.ASSET_STORE.get().getAssetMap().getAsset(key);
+    return key == null ? null : Dialogue.getDialogue(key);
   }
 
   @Override

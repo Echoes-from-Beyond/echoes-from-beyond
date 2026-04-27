@@ -19,11 +19,27 @@
 package org.echoesfrombeyond.plantingyourroots.npc;
 
 import com.google.gson.JsonElement;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.codec.schema.SchemaContext;
+import com.hypixel.hytale.codec.schema.config.Schema;
+import com.hypixel.hytale.codec.validation.ValidationResults;
+import com.hypixel.hytale.codec.validation.Validator;
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.asset.builder.Builder;
+import com.hypixel.hytale.server.npc.asset.builder.BuilderCodecObjectHelper;
 import com.hypixel.hytale.server.npc.asset.builder.BuilderDescriptorState;
 import com.hypixel.hytale.server.npc.asset.builder.BuilderSupport;
 import com.hypixel.hytale.server.npc.corecomponents.builders.BuilderActionBase;
 import com.hypixel.hytale.server.npc.instructions.Action;
+import java.util.HashMap;
+import java.util.Map;
+import org.echoesfrombeyond.codechelper.CodecUtil;
+import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
+import org.echoesfrombeyond.dialoguelib.metadata.MetadataAccessor;
+import org.echoesfrombeyond.dialoguelib.metadata.StringMetadata;
 import org.echoesfrombeyond.dialoguelib.npc.DialogueExistsAssetValidator;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -32,6 +48,40 @@ import org.jspecify.annotations.Nullable;
 public class BuilderRootsOpenDialogue extends BuilderActionBase {
   protected @Nullable String dialogueKey;
   protected @Nullable String talkedToDialogueKey;
+  protected BuilderCodecObjectHelper<EndingLoops> endingLoops =
+      new BuilderCodecObjectHelper<>(
+          EndingLoops.class,
+          EndingLoops.CODEC,
+          new Validator<>() {
+            @Override
+            public void accept(EndingLoops var1, ValidationResults var2) {}
+
+            @Override
+            public void updateSchema(SchemaContext var1, Schema var2) {}
+          });
+
+  @ModelBuilder
+  public static class EndingLoops extends MetadataAccessor {
+    public static BuilderCodec<EndingLoops> CODEC =
+        CodecUtil.modelBuilder(
+            EndingLoops.class,
+            MetadataAccessor.CODEC,
+            Plugin.getSharedResolver(),
+            Plugin.getSharedCache());
+
+    public Map<String, String> Loops;
+
+    public EndingLoops() {
+      this.Loops = new HashMap<>();
+    }
+
+    public @Nullable String getEndingLoop(Ref<EntityStore> player, Dialogue parent) {
+      var meta = getMetadata(player, parent);
+      if (!(meta instanceof StringMetadata stringMetadata)) return null;
+
+      return Loops.get(stringMetadata.Value);
+    }
+  }
 
   @Override
   public String getShortDescription() {
@@ -67,6 +117,14 @@ public class BuilderRootsOpenDialogue extends BuilderActionBase {
         BuilderDescriptorState.Stable,
         "Talked-to dialogue",
         "The dialogue to open when this NPC has already been talked to");
+
+    this.getCodecObject(
+        data,
+        "EndingLoops",
+        endingLoops,
+        BuilderDescriptorState.Stable,
+        "Ending loops.",
+        "Specifies endlessly-looping dialogue triggered when the player has certain metadata.");
 
     return super.readConfig(data);
   }
