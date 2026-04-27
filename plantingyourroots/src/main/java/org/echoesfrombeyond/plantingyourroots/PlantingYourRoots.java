@@ -249,9 +249,11 @@ public class PlantingYourRoots extends JavaPlugin {
                       new InfoUI(
                           playerRef,
                           "Welcome to Kweebdrasil!",
-                          "According to all known laws of aviation, there is no way a bee should be"
-                              + " able to fly. The bee, of course, flies anyway, because bees don't"
-                              + " care what humans think."));
+                          "Your task here is quite simple: go hug some trees in Gaia's name. One of"
+                              + " the possible recipients of your love can be found around here..."
+                              + " or you can just explore the treeand chat with other creatures."
+                              + " Remember to advance the day once you exhaust your"
+                              + " conversation(s)!"));
 
               roots.HasJoinedKweebdrasil = true;
             });
