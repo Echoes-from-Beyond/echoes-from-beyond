@@ -241,7 +241,15 @@ public class PlantingYourRoots extends JavaPlugin {
               ready
                   .getPlayer()
                   .getPageManager()
-                  .openCustomPage(ref, store, new InfoUI(playerRef, "Welcome to Kweebdrasil!", "According to all known laws of aviation, there is no way a bee should be able to fly. The bee, of course, flies anyway, because bees don't care what humans think."));
+                  .openCustomPage(
+                      ref,
+                      store,
+                      new InfoUI(
+                          playerRef,
+                          "Welcome to Kweebdrasil!",
+                          "According to all known laws of aviation, there is no way a bee should be"
+                              + " able to fly. The bee, of course, flies anyway, because bees don't"
+                              + " care what humans think."));
 
               roots.HasJoinedKweebdrasil = true;
             });
