@@ -67,6 +67,7 @@ public class ManageInventorySystem extends PlayerSystems.PlayerRemovedSystem {
     inventory.addItemStack(new ItemStack("Kweebdrasil_Spawn", 1));
     inventory.addItemStack(new ItemStack("Kweebdrasil_Exit", 1));
     inventory.addItemStack(new ItemStack("Kweebdrasil_Diary", 1));
+    inventory.addItemStack(new ItemStack("Kweebdrasil_Advance", 1));
   }
 
   @Override

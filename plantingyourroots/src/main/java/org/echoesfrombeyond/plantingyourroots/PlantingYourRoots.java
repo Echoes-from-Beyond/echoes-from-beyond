@@ -21,7 +21,6 @@ package org.echoesfrombeyond.plantingyourroots;
 import com.hypixel.hytale.builtin.instances.InstancesPlugin;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.lookup.BuilderCodecMapCodec;
-import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.RemoveReason;
 import com.hypixel.hytale.component.Store;
@@ -301,8 +300,7 @@ public class PlantingYourRoots extends JavaPlugin {
 
   @RunOnWorldThread
   @SuppressWarnings("unchecked")
-  public void advanceDay(CommandBuffer<EntityStore> buffer, RootsComponent roots) {
-    var world = buffer.getStore().getExternalData().getWorld();
+  public void advanceDay(World world, RootsComponent roots) {
     if (!isKweebdrasilInstance(world)) return;
 
     List<UUID> spawnedEntities;
