@@ -39,8 +39,8 @@ public interface Dialogue
     extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Dialogue>> {
   AssetCodecMapCodec<String, Dialogue> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
+  @ApiStatus.Internal
   class Internal {
-    @ApiStatus.Internal
     private static final Once<AssetStore<String, Dialogue, AssetMap<String, Dialogue>>>
         ASSET_STORE = Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(Dialogue.class)));
   }
@@ -49,7 +49,7 @@ public interface Dialogue
     return Internal.ASSET_STORE.get().getAssetMap().getAsset(asset);
   }
 
-  static AssetStore<String, Dialogue, AssetMap<String, Dialogue>> getDialogueStore() {
+  static AssetStore<String, Dialogue, AssetMap<String, Dialogue>> getAssetStore() {
     return Internal.ASSET_STORE.get();
   }
 

@@ -30,8 +30,10 @@ import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Ch
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
 import org.echoesfrombeyond.util.thread.Once;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A global trigger of dialogue.
@@ -44,8 +46,19 @@ public interface Trigger
     extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Trigger>> {
   AssetCodecMapCodec<String, Trigger> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
-  Once<AssetStore<String, Trigger, AssetMap<String, Trigger>>> ASSET_STORE =
-      Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(Trigger.class)));
+  @ApiStatus.Internal
+  class Internal {
+    private static final Once<AssetStore<String, Trigger, AssetMap<String, Trigger>>> ASSET_STORE =
+        Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(Trigger.class)));
+  }
+
+  static @Nullable Trigger getTrigger(String asset) {
+    return Internal.ASSET_STORE.get().getAssetMap().getAsset(asset);
+  }
+
+  static AssetStore<String, Trigger, AssetMap<String, Trigger>> getAssetStore() {
+    return Internal.ASSET_STORE.get();
+  }
 
   void link(JavaPlugin linker, Dialogue dialogue);
 

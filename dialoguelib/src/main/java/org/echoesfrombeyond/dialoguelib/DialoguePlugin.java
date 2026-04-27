@@ -153,7 +153,7 @@ public class DialoguePlugin extends JavaPlugin {
 
   private void onTriggerAssetsLoaded(
       LoadedAssetsEvent<String, Trigger, DefaultAssetMap<String, Trigger>> event) {
-    var dialogueStoreMap = Dialogue.getDialogueStore();
+    var dialogueStoreMap = Dialogue.getAssetStore();
     var triggers = event.getLoadedAssets();
 
     var triggersSet = TRIGGERS;
@@ -189,7 +189,7 @@ public class DialoguePlugin extends JavaPlugin {
       LoadedAssetsEvent<String, Dialogue, DefaultAssetMap<String, Dialogue>> event) {
     if (event.isInitial()) return;
 
-    var triggers = Trigger.ASSET_STORE.get().getAssetMap().getAssetMap().values();
+    var triggers = Trigger.getAssetStore().getAssetMap().getAssetMap().values();
 
     for (var dialogue : event.getLoadedAssets().values()) {
       for (var trigger : triggers) {
@@ -217,7 +217,7 @@ public class DialoguePlugin extends JavaPlugin {
 
   private void onDialogueAssetsRemoved(
       RemovedAssetsEvent<String, Dialogue, DefaultAssetMap<String, Dialogue>> event) {
-    var triggers = Trigger.ASSET_STORE.get().getAssetMap().getAssetMap().values();
+    var triggers = Trigger.getAssetStore().getAssetMap().getAssetMap().values();
 
     for (var removed : event.getRemovedAssets())
       for (var trigger : triggers)
