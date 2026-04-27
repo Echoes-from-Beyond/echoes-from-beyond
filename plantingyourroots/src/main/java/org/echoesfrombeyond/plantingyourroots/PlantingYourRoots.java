@@ -120,7 +120,7 @@ public class PlantingYourRoots extends JavaPlugin {
     STATIC_NPCS.add(
         new Spawn("Councilor3", new Vector3d(23.63, 158.0, -12.63), new Vector3f(0, 0, 0)));
     STATIC_NPCS.add(
-        new Spawn("Feran_Traveller", new Vector3d(29.54, 202.0, -18.23), new Vector3f(0, 0, 0)));
+        new Spawn("Feran_Traveller", new Vector3d(29.54, 202.0, 18.23), new Vector3f(0, 0, 0)));
     STATIC_NPCS.add(new Spawn("Merchant1", new Vector3d(25.8, 195.0, 8.74), new Vector3f(0, 0, 0)));
     STATIC_NPCS.add(
         new Spawn("Merchant2", new Vector3d(24.54, 202.0, 9.34), new Vector3f(0, 0, 0)));
