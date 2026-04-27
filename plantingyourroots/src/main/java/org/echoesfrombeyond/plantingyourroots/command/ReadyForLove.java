@@ -45,7 +45,7 @@ public class ReadyForLove extends CommandBase {
     var plugin = PlantingYourRoots.get();
 
     if (plugin.isKweebdrasilInstance(world)) {
-      commandContext.sendMessage(Message.parse("You are already in Kweebdrasil!"));
+      commandContext.sendMessage(Message.raw("You are already in Kweebdrasil!"));
       return;
     }
 

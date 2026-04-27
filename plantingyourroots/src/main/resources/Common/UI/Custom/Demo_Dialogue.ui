@@ -10,6 +10,11 @@ $C = "Common.ui";
     Anchor: (Height: $C.@TitleHeight, Top: 0);
     Background: (TexturePath: "Demo/ContainerHeader.png", HorizontalBorder: 50, VerticalBorder: 0);
     Padding: (Top: 7);
+
+    Group #ContainerDecorationTop {
+      Anchor: (Width: 236, Height: 11, Top: -12);
+      Background: "Demo/ContainerDecorationTop.png";
+    }
   }
 
   Group #Content {

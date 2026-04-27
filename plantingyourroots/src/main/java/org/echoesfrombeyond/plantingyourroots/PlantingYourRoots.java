@@ -51,6 +51,7 @@ import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
 import org.echoesfrombeyond.plantingyourroots.action.MarkTalkedTo;
+import org.echoesfrombeyond.plantingyourroots.action.OpenInfoUI;
 import org.echoesfrombeyond.plantingyourroots.command.ClearKweebdrasilProgress;
 import org.echoesfrombeyond.plantingyourroots.command.ReadyForLove;
 import org.echoesfrombeyond.plantingyourroots.component.KindComponent;
@@ -182,7 +183,8 @@ public class PlantingYourRoots extends JavaPlugin {
             "ExitKweebdrasil", ExitKweebdrasilInteraction.class, ExitKweebdrasilInteraction.CODEC);
 
     getCodecRegistry(ChoiceAction.CODEC)
-        .register("MarkTalkedTo", MarkTalkedTo.class, MarkTalkedTo.CODEC);
+        .register("MarkTalkedTo", MarkTalkedTo.class, MarkTalkedTo.CODEC)
+        .register("ShowInfo", OpenInfoUI.class, OpenInfoUI.CODEC);
 
     getCodecRegistry(ChoiceCondition.CODEC)
         .register("TalkedTo", TalkedToCondition.class, TalkedToCondition.CODEC);
