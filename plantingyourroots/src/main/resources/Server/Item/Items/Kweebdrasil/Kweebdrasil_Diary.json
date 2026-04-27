@@ -1,0 +1,12 @@
+{
+  "TranslationProperties": {
+    "Name": "Open Diary",
+    "Description": "A diary you use to keep track of your exploits in Kweebdrasil."
+  },
+  "Icon": "Icons/ItemsGenerated/Kweebdrasil_Diary.png",
+  "Quality": "Common",
+  "MaxStack": 1,
+  "Categories": [
+    "Items.Example"
+  ]
+}
