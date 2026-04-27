@@ -237,8 +237,17 @@
                 "Type": "LockOnInteractionTarget"
               },
               {
-                "Type": "OpenDialogue",
-                "Dialogue": "Fk4_0"
+                "Type": "RootsOpenDialogue",
+                "Dialogue": "Fk4_0",
+                "TalkedToDialogue": "Fk_Talked_To",
+                "EndingLoops": {
+                  "MetadataStoreKey": "FRENCH_KWEEBEC",
+                  "MetadataKey": "Fk_Relationship",
+                  "Loops": {
+                    "Fk_Disappointment": "Fk_Disappointment",
+                    "Fk_Hate": "Fk_Hate"
+                  }
+                }
               },
               {
                 "Type": "State",
