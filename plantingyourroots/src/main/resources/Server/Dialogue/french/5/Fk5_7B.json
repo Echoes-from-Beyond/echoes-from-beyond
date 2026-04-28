@@ -79,6 +79,11 @@
             },
             {
               "Id": "Close"
+            },
+            {
+              "Id": "ShowInfo",
+              "Title": "Uh-oh",
+              "Message": "Something clearly went wrong. Maybe you shouldn't enable his 'Frenchness' too much."
             }
           ]
         }

@@ -42,6 +42,11 @@
           },
           {
             "Id": "Close"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "Uh-oh",
+            "Message": "There are only a few things worse than Fr*nch people (and trees). This is not happening."
           }
         ]
       }

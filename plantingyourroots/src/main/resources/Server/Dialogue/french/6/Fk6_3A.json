@@ -107,6 +107,11 @@
           },
           {
             "Id": "Close"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "Nice!",
+            "Message": "Hand-in-hand, the two of you head off on a journey up north. You'll live happily ever after, unless something terrible happens on the way."
           }
         ]
       }

@@ -78,6 +78,11 @@
           },
           {
             "Id": "Close"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "Uh-oh",
+            "Message": "Huh. Looks like you failed to charm him. If this wasn't part of the plan, maybe you should play along with the more wholesome of his whims next time."
           }
         ]
       }

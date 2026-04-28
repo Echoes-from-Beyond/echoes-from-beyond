@@ -62,6 +62,11 @@
           },
           {
             "Id": "Close"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "Uh-oh",
+            "Message": "You made your choice. Unfortunately, this is the end."
           }
         ]
       }

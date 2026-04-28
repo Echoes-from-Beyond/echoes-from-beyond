@@ -37,6 +37,11 @@
           },
           {
             "Id": "Close"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "Uh-oh",
+            "Message": "He really does yap too much, doesn't he? Who knew that French romance comes with this much baggage?"
           }
         ]
       }
