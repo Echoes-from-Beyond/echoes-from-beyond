@@ -70,7 +70,7 @@
       },
       {
         "Id": "Standard",
-        "Text": "I get it. Crowds aren't my thing either.",
+        "Text": "Here we go again. Stop pitying yourself.",
         "Action": {
           "Id": "Advance",
           "Next": "Fk5_2B-3C"
