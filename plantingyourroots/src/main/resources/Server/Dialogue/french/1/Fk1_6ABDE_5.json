@@ -25,6 +25,11 @@
           },
           {
             "Id": "Close"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "A fresh start",
+            "Message": "Nice, you made it to the end of your first conversation. Now you can explore and talk to other NPCs, or advance to the next day if you want to talk with this one again. (But it might be somewhere else!)"
           }
         ]
       }
