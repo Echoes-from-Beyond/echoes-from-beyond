@@ -18,24 +18,36 @@
 
 package org.echoesfrombeyond.plantingyourroots.ui;
 
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
-import com.hypixel.hytale.server.core.entity.entities.player.pages.CustomUIPage;
+import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
+import com.hypixel.hytale.protocol.packets.interface_.Page;
+import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import org.echoesfrombeyond.codechelper.CodecUtil;
+import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class InfoUI extends CustomUIPage {
+public class InfoUI extends InteractiveCustomUIPage<InfoUI.Data> {
+  @ModelBuilder
+  public static class Data {
+    public static final BuilderCodec<Data> CODEC =
+        CodecUtil.modelBuilder(Data.class, Plugin.getSharedResolver(), Plugin.getSharedCache());
+  }
+
   private final String title;
   private final String message;
 
   public InfoUI(PlayerRef playerRef, String title, String message) {
-    super(playerRef, CustomPageLifetime.CanDismiss);
-
+    super(playerRef, CustomPageLifetime.CantClose, Data.CODEC);
     this.title = title;
     this.message = message;
   }
@@ -49,5 +61,13 @@ public class InfoUI extends CustomUIPage {
     uiCommandBuilder.append("Info.ui");
     uiCommandBuilder.set("#TitleLabel.Text", title);
     uiCommandBuilder.set("#MessageLabel.Text", message);
+
+    uiEventBuilder.addEventBinding(CustomUIEventBindingType.Activating, "#CloseButton");
+  }
+
+  @Override
+  public void handleDataEvent(Ref<EntityStore> ref, Store<EntityStore> store, InfoUI.Data data) {
+    var player = store.getComponent(ref, Player.getComponentType());
+    if (player != null) player.getPageManager().setPage(ref, store, Page.None);
   }
 }
