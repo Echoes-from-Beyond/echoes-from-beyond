@@ -21,6 +21,7 @@ package org.echoesfrombeyond.plantingyourroots.command;
 import com.hypixel.hytale.builtin.instances.InstancesPlugin;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
+import com.hypixel.hytale.server.core.command.system.CommandSender;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
 import org.echoesfrombeyond.plantingyourroots.PlantingYourRoots;
@@ -31,6 +32,11 @@ import org.jspecify.annotations.NullMarked;
 public class ReadyForLove extends CommandBase {
   public ReadyForLove() {
     super("readyforlove", "Brings you to your new home in Kweebdrasil...");
+  }
+
+  @Override
+  public boolean hasPermission(CommandSender sender) {
+    return true;
   }
 
   @Override

@@ -20,6 +20,7 @@ package org.echoesfrombeyond.plantingyourroots.command;
 
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
+import com.hypixel.hytale.server.core.command.system.CommandSender;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
 import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
 import org.echoesfrombeyond.plantingyourroots.PlantingYourRoots;
@@ -30,6 +31,11 @@ import org.jspecify.annotations.NullMarked;
 public class ClearKweebdrasilProgress extends CommandBase {
   public ClearKweebdrasilProgress() {
     super("clearkweebdrasilprogress", "Resets your adventure in Kweebdrasil.");
+  }
+
+  @Override
+  public boolean hasPermission(CommandSender sender) {
+    return true;
   }
 
   @Override
