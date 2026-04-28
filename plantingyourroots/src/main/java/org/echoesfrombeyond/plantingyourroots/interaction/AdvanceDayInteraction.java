@@ -19,14 +19,18 @@
 package org.echoesfrombeyond.plantingyourroots.interaction;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.common.util.AudioUtil;
 import com.hypixel.hytale.protocol.InteractionType;
+import com.hypixel.hytale.protocol.SoundCategory;
 import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.asset.type.soundevent.config.SoundEvent;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.entity.teleport.Teleport;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
+import com.hypixel.hytale.server.core.universe.world.SoundUtil;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
@@ -79,10 +83,25 @@ public class AdvanceDayInteraction extends SimpleInstantInteraction {
     var teleport = Teleport.createForPlayer(spawnPoint);
     buffer.addComponent(ref, Teleport.getComponentType(), teleport);
 
+    int index = SoundEvent.getAssetMap().getIndex("SFX_Sleep_Success");
+
     var uuidComponent = buffer.getComponent(ref, UUIDComponent.getComponentType());
     if (uuidComponent != null) {
+      var player = buffer.getComponent(ref, Player.getComponentType());
+      if (player != null) player.sendMessage(Message.raw("Started Day " + (roots.Day + 1)));
+
       var uuid = uuidComponent.getUuid();
-      world.execute(() -> plugin.advanceDay(world, uuid));
+      world.execute(
+          () -> {
+            plugin.advanceDay(world, uuid);
+            SoundUtil.playSoundEvent2d(
+                ref,
+                index,
+                SoundCategory.SFX,
+                AudioUtil.decibelsToLinearGain(5),
+                AudioUtil.semitonesToLinearPitch(0),
+                world.getEntityStore().getStore());
+          });
     }
   }
 }
