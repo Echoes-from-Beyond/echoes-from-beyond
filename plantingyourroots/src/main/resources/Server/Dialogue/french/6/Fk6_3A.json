@@ -111,7 +111,7 @@
           {
             "Id": "ShowInfo",
             "Title": "Nice!",
-            "Message": "Hand-in-hand, the two of you head off on a journey up north. You'll live happily ever after, unless something terrible happens on the way."
+            "Message": "Hand-in-hand, the two of you head off on a journey up north. You'll live happily ever after, unless something terrible happens on the way.\n\nWant to go for a different ending? First exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
           }
         ]
       }
