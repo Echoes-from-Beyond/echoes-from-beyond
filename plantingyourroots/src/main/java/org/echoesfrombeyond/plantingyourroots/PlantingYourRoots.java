@@ -240,7 +240,7 @@ public class PlantingYourRoots extends JavaPlugin {
 
               var roots = store.ensureAndGetComponent(ref, RootsComponent.getComponentType());
               var playerRef = store.getComponent(ref, PlayerRef.getComponentType());
-              if (/* roots.HasJoinedKweebdrasil || */ playerRef == null) return;
+              if (roots.HasJoinedKweebdrasil || playerRef == null) return;
 
               ready
                   .getPlayer()
