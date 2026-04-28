@@ -69,6 +69,5 @@ public class InfoUI extends InteractiveCustomUIPage<InfoUI.Data> {
   public void handleDataEvent(Ref<EntityStore> ref, Store<EntityStore> store, InfoUI.Data data) {
     var player = store.getComponent(ref, Player.getComponentType());
     if (player != null) player.getPageManager().setPage(ref, store, Page.None);
-    sendUpdate();
   }
 }

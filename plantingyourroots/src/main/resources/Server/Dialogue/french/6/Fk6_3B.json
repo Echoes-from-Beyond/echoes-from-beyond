@@ -61,9 +61,6 @@
             "Kind": "French_Kweebec"
           },
           {
-            "Id": "Close"
-          },
-          {
             "Id": "ShowInfo",
             "Title": "Uh-oh",
             "Message": "You made your choice. Unfortunately, this is the end.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."

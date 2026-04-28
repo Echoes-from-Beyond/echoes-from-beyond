@@ -50,7 +50,7 @@ public class ClearKweebdrasilProgress extends CommandBase {
     var plugin = PlantingYourRoots.get();
 
     if (plugin.isKweebdrasilInstance(world)) {
-      commandContext.sendMessage(Message.parse("Leave Kweebdrasil before running this command!"));
+      commandContext.sendMessage(Message.raw("Leave Kweebdrasil before running this command!"));
       return;
     }
 
@@ -59,5 +59,7 @@ public class ClearKweebdrasilProgress extends CommandBase {
           store.tryRemoveComponent(playerRef, RootsComponent.getComponentType());
           store.tryRemoveComponent(playerRef, DialogueComponent.getComponentType());
         });
+
+    commandContext.sendMessage(Message.raw("Reset your Kweebdrasil save!"));
   }
 }
