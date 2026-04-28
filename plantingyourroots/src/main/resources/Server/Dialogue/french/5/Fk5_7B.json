@@ -83,7 +83,7 @@
             {
               "Id": "ShowInfo",
               "Title": "Uh-oh",
-              "Message": "Something clearly went wrong. Maybe you shouldn't enable his 'Frenchness' too much."
+              "Message": "Something clearly went wrong. Maybe you shouldn't enable his 'Frenchness' too much.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
             }
           ]
         }

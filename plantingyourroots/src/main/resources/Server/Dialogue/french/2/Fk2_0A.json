@@ -46,7 +46,7 @@
           {
             "Id": "ShowInfo",
             "Title": "Uh-oh",
-            "Message": "There are only a few things worse than Fr*nch people (and trees). This is not happening."
+            "Message": "There are only a few things worse than Fr*nch people (and trees). This is not happening.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
           }
         ]
       }
