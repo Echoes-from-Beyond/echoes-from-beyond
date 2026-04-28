@@ -19,10 +19,12 @@
 package org.echoesfrombeyond.plantingyourroots.command;
 
 import com.hypixel.hytale.builtin.instances.InstancesPlugin;
+import com.hypixel.hytale.protocol.GameMode;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.CommandSender;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
+import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
 import org.echoesfrombeyond.plantingyourroots.PlantingYourRoots;
 import org.echoesfrombeyond.plantingyourroots.component.RootsComponent;
@@ -59,6 +61,8 @@ public class ReadyForLove extends CommandBase {
         () -> {
           var transform = store.getComponent(playerRef, TransformComponent.getComponentType());
           if (transform == null) return;
+
+          Player.setGameMode(playerRef, GameMode.Adventure, store);
 
           var roots = store.ensureAndGetComponent(playerRef, RootsComponent.getComponentType());
           var returnPoint = transform.getTransform().clone();
