@@ -33,15 +33,15 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-class StringDefaultCodec<T> implements Codec<T>, WrappedCodec<T> {
+public class StringDefaultCodec<T> implements Codec<T>, WrappedCodec<T> {
   private final Codec<T> inner;
-  private final BiFunction<String, ? super ExtraInfo, ? extends T> fromString;
-  private final BiFunction<? super T, ? super ExtraInfo, @Nullable String> toString;
+  private final BiFunction<String, ? super ExtraInfo, T> fromString;
+  private final BiFunction<T, ? super ExtraInfo, String> toString;
 
-  StringDefaultCodec(
+  public StringDefaultCodec(
       Codec<T> inner,
-      BiFunction<String, ? super ExtraInfo, ? extends T> fromString,
-      BiFunction<? super T, ? super ExtraInfo, @Nullable String> toString) {
+      BiFunction<String, ? super ExtraInfo, T> fromString,
+      BiFunction<T, ? super ExtraInfo, String> toString) {
     this.inner = inner;
     this.fromString = fromString;
     this.toString = toString;
@@ -58,23 +58,20 @@ class StringDefaultCodec<T> implements Codec<T>, WrappedCodec<T> {
     int peek = reader.peek();
     return switch (peek) {
       case '"' -> fromString.apply(reader.readString(), extraInfo);
-      case '{' -> inner.decodeJson(reader, extraInfo);
+      case '{', '[' -> inner.decodeJson(reader, extraInfo);
       default ->
           throw new IOException(
               "Unexpected character: "
-                  + Integer.toHexString((char) peek)
+                  + Integer.toHexString(peek)
                   + ", '"
                   + (char) peek
-                  + "' expected '\"' or '{'!");
+                  + "' expected '\"', '{', or '['!");
     };
   }
 
   @Override
   public BsonValue encode(T data, ExtraInfo extra) {
-    var string = toString.apply(data, extra);
-    if (string != null) return new BsonString(string);
-
-    return inner.encode(data, extra);
+    return new BsonString(toString.apply(data, extra));
   }
 
   @Override
