@@ -25,7 +25,7 @@ import org.echoesfrombeyond.codechelper.inherit.ListMerger;
 
 /**
  * When inheriting from a parent codec, merges the values from the parent with the values from the
- * child.
+ * child. Works only for field types assignable to List.
  */
 @InheritSpec(ListMerger.class)
 @Target(ElementType.FIELD)

@@ -46,7 +46,7 @@ public interface Provider<Instance, Args> {
           provider.getClass(),
           "Could not cast argument class "
               + args.getClass().getSimpleName()
-              + " to arguments type "
+              + " to argument type "
               + provider.getArgsType().getSimpleName());
     }
   }
