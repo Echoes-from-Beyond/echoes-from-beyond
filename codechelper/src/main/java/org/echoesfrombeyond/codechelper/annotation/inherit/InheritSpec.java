@@ -21,9 +21,18 @@ package org.echoesfrombeyond.codechelper.annotation.inherit;
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.inherit.InheritMergerProvider;
 
+/**
+ * Applied to an annotation type to indicate that it can be used to specify an inheritance merging
+ * policy.
+ */
 @Target(ElementType.ANNOTATION_TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface InheritSpec {
+  /**
+   * The {@link InheritMergerProvider} used to provide inheritance merging functionality.
+   *
+   * @return the InheritMergeProvider
+   */
   Class<? extends InheritMergerProvider<?>> value();
 }
