@@ -19,7 +19,6 @@
 package org.echoesfrombeyond.codechelper.annotation.inherit;
 
 import java.lang.annotation.*;
-
 import org.echoesfrombeyond.codechelper.inherit.InheritProvider;
 
 /**
