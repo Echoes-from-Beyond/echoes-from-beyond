@@ -25,11 +25,18 @@ import org.echoesfrombeyond.codechelper.annotation.inherit.InheritMergeList;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/** Provider for {@link InheritMergeList}. */
 @NullMarked
 public class ListMerger implements InheritMergerProvider<InheritMergeList> {
+  /** Singleton instance of this class. */
+  @SuppressWarnings("unused")
+  public static final ListMerger INSTANCE = new ListMerger();
+
   private static boolean isValidFor(Field field) {
     return List.class.isAssignableFrom(field.getType());
   }
+
+  private ListMerger() {}
 
   @Override
   public Class<InheritMergeList> getArgsType() {

@@ -20,26 +20,18 @@ package org.echoesfrombeyond.codechelper.annotation.inherit;
 
 import java.lang.annotation.*;
 
-import org.echoesfrombeyond.codechelper.inherit.ListMerger;
+import org.echoesfrombeyond.codechelper.inherit.InheritParentProvider;
 
 /**
- * When inheriting from a parent codec, merges the values from the parent with the values from the
- * child. Works only for field types assignable to List.
+ * Specifies an inheritance policy that uses the parent value whenever it is present. The child
+ * value will only be used if the parent is absent.
+ *
+ * <p>This annotation is compatible with all field types.
+ *
+ * @see Inherit
  */
-@InheritSpec(ListMerger.class)
 @Target(ElementType.FIELD)
+@InheritSpec(InheritParentProvider.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface InheritMergeList {
-  /**
-   * Specifies the index at which the parent values should be inserted. This value is clamped to the
-   * actual size of the list and so cannot cause out of bounds errors. Set to a very large value
-   * like {@link Integer#MAX_VALUE} to place parent values at the very end of the resulting list.
-   * Set to a negative value (or 0) to place parent values at the beginning of the list.
-   *
-   * <p>Defaults to 0.
-   *
-   * @return the index where merges should occur
-   */
-  int mergeAt() default 0;
-}
+public @interface InheritParent {}
