@@ -20,6 +20,7 @@ package org.echoesfrombeyond.codechelper.annotation.inherit;
 
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.inherit.ListMerger;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * When inheriting from a parent codec, merges the values from the parent with the values from the
@@ -29,6 +30,7 @@ import org.echoesfrombeyond.codechelper.inherit.ListMerger;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@NullMarked
 public @interface InheritMergeList {
   /**
    * Specifies the index at which the parent values should be inserted. This value is clamped to the

@@ -20,6 +20,7 @@ package org.echoesfrombeyond.codechelper.annotation.inherit;
 
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.inherit.InheritProvider;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Specifies an inheritance policy where the child value overrides the parent value whenever it is
@@ -33,4 +34,5 @@ import org.echoesfrombeyond.codechelper.inherit.InheritProvider;
 @InheritSpec(InheritProvider.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@NullMarked
 public @interface Inherit {}

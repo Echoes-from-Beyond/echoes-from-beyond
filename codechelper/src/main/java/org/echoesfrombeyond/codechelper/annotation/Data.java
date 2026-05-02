@@ -24,6 +24,7 @@ import java.lang.annotation.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Marks a field as the data field.
@@ -39,4 +40,5 @@ import java.util.function.Supplier;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@NullMarked
 public @interface Data {}

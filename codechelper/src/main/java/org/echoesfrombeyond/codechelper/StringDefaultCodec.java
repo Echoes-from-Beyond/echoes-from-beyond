@@ -33,13 +33,13 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-public class StringDefaultCodec<T> implements Codec<T>, WrappedCodec<T> {
-  private final Codec<T> inner;
+public class StringDefaultCodec<T, C extends Codec<T>> implements Codec<T>, WrappedCodec<T> {
+  private final C inner;
   private final BiFunction<String, ? super ExtraInfo, T> fromString;
   private final BiFunction<T, ? super ExtraInfo, String> toString;
 
   public StringDefaultCodec(
-      Codec<T> inner,
+      C inner,
       BiFunction<String, ? super ExtraInfo, T> fromString,
       BiFunction<T, ? super ExtraInfo, String> toString) {
     this.inner = inner;
@@ -75,7 +75,7 @@ public class StringDefaultCodec<T> implements Codec<T>, WrappedCodec<T> {
   }
 
   @Override
-  public Codec<T> getChildCodec() {
+  public C getChildCodec() {
     return inner;
   }
 

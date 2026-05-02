@@ -20,6 +20,7 @@ package org.echoesfrombeyond.codechelper.annotation.inherit;
 
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.inherit.InheritMergerProvider;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Applied to an annotation type to indicate that it can be used to specify an inheritance merging
@@ -28,6 +29,7 @@ import org.echoesfrombeyond.codechelper.inherit.InheritMergerProvider;
 @Target(ElementType.ANNOTATION_TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@NullMarked
 public @interface InheritSpec {
   /**
    * The {@link InheritMergerProvider} used to provide inheritance merging functionality.

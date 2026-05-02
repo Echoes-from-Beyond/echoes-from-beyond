@@ -21,6 +21,7 @@ package org.echoesfrombeyond.codechelper.annotation.validator;
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.validator.RegexProvider;
 import org.intellij.lang.annotations.Language;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * When applied to a field of type {@link String}, validates that it matches the specified regex.
@@ -29,6 +30,7 @@ import org.intellij.lang.annotations.Language;
 @Retention(RetentionPolicy.RUNTIME)
 @ValidatorSpec(RegexProvider.class)
 @Documented
+@NullMarked
 public @interface ValidateRegex {
   /**
    * @return the regex pattern

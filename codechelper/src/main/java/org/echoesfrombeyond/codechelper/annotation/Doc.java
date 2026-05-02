@@ -21,7 +21,7 @@ package org.echoesfrombeyond.codechelper.annotation;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.builder.BuilderField;
 import java.lang.annotation.*;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Adds documentation to the type or field. This is equivalent to calling {@link
@@ -31,9 +31,10 @@ import org.jspecify.annotations.NonNull;
 @Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@NullMarked
 public @interface Doc {
   /**
    * @return the documentation string
    */
-  @NonNull String value();
+  String value();
 }
