@@ -43,16 +43,17 @@ public class InheritMathOpProvider implements InheritMergerProvider<InheritMathO
 
   private record Provider(InheritMathOp.Op op) implements InheritMerger<Object> {
     @Override
-    public @Nullable Object merge(@Nullable Object value, @Nullable Object parentValue) {
-      if (value == null && parentValue == null) return null;
-      if (value == null ^ parentValue == null) return value == null ? parentValue : value;
+    public @Nullable Object merge(@Nullable Object defaultValue, @Nullable Object parentValue) {
+      if (defaultValue == null && parentValue == null) return null;
+      if (defaultValue == null ^ parentValue == null)
+        return defaultValue == null ? parentValue : defaultValue;
 
-      var valueNumber = (Number) value;
+      var valueNumber = (Number) defaultValue;
       var parentNumber = (Number) parentValue;
 
       assert valueNumber.getClass().equals(parentNumber.getClass());
 
-      return switch (value) {
+      return switch (defaultValue) {
         case Byte other ->
             switch (op) {
               case ADD -> parentNumber.byteValue() + other;
@@ -96,7 +97,8 @@ public class InheritMathOpProvider implements InheritMergerProvider<InheritMathO
               case MULTIPLY -> parentNumber.doubleValue() * other;
             };
         default ->
-            throw new CodecException("Unexpected numeric type " + value.getClass().getName());
+            throw new CodecException(
+                "Unexpected numeric type " + defaultValue.getClass().getName());
       };
     }
   }

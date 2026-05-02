@@ -23,8 +23,9 @@ import org.echoesfrombeyond.codechelper.inherit.InheritProvider;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Specifies an inheritance policy where the child value overrides the parent value whenever it is
- * present. This is the default behavior if no {@link InheritSpec} annotation is applied.
+ * Specifies an inheritance policy where the child value overrides the parent value whenever the
+ * child value is non-null. Default inheritance behavior is to <i>always</i> use the child value, so
+ * using this differs from not including any {@link InheritSpec}-type annotation.
  *
  * <p>This annotation is compatible with all field types.
  *

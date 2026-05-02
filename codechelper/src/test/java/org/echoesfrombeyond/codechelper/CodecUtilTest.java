@@ -42,6 +42,8 @@ import org.bson.BsonDocument;
 import org.bson.BsonString;
 import org.bson.json.JsonWriterSettings;
 import org.echoesfrombeyond.codechelper.annotation.*;
+import org.echoesfrombeyond.codechelper.annotation.inherit.Inherit;
+import org.echoesfrombeyond.codechelper.annotation.inherit.InheritParent;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateLengthRange;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateNonEmpty;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateRegex;
@@ -271,6 +273,14 @@ class CodecUtilTest {
 
     @ValidateLengthRange(min = 1, max = 2)
     private Map<String, String> LengthMap;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class SimpleInherit {
+    @Inherit public Integer Value;
+    @InheritParent public String StringValue;
   }
 
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
@@ -917,5 +927,31 @@ class CodecUtilTest {
                             .getChildCodec())
                     .toSchema(new SchemaContext()))
             .getMarkdownEnumDescriptions());
+  }
+
+  @Test
+  public void simpleInheritance() throws IOException {
+    var resolver = CodecResolver.PRIMITIVE;
+
+    var builder = CodecUtil.modelBuilder(SimpleInherit.class, resolver);
+
+    var rawJsonReader =
+        new RawJsonReader(
+            new CharArrayReader("{\"StringValue\":\"child\"}".toCharArray()), new char[4096]);
+
+    var parent = new SimpleInherit();
+    parent.Value = 10;
+    parent.StringValue = "parent";
+
+    var decoded = new SimpleInherit();
+    var ef = new ExtraInfo();
+
+    builder.decodeAndInheritJson0(rawJsonReader, decoded, parent, ef);
+    builder.inherit(decoded, parent, ef);
+    builder.afterDecodeAndValidate(decoded, ef);
+
+    assertNotNull(decoded);
+    assertEquals(10, decoded.Value);
+    assertEquals("parent", decoded.StringValue);
   }
 }

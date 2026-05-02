@@ -37,9 +37,9 @@ public interface InheritMerger<T> {
   /**
    * Merges the parent value with the child value.
    *
-   * @param value the value of the field
+   * @param defaultValue the value of the field
    * @param parentValue the parent value of the field
    * @return the merged value
    */
-  @Nullable T merge(@Nullable T value, @Nullable T parentValue);
+  @Nullable T merge(@Nullable T defaultValue, @Nullable T parentValue);
 }

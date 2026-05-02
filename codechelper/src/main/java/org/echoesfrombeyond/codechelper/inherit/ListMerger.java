@@ -47,11 +47,11 @@ public class ListMerger implements InheritMergerProvider<InheritMergeList> {
     @Override
     @SuppressWarnings("unchecked")
     public @Nullable List<Object> merge(
-        @Nullable List<Object> value, @Nullable List<Object> parentValue) {
-      if (parentValue == null || parentValue.isEmpty()) return value;
+        @Nullable List<Object> defaultValue, @Nullable List<Object> parentValue) {
+      if (parentValue == null || parentValue.isEmpty()) return defaultValue;
 
       // if value is null, it should have the same type as the parent value
-      if (value == null) {
+      if (defaultValue == null) {
         try {
           var newList =
               (List<Object>) parentValue.getClass().getDeclaredConstructor().newInstance();
@@ -65,8 +65,8 @@ public class ListMerger implements InheritMergerProvider<InheritMergeList> {
         }
       }
 
-      value.addAll(Math.min(Math.max(index, 0), value.size()), parentValue);
-      return value;
+      defaultValue.addAll(Math.min(Math.max(index, 0), defaultValue.size()), parentValue);
+      return defaultValue;
     }
   }
 

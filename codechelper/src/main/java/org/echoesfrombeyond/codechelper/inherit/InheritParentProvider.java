@@ -32,14 +32,16 @@ public class InheritParentProvider implements InheritMergerProvider<InheritParen
   @SuppressWarnings("unused")
   public static final InheritParentProvider INSTANCE = new InheritParentProvider();
 
-  private static final Provider PROVIDER_INSTANCE = new Provider();
+  private static final Provider FORCE = new Provider(true);
+  private static final Provider NO_FORCE = new Provider(false);
 
   private InheritParentProvider() {}
 
-  private record Provider() implements InheritMerger<Object> {
+  private record Provider(boolean force) implements InheritMerger<Object> {
     @Override
-    public @Nullable Object merge(@Nullable Object value, @Nullable Object parentValue) {
-      return parentValue != null ? parentValue : value;
+    public @Nullable Object merge(@Nullable Object defaultValue, @Nullable Object parentValue) {
+      if (force) return parentValue;
+      return parentValue == null ? defaultValue : parentValue;
     }
   }
 
@@ -49,7 +51,7 @@ public class InheritParentProvider implements InheritMergerProvider<InheritParen
   }
 
   @Override
-  public InheritMerger<?> getInstance(InheritParent ignored, Field ignored2) {
-    return PROVIDER_INSTANCE;
+  public InheritMerger<?> getInstance(InheritParent args, Field ignored) {
+    return args.value() ? FORCE : NO_FORCE;
   }
 }

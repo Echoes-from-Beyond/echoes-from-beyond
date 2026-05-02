@@ -23,8 +23,10 @@ import org.echoesfrombeyond.codechelper.inherit.InheritParentProvider;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Specifies an inheritance policy that uses the parent value whenever it is present. The child
- * value will only be used if the parent is absent.
+ * Specifies an inheritance policy that uses the parent value whenever the parent value is non-null.
+ * The child value will only be used if the parent is absent. If {@link InheritParent#value()} is
+ * {@code true} (default {@code false}), the parent value will <i>always</i> be used regardless of
+ * its value.
  *
  * <p>This annotation is compatible with all field types.
  *
@@ -35,4 +37,11 @@ import org.jspecify.annotations.NullMarked;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @NullMarked
-public @interface InheritParent {}
+public @interface InheritParent {
+  /**
+   * Whether to force using the parent value. Default {@code false}.
+   *
+   * @return {@code true} if forcefully using the parent value; {@code false} otherwise
+   */
+  boolean value() default false;
+}

@@ -51,6 +51,9 @@ import org.jspecify.annotations.Nullable;
  * desired capabilities, and storing the result in a {@code static final} field. The resolver can
  * then be passed to {@link CodecUtil#modelBuilder(Class, CodecResolver)} or an overload.
  *
+ * <p>Users wanting a "batteries included" resolver that can handle most basic types out of the box
+ * should look at the {@link Builder#withStandardSettings()} method.
+ *
  * @see CodecResolver#builder() builder method to compose instances of this interface
  * @see CodecUtil to use instances of this class to generate custom Codec instances
  * @see CodecResolver#PRIMITIVE for a resolver capable of handling all primitive types
