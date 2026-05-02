@@ -22,6 +22,11 @@ import java.lang.annotation.Annotation;
 import org.echoesfrombeyond.codechelper.provider.Provider;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * Provider for {@link InheritMerger}.
+ *
+ * @param <A> the annotation type
+ */
 @NullMarked
 public interface InheritMergerProvider<A extends Annotation>
     extends Provider<InheritMerger<?>, A> {}

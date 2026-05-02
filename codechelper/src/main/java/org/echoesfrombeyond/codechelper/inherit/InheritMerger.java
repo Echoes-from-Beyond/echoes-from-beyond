@@ -18,10 +18,28 @@
 
 package org.echoesfrombeyond.codechelper.inherit;
 
+import com.hypixel.hytale.codec.KeyedCodec;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Merges the parent value with the child value. These are used during codec inheritance, as if by
+ * calling {@link BuilderCodec.Builder#appendInherited(KeyedCodec, BiConsumer, Function,
+ * BiConsumer)}.
+ *
+ * @param <T> the field type
+ */
 @NullMarked
 public interface InheritMerger<T> {
+  /**
+   * Merges the parent value with the child value.
+   *
+   * @param value the value of the field
+   * @param parentValue the parent value of the field
+   * @return the merged value
+   */
   @Nullable T merge(@Nullable T value, @Nullable T parentValue);
 }

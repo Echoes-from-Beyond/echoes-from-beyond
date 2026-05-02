@@ -24,11 +24,19 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Special implementation of {@link InheritMerger} that combines multiple sub-mergers.
+ *
+ * <p>This API is internal and is not meant to be used by classes outside this library.
+ *
+ * @param <T> the field type
+ */
 @NullMarked
 @ApiStatus.Internal
 public class CompositeMerger<T> implements InheritMerger<T> {
   private final List<InheritMerger<T>> mergers;
 
+  /** Creates a new instance of this class. */
   public CompositeMerger() {
     this.mergers = new ArrayList<>();
   }
@@ -40,8 +48,12 @@ public class CompositeMerger<T> implements InheritMerger<T> {
     return running;
   }
 
+  /**
+   * Adds a new merger. Mergers added later will be executed later during the composite merge.
+   *
+   * @param merger the merger to add
+   */
   public void addMerger(InheritMerger<T> merger) {
-    if (merger instanceof CompositeMerger<T> composite) mergers.addAll(composite.mergers);
-    else mergers.add(merger);
+    mergers.add(merger);
   }
 }
