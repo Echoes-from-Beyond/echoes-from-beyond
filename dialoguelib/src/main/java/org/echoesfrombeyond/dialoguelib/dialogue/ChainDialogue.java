@@ -28,8 +28,6 @@ import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.*;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
-import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
-import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

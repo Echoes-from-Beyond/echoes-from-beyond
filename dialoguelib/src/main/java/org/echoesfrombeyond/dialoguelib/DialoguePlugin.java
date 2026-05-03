@@ -108,7 +108,6 @@ public class DialoguePlugin extends JavaPlugin {
         .register("AdjustInteger", AddIntegerMetadataAction.class, AddIntegerMetadataAction.CODEC)
         .register("Advance", AdvanceAction.class, AdvanceAction.CODEC)
         .register("Close", CloseDialogueAction.class, CloseDialogueAction.CODEC)
-        .register("Composite", CompositeAction.class, CompositeAction.CODEC)
         .register("Conditional", ConditionalAction.class, ConditionalAction.CODEC)
         .register("SetMetadata", SetMetadataAction.class, SetMetadataAction.CODEC);
 

@@ -21,6 +21,7 @@ package org.echoesfrombeyond.dialoguelib.choice;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
@@ -31,8 +32,6 @@ import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-
-import java.util.List;
 
 @NullMarked
 @ModelBuilder
@@ -79,7 +78,7 @@ public class StandardChoice implements DialogueChoice {
     var actions = Actions;
     if (actions == null) return;
 
-    for(var action : actions) {
+    for (var action : actions) {
       action.onChosen(activator, parent, this);
     }
   }
