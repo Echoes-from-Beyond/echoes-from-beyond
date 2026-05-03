@@ -36,10 +36,12 @@
       {
         "Id": "Standard",
         "Text": "Ice mists?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_4B_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4B_1"
+          }
+        ]
       }
     ]
   }

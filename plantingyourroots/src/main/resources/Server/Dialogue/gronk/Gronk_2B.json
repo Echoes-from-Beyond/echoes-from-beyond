@@ -33,18 +33,22 @@
       {
         "Id": "Standard",
         "Text": "Kweebecs, am I right or am I right?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gronk_3A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gronk_3A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "The market DOES feel pretty dangerous...",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gronk_3"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gronk_3"
+          }
+        ]
       }
     ]
   }

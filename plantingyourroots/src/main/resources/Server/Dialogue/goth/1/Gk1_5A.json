@@ -28,10 +28,12 @@
       {
         "Id": "Standard",
         "Text": "Continue",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_5AB"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_5AB"
+          }
+        ]
       }
     ]
   }

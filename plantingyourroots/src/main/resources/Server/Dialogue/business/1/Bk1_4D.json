@@ -32,40 +32,34 @@
       {
         "Id": "Standard",
         "Text": "If you have enough to retire, why don't you do it? It doesn't sound like you love your job.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Bk_Private",
-              "MetadataStoreKey": "BUSINESS_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Bk1_4D-5A"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Private",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4D-5A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I think that something got lost in translation. I was dead serious.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Bk_Public",
-              "MetadataStoreKey": "BUSINESS_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Bk1_4D-5B"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Public",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4D-5B"
+          }
+        ]
       }
     ]
   }

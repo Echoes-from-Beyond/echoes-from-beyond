@@ -52,10 +52,12 @@
       {
         "Id": "Standard",
         "Text": "[Polite conversation is for conformists. Don't say a word.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_1"
+          }
+        ]
       }
     ]
   }

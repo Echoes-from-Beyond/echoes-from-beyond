@@ -24,10 +24,12 @@
       {
         "Id": "Standard",
         "Text": "Continue",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_2ABCD"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2ABCD"
+          }
+        ]
       }
     ]
   }

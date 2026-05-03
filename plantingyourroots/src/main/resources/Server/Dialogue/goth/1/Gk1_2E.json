@@ -40,75 +40,68 @@
       {
         "Id": "Standard",
         "Text": "It was just a compliment. I didn't mean to imply anything more than that.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_2E-3A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2E-3A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Whoa, hold up! I was saying that as one goth to another.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataKey": "Gk_Relationship",
-              "MetadataStoreKey": "GOTH_KWEEBEC",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Gk_Wannabe"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Gk1_2E-3B"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk_Relationship",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk_Wannabe"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2E-3B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Oh, come on. I wouldn't do that.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataKey": "Gk_Relationship",
-              "MetadataStoreKey": "GOTH_KWEEBEC",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Gk_Unrequited"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Gk1_2E-3C"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk_Relationship",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk_Unrequited"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2E-3C"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Fair enough. [Leave]",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataKey": "Gk_Relationship",
-              "MetadataStoreKey": "GOTH_KWEEBEC",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Gk_Unrequited"
-              }
-            },
-            {
-              "Id": "Close"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk_Relationship",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk_Unrequited"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Close"
+          }
+        ]
       }
     ]
   }

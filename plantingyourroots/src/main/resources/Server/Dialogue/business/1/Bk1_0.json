@@ -52,18 +52,22 @@
       {
         "Id": "Standard",
         "Text": "Hi?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_1"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "[Let her continue ranting.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_1A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_1A"
+          }
+        ]
       }
     ]
   }

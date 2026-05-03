@@ -33,10 +33,12 @@
       {
         "Id": "Standard",
         "Text": "Sorry, I don't have anything to pay with.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gronk_4"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gronk_4"
+          }
+        ]
       }
     ]
   }

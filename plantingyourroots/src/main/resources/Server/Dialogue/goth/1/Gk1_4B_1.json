@@ -40,18 +40,22 @@
       {
         "Id": "Standard",
         "Text": "Surely it can't be that bad.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_4B-5A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4B-5A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Oof. Advice taken.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_4B-5B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4B-5B"
+          }
+        ]
       }
     ]
   }

@@ -15,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Gk1_4"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Gk1_4"
+        }
+      ]
     }
   ]
 }
