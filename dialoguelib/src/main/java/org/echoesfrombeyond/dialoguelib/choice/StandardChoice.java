@@ -32,6 +32,8 @@ import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.util.List;
+
 @NullMarked
 @ModelBuilder
 @Doc(
@@ -57,11 +59,11 @@ public class StandardChoice implements DialogueChoice {
 
   @Doc(
       """
-      Action that is taken when the choice is selected (e.g. clicked
+      Actions that are taken when the choice is selected (e.g. clicked
       if the dialogue is UI-based.) If left absent, selecting the
       choice will do nothing.
       """)
-  public @Nullable ChoiceAction Action;
+  public @Nullable List<ChoiceAction> Actions;
 
   public StandardChoice() {
     this.Text = "";
@@ -74,8 +76,12 @@ public class StandardChoice implements DialogueChoice {
 
   @Override
   public void onChosen(Ref<EntityStore> activator, Dialogue parent) {
-    var action = Action;
-    if (action != null) action.onChosen(activator, parent, this);
+    var actions = Actions;
+    if (actions == null) return;
+
+    for(var action : actions) {
+      action.onChosen(activator, parent, this);
+    }
   }
 
   @Override

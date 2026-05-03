@@ -28,6 +28,8 @@ import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.*;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
+import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
+import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -86,7 +88,9 @@ public class ChainDialogue extends UIDialogueBase implements Dialogue {
 
       var advance = new StandardChoice();
       advance.Text = AdvanceText;
-      advance.Action = (player, _, _) -> next.display(player);
+      advance.Actions = new ArrayList<>();
+
+      advance.Actions.add((player, _, _) -> next.display(player));
 
       dialogue.Choices.add(advance);
       dialogue = nextStandard;
