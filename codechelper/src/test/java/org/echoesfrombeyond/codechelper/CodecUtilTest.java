@@ -283,6 +283,23 @@ class CodecUtilTest {
     @InheritParent public String StringValue;
   }
 
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class AfterDecodeTest {
+    public int Test;
+
+    @AfterDecode
+    private void afterDecodeParameterless() {
+      Test++;
+    }
+
+    @AfterDecode
+    private void afterDecode(ExtraInfo extra) {
+      Test++;
+    }
+  }
+
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
     if (expected == null && actual == null) return;
     if (expected == null ^ actual == null) {
@@ -953,5 +970,20 @@ class CodecUtilTest {
     assertNotNull(decoded);
     assertEquals(10, decoded.Value);
     assertEquals("parent", decoded.StringValue);
+  }
+
+  @Test
+  public void afterDecodeSimple() throws IOException {
+    var resolver = CodecResolver.PRIMITIVE;
+
+    var builder = CodecUtil.modelBuilder(AfterDecodeTest.class, resolver);
+
+    var afterDecodeTest =
+        builder.decodeJson(
+            new RawJsonReader(new CharArrayReader("{\"Test\":0}".toCharArray()), new char[4096]),
+            new ExtraInfo());
+
+    assertNotNull(afterDecodeTest);
+    assertEquals(2, afterDecodeTest.Test);
   }
 }

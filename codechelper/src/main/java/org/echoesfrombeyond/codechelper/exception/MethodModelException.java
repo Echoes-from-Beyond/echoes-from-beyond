@@ -18,32 +18,36 @@
 
 package org.echoesfrombeyond.codechelper.exception;
 
+import java.lang.reflect.Method;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.CodecUtil;
-import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /** Exception thrown by {@link CodecUtil#modelBuilder(Class, CodecResolver)} and overloads. */
+@ApiStatus.Internal
 @NullMarked
-public class ModelException extends IllegalArgumentException {
-  private static String formatMessage(Class<?> modelType, String message) {
-    return String.format("Model class: %s\n%s", modelType.getName(), message);
+public class MethodModelException extends ModelException {
+  private static String formatMessage(Method method, String message) {
+    return String.format("Model method: %s\n%s", method, message);
   }
 
   /**
-   * @param modelType the model type, typically annotated with {@link ModelBuilder}
-   * @param message the message string
+   * @param modelType the model type
+   * @param method the method associated with this exception
+   * @param message the error message
    */
-  public ModelException(Class<?> modelType, String message) {
-    super(formatMessage(modelType, message));
+  public MethodModelException(Class<?> modelType, Method method, String message) {
+    super(modelType, formatMessage(method, message));
   }
 
   /**
-   * @param modelType the model type, typically annotated with {@link ModelBuilder}
-   * @param message the message string
-   * @param cause the cause of this exception
+   * @param modelType the model type
+   * @param method the method associated with this exception
+   * @param message the error message
+   * @param cause the error cause
    */
-  public ModelException(Class<?> modelType, String message, Throwable cause) {
-    super(formatMessage(modelType, message), cause);
+  public MethodModelException(Class<?> modelType, Method method, String message, Throwable cause) {
+    super(modelType, formatMessage(method, message), cause);
   }
 }

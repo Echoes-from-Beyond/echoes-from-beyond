@@ -22,6 +22,7 @@ import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.JsonAsset;
 import com.hypixel.hytale.assetstore.codec.AssetBuilderCodec;
 import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.codec.ExtraInfo;
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.builder.BuilderField;
@@ -32,6 +33,7 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.*;
+import java.util.Arrays;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -207,6 +209,8 @@ public final class CodecUtil {
               : BuilderCodec.builder(model, supplier, parent);
     }
 
+    modelCodecVersion(builder, model);
+    modelAfterDecode(builder, model, lookup);
     modelFields(builder, model, resolver, lookup, false);
     return builder.build();
   }
@@ -477,6 +481,8 @@ public final class CodecUtil {
                 dataWriter,
                 dataReader);
 
+    modelCodecVersion(builder, model);
+    modelAfterDecode(builder, model, lookup);
     modelFields(builder, model, resolver, lookup, true);
     return builder.build();
   }
@@ -620,6 +626,71 @@ public final class CodecUtil {
                 throw new CodecException("Couldn't write to field during merge", e);
               }
             });
+  }
+
+  private static <T> void modelCodecVersion(
+      BuilderCodec.BuilderBase<T, ?> builder, Class<T> model) {
+    var version = model.getAnnotation(CodecVersion.class);
+    if (version == null) return;
+
+    builder.codecVersion(version.min(), version.value());
+  }
+
+  private record DecodeHandle(MethodHandle handle, boolean isParameterless) {}
+
+  private static <T> void modelAfterDecode(
+      BuilderCodec.BuilderBase<T, ?> builder, Class<T> model, MethodHandles.Lookup lookup) {
+    var afterDecodeMethods =
+        Arrays.stream(model.getDeclaredMethods())
+            .filter(method -> method.isAnnotationPresent(AfterDecode.class))
+            .toArray(Method[]::new);
+
+    if (afterDecodeMethods.length == 0) return;
+    var decodeHandles = new DecodeHandle[afterDecodeMethods.length];
+
+    for (int i = 0; i < afterDecodeMethods.length; i++) {
+      var method = afterDecodeMethods[i];
+
+      if (!method.getReturnType().equals(void.class))
+        throw new MethodModelException(
+            model, method, "@AfterDecode method must have a void return type");
+
+      var modifiers = method.getModifiers();
+      if (Modifier.isStatic(modifiers)
+          || Modifier.isAbstract(modifiers)
+          || Modifier.isNative(modifiers))
+        throw new MethodModelException(
+            model, method, "@AfterDecode method cannot be static, abstract, or native");
+
+      var parameterLength = method.getParameterCount();
+      if (parameterLength > 1
+          || (parameterLength == 1
+              && !method.getParameterTypes()[0].isAssignableFrom(ExtraInfo.class)))
+        throw new MethodModelException(
+            model,
+            method,
+            "@AfterDecode method must either be parameterless or accept a single parameter"
+                + " whose type is assignable to "
+                + ExtraInfo.class.getName());
+
+      try {
+        decodeHandles[i] = new DecodeHandle(lookup.unreflect(method), parameterLength == 0);
+      } catch (IllegalAccessException e) {
+        throw new MethodModelException(model, method, "@AfterDecode method must be accessible", e);
+      }
+    }
+
+    builder.afterDecode(
+        (self, extraInfo) -> {
+          for (var handle : decodeHandles) {
+            try {
+              if (handle.isParameterless) handle.handle.invoke(self);
+              else handle.handle.invoke(self, extraInfo);
+            } catch (Throwable e) {
+              throw new CodecException("Error invoking @AfterDecode method", e);
+            }
+          }
+        });
   }
 
   @SuppressWarnings("unchecked")
