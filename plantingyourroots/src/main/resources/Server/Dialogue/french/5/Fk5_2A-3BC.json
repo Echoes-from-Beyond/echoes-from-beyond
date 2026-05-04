@@ -28,10 +28,12 @@
       {
         "Id": "Standard",
         "Text": "Do you have 'bad associations' because *that* was your seedhood?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk5_2A-3BC_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2A-3BC_1"
+          }
+        ]
       }
     ]
   }

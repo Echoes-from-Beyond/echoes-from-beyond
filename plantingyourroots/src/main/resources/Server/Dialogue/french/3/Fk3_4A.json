@@ -37,10 +37,12 @@
       {
         "Id": "Standard",
         "Text": "Continue",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_4"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_4"
+          }
+        ]
       }
     ]
   }

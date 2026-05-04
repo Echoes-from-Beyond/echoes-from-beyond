@@ -43,26 +43,32 @@
       {
         "Id": "Standard",
         "Text": "Bonjour.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk5_1A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_1A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "[Mispronounce it horribly.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk5_1B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_1B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Heya.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk5_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_1"
+          }
+        ]
       }
     ]
   }

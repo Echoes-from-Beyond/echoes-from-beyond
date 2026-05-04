@@ -38,18 +38,22 @@
       {
         "Id": "Standard",
         "Text": "He said that he's from Quebec. And so are you.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk5_3_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_3_1"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "The best part is that I heard you're not even French.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk5_3_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_3_1"
+          }
+        ]
       }
     ]
   }

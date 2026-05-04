@@ -37,39 +37,40 @@
           }
         }
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_2_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_2-L1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_2-L1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_2_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_2-L1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_2-L1"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "[Clasp your hand over his.]",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_3A"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_3A"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "[Continue watching him.]",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_3B"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_3B"
+        }
+      ]
     }
   ]
 }

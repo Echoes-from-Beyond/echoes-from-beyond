@@ -58,26 +58,32 @@
       {
         "Id": "Standard",
         "Text": "Let's blow this joint.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk6_2A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_2A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I'll kind of miss you.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk6_2B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_2B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Best of luck!",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk6_2C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_2C"
+          }
+        ]
       }
     ]
   }

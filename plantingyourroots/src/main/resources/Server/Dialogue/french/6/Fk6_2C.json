@@ -23,10 +23,12 @@
         "Comparison": "GreaterThanOrEqualTo",
         "Value": 5
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk6_2_var1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_2_var1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -41,10 +43,12 @@
           "Value": 5
         }
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk6_2_var2"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_2_var2"
+        }
+      ]
     }
   ]
 }

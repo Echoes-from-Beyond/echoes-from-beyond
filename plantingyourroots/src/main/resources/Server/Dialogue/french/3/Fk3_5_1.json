@@ -30,31 +30,30 @@
         "Id": "Equals",
         "MetadataKey": "Fk3_5_1"
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk3_5_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk3_5-L1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk3_5-L1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk3_5_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk3_5-L1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk3_5-L1"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "Where exactly do you come from? Other than 'somewhere in France'.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk3_6"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk3_6"
+        }
+      ]
     }
   ]
 }

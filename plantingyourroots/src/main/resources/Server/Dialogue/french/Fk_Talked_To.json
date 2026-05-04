@@ -15,9 +15,11 @@
     {
       "Id": "Standard",
       "Text": "End",
-      "Action": {
-        "Id": "Close"
-      }
+      "Actions": [
+        {
+          "Id": "Close"
+        }
+      ]
     }
   ]
 }

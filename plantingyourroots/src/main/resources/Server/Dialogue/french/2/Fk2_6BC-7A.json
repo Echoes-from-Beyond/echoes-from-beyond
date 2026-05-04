@@ -16,10 +16,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_5_1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_5_1"
+        }
+      ]
     }
   ]
 }

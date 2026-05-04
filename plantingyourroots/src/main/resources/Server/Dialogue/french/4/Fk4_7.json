@@ -38,10 +38,12 @@
       {
         "Id": "Standard",
         "Text": "How do you even know this?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_7_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_7_1"
+          }
+        ]
       }
     ]
   }

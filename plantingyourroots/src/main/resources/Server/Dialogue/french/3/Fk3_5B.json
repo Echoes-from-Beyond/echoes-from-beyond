@@ -45,10 +45,12 @@
       {
         "Id": "Standard",
         "Text": "You're eating poutine.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_5B_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_5B_1"
+          }
+        ]
       }
     ]
   }

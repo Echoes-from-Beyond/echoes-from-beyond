@@ -24,10 +24,12 @@
           "MetadataKey": "Fk_Poutine"
         }
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_8_1_var1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_8_1_var1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -37,10 +39,12 @@
         "MetadataStoreKey": "FRENCH_KWEEBEC",
         "MetadataKey": "Fk_Poutine"
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_8_1_var2"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_8_1_var2"
+        }
+      ]
     }
   ]
 }

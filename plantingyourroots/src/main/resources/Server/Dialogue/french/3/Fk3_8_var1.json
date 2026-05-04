@@ -98,8 +98,6 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-        "Id": "Composite",
         "Actions": [
           {
             "Id": "MarkTalkedTo",
@@ -109,7 +107,6 @@
             "Id": "Close"
           }
         ]
-      }
       }
     ]
   }

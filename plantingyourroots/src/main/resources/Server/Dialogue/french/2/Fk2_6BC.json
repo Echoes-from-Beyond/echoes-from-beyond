@@ -33,54 +33,50 @@
       {
         "Id": "Standard",
         "Text": "Well, we can't have that.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_6BC-7A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6BC-7A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "How is that my problem?",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "MetadataKey": "Fk_Relationship",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Fk_Disappointment"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk2_6BC-7B"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Disappointment"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6BC-7B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "[Don't even bother responding to that.]",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "MetadataKey": "Fk_Relationship",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Fk_Disappointment"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk2_6BC-7B"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Disappointment"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6BC-7B"
+          }
+        ]
       }
     ]
   }

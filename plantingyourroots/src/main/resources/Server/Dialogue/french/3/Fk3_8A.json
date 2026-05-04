@@ -41,10 +41,12 @@
             "MetadataKey": "Fk_Lavender"
           }
         },
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_8A_var1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_8A_var1"
+          }
+        ]
       },
       {
         "Id": "Standard",
@@ -54,10 +56,12 @@
           "MetadataStoreKey": "FRENCH_KWEEBEC",
           "MetadataKey": "Fk_Lavender"
         },
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_8A_var2"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_8A_var2"
+          }
+        ]
       }
     ]
   }

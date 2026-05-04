@@ -33,45 +33,48 @@
       {
         "Id": "Standard",
         "Text": "Point taken.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_3"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_3"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "You might be reading too much into this.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_3B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_3B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Nope. I'm as boring as they come.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_3C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_3C"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "No offense, man, but it doesn't take much to be more interesting that the Fr*nch.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "MetadataKey": "Fk_Complex",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk3_3D"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Complex",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_3D"
+          }
+        ]
       }
     ]
   }

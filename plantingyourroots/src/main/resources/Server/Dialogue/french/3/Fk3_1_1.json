@@ -32,10 +32,12 @@
         "MetadataStoreKey": "FRENCH_KWEEBEC",
         "MetadataKey": "Fk_Origin"
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk3_1_var1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk3_1_var1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -48,23 +50,20 @@
           "MetadataKey": "Fk_Origin"
         }
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk3_1_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk3_1-L1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk3_1-L1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk3_1_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk3_1-L1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk3_1-L1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -78,21 +77,18 @@
           "Value": "Fk_Zone1"
         }
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "AdjustInteger",
-            "MetadataKey": "Fk_Romance",
-            "MetadataStoreKey": "FRENCH_KWEEBEC",
-            "Delta": 1
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk3_2B"
-          }
-        ]
-      }
+      "Actions": [
+        {
+          "Id": "AdjustInteger",
+          "MetadataKey": "Fk_Romance",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "Delta": 1
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk3_2B"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -106,21 +102,18 @@
           "Value": "Fk_Zone2"
         }
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "AdjustInteger",
-            "MetadataKey": "Fk_Romance",
-            "MetadataStoreKey": "FRENCH_KWEEBEC",
-            "Delta": 1
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk3_2C"
-          }
-        ]
-      }
+      "Actions": [
+        {
+          "Id": "AdjustInteger",
+          "MetadataKey": "Fk_Romance",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "Delta": 1
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk3_2C"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -134,21 +127,18 @@
           "Value": "Fk_Zone3"
         }
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "AdjustInteger",
-            "MetadataKey": "Fk_Romance",
-            "MetadataStoreKey": "FRENCH_KWEEBEC",
-            "Delta": 1
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk3_2D"
-          }
-        ]
-      }
+      "Actions": [
+        {
+          "Id": "AdjustInteger",
+          "MetadataKey": "Fk_Romance",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "Delta": 1
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk3_2D"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -162,21 +152,18 @@
           "Value": "Fk_Zone4"
         }
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "AdjustInteger",
-            "MetadataKey": "Fk_Romance",
-            "MetadataStoreKey": "FRENCH_KWEEBEC",
-            "Delta": 1
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk3_2E"
-          }
-        ]
-      }
+      "Actions": [
+        {
+          "Id": "AdjustInteger",
+          "MetadataKey": "Fk_Romance",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "Delta": 1
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk3_2E"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -189,10 +176,12 @@
           "MetadataKey": "Fk_Origin"
         }
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk3_2F"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk3_2F"
+        }
+      ]
     }
   ]
 }

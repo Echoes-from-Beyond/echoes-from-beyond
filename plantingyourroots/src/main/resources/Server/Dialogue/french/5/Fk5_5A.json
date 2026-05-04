@@ -28,15 +28,12 @@
       {
         "Id": "Standard",
         "Text": "I heard that you did all of that... in Quebec.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "Advance",
-              "Next": "Fk5_5A_1"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_5A_1"
+          }
+        ]
       }
     ]
   }

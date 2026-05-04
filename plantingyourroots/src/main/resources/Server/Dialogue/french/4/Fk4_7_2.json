@@ -30,39 +30,40 @@
         "Id": "Equals",
         "MetadataKey": "Fk4_7_2"
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk4_7_2",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk4_7-L1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk4_7-L1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk4_7_2",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk4_7-L1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk4_7-L1"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "So what do you expect me to do?",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_8"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_8"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "Get to the point.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_8"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_8"
+        }
+      ]
     }
   ]
 }

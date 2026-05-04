@@ -41,43 +41,37 @@
       {
         "Id": "Standard",
         "Text": "[Who cares? Just trample all over the flowers.]",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "MetadataKey": "Fk_Lavender",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Fk_Trampled"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk3_4A"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Lavender",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Trampled"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_4A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "[Don't be a bramble. Find some other way to reach it.]",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "MetadataKey": "Fk_Romance",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk3_4B"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Romance",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_4B"
+          }
+        ]
       }
     ]
   }

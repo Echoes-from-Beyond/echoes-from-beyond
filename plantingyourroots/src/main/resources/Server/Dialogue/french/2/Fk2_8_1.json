@@ -16,18 +16,15 @@
     {
       "Id": "Standard",
       "Text": "End",
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "MarkTalkedTo",
-            "Kind": "French_Kweebec"
-          },
-          {
-            "Id": "Close"
-          }
-        ]
-      }
+      "Actions": [
+        {
+          "Id": "MarkTalkedTo",
+          "Kind": "French_Kweebec"
+        },
+        {
+          "Id": "Close"
+        }
+      ]
     }
   ]
 }

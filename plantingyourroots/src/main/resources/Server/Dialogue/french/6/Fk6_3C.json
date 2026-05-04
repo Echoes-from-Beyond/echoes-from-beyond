@@ -46,8 +46,6 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-        "Id": "Composite",
         "Actions": [
           {
             "Id": "MarkTalkedTo",
@@ -59,7 +57,6 @@
             "Message": "There isn't anything to say here, isn't it? If you expected this to end any better, I don't know what to tell you.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
           }
         ]
-      }
       }
     ]
   }

@@ -58,26 +58,32 @@
       {
         "Id": "Standard",
         "Text": "So do you just like... hide out here while he does his thing?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_7A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_7A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "How come I've never seen the two of you together?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_7AB"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_7AB"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "What's the point of telling me all of this?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_7C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_7C"
+          }
+        ]
       }
     ]
   }

@@ -63,26 +63,32 @@
       {
         "Id": "Standard",
         "Text": "...and?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_6A_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6A_1"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "So?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_6A_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6A_1"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "WHAT?!",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_6A_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6A_1"
+          }
+        ]
       }
     ]
   }

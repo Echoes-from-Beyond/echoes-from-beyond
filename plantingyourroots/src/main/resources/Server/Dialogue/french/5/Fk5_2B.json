@@ -33,48 +33,44 @@
       {
         "Id": "Standard",
         "Text": "If I knew that someone like you lived up here, I would have come sooner.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Fk_Romance",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk5_2B-3A"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2B-3A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I get it. Crowds aren't my thing either.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Fk_Romance",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk5_2B-3B"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2B-3B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Here we go again. Stop pitying yourself.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk5_2B-3C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2B-3C"
+          }
+        ]
       }
     ]
   }

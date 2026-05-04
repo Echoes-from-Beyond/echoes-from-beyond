@@ -16,21 +16,18 @@
     {
       "Id": "Standard",
       "Text": "Well, you know. To remind you of home. [Wink even harder.]",
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "AdjustInteger",
-            "MetadataKey": "Fk_Complex",
-            "MetadataStoreKey": "FRENCH_KWEEBEC",
-            "Delta": 1
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk5_2A-3A"
-          }
-        ]
-      }
+      "Actions": [
+        {
+          "Id": "AdjustInteger",
+          "MetadataKey": "Fk_Complex",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "Delta": 1
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2A-3A"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -44,18 +41,22 @@
           "Value": "Fk_Zone3"
         }
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk5_2A-3B"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2A-3B"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "I heard something about it recently, so I'm curious.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk5_2A-3C"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2A-3C"
+        }
+      ]
     }
   ]
 }

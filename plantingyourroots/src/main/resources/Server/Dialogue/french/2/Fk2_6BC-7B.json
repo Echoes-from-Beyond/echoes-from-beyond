@@ -28,8 +28,6 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-        "Id": "Composite",
         "Actions": [
           {
             "Id": "MarkTalkedTo",
@@ -41,7 +39,6 @@
             "Message": "He really does yap too much, doesn't he? Who knew that French romance comes with this much baggage?\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
           }
         ]
-      }
       }
     ]
   }

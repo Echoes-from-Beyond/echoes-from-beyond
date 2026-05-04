@@ -33,18 +33,22 @@
       {
         "Id": "Standard",
         "Text": "Why do you bother if he's so ungrateful about it?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_5A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_5A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I admire your persistence.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_5B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_5B"
+          }
+        ]
       }
     ]
   }

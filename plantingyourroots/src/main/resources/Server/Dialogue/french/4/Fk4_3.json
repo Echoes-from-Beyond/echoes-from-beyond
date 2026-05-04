@@ -43,18 +43,22 @@
       {
         "Id": "Standard",
         "Text": "But why would he do that?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_4"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_4"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I don't know. He seems plenty French to me.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_4A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_4A"
+          }
+        ]
       }
     ]
   }
