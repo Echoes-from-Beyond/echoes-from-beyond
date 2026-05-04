@@ -22,6 +22,7 @@ import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -33,6 +34,7 @@ import org.jspecify.annotations.Nullable;
  * @param <T> the field type
  */
 @NullMarked
+@ApiStatus.Experimental
 public interface InheritMerger<T> {
   /**
    * Merges the parent value with the child value.

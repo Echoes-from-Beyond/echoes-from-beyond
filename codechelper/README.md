@@ -12,14 +12,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.echoesfrombeyond:codec-helper:0.2.2")
+    compileOnly("org.echoesfrombeyond:codec-helper:0.3.0")
 }
 ```
 
 Then, in your plugin's `manifest.json`, add the following entry to the `DependsOn` block:
 
 ```
-"org.echoesfrombeyond:CodecHelper": "^0.2.2"
+"org.echoesfrombeyond:CodecHelper": "^0.3.0"
 ```
 
 ## Basic usage
@@ -30,7 +30,7 @@ This section covers the simplest usage of the API.
 
 The main entrypoint of this library is the `CodecUtil.modelBuilder` static function, which is overloaded several times. Consult the Javadoc for details.
 
-The main purpose of `modelBuilder` is to generate a `BuilderCodec` from an arbitrary class, skipping a lot of the boilerplate associated with using Hytale's builder API. For example, the following code, using CodecHelper:
+The main purpose of `modelBuilder` is to generate a `BuilderCodec` or `AssetBuilderCodec` from an arbitrary class, skipping a lot of the boilerplate associated with using Hytale's builder API. For example, the following code, using CodecHelper:
 
 ```java
 // To generate a BuilderCodec, classes must be annotated with @ModelBuilder
@@ -219,6 +219,18 @@ When the resulting resolver is queried to produce a codec, resolvers will be exe
 
 Adding built-in support for certain types necessitates adding "internal" resolvers. Such internal resolvers will always execute _after_ any that are added by calling `chain`, though their order is otherwise unspecified.
 
+You can also apply all features necessary for a "fully-featured" resolver:
+
+```
+CodecResolver.builder()
+  .withStandardSettings()
+  
+  // your own custom settings here
+  .build();
+```
+
+See the Javadoc of `withStandardSettings` for exact details on what this entails.
+
 ### Subtype resolution
 
 Some types, such as `List<T>`, cannot be resolved even if the resolver builder specified `withCollectionSupport()`. This is because the internal collection resolver expects _concrete_ implementations, and it cannot construct abstract classes or interfaces. To solve this, it is required to add a "subtype mapping":
@@ -303,7 +315,7 @@ public abstract class SuperClass {
 
 ```java
 public class BaseClass extends SuperClass {
-  public static final BuilderCodec<Superclass> CODEC = CodecUtil.modelBuilder(BaseClass.class, SuperClass.CODEC, Plugin.getSharedResolver());
+  public static final BuilderCodec<BaseClass> CODEC = CodecUtil.modelBuilder(BaseClass.class, SuperClass.CODEC, Plugin.getSharedResolver());
   
   private String BaseStringValue;
 }
@@ -320,3 +332,32 @@ public class BaseClass extends SuperClass {
 ```
 
 Note that, because `SuperClass` is `abstract`, it can only be serialized through non-`abstract` subclasses that provide their own codecs.
+
+### Running code after instances are deserialized
+
+You can use the `AfterDecode` annotation to specify methods that will run after an instance is decoded. This is analogous to `BuilderCodec.Builder#afterDecode(Consumer)`, or `BuilderCodec.Builder#afterDecode(BiConsumer)` when accepting an `ExtraInfo`.
+
+```java
+public class AfterDecode {
+  public static final BuilderCodec<AfterDecode> CODEC = CodecUtil.modelBuilder(BaseClass.class, Plugin.getSharedResolver());
+  
+  public int Value;
+  
+  @AfterDecode
+  private void afterDecode() {
+    // this method is called after the instance is decoded and validated
+  }
+  
+  @AfterDecode
+  private void anotherAfterDecode() {
+    // multiple AfterDecode methods are allowed, though the order in which they will run is NOT
+    // defined
+  }
+  
+  @AfterDecode
+  private void afterDecodeWithExtraInfo(ExtraInfo extraInfo) {
+    // AfterDecode methods can either be parameterless or accept a single parameter assignable from
+    // ExtraInfo
+  }
+}
+```

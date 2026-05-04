@@ -20,7 +20,6 @@ package org.echoesfrombeyond.codechelper.annotation.inherit;
 
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.inherit.InheritMergerProvider;
-import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -31,7 +30,6 @@ import org.jspecify.annotations.NullMarked;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @NullMarked
-@ApiStatus.Experimental
 public @interface InheritSpec {
   /**
    * The {@link InheritMergerProvider} used to provide inheritance merging functionality.
