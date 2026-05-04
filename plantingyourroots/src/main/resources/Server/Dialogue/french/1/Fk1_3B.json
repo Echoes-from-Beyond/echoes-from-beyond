@@ -1,0 +1,45 @@
+{
+  "Type": "Chain",
+  "Id": "Fk1_3B",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I wish you were wrong, but it is true that we are étrangers to each other as much as we are to other Kweebecs.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "But that can still change in time, non ? You just keep visiting me, and we will build a bond to last for the ages.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Ne t’en fais pas !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_3AB"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,9 +1,9 @@
 {
   "Type": "Standard",
-  "Id": "Fk1_6C-7A_1",
+  "Id": "Fk1_1",
   "Line": {
     "Id": "Standard",
-    "Text": "I have an ear for it. You do not."
+    "Text": "But it is clearly not enough. I thought you would have seen it as soon as you climbed up, and recognised « a fellow » in me."
   },
   "Name": {
     "Id": "Standard",
@@ -11,17 +11,15 @@
   },
   "UiPage": "Demo_Dialogue.ui",
   "UiFragment": "Demo_Dialogue_Fragment.ui",
-  "Sprite": "sprites/Kweebec_French_Happy.png",
+  "Sprite": "sprites/Kweebec_French_Sad.png",
   "Choices": [
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Actions": [
-        {
-          "Id": "Advance",
-          "Next": "Fk1_6C-7"
-        }
-      ]
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_1_1"
+      }
     }
   ]
 }

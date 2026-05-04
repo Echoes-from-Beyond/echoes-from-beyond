@@ -1,0 +1,98 @@
+{
+  "Type": "Chain",
+  "Id": "Fk1_2",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "We are all spécial in our own ways, non ? But that is not what I meant.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Both of us are étrangers to this village. And I have expérience with how they like to greet us new ones.",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Half of them act like you are un marchand irritant, and direct you to their decaying markets. Ouf !",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "The other half do not even want to approach you, and think you will sort everything out yourself. Maybe you find your way around Kweebdrasil. Maybe you drop off instead. But they do not care.",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I wish to correctement ... er, greet you correctly. I wish for you to know that you can always talk to me if something is déroutant. But most of all--",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "--I wish to make friends. So you never have to feel seul during your stay."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Sure, we can be friends.",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Relationship",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Friend"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_3A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I appreciate that, but I don't really know you.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_3B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I didn't come all the way over here just to hang out with Fr*nchmen. Are you kidding me?",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Relationship",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Anger"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_3C"
+          }
+        ]
+      }
+    ]
+  }
+}

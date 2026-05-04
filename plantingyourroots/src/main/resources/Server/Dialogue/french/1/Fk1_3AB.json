@@ -1,0 +1,60 @@
+{
+  "Type": "Chain",
+  "Id": "Fk1_3AB",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "He pauses for a bit, as if ashamed to ask his next question.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "But tell me, please, if you have any suggestions for improving my ... reach, is the word.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I wish to welcome as many of us as I can, because no one else will.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Have you not seen one of mes drapeaux-- one of my flags waving at you as you walk up the branch below?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Is that all there is to you? Being French and roleplaying as a greeter for the newcomers?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_4A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I only noticed these banners around your home. I don't think that they're visible from the lower level.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_4B"
+          }
+        ]
+      }
+    ]
+  }
+}

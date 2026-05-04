@@ -1,0 +1,80 @@
+{
+  "Type": "Chain",
+  "Id": "Fk1_0",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "This cheerful fellow bounces on the spot almost as soon as you walk up to him.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Ah, mon ami ! I was wondering when you'd come over.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The overalls, the stripes, the makeup, the characteristic beret -- this Kweebec hails from a continent away. What could've brought him to Kweebdrasil?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I thought I made mon foyer distinctif enough, but it seems that I have some more work ahead of me !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Yeah... it's definitely unique.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_1ACD"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "How are you not embarrassed of this hole?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_1B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Wow, it shows so much personality!",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_1ACD"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I do genuinely like it.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_1ACD"
+          }
+        ]
+      }
+    ]
+  }
+}

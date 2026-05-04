@@ -1,9 +1,9 @@
 {
   "Type": "Standard",
-  "Id": "Fk1_6C-7A_1",
+  "Id": "Fk1_3A",
   "Line": {
     "Id": "Standard",
-    "Text": "I have an ear for it. You do not."
+    "Text": "Mon ami, you just made mon coeur soar with joyousness !"
   },
   "Name": {
     "Id": "Standard",
@@ -16,12 +16,10 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Actions": [
-        {
-          "Id": "Advance",
-          "Next": "Fk1_6C-7"
-        }
-      ]
+      "Action": {
+        "Id": "Advance",
+        "Next": "Fk1_3AB"
+      }
     }
   ]
 }

@@ -1,0 +1,65 @@
+{
+  "Type": "Chain",
+  "Id": "Fk1_6C",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Whisperfrost !?",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The source of his astonishment is not at all obvious. Until...",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You would not be from the province of Québec ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Bonjour.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6C-7A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Nah, I'm from somewhere more *normal*.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6C-7B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Nah, I'm from Saskweetchewan.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6C-7C"
+          }
+        ]
+      }
+    ]
+  }
+}

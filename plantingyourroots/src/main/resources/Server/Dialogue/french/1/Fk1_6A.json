@@ -1,0 +1,55 @@
+{
+  "Type": "Chain",
+  "Id": "Fk1_6A",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Middle-of-Nowhere ? How prophétique they were to name a village--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Ah, you are being sarcastique. See, I am not completely incompétent !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I understand, though. This is more relatable than I would like to admit.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I come from a quite boring communauté, too. I love my country, but there is a reason why I am not there anymore.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Sometimes you have to go to autre places to find potentiel for, well, achieving potentiel."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6ABDE"
+          }
+        ]
+      }
+    ]
+  }
+}

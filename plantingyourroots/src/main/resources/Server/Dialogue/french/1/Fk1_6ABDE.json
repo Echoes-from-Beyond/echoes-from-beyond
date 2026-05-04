@@ -1,0 +1,60 @@
+{
+  "Type": "Chain",
+  "Id": "Fk1_6ABDE",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "Sorrow creeps into the corners of his eyes, creasing them and transporting the mind beyond someplace dimensions away.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Until he snaps back to reality, that is, with a clearly faked enthusiasm.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Ah, I think I am being too déprimant again. Happens sometimes.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Well, I think that I am reaching the end of my réserves sociales. I wish I had more time for you, mon ami, but I have had a busy day today. I feel like mes nerfs are about to shut down.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Au revoir, and remember that you are always welcome chez-moi !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "MarkTalkedTo",
+            "Kind": "French_Kweebec"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "A fresh start",
+            "Message": "Nice, you made it to the end of your first conversation. Now you can explore and talk to other NPCs, or advance to the next day if you want to talk with this one again. (But it might be somewhere else!)"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "Type": "Chain",
+  "Id": "Fk1_6F",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Wah !?",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "His eyes widen with terror, as if it's not immediately obvious that you aren't a voidling... or are you?",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "That stupor doesn't last for long, however -- only enough for him to remember to take a deep breath.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "You-- you joke. Of course.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Mon ami, you are a human so you are probably not aware of these things. But it is not good to bring up the Void around Kweebecs.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "(Unless we are talking about Goth Kweebec, but she is an unusual ... arbre intéressant.)",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "The Void and its maître see us as carriers spéciales of our goddess' soul. Even though she has planted herself across all of Orbis and not just Kweebecs.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It did not stop him and his minions from being so vindicatif. To him, we are Gaia, and so we must die for his mission terrible.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Now, you have given me quite the fright ! I have to take some time to recover.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I will see you tomorrow. Hopefully I will not have cauchemars about the Void sneaking into Kweebdrasil."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "MarkTalkedTo",
+            "Kind": "French_Kweebec"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "A fresh start",
+            "Message": "Nice, you made it to the end of your first conversation. Now you can explore and talk to other NPCs, or advance to the next day if you want to talk with this one again. (But it might be somewhere else!)"
+          }
+        ]
+      }
+    ]
+  }
+}

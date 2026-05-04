@@ -1,9 +1,9 @@
 {
   "Type": "Standard",
-  "Id": "Fk1_6C-7A_1",
+  "Id": "Fk1_6C-7A",
   "Line": {
     "Id": "Standard",
-    "Text": "I have an ear for it. You do not."
+    "Text": "Mon ami, why are you trying to deceive me ? Your accent is all wrong."
   },
   "Name": {
     "Id": "Standard",
@@ -11,15 +11,15 @@
   },
   "UiPage": "Demo_Dialogue.ui",
   "UiFragment": "Demo_Dialogue_Fragment.ui",
-  "Sprite": "sprites/Kweebec_French_Happy.png",
+  "Sprite": "sprites/Kweebec_French_Sad.png",
   "Choices": [
     {
       "Id": "Standard",
-      "Text": "Continue",
+      "Text": "How can you tell that from a single word?",
       "Actions": [
         {
           "Id": "Advance",
-          "Next": "Fk1_6C-7"
+          "Next": "Fk1_6C-7A_1"
         }
       ]
     }
