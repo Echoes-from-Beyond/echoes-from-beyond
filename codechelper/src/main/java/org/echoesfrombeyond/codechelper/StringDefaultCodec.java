@@ -32,16 +32,31 @@ import org.bson.BsonValue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * A codec that produces an object from a string, if the data is a string. Otherwise, delegates to a
+ * child codec.
+ *
+ * @param <T> the object type
+ * @param <C> the codec type
+ */
 @NullMarked
 public class StringDefaultCodec<T, C extends Codec<T>> implements Codec<T>, WrappedCodec<T> {
   private final C inner;
   private final BiFunction<String, ? super ExtraInfo, T> fromString;
-  private final BiFunction<T, ? super ExtraInfo, String> toString;
+  private final BiFunction<T, ? super ExtraInfo, @Nullable String> toString;
 
+  /**
+   * Creates a new instance of this class.
+   *
+   * @param inner the inner codec
+   * @param fromString the function which produces {@code T} from a string
+   * @param toString the function which produces a string from {@code T}; may return {@code null} to
+   *     defer encoding to {@code inner}
+   */
   public StringDefaultCodec(
       C inner,
       BiFunction<String, ? super ExtraInfo, T> fromString,
-      BiFunction<T, ? super ExtraInfo, String> toString) {
+      BiFunction<T, ? super ExtraInfo, @Nullable String> toString) {
     this.inner = inner;
     this.fromString = fromString;
     this.toString = toString;
@@ -71,7 +86,10 @@ public class StringDefaultCodec<T, C extends Codec<T>> implements Codec<T>, Wrap
 
   @Override
   public BsonValue encode(T data, ExtraInfo extra) {
-    return new BsonString(toString.apply(data, extra));
+    var string = toString.apply(data, extra);
+    if (string != null) return new BsonString(string);
+
+    return inner.encode(data, extra);
   }
 
   @Override
