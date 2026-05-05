@@ -21,6 +21,10 @@ package org.echoesfrombeyond.dialoguelib.metadata;
 import com.hypixel.hytale.codec.lookup.BuilderCodecMapCodec;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * Interface defining components that deal with setting simple forms of data (booleans, integers, text) through dialogue choices. These are
+ * referred to as "metadata" in configuration and elsewhere in the codebase.
+ */
 @NullMarked
 public sealed interface DialogueMetadata extends Cloneable
     permits StringMetadata, IntegerMetadata, BooleanMetadata {

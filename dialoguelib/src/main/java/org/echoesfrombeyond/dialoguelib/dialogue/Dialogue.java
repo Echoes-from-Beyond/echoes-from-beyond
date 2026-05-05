@@ -34,6 +34,9 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Defines dialogue assets.
+ */
 @NullMarked
 public interface Dialogue
     extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Dialogue>> {

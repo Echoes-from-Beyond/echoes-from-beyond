@@ -66,6 +66,7 @@ public class DialoguePlugin extends JavaPlugin {
 
   @Override
   protected void setup() {
+    // see https://github.com/Echoes-from-Beyond/echoes-from-beyond/tree/main/codechelper about setting up resolvers
     RESOLVER =
         CodecResolver.builder()
             .chain(CodecResolver.PRIMITIVE)

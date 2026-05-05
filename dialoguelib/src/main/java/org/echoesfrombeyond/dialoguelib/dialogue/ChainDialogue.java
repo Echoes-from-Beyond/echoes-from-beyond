@@ -32,15 +32,39 @@ import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+@Doc("""
+     A Dialogue implementation that exists to remove repetition
+     from single-choice dialogue (e.g. those where several dialogue
+     lines in a row only have "Continue" as a choice).
+     """)
 @NullMarked
 @ModelBuilder
 public class ChainDialogue extends UIDialogueBase implements Dialogue {
+  @Doc("""
+       An entry can be understood as mimicking
+       StandardDialogue, except considerably simplified.
+       You don't manually define any choices for it, and
+       the fields require text instead of DialogueChoice
+       objects.
+       """)
   @ModelBuilder
   public static class Entry {
+    @Doc("""
+         A name to assign to the speaker.
+         """)
     public String Name;
+
+    @Doc("""
+         The text to display above the choices.
+         """)
     public String Line;
 
-    @Opt public @Nullable String Sprite;
+    @Doc("""
+         Location of the sprite's image file. Should be
+         in UI/Custom or a subdirectory thereof.
+         """)
+    @Opt
+    public @Nullable String Sprite;
 
     public Entry() {
       this.Name = "";
@@ -58,9 +82,23 @@ public class ChainDialogue extends UIDialogueBase implements Dialogue {
   @Id private @Nullable String Id;
   @Data private AssetExtraInfo.@Nullable Data Data;
 
+  @Doc("""
+      Collection of associated lines, names and sprites.
+      Each entry has only one choice, the text of which
+      is defined in AdvanceText.
+      """)
   public List<Entry> Entries;
+
+  @Doc("""
+       A dialogue asset displayed at the end of a chain of simple entries.
+       Use StandardDialogue, where you can define your own choices.
+       """)
   public @Nullable Dialogue End;
 
+  @Doc("""
+       The text assigned to the single choice that exists for each entry.
+       Defaults to "Continue" if unspecified.
+       """)
   public String AdvanceText;
 
   public ChainDialogue() {
@@ -78,6 +116,7 @@ public class ChainDialogue extends UIDialogueBase implements Dialogue {
     var dialogue = new StandardDialogue();
     var first = dialogue;
 
+    // turn each entry into an actual StandardDialogue and assign it an action for moving to other entries
     for (int i = 0; i < entries.size(); i++) {
       init(dialogue, entries.get(i));
 

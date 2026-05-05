@@ -74,12 +74,14 @@ public class BooleanCondition implements ChoiceCondition {
   @Override
   public boolean shouldDisplay(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
     return switch (Kind) {
+      // display AND only if all conditions are met
       case And -> {
         for (var condition : Conditions)
           if (!condition.shouldDisplay(activator, parent, choice)) yield false;
 
         yield true;
       }
+      // display OR if even one condition is met
       case Or -> {
         for (var condition : Conditions)
           if (condition.shouldDisplay(activator, parent, choice)) yield true;
