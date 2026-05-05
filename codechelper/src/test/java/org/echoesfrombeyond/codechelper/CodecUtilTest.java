@@ -24,10 +24,13 @@ import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.JsonAsset;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.ExtraInfo;
+import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.RawJsonCodec;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.codecs.EnumCodec;
 import com.hypixel.hytale.codec.exception.CodecException;
 import com.hypixel.hytale.codec.exception.CodecValidationException;
+import com.hypixel.hytale.codec.lookup.CodecMapCodec;
 import com.hypixel.hytale.codec.schema.SchemaContext;
 import com.hypixel.hytale.codec.schema.config.StringSchema;
 import com.hypixel.hytale.codec.util.RawJsonReader;
@@ -36,6 +39,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.stream.Stream;
 import org.bson.BsonArray;
 import org.bson.BsonDocument;
@@ -43,7 +47,6 @@ import org.bson.BsonString;
 import org.bson.json.JsonWriterSettings;
 import org.echoesfrombeyond.codechelper.annotation.*;
 import org.echoesfrombeyond.codechelper.annotation.inherit.Inherit;
-import org.echoesfrombeyond.codechelper.annotation.inherit.InheritParent;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateLengthRange;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateNonEmpty;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateRegex;
@@ -280,7 +283,6 @@ class CodecUtilTest {
   @SuppressWarnings("unused")
   public static class SimpleInherit {
     @Inherit public Integer Value;
-    @InheritParent public String StringValue;
   }
 
   @ModelBuilder
@@ -948,28 +950,17 @@ class CodecUtilTest {
 
   @Test
   public void simpleInheritance() throws IOException {
-    var resolver = CodecResolver.PRIMITIVE;
+    var builder = CodecUtil.modelBuilder(SimpleInherit.class, CodecResolver.PRIMITIVE);
 
-    var builder = CodecUtil.modelBuilder(SimpleInherit.class, resolver);
-
-    var rawJsonReader =
-        new RawJsonReader(
-            new CharArrayReader("{\"StringValue\":\"child\"}".toCharArray()), new char[4096]);
+    var rawJsonReader = new RawJsonReader(new CharArrayReader("{}".toCharArray()), new char[4096]);
 
     var parent = new SimpleInherit();
     parent.Value = 10;
-    parent.StringValue = "parent";
 
-    var decoded = new SimpleInherit();
-    var ef = new ExtraInfo();
-
-    builder.decodeAndInheritJson0(rawJsonReader, decoded, parent, ef);
-    builder.inherit(decoded, parent, ef);
-    builder.afterDecodeAndValidate(decoded, ef);
+    var decoded = builder.decodeAndInheritJson(rawJsonReader, parent, new ExtraInfo());
 
     assertNotNull(decoded);
     assertEquals(10, decoded.Value);
-    assertEquals("parent", decoded.StringValue);
   }
 
   @Test
@@ -985,5 +976,96 @@ class CodecUtilTest {
 
     assertNotNull(afterDecodeTest);
     assertEquals(2, afterDecodeTest.Test);
+  }
+
+  interface StringDefaultTest {
+    CodecMapCodec<StringDefaultTest> CODEC = new CodecMapCodec<>();
+
+    String result();
+  }
+
+  static class Impl1 implements StringDefaultTest {
+    public static final BuilderCodec<Impl1> CODEC =
+        BuilderCodec.builder(Impl1.class, Impl1::new)
+            .append(
+                new KeyedCodec<>("Result", Codec.STRING),
+                (self, v) -> self.Result = v,
+                (self) -> self.Result)
+            .add()
+            .build();
+
+    public String Result = "";
+
+    @Override
+    public String result() {
+      return Result;
+    }
+  }
+
+  static class Impl2 implements StringDefaultTest {
+    public static final BuilderCodec<Impl2> CODEC =
+        BuilderCodec.builder(Impl2.class, Impl2::new)
+            .append(
+                new KeyedCodec<>("Result", Codec.STRING),
+                (self, v) -> self.Result = v,
+                (self) -> self.Result)
+            .add()
+            .build();
+
+    public String Result = "";
+
+    @Override
+    public String result() {
+      return Result;
+    }
+  }
+
+  @Test
+  public void stringDefaultCodec() throws IOException {
+    StringDefaultTest.CODEC.register("First", Impl1.class, Impl1.CODEC);
+    StringDefaultTest.CODEC.register("Second", Impl2.class, Impl2.CODEC);
+
+    var defaultingCodec =
+        new StringDefaultCodec<>(
+            StringDefaultTest.CODEC,
+            (string, _) -> {
+              var value = new Impl1();
+              value.Result = string;
+
+              return value;
+            },
+            new BiFunction<>() {
+              @Override
+              public @Nullable String apply(
+                  StringDefaultTest stringDefaultTest, ExtraInfo extraInfo) {
+                return stringDefaultTest instanceof Impl1 first ? first.Result : null;
+              }
+            });
+
+    var result =
+        defaultingCodec.decodeJson(
+            new RawJsonReader(new CharArrayReader("\"hello\"".toCharArray()), new char[4096]),
+            new ExtraInfo());
+    assertInstanceOf(Impl1.class, result);
+    assertEquals("hello", result.result());
+
+    var result2 =
+        defaultingCodec.decodeJson(
+            new RawJsonReader(
+                new CharArrayReader("{\"Id\":\"Second\",\"Result\":\"value\"}".toCharArray()),
+                new char[4096]),
+            new ExtraInfo());
+    assertInstanceOf(Impl2.class, result2);
+    assertEquals("value", result2.result());
+
+    var result3 =
+        defaultingCodec.decodeJson(
+            new RawJsonReader(
+                new CharArrayReader(
+                    "{\"Id\":\"First\",\"Result\":\"another value\"}".toCharArray()),
+                new char[4096]),
+            new ExtraInfo());
+    assertInstanceOf(Impl1.class, result3);
+    assertEquals("another value", result3.result());
   }
 }

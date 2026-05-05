@@ -99,6 +99,17 @@ public class StringDefaultCodec<T, C extends Codec<T>> implements Codec<T>, Wrap
 
   @Override
   public Schema toSchema(SchemaContext context) {
-    return Schema.anyOf(inner.toSchema(context), new StringSchema());
+    return Schema.anyOf(inner.toSchema(context), getStringSchema(context));
+  }
+
+  /**
+   * Gets the schema used when decoding from a string. When not overridden, this method simply
+   * returns {@code new StringSchema()}.
+   *
+   * @param context the schema context
+   * @return the string schema
+   */
+  protected StringSchema getStringSchema(SchemaContext context) {
+    return new StringSchema();
   }
 }

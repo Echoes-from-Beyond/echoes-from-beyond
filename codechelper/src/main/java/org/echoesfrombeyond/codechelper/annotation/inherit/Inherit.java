@@ -18,19 +18,22 @@
 
 package org.echoesfrombeyond.codechelper.annotation.inherit;
 
+import com.hypixel.hytale.codec.KeyedCodec;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import java.lang.annotation.*;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 import org.echoesfrombeyond.codechelper.inherit.InheritProvider;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Specifies an inheritance policy where the child value overrides the parent value whenever the
- * child value is non-null. Default inheritance behavior is to <i>always</i> use the child value, so
- * using this differs from not including any {@link InheritSpec}-type annotation.
+ * Enables basic field inheritance, as if by calling {@link
+ * BuilderCodec.Builder#appendInherited(KeyedCodec, BiConsumer, Function, BiConsumer)}.
  *
- * <p>This annotation is compatible with all field types.
+ * <p>The parent value will be used if the child value is absent in the config.
  *
- * @see InheritParent
+ * <p>This annotation is compatible with any field type.
  */
 @Target(ElementType.FIELD)
 @InheritSpec(InheritProvider.class)

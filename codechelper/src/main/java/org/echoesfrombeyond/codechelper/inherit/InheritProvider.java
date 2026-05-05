@@ -39,7 +39,7 @@ public class InheritProvider implements InheritMergerProvider<Inherit> {
   private record Provider() implements InheritMerger<Object> {
     @Override
     public @Nullable Object merge(@Nullable Object defaultValue, @Nullable Object parentValue) {
-      return defaultValue == null ? parentValue : defaultValue;
+      return parentValue;
     }
   }
 
