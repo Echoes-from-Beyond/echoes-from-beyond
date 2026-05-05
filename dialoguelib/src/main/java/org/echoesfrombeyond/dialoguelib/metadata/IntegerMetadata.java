@@ -27,10 +27,9 @@ import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
 @Doc(
-        """
-        DialogueMetadata that enables setting integers.
-        """
-)
+    """
+    DialogueMetadata that enables setting integers.
+    """)
 @NullMarked
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
@@ -40,10 +39,9 @@ public final class IntegerMetadata implements DialogueMetadata {
           IntegerMetadata.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
   @Doc(
-          """
-          Any valid integer between 2,147,483,647 and -2,147,483,648.
-          """
-  )
+      """
+      Any valid integer between 2,147,483,647 and -2,147,483,648.
+      """)
   public int Value;
 
   @SuppressWarnings("unused")

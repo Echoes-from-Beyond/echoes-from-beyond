@@ -26,9 +26,10 @@ import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * A {@code DialogueChoice} can be understood as anything that manages the display of, and navigation between texts that
- * can appear on the UI. Although its name implies that this is confined to what players can interact with, choices also
- * control the displayed line, since it can differ based on choices made prior to its display.
+ * A {@code DialogueChoice} can be understood as anything that manages the display of, and
+ * navigation between texts that can appear on the UI. Although its name implies that this is
+ * confined to what players can interact with, choices also control the displayed line, since it can
+ * differ based on choices made prior to its display.
  */
 @NullMarked
 public interface DialogueChoice {
@@ -54,7 +55,8 @@ public interface DialogueChoice {
   void onChosen(Ref<EntityStore> activator, Dialogue parent);
 
   /**
-   * Whether this choice can appear, based on the associated ChoiceCondition or any arbitrary conditions.
+   * Whether this choice can appear, based on the associated ChoiceCondition or any arbitrary
+   * conditions.
    *
    * @param activator Reference to the entity that is interacting with this dialogue.
    * @param parent The dialogue containing the asset that called this function.

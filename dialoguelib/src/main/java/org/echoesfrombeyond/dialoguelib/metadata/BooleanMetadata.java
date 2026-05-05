@@ -27,10 +27,9 @@ import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
 @Doc(
-        """
-        DialogueMetadata that enables setting boolean values.
-        """
-)
+    """
+    DialogueMetadata that enables setting boolean values.
+    """)
 @NullMarked
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
@@ -40,10 +39,9 @@ public final class BooleanMetadata implements DialogueMetadata {
           BooleanMetadata.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
   @Doc(
-          """
-          True or false.
-          """
-  )
+      """
+      True or false.
+      """)
   public boolean Value;
 
   @SuppressWarnings("unused")

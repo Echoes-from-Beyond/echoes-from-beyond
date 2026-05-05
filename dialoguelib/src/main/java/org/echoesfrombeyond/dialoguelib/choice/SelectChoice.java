@@ -75,7 +75,8 @@ public class SelectChoice extends MetadataAccessor implements DialogueChoice {
     // fall back on default if this is not met
     if (!(getMetadata(activator, parent) instanceof StringMetadata stringMetadata)) return Default;
 
-    // otherwise, check if its value is listed under Options for this selection, return the associated choice if so
+    // otherwise, check if its value is listed under Options for this selection, return the
+    // associated choice if so
     var result = Options.get(stringMetadata.Value);
     return result == null ? Default : result;
   }

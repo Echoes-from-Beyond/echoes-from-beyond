@@ -25,9 +25,10 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Class representing metadata unified by single defined store. For example, several metadata saved under "SOME_METADATA_STORAGE_KEY"
- * are considered to be part of the same {@link DialogueMetadataStore}.
- * Also enables operations pertaining to retrieval, setting and deletion of metadata.
+ * Class representing metadata unified by single defined store. For example, several metadata saved
+ * under "SOME_METADATA_STORAGE_KEY" are considered to be part of the same {@link
+ * DialogueMetadataStore}. Also enables operations pertaining to retrieval, setting and deletion of
+ * metadata.
  */
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")

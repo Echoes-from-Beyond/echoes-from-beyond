@@ -27,7 +27,8 @@ import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Actions to perform once a choice is selected. These can modify the UI, edit a player's save state, etc.
+ * Actions to perform once a choice is selected. These can modify the UI, edit a player's save
+ * state, etc.
  */
 @NullMarked
 public interface ChoiceAction {

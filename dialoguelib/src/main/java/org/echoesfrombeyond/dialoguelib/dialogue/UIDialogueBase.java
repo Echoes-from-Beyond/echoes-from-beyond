@@ -28,9 +28,7 @@ import org.echoesfrombeyond.codechelper.annotation.Opt;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
-/**
- * Contains common fields for all UI-dependent dialogue.
- */
+/** Contains common fields for all UI-dependent dialogue. */
 @NullMarked
 @ModelBuilder
 public abstract class UIDialogueBase {

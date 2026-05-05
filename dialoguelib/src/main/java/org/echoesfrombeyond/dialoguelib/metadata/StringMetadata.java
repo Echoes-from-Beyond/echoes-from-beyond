@@ -28,10 +28,9 @@ import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
 @Doc(
-        """
-        DialogueMetadata that enables setting text data.
-        """
-)
+    """
+    DialogueMetadata that enables setting text data.
+    """)
 @NullMarked
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
@@ -41,10 +40,9 @@ public final class StringMetadata implements DialogueMetadata {
           StringMetadata.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
   @Doc(
-          """
-          Any text.
-          """
-  )
+      """
+      Any text.
+      """)
   public String Value;
 
   @SuppressWarnings("unused")

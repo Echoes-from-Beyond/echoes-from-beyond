@@ -34,9 +34,10 @@ import org.jspecify.annotations.Nullable;
 
 // TODO: check why the links are so ugly for this one
 /**
- * Defines storage of metadata between stores (through {@code MetadataStoreKey}) and inside a store (through {@code MetadataKey}).
- * Inherited by various {@link org.echoesfrombeyond.dialoguelib.action.ChoiceAction} to save persistent metadata to a player, and
- * {@link org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition} to read and evaluate them.
+ * Defines storage of metadata between stores (through {@code MetadataStoreKey}) and inside a store
+ * (through {@code MetadataKey}). Inherited by various {@link
+ * org.echoesfrombeyond.dialoguelib.action.ChoiceAction} to save persistent metadata to a player,
+ * and {@link org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition} to read and evaluate them.
  */
 @NullMarked
 @ModelBuilder
@@ -94,11 +95,12 @@ public abstract class MetadataAccessor {
   }
 
   /**
-   * Retrieves metadata that was stored for the calling entity (usually a player). If no {@code MetadataStoreKey} was defined,
-   * it checks for locally-defined metadata. Returns early if:<br>
+   * Retrieves metadata that was stored for the calling entity (usually a player). If no {@code
+   * MetadataStoreKey} was defined, it checks for locally-defined metadata. Returns early if:<br>
    * - no {@code MetadataKey} was passed in<br>
    * - the activating entity's {@link DialogueComponent} could not be found <br>
-   * - no {@code MetadataStoreKey} was passed in <i>and</i> an alternative, locally-defined metadata key could not be made.
+   * - no {@code MetadataStoreKey} was passed in <i>and</i> an alternative, locally-defined metadata
+   * key could not be made.
    *
    * @param activator Reference to the entity that is interacting with this dialogue.
    * @param parent The dialogue containing the asset that called this function.
@@ -122,15 +124,18 @@ public abstract class MetadataAccessor {
   }
 
   /**
-   * Inserts new metadata, or replaces one that was already stored for the calling entity (usually a player).
-   * If no {@code MetadataStoreKey} was defined, it falls back on locally-defined metadata. Returns early if:<br>
+   * Inserts new metadata, or replaces one that was already stored for the calling entity (usually a
+   * player). If no {@code MetadataStoreKey} was defined, it falls back on locally-defined metadata.
+   * Returns early if:<br>
    * - no {@code MetadataKey} was passed in<br>
    * - the activating entity's {@link DialogueComponent} could not be found <br>
-   * - no {@code MetadataStoreKey} was passed in <i>and</i> an alternative, locally-defined metadata key could not be made.
+   * - no {@code MetadataStoreKey} was passed in <i>and</i> an alternative, locally-defined metadata
+   * key could not be made.
    *
    * @param activator Reference to the entity that is interacting with this dialogue.
    * @param parent The dialogue containing the asset that called this function.
-   * @return A {@link DialogueMetadata} that was replaced during this process. If this was a new insert, or the above 'do-nothing' criteria were met, returns {@code null}.
+   * @return A {@link DialogueMetadata} that was replaced during this process. If this was a new
+   *     insert, or the above 'do-nothing' criteria were met, returns {@code null}.
    */
   @RunOnWorldThread
   public @Nullable DialogueMetadata putMetadata(
