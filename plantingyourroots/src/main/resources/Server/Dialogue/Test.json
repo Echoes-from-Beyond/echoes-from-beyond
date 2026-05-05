@@ -1,5 +1,9 @@
 {
   "Type": "Standard",
+  "Line": {
+    "Id": "Display",
+    "Text": "Why are we still here? Just to suffer?"
+  },
   "Id": "Test",
   "Choices": [
     {

@@ -34,6 +34,7 @@ import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.dialoguelib.action.*;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
+import org.echoesfrombeyond.dialoguelib.choice.DisplayChoice;
 import org.echoesfrombeyond.dialoguelib.choice.SelectChoice;
 import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
 import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
@@ -125,7 +126,8 @@ public class DialoguePlugin extends JavaPlugin {
 
     getCodecRegistry(DialogueChoice.CODEC)
         .register("Select", SelectChoice.class, SelectChoice.CODEC)
-        .register("Standard", StandardChoice.class, StandardChoice.CODEC);
+        .register("Standard", StandardChoice.class, StandardChoice.CODEC)
+        .register("Display", DisplayChoice.class, DisplayChoice.CODEC);
 
     getCodecRegistry(DialogueMetadata.CODEC)
         .register("Boolean", BooleanMetadata.class, BooleanMetadata.CODEC)
