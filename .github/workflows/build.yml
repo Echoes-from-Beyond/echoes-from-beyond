@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+concurrency:
+  # The same group as refresh-secret.yml
+  group: secret-writer
+
 jobs:
   # Build and test the project.
   build:
