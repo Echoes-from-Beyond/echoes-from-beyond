@@ -24,24 +24,29 @@ import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.JsonAsset;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.ExtraInfo;
+import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.RawJsonCodec;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.codec.codecs.EnumCodec;
 import com.hypixel.hytale.codec.exception.CodecException;
 import com.hypixel.hytale.codec.exception.CodecValidationException;
+import com.hypixel.hytale.codec.lookup.CodecMapCodec;
+import com.hypixel.hytale.codec.schema.SchemaContext;
+import com.hypixel.hytale.codec.schema.config.StringSchema;
 import com.hypixel.hytale.codec.util.RawJsonReader;
 import java.io.CharArrayReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.stream.Stream;
 import org.bson.BsonArray;
 import org.bson.BsonDocument;
 import org.bson.BsonString;
 import org.bson.json.JsonWriterSettings;
-import org.echoesfrombeyond.codechelper.annotation.Data;
-import org.echoesfrombeyond.codechelper.annotation.Id;
-import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
-import org.echoesfrombeyond.codechelper.annotation.Skip;
+import org.echoesfrombeyond.codechelper.annotation.*;
+import org.echoesfrombeyond.codechelper.annotation.inherit.Inherit;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateLengthRange;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateNonEmpty;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateRegex;
@@ -219,6 +224,37 @@ class CodecUtilTest {
     VALUE_THREE
   }
 
+  @SuppressWarnings({"NonFinalFieldInEnum", "FieldMayBeFinal", "unused"})
+  public enum DocumentedEnum {
+    @Doc("Documented")
+    DocumentedConstant,
+    UndocumentedConstant,
+
+    @Doc("")
+    EmptyStringDocumented,
+
+    @Doc("Documented 2")
+    AnotherDocumentedConstant;
+
+    @Doc("Not considered")
+    private static final String test = "";
+
+    @Doc("Not considered")
+    public static final String test1 = "";
+
+    @Doc("Not considered")
+    public static String test2 = "";
+
+    @Doc("Not considered")
+    public String test3 = "";
+
+    @Doc("Not considered")
+    private String test4 = "";
+
+    @Doc("Not considered")
+    public final String test5 = "";
+  }
+
   @ModelBuilder
   @NullUnmarked
   @SuppressWarnings("unused")
@@ -240,6 +276,30 @@ class CodecUtilTest {
 
     @ValidateLengthRange(min = 1, max = 2)
     private Map<String, String> LengthMap;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class SimpleInherit {
+    @Inherit public Integer Value;
+  }
+
+  @ModelBuilder
+  @NullUnmarked
+  @SuppressWarnings("unused")
+  public static class AfterDecodeTest {
+    public int Test;
+
+    @AfterDecode
+    private void afterDecodeParameterless() {
+      Test++;
+    }
+
+    @AfterDecode
+    private void afterDecode(ExtraInfo extra) {
+      Test++;
+    }
   }
 
   private void assertDeepEquals(@Nullable Object expected, @Nullable Object actual) {
@@ -860,5 +920,152 @@ class CodecUtilTest {
     var codec = CodecUtil.modelBuilder(LengthRange.class, resolver);
 
     assertThrows(CodecValidationException.class, () -> codec.decode(document, new ExtraInfo()));
+  }
+
+  @ModelBuilder
+  @SuppressWarnings("unused")
+  static class ContainingDocumentedEnum {
+    public @Nullable DocumentedEnum Enum;
+  }
+
+  @Test
+  public void documentedEnum() {
+    assertArrayEquals(
+        new String[] {"Documented", "", "", "Documented 2"},
+        assertInstanceOf(
+                StringSchema.class,
+                assertInstanceOf(
+                        EnumCodec.class,
+                        CodecUtil.modelBuilder(
+                                ContainingDocumentedEnum.class,
+                                CodecResolver.builder().withEnumSupport().build())
+                            .getEntries()
+                            .get("Enum")
+                            .getFirst()
+                            .getCodec()
+                            .getChildCodec())
+                    .toSchema(new SchemaContext()))
+            .getMarkdownEnumDescriptions());
+  }
+
+  @Test
+  public void simpleInheritance() throws IOException {
+    var builder = CodecUtil.modelBuilder(SimpleInherit.class, CodecResolver.PRIMITIVE);
+
+    var rawJsonReader = new RawJsonReader(new CharArrayReader("{}".toCharArray()), new char[4096]);
+
+    var parent = new SimpleInherit();
+    parent.Value = 10;
+
+    var decoded = builder.decodeAndInheritJson(rawJsonReader, parent, new ExtraInfo());
+
+    assertNotNull(decoded);
+    assertEquals(10, decoded.Value);
+  }
+
+  @Test
+  public void afterDecodeSimple() throws IOException {
+    var resolver = CodecResolver.PRIMITIVE;
+
+    var builder = CodecUtil.modelBuilder(AfterDecodeTest.class, resolver);
+
+    var afterDecodeTest =
+        builder.decodeJson(
+            new RawJsonReader(new CharArrayReader("{\"Test\":0}".toCharArray()), new char[4096]),
+            new ExtraInfo());
+
+    assertNotNull(afterDecodeTest);
+    assertEquals(2, afterDecodeTest.Test);
+  }
+
+  interface StringDefaultTest {
+    CodecMapCodec<StringDefaultTest> CODEC = new CodecMapCodec<>();
+
+    String result();
+  }
+
+  static class Impl1 implements StringDefaultTest {
+    public static final BuilderCodec<Impl1> CODEC =
+        BuilderCodec.builder(Impl1.class, Impl1::new)
+            .append(
+                new KeyedCodec<>("Result", Codec.STRING),
+                (self, v) -> self.Result = v,
+                (self) -> self.Result)
+            .add()
+            .build();
+
+    public String Result = "";
+
+    @Override
+    public String result() {
+      return Result;
+    }
+  }
+
+  static class Impl2 implements StringDefaultTest {
+    public static final BuilderCodec<Impl2> CODEC =
+        BuilderCodec.builder(Impl2.class, Impl2::new)
+            .append(
+                new KeyedCodec<>("Result", Codec.STRING),
+                (self, v) -> self.Result = v,
+                (self) -> self.Result)
+            .add()
+            .build();
+
+    public String Result = "";
+
+    @Override
+    public String result() {
+      return Result;
+    }
+  }
+
+  @Test
+  public void stringDefaultCodec() throws IOException {
+    StringDefaultTest.CODEC.register("First", Impl1.class, Impl1.CODEC);
+    StringDefaultTest.CODEC.register("Second", Impl2.class, Impl2.CODEC);
+
+    var defaultingCodec =
+        new StringDefaultCodec<>(
+            StringDefaultTest.CODEC,
+            (string, _) -> {
+              var value = new Impl1();
+              value.Result = string;
+
+              return value;
+            },
+            new BiFunction<>() {
+              @Override
+              public @Nullable String apply(
+                  StringDefaultTest stringDefaultTest, ExtraInfo extraInfo) {
+                return stringDefaultTest instanceof Impl1 first ? first.Result : null;
+              }
+            });
+
+    var result =
+        defaultingCodec.decodeJson(
+            new RawJsonReader(new CharArrayReader("\"hello\"".toCharArray()), new char[4096]),
+            new ExtraInfo());
+    assertInstanceOf(Impl1.class, result);
+    assertEquals("hello", result.result());
+
+    var result2 =
+        defaultingCodec.decodeJson(
+            new RawJsonReader(
+                new CharArrayReader("{\"Id\":\"Second\",\"Result\":\"value\"}".toCharArray()),
+                new char[4096]),
+            new ExtraInfo());
+    assertInstanceOf(Impl2.class, result2);
+    assertEquals("value", result2.result());
+
+    var result3 =
+        defaultingCodec.decodeJson(
+            new RawJsonReader(
+                new CharArrayReader(
+                    "{\"Id\":\"First\",\"Result\":\"another value\"}".toCharArray()),
+                new char[4096]),
+            new ExtraInfo());
+    assertInstanceOf(Impl1.class, result3);
+    assertEquals("another value", result3.result());
   }
 }

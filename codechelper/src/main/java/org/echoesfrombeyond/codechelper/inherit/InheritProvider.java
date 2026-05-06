@@ -16,35 +16,40 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codechelper.validator;
+package org.echoesfrombeyond.codechelper.inherit;
 
-import com.hypixel.hytale.codec.validation.Validator;
-import com.hypixel.hytale.codec.validation.Validators;
 import java.lang.reflect.Field;
-import org.echoesfrombeyond.codechelper.annotation.validator.ValidateNonNull;
+import org.echoesfrombeyond.codechelper.annotation.inherit.Inherit;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-/** See {@link ValidateNonNull} for validator behavior. */
+/** Provider for {@link Inherit}. */
 @NullMarked
-public class NonNullProvider implements ValidatorProvider<ValidateNonNull> {
-  /** The singleton instance of this provider. */
+@ApiStatus.Internal
+public class InheritProvider implements InheritMergerProvider<Inherit> {
+  /** Singleton instance for this class. */
   @SuppressWarnings("unused")
-  public static final NonNullProvider INSTANCE = new NonNullProvider();
+  public static final InheritProvider INSTANCE = new InheritProvider();
 
-  private static boolean canProvideFor(Field field) {
-    return !field.getType().isPrimitive();
+  private static final Provider PROVIDER_INSTANCE = new Provider();
+
+  private InheritProvider() {}
+
+  private record Provider() implements InheritMerger<Object> {
+    @Override
+    public @Nullable Object merge(@Nullable Object defaultValue, @Nullable Object parentValue) {
+      return parentValue;
+    }
   }
 
-  private NonNullProvider() {}
-
   @Override
-  public Class<ValidateNonNull> getArgsType() {
-    return ValidateNonNull.class;
+  public Class<Inherit> getArgsType() {
+    return Inherit.class;
   }
 
   @Override
-  public @Nullable Validator<?> getInstance(ValidateNonNull args, Field field) {
-    return canProvideFor(field) ? Validators.nonNull() : null;
+  public InheritMerger<?> getInstance(Inherit ignored, Field ignored2) {
+    return PROVIDER_INSTANCE;
   }
 }

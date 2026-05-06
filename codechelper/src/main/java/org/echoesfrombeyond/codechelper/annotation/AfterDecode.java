@@ -16,24 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codechelper.annotation.validator;
+package org.echoesfrombeyond.codechelper.annotation;
 
+import com.hypixel.hytale.codec.ExtraInfo;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import java.lang.annotation.*;
-import java.util.Collection;
-import java.util.Map;
-import org.echoesfrombeyond.codechelper.validator.NonEmptyProvider;
+import java.util.function.Consumer;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Validates that the field is non-empty.
+ * Annotation applied to a method in a {@link ModelBuilder} class that will be run after an instance
+ * is loaded. Such methods must be non-{@code static}, non-{@code native}, and non-{@code abstract}.
+ * Additionally, they must either be parameterless or specify a single parameter assignable from
+ * {@link ExtraInfo}.
  *
- * <p>If the field is a {@link String}, validates that the string is not zero length. If the field
- * is a {@link Collection} or {@link Map}, validates that the number of elements/entries,
- * respectively, is non-zero. If the field is an array, validates that the length is non-zero.
+ * <p>If a given model class contains multiple {@code AfterDecode} methods, they will all be
+ * executed sequentially in an <b>unspecified order.</b>
+ *
+ * <p>Otherwise, these work equivalently to supplying a lambda to {@link
+ * BuilderCodec.Builder#afterDecode(Consumer)}
  */
-@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@ValidatorSpec(NonEmptyProvider.class)
+@Target(ElementType.METHOD)
 @Documented
 @NullMarked
-public @interface ValidateNonEmpty {}
+public @interface AfterDecode {}

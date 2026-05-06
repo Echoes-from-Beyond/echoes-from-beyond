@@ -21,11 +21,9 @@ package org.echoesfrombeyond.codechelper.exception;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
-import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /** Exception thrown by {@link CodecUtil#modelBuilder(Class, CodecResolver)} and overloads. */
-@ApiStatus.Internal
 @NullMarked
 public class ModelException extends IllegalArgumentException {
   private static String formatMessage(Class<?> modelType, String message) {

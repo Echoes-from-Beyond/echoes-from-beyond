@@ -24,6 +24,7 @@ import com.hypixel.hytale.codec.schema.config.Schema;
 import com.hypixel.hytale.codec.schema.config.StringSchema;
 import com.hypixel.hytale.codec.validation.ValidationResults;
 import com.hypixel.hytale.codec.validation.Validator;
+import it.unimi.dsi.fastutil.booleans.BooleanObjectPair;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -45,15 +46,16 @@ public class NonEmptyProvider implements ValidatorProvider<ValidateNonEmpty> {
         public void accept(@Nullable Object o, ValidationResults validationResults) {
           if (o == null) return;
 
-          var isEmpty =
+          var result =
               switch (o) {
-                case Map<?, ?> map -> map.isEmpty();
-                case Collection<?> collection -> collection.isEmpty();
-                case String string -> string.isEmpty();
-                default -> o.getClass().isArray() && Array.getLength(o) == 0;
+                case Map<?, ?> map -> BooleanObjectPair.of(map.isEmpty(), "Map");
+                case Collection<?> collection -> BooleanObjectPair.of(collection.isEmpty(), "List");
+                case String string -> BooleanObjectPair.of(string.isEmpty(), "String");
+                default ->
+                    BooleanObjectPair.of(o.getClass().isArray() && Array.getLength(o) == 0, "List");
               };
 
-          if (isEmpty) validationResults.fail("Field can't be empty!");
+          if (result.firstBoolean()) validationResults.fail(result.second());
         }
 
         @Override
@@ -72,6 +74,11 @@ public class NonEmptyProvider implements ValidatorProvider<ValidateNonEmpty> {
   }
 
   private NonEmptyProvider() {}
+
+  @Override
+  public Class<ValidateNonEmpty> getArgsType() {
+    return ValidateNonEmpty.class;
+  }
 
   @Override
   public @Nullable Validator<?> getInstance(ValidateNonEmpty ignored, Field field) {

@@ -18,32 +18,36 @@
 
 package org.echoesfrombeyond.codechelper.exception;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.CodecUtil;
-import org.echoesfrombeyond.codechelper.annotation.validator.ValidatorSpec;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
 /** Exception thrown by {@link CodecUtil#modelBuilder(Class, CodecResolver)} and overloads. */
 @ApiStatus.Internal
 @NullMarked
-public class ValidatorModelException extends FieldModelException {
-  private static String formatMessage(
-      ValidatorSpec spec, Class<? extends Annotation> annotationType, String message) {
-    return String.format(
-        "ValidatorProvider: %s\nValidator annotation: %s\n%s",
-        spec.value(), annotationType.getName(), message);
+public class MethodModelException extends ModelException {
+  private static String formatMessage(Method method, String message) {
+    return String.format("Model method: %s\n%s", method, message);
   }
 
-  public ValidatorModelException(
-      Class<?> modelType,
-      Field field,
-      ValidatorSpec spec,
-      Class<? extends Annotation> annotationType,
-      String message,
-      Throwable e) {
-    super(modelType, field, formatMessage(spec, annotationType, message), e);
+  /**
+   * @param modelType the model type
+   * @param method the method associated with this exception
+   * @param message the error message
+   */
+  public MethodModelException(Class<?> modelType, Method method, String message) {
+    super(modelType, formatMessage(method, message));
+  }
+
+  /**
+   * @param modelType the model type
+   * @param method the method associated with this exception
+   * @param message the error message
+   * @param cause the error cause
+   */
+  public MethodModelException(Class<?> modelType, Method method, String message, Throwable cause) {
+    super(modelType, formatMessage(method, message), cause);
   }
 }

@@ -22,6 +22,7 @@ import com.hypixel.hytale.codec.validation.Validator;
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.validator.ValidatorProvider;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Meta-annotation meant to be applied to a field validation annotation.
@@ -32,6 +33,7 @@ import org.echoesfrombeyond.codechelper.validator.ValidatorProvider;
 @Target(ElementType.ANNOTATION_TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@NullMarked
 public @interface ValidatorSpec {
   /** The validator provider class. */
   Class<? extends ValidatorProvider<?>> value();

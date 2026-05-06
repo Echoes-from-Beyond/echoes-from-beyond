@@ -16,24 +16,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codechelper.annotation.validator;
+package org.echoesfrombeyond.codechelper.exception;
 
-import java.lang.annotation.*;
-import java.util.Collection;
-import java.util.Map;
-import org.echoesfrombeyond.codechelper.validator.NonEmptyProvider;
+import org.echoesfrombeyond.codechelper.provider.Provider;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
-/**
- * Validates that the field is non-empty.
- *
- * <p>If the field is a {@link String}, validates that the string is not zero length. If the field
- * is a {@link Collection} or {@link Map}, validates that the number of elements/entries,
- * respectively, is non-zero. If the field is an array, validates that the length is non-zero.
- */
-@Target(ElementType.FIELD)
-@Retention(RetentionPolicy.RUNTIME)
-@ValidatorSpec(NonEmptyProvider.class)
-@Documented
 @NullMarked
-public @interface ValidateNonEmpty {}
+@ApiStatus.Internal
+public class ProviderException extends Exception {
+  private static String formatMessage(Class<?> providerType, String message) {
+    return String.format("Provider class: %s\n%s", providerType.getName(), message);
+  }
+
+  public ProviderException(Class<?> provider, String message) {
+    super(formatMessage(provider, message));
+  }
+
+  public ProviderException(
+      Class<? extends Provider<?, ?>> provider, String message, Throwable cause) {
+    super(formatMessage(provider, message), cause);
+  }
+}

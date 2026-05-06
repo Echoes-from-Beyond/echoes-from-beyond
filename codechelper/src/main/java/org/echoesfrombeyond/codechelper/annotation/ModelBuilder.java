@@ -22,6 +22,7 @@ import com.hypixel.hytale.codec.Codec;
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.CodecUtil;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Marker annotation applied to a class that indicates it supports automatic {@link Codec}
@@ -30,4 +31,5 @@ import org.echoesfrombeyond.codechelper.CodecUtil;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@NullMarked
 public @interface ModelBuilder {}

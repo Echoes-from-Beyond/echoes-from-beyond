@@ -21,7 +21,7 @@ package org.echoesfrombeyond.codechelper.annotation;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import java.lang.annotation.*;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * When applied to a field, sets the name that will be used as a key in the serialized data. If this
@@ -37,9 +37,10 @@ import org.jspecify.annotations.NonNull;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@NullMarked
 public @interface Name {
   /**
    * @return the name, which will be used instead of the field's source code name
    */
-  @NonNull String value();
+  String value();
 }

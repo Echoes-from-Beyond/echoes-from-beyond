@@ -22,6 +22,8 @@ import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.codecs.EnumCodec;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
+import org.echoesfrombeyond.codechelper.exception.FieldModelException;
 import org.echoesfrombeyond.util.type.TypeUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -41,13 +43,32 @@ class EnumResolver implements CodecResolver {
     this.style = style;
   }
 
-  // suppression isn't redundant, IntelliJ misses the unsafe operation (javac doesn't)
   @Override
-  @SuppressWarnings({"unchecked", "RedundantSuppression"})
+  @SuppressWarnings({"rawtypes", "unchecked"})
   public @Nullable Codec<?> resolve(Type type, Field field) {
     var raw = TypeUtil.getRawType(type);
     if (raw == null || !raw.isEnum()) return null;
 
-    return new EnumCodec<>(raw.asSubclass(Enum.class), style);
+    Class<? extends Enum> asEnum = raw.asSubclass(Enum.class);
+    var enumCodec = new EnumCodec<>(asEnum, style);
+
+    for (var enumField : raw.getDeclaredFields()) {
+      if (!enumField.isEnumConstant()) continue;
+
+      var doc = enumField.getDeclaredAnnotation(Doc.class);
+      if (doc == null) continue;
+
+      Object constant;
+      try {
+        constant = enumField.get(null);
+      } catch (IllegalAccessException e) {
+        throw new FieldModelException(
+            field.getDeclaringClass(), field, "Enum constant should be accessible", e);
+      }
+
+      enumCodec = enumCodec.documentKey((Enum) constant, doc.value());
+    }
+
+    return enumCodec;
   }
 }

@@ -16,25 +16,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codechelper.annotation;
+package org.echoesfrombeyond.codechelper.inherit;
 
+import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
-import com.hypixel.hytale.codec.builder.BuilderField;
-import java.lang.annotation.*;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
- * Adds documentation to the type or field. This is equivalent to calling {@link
- * BuilderField.FieldBuilder#documentation(String)} (if applied to a field) or {@link
- * BuilderCodec.Builder#documentation(String)} (if applied to a type).
+ * Merges the parent value with the child value. These are used during codec inheritance, as if by
+ * calling {@link BuilderCodec.Builder#appendInherited(KeyedCodec, BiConsumer, Function,
+ * BiConsumer)}.
+ *
+ * @param <T> the field type
  */
-@Target({ElementType.FIELD, ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
 @NullMarked
-public @interface Doc {
+@ApiStatus.Experimental
+public interface InheritMerger<T> {
   /**
-   * @return the documentation string
+   * Merges the parent value with the child value.
+   *
+   * @param defaultValue the value of the field
+   * @param parentValue the parent value of the field
+   * @return the merged value
    */
-  String value();
+  @Nullable T merge(@Nullable T defaultValue, @Nullable T parentValue);
 }
