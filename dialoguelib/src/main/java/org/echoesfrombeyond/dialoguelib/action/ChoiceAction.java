@@ -37,9 +37,9 @@ public interface ChoiceAction {
   /**
    * The logic to perform once the choice is selected.
    *
-   * @param activator Reference to the entity that is interacting with this dialogue.
-   * @param parent The dialogue containing the asset that called this function.
-   * @param choice The choice on behalf of which this action is being made.
+   * @param activator Reference to the entity that is interacting with this dialogue
+   * @param parent The dialogue containing the asset that called this function
+   * @param choice The choice on behalf of which this action is being made
    */
   @RunOnWorldThread
   void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice);

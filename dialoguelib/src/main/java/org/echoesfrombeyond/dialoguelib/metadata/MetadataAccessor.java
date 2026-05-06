@@ -102,8 +102,8 @@ public abstract class MetadataAccessor {
    * - no {@code MetadataStoreKey} was passed in <i>and</i> an alternative, locally-defined metadata
    * key could not be made.
    *
-   * @param activator Reference to the entity that is interacting with this dialogue.
-   * @param parent The dialogue containing the asset that called this function.
+   * @param activator Reference to the entity that is interacting with this dialogue
+   * @param parent The dialogue containing the asset that called this function
    * @return A {@link DialogueMetadata} of any type, if found. Otherwise, {@code null}.
    */
   @RunOnWorldThread
@@ -132,8 +132,8 @@ public abstract class MetadataAccessor {
    * - no {@code MetadataStoreKey} was passed in <i>and</i> an alternative, locally-defined metadata
    * key could not be made.
    *
-   * @param activator Reference to the entity that is interacting with this dialogue.
-   * @param parent The dialogue containing the asset that called this function.
+   * @param activator Reference to the entity that is interacting with this dialogue
+   * @param parent The dialogue containing the asset that called this function
    * @return A {@link DialogueMetadata} that was replaced during this process. If this was a new
    *     insert, or the above 'do-nothing' criteria were met, returns {@code null}.
    */

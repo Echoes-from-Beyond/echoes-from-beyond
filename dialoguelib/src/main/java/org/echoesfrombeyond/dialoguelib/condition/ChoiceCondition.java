@@ -36,9 +36,9 @@ public interface ChoiceCondition {
   /**
    * Evaluates whether a choice is able to be displayed.
    *
-   * @param activator Reference to the entity that is interacting with this dialogue.
-   * @param parent The dialogue containing the asset that called this function.
-   * @param choice The choice on behalf of which this check is being made.
+   * @param activator Reference to the entity that is interacting with this dialogue
+   * @param parent The dialogue containing the asset that called this function
+   * @param choice The choice on behalf of which this check is being made
    * @return {@code true} if the condition is met, {@code false} otherwise.
    */
   @RunOnWorldThread
