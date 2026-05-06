@@ -12,13 +12,13 @@ While a lot can be achieved in DialogueLib as-is, we recommend developing a plug
 
 The following examples demonstrate the usage of the asset system. Refer to the documentation for the API.
 
-### Get started - Dialogue
+### Getting started - Dialogue
 
 Everything starts with a dialogue asset. Currently, these can be of type **Standard** or **Chain**.
 
 Below is a demonstration of Standard-type dialogue.
 
-```
+```json
 {
   "Type": "Standard",
   "Id": "My_Conversation_1",
@@ -32,11 +32,12 @@ Below is a demonstration of Standard-type dialogue.
   },
   "UiPage": "My_Custom_Dialogue.ui",
   "UiFragment": "My_Custom_Dialogue_Fragment.ui",
+  "Lifetime": "CantClose",
   "Sprite": "Friendly_Fellow.png",
   "Choices": [
     {
       "Id": "Standard",
-      "Text": "Continue",
+      "Text": "I'm doing good. What about you?",
       "Actions": [
         {
           "Id": "Advance",
@@ -70,6 +71,81 @@ If you feel that you don't need some of these selectors, leave them out. Make su
 
 To see an example of this one, check out Classic_Dialogue_Fragment.ui, which is also the default value of this field.
 
+`Lifetime` lets you configure the `CustomPageLifetime` of each dialogue screen, defining how the player can close the window. This field is optional and defaults to `CantClose` if not present, effectively meaning that the player can't escape out of it other than through programmatic means (by using `Advance` actions to replace the window with a new one, or `Close` to force the player out of dialogue). Since this is part of Hytale's own API, you should consult their documentation for more information.
+
 `Sprite` is the path to an image you want to show on the screen in middle of the dialogue. Like other elements of the UI, the path is relative to Common/UI/Custom. This is optional.
 
 `Choices` is a collection of DialogueChoices that, when picked, should each perform some kind of action. Use `Standard` DialogueChoices, which enable you to define `Condition` and `Actions` fields; as the name might imply `Condition` determines whether the player is shown a particular choice at all.
+
+---
+
+Chain-type dialogue can be used to quickly set up lots of dialogue windows that are all connected via single, repetitive choices: e.g. Continue.
+
+```json
+{
+  "Type": "Chain",
+  "Id": "My_Conversation_2",
+  "Entries": [
+    {
+      "Name": "My First NPC",
+      "Line": "That's good to hear. I'm decent as well.",
+      "Sprite": "Friendly_Fellow.png"
+    },
+    {
+      "Name": "My First NPC",
+      "Line": "Had some trouble with bunnies trampling all over my garden today, but it's all been sorted out.",
+      "Sprite": "Friendly_Fellow.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "My_Custom_Dialogue.ui",
+  "UiFragment": "My_Custom_Dialogue_Fragment.ui",
+  "Lifetime": "CantClose",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Now that the pleasantries are over with, what do you do?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Your Inner Voice"
+    },
+    "UiPage": "My_Custom_Dialogue.ui",
+    "UiFragment": "My_Custom_Dialogue_Fragment.ui",
+    "Lifetime": "CantClose",
+    "Sprite": "Friendly_Fellow.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Alright, see you.",
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Hold on, you're the chosen one.",
+        "Condition": {
+          "Id": "Equals",
+          "MetadataStoreKey": "MY_FIRST_CONVERSATION",
+          "MetadataKey": "Knowledge_Status",
+          "Metadata": {
+            "Id": "String",
+            
+          }
+        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "My_Conversation_3"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+```
