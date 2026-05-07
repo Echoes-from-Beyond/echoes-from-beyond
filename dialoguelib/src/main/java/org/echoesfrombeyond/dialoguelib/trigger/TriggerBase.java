@@ -37,6 +37,7 @@ import org.jspecify.annotations.NullMarked;
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public abstract class TriggerBase implements Trigger {
+  /** Codec for TriggerBase */
   public static final BuilderCodec<TriggerBase> CODEC =
       CodecUtil.modelBuilder(
           TriggerBase.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

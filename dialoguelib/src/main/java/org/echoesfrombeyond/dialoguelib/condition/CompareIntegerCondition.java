@@ -50,6 +50,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @ModelBuilder
 public class CompareIntegerCondition extends MetadataAccessor implements ChoiceCondition {
+  /** Codec for CompareIntegerCondition */
   public static final BuilderCodec<CompareIntegerCondition> CODEC =
       CodecUtil.modelBuilder(
           CompareIntegerCondition.class,

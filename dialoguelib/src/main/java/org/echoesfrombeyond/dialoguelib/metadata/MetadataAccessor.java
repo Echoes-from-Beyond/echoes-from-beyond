@@ -27,23 +27,25 @@ import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
+import org.echoesfrombeyond.dialoguelib.action.ChoiceAction;
 import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
+import org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-// TODO: check why the links are so ugly for this one
 /**
  * Defines storage of metadata between stores (through {@code MetadataStoreKey}) and inside a store
- * (through {@code MetadataKey}). Inherited by various {@link
- * org.echoesfrombeyond.dialoguelib.action.ChoiceAction} to save persistent metadata to a player,
- * and {@link org.echoesfrombeyond.dialoguelib.condition.ChoiceCondition} to read and evaluate them.
+ * (through {@code MetadataKey}). Inherited by various {@link ChoiceAction} to save persistent
+ * metadata to a player, and {@link ChoiceCondition} to read and evaluate them.
  */
 @NullMarked
 @ModelBuilder
 public abstract class MetadataAccessor {
+  /** Prefix used to indicate metadata specific to a dialogue asset */
   public static final String ASSET_STORE_KEY_PREFIX = "$$";
 
+  /** Codec for MetadataAccessor */
   public static final BuilderCodec<MetadataAccessor> CODEC =
       CodecUtil.modelBuilder(
           MetadataAccessor.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
@@ -96,14 +98,17 @@ public abstract class MetadataAccessor {
 
   /**
    * Retrieves metadata that was stored for the calling entity (usually a player). If no {@code
-   * MetadataStoreKey} was defined, it checks for locally-defined metadata. Returns early if:<br>
-   * - no {@code MetadataKey} was passed in<br>
-   * - the activating entity's {@link DialogueComponent} could not be found <br>
-   * - no {@code MetadataStoreKey} was passed in <i>and</i> an alternative, locally-defined metadata
-   * key could not be made.
+   * MetadataStoreKey} was defined, it checks for locally-defined metadata. Returns early if:
    *
-   * @param activator Reference to the entity that is interacting with this dialogue
-   * @param parent The dialogue containing the asset that called this function
+   * <ul>
+   *   <li>no {@code MetadataKey} was passed in
+   *   <li>the activating entity's {@link DialogueComponent} could not be found
+   *   <li>no {@code MetadataStoreKey} was passed in <i>and</i> an alternative, locally-defined
+   *       metadata key could not be made.
+   * </ul>
+   *
+   * @param activator reference to the entity that is interacting with this dialogue
+   * @param parent the dialogue containing the asset that called this function
    * @return A {@link DialogueMetadata} of any type, if found. Otherwise, {@code null}.
    */
   @RunOnWorldThread
@@ -126,14 +131,17 @@ public abstract class MetadataAccessor {
   /**
    * Inserts new metadata, or replaces one that was already stored for the calling entity (usually a
    * player). If no {@code MetadataStoreKey} was defined, it falls back on locally-defined metadata.
-   * Returns early if:<br>
-   * - no {@code MetadataKey} was passed in<br>
-   * - the activating entity's {@link DialogueComponent} could not be found <br>
-   * - no {@code MetadataStoreKey} was passed in <i>and</i> an alternative, locally-defined metadata
-   * key could not be made.
+   * Returns early if:
    *
-   * @param activator Reference to the entity that is interacting with this dialogue
-   * @param parent The dialogue containing the asset that called this function
+   * <ul>
+   *   <li>no {@code MetadataKey} was passed in
+   *   <li>the activating entity's {@link DialogueComponent} could not be found
+   *   <li>no {@code MetadataStoreKey} was passed in <i>and</i> an alternative, locally-defined
+   *       metadata key could not be made.
+   * </ul>
+   *
+   * @param activator reference to the entity that is interacting with this dialogue
+   * @param parent the dialogue containing the asset that called this function
    * @return A {@link DialogueMetadata} that was replaced during this process. If this was a new
    *     insert, or the above 'do-nothing' criteria were met, returns {@code null}.
    */

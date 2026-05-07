@@ -77,6 +77,7 @@ public class ChainDialogue extends UIDialogueBase implements Dialogue {
     }
   }
 
+  /** AssetBuilderCodec for ChainDialogue */
   public static final AssetBuilderCodec<String, ChainDialogue> CODEC =
       CodecUtil.modelAssetBuilder(
           ChainDialogue.class,
@@ -134,7 +135,6 @@ public class ChainDialogue extends UIDialogueBase implements Dialogue {
 
       var advance = new StandardChoice();
       advance.Text = AdvanceText;
-      advance.Actions = new ArrayList<>();
 
       advance.Actions.add((player, _, _) -> next.display(player));
 

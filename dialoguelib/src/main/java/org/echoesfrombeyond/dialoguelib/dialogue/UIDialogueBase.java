@@ -32,6 +32,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 @ModelBuilder
 public abstract class UIDialogueBase {
+  /** Codec for UIDialogueBase */
   public static final BuilderCodec<UIDialogueBase> CODEC =
       CodecUtil.modelBuilder(
           UIDialogueBase.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

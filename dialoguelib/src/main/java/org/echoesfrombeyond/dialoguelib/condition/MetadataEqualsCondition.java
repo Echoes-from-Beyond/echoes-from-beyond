@@ -43,6 +43,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @ModelBuilder
 public class MetadataEqualsCondition extends MetadataAccessor implements ChoiceCondition {
+  /** Codec for MetadataEqualsCondition */
   public static final BuilderCodec<MetadataEqualsCondition> CODEC =
       CodecUtil.modelBuilder(
           MetadataEqualsCondition.class,

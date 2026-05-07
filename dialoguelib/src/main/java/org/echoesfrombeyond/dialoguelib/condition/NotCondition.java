@@ -39,6 +39,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @ModelBuilder
 public class NotCondition implements ChoiceCondition {
+  /** Codec for NotCondition */
   public static final BuilderCodec<NotCondition> CODEC =
       CodecUtil.modelBuilder(
           NotCondition.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

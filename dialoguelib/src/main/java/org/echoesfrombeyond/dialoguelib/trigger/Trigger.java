@@ -44,6 +44,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public interface Trigger
     extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Trigger>> {
+  /** Asset map codec for Trigger */
   AssetCodecMapCodec<String, Trigger> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
   @ApiStatus.Internal

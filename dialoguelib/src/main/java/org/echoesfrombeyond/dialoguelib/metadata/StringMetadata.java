@@ -35,6 +35,7 @@ import org.jspecify.annotations.NullMarked;
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public final class StringMetadata implements DialogueMetadata {
+  /** Codec for StringMetadata */
   public static final BuilderCodec<StringMetadata> CODEC =
       CodecUtil.modelBuilder(
           StringMetadata.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

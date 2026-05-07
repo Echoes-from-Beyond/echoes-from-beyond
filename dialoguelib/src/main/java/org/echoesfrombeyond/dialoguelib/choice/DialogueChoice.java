@@ -33,13 +33,14 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public interface DialogueChoice {
+  /** Map codec for DialogueChoice */
   BuilderCodecMapCodec<DialogueChoice> CODEC = new BuilderCodecMapCodec<>();
 
   /**
    * Gets the text associated with this choice.
    *
-   * @param activator Reference to the entity that is interacting with this dialogue
-   * @param parent The dialogue containing the asset that called this function
+   * @param activator reference to the entity that is interacting with this dialogue
+   * @param parent the dialogue containing the asset that called this function
    * @return The text to display, whether for a button or the line.
    */
   @RunOnWorldThread
@@ -48,8 +49,8 @@ public interface DialogueChoice {
   /**
    * Executes further actions if this choice is chosen as part of an interactive UI.
    *
-   * @param activator Reference to the entity that is interacting with this dialogue
-   * @param parent The dialogue containing the asset that called this function
+   * @param activator reference to the entity that is interacting with this dialogue
+   * @param parent the dialogue containing the asset that called this function
    */
   @RunOnWorldThread
   void onChosen(Ref<EntityStore> activator, Dialogue parent);
@@ -58,8 +59,8 @@ public interface DialogueChoice {
    * Whether this choice can appear, based on the associated ChoiceCondition or any arbitrary
    * conditions.
    *
-   * @param activator Reference to the entity that is interacting with this dialogue
-   * @param parent The dialogue containing the asset that called this function
+   * @param activator reference to the entity that is interacting with this dialogue
+   * @param parent the dialogue containing the asset that called this function
    * @return {@code true} if this choice should disappear, {@code false} if not.
    */
   @RunOnWorldThread

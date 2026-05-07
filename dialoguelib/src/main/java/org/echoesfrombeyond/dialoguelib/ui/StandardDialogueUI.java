@@ -41,12 +41,14 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Sets up bindings for and serves the UI for dialogue that uses several "standard" functionalities:
- * <br>
- * - line display (i.e. text not directly associated with choice selection)<br>
- * - name display for the speaker, e.g. the character a player is talking with, "Narrator", etc.<br>
- * - button-based choices that each have their own label (text)<br>
- * - a sprite (image that's displayed on the screen during dialogue).<br>
- * <br>
+ *
+ * <ul>
+ *   <li>line display (i.e. text not directly associated with choice selection)
+ *   <li>name display for the speaker, e.g. the character a player is talking with, "Narrator", etc.
+ *   <li>button-based choices that each have their own label (text)
+ *   <li>a sprite (image that's displayed on the screen during dialogue).
+ * </ul>
+ *
  * Not all of these need to be used, but the dialogue must be constrained to them. Additionally,
  * this UI ensures that all choices are numbered.
  */
@@ -148,10 +150,11 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
   /**
    * Event object for {@link StandardDialogueUI}. Contains the index of the choice selected by the
-   * player.<br>
-   * There is/was a limitation in the API where it expected a client's response to only be a string,
-   * which this accounts for. The {@code getChoice} method converts the response back into an
-   * integer.
+   * player.
+   *
+   * <p>There is/was a limitation in the API where it expected a client's response to only be a
+   * string, which this accounts for. The {@code getChoice} method converts the response back into
+   * an integer.
    */
   @SuppressWarnings("unused")
   @ModelBuilder

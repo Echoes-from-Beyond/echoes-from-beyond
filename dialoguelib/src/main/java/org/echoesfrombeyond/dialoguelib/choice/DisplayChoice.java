@@ -39,6 +39,7 @@ import org.jspecify.annotations.NullMarked;
     and Actions omitted, new users might find it more intuitive.
     """)
 public class DisplayChoice implements DialogueChoice {
+  /** Codec for DisplayChoice */
   public static final BuilderCodec<DisplayChoice> CODEC =
       CodecUtil.modelBuilder(
           DisplayChoice.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

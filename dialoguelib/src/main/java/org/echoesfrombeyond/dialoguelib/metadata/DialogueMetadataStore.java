@@ -43,7 +43,7 @@ public class DialogueMetadataStore implements Cloneable {
   /**
    * Retrieves a {@link DialogueMetadata} kept in this store. Can be of any type.
    *
-   * @param key The key associated with a particular {@link DialogueMetadata}.
+   * @param key the key associated with a particular {@link DialogueMetadata}.
    * @return The metadata, if present. Otherwise, {@code null}.
    */
   public @Nullable DialogueMetadata get(String key) {
@@ -53,7 +53,7 @@ public class DialogueMetadataStore implements Cloneable {
   /**
    * Inserts a new {@link DialogueMetadata}, or replaces one kept in this store. Can be of any type.
    *
-   * @param key The key associated with a particular {@link DialogueMetadata}.
+   * @param key the key associated with a particular {@link DialogueMetadata}.
    * @return The previous metadata value, if one was replaced. Otherwise, {@code null}.
    */
   public @Nullable DialogueMetadata put(String key, DialogueMetadata value) {
@@ -63,7 +63,7 @@ public class DialogueMetadataStore implements Cloneable {
   /**
    * Removes a {@link DialogueMetadata} from the store. Can be of any type.
    *
-   * @param key The key associated with a particular {@link DialogueMetadata}.
+   * @param key the key associated with a particular {@link DialogueMetadata}.
    * @return The metadata that was removed, if it existed. Otherwise, {@code null}.
    */
   public @Nullable DialogueMetadata remove(String key) {

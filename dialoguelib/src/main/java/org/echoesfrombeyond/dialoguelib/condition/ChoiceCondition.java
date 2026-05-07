@@ -31,14 +31,15 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public interface ChoiceCondition {
+  /** Map codec for ChoiceCondition */
   BuilderCodecMapCodec<ChoiceCondition> CODEC = new BuilderCodecMapCodec<>();
 
   /**
    * Evaluates whether a choice is able to be displayed.
    *
-   * @param activator Reference to the entity that is interacting with this dialogue
-   * @param parent The dialogue containing the asset that called this function
-   * @param choice The choice on behalf of which this check is being made
+   * @param activator reference to the entity that is interacting with this dialogue
+   * @param parent the dialogue containing the asset that called this function
+   * @param choice the choice on behalf of which this check is being made
    * @return {@code true} if the condition is met, {@code false} otherwise.
    */
   @RunOnWorldThread

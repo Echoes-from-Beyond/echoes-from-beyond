@@ -34,6 +34,7 @@ import org.jspecify.annotations.NullMarked;
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public final class IntegerMetadata implements DialogueMetadata {
+  /** Codec for IntegerMetadata */
   public static final BuilderCodec<IntegerMetadata> CODEC =
       CodecUtil.modelBuilder(
           IntegerMetadata.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
@@ -41,6 +42,7 @@ public final class IntegerMetadata implements DialogueMetadata {
   @Doc(
       """
       Any valid integer between 2,147,483,647 and -2,147,483,648.
+      Defaults to 0 if unspecified.
       """)
   public int Value;
 

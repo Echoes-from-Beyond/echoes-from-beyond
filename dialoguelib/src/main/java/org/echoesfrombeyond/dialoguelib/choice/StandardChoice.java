@@ -21,6 +21,7 @@ package org.echoesfrombeyond.dialoguelib.choice;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.ArrayList;
 import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
@@ -42,6 +43,7 @@ import org.jspecify.annotations.Nullable;
     action to take when the choice is selected.
     """)
 public class StandardChoice implements DialogueChoice {
+  /** Codec for StandardChoice */
   public static final BuilderCodec<StandardChoice> CODEC =
       CodecUtil.modelBuilder(
           StandardChoice.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
@@ -62,10 +64,11 @@ public class StandardChoice implements DialogueChoice {
       if the dialogue is UI-based.) If left absent, selecting the
       choice will do nothing.
       """)
-  public @Nullable List<ChoiceAction> Actions;
+  public List<ChoiceAction> Actions;
 
   public StandardChoice() {
     this.Text = "";
+    this.Actions = new ArrayList<>();
   }
 
   @Override
@@ -76,7 +79,6 @@ public class StandardChoice implements DialogueChoice {
   @Override
   public void onChosen(Ref<EntityStore> activator, Dialogue parent) {
     var actions = Actions;
-    if (actions == null) return;
 
     for (var action : actions) {
       action.onChosen(activator, parent, this);

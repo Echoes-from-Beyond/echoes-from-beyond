@@ -38,6 +38,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public interface Dialogue
     extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Dialogue>> {
+  /** Asset map codec for Dialogue */
   AssetCodecMapCodec<String, Dialogue> CODEC = IdentifiedAsset.codec(Codec.STRING);
 
   @ApiStatus.Internal

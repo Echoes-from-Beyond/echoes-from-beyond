@@ -43,6 +43,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @ModelBuilder
 public class SelectChoice extends MetadataAccessor implements DialogueChoice {
+  /** Codec for SelectChoice */
   public static final BuilderCodec<SelectChoice> CODEC =
       CodecUtil.modelBuilder(
           SelectChoice.class,

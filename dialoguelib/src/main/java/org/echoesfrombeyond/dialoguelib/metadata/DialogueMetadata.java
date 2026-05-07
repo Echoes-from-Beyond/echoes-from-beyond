@@ -29,6 +29,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public sealed interface DialogueMetadata extends Cloneable
     permits StringMetadata, IntegerMetadata, BooleanMetadata {
+  /** Map codec for DialogueMetadata */
   BuilderCodecMapCodec<DialogueMetadata> CODEC = new BuilderCodecMapCodec<>();
 
   DialogueMetadata clone();
