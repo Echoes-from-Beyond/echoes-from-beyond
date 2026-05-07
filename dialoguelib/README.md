@@ -14,9 +14,9 @@ The following examples demonstrate the usage of the asset system. Refer to the d
 
 ### Getting started - Dialogue
 
-Everything starts with a dialogue asset. Currently, these can be of type **Standard** or **Chain**.
+Everything starts with a dialogue asset. Currently, these can be of type Standard or Chain.
 
-Below is a demonstration of Standard-type dialogue.
+Below is a demonstration of **Standard**-type dialogue.
 
 ```json
 {
@@ -71,15 +71,15 @@ If you feel that you don't need some of these selectors, leave them out. Make su
 
 To see an example of this one, check out Classic_Dialogue_Fragment.ui, which is also the default value of this field.
 
-`Lifetime` lets you configure the `CustomPageLifetime` of each dialogue screen, defining how the player can close the window. This field is optional and defaults to `CantClose` if not present, effectively meaning that the player can't escape out of it other than through programmatic means (by using `Advance` actions to replace the window with a new one, or `Close` to force the player out of dialogue). Since this is part of Hytale's own API, you should consult their documentation for more information.
+`Lifetime` lets you configure the `CustomPageLifetime` of each dialogue screen, defining how the player can close the window. This field is optional and defaults to `CantClose` if not present, effectively meaning that the player can't escape out of it other than through programmatic means (by using Advance actions to replace the window with a new one, or Close to force the player out of dialogue). Since this is part of Hytale's own API, you should consult their documentation for more information.
 
 `Sprite` is the path to an image you want to show on the screen in middle of the dialogue. Like other elements of the UI, the path is relative to Common/UI/Custom. This is optional.
 
-`Choices` is a collection of DialogueChoices that, when picked, should each perform some kind of action. Use `Standard` DialogueChoices, which enable you to define `Condition` and `Actions` fields; as the name might imply `Condition` determines whether the player is shown a particular choice at all.
+`Choices` is a collection of DialogueChoices that, when picked, should each perform some kind of action. Use Standard DialogueChoices, which enable you to define `Condition` and `Actions` fields. As the name might imply, `Condition` determines whether the player is shown a particular choice at all.
 
 ---
 
-Chain-type dialogue can be used to quickly set up lots of dialogue windows that are all connected via single, repetitive choices: e.g. Continue.
+**Chain**-type dialogue can be used to quickly set up lots of dialogue windows that are all connected via single, repetitive choices: e.g. Continue.
 
 ```json
 {
@@ -134,7 +134,7 @@ Chain-type dialogue can be used to quickly set up lots of dialogue windows that 
           "MetadataKey": "Knowledge_Status",
           "Metadata": {
             "Id": "String",
-            
+            "Value": "Knows_NPCs_Real_Identity"
           }
         }
         "Actions": [
@@ -147,5 +147,324 @@ Chain-type dialogue can be used to quickly set up lots of dialogue windows that 
     ]
   }
 }
-
 ```
+
+There are some repeating fields in this one. Check the above Standard dialogue section for a refresher on those.
+
+`Entries` simplifies the dialogue windows by reducing them to a collection of bare necessities. Each object contains a `Name`, `Line` and `Sprite`. Unlike in Standard dialogue, you directly pass text into `Name` and `Line`, rather than DialogueChoices. These are converted into appropriate DialogueChoices under the hood.
+
+`AdvanceText` is the text put into the single choice given to the each entry. This choice only has an Advance action that leads to the next entry, or the `End` dialogue if it's the last entry.
+
+`End` is another Dialogue asset to show once all simplified entries are exhausted. Here you can define dialogue with more complex logic again, or even just one with a different choice from `AdvanceText`.
+
+### Getting started - NPC
+
+To add your dialogue to an NPC, you need to add the following Action (NPC Action, not that of dialogue - see Hytale's documentation for more on those) to whichever Instructions you define:
+
+```json
+{
+  "Type": "OpenDialogue",
+  "Dialogue": "My_Conversation_1"
+}
+```
+
+OpenDialogue is a type of Action that starts the whole dialogue flow. The `Dialogue` field points to the `Id` of the first of the interconnected dialogue assets, or whichever other point you want to start from.
+
+### Getting started - DialogueChoices
+
+There are three types of DialogueChoices that exist for the base library. First one is **DisplayChoice**, which has aforementioned uses for non-interactive elements of the UI.
+
+```json
+{
+  "Id": "Display",
+  "Text": "Any text you want here"
+}
+```
+
+Second is **StandardChoice**, which enables you to set a `Condition` and `Actions`.
+
+Note that DisplayChoice is effectively the same as a StandardChoice, but with `Condition` and `Actions` fields being unset.
+
+```json
+{
+  "Id": "Standard",
+  "Text": "Any text you want here"
+  "Condition": {
+    "Id": "Equals",
+    "MetadataStoreKey": "MY_FIRST_CONVERSATION",
+    "MetadataKey": "Knowledge_Status",
+    "Metadata": {
+      "Id": "String",
+      "Value": "Knows_NPCs_Real_Identity"
+    }
+  },
+  "Actions": [
+    {
+	  "Id": "Advance",
+	  "Next": "Other_Dialogue_Id"
+	}
+  ]
+}
+```
+
+Third is **SelectChoice**, which is only used in situations where the _displayed text_ for some dialogue should differ, but the choices are otherwise functionally the same. Its selection depends on string-based metadata (it won't work for any other kind of metadata).
+
+```json
+{
+  "Id": "Select",
+  "Default": {
+    "Id": "Standard",
+	"Text": "I don't satisfy any of the below values."
+  },
+  "MetadataStoreKey": "MY_FIRST_CONVERSATION",
+  "MetadataKey": "NPC_Opinion",
+  "Options": {
+    "Dislike": {
+	  "Id": "Standard",
+	  "Text": "I hope you have a BAD day."
+	},
+	"Admire": {
+	  "Id": "Standard",
+	  "Text": "How are you so chill all the time?"
+	}
+  }
+}
+```
+
+You can consider SelectChoice as a wrapper around other kinds of DialogueChoices, where only one can be shown to the player. It's similar to a switch-case statement, where the displayed choice is based on the current value of some metadata you read (see below section on metadata).
+
+The `Options` field contains the possible values you want to check for, where you write each value as a *field* ("Dislike", "Admire" in the example). The value of that field is the DialogueChoice to display if this is the current value of your retrieved metadata.
+
+`Default` is a fallback when the metadata is either not set, or is set to a value not contained within `Options`. While it's technically optional, you should always have a default DialogueChoice or else no text will be shown.
+
+### Getting started - Metadata
+
+Metadata allow you to persistently store simple forms of data associated with your dialogue. This is designed to enable state management, an example being dialogue branching based only on _consequential_ choices as opposed to a more naive, flow-based approach.
+
+There are three types of metadata: **StringMetadata** (for text), **IntegerMetadata** and **BooleanMetadata**. Decimal numbers are not covered, but it's very unlikely that you'll need them instead of other supported datatypes.
+
+All ChoiceActions and ChoiceConditions that deal with metadata have the following fields:
+
+  - `MetadataStoreKey`: The field in the player's save data to keep associated metadata, meant primarily for categorically separating otherwise similar `MetadataKey`s. This field is optional everywhere; if left out, it defaults to a field that is "local" to the dialogue asset in which metadata is being handled. Otherwise, it can be accessed by any dialogue asset as long as you write it exactly the same.
+
+  - `MetadataKey`: The field in the player's save data that is part of a greater `MetadataStoreKey`. This one actually gets associated with a value and is **NOT** optional - leaving it out means that your ChoiceAction will do nothing, and ChoiceCondition always fails/succeeds depending on the type.
+
+Some take an additional metadata-related field:
+
+```json
+"Metadata": {
+  "Id": "String",
+  "Value": "someTextHere"
+}
+```
+
+`Id` here can be either String, Integer or Boolean. The associated `Value` is any data of that type.
+
+### Getting started - ChoiceActions
+
+**Advance** is likely the most common kind of ChoiceAction you're going to use.
+
+```json
+
+{
+  "Id": "Advance",
+  "Next": "My_Conversation_2"
+}
+```
+
+`Next` should contain the `Id` of the next Dialogue asset to advance to.
+
+---
+
+If you rely on CantClose lifetimes, **Close** is your other friend. It programmatically closes the UI if you don't want to give the player the option to ESC out of it.
+
+```json
+{
+  "Id": "Close"
+}
+```
+
+---
+
+To set some metadata based on a choice, use **SetMetadata**. You can set all kinds of metadata like this, but you should probably use **AdjustInteger** for integers instead.
+
+```json
+{
+  "Id": "SetMetadata",
+  "MetadataStoreKey": "MY_FIRST_CONVERSATION",
+  "MetadataKey": "NPC_Opinion",
+  "Metadata": {
+    "Id": "String",
+	"Value": "Hate"
+  }
+}
+```
+
+If you don't include the `Metadata` field, the metadata will be removed (unset) instead.
+
+---
+
+If you're working with integers, you should use **AdjustInteger** since that can add or subtract from an existing IntegerMetadata, or create a new one if it doesn't exist. This will give you a better workflow than naively hardcoding numeric values, unless you explicitly intend for a choice to force a particular value (use **SetMetadata** in that circumstance).
+
+This will do nothing if the metadata key was already used for a non-integer metadata type.
+
+```json
+{
+  "Id": "AdjustInteger",
+  "MetadataStoreKey": "MY_FIRST_CONVERSATION",
+  "MetadataKey": "Reputation",
+  "Delta": 1,
+  "Initial": 0
+}
+```
+
+`Delta` is the amount to change the current value by. As you might expect, positive number = addition; negative number = subtraction. This field defaults to 1 if you leave it out.
+
+`Initial` handles behavior when the metadata wasn't already created. It creates an IntegerMetadata with the given value, that is then adjusted with `Delta`. This field defaults to 0 if you leave it out.
+
+There is currently no way to leave the metadata unset through this ChoiceAction.
+
+---
+
+The **Conditional** ChoiceAction is an unusual one in that it doesn't perform any action itself, but determines whether another ChoiceAction will execute. It enables you to use ChoiceConditions for ChoiceActions.
+
+```json
+{
+  "Id": "Conditional",
+  "Condition": {
+    "Id": "Equals",
+    "MetadataStoreKey": "MY_FIRST_CONVERSATION",
+    "MetadataKey": "Knowledge_Status",
+    "Metadata": {
+      "Id": "String",
+      "Value": "Knows_NPCs_Real_Identity"
+    }
+  },
+  "IfMet": {
+    "Id": "Advance",
+	"Next": "My_Conversation_4"
+  },
+  "IfNotMet": {
+    "Id": "Advance",
+	"Next": "My_Conversation_5"
+  }
+}
+```
+
+`Condition` works similarly to the field in a Standard DialogueChoice, except you are able to refine its success and failure behaviors. If the condition succeeds, the ChoiceAction attached to the `IfMet` field is executed; otherwise, `IfNotMet` is executed.
+
+You can leave either one of those two fields out if you e.g. only want to do something if the condition fails. If neither field exists, Conditional obviously does nothing.
+
+### Getting started - ChoiceConditions
+
+ChoiceConditions are generally based on persistent data (metadata), the support for which is enabled by DialogueLib. If you want to perform conditions on some kind of world state, you should extend from this library and add your ChoiceConditions.
+
+As such, one important ChoiceCondition is **Equals**, which compares two metadata (one persisted, and a keyless one defined in this ChoiceCondition) and ensures that they are:
+  - of the same value
+  - of the same type (an IntegerMetadata of value 1 is not the same as StringMetadata of value "1").
+
+```json
+{
+  "Id": "Equals",
+  "MetadataStoreKey": "MY_FIRST_CONVERSATION",
+  "MetadataKey": "NPC_Opinion",
+  "Metadata": {
+    "Id": "String",
+	"Value": "Dislike"
+  }
+}
+```
+
+If you leave the `Metadata` field out, this ChoiceCondition instead checks that your MetadataKey is *unset* (deleted or never made).
+
+In the future, this may be reworked so that it can also compare two persisted metadata.
+
+---
+
+**CompareInteger** ChoiceCondition is used to compare two integers through more boolean operators than just the equality check. This ChoiceCondition further differs from Equals in that it can already compare the values of two *persisted* metadata, as well as some configured value.
+
+The following does a comparison on a configured constant.
+
+```json
+{
+  "Id": "CompareInteger",
+  "MetadataStoreKey": "MY_FIRST_CONVERSATION"
+  "MetadataKey": "Reputation",
+  "DefaultMetadataValue": 0,
+  "Comparison": "GreaterThan",
+  "Value": 5
+}
+```
+
+The `MetadataKey` is always on the left side of the equation, e.g. [REPUTATION VALUE] > 5.
+
+`DefaultMetadataValue` handles scenarios where a given metadata was not initialized yet. This ChoiceCondition does **not** initialize one itself, but uses an alternative value when doing the comparison. Defaults to 0 if you leave this field out.
+
+`Comparison` is the boolean operator to use. Can be LessThan, GreaterThan, LessThanOrEqualTo, GreaterThanOrEqualTo, or EqualTo.
+
+As you might expect, `Value` is a number to compare it against.
+
+The following does a comparison on another persisted metadata.
+
+```json
+{
+  "Id": "CompareInteger",
+  "MetadataStoreKey": "MY_FIRST_CONVERSATION",
+  "MetadataKey": "Reputation",
+  "DefaultMetadataValue": 0,
+  "Comparison": "LesserThan",
+  "OtherMetadataStoreKey": "MY_FIRST_CONVERSATION",
+  "OtherMetadataKey" : "Enmity",
+  "DefaultOtherMetadataValue": 0
+}
+```
+
+This is similar to the constant comparison, except you target another metadata instead. `OtherMetadataKey` is always on the right side of the equation, e.g. [REPUTATION VALUE] < [ENMITY VALUE]. Likewise, `DefaultOtherMetadataValue` provides an alternative if this metadata is not initialized, and defaults to 0 itself.
+
+You shouldn't include `Value` when comparing two metadata, since that field will be ignored.
+
+---
+
+To compare multiple different conditions, use the **Boolean** ChoiceCondition.
+
+```json
+{
+  "Id": "Boolean",
+  "Kind": "And",
+  "Conditions": [
+    // your conditions here
+  ]
+}
+```
+
+`Conditions`, obviously, is a collection of ChoiceConditions.
+
+`Kind` determines how these delegate ChoiceConditions are being evaluated. Use "And" if you want to ensure that everything in the collection succeeds, and "Or" to ensure that _at least one_ ChoiceCondition succeeds.
+
+---
+
+If you want to invert the outcome of another ChoiceCondition, e.g. check for failure, use the **Not** condition.
+
+```json
+
+{
+  "Id": "Not",
+  "Delegate": {
+    "Id": "Equals",
+    "MetadataStoreKey": "MY_FIRST_CONVERSATION",
+    "MetadataKey": "NPC_Opinion",
+    "Metadata": {
+      "Id": "String",
+	  "Value": "Dislike"
+    }
+  }
+}
+```
+
+## See also
+
+DialogueLib was battle-tested by ourselves. It formed the backbone of an experimental WIP project we started with some friends, and now also serves as a demonstration of the library. If you require examples of:
+  - complex conversation chains developed with the above features
+  - DialogueLib being extended
+
+Then take a look at Planting Your Roots (TODO: link on main branch). Assets can be found in various subdirectories of resources/Server. Note that this uses StandardChoices with unset fields rather than DisplayChoices for the non-interactive text.
