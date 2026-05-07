@@ -387,7 +387,7 @@ The following does a comparison on a configured constant.
 
 ```json
 {
-  "Id": "CompareInteger,
+  "Id": "CompareInteger",
   "MetadataStoreKey": "MY_FIRST_CONVERSATION"
   "MetadataKey": "Reputation",
   "DefaultMetadataValue": 0,
@@ -408,7 +408,7 @@ The following does a comparison on another persisted metadata.
 
 ```json
 {
-  "Id": "CompareInteger,
+  "Id": "CompareInteger",
   "MetadataStoreKey": "MY_FIRST_CONVERSATION",
   "MetadataKey": "Reputation",
   "DefaultMetadataValue": 0,
