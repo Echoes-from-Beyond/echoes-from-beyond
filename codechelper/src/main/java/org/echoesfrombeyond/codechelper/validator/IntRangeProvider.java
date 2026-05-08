@@ -40,6 +40,11 @@ public class IntRangeProvider implements ValidatorProvider<ValidateIntRange> {
   private IntRangeProvider() {}
 
   @Override
+  public Class<ValidateIntRange> getArgsType() {
+    return ValidateIntRange.class;
+  }
+
+  @Override
   public @Nullable Validator<?> getInstance(ValidateIntRange args, Field field) {
     return canProvideFor(field)
         ? new RangeValidator<>(args.min(), args.max(), args.inclusive())

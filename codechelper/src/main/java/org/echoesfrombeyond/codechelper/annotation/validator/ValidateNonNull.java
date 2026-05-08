@@ -21,6 +21,7 @@ package org.echoesfrombeyond.codechelper.annotation.validator;
 import com.hypixel.hytale.codec.validation.Validators;
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.validator.NonNullProvider;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Validates that the field is non-null. This is equivalent to using {@link Validators#nonNull()}.
@@ -29,4 +30,5 @@ import org.echoesfrombeyond.codechelper.validator.NonNullProvider;
 @Retention(RetentionPolicy.RUNTIME)
 @ValidatorSpec(NonNullProvider.class)
 @Documented
+@NullMarked
 public @interface ValidateNonNull {}

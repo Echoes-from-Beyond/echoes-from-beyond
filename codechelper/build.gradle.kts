@@ -3,7 +3,7 @@ import org.echoesfrombeyond.gradle.plugin.projectImplementation
 import org.echoesfrombeyond.gradle.plugin.withHytalePlugin
 import org.echoesfrombeyond.gradle.plugin.withPublishedPlugin
 
-version = "0.2.2"
+version = "0.3.0"
 
 apply<JavaConventionPlugin>()
 

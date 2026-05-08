@@ -16,24 +16,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codechelper.annotation.validator;
+package org.echoesfrombeyond.codechelper.annotation;
 
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import java.lang.annotation.*;
-import java.util.Collection;
-import java.util.Map;
-import org.echoesfrombeyond.codechelper.validator.NonEmptyProvider;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Validates that the field is non-empty.
+ * This annotation can be applied to a {@link ModelBuilder} class to specify a codec version for it.
  *
- * <p>If the field is a {@link String}, validates that the string is not zero length. If the field
- * is a {@link Collection} or {@link Map}, validates that the number of elements/entries,
- * respectively, is non-zero. If the field is an array, validates that the length is non-zero.
+ * <p>This is equivalent to calling {@link BuilderCodec.Builder#codecVersion(int, int)}.
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@ValidatorSpec(NonEmptyProvider.class)
 @Documented
 @NullMarked
-public @interface ValidateNonEmpty {}
+public @interface CodecVersion {
+  /**
+   * @return the minimum version; if unspecified defaults to {@code 0}
+   */
+  int min() default 0;
+
+  /**
+   * @return the codec version
+   */
+  int value();
+}

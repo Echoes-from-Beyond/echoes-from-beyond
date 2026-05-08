@@ -16,24 +16,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.codechelper.annotation.validator;
+package org.echoesfrombeyond.codechelper.annotation.inherit;
 
 import java.lang.annotation.*;
-import java.util.Collection;
-import java.util.Map;
-import org.echoesfrombeyond.codechelper.validator.NonEmptyProvider;
+import org.echoesfrombeyond.codechelper.inherit.InheritMergerProvider;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Validates that the field is non-empty.
- *
- * <p>If the field is a {@link String}, validates that the string is not zero length. If the field
- * is a {@link Collection} or {@link Map}, validates that the number of elements/entries,
- * respectively, is non-zero. If the field is an array, validates that the length is non-zero.
+ * Applied to an annotation type to indicate that it can be used to specify an inheritance merging
+ * policy.
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.ANNOTATION_TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@ValidatorSpec(NonEmptyProvider.class)
 @Documented
 @NullMarked
-public @interface ValidateNonEmpty {}
+public @interface InheritSpec {
+  /**
+   * The {@link InheritMergerProvider} used to provide inheritance merging functionality.
+   *
+   * @return the InheritMergeProvider
+   */
+  Class<? extends InheritMergerProvider<?>> value();
+}

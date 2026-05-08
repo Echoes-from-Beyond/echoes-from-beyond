@@ -87,6 +87,11 @@ public class LengthRangeProvider implements ValidatorProvider<ValidateLengthRang
   private LengthRangeProvider() {}
 
   @Override
+  public Class<ValidateLengthRange> getArgsType() {
+    return ValidateLengthRange.class;
+  }
+
+  @Override
   public @Nullable Validator<?> getInstance(ValidateLengthRange args, Field field) {
     return canProvideFor(field) ? new ValidatorImpl(args.min(), args.max()) : null;
   }

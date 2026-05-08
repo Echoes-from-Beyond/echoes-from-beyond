@@ -20,10 +20,9 @@ package org.echoesfrombeyond.codechelper.validator;
 
 import com.hypixel.hytale.codec.validation.Validator;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidatorSpec;
+import org.echoesfrombeyond.codechelper.provider.Provider;
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
 
 /**
  * Given an annotation and the field it is applied to, attempt to return a specific kind of {@link
@@ -39,16 +38,4 @@ import org.jspecify.annotations.Nullable;
  * @param <A> the annotation type
  */
 @NullMarked
-@FunctionalInterface
-public interface ValidatorProvider<A extends Annotation> {
-  /**
-   * Attempt to provide a {@link Validator} that can validate values assignable to the {@code
-   * field}.
-   *
-   * @param args the annotation linking to this provider, which may be used to supply arguments
-   * @param field the field this validator must be compatible with
-   * @return a validator that can validate values for {@code field}; else {@code null} to indicate
-   *     that this provider is incompatible with the field
-   */
-  @Nullable Validator<?> getInstance(A args, Field field);
-}
+public interface ValidatorProvider<A extends Annotation> extends Provider<Validator<?>, A> {}

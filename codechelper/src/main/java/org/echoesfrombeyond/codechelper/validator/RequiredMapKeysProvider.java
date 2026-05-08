@@ -45,6 +45,11 @@ public class RequiredMapKeysProvider implements ValidatorProvider<ValidateRequir
   private RequiredMapKeysProvider() {}
 
   @Override
+  public Class<ValidateRequiredMapKeys> getArgsType() {
+    return ValidateRequiredMapKeys.class;
+  }
+
+  @Override
   public @Nullable Validator<?> getInstance(ValidateRequiredMapKeys args, Field field) {
     return canProvideFor(field) ? new RequiredMapKeysValidator<>(args.value()) : null;
   }

@@ -20,6 +20,7 @@ package org.echoesfrombeyond.codechelper.annotation.validator;
 
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.validator.IntRangeProvider;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Validates that an {@code int} or {@code Integer} field is within a specified range, which may be
@@ -29,6 +30,7 @@ import org.echoesfrombeyond.codechelper.validator.IntRangeProvider;
 @Retention(RetentionPolicy.RUNTIME)
 @ValidatorSpec(IntRangeProvider.class)
 @Documented
+@NullMarked
 public @interface ValidateIntRange {
   /** The minimum allowed value. */
   int min();

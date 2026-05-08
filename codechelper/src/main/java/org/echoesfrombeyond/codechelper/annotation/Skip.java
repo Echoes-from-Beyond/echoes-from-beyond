@@ -19,6 +19,7 @@
 package org.echoesfrombeyond.codechelper.annotation;
 
 import java.lang.annotation.*;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Marker annotation applied to a field to indicate that it should be skipped during codec
@@ -33,4 +34,5 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@NullMarked
 public @interface Skip {}

@@ -57,6 +57,11 @@ public class RegexProvider implements ValidatorProvider<ValidateRegex> {
   private RegexProvider() {}
 
   @Override
+  public Class<ValidateRegex> getArgsType() {
+    return ValidateRegex.class;
+  }
+
+  @Override
   public @Nullable Validator<?> getInstance(ValidateRegex args, Field field) {
     return canProvideFor(field) ? new ValidatorImpl(Pattern.compile(args.value())) : null;
   }
