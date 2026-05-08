@@ -1,21 +1,23 @@
 {
   "Group": "org.echoesfrombeyond",
   "Name": "DialogueLib",
-  "Version": "0.1.0",
+  "Version": "0.2.0",
   "Description": "Library facilitating NPC dialogue.",
   "Authors": [
     {
       "Name": "Kyle",
-      "Email": "chemky2000@gmail.com",
-      "Url": null
+      "Email": "chemky2000@gmail.com"
+    },
+    {
+      "Name": "Cobrinthine",
+      "Email": "cobrinthine.amaranthine@gmail.com"
     }
   ],
-  "Website": null,
   "Main": "org.echoesfrombeyond.dialoguelib.DialoguePlugin",
   "ServerVersion": "2026.03.26-89796e57b",
   "IncludesAssetPack": true,
   "DependsOn": {
     "Hytale:NPC": "*",
-    "org.echoesfrombeyond:CodecHelper": "^0.2.2"
+    "org.echoesfrombeyond:CodecHelper": "^0.3.0"
   }
 }
