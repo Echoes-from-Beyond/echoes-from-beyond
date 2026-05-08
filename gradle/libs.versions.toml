@@ -83,7 +83,7 @@ spotless = "8.4.0"
 [libraries]
 # usage: Automatic codec generation
 # scope: Hytale mods
-codec-helper = { module = "org.echoesfrombeyond:codec-helper", version = "0.2.2" }
+codec-helper = { module = "org.echoesfrombeyond:codec-helper", version = "0.3.0" }
 
 # usage: manifest.json parsing during build validation
 # scope: build scripts

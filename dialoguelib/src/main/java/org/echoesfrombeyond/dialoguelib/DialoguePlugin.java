@@ -124,7 +124,7 @@ public class DialoguePlugin extends JavaPlugin {
         .register("Chain", ChainDialogue.class, ChainDialogue.CODEC)
         .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
 
-    getCodecRegistry(DialogueChoice.CODEC)
+    getCodecRegistry(DialogueChoice.CODEC.getChildCodec())
         .register("Select", SelectChoice.class, SelectChoice.CODEC)
         .register("Standard", StandardChoice.class, StandardChoice.CODEC)
         .register("Display", DisplayChoice.class, DisplayChoice.CODEC);

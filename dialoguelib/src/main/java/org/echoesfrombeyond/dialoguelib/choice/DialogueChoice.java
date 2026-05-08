@@ -18,12 +18,16 @@
 
 package org.echoesfrombeyond.dialoguelib.choice;
 
+import com.hypixel.hytale.codec.ExtraInfo;
 import com.hypixel.hytale.codec.lookup.BuilderCodecMapCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.function.BiFunction;
 import org.echoesfrombeyond.annotation.RunOnWorldThread;
+import org.echoesfrombeyond.codechelper.StringDefaultCodec;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A {@code DialogueChoice} can be understood as anything that manages the display of, and
@@ -34,7 +38,22 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public interface DialogueChoice {
   /** Map codec for DialogueChoice */
-  BuilderCodecMapCodec<DialogueChoice> CODEC = new BuilderCodecMapCodec<>();
+  StringDefaultCodec<DialogueChoice, BuilderCodecMapCodec<DialogueChoice>> CODEC =
+      new StringDefaultCodec<>(
+          new BuilderCodecMapCodec<>(),
+          (string, _) -> {
+            var choice = new DisplayChoice();
+            choice.Text = string;
+            return choice;
+          },
+          new BiFunction<>() {
+            @Override
+            public @Nullable String apply(DialogueChoice dialogueChoice, ExtraInfo extraInfo) {
+              return dialogueChoice instanceof DisplayChoice displayChoice
+                  ? displayChoice.Text
+                  : null;
+            }
+          });
 
   /**
    * Gets the text associated with this choice.
