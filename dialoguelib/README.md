@@ -18,10 +18,10 @@ Everything starts with a dialogue asset. Currently, these can be of type Standar
 
 Below is a demonstration of **Standard**-type dialogue.
 
+My_Conversation_1.json
 ```json
 {
   "Type": "Standard",
-  "Id": "My_Conversation_1",
   "Line": {
     "Id": "Display",
     "Text": "Hello! How are you?"
@@ -49,25 +49,27 @@ Below is a demonstration of **Standard**-type dialogue.
 }
 ```
 
-As implied, the `Type` field differentiates the two dialogue types. However, pay attention to the top-level `Id` field: while `Id` is otherwise used to determine the kind of an Action, Condition, or Choice asset, the top-level `Id` is used to assign a unique, internal ID to this specific part of a conversation. This same ID can be referenced by the `Advance` Action to continue on to the next part, or an NPC to start the conversation.
+Pay attention to the **filename**. The filename (excluding the .json extension) is used to assign a unique ID to each part of a conversation. This can then be referenced by the Advance Action to continue on to the next part of the dialogue, or an NPC to start the conversation.
+
+As implied, the `Type` field differentiates the dialogue types.
 
 `Line` determines the unselectable text that is displayed in the dialogue window. This is handled by a DialogueChoice, which will be explained in more detail later. For the moment, notice the `Id` being `Display`, and a `Text` field that contains whatever you want to be shown to the player: `Display` is a trimmed-down kind of choice that is effectively inert, by not placing any kind of condition on it showing up and not being capable of performing any actions. This field is optional, in case you only want to show a series of choices.
 
 `Name` functions in a similar way as `Line`, but it defines a _different_ kind of unselectable text: the one that shows up as the name of the speaker. In the default UI shipped with this library, this maps to the nameplate above the actual dialogue. Likewise, this field is also optional.
 
 In `UiPage`, you can define your own UI file to use as the main body of the dialogue interface. In your resources folder, this file must be contained somewhere in Common/UI/Custom or a subdirectory thereof. It should have following selectors:
-  - `#Sprite`, a container for the image found in `Sprite`;
-  - `#DialogueName`, which is the Label where the contents of the `Name` field are appended to;
-  - `#DialogueLine`, likewise but for `Line`;
-  - `#DialogueChoices`, which is a Group that can contain multiple `Choices` via appending multiple instances of `UiFragment`.
+- `#Sprite`, a container for the image found in `Sprite`;
+- `#DialogueName`, which is the Label where the contents of the `Name` field are appended to;
+- `#DialogueLine`, likewise but for `Line`;
+- `#DialogueChoices`, which is a Group that can contain multiple `Choices` via appending multiple instances of `UiFragment`.
 
 To see an example of how you might set these up, the library is packaged with Classic_Dialogue.ui - a simple UI to get you started, but you probably shouldn't use as-is. This is also what the library defaults to when you don't define a `UiPage`.
 
 If you feel that you don't need some of these selectors, leave them out. Make sure that your asset files reflect that, however, as inclusion of certain fields, without matching selectors, can cause issues. For example, if you have no need for sprites, you don't need a `#Sprite` selector - but if at least one of your assets contains a defined `Sprite` field, the client will error and be kicked off your server.
 
 `UiFragment` has a similar role, except it affects individual choices. Again, this file must be contained somewhere in Common/UI/Custom. It should have following selectors:
-  - `#DialogueButton`, a Button that gets associated with each choice,
-  - `#DialogueLabel`, a Label contained within said button that will hold the text associated with the choice.
+- `#DialogueButton`, a Button that gets associated with each choice,
+- `#DialogueLabel`, a Label contained within said button that will hold the text associated with the choice.
 
 To see an example of this one, check out Classic_Dialogue_Fragment.ui, which is also the default value of this field.
 
@@ -77,14 +79,43 @@ To see an example of this one, check out Classic_Dialogue_Fragment.ui, which is 
 
 `Choices` is a collection of DialogueChoices that, when picked, should each perform some kind of action. Use Standard DialogueChoices, which enable you to define `Condition` and `Actions` fields. As the name might imply, `Condition` determines whether the player is shown a particular choice at all.
 
+**Note:** Starting with CodecHelper 0.3.0, you can directly assign strings to `Line` and `Name` fields like so:
+
+My_Conversation_1.json
+```json
+{
+  "Type": "Standard",
+  "Line": "Hello! How are you?",
+  "Name": "My First NPC",
+  "UiPage": "My_Custom_Dialogue.ui",
+  "UiFragment": "My_Custom_Dialogue_Fragment.ui",
+  "Lifetime": "CantClose",
+  "Sprite": "Friendly_Fellow.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "I'm doing good. What about you?",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "My_Conversation_2"
+        }
+      ]
+    }
+  ]
+}
+```
+
+This sets up a DisplayChoice internally.
+
 ---
 
 **Chain**-type dialogue can be used to quickly set up lots of dialogue windows that are all connected via single, repetitive choices: e.g. Continue.
 
+My_Conversation_2.json
 ```json
 {
   "Type": "Chain",
-  "Id": "My_Conversation_2",
   "Entries": [
     {
       "Name": "My First NPC",
@@ -136,7 +167,7 @@ To see an example of this one, check out Classic_Dialogue_Fragment.ui, which is 
             "Id": "String",
             "Value": "Knows_NPCs_Real_Identity"
           }
-        }
+        },
         "Actions": [
           {
             "Id": "Advance",
@@ -168,7 +199,271 @@ To add your dialogue to an NPC, you need to add the following Action (NPC Action
 }
 ```
 
-OpenDialogue is a type of Action that starts the whole dialogue flow. The `Dialogue` field points to the `Id` of the first of the interconnected dialogue assets, or whichever other point you want to start from.
+OpenDialogue is a type of Action that starts the whole dialogue flow. The `Dialogue` field points to the filename of the first of the interconnected dialogue assets, or whichever other point you want to start from.
+
+If you're unsure about how this should look, below is an example of a generic NPC where the dialogue is opened on right-click:
+
+```json
+{
+  "Type": "Generic",
+  "Parameters": {
+    "Invulnerable": {
+      "Value": false,
+      "Description": "Whether this NPC is invulnerable."
+    }
+  },
+  "StartState": "Idle",
+  "DisplayNames": [
+    "Klops Merchant",
+    "Traveling Trader",
+    "Wandering Merchant"
+  ],
+  "DefaultNPCAttitude": "Ignore",
+  "DefaultPlayerAttitude": "Neutral",
+  "Appearance": "Klops_Merchant",
+  "DropList": "Drop_Klops_Merchant",
+  "MaxHealth": 74,
+  "DisableDamageGroups": [
+    "Self"
+  ],
+  "BusyStates": [
+    "$Interaction"
+  ],
+  "Invulnerable": {
+    "Compute": "Invulnerable"
+  },
+  "KnockbackScale": 0.5,
+  "MotionControllerList": [
+    {
+      "Type": "Walk",
+      "MaxWalkSpeed": 7,
+      "Gravity": 10,
+      "RunThreshold": 0.3,
+      "MaxFallSpeed": 15,
+      "MaxRotationSpeed": 360,
+      "Acceleration": 10
+    }
+  ],
+  "Instructions": [
+    {
+      "Instructions": [
+        {
+          "$Comment": "Idle state - no player nearby",
+          "Sensor": {
+            "Type": "State",
+            "State": "Idle"
+          },
+          "Instructions": [
+            {
+              "$Comment": "Greet player when they approach (Alerted animation)",
+              "ActionsBlocking": true,
+              "Sensor": {
+                "Type": "Player",
+                "Range": 8
+              },
+              "Actions": [
+                {
+                  "Type": "PlayAnimation",
+                  "Slot": "Status",
+                  "Animation": "Alerted"
+                },
+                {
+                  "Type": "State",
+                  "State": "Watching"
+                }
+              ]
+            },
+            {
+              "Sensor": {
+                "Type": "Any"
+              },
+              "BodyMotion": {
+                "Type": "Nothing"
+              }
+            }
+          ]
+        },
+        {
+          "$Comment": "Watching state - player is nearby, just watch them",
+          "Sensor": {
+            "Type": "State",
+            "State": "Watching"
+          },
+          "Instructions": [
+            {
+              "$Comment": "Watch nearby players with head",
+              "Continue": true,
+              "Sensor": {
+                "Type": "Player",
+                "Range": 12
+              },
+              "HeadMotion": {
+                "Type": "Watch"
+              }
+            },
+            {
+              "$Comment": "Clear animation after delay",
+              "Continue": true,
+              "Sensor": {
+                "Type": "Any"
+              },
+              "Actions": [
+                {
+                  "Type": "Timeout",
+                  "Delay": [
+                    2,
+                    2
+                  ],
+                  "Action": {
+                    "Type": "PlayAnimation",
+                    "Slot": "Status"
+                  }
+                }
+              ]
+            },
+            {
+              "$Comment": "Return to Idle when player leaves (clear animation first)",
+              "Sensor": {
+                "Type": "Not",
+                "Sensor": {
+                  "Type": "Player",
+                  "Range": 12
+                }
+              },
+              "Actions": [
+                {
+                  "Type": "PlayAnimation",
+                  "Slot": "Status"
+                },
+                {
+                  "Type": "State",
+                  "State": "Idle"
+                }
+              ]
+            },
+            {
+              "Sensor": {
+                "Type": "Any"
+              },
+              "BodyMotion": {
+                "Type": "Nothing"
+              }
+            }
+          ]
+        },
+        {
+          "$Comment": "Interaction state - look at player while shop is open",
+          "Sensor": {
+            "Type": "State",
+            "State": "$Interaction"
+          },
+          "Instructions": [
+            {
+              "Continue": true,
+              "Sensor": {
+                "Type": "Target",
+                "Range": 10
+              },
+              "HeadMotion": {
+                "Type": "Watch"
+              }
+            },
+            {
+              "$Comment": "Return to Watching after interaction ends",
+              "Sensor": {
+                "Type": "Any"
+              },
+              "Actions": [
+                {
+                  "Type": "Timeout",
+                  "Delay": [
+                    1,
+                    1
+                  ],
+                  "Action": {
+                    "Type": "Sequence",
+                    "Actions": [
+                      {
+                        "Type": "ReleaseTarget"
+                      },
+                      {
+                        "Type": "State",
+                        "State": "Watching"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "InteractionInstruction": {
+    "Instructions": [
+      {
+        "Sensor": {
+          "Type": "Not",
+          "Sensor": {
+            "Type": "CanInteract",
+            "ViewSector": 180
+          }
+        },
+        "Actions": [
+          {
+            "Type": "SetInteractable",
+            "Interactable": false
+          }
+        ]
+      },
+      {
+        "Continue": true,
+        "Sensor": {
+          "Type": "Any"
+        },
+        "Actions": [
+          {
+            "Type": "SetInteractable",
+            "Interactable": true,
+            "Hint": "server.interactionHints.talk"
+          }
+        ]
+      },
+      {
+        "Sensor": {
+          "Type": "HasInteracted"
+        },
+        "Instructions": [
+          {
+            "Sensor": {
+              "Type": "Not",
+              "Sensor": {
+                "Type": "State",
+                "State": "$Interaction"
+              }
+            },
+            "Actions": [
+              {
+                "Type": "LockOnInteractionTarget"
+              },
+              {
+                "Type": "OpenDialogue",
+                "Dialogue": "My_Conversation_1"
+              },
+              {
+                "Type": "State",
+                "State": "$Interaction"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "NameTranslationKey": "server.npcRoles.Klops_Merchant.name"
+}
+```
 
 ### Getting started - DialogueChoices
 
@@ -188,7 +483,7 @@ Note that DisplayChoice is effectively the same as a StandardChoice, but with `C
 ```json
 {
   "Id": "Standard",
-  "Text": "Any text you want here"
+  "Text": "Any text you want here",
   "Condition": {
     "Id": "Equals",
     "MetadataStoreKey": "MY_FIRST_CONVERSATION",
@@ -202,7 +497,7 @@ Note that DisplayChoice is effectively the same as a StandardChoice, but with `C
     {
 	  "Id": "Advance",
 	  "Next": "Other_Dialogue_Id"
-	}
+    }
   ]
 }
 ```
@@ -214,7 +509,7 @@ Third is **SelectChoice**, which is only used in situations where the _displayed
   "Id": "Select",
   "Default": {
     "Id": "Standard",
-	"Text": "I don't satisfy any of the below values."
+    "Text": "I don't satisfy any of the below values."
   },
   "MetadataStoreKey": "MY_FIRST_CONVERSATION",
   "MetadataKey": "NPC_Opinion",
@@ -239,15 +534,15 @@ The `Options` field contains the possible values you want to check for, where yo
 
 ### Getting started - Metadata
 
-Metadata allow you to persistently store simple forms of data associated with your dialogue. This is designed to enable state management, an example being dialogue branching based only on _consequential_ choices as opposed to a more naive, flow-based approach.
+Metadata allow you to persistently store simple forms of data associated with your dialogue, on the interacting player. This is designed to enable state management, an example being dialogue branching based only on _consequential_ choices as opposed to a more naive, flow-based approach.
 
 There are three types of metadata: **StringMetadata** (for text), **IntegerMetadata** and **BooleanMetadata**. Decimal numbers are not covered, but it's very unlikely that you'll need them instead of other supported datatypes.
 
 All ChoiceActions and ChoiceConditions that deal with metadata have the following fields:
 
-  - `MetadataStoreKey`: The field in the player's save data to keep associated metadata, meant primarily for categorically separating otherwise similar `MetadataKey`s. This field is optional everywhere; if left out, it defaults to a field that is "local" to the dialogue asset in which metadata is being handled. Otherwise, it can be accessed by any dialogue asset as long as you write it exactly the same.
+- `MetadataStoreKey`: The field in the player's save data to keep associated metadata, meant primarily for categorically separating otherwise similar `MetadataKey`s. This field is optional everywhere; if left out, it defaults to a field that is "local" to the dialogue asset in which metadata is being handled. Otherwise, it can be accessed by any dialogue asset as long as you write it exactly the same.
 
-  - `MetadataKey`: The field in the player's save data that is part of a greater `MetadataStoreKey`. This one actually gets associated with a value and is **NOT** optional - leaving it out means that your ChoiceAction will do nothing, and ChoiceCondition always fails/succeeds depending on the type.
+- `MetadataKey`: The field in the player's save data that is part of a greater `MetadataStoreKey`. This one actually gets associated with a value and is **NOT** optional - leaving it out means that your ChoiceAction will do nothing, and ChoiceCondition always fails/succeeds depending on the type.
 
 Some take an additional metadata-related field:
 
@@ -272,7 +567,7 @@ Some take an additional metadata-related field:
 }
 ```
 
-`Next` should contain the `Id` of the next Dialogue asset to advance to.
+`Next` should contain the filename of the next Dialogue asset to advance to.
 
 ---
 
@@ -295,7 +590,7 @@ To set some metadata based on a choice, use **SetMetadata**. You can set all kin
   "MetadataKey": "NPC_Opinion",
   "Metadata": {
     "Id": "String",
-	"Value": "Hate"
+    "Value": "Hate"
   }
 }
 ```
@@ -342,11 +637,11 @@ The **Conditional** ChoiceAction is an unusual one in that it doesn't perform an
   },
   "IfMet": {
     "Id": "Advance",
-	"Next": "My_Conversation_4"
+    "Next": "My_Conversation_4"
   },
   "IfNotMet": {
     "Id": "Advance",
-	"Next": "My_Conversation_5"
+    "Next": "My_Conversation_5"
   }
 }
 ```
@@ -360,8 +655,8 @@ You can leave either one of those two fields out if you e.g. only want to do som
 ChoiceConditions are generally based on persistent data (metadata), the support for which is enabled by DialogueLib. If you want to perform conditions on some kind of world state, you should extend from this library and add your ChoiceConditions.
 
 As such, one important ChoiceCondition is **Equals**, which compares two metadata (one persisted, and a keyless one defined in this ChoiceCondition) and ensures that they are:
-  - of the same value
-  - of the same type (an IntegerMetadata of value 1 is not the same as StringMetadata of value "1").
+- of the same value
+- of the same type (an IntegerMetadata of value 1 is not the same as StringMetadata of value "1").
 
 ```json
 {
@@ -370,7 +665,7 @@ As such, one important ChoiceCondition is **Equals**, which compares two metadat
   "MetadataKey": "NPC_Opinion",
   "Metadata": {
     "Id": "String",
-	"Value": "Dislike"
+    "Value": "Dislike"
   }
 }
 ```
@@ -388,7 +683,7 @@ The following does a comparison on a configured constant.
 ```json
 {
   "Id": "CompareInteger",
-  "MetadataStoreKey": "MY_FIRST_CONVERSATION"
+  "MetadataStoreKey": "MY_FIRST_CONVERSATION",
   "MetadataKey": "Reputation",
   "DefaultMetadataValue": 0,
   "Comparison": "GreaterThan",
@@ -455,7 +750,7 @@ If you want to invert the outcome of another ChoiceCondition, e.g. check for fai
     "MetadataKey": "NPC_Opinion",
     "Metadata": {
       "Id": "String",
-	  "Value": "Dislike"
+      "Value": "Dislike"
     }
   }
 }
@@ -464,7 +759,7 @@ If you want to invert the outcome of another ChoiceCondition, e.g. check for fai
 ## See also
 
 DialogueLib was battle-tested by ourselves. It formed the backbone of an experimental WIP project we started with some friends, and now also serves as a demonstration of the library. If you require examples of:
-  - complex conversation chains developed with the above features
-  - DialogueLib being extended
+- complex conversation chains developed with the above features
+- DialogueLib being extended
 
 Then take a look at Planting Your Roots (TODO: link on main branch). Assets can be found in various subdirectories of resources/Server. Note that this uses StandardChoices with unset fields rather than DisplayChoices for the non-interactive text.
