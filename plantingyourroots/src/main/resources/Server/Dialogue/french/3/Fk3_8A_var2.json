@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk3_8A_var2",
   "Line": {
     "Id": "Standard",
     "Text": "Non, how about I stop making it worse ?"
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk3_8"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk3_8"
+        }
+      ]
     }
   ]
 }

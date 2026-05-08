@@ -43,6 +43,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @ModelBuilder
 public class JoinTrigger extends TriggerBase {
+  /** Asset codec for JoinTrigger */
   public static final AssetBuilderCodec<String, JoinTrigger> CODEC =
       CodecUtil.modelAssetBuilder(
           JoinTrigger.class,

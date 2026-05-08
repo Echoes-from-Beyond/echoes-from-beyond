@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Bk1_3A",
   "Entries": [
     {
       "Name": "Business Kweebec",
@@ -24,18 +23,22 @@
       {
         "Id": "Standard",
         "Text": "[Shake it.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_3A-4A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_3A-4A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "[Leave her hanging.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_3A-4B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_3A-4B"
+          }
+        ]
       }
     ]
   }

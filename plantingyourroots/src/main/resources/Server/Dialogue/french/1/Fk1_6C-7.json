@@ -1,0 +1,79 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "He takes a brief glance to the side, biting his barky lip in meantime.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Whoever he's watching out for -- if he is, indeed, on the lookout -- never manifests. Next time you blink, his eyes are laser-focused onto yours.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I must apologise for my reaction.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I had-- ma famille visited Québec once. Do not misunderstand, it is a truly beautiful region.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "But the people there are out of this world ! And I do not mean that positivement.",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "And how they speak ! Why would they do that to such a langue merveilleuse--",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Ah ! I must apologise again. This is ... you will never really understand.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "So let us not talk about that place again. I will do my best not to bring it up.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I must go cool off. See me tomorrow, after a night's rest. Bonne nuit !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "MarkTalkedTo",
+            "Kind": "French_Kweebec"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "A fresh start",
+            "Message": "Nice, you made it to the end of your first conversation. Now you can explore and talk to other NPCs, or advance to the next day if you want to talk with this one again. (But it might be somewhere else!)"
+          }
+        ]
+      }
+    ]
+  }
+}

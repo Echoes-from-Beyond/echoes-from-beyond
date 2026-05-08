@@ -21,18 +21,29 @@ package org.echoesfrombeyond.dialoguelib.metadata;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
+@Doc(
+    """
+    DialogueMetadata that enables setting integers.
+    """)
 @NullMarked
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public final class IntegerMetadata implements DialogueMetadata {
+  /** Codec for IntegerMetadata */
   public static final BuilderCodec<IntegerMetadata> CODEC =
       CodecUtil.modelBuilder(
           IntegerMetadata.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
+  @Doc(
+      """
+      Any valid integer between 2,147,483,647 and -2,147,483,648.
+      Defaults to 0 if unspecified.
+      """)
   public int Value;
 
   @SuppressWarnings("unused")

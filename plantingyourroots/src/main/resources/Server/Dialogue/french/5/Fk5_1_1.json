@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk5_1_1",
   "Line": {
     "Id": "Select",
     "Default": {
@@ -30,47 +29,50 @@
         "Id": "Equals",
         "MetadataKey": "Fk5_1_1"
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk5_1_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk5_1-L1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk5_1-L1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk5_1_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk5_1-L1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk5_1-L1"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "What's your opinion on Tim Kweertons? Maybe there's one nearby. [Wink at him.]",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk5_2A"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2A"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "I wouldn't really know. I don't go out much.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk5_2B"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2B"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "I've been here for a while and I haven't noticed much of anything.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk5_2B"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2B"
+        }
+      ]
     }
   ]
 }

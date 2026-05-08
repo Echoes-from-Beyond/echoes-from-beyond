@@ -38,10 +38,12 @@ import org.jspecify.annotations.Nullable;
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public class DialogueComponent implements Component<EntityStore> {
+  /** Codec for DialogueComponent */
   public static final BuilderCodec<DialogueComponent> CODEC =
       CodecUtil.modelBuilder(
           DialogueComponent.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
+  /** ComponentType reference for DialogueComponent */
   private static @Nullable ComponentType<EntityStore, DialogueComponent> TYPE;
 
   @ApiStatus.Internal

@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk6_1B",
   "Line": {
     "Id": "Standard",
     "Text": "You affirm my point exactly !"
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk6_1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_1"
+        }
+      ]
     }
   ]
 }

@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk2_8",
   "Entries": [
     {
       "Name": "French Kweebec",
@@ -62,24 +61,21 @@
             "Value": "Fk_Cautious"
           }
         },
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "MetadataKey": "Fk_Relationship",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Fk_Friend"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk2_8_var1"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Friend"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_8_var1"
+          }
+        ]
       },
       {
         "Id": "Standard",
@@ -93,15 +89,12 @@
             "Value": "Fk_Friend"
           }
         },
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "Advance",
-              "Next": "Fk2_8_var2"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_8_var2"
+          }
+        ]
       },
       {
         "Id": "Standard",
@@ -136,24 +129,21 @@
             }
           ]
         },
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "MetadataKey": "Fk_Relationship",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Fk_Friend"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk2_8_var3"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Friend"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_8_var3"
+          }
+        ]
       }
     ]
   }

@@ -21,18 +21,28 @@ package org.echoesfrombeyond.dialoguelib.metadata;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
+@Doc(
+    """
+    DialogueMetadata that enables setting boolean values.
+    """)
 @NullMarked
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public final class BooleanMetadata implements DialogueMetadata {
+  /** Codec for BooleanMetadata */
   public static final BuilderCodec<BooleanMetadata> CODEC =
       CodecUtil.modelBuilder(
           BooleanMetadata.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
+  @Doc(
+      """
+      True or false.
+      """)
   public boolean Value;
 
   @SuppressWarnings("unused")

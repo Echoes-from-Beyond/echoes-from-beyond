@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk5_2-L1_var1",
   "Entries": [
     {
       "Name": "French Kweebec",
@@ -28,10 +27,12 @@
       {
         "Id": "Standard",
         "Text": "Continue",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk5_2A_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2A_1"
+          }
+        ]
       }
     ]
   }

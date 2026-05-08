@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk2_8A",
   "Line": {
     "Id": "Standard",
     "Text": "Hold your tongue ! It fits more than it would seem at a first ... erm, sight."
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_8"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_8"
+        }
+      ]
     }
   ]
 }

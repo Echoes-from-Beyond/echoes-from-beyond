@@ -26,10 +26,22 @@ import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * A ChoiceCondition asset is responsible for determining whether a choice can appear to a player.
+ */
 @NullMarked
 public interface ChoiceCondition {
+  /** Map codec for ChoiceCondition */
   BuilderCodecMapCodec<ChoiceCondition> CODEC = new BuilderCodecMapCodec<>();
 
+  /**
+   * Evaluates whether a choice is able to be displayed.
+   *
+   * @param activator reference to the entity that is interacting with this dialogue
+   * @param parent the dialogue containing the asset that called this function
+   * @param choice the choice on behalf of which this check is being made
+   * @return {@code true} if the condition is met, {@code false} otherwise.
+   */
   @RunOnWorldThread
   boolean shouldDisplay(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice);
 }

@@ -40,6 +40,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 @ModelBuilder
 public class CloseDialogueAction implements ChoiceAction {
+  /** Codec for CloseDialogueAction */
   public static final BuilderCodec<CloseDialogueAction> CODEC =
       CodecUtil.modelBuilder(
           CloseDialogueAction.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

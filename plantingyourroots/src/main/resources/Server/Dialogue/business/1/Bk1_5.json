@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Bk1_5",
   "Entries": [
     {
       "Name": "Business Kweebec",
@@ -36,9 +35,11 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-          "Id": "Close"
-        }
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
       }
     ]
   }

@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Gk1_5C",
   "Entries": [
     {
       "Name": "Goth Kweebec",
@@ -36,54 +35,50 @@
       {
         "Id": "Standard",
         "Text": "It's not about the music...",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataKey": "Gk_Relationship",
-              "MetadataStoreKey": "GOTH_KWEEBEC",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Gk_Dislike"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Gk1_5C-6A"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk_Relationship",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk_Dislike"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_5C-6A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I've literally never met anyone who does things that you do, and isn't just into it for attention.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataKey": "Gk_Relationship",
-              "MetadataStoreKey": "GOTH_KWEEBEC",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Gk_Dislike"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Gk1_2ABCD-3B"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk_Relationship",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk_Dislike"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2ABCD-3B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Sorry, I was trying to be funny.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_5C-6C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_5C-6C"
+          }
+        ]
       }
     ]
   }

@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk6_2C",
   "Line": {
     "Id": "Standard",
     "Text": "Merci beaucoup. I feel anxiety that I will not be able to reach home in time. Or maybe that is *his* anxiety."
@@ -23,10 +22,12 @@
         "Comparison": "GreaterThanOrEqualTo",
         "Value": 5
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk6_2_var1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_2_var1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -41,10 +42,12 @@
           "Value": 5
         }
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk6_2_var2"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_2_var2"
+        }
+      ]
     }
   ]
 }

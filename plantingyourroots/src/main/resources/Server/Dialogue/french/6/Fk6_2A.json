@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk6_2A",
   "Line": {
     "Id": "Standard",
     "Text": "I am, erm, unfamiliar with that phrase. But I think I understand."
@@ -23,10 +22,12 @@
         "Comparison": "GreaterThanOrEqualTo",
         "Value": 5
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk6_2_var1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_2_var1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -41,10 +42,12 @@
           "Value": 5
         }
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk6_2_var2"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_2_var2"
+        }
+      ]
     }
   ]
 }

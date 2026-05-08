@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk4_3C",
   "Line": {
     "Id": "Standard",
     "Text": "Is it really that shocking? Come on."
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_3"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_3"
+        }
+      ]
     }
   ]
 }

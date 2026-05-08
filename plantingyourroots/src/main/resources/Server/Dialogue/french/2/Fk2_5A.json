@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk2_5A",
   "Entries": [
     {
       "Name": "Narrator",
@@ -36,45 +35,48 @@
       {
         "Id": "Standard",
         "Text": "It's very delicious!",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Fk_Romance",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk2_5A-6A"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5A-6A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "It's okay.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_5A-6B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5A-6B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Meh?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_5A-6B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5A-6B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Man, what even is this?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_5A-6C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5A-6C"
+          }
+        ]
       }
     ]
   }

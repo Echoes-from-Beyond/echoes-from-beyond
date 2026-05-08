@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk5_2A-3BC_1",
   "Entries": [
     {
       "Name": "French Kweebec",
@@ -33,10 +32,12 @@
       {
         "Id": "Standard",
         "Text": "I'm surprised that you even tried their food, then.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk5_2A-3BC_2"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2A-3BC_2"
+          }
+        ]
       }
     ]
   }

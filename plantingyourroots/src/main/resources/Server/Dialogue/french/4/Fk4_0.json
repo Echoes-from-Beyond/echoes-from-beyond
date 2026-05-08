@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk4_0",
   "Entries": [
     {
       "Name": "Narrator",
@@ -78,18 +77,22 @@
       {
         "Id": "Standard",
         "Text": "Uh... you're looking a little different today.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_1A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_1A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I see no problems here whatsoever.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_1B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_1B"
+          }
+        ]
       }
     ]
   }

@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Bk1_1A",
   "Entries": [
     {
       "Name": "Business Kweebec",
@@ -28,10 +27,12 @@
       {
         "Id": "Standard",
         "Text": "Continue",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_1"
+          }
+        ]
       }
     ]
   }

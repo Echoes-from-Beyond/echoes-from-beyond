@@ -22,18 +22,28 @@ import com.hypixel.hytale.codec.builder.BuilderCodec;
 import java.util.Objects;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
+@Doc(
+    """
+    DialogueMetadata that enables setting text data.
+    """)
 @NullMarked
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public final class StringMetadata implements DialogueMetadata {
+  /** Codec for StringMetadata */
   public static final BuilderCodec<StringMetadata> CODEC =
       CodecUtil.modelBuilder(
           StringMetadata.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
 
+  @Doc(
+      """
+      Any text.
+      """)
   public String Value;
 
   @SuppressWarnings("unused")

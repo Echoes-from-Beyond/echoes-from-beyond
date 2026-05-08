@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk2_8_var1",
   "Line": {
     "Id": "Standard",
     "Text": "We had a rocky start, but I am willing to call you my friend !"
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_8_1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_8_1"
+        }
+      ]
     }
   ]
 }

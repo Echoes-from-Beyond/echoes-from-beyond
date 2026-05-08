@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk5_4",
   "Entries": [
     {
       "Name": "French Kweebec",
@@ -43,40 +42,34 @@
       {
         "Id": "Standard",
         "Text": "I got a summary of your tragic backstory, alright? You can come clean with it.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Fk_Truth",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk5_5A"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Truth",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_5A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Sure, but you should do something about it. Or just learn how to ignore him. No point being upset over a troll.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Fk_Complex",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk5_5B"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Complex",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_5B"
+          }
+        ]
       }
     ]
   }

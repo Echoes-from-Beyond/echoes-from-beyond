@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk4_1-L1",
   "Line": {
     "Id": "Standard",
     "Text": "Hmm? Unlike *some* trees, I haven't ever tried to come off as particularly « French. »"
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_1_2"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_1_2"
+        }
+      ]
     }
   ]
 }

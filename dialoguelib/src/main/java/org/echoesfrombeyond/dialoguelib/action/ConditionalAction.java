@@ -41,6 +41,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @ModelBuilder
 public class ConditionalAction implements ChoiceAction {
+  /** Codec for ConditionalAction */
   public static final BuilderCodec<ConditionalAction> CODEC =
       CodecUtil.modelBuilder(
           ConditionalAction.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

@@ -39,6 +39,19 @@ import org.echoesfrombeyond.dialoguelib.dialogue.StandardDialogue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Sets up bindings for and serves the UI for dialogue that uses several "standard" functionalities:
+ *
+ * <ul>
+ *   <li>line display (i.e. text not directly associated with choice selection)
+ *   <li>name display for the speaker, e.g. the character a player is talking with, "Narrator", etc.
+ *   <li>button-based choices that each have their own label (text)
+ *   <li>a sprite (image that's displayed on the screen during dialogue).
+ * </ul>
+ *
+ * Not all of these need to be used, but the dialogue must be constrained to them. Additionally,
+ * this UI ensures that all choices are numbered.
+ */
 @NullMarked
 public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogueUI.Data> {
   public static final String DIALOGUE_LINE_SELECTOR = "#DialogueLine";
@@ -61,12 +74,14 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
       UICommandBuilder uiCommandBuilder,
       UIEventBuilder uiEventBuilder,
       Store<EntityStore> store) {
+    // the dialogue asset defines which UI page is shown
     uiCommandBuilder.append(dialogue.UiPage);
 
     var line = dialogue.Line;
     var name = dialogue.Name;
     var sprite = dialogue.Sprite;
 
+    // only display line, name, sprite if they are defined in the dialogue
     if (line != null)
       uiCommandBuilder.set(DIALOGUE_LINE_SELECTOR + ".Text", line.getMessage(ref, dialogue));
 
@@ -80,6 +95,10 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
       uiCommandBuilder.setObject(SPRITE_SELECTOR + ".Background", patchStyle);
     }
 
+    // likewise with choices
+    // since 0-based indexing is generally unintuitive for people, a separate counter keeps track of
+    // the natural 1-based
+    // indexing to display with each choice
     var count = 0;
     var prefixCount = 0;
     for (var choice : dialogue.Choices) {
@@ -94,6 +113,8 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
       uiCommandBuilder.set(indexSelector + " " + DIALOGUE_LABEL_SELECTOR + ".Text", message);
 
+      // the index of the choice is sent over as a string value to the client
+      // this is because of a limitation with the API
       uiEventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
           indexSelector + " " + DIALOGUE_BUTTON_SELECTOR,
@@ -127,6 +148,14 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
     sendUpdate();
   }
 
+  /**
+   * Event object for {@link StandardDialogueUI}. Contains the index of the choice selected by the
+   * player.
+   *
+   * <p>There is/was a limitation in the API where it expected a client's response to only be a
+   * string, which this accounts for. The {@code getChoice} method converts the response back into
+   * an integer.
+   */
   @SuppressWarnings("unused")
   @ModelBuilder
   public static final class Data {
@@ -135,6 +164,12 @@ public class StandardDialogueUI extends InteractiveCustomUIPage<StandardDialogue
 
     public @Nullable String Choice;
 
+    /**
+     * Attempts to convert the value returned by the client into an integer.
+     *
+     * @return An {@link OptionalInt} containing the integer if parsing was successful, {@code null}
+     *     otherwise.
+     */
     public OptionalInt getChoice() {
       var choice = Choice;
       if (choice == null || choice.length() > 16) return OptionalInt.empty();

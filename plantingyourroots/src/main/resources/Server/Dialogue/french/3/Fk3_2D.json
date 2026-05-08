@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk3_2D",
   "Entries": [
     {
       "Name": "Narrator",
@@ -48,10 +47,12 @@
       {
         "Id": "Standard",
         "Text": "Continue",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_2ABCDE"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_2ABCDE"
+          }
+        ]
       }
     ]
   }

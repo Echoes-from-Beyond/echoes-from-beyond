@@ -28,9 +28,11 @@ import org.echoesfrombeyond.codechelper.annotation.Opt;
 import org.echoesfrombeyond.dialoguelib.DialoguePlugin;
 import org.jspecify.annotations.NullMarked;
 
+/** Contains common fields for all UI-dependent dialogue. */
 @NullMarked
 @ModelBuilder
 public abstract class UIDialogueBase {
+  /** Codec for UIDialogueBase */
   public static final BuilderCodec<UIDialogueBase> CODEC =
       CodecUtil.modelBuilder(
           UIDialogueBase.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

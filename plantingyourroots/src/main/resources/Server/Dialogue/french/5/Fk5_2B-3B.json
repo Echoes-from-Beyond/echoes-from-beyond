@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk5_2B-3B",
   "Line": {
     "Id": "Standard",
     "Text": "The crowds are not what I meant, though they do not help."
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk5_2B_1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2B_1"
+        }
+      ]
     }
   ]
 }

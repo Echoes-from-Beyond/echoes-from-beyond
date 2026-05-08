@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk2_0_var2",
   "Line": {
     "Id": "Standard",
     "Text": "Ah, mon ami ! You came by again."
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_0_1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_0_1"
+        }
+      ]
     }
   ]
 }

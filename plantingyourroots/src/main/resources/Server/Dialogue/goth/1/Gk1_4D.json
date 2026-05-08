@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Gk1_4D",
   "Line": {
     "Id": "Standard",
     "Text": "Flytrap got your tongue? That's okay."
@@ -15,10 +14,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Gk1_4BCD"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Gk1_4BCD"
+        }
+      ]
     }
   ]
 }

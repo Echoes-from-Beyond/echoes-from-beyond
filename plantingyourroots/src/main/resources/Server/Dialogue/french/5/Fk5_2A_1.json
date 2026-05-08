@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk5_2A_1",
   "Line": {
     "Id": "Select",
     "Default": {
@@ -30,31 +29,30 @@
         "Id": "Equals",
         "MetadataKey": "Fk5_2A_1"
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk5_2A_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk5_2-L1_var1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk5_2-L1_var1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk5_2A_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk5_2-L1_var1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2-L1_var1"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "Who? Your brother?",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk5_3"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_3"
+        }
+      ]
     }
   ]
 }

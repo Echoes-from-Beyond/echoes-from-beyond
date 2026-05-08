@@ -21,12 +21,14 @@ package org.echoesfrombeyond.codechelper.annotation.validator;
 import java.lang.annotation.*;
 import java.util.Map;
 import org.echoesfrombeyond.codechelper.validator.RequiredMapKeysProvider;
+import org.jspecify.annotations.NullMarked;
 
 /** Validates that a {@link String}-keyed {@link Map} contains the specified keys. */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @ValidatorSpec(RequiredMapKeysProvider.class)
 @Documented
+@NullMarked
 public @interface ValidateRequiredMapKeys {
   /**
    * @return the required keys

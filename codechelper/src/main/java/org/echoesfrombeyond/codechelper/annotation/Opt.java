@@ -21,6 +21,7 @@ package org.echoesfrombeyond.codechelper.annotation;
 import com.hypixel.hytale.codec.Codec;
 import com.hypixel.hytale.codec.KeyedCodec;
 import java.lang.annotation.*;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Specifies that the target field may be null. This is the same as invoking the constructor {@link
@@ -31,4 +32,5 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@NullMarked
 public @interface Opt {}

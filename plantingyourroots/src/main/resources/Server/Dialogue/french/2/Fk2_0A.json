@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk2_0A",
   "Entries": [
     {
       "Name": "French Kweebec",
@@ -33,8 +32,6 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-        "Id": "Composite",
         "Actions": [
           {
             "Id": "MarkTalkedTo",
@@ -46,7 +43,6 @@
             "Message": "There are only a few things worse than Fr*nch people (and trees). This is not happening.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
           }
         ]
-      }
       }
     ]
   }

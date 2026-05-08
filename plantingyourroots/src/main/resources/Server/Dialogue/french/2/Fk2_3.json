@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk2_3",
   "Entries": [
     {
       "Name": "Narrator",
@@ -52,26 +51,32 @@
             "Value": "Fk_Ketchup"
           }
         },
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_4A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_4A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "[Dig in.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_4"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_4"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "[Ugh. You suppose that you have to try, at least.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_4"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_4"
+          }
+        ]
       }
     ]
   }

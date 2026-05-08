@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Bk1_4B",
   "Line": {
     "Id": "Standard",
     "Text": "That's just the reality of it."
@@ -15,10 +14,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Bk1_4BC"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Bk1_4BC"
+        }
+      ]
     }
   ]
 }

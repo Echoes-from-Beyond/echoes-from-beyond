@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk2_6BC-7A",
   "Line": {
     "Id": "Standard",
     "Text": "Merci. I truly cannot express how much that means to me."
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_5_1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_5_1"
+        }
+      ]
     }
   ]
 }

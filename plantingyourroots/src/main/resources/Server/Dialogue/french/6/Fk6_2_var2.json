@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk6_2_var2",
   "Entries": [
     {
       "Name": "Canuck Kweebec",
@@ -69,8 +68,6 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-        "Id": "Composite",
         "Actions": [
           {
             "Id": "MarkTalkedTo",
@@ -82,7 +79,6 @@
             "Message": "Huh. Looks like you failed to charm him. If this wasn't part of the plan, maybe you should play along with the more wholesome of his whims next time.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
           }
         ]
-      }
       }
     ]
   }

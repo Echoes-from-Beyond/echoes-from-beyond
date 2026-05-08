@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk3_0",
   "Entries": [
     {
       "Name": "Narrator",
@@ -38,34 +37,42 @@
       {
         "Id": "Standard",
         "Text": "I'm doing great, now that you're here. [Wink at him.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_1A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_1A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Today has been a good day.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_1B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_1B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I'm okay.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_1C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_1C"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Doom and gloom have been my only company since birth.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_1D"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_1D"
+          }
+        ]
       }
     ]
   }

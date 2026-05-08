@@ -41,6 +41,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 @ModelBuilder
 public class BooleanCondition implements ChoiceCondition {
+  /** Codec for BooleanCondition */
   public static final BuilderCodec<BooleanCondition> CODEC =
       CodecUtil.modelBuilder(
           BooleanCondition.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());
@@ -74,12 +75,14 @@ public class BooleanCondition implements ChoiceCondition {
   @Override
   public boolean shouldDisplay(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
     return switch (Kind) {
+      // display only if ALL conditions are met, or there are no conditions
       case And -> {
         for (var condition : Conditions)
           if (!condition.shouldDisplay(activator, parent, choice)) yield false;
 
         yield true;
       }
+      // display if AT LEAST ONE condition is met
       case Or -> {
         for (var condition : Conditions)
           if (condition.shouldDisplay(activator, parent, choice)) yield true;

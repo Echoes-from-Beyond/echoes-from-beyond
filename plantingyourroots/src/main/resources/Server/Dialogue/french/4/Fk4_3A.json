@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk4_3A",
   "Line": {
     "Id": "Standard",
     "Text": "If you take it at face value, it doesn't. We are also... let's just say that we are very difficult to separate, so don't get too imaginative about that either."
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_3"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_3"
+        }
+      ]
     }
   ]
 }

@@ -34,6 +34,7 @@ import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.dialoguelib.action.*;
 import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
+import org.echoesfrombeyond.dialoguelib.choice.DisplayChoice;
 import org.echoesfrombeyond.dialoguelib.choice.SelectChoice;
 import org.echoesfrombeyond.dialoguelib.choice.StandardChoice;
 import org.echoesfrombeyond.dialoguelib.component.DialogueComponent;
@@ -66,6 +67,8 @@ public class DialoguePlugin extends JavaPlugin {
 
   @Override
   protected void setup() {
+    // see https://github.com/Echoes-from-Beyond/echoes-from-beyond/tree/main/codechelper about
+    // setting up resolvers
     RESOLVER =
         CodecResolver.builder()
             .chain(CodecResolver.PRIMITIVE)
@@ -108,7 +111,6 @@ public class DialoguePlugin extends JavaPlugin {
         .register("AdjustInteger", AddIntegerMetadataAction.class, AddIntegerMetadataAction.CODEC)
         .register("Advance", AdvanceAction.class, AdvanceAction.CODEC)
         .register("Close", CloseDialogueAction.class, CloseDialogueAction.CODEC)
-        .register("Composite", CompositeAction.class, CompositeAction.CODEC)
         .register("Conditional", ConditionalAction.class, ConditionalAction.CODEC)
         .register("SetMetadata", SetMetadataAction.class, SetMetadataAction.CODEC);
 
@@ -122,9 +124,10 @@ public class DialoguePlugin extends JavaPlugin {
         .register("Chain", ChainDialogue.class, ChainDialogue.CODEC)
         .register("Standard", StandardDialogue.class, StandardDialogue.CODEC);
 
-    getCodecRegistry(DialogueChoice.CODEC)
+    getCodecRegistry(DialogueChoice.CODEC.getChildCodec())
         .register("Select", SelectChoice.class, SelectChoice.CODEC)
-        .register("Standard", StandardChoice.class, StandardChoice.CODEC);
+        .register("Standard", StandardChoice.class, StandardChoice.CODEC)
+        .register("Display", DisplayChoice.class, DisplayChoice.CODEC);
 
     getCodecRegistry(DialogueMetadata.CODEC)
         .register("Boolean", BooleanMetadata.class, BooleanMetadata.CODEC)

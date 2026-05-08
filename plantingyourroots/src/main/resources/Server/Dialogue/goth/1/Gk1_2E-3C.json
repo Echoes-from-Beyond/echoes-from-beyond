@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Gk1_2E-3C",
   "Entries": [
     {
       "Name": "Goth Kweebec",
@@ -36,9 +35,11 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-          "Id": "Close"
-        }
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
       }
     ]
   }

@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk2_4",
   "Entries": [
     {
       "Name": "Narrator",
@@ -27,18 +26,22 @@
       {
         "Id": "Standard",
         "Text": "[What's with the hesitation? Just go for it.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_5A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "[Nah, you can't do this.] I'm not hungry.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk2_5B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_5B"
+          }
+        ]
       }
     ]
   }

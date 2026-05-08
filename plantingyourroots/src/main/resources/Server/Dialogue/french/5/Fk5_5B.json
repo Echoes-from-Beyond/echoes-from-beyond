@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk5_5B",
   "Entries": [
     {
       "Name": "French Kweebec",
@@ -33,40 +32,34 @@
       {
         "Id": "Standard",
         "Text": "I'll shut up, then.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Fk_Complex",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk5_6A"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Complex",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_6A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "He did make a good point, though. It feels like you're overplaying your 'Frenchness', like a character.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Fk_Truth",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk5_6B"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Truth",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_6B"
+          }
+        ]
       }
     ]
   }

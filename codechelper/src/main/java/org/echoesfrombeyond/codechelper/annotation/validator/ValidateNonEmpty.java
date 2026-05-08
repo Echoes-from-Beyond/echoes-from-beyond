@@ -22,6 +22,7 @@ import java.lang.annotation.*;
 import java.util.Collection;
 import java.util.Map;
 import org.echoesfrombeyond.codechelper.validator.NonEmptyProvider;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Validates that the field is non-empty.
@@ -34,4 +35,5 @@ import org.echoesfrombeyond.codechelper.validator.NonEmptyProvider;
 @Retention(RetentionPolicy.RUNTIME)
 @ValidatorSpec(NonEmptyProvider.class)
 @Documented
+@NullMarked
 public @interface ValidateNonEmpty {}

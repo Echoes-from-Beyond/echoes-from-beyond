@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk2_0_var1",
   "Entries": [
     {
       "Name": "Narrator",
@@ -28,46 +27,40 @@
       {
         "Id": "Standard",
         "Text": "I wanted to apologize, but then I realized that I forgot how horrifically Fr*nch you are.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "MetadataKey": "Fk_Relationship",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Fk_Hate"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk2_0A"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Hate"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_0A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I'm sorry about last time. I made a terrible joke and it didn't translate well.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "MetadataKey": "Fk_Relationship",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Fk_Cautious"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk2_0B"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Cautious"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_0B"
+          }
+        ]
       }
     ]
   }

@@ -26,10 +26,22 @@ import org.echoesfrombeyond.dialoguelib.choice.DialogueChoice;
 import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * Actions to perform once a choice is selected. These can modify the UI, edit a player's save
+ * state, etc.
+ */
 @NullMarked
 public interface ChoiceAction {
+  /** Map codec for ChoiceAction */
   BuilderCodecMapCodec<ChoiceAction> CODEC = new BuilderCodecMapCodec<>();
 
+  /**
+   * The logic to perform once the choice is selected.
+   *
+   * @param activator reference to the entity that is interacting with this dialogue
+   * @param parent the dialogue containing the asset that called this function
+   * @param choice the choice on behalf of which this action is being made
+   */
   @RunOnWorldThread
   void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice);
 }

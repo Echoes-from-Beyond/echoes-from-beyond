@@ -1,0 +1,44 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "In a way, that makes it easier. Oui ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I mean, if you do not feel « settled » anywhere, it is easier to uproot yourself and go to ... greener pastures, I think you say.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Le monde entier is yours to explore ! You do not have to look back all the time and wonder what could have been. Or wonder if it was right to leave home. Or ... "
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6ABDE"
+          }
+        ]
+      }
+    ]
+  }
+}

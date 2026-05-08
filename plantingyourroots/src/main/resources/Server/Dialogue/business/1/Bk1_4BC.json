@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Bk1_4BC",
   "Entries": [
     {
       "Name": "Business Kweebec",
@@ -36,40 +35,34 @@
       {
         "Id": "Standard",
         "Text": "Do you think that you'd do better if you grew up in wealth?",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Bk_Private",
-              "MetadataStoreKey": "BUSINESS_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Bk1_4BC-5A"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Private",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4BC-5A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Sounds to me like you're just not working hard enough.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Bk_Public",
-              "MetadataStoreKey": "BUSINESS_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Bk1_4BC-5B"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Public",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4BC-5B"
+          }
+        ]
       }
     ]
   }

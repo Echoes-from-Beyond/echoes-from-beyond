@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Gk1_2E-3A",
   "Entries": [
     {
       "Name": "Narrator",
@@ -32,34 +31,42 @@
       {
         "Id": "Standard",
         "Text": "Sure. I like your orchid.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_4A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Nice weather today, isn't it?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_4B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "You can't force that kind of thing.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_4C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4C"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "[Shrug. All of these options suck.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_4D"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4D"
+          }
+        ]
       }
     ]
   }

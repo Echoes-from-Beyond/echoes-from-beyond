@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk4_8_var1",
   "Line": {
     "Id": "Standard",
     "Text": "He really likes you, and I think that you might be able to do way more than I could. If for no other reason than the fact that your presence quickens the flow of his sucrose."
@@ -24,10 +23,12 @@
           "MetadataKey": "Fk_Poutine"
         }
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_8_1_var1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_8_1_var1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -37,10 +38,12 @@
         "MetadataStoreKey": "FRENCH_KWEEBEC",
         "MetadataKey": "Fk_Poutine"
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_8_1_var2"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_8_1_var2"
+        }
+      ]
     }
   ]
 }

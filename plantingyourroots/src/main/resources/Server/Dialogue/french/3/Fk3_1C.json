@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk3_1C",
   "Line": {
     "Id": "Standard",
     "Text": "*Just* okay ? We cannot have that !"
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk3_1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk3_1"
+        }
+      ]
     }
   ]
 }

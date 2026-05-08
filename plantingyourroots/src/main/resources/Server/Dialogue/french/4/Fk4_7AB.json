@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk4_7AB",
   "Line": {
     "Id": "Standard",
     "Text": "I just don't really... how do I explain this to you, eh?"
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_7"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_7"
+        }
+      ]
     }
   ]
 }

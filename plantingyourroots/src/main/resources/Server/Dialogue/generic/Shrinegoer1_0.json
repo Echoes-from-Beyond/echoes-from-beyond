@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Shrinegoer1_0",
   "Entries": [
     {
       "Name": "Kweebec",
@@ -30,9 +29,11 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-          "Id": "Close"
-        }
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
       }
     ]
   }

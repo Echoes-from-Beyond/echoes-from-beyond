@@ -23,7 +23,6 @@ import java.lang.reflect.Field;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidatorSpec;
-import org.echoesfrombeyond.codechelper.validator.ValidatorProvider;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 
@@ -38,19 +37,13 @@ public class ValidatorModelException extends FieldModelException {
         spec.value(), annotationType.getName(), message);
   }
 
-  /**
-   * @param modelType the model class
-   * @param field the field associated with this exception
-   * @param spec annotation containing the {@link ValidatorProvider} that was used
-   * @param annotationType the validator annotation
-   * @param message the error message
-   */
   public ValidatorModelException(
       Class<?> modelType,
       Field field,
       ValidatorSpec spec,
       Class<? extends Annotation> annotationType,
-      String message) {
-    super(modelType, field, formatMessage(spec, annotationType, message));
+      String message,
+      Throwable e) {
+    super(modelType, field, formatMessage(spec, annotationType, message), e);
   }
 }

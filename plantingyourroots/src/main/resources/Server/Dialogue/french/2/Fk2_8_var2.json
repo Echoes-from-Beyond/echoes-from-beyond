@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk2_8_var2",
   "Line": {
     "Id": "Standard",
     "Text": "I am glad to have called you my friend."
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_8_1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_8_1"
+        }
+      ]
     }
   ]
 }

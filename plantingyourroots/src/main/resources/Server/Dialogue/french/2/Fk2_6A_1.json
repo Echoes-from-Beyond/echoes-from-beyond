@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk2_6A_1",
   "Line": {
     "Id": "Standard",
     "Text": "It is exactement as it sounds."
@@ -25,34 +24,42 @@
           "Value": "Fk_Zone3"
         }
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_7A"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_7A"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "But why do you care so much?",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_7B"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_7B"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "Okay, and?",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_7AB"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_7AB"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "I can't believe it. After decades of trying and failing, you'd think that they'd know when to stop.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_7C"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_7C"
+        }
+      ]
     }
   ]
 }

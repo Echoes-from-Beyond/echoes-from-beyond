@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk3_7",
   "Entries": [
     {
       "Name": "French Kweebec",
@@ -58,37 +57,38 @@
       {
         "Id": "Standard",
         "Text": "But I *want* to help you. I care about you.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Fk_Romance",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Fk3_8A"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_8A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Fair enough.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_8"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_8"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Whether you intended to or not, you were making it my problem either way. You keep zoning out during our chats.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk3_8B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_8B"
+          }
+        ]
       }
     ]
   }

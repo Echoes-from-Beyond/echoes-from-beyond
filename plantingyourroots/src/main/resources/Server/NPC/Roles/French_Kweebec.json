@@ -238,7 +238,7 @@
               },
               {
                 "Type": "RootsOpenDialogue",
-                "Dialogue": "Fk1_0_1",
+                "Dialogue": "Fk1_0",
                 "TalkedToDialogue": "Fk_Talked_To",
                 "EndingLoops": {
                   "MetadataStoreKey": "FRENCH_KWEEBEC",

@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk4_7",
   "Entries": [
     {
       "Name": "Quebec Kweebec",
@@ -38,10 +37,12 @@
       {
         "Id": "Standard",
         "Text": "How do you even know this?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_7_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_7_1"
+          }
+        ]
       }
     ]
   }

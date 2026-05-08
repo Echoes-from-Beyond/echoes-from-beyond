@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Gk1_4_1",
   "Line": {
     "Id": "Select",
     "Default": {
@@ -40,23 +39,20 @@
           }
         }
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Gk1_4_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Gk1_4-L1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Gk1_4-L1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Gk1_4_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Gk1_4-L1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Gk1_4-L1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -72,80 +68,68 @@
           }
         }
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Gk1_4_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Gk1_4-L2"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Gk1_4-L2"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Gk1_4_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Gk1_4-L2"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Gk1_4-L2"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "Well, I'd be honored.",
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "AdjustInteger",
-            "MetadataKey": "Gk_Friend",
-            "MetadataStoreKey": "GOTH_KWEEBEC",
-            "Delta": 1
-          },
-          {
-            "Id": "Advance",
-            "Next": "Gk1_5A"
-          }
-        ]
-      }
+      "Actions": [
+        {
+          "Id": "AdjustInteger",
+          "MetadataKey": "Gk_Friend",
+          "MetadataStoreKey": "GOTH_KWEEBEC",
+          "Delta": 1
+        },
+        {
+          "Id": "Advance",
+          "Next": "Gk1_5A"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "No, sorry. Gardening is not for me.",
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "AdjustInteger",
-            "MetadataKey": "Gk_Friend",
-            "MetadataStoreKey": "GOTH_KWEEBEC",
-            "Delta": 1
-          },
-          {
-            "Id": "Advance",
-            "Next": "Gk1_5B"
-          }
-        ]
-      }
+      "Actions": [
+        {
+          "Id": "AdjustInteger",
+          "MetadataKey": "Gk_Friend",
+          "MetadataStoreKey": "GOTH_KWEEBEC",
+          "Delta": 1
+        },
+        {
+          "Id": "Advance",
+          "Next": "Gk1_5B"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "I don't want your emo hand-me-downs.",
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "AdjustInteger",
-            "MetadataKey": "Gk_Judgy",
-            "MetadataStoreKey": "GOTH_KWEEBEC",
-            "Delta": 1
-          },
-          {
-            "Id": "Advance",
-            "Next": "Gk1_5C"
-          }
-        ]
-      }
+      "Actions": [
+        {
+          "Id": "AdjustInteger",
+          "MetadataKey": "Gk_Judgy",
+          "MetadataStoreKey": "GOTH_KWEEBEC",
+          "Delta": 1
+        },
+        {
+          "Id": "Advance",
+          "Next": "Gk1_5C"
+        }
+      ]
     }
   ]
 }

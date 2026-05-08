@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk2_0",
   "Entries": [
     {
       "Name": "Narrator",
@@ -42,11 +41,12 @@
             "Value": "Fk_Anger"
           }
         },
-        "Action": {
-          "Id": "Advance",
-          "$Comment": "Route if FK is angry at player",
-          "Next": "Fk2_0_var1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_0_var1"
+          }
+        ]
       },
       {
         "Id": "Standard",
@@ -63,11 +63,12 @@
             }
           }
         },
-        "Action": {
-          "Id": "Advance",
-          "$Comment": "Default (not angry) route",
-          "Next": "Fk2_0_var2"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_0_var2"
+          }
+        ]
       }
     ]
   }

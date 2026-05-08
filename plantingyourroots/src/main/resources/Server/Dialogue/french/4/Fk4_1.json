@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk4_1",
   "Line": {
     "Id": "Standard",
     "Text": "A pleasant yet familiar scent catches your attention. You feel like you've experienced it before, under reasonably similar circumstances -- wait, didn't you smell it the last time that you met French Kweebec?"
@@ -24,10 +23,12 @@
           "MetadataKey": "Fk_Poutine"
         }
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_1_var1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_1_var1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -37,10 +38,12 @@
         "MetadataStoreKey": "FRENCH_KWEEBEC",
         "MetadataKey": "Fk_Poutine"
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_1_var2"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_1_var2"
+        }
+      ]
     }
   ]
 }

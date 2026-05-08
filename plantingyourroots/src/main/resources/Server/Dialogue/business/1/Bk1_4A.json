@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Bk1_4A",
   "Entries": [
     {
       "Name": "Business Kweebec",
@@ -36,40 +35,34 @@
       {
         "Id": "Standard",
         "Text": "Didn't you just 'advise' me not to get into leadership?",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Bk_Private",
-              "MetadataStoreKey": "BUSINESS_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Bk1_4A-5A"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Private",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4A-5A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "What's the point?",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Bk_Public",
-              "MetadataStoreKey": "BUSINESS_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Bk1_4A-5B"
-            }
-          ]
-        }
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Public",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4A-5B"
+          }
+        ]
       }
     ]
   }

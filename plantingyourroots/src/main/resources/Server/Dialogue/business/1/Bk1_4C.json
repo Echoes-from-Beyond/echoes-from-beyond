@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Bk1_4C",
   "Line": {
     "Id": "Standard",
     "Text": "My point is that they do that either way. But even those incompetent shmucks are preferable to our shareholders."
@@ -15,10 +14,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Bk1_4BC"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Bk1_4BC"
+        }
+      ]
     }
   ]
 }

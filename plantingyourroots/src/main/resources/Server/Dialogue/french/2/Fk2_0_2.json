@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk2_0_2",
   "Line": {
     "Id": "Select",
     "Default": {
@@ -41,23 +40,20 @@
           }
         }
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_0_2",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_0-L1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_0-L1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_0_2",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_0-L1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_0-L1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -73,39 +69,40 @@
           }
         }
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_0_2",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_0-L2"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_0-L2"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_0_2",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_0-L2"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_0-L2"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "[They look great! Just grab one.]",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_1A"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_1A"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "Bread without any sides doesn't sound too appetizing.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_1B"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_1B"
+        }
+      ]
     }
   ]
 }

@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "FeranTraveller_0",
   "Line": {
     "Id": "Standard",
     "Text": "So much swinging... I think I'm going to be sick."
@@ -15,9 +14,11 @@
     {
       "Id": "Standard",
       "Text": "End",
-      "Action": {
-        "Id": "Close"
-      }
+      "Actions": [
+        {
+          "Id": "Close"
+        }
+      ]
     }
   ]
 }

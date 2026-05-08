@@ -1,0 +1,140 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Besides being my signaling stratégie ? Well, there are two autre reasons for it. Un: they remind me of where I come from. Not that I forget, but c'est très réconfortant.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "You can live somewhere for as long as you want, but you always grow an attachment to where you ... how do you say, emerged your plumule.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It is a cord for humans, oui ? When you are first born, you sprout a cord to connect you to votre mère. This is why you carry your babies around so much.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He stops that train of thought, and his expression communicates a vague idea of shame.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Anyway, I should not steal all l'attention from you. Where do you come from?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "From a boring little town in Middle-of-Nowhere, Emerald Wilds. If you can't tell, my life wasn't a very exciting one.",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Origin",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Zone1"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "My family are nomads in Howling Sands. That kind of environment left me with very little time for anything but survival, so I had to go my own way for the sake of my sanity.",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Origin",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Zone2"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Spent my whole childhood in Whisperfrost, and boy am I glad that I'm not freezing to death virtually every winter anymore.",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Origin",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Zone3"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6C"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "It's complicated. Basically, my great-grandmother is one of the few who survived the collapse of Crucible.",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_Origin",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Zone4"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6D"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I don't think I've ever felt tied to a single place. Nothing really stands out.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6E"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I'm a spawn of Varyn himself.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_6F"
+          }
+        ]
+      }
+    ]
+  }
+}

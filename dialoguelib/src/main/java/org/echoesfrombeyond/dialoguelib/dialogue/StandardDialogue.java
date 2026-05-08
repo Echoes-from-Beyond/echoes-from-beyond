@@ -45,6 +45,7 @@ import org.jspecify.annotations.Nullable;
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 public class StandardDialogue extends UIDialogueBase implements Dialogue {
+  /** AssetBuilderCodec for StandardDialogue */
   public static final AssetBuilderCodec<String, StandardDialogue> CODEC =
       CodecUtil.modelAssetBuilder(
           StandardDialogue.class,

@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk2_6B",
   "Line": {
     "Id": "Standard",
     "Text": "Mon ami, I understand that we barely know each other, but I beg you as a friend that you do not go right now."
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_6BC"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_6BC"
+        }
+      ]
     }
   ]
 }

@@ -20,6 +20,7 @@ package org.echoesfrombeyond.codechelper.annotation.validator;
 
 import java.lang.annotation.*;
 import org.echoesfrombeyond.codechelper.validator.LengthRangeProvider;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Validates that the field's length is within a specified bounds.
@@ -33,6 +34,7 @@ import org.echoesfrombeyond.codechelper.validator.LengthRangeProvider;
 @Retention(RetentionPolicy.RUNTIME)
 @ValidatorSpec(LengthRangeProvider.class)
 @Documented
+@NullMarked
 public @interface ValidateLengthRange {
   /** The minimum length (inclusive) */
   int min();

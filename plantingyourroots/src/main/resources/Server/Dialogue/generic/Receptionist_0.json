@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Receptionist_0",
   "Entries": [
     {
       "Name": "Receptionist Kweebec",
@@ -30,9 +29,11 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-          "Id": "Close"
-        }
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
       }
     ]
   }

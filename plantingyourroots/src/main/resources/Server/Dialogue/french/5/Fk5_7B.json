@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk5_7B",
   "Entries": [
     {
       "Name": "French Kweebec",
@@ -65,25 +64,22 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataKey": "Fk_End",
-              "MetadataStoreKey": "FRENCH_KWEEBEC",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Fk_End"
-              }
-            },
-            {
-              "Id": "ShowInfo",
-              "Title": "Uh-oh",
-              "Message": "Something clearly went wrong. Maybe you shouldn't enable his 'Frenchness' too much.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Fk_End",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_End"
             }
-          ]
-        }
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "Uh-oh",
+            "Message": "Something clearly went wrong. Maybe you shouldn't enable his 'Frenchness' too much.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
+          }
+        ]
       }
     ]
   }

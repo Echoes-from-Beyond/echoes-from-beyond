@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk5_4AB",
   "Entries": [
     {
       "Name": "French Kweebec",
@@ -38,10 +37,12 @@
       {
         "Id": "Standard",
         "Text": "Do you know who that Kweebec is, then?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk5_4"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_4"
+          }
+        ]
       }
     ]
   }

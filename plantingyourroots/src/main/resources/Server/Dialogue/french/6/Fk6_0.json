@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk6_0",
   "Entries": [
     {
       "Name": "Narrator",
@@ -58,26 +57,32 @@
       {
         "Id": "Standard",
         "Text": "Who cares? Just own up to it.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk6_1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_1"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Don't let a bunch of strangers and their presumptions make you upend your whole life.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk6_1A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_1A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "But Quebec is also pretty cool. You have... uh... hmm...",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk6_1B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_1B"
+          }
+        ]
       }
     ]
   }

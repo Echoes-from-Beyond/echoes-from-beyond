@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Bk1_3B",
   "Entries": [
     {
       "Name": "Business Kweebec",
@@ -28,34 +27,42 @@
       {
         "Id": "Standard",
         "Text": "Aww, really?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_3B-4ABC"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_3B-4ABC"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I was just curious. I wasn't planning on getting together with you.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_3B-4B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_3B-4B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I never said that I wasn't disappointed.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_3B-4C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_3B-4C"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Yeah, and I thought that until I saw that you look more like a year-old barrel of compost.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_3B-4C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_3B-4C"
+          }
+        ]
       }
     ]
   }

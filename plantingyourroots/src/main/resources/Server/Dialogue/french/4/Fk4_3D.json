@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk4_3D",
   "Entries": [
     {
       "Name": "Quebec Kweebec",
@@ -28,10 +27,12 @@
       {
         "Id": "Standard",
         "Text": "Continue",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_4"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_4"
+          }
+        ]
       }
     ]
   }

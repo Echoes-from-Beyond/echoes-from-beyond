@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk4_5",
   "Entries": [
     {
       "Name": "Quebec Kweebec",
@@ -28,18 +27,22 @@
       {
         "Id": "Standard",
         "Text": "Most of my species is lazy as Void, let's be honest here.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_6A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_6A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "[Let him continue.]",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_6"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_6"
+          }
+        ]
       }
     ]
   }

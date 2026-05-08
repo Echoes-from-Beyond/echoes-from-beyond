@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk4_2",
   "Entries": [
     {
       "Name": "???",
@@ -48,34 +47,42 @@
       {
         "Id": "Standard",
         "Text": "How does that even work?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_3A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_3A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I knew it.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_3B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_3B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Huuuh?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_3C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_3C"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Well, you're the hotter one for sure.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_3D"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_3D"
+          }
+        ]
       }
     ]
   }

@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk4_4",
   "Entries": [
     {
       "Name": "Quebec Kweebec",
@@ -61,10 +60,12 @@
             "MetadataKey": "Fk_Poutine"
           }
         },
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_4_var1"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_4_var1"
+          }
+        ]
       },
       {
         "Id": "Standard",
@@ -74,10 +75,12 @@
           "MetadataStoreKey": "FRENCH_KWEEBEC",
           "MetadataKey": "Fk_Poutine"
         },
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk4_4_var2"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_4_var2"
+          }
+        ]
       }
     ]
   }

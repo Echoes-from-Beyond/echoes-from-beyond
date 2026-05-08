@@ -1,9 +1,8 @@
 {
   "Type": "Standard",
-  "Id": "Fk1_6C-7A_1",
   "Line": {
     "Id": "Standard",
-    "Text": "Mon ami, why are you trying to deceive me ? Your accent is all wrong."
+    "Text": "I have an ear for it. You do not."
   },
   "Name": {
     "Id": "Standard",
@@ -11,15 +10,17 @@
   },
   "UiPage": "Demo_Dialogue.ui",
   "UiFragment": "Demo_Dialogue_Fragment.ui",
-  "Sprite": "sprites/Kweebec_French_Angry.png",
+  "Sprite": "sprites/Kweebec_French_Happy.png",
   "Choices": [
     {
       "Id": "Standard",
-      "Text": "How can you tell that from a single word?",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk1_6C-7A_2"
-      }
+      "Text": "Continue",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk1_6C-7"
+        }
+      ]
     }
   ]
 }

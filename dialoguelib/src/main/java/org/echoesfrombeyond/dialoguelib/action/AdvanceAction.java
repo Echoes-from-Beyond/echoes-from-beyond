@@ -38,8 +38,10 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 @ModelBuilder
 public class AdvanceAction implements ChoiceAction {
+  /** Private logger reference, used for alerts about badly setup dialogue IDs */
   private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
+  /** Codec for AdvanceAction */
   public static final BuilderCodec<AdvanceAction> CODEC =
       CodecUtil.modelBuilder(
           AdvanceAction.class, DialoguePlugin.getResolver(), Plugin.getSharedCache());

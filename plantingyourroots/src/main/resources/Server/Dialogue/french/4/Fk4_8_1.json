@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk4_8_1",
   "Entries": [
     {
       "Name": "Quebec Kweebec",
@@ -28,8 +27,6 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-        "Id": "Composite",
         "Actions": [
           {
             "Id": "MarkTalkedTo",
@@ -39,7 +36,6 @@
             "Id": "Close"
           }
         ]
-      }
       }
     ]
   }

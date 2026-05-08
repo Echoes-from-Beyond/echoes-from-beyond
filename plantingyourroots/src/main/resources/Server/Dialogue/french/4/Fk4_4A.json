@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk4_4A",
   "Line": {
     "Id": "Standard",
     "Text": "Sure. If you don't think about it."
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk4_4"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_4"
+        }
+      ]
     }
   ]
 }

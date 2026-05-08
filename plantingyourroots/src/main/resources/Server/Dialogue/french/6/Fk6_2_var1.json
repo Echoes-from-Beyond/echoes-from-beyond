@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk6_2_var1",
   "Entries": [
     {
       "Name": "Canuck Kweebec",
@@ -63,26 +62,32 @@
       {
         "Id": "Standard",
         "Text": "How could I say no?",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk6_3A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_3A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I'm not into you like that. But we can be friends.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk6_3B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_3B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Oh hell nah.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Fk6_3C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_3C"
+          }
+        ]
       }
     ]
   }

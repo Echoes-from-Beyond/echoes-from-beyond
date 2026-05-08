@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Bk1_1_1",
   "Line": {
     "Id": "Select",
     "Default": {
@@ -29,47 +28,50 @@
         "Id": "Equals",
         "MetadataKey": "Bk1_1-L1"
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Bk1_1-L1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Bk1_1-L1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Bk1_1-L1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Bk1_1-L1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Bk1_1-L1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Bk1_1-L1"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "Yeah, they just kinda let me through.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Bk1_2A"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Bk1_2A"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "I didn't even talk to them.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Bk1_2A"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Bk1_2A"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "I scaled the building like a ninja.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Bk1_2B"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Bk1_2B"
+        }
+      ]
     }
   ]
 }

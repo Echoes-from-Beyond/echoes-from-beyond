@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk2_5_1",
   "Line": {
     "Id": "Select",
     "Default": {
@@ -61,31 +60,28 @@
           }
         ]
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1-prg1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5_1-prg1"
-            }
-          },
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5-L1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_5-L1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1-prg1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5_1-prg1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5-L1"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_5-L1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -112,31 +108,28 @@
           }
         ]
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1-prg2",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5_1-prg2"
-            }
-          },
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5-L2"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_5-L2"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1-prg2",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5_1-prg2"
           }
-        ]
-      }
+        },
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5-L2"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_5-L2"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -168,31 +161,28 @@
           }
         ]
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1-prg2",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5_1-prg2"
-            }
-          },
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5-L2"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_5-L2"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1-prg2",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5_1-prg2"
           }
-        ]
-      }
+        },
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5-L2"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_5-L2"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -207,31 +197,28 @@
           }
         ]
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1-prg3",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5_1-prg3"
-            }
-          },
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5-L3"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_5-L3"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1-prg3",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5_1-prg3"
           }
-        ]
-      }
+        },
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5-L3"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_5-L3"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -246,31 +233,28 @@
           }
         ]
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1-prg4",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5_1-prg4"
-            }
-          },
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5-L4"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_5-L4"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1-prg4",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5_1-prg4"
           }
-        ]
-      }
+        },
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5-L4"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_5-L4"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -285,31 +269,28 @@
           }
         ]
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1-prg5",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5_1-prg5"
-            }
-          },
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5-L5"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_5_1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1-prg5",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5_1-prg5"
           }
-        ]
-      }
+        },
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5-L5"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_5_1"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -352,10 +333,12 @@
           }
         ]
       },
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_6A"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_6A"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -399,32 +382,29 @@
           }
         ]
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataStoreKey": "FRENCH_KWEEBEC",
-            "MetadataKey": "Fk2_State",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk_Initial-Rejection"
-            }
-          },
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1-prg6",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5_1-prg6"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_6B"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk2_State",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk_Initial-Rejection"
           }
-        ]
-      }
+        },
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1-prg6",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5_1-prg6"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_6B"
+        }
+      ]
     },
     {
       "Id": "Standard",
@@ -471,32 +451,29 @@
           }
         ]
       },
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk2_5_1-prg6",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk2_5_1-prg6"
-            }
-          },
-          {
-            "Id": "SetMetadata",
-            "MetadataStoreKey": "FRENCH_KWEEBEC",
-            "MetadataKey": "Fk2_State",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk_Initial-Rejection"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk2_6C"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_5_1-prg6",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_5_1-prg6"
           }
-        ]
-      }
+        },
+        {
+          "Id": "SetMetadata",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk2_State",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk_Initial-Rejection"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_6C"
+        }
+      ]
     }
   ]
 }

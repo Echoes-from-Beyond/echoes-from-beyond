@@ -40,6 +40,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 @ModelBuilder
 public class AddIntegerMetadataAction extends MetadataAccessor implements ChoiceAction {
+  /** Codec for AddIntegerMetadataAction */
   public static final BuilderCodec<AddIntegerMetadataAction> CODEC =
       CodecUtil.modelBuilder(
           AddIntegerMetadataAction.class,
@@ -68,9 +69,12 @@ public class AddIntegerMetadataAction extends MetadataAccessor implements Choice
   @Override
   @RunOnWorldThread
   public void onChosen(Ref<EntityStore> activator, Dialogue parent, DialogueChoice choice) {
+
     var metadata = getMetadata(activator, parent);
+    // create new metadata if it doesn't already exist
     if (metadata == null) putMetadata(activator, parent, metadata = new IntegerMetadata(Initial));
 
+    // do nothing if the metadata doesn't store integers
     if (!(metadata instanceof IntegerMetadata integerMetadata)) return;
     integerMetadata.Value += Delta;
   }

@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Gk1_2ABCD",
   "Entries": [
     {
       "Name": "Goth Kweebec",
@@ -32,54 +31,50 @@
       {
         "Id": "Standard",
         "Text": "You're assuming a lot out of me. I literally just came here to say hi.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Gk1_2ABCD-3A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2ABCD-3A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Maybe you should consider that those other people are right.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataKey": "Gk_Relationship",
-              "MetadataStoreKey": "GOTH_KWEEBEC",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Gk_Dislike"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Gk1_2ABCD-3B"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk_Relationship",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk_Dislike"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2ABCD-3B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Grow up.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataKey": "Gk_Relationship",
-              "MetadataStoreKey": "GOTH_KWEEBEC",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Gk_Dislike"
-              }
-            },
-            {
-              "Id": "Advance",
-              "Next": "Gk1_2ABCD-3B"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk_Relationship",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk_Dislike"
             }
-          ]
-        }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2ABCD-3B"
+          }
+        ]
       }
     ]
   }

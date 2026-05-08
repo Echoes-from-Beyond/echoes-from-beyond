@@ -20,6 +20,7 @@ package org.echoesfrombeyond.dialoguelib.condition;
 
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 
+/** Boolean operators permitted in dialogue. */
 public enum BooleanCompare {
   @Doc("< operator.")
   LessThan,

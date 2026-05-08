@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Bk1_3AB",
   "Entries": [
     {
       "Name": "Business Kweebec",
@@ -36,62 +35,67 @@
       {
         "Id": "Standard",
         "Text": "Boo-hoo, poor you. In the real world, we have to worry about more than just 'annoying meetings'.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_4A"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4A"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "You make it sound like you're a loser either way. Someone always has the upper branch on you.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_4B"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4B"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "Say what you want, but it's either that, or those managers work you to the bone.",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_4C"
-        }
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4C"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "If you can't handle the heat, I'd be willing to take it off your hands...",
-        "Action": {
-          "Id": "Advance",
-          "Next": "Bk1_4D"
-        }
+        "Action": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4D"
+          }
+        ]
       },
       {
         "Id": "Standard",
         "Text": "I'd probably relate if I worked a day of my life.",
-        "Action": {
-          "Id": "Composite",
-          "Actions": [
-            {
-              "Id": "SetMetadata",
-              "MetadataKey": "Bk_Origin",
-              "MetadataStoreKey": "BUSINESS_KWEEBEC",
-              "Metadata": {
-                "Id": "String",
-                "Value": "Bk_Nepo-Baby"
-              }
-            },
-            {
-              "Id": "AdjustInteger",
-              "MetadataKey": "Bk_Public",
-              "MetadataStoreKey": "BUSINESS_KWEEBEC",
-              "Delta": 1
-            },
-            {
-              "Id": "Advance",
-              "Next": "Bk1_4E"
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Bk_Origin",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Bk_Nepo-Baby"
             }
-          ]
-        }
+          },
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Public",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4E"
+          }
+        ]
       }
     ]
   }

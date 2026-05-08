@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Sentry1_0",
   "Entries": [
     {
       "Name": "Kweebec",
@@ -26,9 +25,11 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-          "Id": "Close"
-        }
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
       }
     ]
   }

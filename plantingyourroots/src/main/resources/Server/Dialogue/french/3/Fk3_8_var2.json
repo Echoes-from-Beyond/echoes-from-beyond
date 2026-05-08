@@ -1,6 +1,5 @@
 {
   "Type": "Chain",
-  "Id": "Fk3_8_var2",
   "Entries": [
     {
       "Name": "Narrator",
@@ -28,8 +27,6 @@
       {
         "Id": "Standard",
         "Text": "End",
-        "Action": {
-        "Id": "Composite",
         "Actions": [
           {
             "Id": "MarkTalkedTo",
@@ -39,7 +36,6 @@
             "Id": "Close"
           }
         ]
-      }
       }
     ]
   }

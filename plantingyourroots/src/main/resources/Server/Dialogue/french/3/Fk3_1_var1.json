@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk3_1_var1",
   "Line": {
     "Id": "Select",
     "Default": {
@@ -26,50 +25,46 @@
     {
       "Id": "Standard",
       "Text": "Really? I didn't get the impression that we talked that much about you.",
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "SetMetadata",
-            "MetadataKey": "Fk3_1_var1",
-            "Metadata": {
-              "Id": "String",
-              "Value": "Fk3_1-L1"
-            }
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk3_1-L1_var1"
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk3_1_var1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk3_1-L1"
           }
-        ]
-      }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk3_1-L1_var1"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "[Indulge him.]",
-      "Action": {
-        "Id": "Composite",
-        "Actions": [
-          {
-            "Id": "AdjustInteger",
-            "MetadataKey": "Fk_Romance",
-            "MetadataStoreKey": "FRENCH_KWEEBEC",
-            "Delta": 1
-          },
-          {
-            "Id": "Advance",
-            "Next": "Fk3_2A"
-          }
-        ]
-      }
+      "Actions": [
+        {
+          "Id": "AdjustInteger",
+          "MetadataKey": "Fk_Romance",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "Delta": 1
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk3_2A"
+        }
+      ]
     },
     {
       "Id": "Standard",
       "Text": "I don't like taking about myself.",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk3_2F"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk3_2F"
+        }
+      ]
     }
   ]
 }

@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk2_8_var3",
   "Line": {
     "Id": "Standard",
     "Text": "You hesitate, but you are a friend to me."
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk2_8_1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_8_1"
+        }
+      ]
     }
   ]
 }

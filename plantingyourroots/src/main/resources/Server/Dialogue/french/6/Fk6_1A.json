@@ -1,6 +1,5 @@
 {
   "Type": "Standard",
-  "Id": "Fk6_1A",
   "Line": {
     "Id": "Standard",
     "Text": "Is that not what you just did ?"
@@ -16,10 +15,12 @@
     {
       "Id": "Standard",
       "Text": "Continue",
-      "Action": {
-        "Id": "Advance",
-        "Next": "Fk6_1"
-      }
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_1"
+        }
+      ]
     }
   ]
 }

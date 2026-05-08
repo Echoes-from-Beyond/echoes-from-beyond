@@ -24,6 +24,12 @@ import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Class representing metadata unified by single defined store. For example, several metadata saved
+ * under "SOME_METADATA_STORAGE_KEY" are considered to be part of the same {@link
+ * DialogueMetadataStore}. Also enables operations pertaining to retrieval, setting and deletion of
+ * metadata.
+ */
 @ModelBuilder
 @SuppressWarnings("FieldMayBeFinal")
 @NullMarked
@@ -34,14 +40,32 @@ public class DialogueMetadataStore implements Cloneable {
     this.Metadata = new HashMap<>();
   }
 
+  /**
+   * Retrieves a {@link DialogueMetadata} kept in this store. Can be of any type.
+   *
+   * @param key the key associated with a particular {@link DialogueMetadata}.
+   * @return The metadata, if present. Otherwise, {@code null}.
+   */
   public @Nullable DialogueMetadata get(String key) {
     return Metadata.get(key);
   }
 
+  /**
+   * Inserts a new {@link DialogueMetadata}, or replaces one kept in this store. Can be of any type.
+   *
+   * @param key the key associated with a particular {@link DialogueMetadata}.
+   * @return The previous metadata value, if one was replaced. Otherwise, {@code null}.
+   */
   public @Nullable DialogueMetadata put(String key, DialogueMetadata value) {
     return Metadata.put(key, value);
   }
 
+  /**
+   * Removes a {@link DialogueMetadata} from the store. Can be of any type.
+   *
+   * @param key the key associated with a particular {@link DialogueMetadata}.
+   * @return The metadata that was removed, if it existed. Otherwise, {@code null}.
+   */
   public @Nullable DialogueMetadata remove(String key) {
     return Metadata.remove(key);
   }

@@ -43,6 +43,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 @ModelBuilder
 public class SetMetadataAction extends MetadataAccessor implements ChoiceAction {
+  /** Codec for SetMetadataAction */
   public static final BuilderCodec<SetMetadataAction> CODEC =
       CodecUtil.modelBuilder(
           SetMetadataAction.class,
