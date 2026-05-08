@@ -73,6 +73,8 @@ If you feel that you don't need some of these selectors, leave them out. Make su
 
 To see an example of this one, check out Classic_Dialogue_Fragment.ui, which is also the default value of this field.
 
+To learn more about UI selectors in general, see [Hytale's documentation on this](https://hytalemodding.dev/en/docs/official-documentation/custom-ui#selector-based).
+
 `Lifetime` lets you configure the `CustomPageLifetime` of each dialogue screen, defining how the player can close the window. This field is optional and defaults to `CantClose` if not present, effectively meaning that the player can't escape out of it other than through programmatic means (by using Advance actions to replace the window with a new one, or Close to force the player out of dialogue). Since this is part of Hytale's own API, you should consult their documentation for more information.
 
 `Sprite` is the path to an image you want to show on the screen in middle of the dialogue. Like other elements of the UI, the path is relative to Common/UI/Custom. This is optional.
@@ -184,7 +186,7 @@ There are some repeating fields in this one. Check the above Standard dialogue s
 
 `Entries` simplifies the dialogue windows by reducing them to a collection of bare necessities. Each object contains a `Name`, `Line` and `Sprite`. Unlike in Standard dialogue, you directly pass text into `Name` and `Line`, rather than DialogueChoices. These are converted into appropriate DialogueChoices under the hood.
 
-`AdvanceText` is the text put into the single choice given to the each entry. This choice only has an Advance action that leads to the next entry, or the `End` dialogue if it's the last entry.
+`AdvanceText` is the text put into the single choice given to each entry. This choice only has an Advance action that leads to the next entry, or the `End` dialogue if it's the last entry.
 
 `End` is another Dialogue asset to show once all simplified entries are exhausted. Here you can define dialogue with more complex logic again, or even just one with a different choice from `AdvanceText`.
 
@@ -495,8 +497,8 @@ Note that DisplayChoice is effectively the same as a StandardChoice, but with `C
   },
   "Actions": [
     {
-	  "Id": "Advance",
-	  "Next": "Other_Dialogue_Id"
+      "Id": "Advance",
+      "Next": "Other_Dialogue_Id"
     }
   ]
 }
