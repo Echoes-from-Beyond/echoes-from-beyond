@@ -654,7 +654,7 @@ You can leave either one of those two fields out if you e.g. only want to do som
 
 ### Getting started - ChoiceConditions
 
-ChoiceConditions are generally based on persistent data (metadata), the support for which is enabled by DialogueLib. If you want to perform conditions on some kind of world state, you should extend from this library and add your ChoiceConditions.
+ChoiceConditions are generally based on persistent data (metadata), the support for which is enabled by DialogueLib. If you want to perform conditions on some kind of world state, you should extend from this library and add your ChoiceConditions. In the coming weeks, we'll add support for basic world state interactions ourselves, other than those already covered by vanilla NPCs.
 
 As such, one important ChoiceCondition is **Equals**, which compares two metadata (one persisted, and a keyless one defined in this ChoiceCondition) and ensures that they are:
 - of the same value
