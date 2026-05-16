@@ -190,6 +190,21 @@ There are some repeating fields in this one. Check the above Standard dialogue s
 
 `End` is another Dialogue asset to show once all simplified entries are exhausted. Here you can define dialogue with more complex logic again, or even just one with a different choice from `AdvanceText`.
 
+### Getting started - Triggers
+
+Triggers are used to activate dialogue when something happens (usually an event). 
+
+```json
+{
+  "Id": "Join",
+  "TargetIds": [ "Dialogue_Asset_Key", "Another_Dialogue_Asset_Key" ]
+}
+```
+
+The above example activates dialogue whenever a player joins the world (`PlayerReadyEvent`). This is currently the only trigger provided by the library.
+
+You can implement your own custom triggers in code by extending from `TriggerBase` and registering the codec with `Trigger.CODEC`.
+
 ### Getting started - NPC
 
 To add your dialogue to an NPC, you need to add the following Action (NPC Action, not that of dialogue - see Hytale's documentation for more on those) to whichever Instructions you define:
