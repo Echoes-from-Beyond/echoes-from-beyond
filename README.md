@@ -51,12 +51,12 @@ To do this, create a file named `.hytale` in the root project directory (same le
 
 Then, find the path to your Hytale installation. This is generally dependent on your OS.
 
-Note: all of these are _pre-release_ versions! We always build against the latest pre-release server, so make sure your client is on that branch as well.
+Note: all of these are _release_ versions! We always build against the latest release server, so make sure your client is on that branch as well.
 
 ```
-Linux: $XDG_DATA_HOME/.var/app/com.hypixel.HytaleLauncher/data/Hytale/install/pre-release/package/game/latest
-Windows: %appdata%\Hytale\install\pre-release\package\game\latest
-MacOS: ~/Application Support/Hytale/install/pre-release/package/game/latest
+Linux: $XDG_DATA_HOME/.var/app/com.hypixel.HytaleLauncher/data/Hytale/install/release/package/game/latest
+Windows: %appdata%\Hytale\install\release\package\game\latest
+MacOS: ~/Application Support/Hytale/install/release/package/game/latest
 ```
 
 Once you have located the installation, you will need to convert the file to an _absolute path_ as appropriate for your operating system. Then, copy-paste the absolute path into the `.hytale` file.
