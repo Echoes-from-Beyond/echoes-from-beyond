@@ -787,4 +787,4 @@ DialogueLib was battle-tested by ourselves. It formed the backbone of an experim
 - complex conversation chains developed with the above features
 - DialogueLib being extended
 
-Then take a look at Planting Your Roots (TODO: link on main branch). Assets can be found in various subdirectories of resources/Server. Note that this uses StandardChoices with unset fields rather than DisplayChoices for the non-interactive text.
+Then take a look at [Planting Your Roots](https://github.com/Echoes-from-Beyond/echoes-from-beyond/tree/main/plantingyourroots). Assets can be found in various subdirectories of `resources/Server`. Note that this uses StandardChoices with unset fields rather than DisplayChoices for the non-interactive text.
