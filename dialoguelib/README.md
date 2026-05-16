@@ -4,7 +4,15 @@ DialogueLib brings an asset-based dialogue system into Hytale. Out of the box, i
 
 ## Add this library to your project
 
-TODO
+```kotlin
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly("org.echoesfrombeyond:dialogue-lib:0.2.0")
+}
+```
 
 ## Basic usage
 
