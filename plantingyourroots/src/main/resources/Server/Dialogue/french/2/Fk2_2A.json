@@ -1,0 +1,39 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "That is exactly what I was thinking !",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "What else is so perfect for a summer's day, eh ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_2"
+          }
+        ]
+      }
+    ]
+  }
+}

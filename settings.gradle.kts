@@ -1,3 +1,12 @@
 rootProject.name = "echoes-from-beyond"
 
-include("echoesfrombeyond", "util", "codechelper", "example")
+include(
+    "annotation",
+    "codechelper",
+    "dialoguelib",
+    "echoesfrombeyond",
+    "example",
+    "modutil",
+    // "plantingyourroots",
+    "util",
+)

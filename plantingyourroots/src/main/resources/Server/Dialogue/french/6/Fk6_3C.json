@@ -1,0 +1,62 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "You did not have to say it like that !",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "But I understand. Well, I wish a good life for you.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Perhaps ... non. I get it.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He walks away, crestfallen-- leaf-fallen?",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Not that it matters, but this is the last time you'll see him. You didn't think that 'identity crisis' was a tree species, but you're surely glad to be finally rid of him."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "... oui ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "MarkTalkedTo",
+            "Kind": "French_Kweebec"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "Uh-oh",
+            "Message": "There isn't anything to say here, isn't it? If you expected this to end any better, I don't know what to tell you.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
+          }
+        ]
+      }
+    ]
+  }
+}

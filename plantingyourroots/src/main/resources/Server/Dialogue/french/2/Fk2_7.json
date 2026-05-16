@@ -1,0 +1,44 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "What do they mean by « Quiet Revolution » ? You take your protests to the streets and your kings to the guillotine ! You do not sit in a basement, eat poutine, and hope that they magically go away.",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It is truly embarrassing for France that our own descendants would behave this way. We have perfected la formule, but crossing the ocean has évidemment scrambled leur esprits !",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "And against the Fennish, no less. This is like-- hmm, what would be a common human analogie ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_7_1"
+          }
+        ]
+      }
+    ]
+  }
+}

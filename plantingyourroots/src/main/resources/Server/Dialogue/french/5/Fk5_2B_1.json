@@ -1,0 +1,49 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Since we stand here without une destination, I should ask you a strange question.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I have une cachette on the tree, in a crevice that was not used for some time by anyone else. It is where I keep le vin, because it is cooler than chez-moi.",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "When I went there for a refill, I noticed that one of mes caisses was opened. I ...",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I have seen you go there. I understand that there is no reason to supposer that I have anything to do with that stockage, and I am not intending to accuse you of thievery."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2B_2"
+          }
+        ]
+      }
+    ]
+  }
+}

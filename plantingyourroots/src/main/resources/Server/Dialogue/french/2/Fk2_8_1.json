@@ -1,0 +1,29 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Please visit soon ! You have brightened up my day, and I wish to do the same for you next time."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Kweebec_French_Happy.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "End",
+      "Actions": [
+        {
+          "Id": "MarkTalkedTo",
+          "Kind": "French_Kweebec"
+        },
+        {
+          "Id": "Close"
+        }
+      ]
+    }
+  ]
+}

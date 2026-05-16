@@ -1,0 +1,43 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Goth Kweebec",
+      "Line": "Uh-huh?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "She aims a rather suspicious squint your way. But what else can you say?"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You can't even justify your social ineptitude to yourself. It just seemed right to do in the moment. Like it'd match her vibe."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You wouldn't want this baddie to think that you're a poser or something, right?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2ABCD"
+          }
+        ]
+      }
+    ]
+  }
+}

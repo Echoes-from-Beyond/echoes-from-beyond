@@ -1,0 +1,94 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "I must confess something.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "I can see that you are un vagabond like me, and I have enjoyed our time. I do not suppose that you have already settled yourself on Kweebdrasil ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Well, if you are fine to search for yet another home, I would like you to join me. I, erm ...",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "I would like to know you better. And what better way to bond than to be lost in the wilds, with only each other for company and with dangers surrounding us at every corner ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Ah, what I mean to say is--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "You have, erm, ignited la flamme in my heartwood, and I would like to stoke it--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Non ! That sounds even worse !",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Ah, you can tell I am not really French. Romance does not come naturally to me.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You know what I wish to say. So, uh ..."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Canuck Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "How could I say no?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_3A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I'm not into you like that. But we can be friends.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_3B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Oh hell nah.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk6_3C"
+          }
+        ]
+      }
+    ]
+  }
+}

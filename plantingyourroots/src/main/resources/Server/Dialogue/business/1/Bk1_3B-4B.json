@@ -1,0 +1,35 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Business Kweebec",
+      "Line": "Don't give me that. I've been around for a long time -- people of all races are as transparent as morning dew to me."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You were testing the waters, and you didn't like them."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_3B-4ABC"
+          }
+        ]
+      }
+    ]
+  }
+}

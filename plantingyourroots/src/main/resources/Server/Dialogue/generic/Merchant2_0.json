@@ -1,0 +1,44 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Kweebec Merchant",
+      "Line": "Some of the stuff I have sells really fast. Other things have been sitting here for months."
+    },
+    {
+      "Name": "Kweebec Merchant",
+      "Line": "Take this bottle, for example. You can use it for lots of things: storing water, some kinds of food, interesting bugs you find..."
+    },
+    {
+      "Name": "Kweebec Merchant",
+      "Line": "But then you have all these golden doodads. What *can* you use them for? They're objectively more useless than bottles, and yet..."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "It just makes no sense."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Kweebec Merchant"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
+      }
+    ]
+  }
+}

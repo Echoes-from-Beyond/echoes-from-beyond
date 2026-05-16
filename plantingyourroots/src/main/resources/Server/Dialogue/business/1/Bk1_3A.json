@@ -1,0 +1,45 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Business Kweebec",
+      "Line": "Well met."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "She extends a hand for you to shake."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "[Shake it.]",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_3A-4A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Leave her hanging.]",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_3A-4B"
+          }
+        ]
+      }
+    ]
+  }
+}

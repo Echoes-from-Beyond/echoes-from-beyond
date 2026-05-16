@@ -1,0 +1,26 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Hmm? Unlike *some* trees, I haven't ever tried to come off as particularly « French. »"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "???"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Placeholder.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_1_2"
+        }
+      ]
+    }
+  ]
+}

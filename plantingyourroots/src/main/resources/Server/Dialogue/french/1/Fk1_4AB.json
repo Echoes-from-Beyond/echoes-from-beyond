@@ -1,0 +1,64 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I have lived ici for many seasons now, and even though you would think that the others would consider me as one of their own at this point ...",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "... well, it is not like that, and I fear that this will never change.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I will spare you les détails, but know that others still see me as sort of an « intruder » in their space.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It is less bad now, but when I first arrived, there was no one to say hi to me. Strange Kweebecs are treated worse than les touristes.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Even though I extensively negotiated my ... er, transfert from mon foyer d'origine with many benefits for Kweebdrasil, as is customs for the Kweebecois--",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "--Kweebecs, many of the locals think that I have come to take space from Kweebdrasil's seedlings. And seedlings of their seedlings. But you see how much room there still is on the tree, oui ?",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "So if you are not very lucky with vos voisins, I want you to know that you have a retraite ici. And anyone else like us."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Why are there so many flags, anyway?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk1_5"
+          }
+        ]
+      }
+    ]
+  }
+}

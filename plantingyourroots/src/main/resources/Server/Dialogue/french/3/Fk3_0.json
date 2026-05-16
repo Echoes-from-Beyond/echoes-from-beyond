@@ -1,0 +1,79 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "French Kweebec seems to be in much higher spirits today. He wears a faint, pleased smile while looking over his pond, leaning back against his chair in a rather casual manner.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "You can't help but notice that the table in the back is still crammed with baguettes. You wonder whether he stress-baked another few batches, or these are the same specimens from last time. Were they just lying here, exposed to the elements?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "(Eugh.)",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Ah, salut ! Ça va ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "I'm doing great, now that you're here. [Wink at him.]",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_1A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Today has been a good day.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_1B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I'm okay.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_1C"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Doom and gloom have been my only company since birth.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_1D"
+          }
+        ]
+      }
+    ]
+  }
+}

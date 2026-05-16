@@ -1,0 +1,47 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Gronk",
+      "Line": "Gronk here by ancient-tree permission. Gronk sell treasure in market, give some to running-plants."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Name": {
+      "Id": "Standard",
+      "Text": "Gronk"
+    },
+    "Line": {
+      "Id": "Standard",
+      "Text": "And, before human ask, Gronk not here to make Kweeza!"
+    },
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "What's Kweeza?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gronk_2A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Why are you down here instead of where the rest of the stalls are?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gronk_2B"
+          }
+        ]
+      }
+    ]
+  }
+}

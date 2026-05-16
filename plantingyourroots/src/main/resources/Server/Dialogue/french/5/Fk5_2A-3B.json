@@ -1,0 +1,26 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I feel compassion for you. I have not sprouted around great shops either, yet sometimes I feel un désir to visit them again. To remind me of the taste of my seedhood."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Kweebec_French_Sad.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2A-3BC"
+        }
+      ]
+    }
+  ]
+}

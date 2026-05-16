@@ -1,0 +1,26 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Sure. If you don't think about it."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Placeholder.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_4"
+        }
+      ]
+    }
+  ]
+}

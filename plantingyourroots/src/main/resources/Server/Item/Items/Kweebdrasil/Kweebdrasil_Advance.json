@@ -1,0 +1,21 @@
+{
+  "TranslationProperties": {
+    "Name": "Sleep until the next day",
+    "Description": "Go to sleep and advance to the next day."
+  },
+  "Icon": "Icons/ItemsGenerated/Kweebdrasil_Advance.png",
+  "Quality": "Common",
+  "MaxStack": 1,
+  "Categories": [
+    "Items.Example"
+  ],
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "AdvanceDay"
+        }
+      ]
+    }
+  }
+}

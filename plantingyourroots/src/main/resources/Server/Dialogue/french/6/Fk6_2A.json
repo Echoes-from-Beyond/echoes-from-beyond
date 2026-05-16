@@ -1,0 +1,53 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "I am, erm, unfamiliar with that phrase. But I think I understand."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Canuck Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Kweebec_French_Happy.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "CompareInteger",
+        "MetadataKey": "Fk_Romance",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "Comparison": "GreaterThanOrEqualTo",
+        "Value": 5
+      },
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_2_var1"
+        }
+      ]
+    },
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "CompareInteger",
+          "MetadataKey": "Fk_Romance",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "Comparison": "GreaterThanOrEqualTo",
+          "Value": 5
+        }
+      },
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_2_var2"
+        }
+      ]
+    }
+  ]
+}

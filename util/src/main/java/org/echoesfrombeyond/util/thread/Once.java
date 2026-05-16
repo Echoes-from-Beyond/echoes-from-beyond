@@ -29,7 +29,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Instances can be created from an arbitrary {@link Supplier} by calling {@link
  * Once#of(Supplier)}. The supplier is <i>guaranteed</i> to either have never been called or to be
- * called exactly once.
+ * called exactly once (assuming it is not accessed outside of this class).
  *
  * <p>If a supplier throws an exception, it will not be called again. Other calls to {@link
  * Once#get()} will themselves throw an {@link IllegalStateException}.
@@ -66,7 +66,7 @@ public final class Once<T extends @Nullable Object> implements Supplier<T> {
    *
    * @param getter the getter {@link Supplier}
    * @return a Once instance
-   * @param <T> the type returned by `getter`
+   * @param <T> the type returned by {@code getter}
    * @throws NullPointerException if {@code getter} is null
    */
   public static <T extends @Nullable Object> Once<T> of(Supplier<T> getter) {

@@ -1,0 +1,39 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Business Kweebec",
+      "Line": "I guess it makes sense, though. Peartree's always had a cult riding their roots. They somehow project this unshakeable image of being a 'luxury brand'--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Her fingers curl into quotation marks so forcefully it's like she's trying to rip the phloem out of the rival executives' throats."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "--scandal after scandal. It's not even true! Have you seen the interface on the latest Raincoat Pro? It's the most unusable, oversimplified garbage-- But, but of course that all these mages are eager to--"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_1"
+          }
+        ]
+      }
+    ]
+  }
+}

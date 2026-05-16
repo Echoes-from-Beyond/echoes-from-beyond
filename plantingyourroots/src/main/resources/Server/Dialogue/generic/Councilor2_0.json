@@ -1,0 +1,36 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Kweebec Councilor",
+      "Line": "I'm way too busy for this! Way, way, *way*! I have to prepare festivities for the Day of Roses and--"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Out of my way, human!"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Kweebec Councilor"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
+      }
+    ]
+  }
+}

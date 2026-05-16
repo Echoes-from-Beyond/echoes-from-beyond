@@ -1,0 +1,49 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Tried their ..?",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He suddenly freezes, mouth ajar, as if caught in a lie. Or maybe he's just shocked at your audacity to suggest something like that.",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I have too much dignité for that ! I am relaying to you what I was told by those with less ... erm, respect de soi.",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Nonetheless, it is more reason to stay away from that place. The fact that its creators cannot take pride in their cooking."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2A_1"
+          }
+        ]
+      }
+    ]
+  }
+}

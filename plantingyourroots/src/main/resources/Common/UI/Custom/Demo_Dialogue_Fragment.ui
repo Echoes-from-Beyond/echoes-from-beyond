@@ -1,0 +1,28 @@
+$C = "Common.ui";
+
+@DefaultButtonStyle = ButtonStyle(
+  Default: (Background: PatchStyle(TexturePath: "Demo/Primary_Square.png", Border: $C.@ButtonBorder)),
+  Hovered: (Background: PatchStyle(TexturePath: "Demo/Primary_Square_Hovered.png", Border: $C.@ButtonBorder)),
+  Pressed: (Background: PatchStyle(TexturePath: "Demo/Primary_Square_Pressed.png", Border: $C.@ButtonBorder)),
+  Disabled: (Background: $C.@DefaultSquareButtonDisabledBackground),
+  Sounds: $C.@ButtonSounds,
+);
+
+Group {
+  Anchor: (Width: 1350);
+  Padding: (Vertical: 10);
+  Button #DialogueButton {
+    Anchor: (Full: 0);
+    Padding: (Horizontal: 20, Vertical: 15);
+    LayoutMode: Top;
+    Style: @DefaultButtonStyle;
+    Label #DialogueLabel {
+      Style: (
+        Wrap: true,
+        FontSize: 23,
+        TextColor: #ffffff,
+        RenderBold: true
+      );
+    }
+  }
+}

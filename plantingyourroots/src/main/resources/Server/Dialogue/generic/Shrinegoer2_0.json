@@ -1,0 +1,40 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Kweebec",
+      "Line": "I heard that humans live only for about eighty years."
+    },
+    {
+      "Name": "Kweebec",
+      "Line": "How do you even, like, go without ever seeing your geat-grandseedlings? And great-great-grandseedlings?"
+    }
+  ],
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Many Kweebecs don't start blooming until they're fifty."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
+      }
+    ]
+  }
+}

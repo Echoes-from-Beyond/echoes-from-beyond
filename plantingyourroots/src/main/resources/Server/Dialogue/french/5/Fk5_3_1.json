@@ -1,0 +1,98 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "French Kweebec's expression completely shatters. At first, he's shocked -- moments after, however, his bark folds into a frown.",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "What do you mean ? I *am* French. It is très flagrant, non ?",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I show off so much of ma culture that I did not think I left many opportunités for doubt."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "I know that it's nonsense. You look and sound like a walking baguette.",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Complex",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_4A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I didn't say that I believe it.",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Complex",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_4AB"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I'm going to be real with you. You've talked more about Quebec than France.",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Truth",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_4C"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Flags and baguettes aren't very substantial.",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Truth",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_4D"
+          }
+        ]
+      }
+    ]
+  }
+}

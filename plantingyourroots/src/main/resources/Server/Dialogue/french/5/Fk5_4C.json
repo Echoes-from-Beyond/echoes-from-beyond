@@ -1,0 +1,49 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "...",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He is visibly fighting back a grimace of some kind. His face twists this and that way, until he manages to produce a neutral, if tense, line across his mouth.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "If I have truly done so, then I must apologise. But it was not my intention !",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "It just so happens to be at the forefront of mes pensées. I have told you why, oui ? It is world politique !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Do you know who that Kweebec is, then?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_4"
+          }
+        ]
+      }
+    ]
+  }
+}

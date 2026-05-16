@@ -1,0 +1,39 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "We're so old that we're about to take root, buddy. I'm sure that that fact isn't helping either of our situations.",
+      "Sprite":"sprites/Placeholder.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "We don't have time to see much of Orbis. I honestly question whether we can even go back to Québec one last time before the soil becomes too much to resist."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_7_2"
+          }
+        ]
+      }
+    ]
+  }
+}

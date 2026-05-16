@@ -1,0 +1,21 @@
+{
+  "TranslationProperties": {
+    "Name": "Exit Kweebdrasil",
+    "Description": "Leave Kweebdrasil (your progress will be saved)."
+  },
+  "Icon": "Icons/ItemsGenerated/Kweebdrasil_Exit.png",
+  "Quality": "Common",
+  "MaxStack": 1,
+  "Categories": [
+    "Items.Example"
+  ],
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "ExitKweebdrasil"
+        }
+      ]
+    }
+  }
+}

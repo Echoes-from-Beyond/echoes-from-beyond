@@ -1,0 +1,39 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "If you somehow find a Tim Kweertons around here -- I do not believe you can, because there is a lack of Kweemerican chains too -- I would prefer it if you leave me out of it.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I have bad associations with it. And the food is no better than what Kweemericans produce."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Do you have 'bad associations' because *that* was your seedhood?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2A-3BC_1"
+          }
+        ]
+      }
+    ]
+  }
+}

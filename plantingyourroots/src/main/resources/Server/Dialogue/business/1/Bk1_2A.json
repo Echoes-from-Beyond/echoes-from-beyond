@@ -1,0 +1,35 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Business Kweebec",
+      "Line": "Oh, wow. Can't avoid incompetence even in the one tree I personally manage."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "The younger generations whine non-stop about how they can't find a job, and this is the kind of respect they give to the ones that they do have!"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_2"
+          }
+        ]
+      }
+    ]
+  }
+}

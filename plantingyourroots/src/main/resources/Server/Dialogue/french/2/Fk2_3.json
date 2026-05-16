@@ -1,0 +1,83 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "The condiment is finished when he slowly introduces olive oil, from a bottle that he'd apparently been keeping shoved into some corner somewhere. Rather than mashing the garlic, the pestle now serves to combine the two.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Once he's satisfied with its consistency, he gestures for you to leave. French Kweebec follows right behind, directing you back to the pond with taps on your shoulder.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "It is a beautiful day, is it not ? In these conditions, I like to sit and take in l'air frais.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Your specific destination is the table set that sits right up against the water. He puts the bowl down in the middle, and reaches for the baguettes that no one has touched in the meantime.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "And I am very happy to have someone to share it with !"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "But I wanted ketchup...",
+        "Condition": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Taste",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk_Ketchup"
+          }
+        },
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_4A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Dig in.]",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_4"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Ugh. You suppose that you have to try, at least.]",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_4"
+          }
+        ]
+      }
+    ]
+  }
+}

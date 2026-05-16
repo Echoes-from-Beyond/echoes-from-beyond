@@ -1,0 +1,80 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "You have definitely led une vie intéressante.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I did sense some undue humilité in your words. If I am right, my advice is that you should not worry at all ! During my long travels, I have talked with many from different walks of life.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I have come to understand what « boring » truly means, and you are far from reaching even un pourcentage de la définition."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Point taken.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_3"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "You might be reading too much into this.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_3B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Nope. I'm as boring as they come.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_3C"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "No offense, man, but it doesn't take much to be more interesting that the Fr*nch.",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Complex",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_3D"
+          }
+        ]
+      }
+    ]
+  }
+}

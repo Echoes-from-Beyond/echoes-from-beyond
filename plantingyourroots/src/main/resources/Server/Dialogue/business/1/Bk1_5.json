@@ -1,0 +1,46 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Business Kweebec",
+      "Line": "Well, I think that you've taken enough of my time."
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "You did visit me at an opportune time, but that's rare for someone with my kind of work schedule. I'd suggest to at least make an appointment next time. Definitely don't just barge in."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "That somehow sounds more like a threat than an actual suggestion."
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "But what's the point? Security and law enforcement on Kweebdrasil practically don't exist."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Actually-- meh, don't bother. It's not like that's going to improve anytime soon."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
+      }
+    ]
+  }
+}

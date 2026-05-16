@@ -1,0 +1,32 @@
+$C = "Common.ui";
+
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  @CloseButton = true;
+  Anchor: (Width: 600, Height: 450);
+
+  Group {
+    Anchor: (Full: 0);
+    Padding: (Left: 10, Top: 15, Bottom: 25, Right: 10);
+    LayoutMode: Top;
+
+    Label #TitleLabel {
+      Style: (
+        HorizontalAlignment: Center,
+        RenderUppercase: true,
+        RenderBold: true,
+        FontSize: 28,
+        LetterSpacing: 0
+      );
+    }
+
+    Label #MessageLabel {
+      Style: (
+        FontSize: 20,
+        Wrap: true,
+        Alignment: Center
+      );
+    }
+  }
+}

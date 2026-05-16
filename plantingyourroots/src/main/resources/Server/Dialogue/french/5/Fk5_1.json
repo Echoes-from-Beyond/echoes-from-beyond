@@ -1,0 +1,49 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "French Kweebec relaxes for a moment, though some wariness remains in his expression.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "Well, after we left things off in a not-so-good state last time, I was thinking that maybe we could have some fun today.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "... but I am not sure how one has « fun » on Kweebdrasil. In un sens social, I mean.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Ah, I should have asked Goth Kweebec ahead of time ! But these things keep slipping my mind nowadays."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_1_1"
+          }
+        ]
+      }
+    ]
+  }
+}

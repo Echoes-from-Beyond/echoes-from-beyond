@@ -1,0 +1,90 @@
+$C = "Common.ui";
+
+// based on the DecoratedContainer template in Common.ui
+// just to show additions of your own style
+@DecoratedContainer = Group {
+  @ContentPadding = Padding(Full: 9 + 8);
+  @CloseButton = false;
+
+  Group #Title {
+    Anchor: (Height: $C.@TitleHeight, Top: 0);
+    Background: (TexturePath: "Demo/ContainerHeader.png", HorizontalBorder: 50, VerticalBorder: 0);
+    Padding: (Top: 7);
+
+    Group #ContainerDecorationTop {
+      Anchor: (Width: 236, Height: 11, Top: -12);
+      Background: "Demo/ContainerDecorationTop.png";
+    }
+  }
+
+  Group #Content {
+    LayoutMode: Top;
+    Anchor: (Top: $C.@TitleHeight);
+    Padding: @ContentPadding;
+    Background: (TexturePath: "Demo/ContainerPatch.png", Border: 23);
+  }
+
+  Button #CloseButton {
+    Anchor: (Width: 32, Height: 32, Top: -8, Right: -8);
+    Style: (
+      Default: (Background: "Common/ContainerCloseButton.png"),
+      Hovered: (Background: "Common/ContainerCloseButtonHovered.png"),
+      Pressed: (Background: "Common/ContainerCloseButtonPressed.png"),
+      Sounds: $C.@ButtonsCancel
+    );
+    Visible: @CloseButton;
+  }
+};
+
+Group #Sprite {
+  Anchor: (Bottom: 30, Width: 792, Height: 950);
+}
+
+Group #DialogueContainer {
+  Anchor: (Bottom: 30, Width: 1400, Height: 425);
+  LayoutMode: Top;
+  Group #DialogueNameContainer {
+    Anchor: (Left: 0, Width: 350, Height: 100);
+    LayoutMode: Full;
+    @DecoratedContainer {
+      Label #DialogueName {
+        Anchor: (Full: 0);
+        Style: (
+          FontSize: 24,
+          VerticalAlignment: Center,
+          RenderUppercase: true,
+          TextColor: #b4c8c9,
+          FontName: "Secondary",
+          RenderBold: true,
+          LetterSpacing: 0,
+          HorizontalAlignment: Center
+        );
+        Padding: (Horizontal: 19);
+      }
+    }
+  }
+  @DecoratedContainer {
+    Anchor: (Width: 1400, Height: 350);
+    Group {
+      LayoutMode: Top;
+      Group {
+        Anchor: (Height: 125);
+        Padding: (Horizontal: 15, Vertical: 15);
+        Label #DialogueLine {
+          Style: (
+            Wrap: true,
+            FontSize: 24,
+            TextColor: #ffffff,
+            RenderBold: true
+          );
+        }
+      }
+      Group #DialogueChoices {
+        Anchor: (Height: 195);
+        LayoutMode: TopScrolling;
+        ScrollbarStyle: $C.@TranslucentScrollbarStyle;
+        Padding: (Horizontal: 20);
+      }
+    }
+  }
+}

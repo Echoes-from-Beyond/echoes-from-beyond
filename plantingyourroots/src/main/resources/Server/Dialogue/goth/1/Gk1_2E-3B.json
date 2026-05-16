@@ -1,0 +1,65 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Goth Kweebec",
+      "Line": "Is that so?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Before we get ahead of ourselves, let's just forget about my overreaction. Should we start over?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Sure. I like your orchid.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Nice weather today, isn't it?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "You can't force that kind of thing.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4C"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Shrug. All of these options suck.]",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4D"
+          }
+        ]
+      }
+    ]
+  }
+}

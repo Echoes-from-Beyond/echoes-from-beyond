@@ -33,9 +33,6 @@ import org.jspecify.annotations.Nullable;
 @SuppressWarnings("unused")
 @NullMarked
 public class Plugin extends JavaPlugin {
-  /** The mod group name. */
-  public static final String MOD_GROUP = "EchoesFromBeyond";
-
   /**
    * First entrypoint. Actual initialization tasks should probably go in the various load methods.
    *

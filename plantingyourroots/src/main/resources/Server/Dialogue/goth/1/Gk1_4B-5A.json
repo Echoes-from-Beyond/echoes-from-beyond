@@ -1,0 +1,35 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Goth Kweebec",
+      "Line": "Hah. I mean, if you want to give it a try the next time there's an ice mist, be my guest."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Actually, don't be. My home is toxic to animals if they stay in there for too long."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4B-5"
+          }
+        ]
+      }
+    ]
+  }
+}

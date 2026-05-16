@@ -1,0 +1,40 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Receptionist Kweebec",
+      "Line": "Did you actually climb all the way up here?"
+    },
+    {
+      "Name": "Receptionist Kweebec",
+      "Line": "Oh, Gaia. Did I forget to put up the WIP sign again?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I'm so sorry. Business Kweebec is currently in one of her other penthouses."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Receptionist Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
+      }
+    ]
+  }
+}

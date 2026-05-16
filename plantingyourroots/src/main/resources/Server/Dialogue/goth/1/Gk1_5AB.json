@@ -1,0 +1,58 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Goth Kweebec",
+      "Line": "What really sucks is that Kweebdrasil itself is fine with it. It's even helping me nurture my garden -- it straight up told me that it loves the challenge of growing 'our wacky cousins', as it put it."
+    },
+    {
+      "Name": "Goth Kweebec",
+      "Line": "But according to the Council, I'm 'stressing it out'. Even though Kweebdrasil can and has tried to speak for itself."
+    },
+    {
+      "Name": "Goth Kweebec",
+      "Line": "Like, you have to be a special kind of entitled if you think that your fifty-year-old stump can speak for an Ancient two hundred times your age. Hello?!"
+    },
+    {
+      "Name": "Goth Kweebec",
+      "Line": "And now, every so often, one of them comes over here to ask questions -- very loaded ones -- about whether I'm ashamed about 'rotting my home from inside out'."
+    },
+    {
+      "Name": "Goth Kweebec",
+      "Line": "If you didn't shove your anthers so far down your style--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Eyes closed, she takes a deep breath. Next time that they open, you can see that the act hasn't achieved much."
+    },
+    {
+      "Name": "Goth Kweebec",
+      "Line": "I'm sorry, I've been antsy all day. Come see me tomorrow if you want to chat."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Or don't. Your choice."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
+      }
+    ]
+  }
+}

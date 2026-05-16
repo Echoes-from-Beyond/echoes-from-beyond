@@ -1,0 +1,72 @@
+/*
+ * Echoes from Beyond: Hytale Mod
+ * Copyright (C) 2025 Echoes from Beyond Team <chemky2000@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package org.echoesfrombeyond.dialoguelib.trigger;
+
+import com.hypixel.hytale.assetstore.AssetMap;
+import com.hypixel.hytale.assetstore.AssetRegistry;
+import com.hypixel.hytale.assetstore.AssetStore;
+import com.hypixel.hytale.assetstore.codec.AssetCodecMapCodec;
+import com.hypixel.hytale.assetstore.map.JsonAssetWithMap;
+import com.hypixel.hytale.codec.Codec;
+import com.hypixel.hytale.server.core.plugin.JavaPlugin;
+import java.util.Set;
+import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.dialoguelib.dialogue.Dialogue;
+import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
+import org.echoesfrombeyond.util.thread.Once;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Unmodifiable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+/**
+ * A global trigger of dialogue.
+ *
+ * <p>Triggers generally link up dialogue activation to an event or system. For example, {@link
+ * JoinTrigger} activates dialogue for all joining players.
+ */
+@NullMarked
+public interface Trigger
+    extends IdentifiedAsset<String>, JsonAssetWithMap<String, AssetMap<String, Trigger>> {
+  /** Asset map codec for Trigger */
+  AssetCodecMapCodec<String, Trigger> CODEC = IdentifiedAsset.codec(Codec.STRING);
+
+  @ApiStatus.Internal
+  class Internal {
+    private static final Once<AssetStore<String, Trigger, AssetMap<String, Trigger>>> ASSET_STORE =
+        Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(Trigger.class)));
+  }
+
+  static @Nullable Trigger getTrigger(String asset) {
+    return Internal.ASSET_STORE.get().getAssetMap().getAsset(asset);
+  }
+
+  static AssetStore<String, Trigger, AssetMap<String, Trigger>> getAssetStore() {
+    return Internal.ASSET_STORE.get();
+  }
+
+  void link(JavaPlugin linker, Dialogue dialogue);
+
+  void unlink(String dialogueId);
+
+  void unlinkAll();
+
+  @Unmodifiable
+  Set<String> getTargetIds();
+}

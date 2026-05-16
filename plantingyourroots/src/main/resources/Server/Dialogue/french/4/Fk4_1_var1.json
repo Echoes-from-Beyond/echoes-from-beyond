@@ -1,0 +1,39 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "It's poutine! And here he is, gobbling on it himself: the plate carries a portion that somehow looks even more delectable than what you knocked off the tree. The fries are, well, fried to perfection, the gravy thick, and the cheese curds far too fresh for something that can't be easily sourced atop a tree.",
+      "Sprite":"sprites/Placeholder.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "What stands out the most is that, despite his reaction last time, he doesn't seem to mind in the slightest that you are watching him eat this 'national embarrassment'. Or whatever his deal with Quebec actually is."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_1_1"
+          }
+        ]
+      }
+    ]
+  }
+}

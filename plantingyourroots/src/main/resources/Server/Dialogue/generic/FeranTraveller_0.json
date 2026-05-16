@@ -1,0 +1,24 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "So much swinging... I think I'm going to be sick."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Feran Traveller"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "End",
+      "Actions": [
+        {
+          "Id": "Close"
+        }
+      ]
+    }
+  ]
+}

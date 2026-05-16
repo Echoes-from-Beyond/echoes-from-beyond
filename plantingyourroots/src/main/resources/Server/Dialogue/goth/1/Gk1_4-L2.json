@@ -1,0 +1,35 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Goth Kweebec",
+      "Line": "If the Council get their leaves rustled over my garden again, what else am I supposed to do?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Both my flowers and the woods below are fragile. If the former take root too well, we could have an ecological disaster on our hands. Chances are higher that they wouldn't, though, because they already sap a lot of delicate care out of me."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4_1"
+          }
+        ]
+      }
+    ]
+  }
+}

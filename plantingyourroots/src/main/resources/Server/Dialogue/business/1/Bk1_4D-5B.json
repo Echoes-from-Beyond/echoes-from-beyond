@@ -1,0 +1,43 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Business Kweebec",
+      "Line": "Oh, I'm sure. These kinds of statement are never entirely unserious.  Maybe you feel a little spiteful about me, even."
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "I did also just say that you can do wonders by annoying people, but there are limits to it. Very few are so gullible that you can talk them into anything that way."
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "Sometimes you just lose respect for yourself if you keep insisting. At least if you don't have actual 'gifts' to grease some hands with."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "She offers you a subtle nod with a clear message: you should stop."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_5"
+          }
+        ]
+      }
+    ]
+  }
+}

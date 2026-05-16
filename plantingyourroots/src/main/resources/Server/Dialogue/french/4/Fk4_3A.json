@@ -1,0 +1,26 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "If you take it at face value, it doesn't. We are also... let's just say that we are very difficult to separate, so don't get too imaginative about that either."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Placeholder.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_3"
+        }
+      ]
+    }
+  ]
+}

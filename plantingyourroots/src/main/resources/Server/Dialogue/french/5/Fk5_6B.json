@@ -1,0 +1,104 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Character ? The only personnage I assume is that of myself !",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "If you think that this is somehow a sign of me being false, then it is up to you to convince yourself otherwise. I do not know what else I can tell you.",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "I find much confort in my bark. What you think of as « exagéré » is what I have been surrounded with for most of my life. The smells, the clothing, l'atmosphère ...",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Something in that list causes him to falter momentarily."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "He called you 'Canuck Kweebec'.",
+        "Condition": {
+          "Id": "Boolean",
+          "Kind": "And",
+          "Conditions": [
+            {
+              "Id": "CompareInteger",
+              "MetadataKey": "Fk_Truth",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "Comparison": "GreaterThanOrEqualTo",
+              "OtherMetadataKey": "Fk_Complex",
+              "OtherMetadataStoreKey": "FRENCH_KWEEBEC"
+            },
+            {
+              "Id": "CompareInteger",
+              "MetadataKey": "Fk_Truth",
+              "MetadataStoreKey": "FRENCH_KWEEBEC",
+              "Comparison": "GreaterThanOrEqualTo",
+              "Value": 3
+            }
+          ]
+        },
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_7A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "He called you 'Canuck Kweebec'.",
+        "Condition": {
+          "Id": "Not",
+          "Delegate": {
+            "Id": "Boolean",
+            "Kind": "And",
+            "Conditions": [
+              {
+                "Id": "CompareInteger",
+                "MetadataKey": "Fk_Truth",
+                "MetadataStoreKey": "FRENCH_KWEEBEC",
+                "Comparison": "GreaterThanOrEqualTo",
+                "OtherMetadataKey": "Fk_Complex",
+                "OtherMetadataStoreKey": "FRENCH_KWEEBEC"
+              },
+              {
+                "Id": "CompareInteger",
+                "MetadataKey": "Fk_Truth",
+                "MetadataStoreKey": "FRENCH_KWEEBEC",
+                "Comparison": "GreaterThanOrEqualTo",
+                "Value": 3
+              }
+            ]
+          }
+        },
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_7B"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "Well, mon ami, tell me. How can I make your déjeuner special ? What would you like with mes baguettes ?"
+    },
+    "MetadataKey": "Fk2_1_1",
+    "Options": {
+      "Fk2_1-L1": {
+        "Id": "Standard",
+        "Text": "Yew ? I thought that was toxic to humans. Are you ... sure ?"
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Kweebec_French_Happy.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "You.",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataKey": "Fk2_1_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_1-L1"
+          }
+        }
+      },
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk2_1_1",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk2_1-L1"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_1_1"
+        }
+      ]
+    },
+    {
+      "Id": "Standard",
+      "Text": "Aioli sounds good right now.",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_2A"
+        }
+      ]
+    },
+    {
+      "Id": "Standard",
+      "Text": "Ketchup.",
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Taste",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk_Ketchup"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk2_2B"
+        }
+      ]
+    },
+    {
+      "Id": "Standard",
+      "Text": "Surprise me.",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_2C"
+        }
+      ]
+    },
+    {
+      "Id": "Standard",
+      "Text": "[Just don't say anything.]",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk2_2D"
+        }
+      ]
+    }
+  ]
+}

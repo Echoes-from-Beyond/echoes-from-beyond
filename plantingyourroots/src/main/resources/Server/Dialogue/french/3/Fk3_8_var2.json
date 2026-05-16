@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "He nods at you and grapples your hand with one of his own, which squeezes harder than a vice. It makes you wonder how many of these tree elves understand that humans are much squishier than them, so treating them the same as their bark-covered kin isn't the greatest of ideas.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Mercifully, he lets go of you after a few seconds. But you swear that you can already see the purpling of a bruise on your hand."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "MarkTalkedTo",
+            "Kind": "French_Kweebec"
+          },
+          {
+            "Id": "Close"
+          }
+        ]
+      }
+    ]
+  }
+}

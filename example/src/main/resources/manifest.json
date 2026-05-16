@@ -12,7 +12,7 @@
   ],
   "Website": null,
   "Main": "org.echoesfrombeyond.example.Plugin",
-  "ServerVersion": "*",
+  "ServerVersion": "2026.03.26-89796e57b",
   "DependsOn": {
     "org.echoesfrombeyond:CodecHelper": "^0.2.0"
   }

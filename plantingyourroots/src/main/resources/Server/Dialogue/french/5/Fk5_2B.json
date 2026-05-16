@@ -1,0 +1,76 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Then it looks like we are in the same bateau, I think you say. For all my time here, I have not explored Kweebdrasil much.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "If I knew that someone like you was coming to visit, I would have put more effort into it. But I am no prophète, oui ?",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If I was, I would have tried to bear people's strange looks."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "If I knew that someone like you lived up here, I would have come sooner.",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2B-3A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "I get it. Crowds aren't my thing either.",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Fk_Romance",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2B-3B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Here we go again. Stop pitying yourself.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_2B-3C"
+          }
+        ]
+      }
+    ]
+  }
+}

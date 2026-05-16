@@ -8,4 +8,7 @@ apply<JavaConventionPlugin>()
 
 withHytalePlugin("EchoesFromBeyond", "2026.03.26-89796e57b")
 
-dependencies { projectImplementation(":util") }
+dependencies {
+  projectImplementation(":util")
+  projectImplementation(":modutil")
+}

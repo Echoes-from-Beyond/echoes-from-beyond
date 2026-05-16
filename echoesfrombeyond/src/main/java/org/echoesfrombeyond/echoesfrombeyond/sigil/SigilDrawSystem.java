@@ -28,8 +28,8 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.echoesfrombeyond.codec.SigilPoint;
 import org.echoesfrombeyond.echoesfrombeyond.component.ComponentUtils;
 import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
-import org.echoesfrombeyond.echoesfrombeyond.hud.HudUtils;
 import org.echoesfrombeyond.echoesfrombeyond.hud.SigilHud;
+import org.echoesfrombeyond.modutil.hud.HudUtils;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

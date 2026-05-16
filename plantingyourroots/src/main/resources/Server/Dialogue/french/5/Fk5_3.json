@@ -1,0 +1,59 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Mon frère ?",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "A long pause stretches between the two of you. At several points, it seems that French Kweebec will blurt something out, but he never does; only when he shakes his head does he come up with a response.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "All of ma famille is back in France. We are not very close, but I would know if there is another Français on Kweebdrasil.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Is this something that he has told you ?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "He said that he's from Quebec. And so are you.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_3_1"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "The best part is that I heard you're not even French.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk5_3_1"
+          }
+        ]
+      }
+    ]
+  }
+}

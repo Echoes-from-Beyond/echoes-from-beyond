@@ -1,0 +1,61 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Tim Kweertons ? What do you imply ?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Kweebec_French_Angry.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Well, you know. To remind you of home. [Wink even harder.]",
+      "Actions": [
+        {
+          "Id": "AdjustInteger",
+          "MetadataKey": "Fk_Complex",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "Delta": 1
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2A-3A"
+        }
+      ]
+    },
+    {
+      "Id": "Standard",
+      "Text": "I'm just feeling a bit homesick.",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataKey": "Fk_Origin",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "Metadata": {
+          "Id": "String",
+          "Value": "Fk_Zone3"
+        }
+      },
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2A-3B"
+        }
+      ]
+    },
+    {
+      "Id": "Standard",
+      "Text": "I heard something about it recently, so I'm curious.",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2A-3C"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Kweebec",
+      "Line": "These outposts were built before I germinated, and I don't even know why. Who's going to attack us up here?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Did Trorks grow wings?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "Close"
+          }
+        ]
+      }
+    ]
+  }
+}

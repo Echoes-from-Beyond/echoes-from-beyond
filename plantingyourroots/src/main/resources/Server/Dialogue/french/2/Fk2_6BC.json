@@ -1,0 +1,82 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "Who knows what would happen if you let me be ? I could cover l'arbre entier in mes baguettes.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "French Kweebec",
+      "Line": "And then who would eat them ? Are they to waste and decay ?",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Non ! That is not how you treat your food."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Well, we can't have that.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6BC-7A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "How is that my problem?",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Disappointment"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6BC-7B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Don't even bother responding to that.]",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Disappointment"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk2_6BC-7B"
+          }
+        ]
+      }
+    ]
+  }
+}

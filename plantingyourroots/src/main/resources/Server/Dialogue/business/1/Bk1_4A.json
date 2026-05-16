@@ -1,0 +1,69 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Business Kweebec",
+      "Line": "What would you know about 'the real world'? I don't even need to look at you to tell that you are one of those people who sleepwalk through their entire lives."
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "What do you even do all day? 'Explore'? Attend Slothian soap operas? Pretend that you're happy about having no standing at all, and being crushed under the roots of those who hold all the power?"
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "Which is not even that hard to seize, by the way. You could have all this--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Her hand sweeps across her opulent penthouse, but you have a feeling that she actually meant to sweep it across the whole world."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "--if you just push yourself, sprout."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Didn't you just 'advise' me not to get into leadership?",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Private",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4A-5A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "What's the point?",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Public",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4A-5B"
+          }
+        ]
+      }
+    ]
+  }
+}

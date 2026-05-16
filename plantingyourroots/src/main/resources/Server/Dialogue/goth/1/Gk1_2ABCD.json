@@ -1,0 +1,81 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Goth Kweebec",
+      "Line": "Look. I know how this goes."
+    },
+    {
+      "Name": "Goth Kweebec",
+      "Line": "You showed up to a community full of normal-looking Kweebecs. Of course you gotta find out what's going on with the one overt freak."
+    },
+    {
+      "Name": "Goth Kweebec",
+      "Line": "And I've already heard it all, you know. \"Oh, she just wants attention.\" \"Oh, she's so scary. Will she clip my shoots in my sleep or something?\""
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If you have your own commentary to add onto that, please spare me."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "You're assuming a lot out of me. I literally just came here to say hi.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2ABCD-3A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Maybe you should consider that those other people are right.",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk_Relationship",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk_Dislike"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2ABCD-3B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Grow up.",
+        "Actions": [
+          {
+            "Id": "SetMetadata",
+            "MetadataKey": "Gk_Relationship",
+            "MetadataStoreKey": "GOTH_KWEEBEC",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Gk_Dislike"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Gk1_2ABCD-3B"
+          }
+        ]
+      }
+    ]
+  }
+}

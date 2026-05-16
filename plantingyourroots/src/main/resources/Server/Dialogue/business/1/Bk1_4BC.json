@@ -1,0 +1,69 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Business Kweebec",
+      "Line": "You are always going to be someone's worm, unless you get lucky in life and inherit a whole lot of your ancestor's money."
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "You can either kick back and relax from the moment of your germination, or you can get into investing and pretend that it's the same thing as any real work."
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "But because you're so uneducated -- or you hold a worthless degree thanks to your connections -- when you attempt to do anything more than throw money at the rest of us, we have to start playing games around you--"
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "--just so you don't kill any momentum that us real professionals had! Insecure twigs!"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "If only I was so lucky. If only..."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Do you think that you'd do better if you grew up in wealth?",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Private",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4BC-5A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Sounds to me like you're just not working hard enough.",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataKey": "Bk_Public",
+            "MetadataStoreKey": "BUSINESS_KWEEBEC",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Bk1_4BC-5B"
+          }
+        ]
+      }
+    ]
+  }
+}

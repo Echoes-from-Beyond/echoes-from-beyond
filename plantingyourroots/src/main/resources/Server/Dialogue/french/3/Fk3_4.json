@@ -1,0 +1,76 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "His eyes lock onto your arms, which have already begun reaching for the leaves in question. The growl that escapes his mouth seems almost unthinkable for a Kweebec.",
+      "Sprite":"sprites/Kweebec_French_Angry.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Do not do that."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Angry.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "[Retract your hands.] Why? What's in there?",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Romance",
+            "Delta": 1
+          },
+          {
+            "Id": "AdjustInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Truth",
+            "Delta": 1
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_5A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Can't stop me. [Raid his stash.]",
+        "Actions": [
+          {
+            "Id": "AdjustInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Complex",
+            "Delta": 2
+          },
+          {
+            "Id": "SetMetadata",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Poutine",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Poutine"
+            }
+          },
+          {
+            "Id": "Advance",
+            "Next": "Fk3_5B"
+          }
+        ]
+      }
+    ]
+  }
+}

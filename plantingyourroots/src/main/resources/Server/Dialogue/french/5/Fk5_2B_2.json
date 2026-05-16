@@ -1,0 +1,58 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Select",
+    "Default": {
+      "Id": "Standard",
+      "Text": "But I wonder, who was that second voice with you ?"
+    },
+    "MetadataKey": "Fk5_2B_2",
+    "Options": {
+      "Fk5_2-L1_var2": {
+        "Id": "Standard",
+        "Text": "But I somehow feel that this is not what it is about. Please, I ask of you as my friend to be honest with me."
+      }
+    }
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "French Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Kweebec_French_Angry.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "I don't know what you're talking about.",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataKey": "Fk5_2B_2"
+      },
+      "Actions": [
+        {
+          "Id": "SetMetadata",
+          "MetadataKey": "Fk5_2B_2",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk5_2-L1_var2"
+          }
+        },
+        {
+          "Id": "Advance",
+          "Next": "Fk5_2-L1_var2"
+        }
+      ]
+    },
+    {
+      "Id": "Standard",
+      "Text": "Who? Your brother?",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk5_3"
+        }
+      ]
+    }
+  ]
+}

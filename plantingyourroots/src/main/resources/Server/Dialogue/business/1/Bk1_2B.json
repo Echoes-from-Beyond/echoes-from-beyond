@@ -1,0 +1,25 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "If you're looking to steal, you typically don't go announcing yourself to the owner. You know that, right?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Business Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Bk1_2"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "But don't push him too hard. If he feels threatened, he goes back into his coat and turns up the Frenchness.",
+      "Sprite":"sprites/Placeholder.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "In other words, try to respect his boundaries."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_8_1"
+          }
+        ]
+      }
+    ]
+  }
+}

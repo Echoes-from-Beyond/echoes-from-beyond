@@ -1,0 +1,66 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "French Kweebec",
+      "Line": "I shall let you go now. I am aware that we have not spent that long in here, and I regret that. But I must take some time to myself, if you do not mind.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Merci beaucoup for the time you have given me, though."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "French Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "CompareInteger",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Romance",
+          "Comparison": "GreaterThanOrEqualTo",
+          "Value": 5
+        },
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_8_var1"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Not",
+          "Delegate": {
+            "Id": "CompareInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Romance",
+            "Comparison": "GreaterThanOrEqualTo",
+            "Value": 5
+          }
+        },
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk3_8_var2"
+          }
+        ]
+      }
+    ]
+  }
+}

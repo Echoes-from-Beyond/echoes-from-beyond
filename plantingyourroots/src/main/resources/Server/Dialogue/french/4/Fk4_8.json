@@ -1,0 +1,66 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Well, since you're such good friends now... at least from his perspective, I'd like you to gently steer him away from all of this.",
+      "Sprite":"sprites/Placeholder.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Originally, this whole French thing helped him feel a little better about himself. Now it's doing the opposite."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "CompareInteger",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Romance",
+          "Comparison": "GreaterThanOrEqualTo",
+          "Value": 5
+        },
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_8_var1"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Not",
+          "Delegate": {
+            "Id": "CompareInteger",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Romance",
+            "Comparison": "GreaterThanOrEqualTo",
+            "Value": 5
+          }
+        },
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_8_var2"
+          }
+        ]
+      }
+    ]
+  }
+}

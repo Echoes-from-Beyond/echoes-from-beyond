@@ -1,0 +1,18 @@
+{
+  "Parent": "Default",
+  "World": {
+    "AllowBlockBreaking": false,
+    "AllowBlockGathering": false,
+    "AllowBlockPlacement": false
+  },
+  "Death": {
+    "ItemsLossMode": "None",
+    "RespawnController": {
+      "Type": "WorldSpawnPoint"
+    }
+  },
+  "Combat": {
+    "DisableNPCIncomingDamage": true,
+    "DisablePlayerIncomingDamage": true
+  }
+}

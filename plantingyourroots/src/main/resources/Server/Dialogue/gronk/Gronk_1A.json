@@ -1,0 +1,45 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "You scream as loudly as you can, hoping to at least save the market-goers from ending up as Trork food."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The Trork, however, appears nonplussed as he stares back at you, unmoving. Your yelling slowly trails off."
+    },
+    {
+      "Name": "Gronk",
+      "Line": "Why do all human react same to Gronk?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Name": {
+      "Id": "Standard",
+      "Text": "Gronk"
+    },
+    "Line": {
+      "Id": "Standard",
+      "Text": "Gronk hurt no-one, but human and running-plants always assume before asking!"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "How are you here?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gronk_1"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "Just be careful around him. If you upset him or you're too negative about something... you know, that's how he got here in the first place. He gets a little defensive."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Quebec Kweebec"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Placeholder.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_8_1"
+        }
+      ]
+    }
+  ]
+}

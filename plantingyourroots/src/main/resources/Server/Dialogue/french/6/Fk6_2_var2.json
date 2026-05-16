@@ -1,0 +1,85 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "If this is what you are thinking, I will not waste your time.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Let me explain, before you get l'impression that I was using you pour mon divertissement. I very much appreciate you visiting me and helping me feel less lonely.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "But I think that I must do the rest of my soul-searching on my own.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Indeed, this is goodbye. I will remember you for as long as I live.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "If I find good soil, that can be centuries. Long after you rejoin la terre, so I will not be doing any forgetting during your lifetime. Do not worry.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "And ... merci.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "He's already set to travel, apparently, as he flashes you a small smile, and heads off to the lower levels. You don't see him bringing any particular gear with himself, so you wonder...",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Well, Kweebecs can probably feed themselves on soil -- which is virtually everywhere, unless you head into Howling Sands -- and drinking any random puddle of water is far less dangerous for them than for the animal species."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "But what about Trork lumberjacks? Or Outlanders? Or--"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "Nah, you'll stop overthinking this. Surely Canuck Kweebec knows what he's doing if he and his 'brother', or whoever that guy really was, came all the way over here in the first place."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "You wonder if he would've invited you to come along if he liked you better. He doesn't seem to pay much attention to overt flirting, but perhaps showing kindness and playing along with his whims would've done the trick."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "MarkTalkedTo",
+            "Kind": "French_Kweebec"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "Uh-oh",
+            "Message": "Huh. Looks like you failed to charm him. If this wasn't part of the plan, maybe you should play along with the more wholesome of his whims next time.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
+          }
+        ]
+      }
+    ]
+  }
+}

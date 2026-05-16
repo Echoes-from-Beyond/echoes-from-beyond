@@ -1,0 +1,39 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Business Kweebec",
+      "Line": "If you've already given up, then why are you complaining about the state of your affairs?"
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "Some trees, I swear. You moan about the world without even making an attempt to take charge of your situation."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "This is why we get to the top, and whiners like you stay in the dirt."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_5"
+          }
+        ]
+      }
+    ]
+  }
+}

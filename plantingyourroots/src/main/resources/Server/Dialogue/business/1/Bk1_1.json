@@ -1,0 +1,51 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "She stops in her tracks, noticing you at long last."
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "Should you be here?"
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "No, not you! I have something to deal with at home. I'll call you back in an hour."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "After that last bit, which doesn't seem to have been aimed at you, the light of the rune in her hand dies down."
+    },
+    {
+      "Name": "Business Kweebec",
+      "Line": "...or hopefully never."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "As for you, human, I don't think we've met before. And my business associates are generally very hard to forget. What brings you here?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Business Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Bk1_1_1"
+          }
+        ]
+      }
+    ]
+  }
+}

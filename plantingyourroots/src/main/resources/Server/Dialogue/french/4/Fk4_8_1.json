@@ -1,0 +1,42 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "I have to finish my food before he wakes up. I'm sorry for rushing through this but, you know, Gaia's mandate and all.",
+      "Sprite":"sprites/Placeholder.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Maybe you and I will eventually be able to get up to something proper. Come see me when you remember more of Orbis."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "MarkTalkedTo",
+            "Kind": "French_Kweebec"
+          },
+          {
+            "Id": "Close"
+          }
+        ]
+      }
+    ]
+  }
+}

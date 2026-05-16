@@ -1,0 +1,45 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "The Trork silently brings the palm of his large hand to his face, in the evidently-universal gesture of exasperation."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "At least human not yell like last one."
+    },
+    {
+      "Name": "Narrator",
+      "Line": "If human not buy treasure from Gronk, why climb down so far?"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Name": {
+      "Id": "Standard",
+      "Text": "Gronk"
+    },
+    "Line": {
+      "Id": "Standard",
+      "Text": "Gronk hurt no-one, but human and running-plants always assume before asking!"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "How are you here?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gronk_1"
+          }
+        ]
+      }
+    ]
+  }
+}

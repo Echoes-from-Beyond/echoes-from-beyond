@@ -1,0 +1,53 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "He squeezes his eyes shut and looks away for a second. Something eats at him from the inside."
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Narrator"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Kweebec_French_Sad.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "CompareInteger",
+        "MetadataKey": "Fk_Romance",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "Comparison": "GreaterThanOrEqualTo",
+        "Value": 5
+      },
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_2_var1"
+        }
+      ]
+    },
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "CompareInteger",
+          "MetadataKey": "Fk_Romance",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "Comparison": "GreaterThanOrEqualTo",
+          "Value": 5
+        }
+      },
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk6_2_var2"
+        }
+      ]
+    }
+  ]
+}

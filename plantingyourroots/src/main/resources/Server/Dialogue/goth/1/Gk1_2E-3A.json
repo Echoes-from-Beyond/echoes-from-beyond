@@ -1,0 +1,73 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "Silence stretches between you two while she thinks of an answer, seemingly not believing you at first."
+    },
+    {
+      "Name": "Goth Kweebec",
+      "Line": "Really?"
+    },
+    {
+      "Name": "Goth Kweebec",
+      "Line": "I... I might be a little jumpy today, to be honest."
+    }
+  ],
+  "AdvanceText": "Continue",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "I was already in a bad mood-- Okay, let me spare you the excuses. Let's start again."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Goth Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Sure. I like your orchid.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4A"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Nice weather today, isn't it?",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4B"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "You can't force that kind of thing.",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4C"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "[Shrug. All of these options suck.]",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Gk1_4D"
+          }
+        ]
+      }
+    ]
+  }
+}

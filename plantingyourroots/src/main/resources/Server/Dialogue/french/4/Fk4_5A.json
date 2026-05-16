@@ -1,0 +1,39 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Quebec Kweebec",
+      "Line": "Because I care about him. He probably puts on this happy persona for you, like he does to everyone else, but it's hard to actually make him feel that way. So, I like to take every opportunity to do so.",
+      "Sprite":"sprites/Placeholder.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Maybe I would've shared your opinion if we weren't bound together. Maybe he really is an ungrateful little pile of compost from the outside."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Quebec Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Placeholder.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk4_5"
+          }
+        ]
+      }
+    ]
+  }
+}

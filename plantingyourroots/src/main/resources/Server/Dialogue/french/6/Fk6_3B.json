@@ -1,0 +1,69 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "I meant--",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Ah, I see. Well, I cannot say that I am not a little disappointed.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "It is not your fault ! Mes attentes-- I thought that maybe--",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "What I want to say is that I do not have a lot of opportunités to find kinship. For the same reason that I am unable to make my mark on le monde.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "I was hoping that ... erm, not that you are easy to--",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    },
+    {
+      "Name": "Canuck Kweebec",
+      "Line": "Perhaps I should leave you to it. It would be awkward for me, and you may have better luck with some of the other trees.",
+      "Sprite":"sprites/Kweebec_French_Sad.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Au revoir. You will be in my thoughts."
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Canuck Kweebec"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Sad.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "End",
+        "Actions": [
+          {
+            "Id": "MarkTalkedTo",
+            "Kind": "French_Kweebec"
+          },
+          {
+            "Id": "ShowInfo",
+            "Title": "Uh-oh",
+            "Message": "You made your choice. Unfortunately, this is the end.\n\nIf you want to try again, first exit Kweebdrasil, then reset your progress by running the command /clearkweebdrasilprogress."
+          }
+        ]
+      }
+    ]
+  }
+}

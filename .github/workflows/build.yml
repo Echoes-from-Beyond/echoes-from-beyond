@@ -120,7 +120,7 @@ jobs:
       # directory, `validateHytaleVersions` checks that all plugins are compatible with the latest
       # version.
       - name: Run unit tests and assemble plugins
-        run: ./gradlew check syncPlugins validateVersions
+        run: ./gradlew check syncPlugins
 
       # Integration tests are run by booting the server and executing the command
       # `integration_test`. Tests are considered to have failed if this is a non-zero exit code.

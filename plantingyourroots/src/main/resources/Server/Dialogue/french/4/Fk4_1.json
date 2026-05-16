@@ -1,0 +1,49 @@
+{
+  "Type": "Standard",
+  "Line": {
+    "Id": "Standard",
+    "Text": "A pleasant yet familiar scent catches your attention. You feel like you've experienced it before, under reasonably similar circumstances -- wait, didn't you smell it the last time that you met French Kweebec?"
+  },
+  "Name": {
+    "Id": "Standard",
+    "Text": "Narrator"
+  },
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "Sprite": "sprites/Placeholder.png",
+  "Choices": [
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "Not",
+        "Delegate": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Poutine"
+        }
+      },
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_1_var1"
+        }
+      ]
+    },
+    {
+      "Id": "Standard",
+      "Text": "Continue",
+      "Condition": {
+        "Id": "Equals",
+        "MetadataStoreKey": "FRENCH_KWEEBEC",
+        "MetadataKey": "Fk_Poutine"
+      },
+      "Actions": [
+        {
+          "Id": "Advance",
+          "Next": "Fk4_1_var2"
+        }
+      ]
+    }
+  ]
+}

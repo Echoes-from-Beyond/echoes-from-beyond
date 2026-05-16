@@ -1,0 +1,75 @@
+{
+  "Type": "Chain",
+  "Entries": [
+    {
+      "Name": "Narrator",
+      "Line": "You find French Kweebec lounging about by the pond above his home. The flag used as a canopy in the corner couldn't make its ownership more obvious.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    },
+    {
+      "Name": "Narrator",
+      "Line": "The more time you spend nearby, however, you are hit with the intense smells of lavender and freshly baked pastries. Indeed, the table at the back is host to a row of crispy, golden baguettes.",
+      "Sprite":"sprites/Kweebec_French_Happy.png"
+    }
+  ],
+  "AdvanceText": "Continue",
+  "UiPage": "Demo_Dialogue.ui",
+  "UiFragment": "Demo_Dialogue_Fragment.ui",
+  "End": {
+    "Type": "Standard",
+    "Line": {
+      "Id": "Standard",
+      "Text": "Is French Kweebec expecting some kind of a social gathering?"
+    },
+    "Name": {
+      "Id": "Standard",
+      "Text": "Narrator"
+    },
+    "UiPage": "Demo_Dialogue.ui",
+    "UiFragment": "Demo_Dialogue_Fragment.ui",
+    "Sprite": "sprites/Kweebec_French_Happy.png",
+    "Choices": [
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Equals",
+          "MetadataStoreKey": "FRENCH_KWEEBEC",
+          "MetadataKey": "Fk_Relationship",
+          "Metadata": {
+            "Id": "String",
+            "Value": "Fk_Anger"
+          }
+        },
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_0_var1"
+          }
+        ]
+      },
+      {
+        "Id": "Standard",
+        "Text": "Continue",
+        "Condition": {
+          "Id": "Not",
+          "Delegate": {
+            "Id": "Equals",
+            "MetadataStoreKey": "FRENCH_KWEEBEC",
+            "MetadataKey": "Fk_Relationship",
+            "Metadata": {
+              "Id": "String",
+              "Value": "Fk_Anger"
+            }
+          }
+        },
+        "Actions": [
+          {
+            "Id": "Advance",
+            "Next": "Fk2_0_var2"
+          }
+        ]
+      }
+    ]
+  }
+}
