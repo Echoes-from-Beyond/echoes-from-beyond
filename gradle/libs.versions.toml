@@ -46,6 +46,11 @@ dialoguelib-shadow = [
     "codec-helper"
 ]
 
+# Compile-only dependencies for the `echoesfrombeyond` project.
+echoesfrombeyond-compileOnly = [
+    "codec-helper"
+]
+
 # Compile-only dependencies for the `example` project.
 example-compileOnly = [
     "codec-helper"

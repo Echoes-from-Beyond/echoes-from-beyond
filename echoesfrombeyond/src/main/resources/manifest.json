@@ -6,16 +6,13 @@
   "Authors": [
     {
       "Name": "Kyle",
-      "Email": "chemky2000@gmail.com",
-      "Url": null
+      "Email": "chemky2000@gmail.com"
     },
     {
       "Name": "Cobrinthine",
-      "Email": null,
-      "Url": null
+      "Email": "cobrinthine.amaranthine@gmail.com"
     }
   ],
-  "Website": null,
   "Main": "org.echoesfrombeyond.echoesfrombeyond.Plugin",
   "ServerVersion": "2026.03.26-89796e57b",
   "IncludesAssetPack": true,
@@ -24,6 +21,7 @@
   },
   "DependsOn": {
     "Hytale:EntityModule": "*",
-    "Hytale:BlockModule": "*"
+    "Hytale:BlockModule": "*",
+    "org.echoesfrombeyond:CodecHelper": "^0.3.0"
   }
 }
