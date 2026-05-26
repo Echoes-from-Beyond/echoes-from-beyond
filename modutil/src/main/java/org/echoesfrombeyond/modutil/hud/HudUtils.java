@@ -35,6 +35,7 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public final class HudUtils {
+  // TODO: it looks like this class is totally obsolete after Update 5, do we remove it?
   private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
   private static final class MHUD {
@@ -108,6 +109,7 @@ public final class HudUtils {
    * @param <T> the type of hud, or {@code null} if there was an error, or none could be found
    */
   public static <T extends CustomUIHud> @Nullable T getHud(Class<T> hudClass, HudManager manager) {
+    // TODO: HUDs are now kept in a map, so the original way of handling them no longer applies
     var currentHuds = manager.getCustomHuds();
     var currentHud = currentHuds.get("");
     if (currentHud == null) return null;
