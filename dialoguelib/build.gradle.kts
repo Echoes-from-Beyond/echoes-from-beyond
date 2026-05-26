@@ -3,11 +3,11 @@ import org.echoesfrombeyond.gradle.plugin.projectImplementation
 import org.echoesfrombeyond.gradle.plugin.withHytalePlugin
 import org.echoesfrombeyond.gradle.plugin.withPublishedPlugin
 
-version = "0.2.0"
+version = "0.2.1"
 
 apply<JavaConventionPlugin>()
 
-withHytalePlugin("DialogueLib", "2026.03.26-89796e57b")
+withHytalePlugin("DialogueLib", "0.5.1")
 
 dependencies {
   projectImplementation(":annotation")

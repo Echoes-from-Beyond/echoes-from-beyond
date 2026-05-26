@@ -33,7 +33,6 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.echoesfrombeyond.hud.SigilHud;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.InteractionUtils;
-import org.echoesfrombeyond.modutil.hud.HudUtils;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -61,10 +60,10 @@ public class EndSigilDraw extends SimpleInstantInteraction {
 
     if (sigilDraw == null || !sigilDraw.drawing || !sigilDraw.open) return;
 
-    var hud = HudUtils.getHud(SigilHud.class, player.getHudManager());
-    if (sigilDraw.points.size() > 1 && hud != null) {
+    var hud = player.getHudManager().getCustomHud("SigilHud");
+    if (sigilDraw.points.size() > 1 && hud instanceof SigilHud) {
       UICommandBuilder builder = new UICommandBuilder();
-      hud.unsetLines(builder, sigilDraw.points);
+      ((SigilHud) hud).unsetLines(builder, sigilDraw.points);
       hud.update(false, builder);
     }
 

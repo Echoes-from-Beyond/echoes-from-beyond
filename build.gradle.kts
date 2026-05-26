@@ -37,7 +37,7 @@ val hytalePath: Provider<File> = provider {
 val serverJar: Provider<File> =
     hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.jar") }
 val serverAot: Provider<File> =
-    hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.aot") }
+    hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.aot.config") }
 val assetsZip: Provider<File> = hytalePath.map { file -> file.resolve("Assets.zip") }
 
 val checkHytalePath: TaskProvider<DefaultTask> =

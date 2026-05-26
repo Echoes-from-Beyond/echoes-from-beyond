@@ -108,7 +108,8 @@ public final class HudUtils {
    * @param <T> the type of hud, or {@code null} if there was an error, or none could be found
    */
   public static <T extends CustomUIHud> @Nullable T getHud(Class<T> hudClass, HudManager manager) {
-    var currentHud = manager.getCustomHud();
+    var currentHuds = manager.getCustomHuds();
+    var currentHud = currentHuds.get("");
     if (currentHud == null) return null;
 
     if (MHUD.MHUD_MCUIH != null && MHUD.MHUD_MCUIH.isAssignableFrom(currentHud.getClass())) {
@@ -166,7 +167,7 @@ public final class HudUtils {
       }
     }
 
-    player.getHudManager().setCustomHud(playerRef, hud);
+    player.getHudManager().addCustomHud(playerRef, hud);
   }
 
   /**
@@ -193,6 +194,6 @@ public final class HudUtils {
       }
     }
 
-    player.getHudManager().setCustomHud(playerRef, new EmptyHud(playerRef));
+    player.getHudManager().addCustomHud(playerRef, new EmptyHud(playerRef));
   }
 }

@@ -31,7 +31,6 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.echoesfrombeyond.hud.SigilHud;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.InteractionUtils;
-import org.echoesfrombeyond.modutil.hud.HudUtils;
 import org.jspecify.annotations.NullMarked;
 
 /** Closes the Sigil HUD. This will cast any drawn Sigils. */
@@ -52,7 +51,7 @@ public class CloseSigilHud extends SimpleInstantInteraction {
 
   private static void run(
       CommandBuffer<EntityStore> buffer, Ref<EntityStore> ref, Player player, PlayerRef playerRef) {
-    HudUtils.hideHud(SigilHud.class, player, playerRef);
+    player.getHudManager().removeCustomHud(playerRef, "SigilHud");
 
     var sigilDraw = buffer.getComponent(ref, SigilDrawComponent.getComponentType());
     if (sigilDraw != null) sigilDraw.reset();

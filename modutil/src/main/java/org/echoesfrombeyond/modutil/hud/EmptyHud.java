@@ -32,7 +32,7 @@ public class EmptyHud extends CustomUIHud {
    * @param playerRef the player reference component
    */
   public EmptyHud(PlayerRef playerRef) {
-    super(playerRef);
+    super(playerRef, "Empty");
   }
 
   @Override

@@ -33,7 +33,6 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.echoesfrombeyond.hud.SigilHud;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.InteractionUtils;
-import org.echoesfrombeyond.modutil.hud.HudUtils;
 import org.jspecify.annotations.NullMarked;
 
 /** Opens the Sigil HUD. */
@@ -63,7 +62,7 @@ public class OpenSigilHud extends SimpleInstantInteraction {
     sigilDraw.initialRotation = head.getRotation().clone();
 
     var hud = new SigilHud(playerRef);
-    HudUtils.showHud(player, playerRef, hud);
+    player.getHudManager().addCustomHud(playerRef, hud);
 
     var builder = new UICommandBuilder();
     hud.highlight(builder, sigilDraw.highlighted, true);
