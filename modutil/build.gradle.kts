@@ -3,4 +3,4 @@ import org.echoesfrombeyond.gradle.plugin.withHytaleDependency
 
 apply<JavaConventionPlugin>()
 
-withHytaleDependency("0.5.1")
+withHytaleDependency("0.5.2")

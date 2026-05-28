@@ -7,7 +7,7 @@ version = "0.2.1"
 
 apply<JavaConventionPlugin>()
 
-withHytalePlugin("DialogueLib", "0.5.1")
+withHytalePlugin("DialogueLib", "0.5.2")
 
 dependencies {
   projectImplementation(":annotation")
