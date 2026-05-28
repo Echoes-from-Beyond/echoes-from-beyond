@@ -5,4 +5,4 @@ version = "0.1.0"
 
 apply<JavaConventionPlugin>()
 
-withHytalePlugin("ExamplePlugin", "2026.03.26-89796e57b")
+withHytalePlugin("ExamplePlugin", "0.5.2")

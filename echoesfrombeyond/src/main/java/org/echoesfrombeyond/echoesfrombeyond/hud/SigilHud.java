@@ -87,7 +87,8 @@ public class SigilHud extends CustomUIHud {
    * @param playerRef the player reference component
    */
   public SigilHud(PlayerRef playerRef) {
-    super(playerRef);
+    // TODO: think of a better key naming convention?
+    super(playerRef, "SigilHud");
 
     this.cursor = new Anchor();
     this.cursor.setWidth(Value.of(CURSOR_WIDTH));

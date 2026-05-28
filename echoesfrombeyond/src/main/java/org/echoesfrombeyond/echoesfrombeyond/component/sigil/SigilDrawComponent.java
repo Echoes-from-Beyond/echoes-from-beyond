@@ -21,7 +21,7 @@ package org.echoesfrombeyond.echoesfrombeyond.component.sigil;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentRegistryProxy;
 import com.hypixel.hytale.component.ComponentType;
-import com.hypixel.hytale.math.vector.Vector3f;
+import com.hypixel.hytale.math.vector.Rotation3f;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +67,7 @@ public class SigilDrawComponent implements Component<EntityStore> {
   public boolean drawing;
 
   /** The starting rotation of the player. */
-  public Vector3f initialRotation;
+  public Rotation3f initialRotation;
 
   /** Distance the grid is from the player. */
   public float gridDistance;
@@ -87,7 +87,7 @@ public class SigilDrawComponent implements Component<EntityStore> {
   public SigilDrawComponent() {
     this.open = false;
     this.drawing = false;
-    this.initialRotation = new Vector3f(0, 0, 0);
+    this.initialRotation = new Rotation3f(0, 0, 0);
     this.gridDistance = DEFAULT_GRID_DISTANCE;
     this.lastCursorX = DEFAULT_CURSOR_XY;
     this.lastCursorY = DEFAULT_CURSOR_XY;
@@ -109,7 +109,7 @@ public class SigilDrawComponent implements Component<EntityStore> {
   public void reset() {
     this.open = false;
     this.drawing = false;
-    this.initialRotation.assign(0, 0, 0);
+    this.initialRotation.set(0, 0, 0);
     this.gridDistance = DEFAULT_GRID_DISTANCE;
     this.lastCursorX = DEFAULT_CURSOR_XY;
     this.lastCursorY = DEFAULT_CURSOR_XY;
