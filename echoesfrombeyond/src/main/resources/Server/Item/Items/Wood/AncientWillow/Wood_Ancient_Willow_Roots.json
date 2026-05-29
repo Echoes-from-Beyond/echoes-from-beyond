@@ -1,0 +1,67 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Wood_Ancient_Willow.name"
+  },
+  "ItemLevel": 10,
+  "Icon": "Icons/ItemsGenerated/Wood_Ancient_Willow_Roots.png",
+  "Categories": [
+    "Blocks.Wood"
+  ],
+  "SubCategory": "Trees",
+  "Set": "Wood_Ancient_Willow",
+  "PlayerAnimationsId": "Item",
+  "Interactions": {
+    "Primary": "Block_Primary",
+    "Secondary": "Block_Secondary"
+  },
+  "BlockType": {
+    "Material": "Empty",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "BlockParticleSetId": "Leaves_Branches",
+    "BlockSoundSetId": "Branch",
+    "CustomModel": "Blocks/Foliage/Tree/Roots.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Tree/Roots_Textures/Ancient_Willow.png",
+        "Weight": 1
+      }
+    ],
+    "Group": "Wood",
+    "Flags": {},
+    "Gathering": {
+      "Soft": {
+        "DropList": "Wood_Oak_Branch_Physics"
+      }
+    },
+    "ParticleColor": "#633625",
+    "Support": {
+      "Up": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    }
+  },
+  "IconProperties": {
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Scale": 0.405,
+    "Translation": [
+      2.4,
+      -2.4
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Wood"
+    ],
+    "Family": [
+      "Ancient_Willow"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Wood"
+}
