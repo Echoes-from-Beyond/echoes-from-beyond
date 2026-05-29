@@ -1,9 +1,9 @@
 {
   "TranslationProperties": {
-    "Name": "server.items.Wood_Ancient_Willow.name"
+    "Name": "server.items.Wood_AncientWillow.name"
   },
   "ItemLevel": 10,
-  "Icon": "Icons/ItemsGenerated/Wood_Ancient_Willow_Roots.png",
+  "Icon": "Icons/ItemsGenerated/Wood_AncientWillow_Roots.png",
   "Categories": [
     "Blocks.Wood"
   ],
