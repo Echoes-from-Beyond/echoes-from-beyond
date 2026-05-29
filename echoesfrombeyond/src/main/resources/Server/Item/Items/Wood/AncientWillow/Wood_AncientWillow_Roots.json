@@ -8,7 +8,7 @@
     "Blocks.Wood"
   ],
   "SubCategory": "Trees",
-  "Set": "Wood_Ancient_Willow",
+  "Set": "Wood_AncientWillow",
   "PlayerAnimationsId": "Item",
   "Interactions": {
     "Primary": "Block_Primary",
@@ -23,7 +23,7 @@
     "CustomModel": "Blocks/Foliage/Tree/Roots.blockymodel",
     "CustomModelTexture": [
       {
-        "Texture": "Blocks/Foliage/Tree/Roots_Textures/Ancient_Willow.png",
+        "Texture": "Blocks/Foliage/Tree/Roots_Textures/AncientWillow.png",
         "Weight": 1
       }
     ],
@@ -60,7 +60,7 @@
       "Wood"
     ],
     "Family": [
-      "Ancient_Willow"
+      "AncientWillow"
     ]
   },
   "ItemSoundSetId": "ISS_Blocks_Wood"

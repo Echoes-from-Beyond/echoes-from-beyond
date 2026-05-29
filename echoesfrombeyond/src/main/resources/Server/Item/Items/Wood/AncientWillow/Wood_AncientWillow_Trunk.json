@@ -1,0 +1,47 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Wood_AncientWillow_Trunk.name",
+    "Description": ""
+  },
+  "Parent": "Wood_Oak_Trunk",
+  "Icon": "Icons/ItemsGenerated/Wood_AncientWillow_Trunk.png",
+  "Categories": [
+    "Blocks.Wood"
+  ],
+  "SubCategory": "Trees",
+  "Set": "Wood_AncientWillow",
+  "BlockType": {
+    "Textures": [
+      {
+        "Sides": "BlockTextures/Wood_Trunk_AncientWillow.png",
+        "UpDown": "BlockTextures/Wood_Trunk_AncientWillow_Top.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "ItemId": "Wood_AncientWillow_Trunk",
+        "GatherType": "Woods"
+      }
+    },
+    "ParticleColor": "#c19e52",
+    "TextureComputedColor": "#BF963D"
+  },
+  "ResourceTypes": [
+    {
+      "Id": "Wood_AncientWillow"
+    },
+    {
+      "Id": "Wood_Trunk"
+    },
+    {
+      "Id": "Wood_All"
+    },
+    {
+      "Id": "Fuel"
+    },
+    {
+      "Id": "Charcoal"
+    }
+  ]
+}
