@@ -1,6 +1,6 @@
 {
   "TranslationProperties": {
-    "Name": "server.items.Wood_AncientWillow.name"
+    "Name": "server.items.Wood_AncientWillow_Roots.name"
   },
   "ItemLevel": 10,
   "Icon": "Icons/ItemsGenerated/Wood_AncientWillow_Roots.png",

@@ -1,6 +1,6 @@
 {
   "TranslationProperties": {
-    "Name": "server.items.Wood_AncientWillow_Trunk.name"
+    "Name": "server.items.Wood_AncientWillow_Trunk_Full.name"
   },
   "Parent": "Wood_AncientWillow_Trunk",
   "Icon": "Icons/ItemsGenerated/Wood_AncientWillow_Trunk_Full.png",

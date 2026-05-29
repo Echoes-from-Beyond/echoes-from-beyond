@@ -1,5 +1,6 @@
 items.Casting_Wand.name = Casting Wand
 items.Casting_Wand.description = Used for drawing Sigils.
 
-items.Wood_AncientWillow.name = Ancient Willow
-items.Wood_AncientWillow_Trunk.name = Ancient Willow Trunk
+items.Wood_AncientWillow_Roots.name = Ancient Willow Roots
+items.Wood_AncientWillow_Trunk.name = Ancient Willow Log
+items.Wood_AncientWillow_Trunk_Full.name = Ancient Willow Tree Trunk
