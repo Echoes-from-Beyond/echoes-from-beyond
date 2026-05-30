@@ -1,0 +1,19 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Leaves_AncientWillow.name"
+  },
+  "Icon": "Icons/ItemsGenerated/Plant_Leaves_AncientWillow.png",
+  "Parent": "Plant_Leaves_Oak",
+  "BlockType": {
+    "CustomModel": "Blocks/Foliage/Leaves/Hanging.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Leaves/Hanging_Textures/AncientWillow.png",
+        "Weight": 1
+      }
+    ],
+    "RandomRotation": "YawStep1",
+    "ParticleColor": "#73a834",
+    "TextureComputedColor": "#1B4E2E"
+  }
+}
