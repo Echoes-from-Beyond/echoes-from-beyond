@@ -1,0 +1,157 @@
+{
+  "$NodeId": "Locator.Prop-31344562-7f82-4af7-b9d5-b558ed893261",
+  "Type": "Locator",
+  "ExportAs": "Test_Prop",
+  "Skip": false,
+  "PlacementCap": 10000000,
+  "Prop": {
+    "$NodeId": "Cuboid.Prop-8f775e86-3be4-48d8-8b7c-a0ee855a8658",
+    "Type": "Cuboid",
+    "Skip": false,
+    "Bounds": {
+      "$NodeId": "Bounds3i-770d8349-ed84-4885-b857-34b7d80aef1c",
+      "PointA": {
+        "$NodeId": "Vector3i-b4b683c7-6abd-4977-889f-2036e7cdce47",
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "PointB": {
+        "$NodeId": "Vector3i-9443e439-e927-41d0-9487-18708675d501",
+        "X": 10,
+        "Y": 10,
+        "Z": 10
+      }
+    },
+    "Material": {
+      "$NodeId": "ConstantMaterialProvider-5b0259ba-9e29-4b81-91aa-f4ec29098d05",
+      "Type": "Constant",
+      "Skip": false,
+      "Material": {
+        "$NodeId": "Material-47ba7f8e-a4a6-4c66-aec7-564a4d9a4354",
+        "Solid": "Soil_Dirt",
+        "SolidBottomUp": false
+      }
+    }
+  },
+  "Pattern": {
+    "$NodeId": "Floor.Pattern-3dc8e896-4cbb-4d5f-8f33-33c2933c284f",
+    "Type": "Floor",
+    "Skip": false,
+    "Floor": {
+      "$NodeId": "BlockType.Pattern-000016fa-d69b-44ec-a8b7-14f512ed7c7a",
+      "Type": "BlockType",
+      "Skip": false,
+      "Material": {
+        "$NodeId": "Material-5df16342-f69c-4fac-be74-b31c430b017e",
+        "Solid": "Soil_Grass",
+        "SolidBottomUp": false
+      }
+    }
+  },
+  "Scanner": {
+    "$NodeId": "Linear.Scanner-1fd4fe40-4218-4de8-bdf3-94721f5cb6fa",
+    "Type": "Linear",
+    "Skip": false,
+    "Axis": "X",
+    "AscendingOrder": false,
+    "Scanner": {
+      "$NodeId": "Origin.Scanner-4a2d9775-8a87-4340-971f-1a26060aeef4",
+      "Type": "Origin",
+      "Skip": false
+    },
+    "Range": {
+      "$NodeId": "Integer.Range-40037b7c-1111-4945-9500-c03fa923d3f5",
+      "MinInclusive": 0,
+      "MaxExclusive": 10000
+    }
+  },
+  "$NodeEditorMetadata": {
+    "$Nodes": {
+      "Cuboid.Prop-8f775e86-3be4-48d8-8b7c-a0ee855a8658": {
+        "$Position": {
+          "$x": 673,
+          "$y": -259
+        }
+      },
+      "Bounds3i-770d8349-ed84-4885-b857-34b7d80aef1c": {
+        "$Position": {
+          "$x": 1370,
+          "$y": -573
+        }
+      },
+      "Locator.Prop-31344562-7f82-4af7-b9d5-b558ed893261": {
+        "$Position": {
+          "$x": -157,
+          "$y": -233
+        },
+        "$Title": "[ROOT] Locator Prop"
+      },
+      "Floor.Pattern-3dc8e896-4cbb-4d5f-8f33-33c2933c284f": {
+        "$Position": {
+          "$x": 665,
+          "$y": -97
+        }
+      },
+      "BlockType.Pattern-000016fa-d69b-44ec-a8b7-14f512ed7c7a": {
+        "$Position": {
+          "$x": 1354,
+          "$y": -92
+        }
+      },
+      "Material-5df16342-f69c-4fac-be74-b31c430b017e": {
+        "$Position": {
+          "$x": 2094,
+          "$y": -97
+        }
+      },
+      "Vector3i-b4b683c7-6abd-4977-889f-2036e7cdce47": {
+        "$Position": {
+          "$x": 1755,
+          "$y": -718
+        }
+      },
+      "Vector3i-9443e439-e927-41d0-9487-18708675d501": {
+        "$Position": {
+          "$x": 1755,
+          "$y": -529
+        }
+      },
+      "ConstantMaterialProvider-5b0259ba-9e29-4b81-91aa-f4ec29098d05": {
+        "$Position": {
+          "$x": 1383,
+          "$y": -305
+        }
+      },
+      "Material-47ba7f8e-a4a6-4c66-aec7-564a4d9a4354": {
+        "$Position": {
+          "$x": 2083,
+          "$y": -306
+        }
+      },
+      "Linear.Scanner-1fd4fe40-4218-4de8-bdf3-94721f5cb6fa": {
+        "$Position": {
+          "$x": 568,
+          "$y": 272
+        }
+      },
+      "Origin.Scanner-4a2d9775-8a87-4340-971f-1a26060aeef4": {
+        "$Position": {
+          "$x": 1252,
+          "$y": 184
+        }
+      },
+      "Integer.Range-40037b7c-1111-4945-9500-c03fa923d3f5": {
+        "$Position": {
+          "$x": 1253,
+          "$y": 376
+        }
+      }
+    },
+    "$FloatingNodes": [],
+    "$Links": {},
+    "$Groups": [],
+    "$Comments": [],
+    "$WorkspaceID": "HytaleGenerator - Prop"
+  }
+}
