@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.echoesfrombeyond:dialogue-lib:0.2.0")
+    compileOnly("org.echoesfrombeyond:dialogue-lib:0.2.1")
 }
 ```
 
