@@ -4,3 +4,7 @@ items.Casting_Wand.description = Used for drawing Sigils.
 items.Wood_AncientWillow_Roots.name = Ancient Willow Roots
 items.Wood_AncientWillow_Trunk.name = Ancient Willow Log
 items.Wood_AncientWillow_Trunk_Full.name = Ancient Willow Tree Trunk
+
+items.Wood_AncientWillow_Branch_Corner.name = Ancient Willow Branch - Corner
+items.Wood_AncientWillow_Branch_Long.name = Ancient Willow Branch - Long
+items.Wood_AncientWillow_Branch_Short.name = Ancient Willow Branch - Short

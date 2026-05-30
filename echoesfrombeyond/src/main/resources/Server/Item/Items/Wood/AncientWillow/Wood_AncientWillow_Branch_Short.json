@@ -1,0 +1,22 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Wood_AncientWillow_Branch_Short.name"
+  },
+  "Parent": "Wood_Oak_Branch_Short",
+  "Icon": "Icons/ItemsGenerated/Wood_AncientWillow_Branch_Short.png",
+  "Categories": [
+    "Blocks.Wood"
+  ],
+  "SubCategory": "Trees",
+  "Set": "Wood_AncientWillow",
+  "BlockType": {
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Structures/Tubes/Corner_Textures/AncientWillow.png",
+        "Weight": 1
+      }
+    ],
+    "ParticleColor": "#482912",
+    "TextureComputedColor": "#3C2621"
+  }
+}
