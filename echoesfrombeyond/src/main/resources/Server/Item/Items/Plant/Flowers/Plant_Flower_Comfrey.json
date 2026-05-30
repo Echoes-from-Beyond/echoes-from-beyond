@@ -1,0 +1,41 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Flower_Comfrey.name"
+  },
+  "Parent": "Plant_Flower_Common_White",
+  "BlockType": {
+    "InteractionHint": "server.interactionHints.pick",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Foliage/Flowers/Comfrey.blockymodel",
+    "CustomModelScale": 1.3,
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Flowers/Comfrey.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Soft": {
+        "DropList": "Plant_Bush"
+      },
+      "Harvest": {}
+    },
+    "HitboxType": "Plant_Tall_Medium",
+    "BlockParticleSetId": "Flower",
+    "ParticleColor": "#488ca5",
+    "TextureComputedColor": "#2A7794"
+  },
+  "Icon": "Icons/ItemsGenerated/Plant_Flower_Comfrey.png",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Translation": [
+      0,
+      -17.3
+    ],
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ]
+  }
+}
