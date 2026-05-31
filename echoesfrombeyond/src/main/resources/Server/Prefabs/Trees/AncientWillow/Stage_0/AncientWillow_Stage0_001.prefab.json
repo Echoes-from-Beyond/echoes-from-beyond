@@ -9,101 +9,87 @@
       "x": -3,
       "y": 2,
       "z": 2,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": -2,
       "y": 2,
       "z": 0,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": -2,
       "y": 2,
       "z": 1,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": -2,
       "y": 2,
       "z": 2,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": -1,
       "y": 1,
       "z": 0,
-      "name": "Wood_AncientWillow_Trunk_Full",
-      "support": 15
+      "name": "Wood_AncientWillow_Trunk_Full"
     },
     {
       "x": -1,
       "y": 2,
       "z": 0,
-      "name": "Wood_AncientWillow_Trunk_Full",
-      "support": 15
+      "name": "Wood_AncientWillow_Trunk_Full"
     },
     {
       "x": -1,
       "y": 3,
       "z": 0,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": -1,
       "y": 2,
       "z": 1,
       "name": "Wood_AncientWillow_Trunk_Full",
-      "support": 15,
       "rotation": 4
     },
     {
       "x": -1,
       "y": 3,
       "z": 1,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": -1,
       "y": 2,
       "z": 2,
       "name": "Wood_AncientWillow_Trunk_Full",
-      "support": 15,
       "rotation": 4
     },
     {
       "x": -1,
       "y": 3,
       "z": 2,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": -1,
       "y": 1,
       "z": 3,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": -1,
       "y": 2,
       "z": 3,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 0,
       "y": 2,
       "z": -1,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 0,
@@ -115,106 +101,91 @@
       "x": 0,
       "y": 1,
       "z": 0,
-      "name": "Wood_AncientWillow_Trunk_Full",
-      "support": 15
+      "name": "Wood_AncientWillow_Trunk_Full"
     },
     {
       "x": 0,
       "y": 2,
       "z": 0,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 0,
       "y": 2,
       "z": 1,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 0,
       "y": 2,
       "z": 2,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 1,
       "y": 2,
       "z": -2,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 1,
       "y": 1,
       "z": -1,
-      "name": "Wood_AncientWillow_Trunk_Full",
-      "support": 15
+      "name": "Wood_AncientWillow_Trunk_Full"
     },
     {
       "x": 1,
       "y": 2,
       "z": -1,
-      "name": "Wood_AncientWillow_Trunk_Full",
-      "support": 15
+      "name": "Wood_AncientWillow_Trunk_Full"
     },
     {
       "x": 1,
       "y": 3,
       "z": -1,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 1,
       "y": 2,
       "z": 0,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 2,
       "y": 2,
       "z": -3,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 2,
       "y": 1,
       "z": -2,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 2,
       "y": 2,
       "z": -2,
-      "name": "Wood_AncientWillow_Trunk_Full",
-      "support": 15
+      "name": "Wood_AncientWillow_Trunk_Full"
     },
     {
       "x": 2,
       "y": 3,
       "z": -2,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 2,
       "y": 2,
       "z": -1,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     },
     {
       "x": 3,
       "y": 2,
       "z": -2,
-      "name": "Plant_Leaves_AncientWillow",
-      "support": 15
+      "name": "Plant_Leaves_AncientWillow"
     }
   ]
 }
