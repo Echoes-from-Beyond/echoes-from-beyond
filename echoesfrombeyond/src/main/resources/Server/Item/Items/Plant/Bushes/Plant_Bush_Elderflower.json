@@ -17,9 +17,9 @@
     "BlockSoundSetId": "Fern",
     "PhysicalMaterialId": "Foliage",
     "CustomModelScale": 1.2,
-    "TextureComputedColor": "#42731B"
+    "TextureComputedColor": "#429225"
   },
-  "Icon": "Icons/ItemsGenerated/Plant_Bush_Berry.png",
+  "Icon": "Icons/ItemsGenerated/Plant_Bush_Elderflower.png",
   "IconProperties": {
     "Scale": 0.58823,
     "Translation": [

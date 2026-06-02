@@ -20,10 +20,9 @@
       },
       "Harvest": {}
     },
-    "HitboxType": "Plant_Tall_Medium",
     "BlockParticleSetId": "Flower",
-    "ParticleColor": "#a374ae",
-    "TextureComputedColor": "#2A7794"
+    "ParticleColor": "#A374AE",
+    "TextureComputedColor": "#A374AE"
   },
   "Icon": "Icons/ItemsGenerated/Plant_Flower_Comfrey.png",
   "IconProperties": {
