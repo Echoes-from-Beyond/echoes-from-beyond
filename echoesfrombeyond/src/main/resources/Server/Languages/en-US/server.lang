@@ -16,3 +16,4 @@ items.Plant_Sapling_AncientWillow.name = Ancient Willow Sapling
 items.Plant_Sapling_AncientWillow.description = [TMP] Grows into an <color is="#ffffff">Ancient Willow Tree</color>.\n• Yields <color is="#ffffff">Softwood</color>\n\nGrowth Time:\n• <color is="#4ade80">5</color> <color is="#ffffff">Stages</color>\n• <color is="#4ade80">2</color> <color is="#ffffff">Days</color>
 
 items.Plant_Bush_Elderflower.name = Elderflower Bush
+items.Plant_Bush_Elderflower.description = [TMP] Harvesting:\n• <color is="#4ade80">4</color> <color is="#ffffff">Elderflower</color>\n\nGrowth Time:\n• <color is="#4ade80">2</color> <color is="#ffffff">Stages</color>\n• <color is="#4ade80">1</color> <color is="#ffffff">Day</color>\n• <color is="#ffffff">Regrows</color>

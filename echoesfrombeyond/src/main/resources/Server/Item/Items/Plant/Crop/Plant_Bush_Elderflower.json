@@ -1,0 +1,133 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Plant_Bush_Elderflower.name",
+    "Description": "server.items.Plant_Bush_Elderflower.description"
+  },
+  "$Comment": "I don't know why it doesn't work without inheriting the below template, so don't remove it :pray:",
+  "Parent": "Template_Crop_Berry_Block",
+  "ItemLevel": 10,
+  "BlockType": {
+    "Opacity": "Semitransparent",
+    "CustomModel": "Blocks/Foliage/Plants/Bush_Elderflower.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Foliage/Plants/Bush_Elderflower.png",
+        "Weight": 1
+      }
+    ],
+    "HitboxType": "Plant_Tall_Large",
+    "BlockParticleSetId": "Leaves",
+    "ParticleColor": "#429225",
+    "BlockSoundSetId": "Fern",
+    "PhysicalMaterialId": "Foliage",
+    "CustomModelScale": 1.2,
+    "TextureComputedColor": "#429225",
+    "State": {
+      "Definitions": {
+        "StageFinal": {
+          "CustomModel": "Blocks/Foliage/Plants/Bush_Elderflower_Flowering.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Foliage/Plants/Bush_Elderflower.png",
+              "Weight": 1
+            }
+          ],
+          "InteractionHint": "server.interactionHints.harvest",
+          "Interactions": {
+            "Use": {
+              "Interactions": [
+                {
+                  "Type": "HarvestCrop"
+                }
+              ]
+            }
+          },
+          "Support": {
+            "Down": [
+              {
+                "FaceType": "Full"
+              },
+              {
+                "FaceType": "Bushes"
+              }
+            ]
+          },
+          "Supporting": {
+            "Up": [
+              {
+                "FaceType": "Bushes"
+              }
+            ]
+          },
+          "Gathering": {
+            "Soft": {
+              "DropList": "Drops_Plant_Crop_Berry_StageFinal",
+              "IsWeaponBreakable": false
+            },
+            "Harvest": {
+              "DropList": "Drops_Plant_Crop_Berry_StageFinal_Harvest"
+            }
+          }
+        }
+      }
+    },
+    "Farming": {
+      "Stages": {
+        "Default": [
+          {
+            "Type": "BlockState",
+            "Duration": {
+              "Min": 80000,
+              "Max": 80000
+            },
+            "State": "default",
+            "SoundEventId": "SFX_Crops_Grow"
+          },
+          {
+            "Type": "BlockState",
+            "State": "StageFinal",
+            "SoundEventId": "SFX_Crops_Grow_Stage_Complete"
+          }
+        ],
+        "Harvested": [
+          {
+            "Type": "BlockState",
+            "Duration": {
+              "Min": 20000,
+              "Max": 20000
+            },
+            "State": "default",
+            "SoundEventId": "SFX_Crops_Grow"
+          },
+          {
+            "Type": "BlockState",
+            "State": "StageFinal",
+            "SoundEventId": "SFX_Crops_Grow_Stage_Complete"
+          }
+        ]
+      },
+      "StartingStageSet": "Default",
+      "StageSetAfterHarvest": "Harvested"
+    },
+    "Gathering": {
+      "Soft": {
+        "DropList": "Drops_Plant_Crop_Berry_Block",
+        "IsWeaponBreakable": false
+      },
+      "UseDefaultDropWhenPlaced": true
+    }
+  },
+  "Icon": "Icons/ItemsGenerated/Plant_Bush_Elderflower.png",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Translation": [
+      0,
+      -19.1
+    ],
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ]
+  }
+}

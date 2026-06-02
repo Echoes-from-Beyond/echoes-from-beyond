@@ -98,7 +98,7 @@
               }
             },
             "unwrapMode": "custom",
-            "visible": false,
+            "visible": true,
             "doubleSided": true,
             "shadingMode": "flat"
           }
@@ -203,7 +203,7 @@
               }
             },
             "unwrapMode": "custom",
-            "visible": false,
+            "visible": true,
             "doubleSided": true,
             "shadingMode": "flat"
           }
@@ -308,7 +308,7 @@
               }
             },
             "unwrapMode": "custom",
-            "visible": false,
+            "visible": true,
             "doubleSided": true,
             "shadingMode": "flat"
           }
@@ -393,7 +393,7 @@
               }
             },
             "unwrapMode": "custom",
-            "visible": false,
+            "visible": true,
             "doubleSided": true,
             "shadingMode": "flat"
           }
@@ -421,7 +421,7 @@
               }
             },
             "unwrapMode": "custom",
-            "visible": false,
+            "visible": true,
             "doubleSided": true,
             "shadingMode": "flat"
           }
@@ -449,7 +449,7 @@
               }
             },
             "unwrapMode": "custom",
-            "visible": false,
+            "visible": true,
             "doubleSided": true,
             "shadingMode": "flat"
           }
@@ -477,7 +477,7 @@
               }
             },
             "unwrapMode": "custom",
-            "visible": false,
+            "visible": true,
             "doubleSided": true,
             "shadingMode": "flat"
           }
@@ -505,7 +505,7 @@
               }
             },
             "unwrapMode": "custom",
-            "visible": false,
+            "visible": true,
             "doubleSided": true,
             "shadingMode": "flat"
           }
@@ -533,7 +533,7 @@
               }
             },
             "unwrapMode": "custom",
-            "visible": false,
+            "visible": true,
             "doubleSided": true,
             "shadingMode": "flat"
           }
