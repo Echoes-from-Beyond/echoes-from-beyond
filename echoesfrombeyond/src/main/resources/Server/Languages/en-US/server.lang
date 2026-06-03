@@ -21,4 +21,6 @@ items.Plant_Bush_Elderflower.description = [TMP] Harvesting:\n• <color is="#4a
 items.Bench_HangingCauldron.name = Hanging Cauldron
 items.Bench_HangingCauldron.description = A simple way to heat and combine alchemical ingredients.
 
+items.Tool_Bark_Scraper.description = Removes the outer bark of certain tree logs.\n\n<i>The Kweebecs acknowledge that some cultures require wood as a resource. As long as you avoid entering their woodlands with such a blade bared, it's unlikely they'll ever bring it up.</i>
+
 interactionHints.strip = [{key}] Strip Bark

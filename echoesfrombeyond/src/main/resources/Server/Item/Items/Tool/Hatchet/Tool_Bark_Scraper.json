@@ -1,0 +1,37 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Tool_Bark_Scraper.name",
+    "Description": "server.items.Tool_Bark_Scraper.description"
+  },
+  "Parent": "Tool_Hatchet_Crude",
+  "Icon": "Icons/ItemsGenerated/Tool_Bark_Scraper.png",
+  "Model": "Items/Tools/Bark_Scraper.blockymodel",
+  "Texture": "Items/Tools/Hatchet/Crude_Texture.png",
+  "$Comment": "TODO: How do you meaningfully differentiate the recipe from the crude hatchet?",
+  "Recipe": {
+    "KnowledgeRequired": false,
+    "Input": [
+      {
+        "ResourceTypeId": "Rubble",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Fibre",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Stick",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Workbench",
+        "Type": "Crafting",
+        "Categories": [
+          "Workbench_Tools"
+        ]
+      }
+    ]
+  }
+}
