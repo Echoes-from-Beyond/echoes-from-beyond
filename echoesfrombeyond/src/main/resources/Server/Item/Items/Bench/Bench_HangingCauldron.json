@@ -1,0 +1,131 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Bench_HangingCauldron.name",
+    "Description": "server.items.Bench_HangingCauldron.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Bench_HangingCauldron.png",
+  "Categories": [
+    "Furniture.Benches"
+  ],
+  "Recipe": {
+    "Input": [
+      {
+        "ResourceTypeId": "Wood_Trunk",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 10
+      }
+    ],
+    "Output": [
+      {
+        "ItemId": "Bench_HangingCauldron"
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Categories": [
+          "Workbench_Crafting"
+        ],
+        "Id": "Workbench"
+      }
+    ],
+    "TimeSeconds": 3
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/Benches/HangingCauldron.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Benches/HangingCauldron_Off.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "NESW",
+    "State": {
+      "Definitions": {
+        "Processing": {
+          "Looping": true,
+          "Light": {
+            "Color": "#B72"
+          },
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Benches/HangingCauldron_On.png",
+              "Weight": 1
+            }
+          ],
+          "Particles": [
+            {
+              "SystemId": "Fire_Furnace_On",
+              "TargetNodeName": "Fire",
+              "Scale": 0.7,
+              "PositionOffset": {
+                "X": 0,
+                "Z": 0.3
+              }
+            }
+          ],
+          "AmbientSoundEventId": "SFX_Furnace_Bench_Processing"
+        },
+        "ProcessCompleted": {
+          "Light": {
+            "Color": "#B72"
+          },
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Benches/HangingCauldron_Off.png",
+              "Weight": 1
+            }
+          ],
+          "AmbientSoundEventId": "SFX_Furnace_Bench_Processing",
+          "Looping": true,
+          "CustomModelAnimation": "Blocks/Benches/Furnace_Smelting.blockyanim"
+        }
+      }
+    },
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Benches"
+      }
+    },
+    "HitboxType": "Bench_Furnace",
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#5C583E",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "TextureComputedColor": "#29281F"
+  },
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.365,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      12,
+      -17.4
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Bench"
+    ]
+  },
+  "MaxStack": 1,
+  "ItemLevel": 1,
+  "ItemSoundSetId": "ISS_Blocks_Stone"
+}
