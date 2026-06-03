@@ -47,7 +47,8 @@
               "Weight": 1
             }
           ],
-          "Gathering": {}
+          "Gathering": {},
+          "InteractionHint": ""
         }
       }
     },
