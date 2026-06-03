@@ -93,7 +93,7 @@
         "GatherType": "Benches"
       }
     },
-    "HitboxType": "Bench_Furnace",
+    "HitboxType": "Bench_HangingCauldron",
     "BlockParticleSetId": "Stone",
     "ParticleColor": "#5C583E",
     "Support": {
