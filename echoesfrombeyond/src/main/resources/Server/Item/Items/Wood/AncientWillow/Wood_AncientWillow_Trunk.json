@@ -18,11 +18,64 @@
         "Weight": 1
       }
     ],
+    "InteractionHint": "server.interactionHints.strip",
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "HarvestCrop"
+          }
+        ]
+      }
+    },
     "Gathering": {
       "Breaking": {
         "ItemId": "Wood_AncientWillow_Trunk",
         "GatherType": "Woods"
+      },
+      "Harvest": {
+        "DropList": "Drops_Wood_AncientWillow_Harvest"
       }
+    },
+    "State": {
+      "Definitions": {
+        "Stripped": {
+          "Textures": [
+            {
+              "Sides": "BlockTextures/Calcite_Top.png",
+              "UpDown": "BlockTextures/Wood_Trunk_AncientWillow_Top.png",
+              "Weight": 1
+            }
+          ],
+          "Gathering": {}
+        }
+      }
+    },
+    "Farming": {
+      "Stages": {
+        "Default": [
+          {
+            "Type": "BlockState",
+            "Stage": "default"
+          }
+        ],
+        "Stripped": [
+          {
+            "Type": "BlockState",
+            "Duration": {
+              "Min": 20,
+              "Max": 20
+            },
+            "State": "Stripped"
+          },
+          {
+            "Type": "BlockState",
+            "State": "default"
+          }
+        ]
+      },
+      "StartingStageSet": "Default",
+      "StageSetAfterHarvest": "Stripped"
     },
     "ParticleColor": "#482912",
     "TextureComputedColor": "#BF963D"

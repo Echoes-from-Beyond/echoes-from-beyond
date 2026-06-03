@@ -20,3 +20,5 @@ items.Plant_Bush_Elderflower.description = [TMP] Harvesting:\n• <color is="#4a
 
 items.Bench_HangingCauldron.name = Hanging Cauldron
 items.Bench_HangingCauldron.description = A simple way to heat and combine alchemical ingredients.
+
+interactionHints.strip = [{key}] Strip Bark
