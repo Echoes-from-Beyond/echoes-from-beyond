@@ -1,8 +1,9 @@
 {
   "TranslationProperties": {
-    "Name": "server.items.Wood_AncientWillow_Trunk_Full.name"
+    "Name": "server.items.Wood_AncientWillow_Trunk_Full.name",
+    "Description": ""
   },
-  "Parent": "Wood_AncientWillow_Trunk",
+  "Parent": "Wood_Oak_Trunk",
   "Icon": "Icons/ItemsGenerated/Wood_AncientWillow_Trunk_Full.png",
   "Categories": [
     "Blocks.Wood"
@@ -17,13 +18,94 @@
         "Weight": 1
       }
     ],
+    "InteractionHint": "server.interactionHints.strip",
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "HeldItemCondition",
+            "ItemId": "Tool_Bark_Scraper",
+            "Next": {
+              "Type": "HarvestCrop"
+            }
+          }
+        ]
+      }
+    },
     "Gathering": {
       "Breaking": {
         "ItemId": "Wood_AncientWillow_Trunk",
         "GatherType": "Woods"
+      },
+      "Harvest": {
+        "DropList": "Drops_Wood_AncientWillow_Harvest"
       }
+    },
+    "State": {
+      "Definitions": {
+        "Stripped": {
+          "Textures": [
+            {
+              "Sides": "BlockTextures/Wood_Trunk_AncientWillow_Stripped.png",
+              "UpDown": "BlockTextures/Wood_Trunk_AncientWillow_Full_Stripped.png",
+              "Weight": 1
+            }
+          ],
+          "Gathering": {},
+          "InteractionHint": ""
+        }
+      }
+    },
+    "Farming": {
+      "Stages": {
+        "Default": [
+          {
+            "Type": "BlockState",
+            "Stage": "default"
+          }
+        ],
+        "Stripped": [
+          {
+            "Type": "BlockState",
+            "Duration": {
+              "Min": 40,
+              "Max": 40
+            },
+            "State": "Stripped"
+          },
+          {
+            "Type": "BlockState",
+            "State": "default"
+          }
+        ]
+      },
+      "StartingStageSet": "Default",
+      "StageSetAfterHarvest": "Stripped"
     },
     "ParticleColor": "#482912",
     "TextureComputedColor": "#BF963D"
-  }
+  },
+  "ResourceTypes": [
+    {
+      "Id": "Wood_AncientWillow"
+    },
+    {
+      "Id": "Wood_Softwood"
+    },
+    {
+      "Id": "Wood_Softwood_Trunk"
+    },
+    {
+      "Id": "Wood_Trunk"
+    },
+    {
+      "Id": "Wood_All"
+    },
+    {
+      "Id": "Fuel"
+    },
+    {
+      "Id": "Charcoal"
+    }
+  ]
 }
