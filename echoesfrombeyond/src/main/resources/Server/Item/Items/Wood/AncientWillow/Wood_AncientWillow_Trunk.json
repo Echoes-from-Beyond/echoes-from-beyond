@@ -23,7 +23,11 @@
       "Use": {
         "Interactions": [
           {
-            "Type": "HarvestCrop"
+            "Type": "HeldItemCondition",
+            "ItemId": "Tool_Bark_Scraper",
+            "Next": {
+              "Type": "HarvestCrop"
+            }
           }
         ]
       }

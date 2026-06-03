@@ -31,6 +31,7 @@ import com.hypixel.hytale.server.core.plugin.PluginState;
 import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.echoesfrombeyond.command.IntegrationTestCommand;
 import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
+import org.echoesfrombeyond.echoesfrombeyond.interaction.HeldItemConditionInteraction;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.BeginSigilDraw;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.CloseSigilHud;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.EndSigilDraw;
@@ -78,18 +79,13 @@ public class Init {
     // Order registrations alphabetically by `id` parameter.
     plugin
         .getCodecRegistry(Interaction.CODEC)
-        .register("Begin_Sigil_Draw", BeginSigilDraw.class, BeginSigilDraw.CODEC);
-
-    plugin
-        .getCodecRegistry(Interaction.CODEC)
-        .register("Close_Sigil_Hud", CloseSigilHud.class, CloseSigilHud.CODEC);
-
-    plugin
-        .getCodecRegistry(Interaction.CODEC)
-        .register("End_Sigil_Draw", EndSigilDraw.class, EndSigilDraw.CODEC);
-
-    plugin
-        .getCodecRegistry(Interaction.CODEC)
+        .register("Begin_Sigil_Draw", BeginSigilDraw.class, BeginSigilDraw.CODEC)
+        .register("Close_Sigil_Hud", CloseSigilHud.class, CloseSigilHud.CODEC)
+        .register("End_Sigil_Draw", EndSigilDraw.class, EndSigilDraw.CODEC)
+        .register(
+            "HeldItemCondition",
+            HeldItemConditionInteraction.class,
+            HeldItemConditionInteraction.CODEC)
         .register("Open_Sigil_Hud", OpenSigilHud.class, OpenSigilHud.CODEC);
   }
 
