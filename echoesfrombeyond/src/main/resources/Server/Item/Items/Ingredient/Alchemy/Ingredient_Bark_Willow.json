@@ -1,0 +1,36 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Ingredient_Bark_Willow.name",
+    "Description": "server.items.Ingredient_Bark_Willow.description"
+  },
+  "Categories": [
+    "Items.Ingredients"
+  ],
+  "Model": "Resources/Alchemy/Bark_Willow.blockymodel",
+  "Texture": "Resources/Alchemy/Bark_Willow.png",
+  "Quality": "Common",
+  "ItemLevel": 10,
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Ingredient"
+    ]
+  },
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "DropOnDeath": true,
+  "Icon": "Icons/ItemsGenerated/Ingredient_Bark_Willow.png",
+  "IconProperties": {
+    "Scale": 1,
+    "Rotation": [
+      22.5,
+      50,
+      22.5
+    ],
+    "Translation": [
+      2,
+      -1
+    ]
+  }
+}

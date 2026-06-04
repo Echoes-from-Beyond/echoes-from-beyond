@@ -5,7 +5,7 @@
       {
         "Type": "Single",
         "Item": {
-          "ItemId": "Plant_Fruit_Berries_Red",
+          "ItemId": "Ingredient_Bark_Willow",
           "QuantityMin": 1,
           "QuantityMax": 2
         }

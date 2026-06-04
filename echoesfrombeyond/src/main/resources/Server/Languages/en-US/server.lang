@@ -10,7 +10,11 @@ items.Wood_AncientWillow_Branch_Long.name = Ancient Willow Branch - Long
 items.Wood_AncientWillow_Branch_Short.name = Ancient Willow Branch - Short
 items.Plant_Leaves_AncientWillow.name = Ancient Willow Leaves
 
+items.Ingredient_Bark_Willow.name = Willow Bark
+items.Ingredient_Bark_Willow.description = Used as an alchemical ingredient.\n\n<i>Ancient Willows are an unusually powerful conduit for life energy. While the high rate of absorption also means that it's converted to a hardly useful form to mages, the bark is infused with curative properties as a result.</i>
+
 items.Plant_Flower_Comfrey.name = Comfrey
+items.Plant_Flower_Comfrey.description = Used as an alchemical ingredient.\n\n<i>A long-gone people used the roots of this medicinal plant to create remedies. Most of it is toxic if eaten, though.</i>
 
 items.Plant_Sapling_AncientWillow.name = Ancient Willow Sapling
 items.Plant_Sapling_AncientWillow.description = [TMP] Grows into an <color is="#ffffff">Ancient Willow Tree</color>.\n• Yields <color is="#ffffff">Softwood</color>\n\nGrowth Time:\n• <color is="#4ade80">5</color> <color is="#ffffff">Stages</color>\n• <color is="#4ade80">2</color> <color is="#ffffff">Days</color>
@@ -19,7 +23,7 @@ items.Plant_Bush_Elderflower.name = Elderflower Bush
 items.Plant_Bush_Elderflower.description = [TMP] Harvesting:\n• <color is="#4ade80">4</color> <color is="#ffffff">Elderflower</color>\n\nGrowth Time:\n• <color is="#4ade80">2</color> <color is="#ffffff">Stages</color>\n• <color is="#4ade80">1</color> <color is="#ffffff">Day</color>\n• <color is="#ffffff">Regrows</color>
 
 items.Bench_HangingCauldron.name = Hanging Cauldron
-items.Bench_HangingCauldron.description = A simple way to heat and combine alchemical ingredients.
+items.Bench_HangingCauldron.description = A simple way to heat and combine alchemical ingredients.\n\n<i>Once used to make stew, now serves as a tool in your experiments. The chains can be adjusted to give you some control over temperature.</i>
 
 items.Tool_Bark_Scraper.description = Removes the outer bark of certain tree logs.\n\n<i>The Kweebecs acknowledge that some cultures require wood as a resource. As long as you avoid entering their woodlands with such a blade bared, it's unlikely they'll ever bring it up.</i>
 
