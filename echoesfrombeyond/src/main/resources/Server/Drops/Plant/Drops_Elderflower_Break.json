@@ -1,0 +1,23 @@
+{
+  "Container": {
+    "Type": "Multiple",
+    "Containers": [
+      {
+        "Type": "Single",
+        "Item": {
+          "ItemId": "Ingredient_Fibre",
+          "QuantityMin": 1,
+          "QuantityMax": 2
+        }
+      },
+      {
+        "Type": "Single",
+        "Item": {
+          "ItemId": "Ingredient_Stick",
+          "QuantityMin": 1,
+          "QuantityMax": 2
+        }
+      }
+    ]
+  }
+}

@@ -16,6 +16,9 @@ items.Ingredient_Bark_Willow.description = Used as an alchemical ingredient.\n\n
 items.Plant_Flower_Comfrey.name = Comfrey
 items.Plant_Flower_Comfrey.description = Used as an alchemical ingredient.\n\n<i>A long-gone people used the roots of this medicinal plant to create remedies. Most of it is toxic if eaten, though.</i>
 
+items.Ingredient_Elderflower.name = Elderflower
+items.Ingredient_Elderflower.description = Used as an alchemical ingredient.\n\n<i>This flowering shrub is a common sight across Emerald Wilds. Delicious juice can be made out of it.</i>
+
 items.Plant_Sapling_AncientWillow.name = Ancient Willow Sapling
 items.Plant_Sapling_AncientWillow.description = [TMP] Grows into an <color is="#ffffff">Ancient Willow Tree</color>.\n• Yields <color is="#ffffff">Softwood</color>\n\nGrowth Time:\n• <color is="#4ade80">5</color> <color is="#ffffff">Stages</color>\n• <color is="#4ade80">2</color> <color is="#ffffff">Days</color>
 

@@ -61,11 +61,11 @@
           },
           "Gathering": {
             "Soft": {
-              "DropList": "Drops_Plant_Crop_Berry_StageFinal",
+              "DropList": "Drops_Elderflower_Break",
               "IsWeaponBreakable": false
             },
             "Harvest": {
-              "DropList": "Drops_Plant_Crop_Berry_StageFinal_Harvest"
+              "DropList": "Drops_Crop_Elderflower_Harvest"
             }
           }
         }
@@ -110,8 +110,13 @@
       "StageSetAfterHarvest": "Harvested"
     },
     "Gathering": {
+      "Tools": [
+        {
+          "Type": "Shears"
+        }
+      ],
       "Soft": {
-        "DropList": "Drops_Plant_Crop_Berry_Block",
+        "DropList": "Drops_Elderflower_Break",
         "IsWeaponBreakable": false
       },
       "UseDefaultDropWhenPlaced": true

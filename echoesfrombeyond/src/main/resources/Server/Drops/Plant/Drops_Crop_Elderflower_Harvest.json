@@ -1,0 +1,15 @@
+{
+  "Container": {
+    "Type": "Choice",
+    "Containers": [
+      {
+        "Type": "Single",
+        "Item": {
+          "ItemId": "Ingredient_Elderflower",
+          "QuantityMin": 3,
+          "QuantityMax": 5
+        }
+      }
+    ]
+  }
+}

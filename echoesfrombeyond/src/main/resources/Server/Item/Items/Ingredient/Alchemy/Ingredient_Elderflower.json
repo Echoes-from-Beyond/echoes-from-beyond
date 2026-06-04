@@ -1,0 +1,36 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Ingredient_Elderflower.name",
+    "Description": "server.items.Ingredient_Elderflower.description"
+  },
+  "Categories": [
+    "Items.Ingredients"
+  ],
+  "Model": "Resources/Alchemy/Elderflower.blockymodel",
+  "Texture": "Resources/Alchemy/Elderflower.png",
+  "Quality": "Common",
+  "ItemLevel": 10,
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Ingredient"
+    ]
+  },
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "DropOnDeath": true,
+  "Icon": "Icons/ItemsGenerated/Ingredient_Elderflower.png",
+  "IconProperties": {
+    "Scale": 1.7,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -3
+    ]
+  }
+}
