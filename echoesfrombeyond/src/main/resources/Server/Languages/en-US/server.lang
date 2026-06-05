@@ -28,6 +28,9 @@ items.Plant_Bush_Elderflower.description = [TMP] Harvesting:\n• <color is="#4a
 items.Bench_HangingCauldron.name = Hanging Cauldron
 items.Bench_HangingCauldron.description = A simple way to heat and combine alchemical ingredients.\n\n<i>Once used to make stew, now serves as a tool in your experiments. The chains can be adjusted to give you some control over temperature.</i>
 
+items.Bench_MortarAndPestle.name = Mortar and Pestle
+items.Bench_MortarAndPestle.description = Crush tougher ingredients so that they can be used in alchemy.\n\n<i>The most recognizable, and yet the simplest, of an alchemist's kit. Helps you crush large solids into something more usable.</i>
+
 items.Tool_Bark_Scraper.description = Removes the outer bark of certain tree logs.\n\n<i>The Kweebecs acknowledge that some cultures require wood as a resource. As long as you avoid entering their woodlands with such a blade bared, it's unlikely they'll ever bring it up.</i>
 
 interactionHints.strip = [{key}] Strip Bark
