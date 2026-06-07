@@ -30,7 +30,7 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Sim
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
+import org.echoesfrombeyond.echoesfrombeyond.component.entity.SigilDrawComponent;
 import org.echoesfrombeyond.echoesfrombeyond.hud.SigilHud;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.InteractionUtils;
 import org.jspecify.annotations.NullMarked;

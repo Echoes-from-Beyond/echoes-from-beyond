@@ -30,14 +30,15 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.PluginState;
 import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.echoesfrombeyond.command.IntegrationTestCommand;
-import org.echoesfrombeyond.echoesfrombeyond.component.alchemy.AlchemyBench;
-import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
+import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyBench;
+import org.echoesfrombeyond.echoesfrombeyond.component.entity.SigilDrawComponent;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.HeldItemConditionInteraction;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.BeginSigilDraw;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.CloseSigilHud;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.EndSigilDraw;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.OpenSigilHud;
-import org.echoesfrombeyond.echoesfrombeyond.sigil.SigilDrawSystem;
+import org.echoesfrombeyond.echoesfrombeyond.system.chunk.UpdateAlchemyNetworkSystem;
+import org.echoesfrombeyond.echoesfrombeyond.system.entity.SigilDrawSystem;
 import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 
@@ -145,7 +146,21 @@ public class Init {
   static void registerSystems(JavaPlugin plugin) {
     Check.equals(plugin.getState(), PluginState.SETUP);
 
-    // Order registrations alphabetically by class name.
-    plugin.getEntityStoreRegistry().registerSystem(new SigilDrawSystem());
+    registerChunkSystems(plugin);
+    registerEntitySystems(plugin);
+  }
+
+  private static void registerChunkSystems(JavaPlugin plugin) {
+    var chunkStoreRegistry = plugin.getChunkStoreRegistry();
+
+    // Order alphabetically by class name
+    chunkStoreRegistry.registerSystem(new UpdateAlchemyNetworkSystem());
+  }
+
+  private static void registerEntitySystems(JavaPlugin plugin) {
+    var entityStoreRegistry = plugin.getEntityStoreRegistry();
+
+    // Order alphabetically by class name
+    entityStoreRegistry.registerSystem(new SigilDrawSystem());
   }
 }
