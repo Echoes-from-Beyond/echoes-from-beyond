@@ -1,17 +1,16 @@
 {
   "TranslationProperties": {
-    "Name": "server.items.Plant_Flower_Comfrey.name",
-    "Description": "server.items.Plant_Flower_Comfrey.description"
+    "Name": "server.items.Plant_Flower_GaiasWort.name"
   },
   "Parent": "Plant_Flower_Common_White",
   "BlockType": {
     "InteractionHint": "server.interactionHints.pick",
     "Opacity": "Transparent",
-    "CustomModel": "Blocks/Foliage/Flowers/Comfrey.blockymodel",
+    "CustomModel": "Blocks/Foliage/Flowers/Wort.blockymodel",
     "CustomModelScale": 1.3,
     "CustomModelTexture": [
       {
-        "Texture": "Blocks/Foliage/Flowers/Comfrey.png",
+        "Texture": "Blocks/Foliage/Flowers/GaiasWort.png",
         "Weight": 1
       }
     ],
@@ -22,20 +21,20 @@
       "Harvest": {}
     },
     "BlockParticleSetId": "Flower",
-    "ParticleColor": "#A374AE",
-    "TextureComputedColor": "#A374AE"
+    "ParticleColor": "#ECEB2C",
+    "TextureComputedColor": "#ECEB2C"
   },
-  "Icon": "Icons/ItemsGenerated/Plant_Flower_Comfrey.png",
+  "Icon": "Icons/ItemsGenerated/Plant_Flower_GaiasWort.png",
   "IconProperties": {
-    "Scale": 0.58823,
-    "Translation": [
-      0,
-      -17.3
-    ],
+    "Scale": 0.7,
     "Rotation": [
       22.5,
       45,
       22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
     ]
   }
 }

@@ -19,6 +19,9 @@ items.Plant_Flower_Comfrey.description = Used as an alchemical ingredient.\n\n<i
 items.Ingredient_Elderflower.name = Elderflower
 items.Ingredient_Elderflower.description = Used as an alchemical ingredient.\n\n<i>This flowering shrub is a common sight across Emerald Wilds. Delicious juice can be made out of it.</i>
 
+items.Plant_Flower_GaiasWort.name = Gaia's Wort
+items.Plant_Flower_GaiasWort.description = Used as an alchemical ingredient.\n\n<i>A yellow flower popularly used to cure mental ailments.</i>
+
 items.Plant_Sapling_AncientWillow.name = Ancient Willow Sapling
 items.Plant_Sapling_AncientWillow.description = [TMP] Grows into an <color is="#ffffff">Ancient Willow Tree</color>.\n• Yields <color is="#ffffff">Softwood</color>\n\nGrowth Time:\n• <color is="#4ade80">5</color> <color is="#ffffff">Stages</color>\n• <color is="#4ade80">2</color> <color is="#ffffff">Days</color>
 
