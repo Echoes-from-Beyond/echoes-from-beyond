@@ -24,9 +24,10 @@ import com.hypixel.hytale.component.ComponentRegistryProxy;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import org.echoesfrombeyond.codechelper.CodecUtil;
-import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.jetbrains.annotations.ApiStatus;
+import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -34,9 +35,11 @@ import org.jspecify.annotations.Nullable;
 @ModelBuilder
 public class AlchemyBench implements Component<ChunkStore> {
   public static final BuilderCodec<AlchemyBench> CODEC =
-      CodecUtil.modelBuilder(AlchemyBench.class, Plugin.getSharedResolver());
+      CodecUtil.modelBuilder(AlchemyBench.class, EchoesFromBeyond.get().getResolver());
 
   private static @Nullable ComponentType<ChunkStore, AlchemyBench> COMPONENT_TYPE;
+
+  private @Nullable Vector3i BlockLocation;
 
   /**
    * Called internally during plugin initialization.
@@ -60,7 +63,27 @@ public class AlchemyBench implements Component<ChunkStore> {
   @SuppressWarnings("unused")
   public AlchemyBench() {}
 
-  private AlchemyBench(AlchemyBench that) {}
+  private AlchemyBench(AlchemyBench that) {
+    try {
+      this.BlockLocation =
+          that.BlockLocation == null ? null : (Vector3i) that.BlockLocation.clone();
+    } catch (CloneNotSupportedException e) {
+      throw new AssertionError("Expected Vector3i to be cloneable");
+    }
+  }
+
+  public void clearLocation() {
+    BlockLocation = null;
+  }
+
+  public void setBlockLocation(int x, int y, int z) {
+    if (BlockLocation == null) BlockLocation = new Vector3i(x, y, z);
+    else BlockLocation.set(x, y, z);
+  }
+
+  public @Nullable Vector3i getBlockLocation() {
+    return BlockLocation;
+  }
 
   @Override
   @SuppressWarnings("MethodDoesntCallSuperMethod")

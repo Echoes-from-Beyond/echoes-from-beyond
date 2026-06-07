@@ -18,9 +18,13 @@
 
 package org.echoesfrombeyond.echoesfrombeyond;
 
+import com.hypixel.hytale.math.vector.Vector3iUtil;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import java.util.concurrent.CompletableFuture;
+import org.echoesfrombeyond.codechelper.CodecResolver;
+import org.echoesfrombeyond.codechelper.cache.CodecCache;
+import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -33,6 +37,10 @@ import org.jspecify.annotations.Nullable;
 @SuppressWarnings("unused")
 @NullMarked
 public class EchoesFromBeyond extends JavaPlugin {
+  private static @Nullable EchoesFromBeyond instance;
+
+  private @Nullable CodecResolver resolver;
+
   /**
    * First entrypoint. Actual initialization tasks should probably go in the various load methods.
    *
@@ -57,6 +65,15 @@ public class EchoesFromBeyond extends JavaPlugin {
   /** Setup. Most asset registration happens here. */
   @Override
   protected void setup() {
+    var cache = CodecCache.cache();
+    resolver =
+        CodecResolver.builder()
+            .withStandardSettings(cache)
+            .withDirectMapping(Vector3i.class, Vector3iUtil.CODEC)
+            .build();
+
+    EchoesFromBeyond.instance = this;
+
     Init.registerAssetRegistries(this);
     Init.registerCodecs(this);
     Init.registerCommands(this);
@@ -72,5 +89,17 @@ public class EchoesFromBeyond extends JavaPlugin {
   protected void start() {
     // Also a no-op.
     super.start();
+  }
+
+  public static EchoesFromBeyond get() {
+    var instance = EchoesFromBeyond.instance;
+    if (instance == null) throw new IllegalStateException("Plugin is not loaded");
+
+    return instance;
+  }
+
+  public CodecResolver getResolver() {
+    assert resolver != null;
+    return resolver;
   }
 }
