@@ -21,9 +21,14 @@ package org.echoesfrombeyond.echoesfrombeyond;
 import com.hypixel.hytale.math.vector.Vector3iUtil;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.universe.world.World;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.cache.CodecCache;
+import org.jetbrains.annotations.ApiStatus;
 import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -41,7 +46,7 @@ public class EchoesFromBeyond extends JavaPlugin {
 
   private @Nullable CodecResolver resolver;
 
-  private final AlchemyNetworks alchemyNetworks;
+  private final Map<UUID, AlchemyNetworks> alchemyNetworks;
 
   /**
    * First entrypoint. Actual initialization tasks should probably go in the various load methods.
@@ -51,7 +56,7 @@ public class EchoesFromBeyond extends JavaPlugin {
   public EchoesFromBeyond(JavaPluginInit init) {
     super(init);
 
-    this.alchemyNetworks = new AlchemyNetworks(16);
+    this.alchemyNetworks = new ConcurrentHashMap<>();
   }
 
   /**
@@ -107,7 +112,13 @@ public class EchoesFromBeyond extends JavaPlugin {
     return resolver;
   }
 
-  public AlchemyNetworks getAlchemyNetworks() {
-    return alchemyNetworks;
+  public @Nullable AlchemyNetworks getAlchemyNetworksForWorld(World world) {
+    return alchemyNetworks.computeIfAbsent(
+        world.getWorldConfig().getUuid(), _ -> new AlchemyNetworks(16));
+  }
+
+  @ApiStatus.Internal
+  public @Nullable AlchemyNetworks removeAlchemyNetworksForWorld(World world) {
+    return alchemyNetworks.remove(world.getWorldConfig().getUuid());
   }
 }
