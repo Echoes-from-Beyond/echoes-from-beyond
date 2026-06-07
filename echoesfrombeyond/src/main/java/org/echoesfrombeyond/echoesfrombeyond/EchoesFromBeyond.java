@@ -41,6 +41,8 @@ public class EchoesFromBeyond extends JavaPlugin {
 
   private @Nullable CodecResolver resolver;
 
+  private final AlchemyNetworks alchemyNetworks;
+
   /**
    * First entrypoint. Actual initialization tasks should probably go in the various load methods.
    *
@@ -48,6 +50,8 @@ public class EchoesFromBeyond extends JavaPlugin {
    */
   public EchoesFromBeyond(JavaPluginInit init) {
     super(init);
+
+    this.alchemyNetworks = new AlchemyNetworks(16);
   }
 
   /**
@@ -101,5 +105,9 @@ public class EchoesFromBeyond extends JavaPlugin {
   public CodecResolver getResolver() {
     assert resolver != null;
     return resolver;
+  }
+
+  public AlchemyNetworks getAlchemyNetworks() {
+    return alchemyNetworks;
   }
 }

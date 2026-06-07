@@ -24,6 +24,7 @@ import com.hypixel.hytale.component.ComponentRegistryProxy;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import org.echoesfrombeyond.codechelper.CodecUtil;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.jetbrains.annotations.ApiStatus;
@@ -40,6 +41,9 @@ public class AlchemyBench implements Component<ChunkStore> {
   private static @Nullable ComponentType<ChunkStore, AlchemyBench> COMPONENT_TYPE;
 
   private @Nullable Vector3i BlockLocation;
+
+  @Doc("Whether this bench should be considered as the origin point of a bench network")
+  private boolean IsNetworkOrigin;
 
   /**
    * Called internally during plugin initialization.
@@ -70,6 +74,8 @@ public class AlchemyBench implements Component<ChunkStore> {
     } catch (CloneNotSupportedException e) {
       throw new AssertionError("Expected Vector3i to be cloneable");
     }
+
+    this.IsNetworkOrigin = that.IsNetworkOrigin;
   }
 
   public void clearLocation() {
@@ -83,6 +89,10 @@ public class AlchemyBench implements Component<ChunkStore> {
 
   public @Nullable Vector3i getBlockLocation() {
     return BlockLocation;
+  }
+
+  public boolean isNetworkOrigin() {
+    return IsNetworkOrigin;
   }
 
   @Override

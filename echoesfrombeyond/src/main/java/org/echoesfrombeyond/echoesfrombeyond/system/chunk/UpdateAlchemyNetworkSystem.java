@@ -72,6 +72,7 @@ public class UpdateAlchemyNetworkSystem extends RefSystem<ChunkStore> {
 
     LOGGER.atInfo().log(
         "Added alchemy bench at coordinates " + new Vector3i(blockX, localY, blockZ));
+    LOGGER.atInfo().log("Is the bench a network origin bench? " + alchemyBench.isNetworkOrigin());
   }
 
   @Override
