@@ -46,6 +46,11 @@
     ],
     "HitboxType": "Bench_MortarAndPestle",
     "VariantRotation": "NESW",
+    "BlockEntity": {
+      "Components": {
+        "AlchemyBench": {}
+      }
+    },
     "Bench": {
       "Type": "Crafting",
       "LocalOpenSoundEventId": "SFX_Arcane_Workbench_Open_Local",

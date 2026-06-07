@@ -46,6 +46,11 @@
       }
     ],
     "VariantRotation": "NESW",
+    "BlockEntity": {
+      "Components": {
+        "AlchemyBench": {}
+      }
+    },
     "State": {
       "Definitions": {
         "Processing": {

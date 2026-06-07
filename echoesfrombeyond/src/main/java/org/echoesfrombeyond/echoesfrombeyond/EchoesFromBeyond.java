@@ -32,13 +32,13 @@ import org.jspecify.annotations.Nullable;
  */
 @SuppressWarnings("unused")
 @NullMarked
-public class Plugin extends JavaPlugin {
+public class EchoesFromBeyond extends JavaPlugin {
   /**
    * First entrypoint. Actual initialization tasks should probably go in the various load methods.
    *
    * @param init the initialization argument
    */
-  public Plugin(JavaPluginInit init) {
+  public EchoesFromBeyond(JavaPluginInit init) {
     super(init);
   }
 

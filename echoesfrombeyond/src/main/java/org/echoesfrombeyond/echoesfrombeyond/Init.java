@@ -30,6 +30,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.PluginState;
 import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.echoesfrombeyond.command.IntegrationTestCommand;
+import org.echoesfrombeyond.echoesfrombeyond.component.alchemy.AlchemyBench;
 import org.echoesfrombeyond.echoesfrombeyond.component.sigil.SigilDrawComponent;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.HeldItemConditionInteraction;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.BeginSigilDraw;
@@ -40,7 +41,10 @@ import org.echoesfrombeyond.echoesfrombeyond.sigil.SigilDrawSystem;
 import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 
-/** Initialization/registration actions. Only used internally to avoid cluttering {@link Plugin}. */
+/**
+ * Initialization/registration actions. Only used internally to avoid cluttering {@link
+ * EchoesFromBeyond}.
+ */
 @NullMarked
 public class Init {
   private Init() {}
@@ -113,10 +117,22 @@ public class Init {
   static void registerComponents(JavaPlugin plugin) {
     Check.equals(plugin.getState(), PluginState.SETUP);
 
-    var proxy = plugin.getEntityStoreRegistry();
+    registerChunkStoreComponents(plugin);
+    registerEntityStoreComponents(plugin);
+  }
 
-    // Order registrations alphabetically by class name.
-    SigilDrawComponent.registerComponentType(proxy);
+  private static void registerChunkStoreComponents(JavaPlugin plugin) {
+    var chunkProxy = plugin.getChunkStoreRegistry();
+
+    // Order alphabetically by class name
+    AlchemyBench.registerComponentType(chunkProxy);
+  }
+
+  private static void registerEntityStoreComponents(JavaPlugin plugin) {
+    var entityProxy = plugin.getEntityStoreRegistry();
+
+    // Order alphabetically by class name
+    SigilDrawComponent.registerComponentType(entityProxy);
   }
 
   /**
