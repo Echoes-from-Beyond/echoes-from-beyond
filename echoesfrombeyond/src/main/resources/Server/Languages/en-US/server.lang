@@ -34,6 +34,9 @@ items.Bench_HangingCauldron.description = A simple way to heat and combine alche
 items.Bench_MortarAndPestle.name = Mortar and Pestle
 items.Bench_MortarAndPestle.description = Crush tougher ingredients so that they can be used in alchemy.\n\n<i>The most recognizable, and yet the simplest, of an alchemist's kit. Helps you crush large solids into something more usable.</i>
 
+items.Bench_BottlingStation.name = Bottling Station
+items.Bench_BottlingStation.description = Finish up your concoctions here.\n\n<i>Bottles, corks, and all the other doohickeys you need to enclose your potion in.</i>
+
 items.Tool_Bark_Scraper.description = Removes the outer bark of certain tree logs.\n\n<i>The Kweebecs acknowledge that some cultures require wood as a resource. As long as you avoid entering their woodlands with such a blade bared, it's unlikely they'll ever bring it up.</i>
 
 interactionHints.strip = [{key}] Strip Bark
