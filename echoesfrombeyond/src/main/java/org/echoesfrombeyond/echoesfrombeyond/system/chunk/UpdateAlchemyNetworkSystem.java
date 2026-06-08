@@ -26,6 +26,8 @@ import com.hypixel.hytale.math.util.ChunkUtil;
 import com.hypixel.hytale.server.core.modules.block.BlockModule;
 import com.hypixel.hytale.server.core.universe.world.chunk.BlockChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
+import org.echoesfrombeyond.echoesfrombeyond.AlchemyBenchInfo;
+import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyBench;
 import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
@@ -62,17 +64,20 @@ public class UpdateAlchemyNetworkSystem extends RefSystem<ChunkStore> {
     var blockIndex = stateInfo.getIndex();
 
     int localX = ChunkUtil.xFromBlockInColumn(blockIndex);
-    int localY = ChunkUtil.yFromBlockInColumn(blockIndex);
     int localZ = ChunkUtil.zFromBlockInColumn(blockIndex);
 
     int blockX = ChunkUtil.worldCoordFromLocalCoord(blockChunk.getX(), localX);
+    int blockY = ChunkUtil.yFromBlockInColumn(blockIndex);
     int blockZ = ChunkUtil.worldCoordFromLocalCoord(blockChunk.getZ(), localZ);
 
-    alchemyBench.setBlockLocation(blockX, localY, blockZ);
+    EchoesFromBeyond.get()
+        .placeAlchemyBench(
+            store.getExternalData().getWorld(),
+            new Vector3i(blockX, blockY, blockZ),
+            new AlchemyBenchInfo(alchemyBench.isNetworkOrigin()));
 
     LOGGER.atInfo().log(
-        "Added alchemy bench at coordinates " + new Vector3i(blockX, localY, blockZ));
-    LOGGER.atInfo().log("Is the bench a network origin bench? " + alchemyBench.isNetworkOrigin());
+        "Added alchemy bench at coordinates " + new Vector3i(blockX, blockY, blockZ));
   }
 
   @Override
@@ -81,10 +86,31 @@ public class UpdateAlchemyNetworkSystem extends RefSystem<ChunkStore> {
       RemoveReason reason,
       Store<ChunkStore> store,
       CommandBuffer<ChunkStore> buf) {
+    var stateInfo = buf.getComponent(ref, blockStateInfoComponentType);
+
+    if (stateInfo == null) return;
+
+    var chunkRef = stateInfo.getChunkRef();
+    if (!chunkRef.isValid()) return;
+
+    var blockChunk = buf.getComponent(chunkRef, BlockChunk.getComponentType());
+    if (blockChunk == null) return;
+
     var alchemyBench = buf.getComponent(ref, AlchemyBench.getComponentType());
     assert alchemyBench != null;
 
-    alchemyBench.clearLocation();
+    var blockIndex = stateInfo.getIndex();
+
+    int localX = ChunkUtil.xFromBlockInColumn(blockIndex);
+    int localZ = ChunkUtil.zFromBlockInColumn(blockIndex);
+
+    int blockX = ChunkUtil.worldCoordFromLocalCoord(blockChunk.getX(), localX);
+    int blockY = ChunkUtil.yFromBlockInColumn(blockIndex);
+    int blockZ = ChunkUtil.worldCoordFromLocalCoord(blockChunk.getZ(), localZ);
+
+    EchoesFromBeyond.get()
+        .removeAlchemyBench(
+            store.getExternalData().getWorld(), new Vector3i(blockX, blockY, blockZ));
 
     LOGGER.atInfo().log("Removed alchemy bench");
   }

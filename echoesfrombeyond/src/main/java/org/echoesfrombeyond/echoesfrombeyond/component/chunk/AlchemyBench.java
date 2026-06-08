@@ -28,7 +28,6 @@ import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.jetbrains.annotations.ApiStatus;
-import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -39,8 +38,6 @@ public class AlchemyBench implements Component<ChunkStore> {
       CodecUtil.modelBuilder(AlchemyBench.class, EchoesFromBeyond.get().getResolver());
 
   private static @Nullable ComponentType<ChunkStore, AlchemyBench> COMPONENT_TYPE;
-
-  private @Nullable Vector3i BlockLocation;
 
   @Doc("Whether this bench should be considered as the origin point of a bench network")
   private boolean IsNetworkOrigin;
@@ -68,27 +65,7 @@ public class AlchemyBench implements Component<ChunkStore> {
   public AlchemyBench() {}
 
   private AlchemyBench(AlchemyBench that) {
-    try {
-      this.BlockLocation =
-          that.BlockLocation == null ? null : (Vector3i) that.BlockLocation.clone();
-    } catch (CloneNotSupportedException e) {
-      throw new AssertionError("Expected Vector3i to be cloneable");
-    }
-
     this.IsNetworkOrigin = that.IsNetworkOrigin;
-  }
-
-  public void clearLocation() {
-    BlockLocation = null;
-  }
-
-  public void setBlockLocation(int x, int y, int z) {
-    if (BlockLocation == null) BlockLocation = new Vector3i(x, y, z);
-    else BlockLocation.set(x, y, z);
-  }
-
-  public @Nullable Vector3i getBlockLocation() {
-    return BlockLocation;
   }
 
   public boolean isNetworkOrigin() {

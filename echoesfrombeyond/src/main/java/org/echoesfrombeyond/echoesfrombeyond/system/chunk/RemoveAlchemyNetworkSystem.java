@@ -20,6 +20,7 @@ package org.echoesfrombeyond.echoesfrombeyond.system.chunk;
 
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.system.StoreSystem;
+import com.hypixel.hytale.logger.HytaleLogger;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.jetbrains.annotations.ApiStatus;
@@ -28,11 +29,16 @@ import org.jspecify.annotations.NullMarked;
 @ApiStatus.Internal
 @NullMarked
 public final class RemoveAlchemyNetworkSystem extends StoreSystem<ChunkStore> {
+  private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
+
   @Override
   public void onSystemAddedToStore(Store<ChunkStore> ignored) {}
 
   @Override
   public void onSystemRemovedFromStore(Store<ChunkStore> store) {
-    EchoesFromBeyond.get().removeAlchemyNetworksForWorld(store.getExternalData().getWorld());
+    var world = store.getExternalData().getWorld();
+
+    LOGGER.atInfo().log("Removing alchemy network data for world " + world.getName());
+    EchoesFromBeyond.get().removeAlchemyNetworksForWorld(world);
   }
 }
