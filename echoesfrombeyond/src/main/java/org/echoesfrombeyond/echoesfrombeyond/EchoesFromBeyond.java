@@ -120,18 +120,29 @@ public class EchoesFromBeyond extends JavaPlugin {
   }
 
   @ApiStatus.Internal
-  public void placeAlchemyBench(World world, Vector3i location, AlchemyBenchInfo info) {
-    alchemyNetworks
-        .computeIfAbsent(world.getWorldConfig().getUuid(), _ -> new ChunkGridMap<>())
-        .put(location, info);
+  public void addAlchemyBench(World world, Vector3i location, AlchemyBenchInfo info) {
+    var data =
+        alchemyNetworks.computeIfAbsent(
+            world.getWorldConfig().getUuid(), _ -> new ChunkGridMap<>());
+
+    synchronized (data) {
+      data.put(location, info);
+    }
   }
 
   @ApiStatus.Internal
   public @Nullable AlchemyBenchInfo removeAlchemyBench(World world, Vector3i location) {
-    var data = alchemyNetworks.get(world.getWorldConfig().getUuid());
+    var uuid = world.getWorldConfig().getUuid();
+
+    var data = alchemyNetworks.get(uuid);
     if (data == null) return null;
 
-    return data.remove(location);
+    synchronized (data) {
+      var returnValue = data.remove(location);
+      if (data.size() == 0) alchemyNetworks.remove(uuid);
+
+      return returnValue;
+    }
   }
 
   public void findNearbyAlchemyBenches(

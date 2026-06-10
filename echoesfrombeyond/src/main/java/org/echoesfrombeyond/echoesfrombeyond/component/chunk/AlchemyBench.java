@@ -39,7 +39,7 @@ public class AlchemyBench implements Component<ChunkStore> {
 
   private static @Nullable ComponentType<ChunkStore, AlchemyBench> COMPONENT_TYPE;
 
-  @Doc("Whether this bench should be considered as the origin point of a bench network")
+  @Doc("Whether this bench should be considered as the origin point of a bench network.")
   private boolean IsNetworkOrigin;
 
   /**

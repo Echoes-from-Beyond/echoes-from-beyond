@@ -71,7 +71,7 @@ public class UpdateAlchemyNetworkSystem extends RefSystem<ChunkStore> {
     int blockZ = ChunkUtil.worldCoordFromLocalCoord(blockChunk.getZ(), localZ);
 
     EchoesFromBeyond.get()
-        .placeAlchemyBench(
+        .addAlchemyBench(
             store.getExternalData().getWorld(),
             new Vector3i(blockX, blockY, blockZ),
             new AlchemyBenchInfo(alchemyBench.isNetworkOrigin()));

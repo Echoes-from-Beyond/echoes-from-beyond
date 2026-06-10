@@ -31,9 +31,14 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class ChunkGridMap<V extends @Nullable Object> {
   private final Long2ObjectMap<Int2ObjectMap<V>> storage;
+  private int size;
 
   public ChunkGridMap() {
     this.storage = new Long2ObjectOpenHashMap<>();
+  }
+
+  public int size() {
+    return size;
   }
 
   @SuppressWarnings("ConstantValue")
@@ -51,9 +56,15 @@ public class ChunkGridMap<V extends @Nullable Object> {
     var chunkX = ChunkUtil.chunkCoordinate(at.x);
     var chunkZ = ChunkUtil.chunkCoordinate(at.z);
 
-    return storage
-        .computeIfAbsent(ChunkUtil.indexChunk(chunkX, chunkZ), _ -> new Int2ObjectOpenHashMap<>())
-        .put(ChunkUtil.indexBlockInColumn(at.x, at.y, at.z), value);
+    var chunkData =
+        storage.computeIfAbsent(
+            ChunkUtil.indexChunk(chunkX, chunkZ), _ -> new Int2ObjectOpenHashMap<>());
+
+    int oldSize = chunkData.size();
+    var returnValue = chunkData.put(ChunkUtil.indexBlockInColumn(at.x, at.y, at.z), value);
+    if (chunkData.size() > oldSize) size++;
+
+    return returnValue;
   }
 
   @SuppressWarnings("ConstantValue")
@@ -65,7 +76,9 @@ public class ChunkGridMap<V extends @Nullable Object> {
     var chunkData = storage.get(chunkIndex);
     if (chunkData == null) return null;
 
+    int oldSize = chunkData.size();
     var returnValue = chunkData.remove(ChunkUtil.indexBlockInColumn(at.x, at.y, at.z));
+    if (chunkData.size() < oldSize) size--;
 
     // clean up empty storage
     if (chunkData.isEmpty()) storage.remove(chunkIndex);
