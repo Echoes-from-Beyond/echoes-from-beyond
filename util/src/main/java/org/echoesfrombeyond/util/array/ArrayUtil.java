@@ -59,4 +59,9 @@ public final class ArrayUtil {
       array[secondIndex] = temp;
     }
   }
+
+  public static boolean containsIgnoreCase(String[] array, String value) {
+    for (var sample : array) if (sample.equalsIgnoreCase(value)) return true;
+    return false;
+  }
 }

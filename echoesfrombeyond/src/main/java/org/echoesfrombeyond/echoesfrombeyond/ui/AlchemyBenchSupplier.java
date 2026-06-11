@@ -18,7 +18,6 @@
 
 package org.echoesfrombeyond.echoesfrombeyond.ui;
 
-import com.hypixel.hytale.common.util.ArrayUtil;
 import com.hypixel.hytale.component.ComponentAccessor;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.math.util.ChunkUtil;
@@ -27,6 +26,8 @@ import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.server.OpenCustomUIInteraction;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.ArrayList;
+
+import org.echoesfrombeyond.util.array.ArrayUtil;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
@@ -67,7 +68,7 @@ public abstract class AlchemyBenchSupplier implements OpenCustomUIInteraction.Cu
       inventory.forEach(
           (_, item) -> {
             var validBenches = item.getItem().getData().getRawTags().get("ValidAlchemyBenches");
-            if (validBenches != null && ArrayUtil.contains(validBenches, targetBlockId))
+            if (validBenches != null && ArrayUtil.containsIgnoreCase(validBenches, targetBlockId))
               items.add(new ItemEntry(item.getItemId(), item.getQuantity()));
           });
     }
