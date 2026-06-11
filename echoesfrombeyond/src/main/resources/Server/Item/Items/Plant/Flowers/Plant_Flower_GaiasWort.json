@@ -4,8 +4,8 @@
   },
   "Parent": "Plant_Flower_Common_White",
   "Tags": {
-    "Alchemy": [
-      "Cauldron"
+    "ValidAlchemyBenches": [
+      "Bench_HangingCauldron"
     ]
   },
   "BlockType": {

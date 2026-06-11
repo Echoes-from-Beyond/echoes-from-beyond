@@ -15,8 +15,8 @@
     "Type": [
       "Ingredient"
     ],
-    "Alchemy": [
-      "Cauldron"
+    "ValidAlchemyBenches": [
+      "Bench_HangingCauldron"
     ]
   },
   "ItemEntity": {

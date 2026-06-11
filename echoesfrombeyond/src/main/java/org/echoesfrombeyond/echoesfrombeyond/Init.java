@@ -39,10 +39,10 @@ import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.BeginSigilDraw;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.CloseSigilHud;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.EndSigilDraw;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.OpenSigilHud;
-import org.echoesfrombeyond.echoesfrombeyond.page.supplier.BenchMortarSupplier;
 import org.echoesfrombeyond.echoesfrombeyond.system.chunk.RemoveAlchemyNetworkSystem;
 import org.echoesfrombeyond.echoesfrombeyond.system.chunk.UpdateAlchemyNetworkSystem;
 import org.echoesfrombeyond.echoesfrombeyond.system.entity.SigilDrawSystem;
+import org.echoesfrombeyond.echoesfrombeyond.ui.BenchMortarSupplier;
 import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 

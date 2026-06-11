@@ -15,8 +15,8 @@
     "Type": [
       "Ingredient"
     ],
-    "Alchemy": [
-      "MortarAndPestle"
+    "ValidAlchemyBenches": [
+      "Bench_MortarAndPestle"
     ]
   },
   "ItemEntity": {

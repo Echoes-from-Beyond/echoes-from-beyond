@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.echoesfrombeyond.page.ui;
+package org.echoesfrombeyond.echoesfrombeyond.ui.page;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
@@ -30,13 +30,16 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.echoesfrombeyond.ui.AlchemyBenchSupplier;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.BenchMortarData> {
+  private final AlchemyBenchSupplier.ItemEntry[] validIngredients;
 
-  public BenchMortarPage(PlayerRef playerRef) {
+  public BenchMortarPage(PlayerRef playerRef, AlchemyBenchSupplier.ItemEntry[] validIngredients) {
     super(playerRef, CustomPageLifetime.CanDismiss, BenchMortarData.CODEC);
+    this.validIngredients = validIngredients;
   }
 
   @Override
