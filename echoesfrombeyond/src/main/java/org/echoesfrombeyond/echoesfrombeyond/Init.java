@@ -29,6 +29,7 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Int
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.server.OpenCustomUIInteraction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.PluginState;
+import org.echoesfrombeyond.echoesfrombeyond.asset.AlchemyComponent;
 import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.echoesfrombeyond.command.IntegrationTestCommand;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyBench;
@@ -64,6 +65,15 @@ public class Init {
     Check.equals(plugin.getState(), PluginState.SETUP);
 
     // Order registrations alphabetically by value passed to `setPath`.
+    plugin
+        .getAssetRegistry()
+        .register(
+            HytaleAssetStore.builder(AlchemyComponent.class, new DefaultAssetMap<>())
+                .setCodec(AlchemyComponent.CODEC)
+                .setPath("Alchemy/Components")
+                .setKeyFunction(AlchemyComponent::getId)
+                .build());
+
     plugin
         .getAssetRegistry()
         .register(
