@@ -1,0 +1,169 @@
+$C = "Common.ui";
+
+Group {
+  Anchor: (Width: 1400, Height: 850);
+  LayoutMode: Top;
+
+  Group {
+    Anchor: (Width: 1400, Height: 675);
+    LayoutMode: Left;
+
+    // main
+    $C.@DecoratedContainer {
+      Anchor: (Width: 1200, Height: 675);
+
+      Group #MortarUi {
+        Anchor: (Top: 50);
+        LayoutMode: Top;
+        Group #MortarInput {
+          LayoutMode: Top;
+
+          // TODO: rework input slot # to be configurable eventually?
+          // top row
+          Group {
+            Anchor: (Width: 64, Height: 64);
+            LayoutMode: Left;
+
+            ItemSlotButton #IS {
+              Anchor: (Width: 64, Height: 64);
+              LayoutMode: Full;
+              Padding: 2;
+              Style: (
+                Sounds: $C.@ButtonSounds,
+              );
+              ItemSlot #Slot {
+                Anchor: (Full: 0);
+                ShowQualityBackground: true;
+              }
+            }
+          }
+
+          // middle row
+          Group {
+            Anchor: (Width: 192, Height: 64);
+            LayoutMode: Left;
+
+            ItemSlotButton #IS {
+              Anchor: (Width: 64, Height: 64);
+              LayoutMode: Full;
+              Padding: 2;
+              Style: (
+                Sounds: $C.@ButtonSounds,
+              );
+              ItemSlot #Slot {
+                Anchor: (Full: 0);
+                ShowQualityBackground: true;
+              }
+            }
+
+            ItemSlotButton #IS {
+              Anchor: (Width: 64, Height: 64);
+              LayoutMode: Full;
+              Padding: 2;
+              Style: (
+                Sounds: $C.@ButtonSounds,
+              );
+              ItemSlot #Slot {
+                Anchor: (Full: 0);
+                ShowQualityBackground: true;
+              }
+            }
+
+            ItemSlotButton #IS {
+              Anchor: (Width: 64, Height: 64);
+              LayoutMode: Full;
+              Padding: 2;
+              Style: (
+                Sounds: $C.@ButtonSounds,
+              );
+              ItemSlot #Slot {
+                Anchor: (Full: 0);
+                ShowQualityBackground: true;
+              }
+            }
+          }
+
+          // bottom row
+          Group {
+            Anchor: (Width: 128, Height: 64);
+            LayoutMode: Left;
+
+            ItemSlotButton #IS {
+              Anchor: (Width: 64, Height: 64);
+              LayoutMode: Full;
+              Padding: 2;
+              Style: (
+                Sounds: $C.@ButtonSounds,
+              );
+              ItemSlot #Slot {
+                Anchor: (Full: 0);
+                ShowQualityBackground: true;
+              }
+            }
+
+            ItemSlotButton #IS {
+              Anchor: (Width: 64, Height: 64);
+              LayoutMode: Full;
+              Padding: 2;
+              Style: (
+                Sounds: $C.@ButtonSounds,
+              );
+              ItemSlot #Slot {
+                Anchor: (Full: 0);
+                ShowQualityBackground: true;
+              }
+            }
+          }
+        }
+
+        Group {
+          Anchor: (Width: 300, Height:130);
+          Padding: (Vertical: 20);
+          Button #GrindButton {
+            Anchor: (Full: 0);
+            Padding: (Horizontal: 20, Vertical: 15);
+            LayoutMode: Top;
+            Style: $C.@DefaultButtonStyle;
+            Label {
+              Style: (
+                FontSize: 28,
+                TextColor: #ffffff,
+                RenderBold: true
+              );
+              Text: %server.alchemy.mortar.grind.button;
+            }
+          }
+        }
+      }
+    }
+    // shared inventory
+    $C.@DecoratedContainer {
+      Anchor: (Width: 200, Height: 675);
+      Group #SharedInventory {
+        LayoutMode: TopScrolling;
+      }
+    }
+  }
+
+  Group {
+    Anchor: (Width: 1400, Height: 175);
+    LayoutMode: Left;
+
+    // player inventory
+    $C.@DecoratedContainer {
+      Anchor: (Width: 700, Height: 175);
+
+      Group #PlayerInventory {
+        LayoutMode: TopScrolling;
+      }
+    }
+    // overflow basket
+    $C.@DecoratedContainer {
+      Anchor: (Width: 700, Height: 175);
+
+      Group #Overflow {
+        LayoutMode: TopScrolling;
+      }
+    }
+  }
+}

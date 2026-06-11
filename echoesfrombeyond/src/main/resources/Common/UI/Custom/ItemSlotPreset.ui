@@ -1,0 +1,15 @@
+$C = "Common.ui";
+
+// use this when dynamically generating item slots so that the style is consistent
+ItemSlotButton {
+  Anchor: (Width: 64, Height: 64);
+  LayoutMode: Full;
+  Padding: 2;
+  Style: (
+     Sounds: $C.@ButtonSounds,
+  );
+  ItemSlot #Slot {
+    Anchor: (Full: 0);
+    ShowQualityBackground: true;
+  }
+}

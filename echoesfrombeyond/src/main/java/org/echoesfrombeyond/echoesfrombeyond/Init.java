@@ -26,6 +26,8 @@ import com.hypixel.hytale.component.system.System;
 import com.hypixel.hytale.server.core.asset.HytaleAssetStore;
 import com.hypixel.hytale.server.core.command.system.AbstractCommand;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
+import com.hypixel.hytale.server.core.modules.interaction.interaction.config.server.OpenCustomUIInteraction;
+import com.hypixel.hytale.server.core.modules.interaction.suppliers.ItemRepairPageSupplier;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.PluginState;
 import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
@@ -37,9 +39,11 @@ import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.BeginSigilDraw;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.CloseSigilHud;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.EndSigilDraw;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.OpenSigilHud;
+import org.echoesfrombeyond.echoesfrombeyond.page.supplier.BenchMortarSupplier;
 import org.echoesfrombeyond.echoesfrombeyond.system.chunk.RemoveAlchemyNetworkSystem;
 import org.echoesfrombeyond.echoesfrombeyond.system.chunk.UpdateAlchemyNetworkSystem;
 import org.echoesfrombeyond.echoesfrombeyond.system.entity.SigilDrawSystem;
+import com.hypixel.hytale.server.core.modules.interaction.InteractionModule;
 import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 
@@ -93,6 +97,8 @@ public class Init {
             HeldItemConditionInteraction.class,
             HeldItemConditionInteraction.CODEC)
         .register("Open_Sigil_Hud", OpenSigilHud.class, OpenSigilHud.CODEC);
+
+    plugin.getCodecRegistry(OpenCustomUIInteraction.PAGE_CODEC).register("BenchMortar", BenchMortarSupplier.class, BenchMortarSupplier.CODEC);
   }
 
   /**

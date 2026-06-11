@@ -51,24 +51,18 @@
         "AlchemyBench": {}
       }
     },
-    "Bench": {
-      "Type": "Crafting",
-      "LocalOpenSoundEventId": "SFX_Arcane_Workbench_Open_Local",
-      "LocalCloseSoundEventId": "SFX_Arcane_Workbench_Close_Local",
-      "CompletedSoundEventId": "SFX_Arcane_Workbench_Craft",
-      "Categories": [
-        {
-          "Id": "Arcane_Portals",
-          "Icon": "Icons/CraftingCategories/Arcane/Portal_Device.png",
-          "Name": "server.benchCategories.portals"
-        },
-        {
-          "Id": "Arcane_Misc",
-          "Icon": "Icons/CraftingCategories/Arcane/Bench_Memories.png",
-          "Name": "server.benchCategories.misc"
-        }
-      ],
-      "Id": "Mortarpestlebench"
+    "InteractionHint": "server.interactionHints.generic",
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "OpenCustomUI",
+            "Page": {
+              "Id": "BenchMortar"
+            }
+          }
+        ]
+      }
     },
     "Gathering": {
       "Breaking": {
