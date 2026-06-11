@@ -4,6 +4,11 @@
     "Description": "server.items.Plant_Flower_Comfrey.description"
   },
   "Parent": "Plant_Flower_Common_White",
+  "Tags": {
+    "Alchemy": [
+      "Cauldron"
+    ]
+  },
   "BlockType": {
     "InteractionHint": "server.interactionHints.pick",
     "Opacity": "Transparent",

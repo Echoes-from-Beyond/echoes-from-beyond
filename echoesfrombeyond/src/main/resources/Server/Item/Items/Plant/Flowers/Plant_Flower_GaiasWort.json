@@ -3,6 +3,11 @@
     "Name": "server.items.Plant_Flower_GaiasWort.name"
   },
   "Parent": "Plant_Flower_Common_White",
+  "Tags": {
+    "Alchemy": [
+      "Cauldron"
+    ]
+  },
   "BlockType": {
     "InteractionHint": "server.interactionHints.pick",
     "Opacity": "Transparent",
