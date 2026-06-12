@@ -116,7 +116,7 @@ public class AlchemyComponent
   public @Nullable String DenatureIntoLower;
 
   public AlchemyComponent() {
-    DenaturationRateMath = MathFormulaType.LINEAR;
+    DenaturationRateMath = MathFormulaType.Linear;
     DenaturationTempUpper = 5500.0;
     DenaturationRateUpper = 0.0;
     DenaturationTempLower = -273.15;
@@ -124,18 +124,18 @@ public class AlchemyComponent
   }
 
   @ApiStatus.Internal
-  class Internal {
+  static class Internal {
     private static final Once<
             AssetStore<String, AlchemyComponent, DefaultAssetMap<String, AlchemyComponent>>>
         ASSET_STORE =
             Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(AlchemyComponent.class)));
   }
 
-  static @Nullable AlchemyComponent getAlchemyComponent(String asset) {
+  public static @Nullable AlchemyComponent getAlchemyComponent(String asset) {
     return Internal.ASSET_STORE.get().getAssetMap().getAsset(asset);
   }
 
-  static AssetStore<String, AlchemyComponent, DefaultAssetMap<String, AlchemyComponent>>
+  public static AssetStore<String, AlchemyComponent, DefaultAssetMap<String, AlchemyComponent>>
       getAssetStore() {
     return Internal.ASSET_STORE.get();
   }

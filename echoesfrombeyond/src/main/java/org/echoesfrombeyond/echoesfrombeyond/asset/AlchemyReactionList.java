@@ -124,7 +124,7 @@ public class AlchemyReactionList
     public Reaction() {
       Reactants = new ArrayList<>();
       Products = new ArrayList<>();
-      ReactionRateMath = MathFormulaType.LINEAR;
+      ReactionRateMath = MathFormulaType.Linear;
       RequisiteTemperature = 100.0;
       PreferHigherTemperatures = true;
     }
@@ -152,18 +152,19 @@ public class AlchemyReactionList
   @Data private AssetExtraInfo.@Nullable Data Data;
 
   @ApiStatus.Internal
-  class Internal {
+  static class Internal {
     private static final Once<
             AssetStore<String, AlchemyReactionList, DefaultAssetMap<String, AlchemyReactionList>>>
         ASSET_STORE =
             Once.of(() -> Check.nonNull(AssetRegistry.getAssetStore(AlchemyReactionList.class)));
   }
 
-  static @Nullable AlchemyReactionList getAlchemyReactionList(String asset) {
+  public static @Nullable AlchemyReactionList getAlchemyReactionList(String asset) {
     return AlchemyReactionList.Internal.ASSET_STORE.get().getAssetMap().getAsset(asset);
   }
 
-  static AssetStore<String, AlchemyReactionList, DefaultAssetMap<String, AlchemyReactionList>>
+  public static AssetStore<
+          String, AlchemyReactionList, DefaultAssetMap<String, AlchemyReactionList>>
       getAssetStore() {
     return AlchemyReactionList.Internal.ASSET_STORE.get();
   }

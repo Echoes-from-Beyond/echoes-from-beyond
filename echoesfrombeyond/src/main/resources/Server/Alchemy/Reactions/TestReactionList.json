@@ -2,17 +2,15 @@
   "Reactions": [
     [
       {
-        "Reaction": {
-          "Reactants": [
-            {
-              "ComponentId": "TestComponent",
-              "Quantity": "1"
-            }
-          ],
-          "ReactionRateMath": "LINEAR",
-          "RequisiteTemperature": 69.0,
-          "PreferHigherTemperatures": true
-        }
+        "Reactants": [
+          {
+            "ComponentId": "TestComponent",
+            "Quantity": 1
+          }
+        ],
+        "ReactionRateMath": "Linear",
+        "RequisiteTemperature": 69.0,
+        "PreferHigherTemperatures": true
       }
     ]
   ]

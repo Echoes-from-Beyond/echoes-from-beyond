@@ -19,7 +19,7 @@
 package org.echoesfrombeyond.echoesfrombeyond.enums;
 
 public enum MathFormulaType {
-  CONSTANT,
-  LINEAR,
-  EXPONENTIAL
+  Constant,
+  Linear,
+  Exponential
 }
