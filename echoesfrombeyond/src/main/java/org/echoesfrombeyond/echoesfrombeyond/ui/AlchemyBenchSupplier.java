@@ -72,6 +72,14 @@ public abstract class AlchemyBenchSupplier implements OpenCustomUIInteraction.Cu
           });
     }
 
+    for (int i = 0; i < items.size(); i++) {
+      var basis = items.get(i);
+
+      for (int j = items.size() - 1; j > i; j--)
+        if (items.get(j).id.equalsIgnoreCase(basis.id))
+          items.set(i, basis = new ItemEntry(basis.id, basis.quantity + items.remove(j).quantity));
+    }
+
     return items.toArray(ItemEntry[]::new);
   }
 }
