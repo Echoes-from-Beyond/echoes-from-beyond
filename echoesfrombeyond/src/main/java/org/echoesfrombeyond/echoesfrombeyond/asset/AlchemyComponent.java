@@ -28,6 +28,7 @@ import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.*;
 import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.echoesfrombeyond.enums.MathFormulaType;
 import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
 import org.echoesfrombeyond.util.thread.Once;
 import org.jetbrains.annotations.ApiStatus;
@@ -47,13 +48,22 @@ public class AlchemyComponent
 
   @Data private AssetExtraInfo.@Nullable Data Data;
 
-  // TODO: other decay rate formulae than linear, e.g. exponential
-
   @Doc(
       """
       A name, instead of the component identifier, that will be shown to the player.
       """)
   public @Nullable String DisplayName;
+
+  @Doc(
+      """
+      How to treat denaturation rates with respect to temperature excesses (for upper) and deficiencies (for lower).
+      CONSTANT means that the rate is the same no matter the temperature; LINEAR multiplies the rate by the difference between
+      the current temperature and the boundary; EXPONENTIAL raises the rate to the power of the difference. In all cases,
+      denaturation only cares about the *absolute* value of the difference.
+      Defaults to LINEAR.
+      """)
+  @Opt
+  public MathFormulaType DenaturationRateMath;
 
   @Doc(
       """
@@ -66,7 +76,7 @@ public class AlchemyComponent
 
   @Doc(
       """
-      The rate of denaturation once the temperature of a mixture reaches the upper range. Multiplied by temperature excess.
+      The rate of denaturation once the temperature of a mixture reaches the upper range. The arithmetic depends on DenaturationRateMath.
       Defaults to 0.0.
       """)
   @Opt
@@ -91,7 +101,7 @@ public class AlchemyComponent
 
   @Doc(
       """
-      The rate of denaturation once the temperature of a mixture reaches the lower range. Multiplied by temperature deficiency.
+      The rate of denaturation once the temperature of a mixture reaches the lower range. The arithmetic depends on DenaturationRateMath.
       Defaults to 0.0.
       """)
   @Opt
@@ -106,6 +116,7 @@ public class AlchemyComponent
   public @Nullable String DenatureIntoLower;
 
   public AlchemyComponent() {
+    DenaturationRateMath = MathFormulaType.LINEAR;
     DenaturationTempUpper = 5500.0;
     DenaturationRateUpper = 0.0;
     DenaturationTempLower = -273.15;

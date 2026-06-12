@@ -30,6 +30,7 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.config.ser
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.PluginState;
 import org.echoesfrombeyond.echoesfrombeyond.asset.AlchemyComponent;
+import org.echoesfrombeyond.echoesfrombeyond.asset.AlchemyReactionList;
 import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.echoesfrombeyond.command.IntegrationTestCommand;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyBench;
@@ -72,6 +73,15 @@ public class Init {
                 .setCodec(AlchemyComponent.CODEC)
                 .setPath("Alchemy/Components")
                 .setKeyFunction(AlchemyComponent::getId)
+                .build());
+
+    plugin
+        .getAssetRegistry()
+        .register(
+            HytaleAssetStore.builder(AlchemyReactionList.class, new DefaultAssetMap<>())
+                .setCodec(AlchemyReactionList.CODEC)
+                .setPath("Alchemy/Reactions")
+                .setKeyFunction(AlchemyReactionList::getId)
                 .build());
 
     plugin
