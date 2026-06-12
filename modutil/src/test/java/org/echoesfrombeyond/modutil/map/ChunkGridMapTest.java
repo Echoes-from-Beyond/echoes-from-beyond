@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import org.joml.Vector3i;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -89,6 +90,11 @@ class ChunkGridMapTest {
         for (int z = -64; z <= 64; z += 16) list.add(new Vector3i(x, y == 0 ? 1 : y, z));
 
     return list.stream().map(vec -> Arguments.of(vec.x, vec.y, vec.z));
+  }
+
+  @Test
+  public void forEachInRangeVisitsNoValuesWhenEmpty() {
+    new ChunkGridMap<String>().forEachInRange(new Vector3i(0, 0, 0), 10, (_, _) -> fail());
   }
 
   @ParameterizedTest
