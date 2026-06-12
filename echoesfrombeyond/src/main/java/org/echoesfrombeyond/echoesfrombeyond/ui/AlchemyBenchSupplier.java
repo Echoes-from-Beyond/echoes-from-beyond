@@ -26,7 +26,6 @@ import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.server.OpenCustomUIInteraction;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.ArrayList;
-
 import org.echoesfrombeyond.util.array.ArrayUtil;
 import org.jspecify.annotations.NullMarked;
 
