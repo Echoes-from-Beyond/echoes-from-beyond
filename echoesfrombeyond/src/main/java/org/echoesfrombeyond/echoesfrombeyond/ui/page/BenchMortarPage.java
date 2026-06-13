@@ -41,7 +41,11 @@ import org.jspecify.annotations.Nullable;
 public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.BenchMortarData> {
   private final AlchemyBenchSupplier.ItemEntry[] validIngredients;
 
-  public BenchMortarPage(PlayerRef playerRef, AlchemyBenchSupplier.ItemEntry[] validIngredients) {
+  public BenchMortarPage(
+      PlayerRef playerRef,
+      AlchemyBenchSupplier.ItemEntry[] validIngredients,
+      int baselineInteractions,
+      int interactionsPerIngredient) {
     super(playerRef, CustomPageLifetime.CanDismiss, BenchMortarData.CODEC);
     this.validIngredients = validIngredients;
   }

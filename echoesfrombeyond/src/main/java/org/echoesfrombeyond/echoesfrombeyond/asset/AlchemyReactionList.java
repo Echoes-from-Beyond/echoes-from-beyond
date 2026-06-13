@@ -31,6 +31,7 @@ import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.*;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateLengthRange;
 import org.echoesfrombeyond.codechelper.internaldep.org.echoesfrombeyond.util.Check;
+import org.echoesfrombeyond.echoesfrombeyond.asset.other.ComponentIngredient;
 import org.echoesfrombeyond.echoesfrombeyond.enums.MathFormulaType;
 import org.echoesfrombeyond.modutil.asset.IdentifiedAsset;
 import org.echoesfrombeyond.util.thread.Once;
@@ -51,31 +52,6 @@ public class AlchemyReactionList
   @NullMarked
   @ModelBuilder
   public static class Reaction {
-
-    @Doc(
-        """
-        Associates an alchemical component with a quantity of units to use/produce as part of a reaction.
-        """)
-    @NullMarked
-    @ModelBuilder
-    public static class ComponentIngredient {
-      @Doc(
-          """
-          The identifier of the alchemical component.
-          """)
-      public String ComponentId;
-
-      @Doc(
-          """
-          How many units of the above component is used for/produced in this step.
-          """)
-      public int Quantity;
-
-      public ComponentIngredient() {
-        ComponentId = "";
-        Quantity = 1;
-      }
-    }
 
     @Doc(
         """

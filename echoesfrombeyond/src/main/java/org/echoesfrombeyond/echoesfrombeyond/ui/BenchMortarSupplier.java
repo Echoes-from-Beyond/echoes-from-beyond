@@ -27,7 +27,9 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
+import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.codechelper.annotation.validator.ValidateIntRange;
 import org.echoesfrombeyond.echoesfrombeyond.ui.page.BenchMortarPage;
 import org.jspecify.annotations.NullMarked;
 
@@ -37,11 +39,32 @@ public class BenchMortarSupplier extends AlchemyBenchSupplier {
   public static final BuilderCodec<BenchMortarSupplier> CODEC =
       CodecUtil.modelBuilder(BenchMortarSupplier.class, Plugin.getSharedResolver());
 
+  @Doc(
+      """
+      When the player uses the mortar, this is a baseline number of interactions (including the initiating one)
+      for the crafting to complete, no matter the amount of ingredients.
+      Cannot be lower than 1.
+      """)
+  @ValidateIntRange(min = 1, max = Integer.MAX_VALUE)
+  protected int BaselineInteractions;
+
+  @Doc(
+      """
+      When the player uses the mortar, this is a number of interactions added per each ingredient to the crafting requirement.
+      Cannot be lower than 0.
+      """)
+  @ValidateIntRange(min = 0, max = Integer.MAX_VALUE)
+  protected int InteractionsPerIngredient;
+
   public CustomUIPage tryCreate(
       Ref<EntityStore> ref,
       ComponentAccessor<EntityStore> componentAccessor,
       PlayerRef playerRef,
       InteractionContext context) {
-    return new BenchMortarPage(playerRef, getValidItems(ref, componentAccessor, context));
+    return new BenchMortarPage(
+        playerRef,
+        getValidItems(ref, componentAccessor, context),
+        BaselineInteractions,
+        InteractionsPerIngredient);
   }
 }

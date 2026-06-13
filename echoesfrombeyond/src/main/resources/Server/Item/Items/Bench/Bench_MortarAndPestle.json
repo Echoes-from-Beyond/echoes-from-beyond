@@ -58,7 +58,9 @@
           {
             "Type": "OpenCustomUI",
             "Page": {
-              "Id": "BenchMortar"
+              "Id": "BenchMortar",
+              "BaselineInteractions": 2,
+              "InteractionsPerIngredient": 2
             }
           }
         ]
