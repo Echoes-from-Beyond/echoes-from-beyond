@@ -34,6 +34,7 @@ import org.echoesfrombeyond.echoesfrombeyond.asset.AlchemyReactionList;
 import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.echoesfrombeyond.command.IntegrationTestCommand;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyBench;
+import org.echoesfrombeyond.echoesfrombeyond.component.chunk.MortarAndPestle;
 import org.echoesfrombeyond.echoesfrombeyond.component.entity.SigilDrawComponent;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.HeldItemConditionInteraction;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.BeginSigilDraw;
@@ -154,6 +155,7 @@ public class Init {
 
     // Order alphabetically by class name
     AlchemyBench.registerComponentType(chunkProxy);
+    MortarAndPestle.registerComponentType(chunkProxy);
   }
 
   private static void registerEntityStoreComponents(JavaPlugin plugin) {
