@@ -23,14 +23,19 @@ import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentRegistryProxy;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.BooleanSupplier;
 import org.echoesfrombeyond.codechelper.CodecUtil;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
-import org.echoesfrombeyond.echoesfrombeyond.ui.AlchemyBenchSupplier;
+import org.echoesfrombeyond.echoesfrombeyond.ItemEntry;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
+@ModelBuilder
 public class MortarAndPestle implements Component<ChunkStore> {
   public static final int MAX_GRINDABLE_ITEMS = 6;
 
@@ -40,7 +45,7 @@ public class MortarAndPestle implements Component<ChunkStore> {
   private static @Nullable ComponentType<ChunkStore, MortarAndPestle> COMPONENT_TYPE;
 
   @SuppressWarnings("FieldMayBeFinal")
-  private AlchemyBenchSupplier.@Nullable ItemEntry[] ItemsToGrind;
+  private @Nullable ItemEntry[] ItemsToGrind;
 
   /**
    * Called internally during plugin initialization.
@@ -62,23 +67,25 @@ public class MortarAndPestle implements Component<ChunkStore> {
 
   @SuppressWarnings("unused")
   public MortarAndPestle() {
-    this.ItemsToGrind = new AlchemyBenchSupplier.ItemEntry[MAX_GRINDABLE_ITEMS];
+    this.ItemsToGrind = new ItemEntry[MAX_GRINDABLE_ITEMS];
   }
 
   private MortarAndPestle(MortarAndPestle that) {
-    this.ItemsToGrind = new AlchemyBenchSupplier.ItemEntry[that.ItemsToGrind.length];
+    this.ItemsToGrind = new ItemEntry[that.ItemsToGrind.length];
     System.arraycopy(that.ItemsToGrind, 0, this.ItemsToGrind, 0, ItemsToGrind.length);
   }
 
-  public boolean addItem(AlchemyBenchSupplier.ItemEntry entry) {
+  public void tryAddItem(ItemEntry item, BooleanSupplier transact) {
     for (int i = 0; i < ItemsToGrind.length; i++) {
       if (ItemsToGrind[i] == null) {
-        ItemsToGrind[i] = entry;
-        return true;
+        if (transact.getAsBoolean()) ItemsToGrind[i] = item;
+        return;
       }
     }
+  }
 
-    return false;
+  public List<@Nullable ItemEntry> getItems() {
+    return Arrays.asList(ItemsToGrind);
   }
 
   @Override

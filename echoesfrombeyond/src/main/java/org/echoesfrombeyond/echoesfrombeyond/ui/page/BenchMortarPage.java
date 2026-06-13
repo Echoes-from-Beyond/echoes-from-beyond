@@ -24,6 +24,8 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
+import com.hypixel.hytale.server.core.inventory.InventoryComponent;
+import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
@@ -31,54 +33,72 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.OptionalInt;
 import org.echoesfrombeyond.codechelper.CodecUtil;
-import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
-import org.echoesfrombeyond.echoesfrombeyond.ui.AlchemyBenchSupplier;
+import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
+import org.echoesfrombeyond.echoesfrombeyond.component.chunk.MortarAndPestle;
+import org.echoesfrombeyond.echoesfrombeyond.util.AlchemyBenchUtils;
+import org.echoesfrombeyond.modutil.component.ComponentUtils;
+import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.BenchMortarData> {
-  private final AlchemyBenchSupplier.ItemEntry[] validIngredients;
+  private final Vector3i position;
 
   public BenchMortarPage(
       PlayerRef playerRef,
-      AlchemyBenchSupplier.ItemEntry[] validIngredients,
+      Vector3i position,
       int baselineInteractions,
       int interactionsPerIngredient) {
     super(playerRef, CustomPageLifetime.CanDismiss, BenchMortarData.CODEC);
-    this.validIngredients = validIngredients;
+    this.position = position;
   }
 
-  @Override
-  public void build(
+  private void buildInternal(
       Ref<EntityStore> ref,
+      Store<EntityStore> store,
       UICommandBuilder commandBuilder,
-      UIEventBuilder eventBuilder,
-      Store<EntityStore> store) {
+      UIEventBuilder eventBuilder) {
     commandBuilder.append("BenchMortarPage.ui");
-    // TODO: store bench data persistently and populate all the input buttons with it
 
-    for (int i = 0; i < 5; i++) {
-      // TODO: currently proof of concept for display; rework this to pull from the STORAGE SYSTEM
-      String sharedSelect = "#SharedInventory[" + i + "]";
+    ComponentUtils.getBlockComponent(
+            store.getExternalData().getWorld(), position, MortarAndPestle.getComponentType())
+        .ifPresent(
+            mortarAndPestle -> {
+              var items = mortarAndPestle.getItems();
+              for (int i = 0; i < items.size(); i++) {
+                var item = items.get(i);
+                String itemButtonSelect = "#SharedInventory[" + i + "]";
 
-      commandBuilder.append("#SharedInventory", "ItemSlotPreset.ui");
-    }
+                commandBuilder.append("#SharedInventory", "ItemSlotPreset.ui");
+
+                if (item != null) {
+                  commandBuilder.set(itemButtonSelect + " #Slot.ItemId", item.getId());
+
+                  eventBuilder.addEventBinding(
+                      CustomUIEventBindingType.Activating,
+                      itemButtonSelect,
+                      EventData.of("Index", Integer.toString(i)).append("Type", "RemoveItem"));
+                }
+              }
+            });
+
+    var validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, position);
 
     for (int i = 0; i < validIngredients.length; i++) {
       var itemButtonSelect = "#PlayerInventory[" + i + "]";
       var ingredient = validIngredients[i];
 
       commandBuilder.append("#PlayerInventory", "ItemSlotPreset.ui");
-      commandBuilder.set(itemButtonSelect + " #Slot.ItemId", ingredient.id());
-      commandBuilder.set(itemButtonSelect + " #Slot.Quantity", ingredient.quantity());
+      commandBuilder.set(itemButtonSelect + " #Slot.ItemId", ingredient.getId());
+      commandBuilder.set(itemButtonSelect + " #Slot.Quantity", ingredient.getQuantity());
       commandBuilder.set(itemButtonSelect + " #Slot.ShowQuantity", true);
 
       eventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
           itemButtonSelect,
-          EventData.of("Index", Integer.toString(i)));
+          EventData.of("Index", Integer.toString(i)).append("Type", "AddItem"));
     }
 
     for (int i = 0; i < 5; i++) {
@@ -90,19 +110,76 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
   }
 
   @Override
+  public void build(
+      Ref<EntityStore> ref,
+      UICommandBuilder commandBuilder,
+      UIEventBuilder eventBuilder,
+      Store<EntityStore> store) {
+    buildInternal(ref, store, commandBuilder, eventBuilder);
+  }
+
+  @Override
   public void handleDataEvent(
       Ref<EntityStore> ref, Store<EntityStore> store, BenchMortarData data) {
-    sendUpdate();
+    var mortarAndPestleOptional =
+        ComponentUtils.getBlockComponent(
+            store.getExternalData().getWorld(), position, MortarAndPestle.getComponentType());
+
+    if (mortarAndPestleOptional.isEmpty()) {
+      sendUpdate();
+      return;
+    }
+
+    var mortarAndPestle = mortarAndPestleOptional.get();
+    var validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, position);
+
+    switch (data.Type) {
+      case "AddItem" ->
+          data.getIndex(validIngredients.length)
+              .ifPresent(
+                  index -> {
+                    var item = validIngredients[index];
+
+                    mortarAndPestle.tryAddItem(
+                        item,
+                        () -> {
+                          var combinedInventory =
+                              store.getComponent(
+                                  ref, InventoryComponent.Combined.getComponentType());
+                          assert combinedInventory != null;
+
+                          for (var inventory : combinedInventory.getInventories().values()) {
+                            var transaction =
+                                inventory.removeItemStack(new ItemStack(item.getId(), 1));
+                            if (transaction.succeeded()) {
+                              return true;
+                            }
+                          }
+
+                          return false;
+                        });
+                  });
+      case "RemoveItem" -> {}
+      case null, default -> {}
+    }
+
+    var commandBuilder = new UICommandBuilder();
+    var eventBuilder = new UIEventBuilder();
+
+    buildInternal(ref, store, commandBuilder, eventBuilder);
+    sendUpdate(commandBuilder, eventBuilder, true);
   }
 
   @NullMarked
   @ModelBuilder
   public static class BenchMortarData {
     public static final BuilderCodec<BenchMortarData> CODEC =
-        CodecUtil.modelBuilder(BenchMortarData.class, Plugin.getSharedResolver());
+        CodecUtil.modelBuilder(BenchMortarData.class, EchoesFromBeyond.get().getResolver());
 
     @SuppressWarnings({"FieldMayBeFinal", "unused"})
     private @Nullable String Index;
+
+    public @Nullable String Type;
 
     public OptionalInt getIndex(int len) {
       var index = Index;

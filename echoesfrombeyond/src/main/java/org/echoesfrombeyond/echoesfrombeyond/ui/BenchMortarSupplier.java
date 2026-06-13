@@ -31,7 +31,9 @@ import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateIntRange;
 import org.echoesfrombeyond.echoesfrombeyond.ui.page.BenchMortarPage;
+import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
 @ModelBuilder
@@ -56,15 +58,16 @@ public class BenchMortarSupplier extends AlchemyBenchSupplier {
   @ValidateIntRange(min = 0, max = Integer.MAX_VALUE)
   protected int InteractionsPerIngredient;
 
-  public CustomUIPage tryCreate(
+  public @Nullable CustomUIPage tryCreate(
       Ref<EntityStore> ref,
       ComponentAccessor<EntityStore> componentAccessor,
       PlayerRef playerRef,
       InteractionContext context) {
+    var block = context.getTargetBlock();
+    if (block == null) return null;
+
+    var targetBlock = new Vector3i(block.x, block.y, block.z);
     return new BenchMortarPage(
-        playerRef,
-        getValidItems(ref, componentAccessor, context),
-        BaselineInteractions,
-        InteractionsPerIngredient);
+        playerRef, targetBlock, BaselineInteractions, InteractionsPerIngredient);
   }
 }
