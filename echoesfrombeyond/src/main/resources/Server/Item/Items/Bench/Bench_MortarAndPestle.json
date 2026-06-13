@@ -48,7 +48,8 @@
     "VariantRotation": "NESW",
     "BlockEntity": {
       "Components": {
-        "AlchemyBench": {}
+        "AlchemyBench": {},
+        "MortarAndPestle": {}
       }
     },
     "InteractionHint": "server.interactionHints.generic",
