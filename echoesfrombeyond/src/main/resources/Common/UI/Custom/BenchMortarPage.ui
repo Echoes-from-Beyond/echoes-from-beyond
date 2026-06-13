@@ -1,19 +1,19 @@
 $C = "Common.ui";
 
 Group {
-  Anchor: (Width: 1400, Height: 850);
+  Anchor: (Width: 1400, Height: 700);
   LayoutMode: Top;
 
   Group {
-    Anchor: (Width: 1400, Height: 675);
+    Anchor: (Width: 1400, Height: 550);
     LayoutMode: Left;
 
     // main
-    $C.@DecoratedContainer {
-      Anchor: (Width: 1200, Height: 675);
+    $C.@Container {
+      Anchor: (Width: 1200, Height: 550);
 
       Group #MortarUi {
-        Anchor: (Top: 50);
+        Anchor: (Top: 150);
         LayoutMode: Top;
         Group #MortarInput {
           LayoutMode: Top;
@@ -117,7 +117,7 @@ Group {
         }
 
         Group {
-          Anchor: (Width: 300, Height:130);
+          Anchor: (Width: 250, Height: 100);
           Padding: (Vertical: 20);
           Button #GrindButton {
             Anchor: (Full: 0);
@@ -126,7 +126,9 @@ Group {
             Style: $C.@DefaultButtonStyle;
             Label {
               Style: (
-                FontSize: 28,
+                HorizontalAlignment: Center,
+                VerticalAlignment: Center,
+                FontSize: 22,
                 TextColor: #ffffff,
                 RenderBold: true
               );
@@ -137,32 +139,38 @@ Group {
       }
     }
     // shared inventory
-    $C.@DecoratedContainer {
-      Anchor: (Width: 200, Height: 675);
+    $C.@Container {
+      Anchor: (Width: 200, Height: 550);
       Group #SharedInventory {
+        Anchor: (Top: 50);
         LayoutMode: TopScrolling;
+        ScrollbarStyle: $C.@DefaultScrollbarStyle;
       }
     }
   }
 
   Group {
-    Anchor: (Width: 1400, Height: 175);
+    Anchor: (Width: 1400, Height: 150);
     LayoutMode: Left;
 
     // player inventory
-    $C.@DecoratedContainer {
-      Anchor: (Width: 700, Height: 175);
+    $C.@Container {
+      Anchor: (Width: 700, Height: 150);
 
       Group #PlayerInventory {
-        LayoutMode: TopScrolling;
+        Anchor: (Top: 50, Left: 20);
+        LayoutMode: LeftScrolling;
+        ScrollbarStyle: $C.@DefaultScrollbarStyle;
       }
     }
     // overflow basket
-    $C.@DecoratedContainer {
-      Anchor: (Width: 700, Height: 175);
+    $C.@Container {
+      Anchor: (Width: 700, Height: 150);
 
       Group #Overflow {
-        LayoutMode: TopScrolling;
+        Anchor: (Top: 50, Left: 20);
+        LayoutMode: LeftScrolling;
+        ScrollbarStyle: $C.@DefaultScrollbarStyle;
       }
     }
   }
