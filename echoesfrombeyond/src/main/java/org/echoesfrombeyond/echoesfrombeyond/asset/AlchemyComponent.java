@@ -115,12 +115,22 @@ public class AlchemyComponent
   @Opt
   public @Nullable String DenatureIntoLower;
 
+  @Doc(
+      """
+      Arbitrary weight applied to each unit of this component, only used to split off mixtures into
+      different intermediary ingredients. Each intermediary ingredient can only hold a finite amount of weight.
+      Defaults to 0.1.
+      """)
+  @Opt
+  public double WeightPerUnit;
+
   public AlchemyComponent() {
     DenaturationRateMath = MathFormulaType.Linear;
     DenaturationTempUpper = 5500.0;
     DenaturationRateUpper = 0.0;
     DenaturationTempLower = -273.15;
     DenaturationRateLower = 0.0;
+    WeightPerUnit = 0.1;
   }
 
   @ApiStatus.Internal
