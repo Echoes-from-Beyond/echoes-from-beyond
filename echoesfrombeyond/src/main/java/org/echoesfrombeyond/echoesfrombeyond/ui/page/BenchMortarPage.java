@@ -22,16 +22,20 @@ import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
+import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
+import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.OptionalInt;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.ui.AlchemyBenchSupplier;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.BenchMortarData> {
@@ -58,11 +62,19 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
       commandBuilder.append("#SharedInventory", "ItemSlotPreset.ui");
     }
 
-    for (int i = 0; i < 5; i++) {
-      // TODO: currently proof of concept for display; rework this to pull from the PLAYER INVENTORY
-      String invSelect = "#PlayerInventory[" + i + "]";
+    for (int i = 0; i < validIngredients.length; i++) {
+      var itemButtonSelect = "#PlayerInventory[" + i + "]";
+      var ingredient = validIngredients[i];
 
       commandBuilder.append("#PlayerInventory", "ItemSlotPreset.ui");
+      commandBuilder.set(itemButtonSelect + " #Slot.ItemId", ingredient.id());
+      commandBuilder.set(itemButtonSelect + " #Slot.Quantity", ingredient.quantity());
+      commandBuilder.set(itemButtonSelect + " #Slot.ShowQuantity", true);
+
+      eventBuilder.addEventBinding(
+          CustomUIEventBindingType.Activating,
+          itemButtonSelect,
+          EventData.of("Index", Integer.toString(i)));
     }
 
     for (int i = 0; i < 5; i++) {
@@ -75,7 +87,9 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
 
   @Override
   public void handleDataEvent(
-      Ref<EntityStore> ref, Store<EntityStore> store, BenchMortarData data) {}
+      Ref<EntityStore> ref, Store<EntityStore> store, BenchMortarData data) {
+    sendUpdate();
+  }
 
   @NullMarked
   @ModelBuilder
@@ -83,14 +97,20 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
     public static final BuilderCodec<BenchMortarData> CODEC =
         CodecUtil.modelBuilder(BenchMortarData.class, Plugin.getSharedResolver());
 
-    public BenchMortarData() {
-      ClickedSlot = "invalid";
-    }
+    @SuppressWarnings({"FieldMayBeFinal", "unused"})
+    private @Nullable String Index;
 
-    public String ClickedSlot;
+    public OptionalInt getIndex(int len) {
+      var index = Index;
+      if (index == null) return OptionalInt.empty();
 
-    public String getClickedSlot() {
-      return ClickedSlot;
+      try {
+        var actualIndex = Integer.parseInt(index);
+        if (actualIndex < 0 && actualIndex >= len) return OptionalInt.empty();
+        return OptionalInt.of(actualIndex);
+      } catch (NumberFormatException _) {
+        return OptionalInt.empty();
+      }
     }
   }
 }
