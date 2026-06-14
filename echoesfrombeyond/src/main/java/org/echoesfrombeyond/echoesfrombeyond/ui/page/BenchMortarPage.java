@@ -23,6 +23,7 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.protocol.packets.interface_.CustomUIEventBindingType;
+import com.hypixel.hytale.server.core.entity.ItemUtils;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
@@ -33,13 +34,14 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalInt;
+import java.util.Optional;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.MortarAndPestle;
 import org.echoesfrombeyond.echoesfrombeyond.util.AlchemyBenchUtils;
 import org.echoesfrombeyond.modutil.component.ComponentUtils;
+import org.echoesfrombeyond.util.Check;
 import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -47,7 +49,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.BenchMortarData> {
   private final Vector3i position;
-  private final List<String> ingredientTypes;
+  private final List<ItemStack> ingredientTypes;
 
   public BenchMortarPage(
       PlayerRef playerRef,
@@ -64,39 +66,38 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
       Store<EntityStore> store,
       UICommandBuilder commandBuilder,
       UIEventBuilder eventBuilder) {
+    var mortarAndPestle =
+        ComponentUtils.getBlockComponent(
+            store.getExternalData().getWorld(), position, MortarAndPestle.getComponentType());
+    if (mortarAndPestle == null) return;
+
     commandBuilder.append("BenchMortarPage.ui");
 
-    ComponentUtils.getBlockComponent(
-            store.getExternalData().getWorld(), position, MortarAndPestle.getComponentType())
-        .ifPresent(
-            mortarAndPestle -> {
-              var items = mortarAndPestle.getItems();
-              for (int i = 0; i < items.size(); i++) {
-                var item = items.get(i);
-                var itemButtonSelect = "#SharedInventory[" + i + "]";
+    var items = mortarAndPestle.getItems();
+    for (int i = 0; i < items.size(); i++) {
+      var item = items.get(i);
+      var itemButtonSelect = "#SharedInventory[" + i + "]";
 
-                commandBuilder.append("#SharedInventory", "ItemSlotPreset.ui");
-                if (item == null) continue;
+      commandBuilder.append("#SharedInventory", "ItemSlotPreset.ui");
+      if (item == null) continue;
 
-                commandBuilder.set(itemButtonSelect + " #Slot.ItemId", item);
+      commandBuilder.set(itemButtonSelect + " #Slot.ItemId", item.getItemId());
 
-                eventBuilder.addEventBinding(
-                    CustomUIEventBindingType.Activating,
-                    itemButtonSelect,
-                    EventData.of("Index", Integer.toString(i)).append("Type", "RemoveItem"));
-              }
-            });
+      eventBuilder.addEventBinding(
+          CustomUIEventBindingType.Activating,
+          itemButtonSelect,
+          EventData.of("Index", Integer.toString(i)).append("Type", "RemoveItem"));
+    }
 
     var validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, position);
 
     ingredientTypes.clear();
-
     for (int i = 0; i < validIngredients.length; i++) {
       var ingredient = validIngredients[i];
       var itemButtonSelect = "#PlayerInventory[" + i + "]";
 
       commandBuilder.append("#PlayerInventory", "ItemSlotPreset.ui");
-      commandBuilder.set(itemButtonSelect + " #Slot.ItemId", ingredient.getId());
+      commandBuilder.set(itemButtonSelect + " #Slot.ItemId", ingredient.getItemId());
       commandBuilder.set(itemButtonSelect + " #Slot.Quantity", ingredient.getQuantity());
       commandBuilder.set(itemButtonSelect + " #Slot.ShowQuantity", true);
 
@@ -105,7 +106,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
           itemButtonSelect,
           EventData.of("Index", Integer.toString(i)).append("Type", "AddItem"));
 
-      ingredientTypes.add(ingredient.getId());
+      ingredientTypes.add(Check.nonNull(ingredient.withQuantity(1)));
     }
 
     for (int i = 0; i < 5; i++) {
@@ -128,39 +129,51 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
   @Override
   public void handleDataEvent(
       Ref<EntityStore> ref, Store<EntityStore> store, BenchMortarData data) {
-    var mortarAndPestleOptional =
-        ComponentUtils.getBlockComponent(
-            store.getExternalData().getWorld(), position, MortarAndPestle.getComponentType());
+    var world = store.getExternalData().getWorld();
+    var mortarAndPestle =
+        ComponentUtils.getBlockComponent(world, position, MortarAndPestle.getComponentType());
 
-    if (mortarAndPestleOptional.isEmpty()) {
+    if (mortarAndPestle == null) {
       sendUpdate();
       return;
     }
 
-    var mortarAndPestle = mortarAndPestleOptional.get();
+    var combinedInventory =
+        InventoryComponent.getCombined(store, ref, InventoryComponent.EVERYTHING);
 
-    switch (data.Type) {
-      case "AddItem" ->
-          data.getIndex(ingredientTypes.size())
-              .ifPresent(
-                  index ->
-                      mortarAndPestle.tryAddItem(
-                          ingredientTypes.get(index),
-                          itemType -> {
-                            var combinedInventory =
-                                store.getComponent(
-                                    ref, InventoryComponent.Combined.getComponentType());
-                            assert combinedInventory != null;
+    var modifiedInventory =
+        switch (data.Type) {
+          case "AddItem" ->
+              data.useIndex(
+                      ingredientTypes,
+                      (_, item) ->
+                          mortarAndPestle.tryAddItem(
+                              item,
+                              itemStack ->
+                                  combinedInventory
+                                      .removeItemStack((ItemStack) itemStack)
+                                      .succeeded()))
+                  .orElse(false);
 
-                            for (var inventory : combinedInventory.getInventories().values())
-                              if (inventory
-                                  .removeItemStack(new ItemStack((String) itemType, 1))
-                                  .succeeded()) return true;
-                            return false;
-                          }));
-      case "RemoveItem" -> {}
-      case null, default -> {}
-    }
+          case "RemoveItem" ->
+              data.useIndex(
+                      mortarAndPestle.getItems(),
+                      (index, itemToRemove) -> {
+                        if (itemToRemove == null) return false;
+
+                        mortarAndPestle.setItem(index, null);
+
+                        if (!combinedInventory.addItemStack(itemToRemove).succeeded())
+                          ItemUtils.dropItem(ref, itemToRemove, store);
+
+                        return true;
+                      })
+                  .orElse(false);
+
+          case null, default -> false;
+        };
+
+    if (modifiedInventory) ComponentUtils.markNeedsSaving(world, position);
 
     var commandBuilder = new UICommandBuilder();
     var eventBuilder = new UIEventBuilder();
@@ -180,17 +193,25 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
 
     public @Nullable String Type;
 
-    public OptionalInt getIndex(int len) {
-      var index = Index;
-      if (index == null) return OptionalInt.empty();
+    @FunctionalInterface
+    public interface IndexOp<T extends @Nullable Object, R extends @Nullable Object> {
+      R index(int index, T value);
+    }
 
+    public <T extends @Nullable Object, R> Optional<R> useIndex(
+        List<T> indexable, IndexOp<? super T, ? extends R> callback) {
+      var index = Index;
+      if (index == null) return Optional.empty();
+
+      int actualIndex;
       try {
-        var actualIndex = Integer.parseInt(index);
-        if (actualIndex < 0 && actualIndex >= len) return OptionalInt.empty();
-        return OptionalInt.of(actualIndex);
+        actualIndex = Integer.parseInt(index);
+        if (actualIndex < 0 || actualIndex >= indexable.size()) return Optional.empty();
       } catch (NumberFormatException _) {
-        return OptionalInt.empty();
+        return Optional.empty();
       }
+
+      return Optional.of(callback.index(actualIndex, indexable.get(actualIndex)));
     }
   }
 }

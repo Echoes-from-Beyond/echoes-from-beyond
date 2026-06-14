@@ -19,6 +19,7 @@
 package org.echoesfrombeyond.echoesfrombeyond;
 
 import com.hypixel.hytale.math.vector.Vector3iUtil;
+import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.world.World;
@@ -80,6 +81,7 @@ public class EchoesFromBeyond extends JavaPlugin {
     resolver =
         CodecResolver.builder()
             .withStandardSettings(cache)
+            .withDirectMapping(ItemStack.class, ItemStack.CODEC)
             .withDirectMapping(Vector3i.class, Vector3iUtil.CODEC)
             .build();
 

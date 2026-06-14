@@ -33,12 +33,12 @@ import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class UpdateAlchemyNetworkSystem extends RefSystem<ChunkStore> {
+public class AlchemyBenchLifecycleSystem extends RefSystem<ChunkStore> {
   private static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
   private final ComponentType<ChunkStore, BlockModule.BlockStateInfo> blockStateInfoComponentType;
 
-  public UpdateAlchemyNetworkSystem() {
+  public AlchemyBenchLifecycleSystem() {
     this.blockStateInfoComponentType = BlockModule.BlockStateInfo.getComponentType();
   }
 
@@ -77,7 +77,11 @@ public class UpdateAlchemyNetworkSystem extends RefSystem<ChunkStore> {
             new AlchemyBenchInfo(alchemyBench.isNetworkOrigin()));
 
     LOGGER.atInfo().log(
-        "Added alchemy bench at coordinates " + new Vector3i(blockX, blockY, blockZ));
+        "Added alchemy bench at coordinates "
+            + new Vector3i(blockX, blockY, blockZ)
+            + " (reason: "
+            + reason
+            + ")");
   }
 
   @Override
@@ -89,6 +93,7 @@ public class UpdateAlchemyNetworkSystem extends RefSystem<ChunkStore> {
     var stateInfo = buf.getComponent(ref, blockStateInfoComponentType);
 
     if (stateInfo == null) return;
+    if (reason == RemoveReason.UNLOAD) stateInfo.markNeedsSaving();
 
     var chunkRef = stateInfo.getChunkRef();
     if (!chunkRef.isValid()) return;
@@ -112,7 +117,7 @@ public class UpdateAlchemyNetworkSystem extends RefSystem<ChunkStore> {
         .removeAlchemyBench(
             store.getExternalData().getWorld(), new Vector3i(blockX, blockY, blockZ));
 
-    LOGGER.atInfo().log("Removed alchemy bench");
+    LOGGER.atInfo().log("Removed alchemy bench (reason: " + reason + ")");
   }
 
   @Override

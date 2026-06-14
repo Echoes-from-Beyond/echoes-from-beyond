@@ -22,6 +22,7 @@ import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentRegistryProxy;
 import com.hypixel.hytale.component.ComponentType;
+import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import it.unimi.dsi.fastutil.objects.Object2BooleanFunction;
 import java.util.Arrays;
@@ -44,7 +45,7 @@ public class MortarAndPestle implements Component<ChunkStore> {
   private static @Nullable ComponentType<ChunkStore, MortarAndPestle> COMPONENT_TYPE;
 
   @SuppressWarnings("FieldMayBeFinal")
-  private @Nullable String[] ItemsToGrind;
+  private @Nullable ItemStack[] ItemsToGrind;
 
   /**
    * Called internally during plugin initialization.
@@ -66,24 +67,34 @@ public class MortarAndPestle implements Component<ChunkStore> {
 
   @SuppressWarnings("unused")
   public MortarAndPestle() {
-    this.ItemsToGrind = new String[MAX_GRINDABLE_ITEMS];
+    this.ItemsToGrind = new ItemStack[MAX_GRINDABLE_ITEMS];
   }
 
   private MortarAndPestle(MortarAndPestle that) {
-    this.ItemsToGrind = new String[that.ItemsToGrind.length];
+    this.ItemsToGrind = new ItemStack[that.ItemsToGrind.length];
     System.arraycopy(that.ItemsToGrind, 0, this.ItemsToGrind, 0, ItemsToGrind.length);
   }
 
-  public void tryAddItem(String itemType, Object2BooleanFunction<String> transact) {
+  public boolean tryAddItem(ItemStack newItem, Object2BooleanFunction<ItemStack> transact) {
     for (int i = 0; i < ItemsToGrind.length; i++) {
       if (ItemsToGrind[i] == null) {
-        if (transact.test(itemType)) ItemsToGrind[i] = itemType;
-        return;
+        if (transact.test(newItem)) {
+          ItemsToGrind[i] = newItem;
+          return true;
+        }
+
+        return false;
       }
     }
+
+    return false;
   }
 
-  public List<@Nullable String> getItems() {
+  public void setItem(int index, @Nullable ItemStack item) {
+    ItemsToGrind[index] = item;
+  }
+
+  public List<@Nullable ItemStack> getItems() {
     return Arrays.asList(ItemsToGrind);
   }
 
