@@ -31,6 +31,8 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalInt;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
@@ -45,6 +47,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.BenchMortarData> {
   private final Vector3i position;
+  private final List<String> ingredientTypes;
 
   public BenchMortarPage(
       PlayerRef playerRef,
@@ -53,6 +56,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
       int interactionsPerIngredient) {
     super(playerRef, CustomPageLifetime.CanDismiss, BenchMortarData.CODEC);
     this.position = position;
+    this.ingredientTypes = new ArrayList<>();
   }
 
   private void buildInternal(
@@ -69,26 +73,27 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
               var items = mortarAndPestle.getItems();
               for (int i = 0; i < items.size(); i++) {
                 var item = items.get(i);
-                String itemButtonSelect = "#SharedInventory[" + i + "]";
+                var itemButtonSelect = "#SharedInventory[" + i + "]";
 
                 commandBuilder.append("#SharedInventory", "ItemSlotPreset.ui");
+                if (item == null) continue;
 
-                if (item != null) {
-                  commandBuilder.set(itemButtonSelect + " #Slot.ItemId", item.getId());
+                commandBuilder.set(itemButtonSelect + " #Slot.ItemId", item);
 
-                  eventBuilder.addEventBinding(
-                      CustomUIEventBindingType.Activating,
-                      itemButtonSelect,
-                      EventData.of("Index", Integer.toString(i)).append("Type", "RemoveItem"));
-                }
+                eventBuilder.addEventBinding(
+                    CustomUIEventBindingType.Activating,
+                    itemButtonSelect,
+                    EventData.of("Index", Integer.toString(i)).append("Type", "RemoveItem"));
               }
             });
 
     var validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, position);
 
+    ingredientTypes.clear();
+
     for (int i = 0; i < validIngredients.length; i++) {
-      var itemButtonSelect = "#PlayerInventory[" + i + "]";
       var ingredient = validIngredients[i];
+      var itemButtonSelect = "#PlayerInventory[" + i + "]";
 
       commandBuilder.append("#PlayerInventory", "ItemSlotPreset.ui");
       commandBuilder.set(itemButtonSelect + " #Slot.ItemId", ingredient.getId());
@@ -99,6 +104,8 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
           CustomUIEventBindingType.Activating,
           itemButtonSelect,
           EventData.of("Index", Integer.toString(i)).append("Type", "AddItem"));
+
+      ingredientTypes.add(ingredient.getId());
     }
 
     for (int i = 0; i < 5; i++) {
@@ -131,34 +138,26 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
     }
 
     var mortarAndPestle = mortarAndPestleOptional.get();
-    var validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, position);
 
     switch (data.Type) {
       case "AddItem" ->
-          data.getIndex(validIngredients.length)
+          data.getIndex(ingredientTypes.size())
               .ifPresent(
-                  index -> {
-                    var item = validIngredients[index];
+                  index ->
+                      mortarAndPestle.tryAddItem(
+                          ingredientTypes.get(index),
+                          itemType -> {
+                            var combinedInventory =
+                                store.getComponent(
+                                    ref, InventoryComponent.Combined.getComponentType());
+                            assert combinedInventory != null;
 
-                    mortarAndPestle.tryAddItem(
-                        item,
-                        () -> {
-                          var combinedInventory =
-                              store.getComponent(
-                                  ref, InventoryComponent.Combined.getComponentType());
-                          assert combinedInventory != null;
-
-                          for (var inventory : combinedInventory.getInventories().values()) {
-                            var transaction =
-                                inventory.removeItemStack(new ItemStack(item.getId(), 1));
-                            if (transaction.succeeded()) {
-                              return true;
-                            }
-                          }
-
-                          return false;
-                        });
-                  });
+                            for (var inventory : combinedInventory.getInventories().values())
+                              if (inventory
+                                  .removeItemStack(new ItemStack((String) itemType, 1))
+                                  .succeeded()) return true;
+                            return false;
+                          }));
       case "RemoveItem" -> {}
       case null, default -> {}
     }

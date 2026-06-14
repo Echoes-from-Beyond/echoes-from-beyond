@@ -23,13 +23,12 @@ import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentRegistryProxy;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
+import it.unimi.dsi.fastutil.objects.Object2BooleanFunction;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
-import org.echoesfrombeyond.echoesfrombeyond.ItemEntry;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -45,7 +44,7 @@ public class MortarAndPestle implements Component<ChunkStore> {
   private static @Nullable ComponentType<ChunkStore, MortarAndPestle> COMPONENT_TYPE;
 
   @SuppressWarnings("FieldMayBeFinal")
-  private @Nullable ItemEntry[] ItemsToGrind;
+  private @Nullable String[] ItemsToGrind;
 
   /**
    * Called internally during plugin initialization.
@@ -67,24 +66,24 @@ public class MortarAndPestle implements Component<ChunkStore> {
 
   @SuppressWarnings("unused")
   public MortarAndPestle() {
-    this.ItemsToGrind = new ItemEntry[MAX_GRINDABLE_ITEMS];
+    this.ItemsToGrind = new String[MAX_GRINDABLE_ITEMS];
   }
 
   private MortarAndPestle(MortarAndPestle that) {
-    this.ItemsToGrind = new ItemEntry[that.ItemsToGrind.length];
+    this.ItemsToGrind = new String[that.ItemsToGrind.length];
     System.arraycopy(that.ItemsToGrind, 0, this.ItemsToGrind, 0, ItemsToGrind.length);
   }
 
-  public void tryAddItem(ItemEntry item, BooleanSupplier transact) {
+  public void tryAddItem(String itemType, Object2BooleanFunction<String> transact) {
     for (int i = 0; i < ItemsToGrind.length; i++) {
       if (ItemsToGrind[i] == null) {
-        if (transact.getAsBoolean()) ItemsToGrind[i] = item;
+        if (transact.test(itemType)) ItemsToGrind[i] = itemType;
         return;
       }
     }
   }
 
-  public List<@Nullable ItemEntry> getItems() {
+  public List<@Nullable String> getItems() {
     return Arrays.asList(ItemsToGrind);
   }
 
