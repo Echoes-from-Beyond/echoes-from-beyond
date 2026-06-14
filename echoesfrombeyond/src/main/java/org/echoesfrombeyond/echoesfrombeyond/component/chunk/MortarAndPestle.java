@@ -27,6 +27,8 @@ import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import it.unimi.dsi.fastutil.objects.Object2BooleanFunction;
 import java.util.Arrays;
 import java.util.List;
+
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
@@ -46,6 +48,14 @@ public class MortarAndPestle implements Component<ChunkStore> {
 
   @SuppressWarnings("FieldMayBeFinal")
   private @Nullable ItemStack[] ItemsToGrind;
+
+  @SuppressWarnings("FieldMayBeFinal")
+  public List<ItemStack> Overflow;
+
+  public int CurrentInteractions;
+
+  public int CurrentNeededInteractions;
+
 
   /**
    * Called internally during plugin initialization.
@@ -68,14 +78,18 @@ public class MortarAndPestle implements Component<ChunkStore> {
   @SuppressWarnings("unused")
   public MortarAndPestle() {
     this.ItemsToGrind = new ItemStack[MAX_GRINDABLE_ITEMS];
+    this.Overflow = new ObjectArrayList<>();
   }
 
   private MortarAndPestle(MortarAndPestle that) {
     this.ItemsToGrind = new ItemStack[that.ItemsToGrind.length];
     System.arraycopy(that.ItemsToGrind, 0, this.ItemsToGrind, 0, ItemsToGrind.length);
+    this.Overflow = new ObjectArrayList<>(that.Overflow);
+    this.CurrentInteractions = that.CurrentInteractions;
+    this.CurrentNeededInteractions = that.CurrentNeededInteractions;
   }
 
-  public boolean tryAddItem(ItemStack newItem, Object2BooleanFunction<ItemStack> transact) {
+  public boolean tryAddItemToInput(ItemStack newItem, Object2BooleanFunction<ItemStack> transact) {
     for (int i = 0; i < ItemsToGrind.length; i++) {
       if (ItemsToGrind[i] == null) {
         if (transact.test(newItem)) {
@@ -96,6 +110,12 @@ public class MortarAndPestle implements Component<ChunkStore> {
 
   public List<@Nullable ItemStack> getItems() {
     return Arrays.asList(ItemsToGrind);
+  }
+
+  public double getProgress() {
+    if(CurrentNeededInteractions == 0) return 0.0;
+
+    return (double) CurrentInteractions / (double) CurrentNeededInteractions;
   }
 
   @Override
