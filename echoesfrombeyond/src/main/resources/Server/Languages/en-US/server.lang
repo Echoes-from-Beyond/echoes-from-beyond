@@ -40,5 +40,9 @@ items.Bench_BottlingStation.description = Finish up your concoctions here.\n\n<i
 items.Tool_Bark_Scraper.description = Removes the outer bark of certain tree logs.\n\n<i>The Kweebecs acknowledge that some cultures require wood as a resource. As long as you avoid entering their woodlands with such a blade bared, it's unlikely they'll ever bring it up.</i>
 
 alchemy.mortar.grind.button = GRIND
+alchemy.mortar.main.title = MORTAR & PESTLE
+alchemy.mortar.shared.title = SHARED
+alchemy.mortar.inventory.title = YOUR INVENTORY
+alchemy.mortar.overflow.title = OVERFLOW
 
 interactionHints.strip = [{key}] Strip Bark

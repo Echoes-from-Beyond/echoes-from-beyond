@@ -11,109 +11,28 @@ Group {
     // main
     $C.@Container {
       Anchor: (Width: 1200, Height: 550);
+      Group {
+        Anchor: (Top: 5, Width: 1200, Height: 40);
+
+        Label {
+          Style: (
+            HorizontalAlignment: Center,
+            VerticalAlignment: Center,
+            FontSize: 16,
+            TextColor: $C.@ColorDefault,
+            RenderBold: true
+          );
+          Text: %server.alchemy.mortar.main.title;
+        }
+      }
 
       Group #MortarUi {
         Anchor: (Top: 150);
         LayoutMode: Top;
         Group #MortarInput {
-          LayoutMode: Top;
+          Anchor: (Width: 250);
+          LayoutMode: LeftCenterWrap;
 
-          // TODO: rework input slot # to be configurable eventually?
-          // top row
-          Group {
-            Anchor: (Width: 64, Height: 64);
-            LayoutMode: Left;
-
-            ItemSlotButton #IS {
-              Anchor: (Width: 64, Height: 64);
-              LayoutMode: Full;
-              Padding: 2;
-              Style: (
-                Sounds: $C.@ButtonSounds,
-              );
-              ItemSlot #Slot {
-                Anchor: (Full: 0);
-                ShowQualityBackground: true;
-              }
-            }
-          }
-
-          // middle row
-          Group {
-            Anchor: (Width: 192, Height: 64);
-            LayoutMode: Left;
-
-            ItemSlotButton #IS {
-              Anchor: (Width: 64, Height: 64);
-              LayoutMode: Full;
-              Padding: 2;
-              Style: (
-                Sounds: $C.@ButtonSounds,
-              );
-              ItemSlot #Slot {
-                Anchor: (Full: 0);
-                ShowQualityBackground: true;
-              }
-            }
-
-            ItemSlotButton #IS {
-              Anchor: (Width: 64, Height: 64);
-              LayoutMode: Full;
-              Padding: 2;
-              Style: (
-                Sounds: $C.@ButtonSounds,
-              );
-              ItemSlot #Slot {
-                Anchor: (Full: 0);
-                ShowQualityBackground: true;
-              }
-            }
-
-            ItemSlotButton #IS {
-              Anchor: (Width: 64, Height: 64);
-              LayoutMode: Full;
-              Padding: 2;
-              Style: (
-                Sounds: $C.@ButtonSounds,
-              );
-              ItemSlot #Slot {
-                Anchor: (Full: 0);
-                ShowQualityBackground: true;
-              }
-            }
-          }
-
-          // bottom row
-          Group {
-            Anchor: (Width: 128, Height: 64);
-            LayoutMode: Left;
-
-            ItemSlotButton #IS {
-              Anchor: (Width: 64, Height: 64);
-              LayoutMode: Full;
-              Padding: 2;
-              Style: (
-                Sounds: $C.@ButtonSounds,
-              );
-              ItemSlot #Slot {
-                Anchor: (Full: 0);
-                ShowQualityBackground: true;
-              }
-            }
-
-            ItemSlotButton #IS {
-              Anchor: (Width: 64, Height: 64);
-              LayoutMode: Full;
-              Padding: 2;
-              Style: (
-                Sounds: $C.@ButtonSounds,
-              );
-              ItemSlot #Slot {
-                Anchor: (Full: 0);
-                ShowQualityBackground: true;
-              }
-            }
-          }
         }
 
         Group {
@@ -129,7 +48,7 @@ Group {
                 HorizontalAlignment: Center,
                 VerticalAlignment: Center,
                 FontSize: 22,
-                TextColor: #ffffff,
+                TextColor: $C.@ColorButtonText,
                 RenderBold: true
               );
               Text: %server.alchemy.mortar.grind.button;
@@ -141,6 +60,21 @@ Group {
     // shared inventory
     $C.@Container {
       Anchor: (Width: 200, Height: 550);
+      Group {
+        Anchor: (Top: 5, Width: 200, Height: 40);
+
+        Label {
+          Style: (
+            HorizontalAlignment: Center,
+            VerticalAlignment: Center,
+            FontSize: 16,
+            TextColor: $C.@ColorDefault,
+            RenderBold: true
+          );
+          Text: %server.alchemy.mortar.shared.title;
+        }
+      }
+
       Group #SharedInventory {
         Anchor: (Top: 50);
         LayoutMode: TopScrolling;
@@ -157,6 +91,20 @@ Group {
     $C.@Container {
       Anchor: (Width: 700, Height: 150);
 
+      Group {
+        Anchor: (Top: 5, Left: 5, Width: 700, Height: 40);
+
+        Label {
+          Style: (
+            VerticalAlignment: Center,
+            FontSize: 16,
+            TextColor: $C.@ColorDefault,
+            RenderBold: true
+          );
+          Text: %server.alchemy.mortar.inventory.title;
+        }
+      }
+
       Group #PlayerInventory {
         Anchor: (Top: 50, Left: 20);
         LayoutMode: LeftScrolling;
@@ -166,6 +114,19 @@ Group {
     // overflow basket
     $C.@Container {
       Anchor: (Width: 700, Height: 150);
+      Group {
+        Anchor: (Top: 5, Left: 5, Width: 700, Height: 40);
+
+        Label {
+          Style: (
+            VerticalAlignment: Center,
+            FontSize: 16,
+            TextColor: #bc5a5a,
+            RenderBold: true
+          );
+          Text: %server.alchemy.mortar.overflow.title;
+        }
+      }
 
       Group #Overflow {
         Anchor: (Top: 50, Left: 20);

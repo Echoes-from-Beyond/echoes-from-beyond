@@ -76,9 +76,9 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
     var items = mortarAndPestle.getItems();
     for (int i = 0; i < items.size(); i++) {
       var item = items.get(i);
-      var itemButtonSelect = "#SharedInventory[" + i + "]";
+      var itemButtonSelect = "#MortarInput[" + i + "]";
 
-      commandBuilder.append("#SharedInventory", "ItemSlotPreset.ui");
+      commandBuilder.append("#MortarInput", "ItemSlotPreset.ui");
       if (item == null) continue;
 
       commandBuilder.set(itemButtonSelect + " #Slot.ItemId", item.getItemId());
