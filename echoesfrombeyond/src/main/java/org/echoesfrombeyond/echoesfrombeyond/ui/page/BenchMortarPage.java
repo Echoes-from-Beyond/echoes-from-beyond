@@ -50,6 +50,8 @@ import org.jspecify.annotations.Nullable;
 public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.BenchMortarData> {
   private final Vector3i position;
   private final List<ItemStack> ingredientTypes;
+  private final int baselineInteractions;
+  private final int interactionsPerIngredient;
 
   public BenchMortarPage(
       PlayerRef playerRef,
@@ -59,6 +61,8 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
     super(playerRef, CustomPageLifetime.CanDismiss, BenchMortarData.CODEC);
     this.position = position;
     this.ingredientTypes = new ArrayList<>();
+    this.baselineInteractions = baselineInteractions;
+    this.interactionsPerIngredient = interactionsPerIngredient;
   }
 
   private void buildInternal(
@@ -115,6 +119,12 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
 
       commandBuilder.append("#Overflow", "ItemSlotPreset.ui");
     }
+
+    // the index here is not important
+    eventBuilder.addEventBinding(
+        CustomUIEventBindingType.Activating,
+        "#GrindButton",
+        EventData.of("Index", Integer.toString(0)).append("Type", "Grind"));
   }
 
   @Override

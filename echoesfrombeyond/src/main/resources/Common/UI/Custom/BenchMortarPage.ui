@@ -31,13 +31,22 @@ Group {
         LayoutMode: Top;
         Group #MortarInput {
           Anchor: (Width: 250);
+          Padding: (Vertical: 10);
           LayoutMode: LeftCenterWrap;
 
         }
 
         Group {
           Anchor: (Width: 250, Height: 100);
-          Padding: (Vertical: 20);
+          Padding: (Vertical: 10);
+          $C.@ProgressBar #ProgressBar {
+            Value: 0.0;
+          }
+        }
+
+        Group {
+          Anchor: (Width: 250, Height: 100);
+          Padding: (Vertical: 10);
           Button #GrindButton {
             Anchor: (Full: 0);
             Padding: (Horizontal: 20, Vertical: 15);
@@ -92,7 +101,7 @@ Group {
       Anchor: (Width: 700, Height: 150);
 
       Group {
-        Anchor: (Top: 5, Left: 5, Width: 700, Height: 40);
+        Anchor: (Top: 5, Left: 15, Width: 700, Height: 40);
 
         Label {
           Style: (
@@ -115,7 +124,7 @@ Group {
     $C.@Container {
       Anchor: (Width: 700, Height: 150);
       Group {
-        Anchor: (Top: 5, Left: 5, Width: 700, Height: 40);
+        Anchor: (Top: 5, Left: 15, Width: 700, Height: 40);
 
         Label {
           Style: (
