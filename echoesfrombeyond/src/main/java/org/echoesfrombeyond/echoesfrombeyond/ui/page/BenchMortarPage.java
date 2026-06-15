@@ -65,21 +65,15 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
     this.interactionsPerIngredient = interactionsPerIngredient;
   }
 
-  private boolean isInProgress(MortarAndPestle mortar) {
-    return mortar.getProgress() != 0.0 && mortar.getProgress() < 1.0;
-  }
-
   private boolean grind(MortarAndPestle mortar) {
-    if(mortar.getItems().isEmpty()) return false;
+    if (!mortar.hasItems()) return false;
 
-    double prog = mortar.getProgress();
+    mortar.CurrentInteractions++;
+    double prog = mortar.getProgress(baselineInteractions, interactionsPerIngredient);
 
-    if(prog >= 1.0) {
-      // recalculate necessary interactions
-      mortar.CurrentNeededInteractions = baselineInteractions + (interactionsPerIngredient * mortar.getItems().size());
-      mortar.CurrentInteractions = 1;
-    } else {
-      mortar.CurrentInteractions++;
+    if (prog >= 1.0) {
+      mortar.CurrentInteractions = 0;
+      // TODO: recipe logic
     }
 
     return true;
@@ -89,12 +83,8 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
       Ref<EntityStore> ref,
       Store<EntityStore> store,
       UICommandBuilder commandBuilder,
-      UIEventBuilder eventBuilder) {
-    var mortarAndPestle =
-        ComponentUtils.getBlockComponent(
-            store.getExternalData().getWorld(), position, MortarAndPestle.getComponentType());
-    if (mortarAndPestle == null) return;
-
+      UIEventBuilder eventBuilder,
+      MortarAndPestle mortarAndPestle) {
     commandBuilder.append("BenchMortarPage.ui");
 
     var items = mortarAndPestle.getItems();
@@ -110,7 +100,8 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
       eventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
           itemButtonSelect,
-          EventData.of("Index", Integer.toString(i)).append("Type", "RemoveItem"));
+          EventData.of("Index", Integer.toString(i))
+              .append("Type", InteractionType.RemoveItemFromInput));
     }
 
     // TODO: shared inventory - we should probably do the storage station first
@@ -130,14 +121,15 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
       eventBuilder.addEventBinding(
           CustomUIEventBindingType.Activating,
           itemButtonSelect,
-          EventData.of("Index", Integer.toString(i)).append("Type", "AddItem"));
+          EventData.of("Index", Integer.toString(i))
+              .append("Type", InteractionType.AddItemToInput));
 
       ingredientTypes.add(Check.nonNull(ingredient.withQuantity(1)));
     }
 
     var overflow = mortarAndPestle.Overflow;
 
-    for(int i = 0; i < overflow.size(); i++) {
+    for (int i = 0; i < overflow.size(); i++) {
       var item = overflow.get(i);
       String overflowSelect = "#Overflow[" + i + "]";
 
@@ -147,20 +139,23 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
       commandBuilder.set(overflowSelect + " #Slot.ShowQuantity", true);
 
       eventBuilder.addEventBinding(
-              CustomUIEventBindingType.Activating,
-              overflowSelect,
-              EventData.of("Index", Integer.toString(i)).append("Type", "RemoveFromOverflow"));
+          CustomUIEventBindingType.Activating,
+          overflowSelect,
+          EventData.of("Index", Integer.toString(i))
+              .append("Type", InteractionType.RemoveItemFromOverflow));
     }
 
-    commandBuilder.set("#ProgressBar.Value", mortarAndPestle.getProgress());
+    commandBuilder.set(
+        "#ProgressBar.Value",
+        mortarAndPestle.getProgress(baselineInteractions, interactionsPerIngredient));
 
-    if(isInProgress(mortarAndPestle)) commandBuilder.set("#GrindButton.Disabled", true);
+    if (!mortarAndPestle.hasItems()) commandBuilder.set("#GrindButton.Disabled", true);
 
     // the index here is not important
     eventBuilder.addEventBinding(
         CustomUIEventBindingType.Activating,
         "#GrindButton",
-        EventData.of("Index", Integer.toString(0)).append("Type", "Grind"));
+        EventData.of("Type", "Grind").append("Type", InteractionType.Grind));
   }
 
   @Override
@@ -169,7 +164,12 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
       UICommandBuilder commandBuilder,
       UIEventBuilder eventBuilder,
       Store<EntityStore> store) {
-    buildInternal(ref, store, commandBuilder, eventBuilder);
+    var mortarAndPestle =
+        ComponentUtils.getBlockComponent(
+            store.getExternalData().getWorld(), position, MortarAndPestle.getComponentType());
+    if (mortarAndPestle == null) return;
+
+    buildInternal(ref, store, commandBuilder, eventBuilder, mortarAndPestle);
   }
 
   @Override
@@ -189,53 +189,55 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
 
     var modification =
         switch (data.Type) {
-          case "AddItem" ->
-                  (!isInProgress(mortarAndPestle)) && data.useIndex(
-                      ingredientTypes,
-                      (_, item) ->
-                          mortarAndPestle.tryAddItemToInput(
-                              item,
-                              itemStack ->
-                                  combinedInventory
-                                      .removeItemStack((ItemStack) itemStack)
-                                      .succeeded()))
-                  .orElse(false);
+          case AddItemToInput ->
+              (!mortarAndPestle.isInProgress())
+                  && data.useIndex(
+                          ingredientTypes,
+                          (_, item) ->
+                              mortarAndPestle.tryAddItemToInput(
+                                  item,
+                                  itemStack ->
+                                      combinedInventory
+                                          .removeItemStack((ItemStack) itemStack)
+                                          .succeeded()))
+                      .orElse(false);
 
-          case "RemoveItem" ->
+          case RemoveItemFromInput ->
+              (!mortarAndPestle.isInProgress())
+                  && data.useIndex(
+                          mortarAndPestle.getItems(),
+                          (index, itemToRemove) -> {
+                            if (itemToRemove == null) return false;
+
+                            mortarAndPestle.setItem(index, null);
+
+                            if (!combinedInventory.addItemStack(itemToRemove).succeeded())
+                              ItemUtils.dropItem(ref, itemToRemove, store);
+
+                            return true;
+                          })
+                      .orElse(false);
+
+          case RemoveItemFromOverflow ->
               data.useIndex(
-                      mortarAndPestle.getItems(),
-                      (index, itemToRemove) -> {
-                        if(isInProgress(mortarAndPestle)) return false;
-                        if (itemToRemove == null) return false;
+                      mortarAndPestle.Overflow,
+                      (index, item) -> {
+                        // to remove from overflow, no need to check for progress
+                        // however, there *shouldn't* be progress if overflow exists - a player must
+                        // take out all
+                        // overflow before grinding more ingredients
+                        mortarAndPestle.Overflow.remove(index);
 
-                        mortarAndPestle.setItem(index, null);
-
-                        if (!combinedInventory.addItemStack(itemToRemove).succeeded())
-                          ItemUtils.dropItem(ref, itemToRemove, store);
+                        if (!combinedInventory.addItemStack(item).succeeded())
+                          ItemUtils.dropItem(ref, item, store);
 
                         return true;
                       })
                   .orElse(false);
 
-          case "RemoveFromOverflow" ->
-            data.useIndex(mortarAndPestle.Overflow,
-                    (index, item) -> {
-                      // to remove from overflow, no need to check for progress
-                      // however, there *shouldn't* be progress if overflow exists - a player must take out all
-                      // overflow before grinding more ingredients
-                      mortarAndPestle.Overflow.remove(index);
+          case Grind -> grind(mortarAndPestle);
 
-                      if (!combinedInventory.addItemStack(item).succeeded())
-                        ItemUtils.dropItem(ref, item, store);
-
-                      return true;
-                    })
-                    .orElse(false);
-
-          case "Grind" ->
-            grind(mortarAndPestle);
-
-          case null, default -> false;
+          case null -> false;
         };
 
     if (modification) ComponentUtils.markNeedsSaving(world, position);
@@ -243,8 +245,15 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
     var commandBuilder = new UICommandBuilder();
     var eventBuilder = new UIEventBuilder();
 
-    buildInternal(ref, store, commandBuilder, eventBuilder);
+    buildInternal(ref, store, commandBuilder, eventBuilder, mortarAndPestle);
     sendUpdate(commandBuilder, eventBuilder, true);
+  }
+
+  public enum InteractionType {
+    AddItemToInput,
+    RemoveItemFromInput,
+    RemoveItemFromOverflow,
+    Grind
   }
 
   @NullMarked
@@ -256,7 +265,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
     @SuppressWarnings({"FieldMayBeFinal", "unused"})
     private @Nullable String Index;
 
-    public @Nullable String Type;
+    public @Nullable InteractionType Type;
 
     @FunctionalInterface
     public interface IndexOp<T extends @Nullable Object, R extends @Nullable Object> {

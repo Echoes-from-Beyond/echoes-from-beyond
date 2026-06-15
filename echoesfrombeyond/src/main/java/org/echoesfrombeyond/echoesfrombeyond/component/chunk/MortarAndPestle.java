@@ -25,10 +25,9 @@ import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import it.unimi.dsi.fastutil.objects.Object2BooleanFunction;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
@@ -53,9 +52,6 @@ public class MortarAndPestle implements Component<ChunkStore> {
   public List<ItemStack> Overflow;
 
   public int CurrentInteractions;
-
-  public int CurrentNeededInteractions;
-
 
   /**
    * Called internally during plugin initialization.
@@ -86,7 +82,6 @@ public class MortarAndPestle implements Component<ChunkStore> {
     System.arraycopy(that.ItemsToGrind, 0, this.ItemsToGrind, 0, ItemsToGrind.length);
     this.Overflow = new ObjectArrayList<>(that.Overflow);
     this.CurrentInteractions = that.CurrentInteractions;
-    this.CurrentNeededInteractions = that.CurrentNeededInteractions;
   }
 
   public boolean tryAddItemToInput(ItemStack newItem, Object2BooleanFunction<ItemStack> transact) {
@@ -112,10 +107,28 @@ public class MortarAndPestle implements Component<ChunkStore> {
     return Arrays.asList(ItemsToGrind);
   }
 
-  public double getProgress() {
-    if(CurrentNeededInteractions == 0) return 0.0;
+  @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+  public boolean hasItems() {
+    for (var item : ItemsToGrind) if (item != null) return true;
+    return false;
+  }
 
-    return (double) CurrentInteractions / (double) CurrentNeededInteractions;
+  public int getItemCount() {
+    int i = 0;
+    for (var item : ItemsToGrind) if (item != null) i++;
+    return i;
+  }
+
+  @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+  public boolean isInProgress() {
+    return CurrentInteractions > 0;
+  }
+
+  public double getProgress(int baselineInteractions, int interactionsPerItem) {
+    var neededInteractions = baselineInteractions + (interactionsPerItem * getItemCount());
+
+    if (neededInteractions <= 0) return 0.0;
+    return (double) CurrentInteractions / (double) neededInteractions;
   }
 
   @Override
