@@ -268,7 +268,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
     public @Nullable InteractionType Type;
 
     @FunctionalInterface
-    public interface IndexOp<T extends @Nullable Object, R extends @Nullable Object> {
+    public interface IndexOp<T extends @Nullable Object, R> {
       R index(int index, T value);
     }
 
