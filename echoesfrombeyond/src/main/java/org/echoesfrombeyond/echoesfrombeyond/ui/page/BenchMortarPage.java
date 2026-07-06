@@ -34,8 +34,9 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.ArrayList;
 import java.util.List;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.MortarAndPestle;
+import org.echoesfrombeyond.echoesfrombeyond.ui.data.BenchInteractionType;
 import org.echoesfrombeyond.echoesfrombeyond.ui.data.GenericBenchData;
-import org.echoesfrombeyond.echoesfrombeyond.ui.data.GenericBenchInteractionType;
+import org.echoesfrombeyond.echoesfrombeyond.ui.data.ItemSource;
 import org.echoesfrombeyond.echoesfrombeyond.util.AlchemyBenchUtils;
 import org.echoesfrombeyond.modutil.component.ComponentUtils;
 import org.echoesfrombeyond.util.Check;
@@ -84,6 +85,8 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
     commandBuilder.append("BenchMortarPage.ui");
 
     var items = mortarAndPestle.getItems();
+
+    // MAIN UI
     for (int i = 0; i < items.size(); i++) {
       var item = items.get(i);
       var itemButtonSelect = "#MortarInput[" + i + "]";
@@ -97,13 +100,14 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
           CustomUIEventBindingType.Activating,
           itemButtonSelect,
           EventData.of("Index", Integer.toString(i))
-              .append("Type", GenericBenchInteractionType.RemoveItemFromInput));
+              .append("Type", BenchInteractionType.RemoveItemFromInput));
     }
 
     var validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, position);
     var itemsInStorage =
         AlchemyBenchUtils.getItemsInStorageNetwork(store.getExternalData().getWorld(), position);
 
+    // STORAGE
     for (int i = 0; i < itemsInStorage.size(); i++) {
       var select = "#SharedInventory[" + i + "]";
 
@@ -111,6 +115,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
       commandBuilder.set(select + " #Slot.ItemId", itemsInStorage.get(i).getItemId());
     }
 
+    // PLAYER INVENTORY
     ingredientTypes.clear();
     for (int i = 0; i < validIngredients.length; i++) {
       var ingredient = validIngredients[i];
@@ -125,13 +130,15 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
           CustomUIEventBindingType.Activating,
           itemButtonSelect,
           EventData.of("Index", Integer.toString(i))
-              .append("Type", GenericBenchInteractionType.AddItemToInput));
+              .append("Type", BenchInteractionType.AddItemToInput)
+              .append("Source", ItemSource.PlayerInventory));
 
       ingredientTypes.add(Check.nonNull(ingredient.withQuantity(1)));
     }
 
     var overflow = mortarAndPestle.Overflow;
 
+    // OVERFLOW
     for (int i = 0; i < overflow.size(); i++) {
       var item = overflow.get(i);
       String overflowSelect = "#Overflow[" + i + "]";
@@ -145,7 +152,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
           CustomUIEventBindingType.Activating,
           overflowSelect,
           EventData.of("Index", Integer.toString(i))
-              .append("Type", GenericBenchInteractionType.RemoveItemFromOverflow));
+              .append("Type", BenchInteractionType.RemoveItemFromOverflow));
     }
 
     commandBuilder.set(
@@ -158,7 +165,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
     eventBuilder.addEventBinding(
         CustomUIEventBindingType.Activating,
         "#GrindButton",
-        EventData.of("Type", "Grind").append("Type", GenericBenchInteractionType.Grind));
+        EventData.of("Type", "Grind").append("Type", BenchInteractionType.Grind));
   }
 
   @Override

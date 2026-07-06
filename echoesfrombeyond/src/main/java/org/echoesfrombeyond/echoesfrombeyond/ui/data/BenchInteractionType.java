@@ -18,7 +18,7 @@
 
 package org.echoesfrombeyond.echoesfrombeyond.ui.data;
 
-public enum GenericBenchInteractionType {
+public enum BenchInteractionType {
   AddItemToInput,
   RemoveItemFromInput,
   RemoveItemFromOverflow,

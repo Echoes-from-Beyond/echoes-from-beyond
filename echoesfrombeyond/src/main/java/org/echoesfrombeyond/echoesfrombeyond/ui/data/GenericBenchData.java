@@ -36,7 +36,9 @@ public class GenericBenchData {
   @SuppressWarnings({"FieldMayBeFinal", "unused"})
   private @Nullable String Index;
 
-  public @Nullable GenericBenchInteractionType Type;
+  public @Nullable BenchInteractionType Type;
+
+  public @Nullable ItemSource Source;
 
   @FunctionalInterface
   public interface IndexOp<T extends @Nullable Object, R> {
