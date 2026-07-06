@@ -45,4 +45,7 @@ alchemy.mortar.shared.title = SHARED
 alchemy.mortar.inventory.title = YOUR INVENTORY
 alchemy.mortar.overflow.title = OVERFLOW
 
+alchemy.storage.title = STORAGE
+alchemy.storage.player.title = YOUR INVENTORY
+
 interactionHints.strip = [{key}] Strip Bark

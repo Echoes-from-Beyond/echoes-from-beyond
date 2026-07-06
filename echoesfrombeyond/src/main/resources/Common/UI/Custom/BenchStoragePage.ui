@@ -1,0 +1,64 @@
+$C = "Common.ui";
+
+Group {
+  Anchor: (Width: 1400, Height: 700);
+  LayoutMode: Top;
+
+  Group {
+    Anchor: (Width: 1400, Height: 350);
+
+    $C.Container {
+      Anchor: (Width: 1400, Height: 350);
+
+      Group {
+        Anchor: (Top: 5, Width: 1400, Height: 40);
+
+        Label {
+          Style: (
+            HorizontalAlignment: Center,
+            VerticalAlignment: Center,
+            FontSize: 16,
+            TextColor: $C.@ColorDefault,
+            RenderBold: true
+          );
+          Text: %server.alchemy.storage.title;
+        }
+      }
+
+      Group #StorageInventory {
+        Anchor: (Top: 50);
+        LayoutMode: TopScrolling;
+        ScrollbarStyle: $C.@DefaultScrollbarStyle;
+      }
+    }
+  }
+
+  Group {
+    Anchor: (Width: 1400, Height: 350);
+
+    $C.Container {
+      Anchor: (Width: 1400, Height: 350);
+
+      Group {
+        Anchor: (Top: 5, Width: 1400, Height: 40);
+
+        Label {
+          Style: (
+            HorizontalAlignment: Center,
+            VerticalAlignment: Center,
+            FontSize: 16,
+            TextColor: $C.@ColorDefault,
+            RenderBold: true
+          );
+          Text: %server.alchemy.storage.player.title;
+        }
+      }
+
+      Group #PlayerInventory {
+        Anchor: (Top: 50);
+        LayoutMode: TopScrolling;
+        ScrollbarStyle: $C.@DefaultScrollbarStyle;
+      }
+    }
+  }
+}
