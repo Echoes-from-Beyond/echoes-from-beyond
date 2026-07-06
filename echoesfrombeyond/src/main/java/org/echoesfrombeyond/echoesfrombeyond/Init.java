@@ -35,6 +35,7 @@ import org.echoesfrombeyond.echoesfrombeyond.asset.AlchemyReactionList;
 import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
 import org.echoesfrombeyond.echoesfrombeyond.command.IntegrationTestCommand;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyBench;
+import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyStorage;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.MortarAndPestle;
 import org.echoesfrombeyond.echoesfrombeyond.component.entity.SigilDrawComponent;
 import org.echoesfrombeyond.echoesfrombeyond.interaction.HeldItemConditionInteraction;
@@ -165,6 +166,7 @@ public class Init {
 
     // Order alphabetically by class name
     AlchemyBench.registerComponentType(chunkProxy);
+    AlchemyStorage.registerComponentType(chunkProxy);
     MortarAndPestle.registerComponentType(chunkProxy);
   }
 

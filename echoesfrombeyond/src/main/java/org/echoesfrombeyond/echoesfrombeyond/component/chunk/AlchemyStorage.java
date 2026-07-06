@@ -25,14 +25,20 @@ import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.UnmodifiableView;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+@ModelBuilder
+@NullMarked
 public class AlchemyStorage implements Component<ChunkStore> {
   public static final int DEFAULT_MAX_STORAGE_SIZE = 6;
   public static final String ALCHEMY_INTERMEDIATE_TAG = "AlchemyIntermediate";
@@ -68,6 +74,7 @@ public class AlchemyStorage implements Component<ChunkStore> {
   @SuppressWarnings("unused")
   public AlchemyStorage() {
     this.MaxStorage = DEFAULT_MAX_STORAGE_SIZE;
+    this.ItemsStored = new ArrayList<>();
   }
 
   private AlchemyStorage(AlchemyStorage that) {
@@ -79,35 +86,26 @@ public class AlchemyStorage implements Component<ChunkStore> {
   public List<ItemStack> getStorage() {
     // instead of directly modifying the list, should always fall back on other methods to ensure
     // validation
-    return Collections.unmodifiableList(this.ItemsStored);
+    return Collections.unmodifiableList(ItemsStored);
   }
 
   public boolean addToStorage(ItemStack item) {
     // only one item per slot
     if (item.getQuantity() > 1) return false;
 
-    String[] typeTags = item.getItem().getData().getRawTags().get("Type");
-
-    boolean found = false;
-    for (String tag : typeTags) {
-      if (tag.equals(ALCHEMY_INTERMEDIATE_TAG)) {
-        found = true;
-        break;
-      }
-    }
-
     // don't add items that don't have the correct tag
-    if (!found) return false;
+    if (!Arrays.asList(item.getItem().getData().getRawTags().get("Type"))
+        .contains(ALCHEMY_INTERMEDIATE_TAG)) return false;
 
-    this.ItemsStored.add(item);
+    ItemsStored.add(item);
     return true;
   }
 
   public boolean removeFromStorage(int index) {
     // bounds check
-    if (index < 0 || index >= this.ItemsStored.size()) return false;
+    if (index < 0 || index >= ItemsStored.size()) return false;
 
-    this.ItemsStored.remove(index);
+    ItemsStored.remove(index);
 
     return true;
   }
