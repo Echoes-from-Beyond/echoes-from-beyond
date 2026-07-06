@@ -111,16 +111,19 @@ public class AlchemyStorage implements Component<ChunkStore> {
   }
 
   /**
-   * Performs extra validation by checking that the target item still exists at a given index, before removing it.
+   * Performs extra validation by checking that the target item still exists at a given index,
+   * before removing it.
+   *
    * @param index position in the list
    * @param item target item
-   * @return {@code true} if all validation passes <i>and</i> the item was removed, {@code false} otherwise.
+   * @return {@code true} if all validation passes <i>and</i> the item was removed, {@code false}
+   *     otherwise.
    */
   public boolean removeFromStorage(int index, ItemStack item) {
     // bounds check
     if (index < 0 || index >= ItemsStored.size()) return false;
 
-    if(!ItemsStored.get(index).equals(item)) return false;
+    if (!ItemsStored.get(index).equals(item)) return false;
 
     ItemsStored.remove(index);
 

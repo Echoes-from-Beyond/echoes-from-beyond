@@ -27,7 +27,6 @@ import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyStorage;
-import org.echoesfrombeyond.echoesfrombeyond.component.chunk.MortarAndPestle;
 import org.echoesfrombeyond.echoesfrombeyond.ui.data.GenericBenchData;
 import org.echoesfrombeyond.modutil.component.ComponentUtils;
 import org.joml.Vector3i;
@@ -49,19 +48,19 @@ public class BenchStoragePage extends InteractiveCustomUIPage<GenericBenchData> 
       UIEventBuilder eventBuilder,
       Store<EntityStore> store) {
     var storageBlock =
-            ComponentUtils.getBlockComponent(
-                    store.getExternalData().getWorld(), position, AlchemyStorage.getComponentType());
+        ComponentUtils.getBlockComponent(
+            store.getExternalData().getWorld(), position, AlchemyStorage.getComponentType());
     if (storageBlock == null) return;
 
     buildInternal(ref, store, commandBuilder, eventBuilder, storageBlock);
   }
 
   private void buildInternal(
-          Ref<EntityStore> ref,
-          Store<EntityStore> store,
-          UICommandBuilder commandBuilder,
-          UIEventBuilder eventBuilder,
-          AlchemyStorage storageBlock) {
+      Ref<EntityStore> ref,
+      Store<EntityStore> store,
+      UICommandBuilder commandBuilder,
+      UIEventBuilder eventBuilder,
+      AlchemyStorage storageBlock) {
     commandBuilder.append("BenchStoragePage.ui");
 
     var storageView = storageBlock.getStorage();
