@@ -39,6 +39,8 @@ import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.MortarAndPestle;
+import org.echoesfrombeyond.echoesfrombeyond.ui.data.GenericBenchData;
+import org.echoesfrombeyond.echoesfrombeyond.ui.data.GenericBenchInteractionType;
 import org.echoesfrombeyond.echoesfrombeyond.util.AlchemyBenchUtils;
 import org.echoesfrombeyond.modutil.component.ComponentUtils;
 import org.echoesfrombeyond.util.Check;
@@ -47,7 +49,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.BenchMortarData> {
+public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
   private final Vector3i position;
   private final List<ItemStack> ingredientTypes;
   private final int baselineInteractions;
@@ -58,7 +60,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
       Vector3i position,
       int baselineInteractions,
       int interactionsPerIngredient) {
-    super(playerRef, CustomPageLifetime.CanDismiss, BenchMortarData.CODEC);
+    super(playerRef, CustomPageLifetime.CanDismiss, GenericBenchData.CODEC);
     this.position = position;
     this.ingredientTypes = new ArrayList<>();
     this.baselineInteractions = baselineInteractions;
@@ -101,7 +103,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
           CustomUIEventBindingType.Activating,
           itemButtonSelect,
           EventData.of("Index", Integer.toString(i))
-              .append("Type", InteractionType.RemoveItemFromInput));
+              .append("Type", GenericBenchInteractionType.RemoveItemFromInput));
     }
 
     // TODO: shared inventory - we should probably do the storage station first
@@ -122,7 +124,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
           CustomUIEventBindingType.Activating,
           itemButtonSelect,
           EventData.of("Index", Integer.toString(i))
-              .append("Type", InteractionType.AddItemToInput));
+              .append("Type", GenericBenchInteractionType.AddItemToInput));
 
       ingredientTypes.add(Check.nonNull(ingredient.withQuantity(1)));
     }
@@ -142,7 +144,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
           CustomUIEventBindingType.Activating,
           overflowSelect,
           EventData.of("Index", Integer.toString(i))
-              .append("Type", InteractionType.RemoveItemFromOverflow));
+              .append("Type", GenericBenchInteractionType.RemoveItemFromOverflow));
     }
 
     commandBuilder.set(
@@ -155,7 +157,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
     eventBuilder.addEventBinding(
         CustomUIEventBindingType.Activating,
         "#GrindButton",
-        EventData.of("Type", "Grind").append("Type", InteractionType.Grind));
+        EventData.of("Type", "Grind").append("Type", GenericBenchInteractionType.Grind));
   }
 
   @Override
@@ -174,7 +176,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
 
   @Override
   public void handleDataEvent(
-      Ref<EntityStore> ref, Store<EntityStore> store, BenchMortarData data) {
+      Ref<EntityStore> ref, Store<EntityStore> store, GenericBenchData data) {
     var world = store.getExternalData().getWorld();
     var mortarAndPestle =
         ComponentUtils.getBlockComponent(world, position, MortarAndPestle.getComponentType());
@@ -247,45 +249,5 @@ public class BenchMortarPage extends InteractiveCustomUIPage<BenchMortarPage.Ben
 
     buildInternal(ref, store, commandBuilder, eventBuilder, mortarAndPestle);
     sendUpdate(commandBuilder, eventBuilder, true);
-  }
-
-  public enum InteractionType {
-    AddItemToInput,
-    RemoveItemFromInput,
-    RemoveItemFromOverflow,
-    Grind
-  }
-
-  @NullMarked
-  @ModelBuilder
-  public static class BenchMortarData {
-    public static final BuilderCodec<BenchMortarData> CODEC =
-        CodecUtil.modelBuilder(BenchMortarData.class, EchoesFromBeyond.get().getResolver());
-
-    @SuppressWarnings({"FieldMayBeFinal", "unused"})
-    private @Nullable String Index;
-
-    public @Nullable InteractionType Type;
-
-    @FunctionalInterface
-    public interface IndexOp<T extends @Nullable Object, R> {
-      R index(int index, T value);
-    }
-
-    public <T extends @Nullable Object, R> Optional<R> useIndex(
-        List<T> indexable, IndexOp<? super T, ? extends R> callback) {
-      var index = Index;
-      if (index == null) return Optional.empty();
-
-      int actualIndex;
-      try {
-        actualIndex = Integer.parseInt(index);
-        if (actualIndex < 0 || actualIndex >= indexable.size()) return Optional.empty();
-      } catch (NumberFormatException _) {
-        return Optional.empty();
-      }
-
-      return Optional.of(callback.index(actualIndex, indexable.get(actualIndex)));
-    }
   }
 }

@@ -46,7 +46,7 @@ import org.echoesfrombeyond.echoesfrombeyond.interaction.sigil.OpenSigilHud;
 import org.echoesfrombeyond.echoesfrombeyond.system.chunk.AlchemyBenchLifecycleSystem;
 import org.echoesfrombeyond.echoesfrombeyond.system.chunk.RemoveAlchemyNetworkSystem;
 import org.echoesfrombeyond.echoesfrombeyond.system.entity.SigilDrawSystem;
-import org.echoesfrombeyond.echoesfrombeyond.ui.BenchMortarSupplier;
+import org.echoesfrombeyond.echoesfrombeyond.ui.supplier.BenchMortarSupplier;
 import org.echoesfrombeyond.util.Check;
 import org.jspecify.annotations.NullMarked;
 

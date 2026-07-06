@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.echoesfrombeyond.echoesfrombeyond.ui;
+package org.echoesfrombeyond.echoesfrombeyond.ui.supplier;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.ComponentAccessor;
@@ -30,6 +30,7 @@ import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateIntRange;
+import org.echoesfrombeyond.echoesfrombeyond.ui.AlchemyBenchSupplier;
 import org.echoesfrombeyond.echoesfrombeyond.ui.page.BenchMortarPage;
 import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
