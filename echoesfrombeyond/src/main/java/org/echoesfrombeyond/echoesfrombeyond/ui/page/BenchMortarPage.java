@@ -100,9 +100,16 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
               .append("Type", GenericBenchInteractionType.RemoveItemFromInput));
     }
 
-    // TODO: shared inventory - we should probably do the storage station first
-
     var validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, position);
+    var itemsInStorage =
+        AlchemyBenchUtils.getItemsInStorageNetwork(store.getExternalData().getWorld(), position);
+
+    for (int i = 0; i < itemsInStorage.size(); i++) {
+      var select = "#SharedInventory[" + i + "]";
+
+      commandBuilder.append("#SharedInventory", "ItemSlotPreset.ui");
+      commandBuilder.set(select + " #Slot.ItemId", itemsInStorage.get(i).getItemId());
+    }
 
     ingredientTypes.clear();
     for (int i = 0; i < validIngredients.length; i++) {

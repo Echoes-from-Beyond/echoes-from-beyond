@@ -23,14 +23,16 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import java.util.Optional;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class ChunkGridMap<V extends @Nullable Object> {
-  private final Long2ObjectMap<Int2ObjectMap<V>> storage;
+  private final Long2ObjectMap<@Nullable Int2ObjectMap<V>> storage;
   private int size;
 
   public ChunkGridMap() {
@@ -41,7 +43,6 @@ public class ChunkGridMap<V extends @Nullable Object> {
     return size;
   }
 
-  @SuppressWarnings("ConstantValue")
   public @Nullable V get(Vector3i at) {
     var chunkX = ChunkUtil.chunkCoordinate(at.x);
     var chunkZ = ChunkUtil.chunkCoordinate(at.z);
@@ -67,7 +68,6 @@ public class ChunkGridMap<V extends @Nullable Object> {
     return returnValue;
   }
 
-  @SuppressWarnings("ConstantValue")
   public V remove(Vector3i at) {
     var chunkX = ChunkUtil.chunkCoordinate(at.x);
     var chunkZ = ChunkUtil.chunkCoordinate(at.z);
@@ -86,9 +86,8 @@ public class ChunkGridMap<V extends @Nullable Object> {
     return returnValue;
   }
 
-  @SuppressWarnings("ConstantValue")
-  public void forEachInRange(
-      Vector3i center, int radius, BiConsumer<? super Vector3i, ? super V> callback) {
+  public <R> Optional<R> forEachInRangeUntil(
+      Vector3i center, int radius, BiFunction<? super Vector3i, ? super V, @Nullable R> callback) {
     var chunkStartX = ChunkUtil.chunkCoordinate(center.x - radius);
     var chunkEndX = ChunkUtil.chunkCoordinate(center.x + radius);
 
@@ -110,10 +109,25 @@ public class ChunkGridMap<V extends @Nullable Object> {
               ChunkUtil.yFromBlockInColumn(index),
               ChunkUtil.worldCoordFromLocalCoord(cz, ChunkUtil.zFromIndex(index)));
 
-          if (dataPosition.gridDistance(center) <= radius)
-            callback.accept(dataPosition, entry.getValue());
+          if (dataPosition.gridDistance(center) <= radius) {
+            R returnValue = callback.apply(dataPosition, entry.getValue());
+            if (returnValue != null) return Optional.of(returnValue);
+          }
         }
       }
     }
+
+    return Optional.empty();
+  }
+
+  public void forEachInRange(
+      Vector3i center, int radius, BiConsumer<? super Vector3i, ? super V> callback) {
+    forEachInRangeUntil(
+        center,
+        radius,
+        (pos, value) -> {
+          callback.accept(pos, value);
+          return null;
+        });
   }
 }

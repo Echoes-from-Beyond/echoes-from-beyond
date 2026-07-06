@@ -23,10 +23,16 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.math.util.ChunkUtil;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import java.util.ArrayList;
+import java.util.List;
+import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
+import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyStorage;
+import org.echoesfrombeyond.modutil.component.ComponentUtils;
 import org.echoesfrombeyond.util.Check;
 import org.echoesfrombeyond.util.array.ArrayUtil;
+import org.jetbrains.annotations.UnmodifiableView;
 import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 
@@ -34,6 +40,26 @@ import org.jspecify.annotations.NullMarked;
 public final class AlchemyBenchUtils {
   private AlchemyBenchUtils() {
     throw new RuntimeException();
+  }
+
+  public static @UnmodifiableView List<ItemStack> getItemsInStorageNetwork(
+      World world, Vector3i position) {
+    return EchoesFromBeyond.get()
+        .accessAlchemyNetwork(
+            world,
+            (w, data) ->
+                data.forEachInRangeUntil(position, 15, (pos, info) -> info.isOrigin() ? pos : null)
+                    .map(
+                        pos -> {
+                          var storage =
+                              ComponentUtils.getBlockComponent(
+                                  w, pos, AlchemyStorage.getComponentType());
+                          if (storage == null) return null;
+
+                          return storage.getStorage();
+                        }))
+        .flatMap(optional -> optional)
+        .orElse(List.of());
   }
 
   public static ItemStack[] getValidIngredientsForBench(

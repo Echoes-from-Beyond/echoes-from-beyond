@@ -24,10 +24,11 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.world.World;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.cache.CodecCache;
 import org.echoesfrombeyond.modutil.map.ChunkGridMap;
@@ -147,16 +148,14 @@ public class EchoesFromBeyond extends JavaPlugin {
     }
   }
 
-  public void findNearbyAlchemyBenches(
+  public <R> Optional<R> accessAlchemyNetwork(
       World world,
-      Vector3i origin,
-      int radius,
-      BiConsumer<? super Vector3i, ? super AlchemyBenchInfo> callback) {
+      BiFunction<? super World, ? super ChunkGridMap<AlchemyBenchInfo>, @Nullable R> accessor) {
     var data = alchemyNetworks.get(world.getWorldConfig().getUuid());
-    if (data == null) return;
+    if (data == null) return Optional.empty();
 
     synchronized (data) {
-      data.forEachInRange(origin, radius, callback);
+      return Optional.ofNullable(accessor.apply(world, data));
     }
   }
 }
