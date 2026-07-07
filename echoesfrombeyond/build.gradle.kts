@@ -6,7 +6,7 @@ version = "0.1.0"
 
 apply<JavaConventionPlugin>()
 
-withHytalePlugin("EchoesFromBeyond", "0.5.2")
+withHytalePlugin("EchoesFromBeyond", "0.5.6")
 
 dependencies {
   projectImplementation(":util")
