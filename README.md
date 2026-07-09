@@ -45,7 +45,7 @@ If there are formatting errors, run `./gradlew spotlessApply` to fix them.
 
 ### Setting up a development environment
 
-In order to actually test any mods in-game, users need to specify their local Hytale installation.
+The build system needs to know the user's Hytale installation in order to automatically set up a testing environment. This can be inferred for common operating systems (Linux, MacOS, and Windows), but for others it will be necessary to specify the exact path to the installation using a `.hytale` file.
 
 To do this, create a file named `.hytale` in the root project directory (same level as this readme).
 

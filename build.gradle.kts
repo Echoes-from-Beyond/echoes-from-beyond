@@ -11,14 +11,27 @@ apply<SpotlessPlugin>()
 val hytaleDotfile: RegularFile = layout.projectDirectory.file(".hytale")
 val runDirectory: Directory = layout.projectDirectory.dir("run")
 
-val hytalePath: Provider<File> = provider {
+val hytalePath: Provider<String> = provider {
   val hytaleDotfile: File = hytaleDotfile.asFile
 
-  if (!hytaleDotfile.exists())
-      throw GradleException(
-          "Missing .hytale file! Please read the # Install section in the " +
-              "README for setup details."
-      )
+  if (!hytaleDotfile.exists()) {
+    val os = org.gradle.internal.os.OperatingSystem.current()
+
+    val basedir =
+        if (os.isWindows) {
+          "AppData/Roaming"
+        } else if (os.isMacOsX) {
+          "Library/Application Support"
+        } else if (os.isLinux) {
+          ".var/app/com.hypixel.HytaleLauncher/data"
+        } else {
+          throw GradleException(
+              "Unsupported operating system! Please add a file named .hytale containing the absolute path to your Hytale installation."
+          )
+        }
+
+    return@provider "${System.getProperty("user.home")}/$basedir/Hytale/install/release/package/game/latest"
+  }
 
   var hytalePath: File = Paths.get(hytaleDotfile.readText(Charsets.UTF_8).trim()).toFile()
 
@@ -31,14 +44,14 @@ val hytalePath: Provider<File> = provider {
   if (!hytalePath.isAbsolute)
       throw GradleException("The path specified in .hytale is not absolute!")
 
-  hytalePath
+  hytalePath.absolutePath
 }
 
 val serverJar: Provider<File> =
-    hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.jar") }
+    hytalePath.map { file -> File(file).resolve("Server").resolve("HytaleServer.jar") }
 val serverAot: Provider<File> =
-    hytalePath.map { file -> file.resolve("Server").resolve("HytaleServer.aot.config") }
-val assetsZip: Provider<File> = hytalePath.map { file -> file.resolve("Assets.zip") }
+    hytalePath.map { file -> File(file).resolve("Server").resolve("HytaleServer.aot.config") }
+val assetsZip: Provider<File> = hytalePath.map { file -> File(file).resolve("Assets.zip") }
 
 val checkHytalePath: TaskProvider<DefaultTask> =
     tasks.register("checkHytalePath", DefaultTask::class.java) {
@@ -48,8 +61,9 @@ val checkHytalePath: TaskProvider<DefaultTask> =
       doLast {
         if (inputs.files.any { file -> !file.exists() })
             throw GradleException(
-                "One or more required server files could not be found; check that the contents " +
-                    "of the .hytale file point to a valid Hytale installation"
+                "One or more required server files could not be found; if " +
+                    "you are using a .hytale file check that its contents" +
+                    "point to a valid installation."
             )
       }
     }
