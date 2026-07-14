@@ -19,6 +19,7 @@
 package org.echoesfrombeyond.modutil.inventory;
 
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.Contract;
@@ -30,9 +31,12 @@ import org.jspecify.annotations.Nullable;
  * the container.
  *
  * <p>Can represent a traditional fixed grid of item slots or a growable list.
+ *
+ * <p>This is deliberately distinct from Hytale's built-in {@link ItemContainer}, in order to give
+ * us more control over the functionality of custom inventories.
  */
 @NullMarked
-public interface ItemContainer {
+public interface InventoryContainer {
   /** A {@link Consumer} that accepts an {@code int} and an {@link ItemStack}. */
   @FunctionalInterface
   interface StackConsumer {
@@ -45,26 +49,31 @@ public interface ItemContainer {
     void accept(int slot, ItemStack stack);
   }
 
-  /** The result of adding an item to an inventory. */
-  enum AddResult {
+  /** The result of modifying the inventory. */
+  public enum OperationState {
     /**
-     * The item was successfully added. Prefer to call {@link AddResult#isSuccess()} rather than
-     * comparing against this variant.
+     * The inventory was successfully modified. Prefer to call {@link OperationState#isSuccess()}
+     * rather than comparing against this variant.
      */
     SUCCESS,
 
-    /** The item wasn't added because the inventory isn't accepting new items at this time. */
+    /** The inventory wasn't modified because it doesn't permit such operations at this time. */
     INVENTORY_FROZEN,
 
     /** The item wasn't added because the inventory is full. */
     TARGET_FULL,
 
-    /** The item wasn't added because it is somehow invalid for the container. */
-    INVALID_ITEM;
+    /** The target item wasn't modified because it is somehow invalid for the container. */
+    INVALID_ITEM,
+
+    /** The target item couldn't be modified because nothing is stored at a given index.
+     *  Should only apply to inventories that allow null values.
+     */
+    EMPTY_SLOT;
 
     /**
      * Whether this was a success result. Prefer to call this method instead of comparing against
-     * {@link AddResult#SUCCESS}.
+     * {@link OperationState#SUCCESS}.
      */
     public boolean isSuccess() {
       return this == SUCCESS;
@@ -72,30 +81,9 @@ public interface ItemContainer {
   }
 
   /**
-   * The result of setting a slot.
-   *
-   * @param result the added item
-   * @param oldItem the item that was in the slot previously; {@code null} if there was no item
-   */
-  record SetResult(AddResult result, @Nullable ItemStack oldItem) {
-    public SetResult {
-      if (!result.isSuccess() && oldItem != null) throw new IllegalArgumentException();
-    }
-
-    /**
-     * Whether the item was successfully set.
-     *
-     * @return {@code true} if successful; {@code false} if not
-     */
-    public boolean isSuccess() {
-      return result.isSuccess();
-    }
-  }
-
-  /**
    * Gets the number of items in this container. For fixed-size inventories, this only counts slots
    * that currently have an item. To get the number of slots, call {@link
-   * ItemContainer#getItemCapacity()}.
+   * InventoryContainer#getItemCapacity()}.
    *
    * @return the number of items in this container
    */
@@ -104,7 +92,7 @@ public interface ItemContainer {
   /**
    * Gets the number of items this container can hold, i.e. the largest valid index + 1. For fixed
    * size inventories, this would be the number of slots. For growable inventories, this is equal to
-   * {@link ItemContainer#getItemCount()}.
+   * {@link InventoryContainer#getItemCount()}.
    *
    * @return the capacity of items
    */
@@ -117,43 +105,43 @@ public interface ItemContainer {
    * @param stack the item to add
    * @return the result of adding the item
    */
-  AddResult addItem(ItemStack stack);
+  InventoryOperationResult addItem(ItemStack stack);
 
   /**
-   * Operates similarly to {@link ItemContainer#addItem(ItemStack)}, but inserts the item at the
-   * specified index.
+   * Operates similarly to {@link InventoryContainer#addItem(ItemStack)}, but inserts the item at
+   * the specified index.
    *
    * @param stack the item to add
    * @param index the index to add the item at
    * @return the result of adding the item
    * @throws IndexOutOfBoundsException if {@code index > getItemCapacity()}
    */
-  AddResult addItem(ItemStack stack, int index);
+  InventoryOperationResult addItem(ItemStack stack, int index);
 
   /**
    * Sets the item at a certain index. If there is already an item in the slot, it is replaced.
    *
    * @param stack the item to set
    * @param index the index
-   * @return the result of adding the item
+   * @return the result of setting the item
    * @throws IndexOutOfBoundsException if {@code index >= getItemCapacity()}
    */
-  SetResult setItem(ItemStack stack, int index);
+  InventoryOperationResult setItem(ItemStack stack, int index);
 
   /**
    * Removes the entire stack at a certain index.
    *
    * @param index the index
-   * @return the removed item, or {@code null} if not present
+   * @return the result of removing the item
    * @throws IndexOutOfBoundsException if {@code index >= getItemCapacity()}
    */
-  @Nullable ItemStack removeItem(int index);
+  InventoryOperationResult removeItem(int index);
 
   /**
    * Gets the entire stack at a certain index.
    *
    * @param index the index
-   * @return the removed item, or {@code null} if not present
+   * @return the item, or {@code null} if not present
    * @throws IndexOutOfBoundsException if {@code index >= getItemCapacity()}
    */
   @Nullable ItemStack getItem(int index);
