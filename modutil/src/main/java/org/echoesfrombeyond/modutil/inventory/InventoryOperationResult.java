@@ -30,55 +30,16 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Deliberately distinct from Hytale's {@link SlotTransaction} (and various children) so that the
  * error reasons can be communicated, and irrelevant fields are omitted.
+ *
+ * @param previousItem item that was replaced can be null in case of addition
+ * @param newItem what you can find now at that slot can be null in case of removal, but also can be
+ *     an item that can now be found at that index if the inventory does not permit empty slots,
+ *     e.g. the overflow inventory in Echoes from Beyond's alchemy stations
  */
 @NullMarked
-public class InventoryOperationResult {
-  private final ActionType operation;
-
-  private final OperationState operationState;
-
-  private final int slotIndex;
-
-  // item that was replaced
-  // can be null in case of addition
-  @Nullable private final ItemStack previousItem;
-
-  // what you can find now at that slot
-  // can be null in case of removal, but also can be an item that can now be found at that index
-  // if the inventory does not permit empty slots, e.g. the overflow inventory in Echoes from
-  // Beyond's alchemy stations
-  @Nullable private final ItemStack newItem;
-
-  public InventoryOperationResult(
-      ActionType operation,
-      OperationState operationState,
-      int slotIndex,
-      @Nullable ItemStack previousItem,
-      @Nullable ItemStack newItem) {
-    this.operation = operation;
-    this.operationState = operationState;
-    this.slotIndex = slotIndex;
-    this.previousItem = previousItem;
-    this.newItem = newItem;
-  }
-
-  public ActionType getOperation() {
-    return operation;
-  }
-
-  public OperationState getOperationState() {
-    return operationState;
-  }
-
-  public int getSlotIndex() {
-    return slotIndex;
-  }
-
-  public @Nullable ItemStack getPreviousItem() {
-    return previousItem;
-  }
-
-  public @Nullable ItemStack getNewItem() {
-    return newItem;
-  }
-}
+public record InventoryOperationResult(
+    ActionType operation,
+    OperationState operationState,
+    int slotIndex,
+    @Nullable ItemStack previousItem,
+    @Nullable ItemStack newItem) {}

@@ -33,7 +33,7 @@ import org.jspecify.annotations.Nullable;
  * <p>Can represent a traditional fixed grid of item slots or a growable list.
  *
  * <p>This is deliberately distinct from Hytale's built-in {@link ItemContainer}, in order to give
- * us more control over the functionality of custom inventories.
+ * us more control over the functionality of custom inventories, and present a simplified API.
  */
 @NullMarked
 public interface InventoryContainer {
@@ -50,7 +50,7 @@ public interface InventoryContainer {
   }
 
   /** The result of modifying the inventory. */
-  public enum OperationState {
+  enum OperationState {
     /**
      * The inventory was successfully modified. Prefer to call {@link OperationState#isSuccess()}
      * rather than comparing against this variant.
@@ -66,8 +66,9 @@ public interface InventoryContainer {
     /** The target item wasn't modified because it is somehow invalid for the container. */
     INVALID_ITEM,
 
-    /** The target item couldn't be modified because nothing is stored at a given index.
-     *  Should only apply to inventories that allow null values.
+    /**
+     * The target item couldn't be modified because nothing is stored at a given index. Should only
+     * apply to inventories that allow null values.
      */
     EMPTY_SLOT;
 
@@ -81,22 +82,33 @@ public interface InventoryContainer {
   }
 
   /**
-   * Gets the number of items in this container. For fixed-size inventories, this only counts slots
-   * that currently have an item. To get the number of slots, call {@link
-   * InventoryContainer#getItemCapacity()}.
+   * Gets the number of filled slots in this container, i.e. slots that currently have an item. To
+   * get the number of slots regardless of if they are empty or not, call {@link
+   * InventoryContainer#getSlotCapacity()}.
    *
-   * @return the number of items in this container
+   * @return the number of slots that are filled
    */
-  int getItemCount();
+  int getFilledSlots();
 
   /**
-   * Gets the number of items this container can hold, i.e. the largest valid index + 1. For fixed
-   * size inventories, this would be the number of slots. For growable inventories, this is equal to
-   * {@link InventoryContainer#getItemCount()}.
+   * Gets the number of slots in the inventory, whether they are empty or not. This should be
+   * strictly larger than or equal to {@link InventoryContainer#getFilledSlots()}.
    *
-   * @return the capacity of items
+   * @return the number of item slots in the inventory
    */
-  int getItemCapacity();
+  int getSlotCapacity();
+
+  /**
+   * Gets the number of items in the inventory. This is the sum of the quantities of every {@link
+   * ItemStack} in the inventory.
+   *
+   * @return the number of items in the inventory
+   */
+  default int getItemCount() {
+    var count = new int[1];
+    forEachItem((_, stack) -> count[0] += stack.getQuantity());
+    return count[0];
+  }
 
   /**
    * Adds an item to the container. This may cause the item to occupy a new slot, or it may be
