@@ -34,15 +34,14 @@ import org.jspecify.annotations.Nullable;
  * @param operation the type of inventory operation
  * @param operationState communicates the success or failure of the operation
  * @param slotIndex the index where the operation occurred
- * @param previousItem item that was replaced can be null in case of addition
- * @param newItem what you can find now at that slot can be null in case of removal, but also can be
- *     an item that can now be found at that index if the inventory does not permit empty slots,
- *     e.g. the overflow inventory in Echoes from Beyond's alchemy stations
+ * @param remainder item that was replaced can be null in case of addition
  */
 @NullMarked
 public record InventoryOperationResult(
     ActionType operation,
     OperationState operationState,
     int slotIndex,
-    @Nullable ItemStack previousItem,
-    @Nullable ItemStack newItem) {}
+    @Nullable ItemStack remainder) {
+  public static InventoryOperationResult FAILED_ADD_FULL =
+      new InventoryOperationResult(ActionType.ADD, OperationState.INVENTORY_FULL, -1, null);
+}

@@ -61,7 +61,7 @@ public interface StackContainer {
     INVENTORY_FROZEN,
 
     /** The item wasn't added because the inventory is full. */
-    TARGET_FULL,
+    INVENTORY_FULL,
 
     /** The target item wasn't modified because it is somehow invalid for the container. */
     INVALID_ITEM,
@@ -98,8 +98,8 @@ public interface StackContainer {
    * get the number of slots regardless of if they are empty or not, call {@link
    * StackContainer#getSlotCount()}.
    *
-   * <p>The default implementation uses {@link StackContainer#forEachItem(StackConsumer)} to
-   * count the filled slots.
+   * <p>The default implementation uses {@link StackContainer#forEachItem(StackConsumer)} to count
+   * the filled slots.
    *
    * @return the number of slots that are filled
    */
@@ -124,8 +124,8 @@ public interface StackContainer {
    * Gets the number of items in the inventory. This is the sum of the quantities of every {@link
    * ItemStack} in the inventory.
    *
-   * <p>The default implementation calls {@link StackContainer#forEachItem(StackConsumer)} to
-   * loop through all stacks, summing their quantities. Implementations may choose to override this
+   * <p>The default implementation calls {@link StackContainer#forEachItem(StackConsumer)} to loop
+   * through all stacks, summing their quantities. Implementations may choose to override this
    * method if they can provide a more optimized approach.
    *
    * @return the number of items in the inventory
@@ -146,8 +146,8 @@ public interface StackContainer {
   InventoryOperationResult addItem(ItemStack stack);
 
   /**
-   * Operates similarly to {@link StackContainer#addItem(ItemStack)}, but inserts the item at
-   * the specified index.
+   * Operates similarly to {@link StackContainer#addItem(ItemStack)}, but inserts the item at the
+   * specified index.
    *
    * @param stack the item to add
    * @param index the index to add the item at
