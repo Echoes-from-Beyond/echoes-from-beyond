@@ -98,13 +98,23 @@ public interface InventoryContainer {
    * get the number of slots regardless of if they are empty or not, call {@link
    * InventoryContainer#getSlotCount()}.
    *
+   * <p>The default implementation uses {@link InventoryContainer#forEachItem(StackConsumer)} to
+   * count the filled slots.
+   *
    * @return the number of slots that are filled
    */
-  int getFilledSlots();
+  default int getFilledSlots() {
+    var count = new int[1];
+    forEachItem((_, _) -> count[0]++);
+    return count[0];
+  }
 
   /**
    * Gets the number of slots in the inventory, whether they are empty or not. This should be
    * strictly larger than or equal to {@link InventoryContainer#getFilledSlots()}.
+   *
+   * <p>For inventories that dynamically increase in size, this value can change as items are added
+   * or removed.
    *
    * @return the number of item slots in the inventory
    */
