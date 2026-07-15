@@ -75,9 +75,21 @@ public interface InventoryContainer {
     /**
      * Whether this was a success result. Prefer to call this method instead of comparing against
      * {@link OperationState#SUCCESS}.
+     *
+     * @return {@code true} if successful; {@code false otherwise}
      */
     public boolean isSuccess() {
       return this == SUCCESS;
+    }
+
+    /**
+     * Whether this operation was a failure result. Prefer to call this method instead of comparing
+     * against {@link OperationState#SUCCESS}.
+     *
+     * @return {@code true} if failed; {@code false otherwise}
+     */
+    public boolean isFailure() {
+      return this != SUCCESS;
     }
   }
 
@@ -101,6 +113,10 @@ public interface InventoryContainer {
   /**
    * Gets the number of items in the inventory. This is the sum of the quantities of every {@link
    * ItemStack} in the inventory.
+   *
+   * <p>The default implementation calls {@link InventoryContainer#forEachItem(StackConsumer)} to
+   * loop through all stacks, summing their quantities. Implementations may choose to override this
+   * method if they can provide a more optimized approach.
    *
    * @return the number of items in the inventory
    */
@@ -126,7 +142,7 @@ public interface InventoryContainer {
    * @param stack the item to add
    * @param index the index to add the item at
    * @return the result of adding the item
-   * @throws IndexOutOfBoundsException if {@code index > getItemCapacity()}
+   * @throws IndexOutOfBoundsException if {@code index > getSlotCapacity()}
    */
   InventoryOperationResult addItem(ItemStack stack, int index);
 
@@ -136,7 +152,7 @@ public interface InventoryContainer {
    * @param stack the item to set
    * @param index the index
    * @return the result of setting the item
-   * @throws IndexOutOfBoundsException if {@code index >= getItemCapacity()}
+   * @throws IndexOutOfBoundsException if {@code index >= getSlotCapacity()}
    */
   InventoryOperationResult setItem(ItemStack stack, int index);
 
@@ -145,7 +161,7 @@ public interface InventoryContainer {
    *
    * @param index the index
    * @return the result of removing the item
-   * @throws IndexOutOfBoundsException if {@code index >= getItemCapacity()}
+   * @throws IndexOutOfBoundsException if {@code index >= getSlotCapacity()}
    */
   InventoryOperationResult removeItem(int index);
 
@@ -154,7 +170,7 @@ public interface InventoryContainer {
    *
    * @param index the index
    * @return the item, or {@code null} if not present
-   * @throws IndexOutOfBoundsException if {@code index >= getItemCapacity()}
+   * @throws IndexOutOfBoundsException if {@code index >= getSlotCapacity()}
    */
   @Nullable ItemStack getItem(int index);
 
