@@ -21,7 +21,7 @@ package org.echoesfrombeyond.modutil.inventory;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.transaction.ActionType;
 import com.hypixel.hytale.server.core.inventory.transaction.SlotTransaction;
-import org.echoesfrombeyond.modutil.inventory.InventoryContainer.OperationState;
+import org.echoesfrombeyond.modutil.inventory.StackContainer.OperationState;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

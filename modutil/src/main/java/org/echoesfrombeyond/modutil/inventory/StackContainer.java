@@ -36,7 +36,7 @@ import org.jspecify.annotations.Nullable;
  * us more control over the functionality of custom inventories, and present a simplified API.
  */
 @NullMarked
-public interface InventoryContainer {
+public interface StackContainer {
   /** A {@link Consumer} that accepts an {@code int} and an {@link ItemStack}. */
   @FunctionalInterface
   interface StackConsumer {
@@ -96,9 +96,9 @@ public interface InventoryContainer {
   /**
    * Gets the number of filled slots in this container, i.e. slots that currently have an item. To
    * get the number of slots regardless of if they are empty or not, call {@link
-   * InventoryContainer#getSlotCount()}.
+   * StackContainer#getSlotCount()}.
    *
-   * <p>The default implementation uses {@link InventoryContainer#forEachItem(StackConsumer)} to
+   * <p>The default implementation uses {@link StackContainer#forEachItem(StackConsumer)} to
    * count the filled slots.
    *
    * @return the number of slots that are filled
@@ -111,7 +111,7 @@ public interface InventoryContainer {
 
   /**
    * Gets the number of slots in the inventory, whether they are empty or not. This should be
-   * strictly larger than or equal to {@link InventoryContainer#getFilledSlots()}.
+   * strictly larger than or equal to {@link StackContainer#getFilledSlots()}.
    *
    * <p>For inventories that dynamically increase in size, this value can change as items are added
    * or removed.
@@ -124,7 +124,7 @@ public interface InventoryContainer {
    * Gets the number of items in the inventory. This is the sum of the quantities of every {@link
    * ItemStack} in the inventory.
    *
-   * <p>The default implementation calls {@link InventoryContainer#forEachItem(StackConsumer)} to
+   * <p>The default implementation calls {@link StackContainer#forEachItem(StackConsumer)} to
    * loop through all stacks, summing their quantities. Implementations may choose to override this
    * method if they can provide a more optimized approach.
    *
@@ -146,7 +146,7 @@ public interface InventoryContainer {
   InventoryOperationResult addItem(ItemStack stack);
 
   /**
-   * Operates similarly to {@link InventoryContainer#addItem(ItemStack)}, but inserts the item at
+   * Operates similarly to {@link StackContainer#addItem(ItemStack)}, but inserts the item at
    * the specified index.
    *
    * @param stack the item to add
