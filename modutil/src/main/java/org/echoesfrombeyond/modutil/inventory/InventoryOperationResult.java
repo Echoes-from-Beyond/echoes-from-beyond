@@ -34,14 +34,19 @@ import org.jspecify.annotations.Nullable;
  * @param operation the type of inventory operation
  * @param operationState communicates the success or failure of the operation
  * @param slotIndex the index where the operation occurred
- * @param remainder item that was replaced can be null in case of addition
+ * @param newStack item that was added, can be null in case of removal or failure
+ * @param previousStack item that was replaced, can be null in case of addition
+ * @param remainder leftover stack from transactions with limited items per slot
  */
 @NullMarked
 public record InventoryOperationResult(
     ActionType operation,
     OperationState operationState,
     int slotIndex,
+    @Nullable ItemStack newStack,
+    @Nullable ItemStack previousStack,
     @Nullable ItemStack remainder) {
   public static InventoryOperationResult FAILED_ADD_FULL =
-      new InventoryOperationResult(ActionType.ADD, OperationState.INVENTORY_FULL, -1, null);
+      new InventoryOperationResult(
+          ActionType.ADD, OperationState.INVENTORY_FULL, -1, null, null, null);
 }

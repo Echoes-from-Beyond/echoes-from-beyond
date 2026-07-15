@@ -18,6 +18,8 @@
 
 package org.echoesfrombeyond.echoesfrombeyond.component.chunk;
 
+import static org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyRestrictedStackContainer.ALCHEMY_INTERMEDIATE_TAG;
+
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentRegistryProxy;
@@ -41,7 +43,6 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class AlchemyStorage implements Component<ChunkStore> {
   public static final int DEFAULT_MAX_STORAGE_SIZE = 6;
-  public static final String ALCHEMY_INTERMEDIATE_TAG = "AlchemyIntermediate";
 
   public static final BuilderCodec<AlchemyStorage> CODEC =
       CodecUtil.modelBuilder(AlchemyStorage.class, EchoesFromBeyond.get().getResolver());
