@@ -31,6 +31,9 @@ import org.jspecify.annotations.Nullable;
  * <p>Deliberately distinct from Hytale's {@link SlotTransaction} (and various children) so that the
  * error reasons can be communicated, and irrelevant fields are omitted.
  *
+ * @param operation the type of inventory operation
+ * @param operationState communicates the success or failure of the operation
+ * @param slotIndex the index where the operation occurred
  * @param previousItem item that was replaced can be null in case of addition
  * @param newItem what you can find now at that slot can be null in case of removal, but also can be
  *     an item that can now be found at that index if the inventory does not permit empty slots,

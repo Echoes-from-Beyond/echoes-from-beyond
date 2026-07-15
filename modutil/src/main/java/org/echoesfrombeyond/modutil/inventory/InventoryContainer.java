@@ -96,7 +96,7 @@ public interface InventoryContainer {
   /**
    * Gets the number of filled slots in this container, i.e. slots that currently have an item. To
    * get the number of slots regardless of if they are empty or not, call {@link
-   * InventoryContainer#getSlotCapacity()}.
+   * InventoryContainer#getSlotCount()}.
    *
    * @return the number of slots that are filled
    */
@@ -108,7 +108,7 @@ public interface InventoryContainer {
    *
    * @return the number of item slots in the inventory
    */
-  int getSlotCapacity();
+  int getSlotCount();
 
   /**
    * Gets the number of items in the inventory. This is the sum of the quantities of every {@link
@@ -142,7 +142,7 @@ public interface InventoryContainer {
    * @param stack the item to add
    * @param index the index to add the item at
    * @return the result of adding the item
-   * @throws IndexOutOfBoundsException if {@code index > getSlotCapacity()}
+   * @throws IndexOutOfBoundsException if {@code index > getSlotCount()}
    */
   InventoryOperationResult addItem(ItemStack stack, int index);
 
@@ -152,7 +152,7 @@ public interface InventoryContainer {
    * @param stack the item to set
    * @param index the index
    * @return the result of setting the item
-   * @throws IndexOutOfBoundsException if {@code index >= getSlotCapacity()}
+   * @throws IndexOutOfBoundsException if {@code index >= getSlotCount()}
    */
   InventoryOperationResult setItem(ItemStack stack, int index);
 
@@ -161,7 +161,7 @@ public interface InventoryContainer {
    *
    * @param index the index
    * @return the result of removing the item
-   * @throws IndexOutOfBoundsException if {@code index >= getSlotCapacity()}
+   * @throws IndexOutOfBoundsException if {@code index >= getSlotCount()}
    */
   InventoryOperationResult removeItem(int index);
 
@@ -170,7 +170,7 @@ public interface InventoryContainer {
    *
    * @param index the index
    * @return the item, or {@code null} if not present
-   * @throws IndexOutOfBoundsException if {@code index >= getSlotCapacity()}
+   * @throws IndexOutOfBoundsException if {@code index >= getSlotCount()}
    */
   @Nullable ItemStack getItem(int index);
 
