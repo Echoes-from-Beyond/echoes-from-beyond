@@ -65,106 +65,91 @@ public class AlchemyRestrictedStackContainer implements StackContainer {
     return storedItems.size();
   }
 
+  @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+  private boolean canAddItem(ItemStack stack) {
+    return Arrays.asList(stack.getItem().getData().getRawTags().get("Type"))
+        .contains(ALCHEMY_INTERMEDIATE_TAG);
+  }
+
   @Override
   public InventoryOperationResult addItem(ItemStack stack) {
-    if (getSlotCount() > this.maxSize) {
-      return InventoryOperationResult.FAILED_ADD_FULL;
-    }
+    if (getSlotCount() > this.maxSize) return InventoryOperationResult.FAILED_ADD_FULL;
 
     // don't add items that don't have the correct tag, or have zero quantity
-    if (stack.getQuantity() == 0
-        || !Arrays.asList(stack.getItem().getData().getRawTags().get("Type"))
-            .contains(ALCHEMY_INTERMEDIATE_TAG))
+    if (!canAddItem(stack))
       return new InventoryOperationResult(
           ActionType.ADD, OperationState.INVALID_ITEM, -1, null, null, stack);
 
-    // should never return null because we already check whether the quantity is 0
-    ItemStack single = stack.withQuantity(1);
+    // will never return null because 1 != 0
+    var single = stack.withQuantity(1);
     assert single != null;
     storedItems.add(single);
 
-    ItemStack rest = stack.withQuantity(stack.getQuantity() - 1);
+    var rest = stack.withQuantity(stack.getQuantity() - 1);
     return new InventoryOperationResult(
         ActionType.ADD, OperationState.SUCCESS, getSlotCount() - 1, stack, null, rest);
   }
 
   @Override
   public InventoryOperationResult addItem(ItemStack stack, int index) {
-    if (index >= getSlotCount()) {
-      throw new IndexOutOfBoundsException();
-    }
+    var size = getSlotCount();
 
-    if (getSlotCount() > this.maxSize) {
-      return InventoryOperationResult.FAILED_ADD_FULL;
-    }
+    // mimic behavior of List#add(T, int)
+    if (index == size) return addItem(stack);
+
+    if (index > size) throw new IndexOutOfBoundsException(index);
+    if (size > this.maxSize) return InventoryOperationResult.FAILED_ADD_FULL;
 
     // capture the previous item
-    ItemStack previous = storedItems.get(index);
+    var previous = storedItems.get(index);
 
-    // don't add items that don't have the correct tag, or have zero quantity
-    if (stack.getQuantity() == 0
-        || !Arrays.asList(stack.getItem().getData().getRawTags().get("Type"))
-            .contains(ALCHEMY_INTERMEDIATE_TAG))
+    if (!canAddItem(stack))
       return new InventoryOperationResult(
           ActionType.ADD, OperationState.INVALID_ITEM, -1, null, null, stack);
 
-    // should never return null because we already check whether the quantity is 0
-    ItemStack single = stack.withQuantity(1);
+    var single = stack.withQuantity(1);
     assert single != null;
     storedItems.add(index, single);
 
-    ItemStack rest = stack.withQuantity(stack.getQuantity() - 1);
+    var rest = stack.withQuantity(stack.getQuantity() - 1);
     return new InventoryOperationResult(
         ActionType.ADD, OperationState.SUCCESS, index, stack, previous, rest);
   }
 
   @Override
   public InventoryOperationResult setItem(ItemStack stack, int index) {
-    if (index >= getSlotCount()) {
-      throw new IndexOutOfBoundsException();
-    }
+    if (index >= getSlotCount()) throw new IndexOutOfBoundsException(index);
 
-    // capture the previous item
-    ItemStack previous = storedItems.get(index);
+    var previous = storedItems.get(index);
 
-    // don't add items that don't have the correct tag, or have zero quantity
-    if (stack.getQuantity() == 0
-        || !Arrays.asList(stack.getItem().getData().getRawTags().get("Type"))
-            .contains(ALCHEMY_INTERMEDIATE_TAG))
+    if (!canAddItem(stack))
       return new InventoryOperationResult(
           ActionType.REPLACE, OperationState.INVALID_ITEM, -1, null, null, stack);
 
-    // should never return null because we already check whether the quantity is 0
-    ItemStack single = stack.withQuantity(1);
+    var single = stack.withQuantity(1);
     assert single != null;
+
     storedItems.set(index, single);
 
-    ItemStack rest = stack.withQuantity(stack.getQuantity() - 1);
+    var rest = stack.withQuantity(stack.getQuantity() - 1);
     return new InventoryOperationResult(
         ActionType.REPLACE, OperationState.SUCCESS, index, stack, previous, rest);
   }
 
   @Override
   public InventoryOperationResult removeItem(int index) {
-    if (index >= getSlotCount()) {
-      throw new IndexOutOfBoundsException();
-    }
+    if (index >= getSlotCount()) throw new IndexOutOfBoundsException(index);
 
-    // capture the previous item
-    ItemStack previous = storedItems.get(index);
-
-    ItemStack rest = previous.withQuantity(previous.getQuantity() + 1);
+    var previous = storedItems.get(index);
+    var rest = previous.withQuantity(previous.getQuantity() + 1);
     return new InventoryOperationResult(
         ActionType.REMOVE, OperationState.SUCCESS, index, null, previous, rest);
   }
 
   @Override
   public @Nullable ItemStack getItem(int index) {
-    if (index >= getSlotCount()) {
-      throw new IndexOutOfBoundsException();
-    }
-
-    return storedItems.get(index).cleanCopy();
+    if (index >= getSlotCount()) throw new IndexOutOfBoundsException(index);
+    return storedItems.get(index);
   }
 
   @Override
@@ -173,5 +158,8 @@ public class AlchemyRestrictedStackContainer implements StackContainer {
   }
 
   @Override
-  public void forEachItem(StackConsumer consumer) {}
+  public void forEachItem(StackConsumer consumer) {
+    for (var slot = 0; slot < storedItems.size(); slot++)
+      consumer.accept(slot, storedItems.get(slot));
+  }
 }
