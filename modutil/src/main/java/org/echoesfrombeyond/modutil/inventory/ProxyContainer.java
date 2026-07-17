@@ -26,7 +26,6 @@ import java.util.List;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-// TODO: check that InventoryOperationResult items are populated correctly
 @NullMarked
 public class ProxyContainer implements StackContainer {
   private final ItemContainer itemContainer;
@@ -45,12 +44,14 @@ public class ProxyContainer implements StackContainer {
     var result = itemContainer.addItemStack(stack);
     if (!result.succeeded()) return InventoryOperationResult.FAILED_ADD_FULL;
 
+    var first = result.getSlotTransactions().getFirst();
+
     return new InventoryOperationResult(
         ActionType.ADD,
         OperationState.SUCCESS,
-        result.getSlotTransactions().getFirst().getSlot(),
-        result.getSlotTransactions().getFirst().getSlotAfter(),
-        result.getSlotTransactions().getFirst().getSlotBefore(),
+        first.getSlot(),
+        first.getSlotAfter(),
+        first.getSlotBefore(),
         result.getRemainder());
   }
 

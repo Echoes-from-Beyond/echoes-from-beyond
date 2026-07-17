@@ -33,7 +33,6 @@ import org.echoesfrombeyond.echoesfrombeyond.asset.AlchemyComponent;
 import org.echoesfrombeyond.echoesfrombeyond.asset.AlchemyItem;
 import org.echoesfrombeyond.echoesfrombeyond.asset.AlchemyReactionList;
 import org.echoesfrombeyond.echoesfrombeyond.asset.SigilPattern;
-import org.echoesfrombeyond.echoesfrombeyond.command.IntegrationTestCommand;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyBench;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.AlchemyStorage;
 import org.echoesfrombeyond.echoesfrombeyond.component.chunk.MortarAndPestle;
@@ -142,9 +141,6 @@ public class Init {
    */
   static void registerCommands(JavaPlugin plugin) {
     Check.equals(plugin.getState(), PluginState.SETUP);
-
-    // Order registrations alphabetically by class name.
-    IntegrationTestCommand.register(plugin);
   }
 
   /**

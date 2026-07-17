@@ -14,6 +14,8 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.java.archives.Manifest
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.plugins.JavaTestFixturesPlugin
+import org.gradle.api.provider.Provider
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.AbstractArchiveTask
@@ -163,6 +165,14 @@ fun Project.withHytaleDependency(hytaleVersion: String, prerelease: Boolean = fa
   if (plugins.withType(JavaConventionPlugin::class.java).isEmpty())
       throw GradleException("Hytale plugin projects must apply JavaConventionPlugin!")
 
+  val isTestFixture = plugins.withType(JavaTestFixturesPlugin::class.java).isNotEmpty()
+
+  tasks.named("test", Test::class.java) {
+    it.workingDir(extra.get("runDir")!!)
+    it.systemProperty("java.util.logging.manager", "com.hypixel.hytale.logger.backend.HytaleLogManager")
+    it.systemProperty("org.echoesfrombeyond.assets-zip", (extra.get("assetsZip") as Provider<*>).get())
+  }
+
   repositories.exclusiveContent { exclusive ->
     exclusive.forRepository {
       repositories.maven { maven ->
@@ -188,6 +198,18 @@ fun Project.withHytaleDependency(hytaleVersion: String, prerelease: Boolean = fa
   val hytale = "com.hypixel.hytale:Server:$hytaleVersion"
   dependencies.add("compileOnly", hytale)
   dependencies.add("testImplementation", hytale)
+
+  if (isTestFixture) {
+    dependencies.add("testFixturesImplementation", hytale)
+
+    val libs =
+      (extensions.getByName("versionCatalogs") as VersionCatalogsExtension).named("libs")
+
+    libs.findBundle("testImplementation").ifPresent { provider -> dependencies.add("testFixturesImplementation", provider) }
+    libs.findBundle("$name-testImplementation").ifPresent { provider -> dependencies.add("testFixturesImplementation", provider) }
+  } else {
+    dependencies.add("testImplementation", dependencies.testFixtures(project(":testing")))
+  }
 
   extra["hytaleVersion"] = hytaleVersion
   extra["hytalePrerelease"] = prerelease

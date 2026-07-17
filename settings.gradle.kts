@@ -8,5 +8,6 @@ include(
     "example",
     "modutil",
     // "plantingyourroots",
+    "testing",
     "util",
 )

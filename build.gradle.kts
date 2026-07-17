@@ -49,14 +49,12 @@ val hytalePath: Provider<String> = provider {
 
 val serverJar: Provider<File> =
     hytalePath.map { file -> File(file).resolve("Server").resolve("HytaleServer.jar") }
-val serverAot: Provider<File> =
-    hytalePath.map { file -> File(file).resolve("Server").resolve("HytaleServer.aot.config") }
 val assetsZip: Provider<File> = hytalePath.map { file -> File(file).resolve("Assets.zip") }
 
 val checkHytalePath: TaskProvider<DefaultTask> =
     tasks.register("checkHytalePath", DefaultTask::class.java) {
-      inputs.files(serverJar, serverAot, assetsZip)
-      outputs.files(serverJar, serverAot, assetsZip)
+      inputs.files(serverJar, assetsZip)
+      outputs.files(serverJar, assetsZip)
 
       doLast {
         if (inputs.files.any { file -> !file.exists() })
@@ -68,8 +66,10 @@ val checkHytalePath: TaskProvider<DefaultTask> =
       }
     }
 
-val copySdkTask: TaskProvider<Copy> =
-    tasks.register("copySdk", Copy::class.java) { from(checkHytalePath).into(runDirectory) }
+subprojects.forEach { sub ->
+  sub.extra.set("assetsZip", assetsZip)
+  sub.extra.set("runDir", runDirectory)
+}
 
 val pluginJarFiles: Provider<List<Provider<File>>> = provider {
   subprojects
@@ -94,26 +94,24 @@ val syncPluginsTask: TaskProvider<Sync> =
     }
 
 tasks.register("runDevServer", JavaExec::class.java) {
-  inputs.files(copySdkTask, syncPluginsTask)
+  inputs.files(checkHytalePath, syncPluginsTask)
 
   // Pass through commands to the Hytale server.
   standardInput = System.`in`
 
-  classpath = files(runDirectory.file("HytaleServer.jar"))
+  classpath = files(serverJar)
   workingDir = runDirectory.asFile
 
   jvmArgs =
       listOf(
           "-Xms6G",
           "-Xmx6G",
-          "-Xlog:aot",
           "-XX:+UseCompactObjectHeaders",
-          "-XX:AOTCache=HytaleServer.aot",
           "--enable-native-access=ALL-UNNAMED",
           "--sun-misc-unsafe-memory-access=allow",
           "-ea",
       )
-  args = listOf("--disable-sentry", "--assets", "Assets.zip")
+  args("--disable-sentry", "--assets", assetsZip.get().absolutePath)
 }
 
 tasks.register("cleanRunDir", Delete::class.java) {
@@ -124,10 +122,7 @@ tasks.register("cleanRunDir", Delete::class.java) {
       fileTree(runDirectory).matching {
         include("*")
         exclude("*.json")
-        exclude("Assets.zip")
         exclude("auth.enc")
-        exclude("HytaleServer.jar")
-        exclude("HytaleServer.aot")
       }
   )
 }
