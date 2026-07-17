@@ -18,7 +18,7 @@
 
 package org.echoesfrombeyond.echoesfrombeyond.component.chunk;
 
-import static org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyRestrictedStackContainer.ALCHEMY_INTERMEDIATE_TAG;
+import static org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyIntermediateStackContainer.ALCHEMY_INTERMEDIATE_TAG;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.Component;

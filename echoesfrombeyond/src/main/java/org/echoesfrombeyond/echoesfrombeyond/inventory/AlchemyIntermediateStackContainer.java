@@ -35,23 +35,23 @@ import org.jspecify.annotations.Nullable;
  * <p>This one does not allow empty (null) slots.
  */
 @NullMarked
-public class AlchemyRestrictedStackContainer implements StackContainer {
+public class AlchemyIntermediateStackContainer implements StackContainer {
   public static final String ALCHEMY_INTERMEDIATE_TAG = "AlchemyIntermediate";
 
   private final List<ItemStack> storedItems;
   private final int maxSize;
 
-  public AlchemyRestrictedStackContainer() {
+  public AlchemyIntermediateStackContainer() {
     this.storedItems = new ArrayList<>();
     this.maxSize = Integer.MAX_VALUE;
   }
 
-  public AlchemyRestrictedStackContainer(int maxSize) {
+  public AlchemyIntermediateStackContainer(int maxSize) {
     this.storedItems = new ArrayList<>();
     this.maxSize = maxSize;
   }
 
-  public AlchemyRestrictedStackContainer(AlchemyRestrictedStackContainer that) {
+  public AlchemyIntermediateStackContainer(AlchemyIntermediateStackContainer that) {
     this.storedItems = new ArrayList<>(that.storedItems);
     this.maxSize = that.maxSize;
   }
