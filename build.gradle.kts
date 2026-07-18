@@ -2,6 +2,7 @@ import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessPlugin
 import com.diffplug.spotless.LineEnding
 import java.nio.file.Paths
+import java.util.Locale
 import org.echoesfrombeyond.gradle.plugin.HytaleDecompiler
 
 apply<HytaleDecompiler>()
@@ -15,14 +16,15 @@ val hytalePath: Provider<String> = provider {
   val hytaleDotfile: File = hytaleDotfile.asFile
 
   if (!hytaleDotfile.exists()) {
-    val os = org.gradle.internal.os.OperatingSystem.current()
-
+    val osName = System.getProperty("os.name").lowercase(Locale.ROOT)
     val basedir =
-        if (os.isWindows) {
+        if (osName.contains("windows")) {
           "AppData/Roaming"
-        } else if (os.isMacOsX) {
+        } else if (
+            osName.contains("mac os x") || osName.contains("darwin") || osName.contains("osx")
+        ) {
           "Library/Application Support"
-        } else if (os.isLinux) {
+        } else if (osName.contains("linux")) {
           ".var/app/com.hypixel.HytaleLauncher/data"
         } else {
           throw GradleException(
