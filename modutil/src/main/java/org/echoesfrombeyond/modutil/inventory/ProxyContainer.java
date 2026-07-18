@@ -27,6 +27,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
+@SuppressWarnings("ClassCanBeRecord")
 public class ProxyContainer implements StackContainer {
   private final ItemContainer itemContainer;
 
@@ -41,49 +42,48 @@ public class ProxyContainer implements StackContainer {
 
   @Override
   public InventoryOperationResult addItem(ItemStack stack) {
-    var result = itemContainer.addItemStack(stack);
-    if (!result.succeeded()) return InventoryOperationResult.FAILED_ADD_FULL;
+    var result = itemContainer.addItemStack(stack, true, false, false);
+    if (!result.succeeded())
+      return new InventoryOperationResult(
+          ActionType.ADD, OperationState.INVENTORY_FULL, -1, null, null, stack);
 
-    var first = result.getSlotTransactions().getFirst();
+    var transactions = result.getSlotTransactions();
+
+    var first = transactions.getFirst();
+    var last = transactions.getLast();
 
     return new InventoryOperationResult(
         ActionType.ADD,
         OperationState.SUCCESS,
         first.getSlot(),
-        first.getSlotAfter(),
         first.getSlotBefore(),
+        last.getSlotAfter(),
         result.getRemainder());
   }
 
   @Override
   public InventoryOperationResult addItem(ItemStack stack, int index) {
-    var result = itemContainer.addItemStackToSlot((short) index, stack);
-    if (!result.succeeded())
-      return new InventoryOperationResult(
-          ActionType.ADD, OperationState.INVENTORY_FULL, index, null, null, null);
+    var result = itemContainer.addItemStackToSlot((short) index, stack, true, false);
 
     return new InventoryOperationResult(
         ActionType.ADD,
-        OperationState.SUCCESS,
+        result.succeeded() ? OperationState.SUCCESS : OperationState.INVENTORY_FULL,
         index,
-        result.getSlotAfter(),
         result.getSlotBefore(),
+        result.getSlotAfter(),
         result.getRemainder());
   }
 
   @Override
   public InventoryOperationResult setItem(ItemStack stack, int index) {
-    var result = itemContainer.setItemStackForSlot((short) index, stack);
-    if (!result.succeeded())
-      return new InventoryOperationResult(
-          ActionType.SET, OperationState.INVENTORY_FULL, index, null, null, null);
+    var result = itemContainer.setItemStackForSlot((short) index, stack, false);
 
     return new InventoryOperationResult(
         ActionType.SET,
         OperationState.SUCCESS,
         index,
-        result.getSlotAfter(),
         result.getSlotBefore(),
+        result.getSlotAfter(),
         result.getRemainder());
   }
 
@@ -98,8 +98,8 @@ public class ProxyContainer implements StackContainer {
         ActionType.REMOVE,
         OperationState.SUCCESS,
         index,
-        result.getSlotAfter(),
         result.getSlotBefore(),
+        result.getSlotAfter(),
         result.getSlotAfter());
   }
 
@@ -118,5 +118,14 @@ public class ProxyContainer implements StackContainer {
   @Override
   public void forEachItem(StackConsumer consumer) {
     itemContainer.forEach(consumer::accept);
+  }
+
+  /**
+   * Gets the underlying {@link ItemContainer}.
+   *
+   * @return the underlying ItemContainer
+   */
+  public ItemContainer getItemContainer() {
+    return itemContainer;
   }
 }

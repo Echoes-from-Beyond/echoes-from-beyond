@@ -69,7 +69,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
 
     var rest = stack.withQuantity(stack.getQuantity() - 1);
     return new InventoryOperationResult(
-        ActionType.ADD, OperationState.SUCCESS, getSlotCount() - 1, stack, null, rest);
+        ActionType.ADD, OperationState.SUCCESS, getSlotCount() - 1, null, stack, rest);
   }
 
   @Override
@@ -95,7 +95,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
 
     var rest = stack.withQuantity(stack.getQuantity() - 1);
     return new InventoryOperationResult(
-        ActionType.ADD, OperationState.SUCCESS, index, stack, previous, rest);
+        ActionType.ADD, OperationState.SUCCESS, index, previous, stack, rest);
   }
 
   @Override
@@ -115,7 +115,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
 
     var rest = stack.withQuantity(stack.getQuantity() - 1);
     return new InventoryOperationResult(
-        ActionType.REPLACE, OperationState.SUCCESS, index, stack, previous, rest);
+        ActionType.REPLACE, OperationState.SUCCESS, index, previous, stack, rest);
   }
 
   @Override
@@ -125,7 +125,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
     var previous = storedItems.get(index);
     var rest = previous.withQuantity(previous.getQuantity() + 1);
     return new InventoryOperationResult(
-        ActionType.REMOVE, OperationState.SUCCESS, index, null, previous, rest);
+        ActionType.REMOVE, OperationState.SUCCESS, index, previous, null, rest);
   }
 
   @Override

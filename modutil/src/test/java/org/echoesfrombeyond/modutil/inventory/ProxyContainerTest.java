@@ -31,15 +31,62 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(HytaleIntegrationTest.class)
 class ProxyContainerTest {
   private static class Statics {
-    private static final ItemStack TEST_STACK_1 = new ItemStack("Test", 1);
+    private static final ItemStack TEST_STACK_1 = new ItemStack("Soil_Dirt", 1);
+    private static final ItemStack TEST_STACK_2 = new ItemStack("Soil_Grass", 1);
+  }
+
+  private static ProxyContainer getProxy(int size) {
+    return new ProxyContainer(new SimpleItemContainer((short) size));
   }
 
   @Test
   void simpleAddItem() {
-    var container = new SimpleItemContainer((short) 16);
-    var proxy = new ProxyContainer(container);
+    var proxy = getProxy(16);
 
     proxy.addItem(Statics.TEST_STACK_1);
-    assertSame(Statics.TEST_STACK_1, container.getItemStack((short) 0));
+    assertSame(Statics.TEST_STACK_1, proxy.getItem(0));
+  }
+
+  @Test
+  void addItemMerge() {
+    var proxy = getProxy(16);
+
+    proxy.addItem(Statics.TEST_STACK_1);
+    proxy.addItem(Statics.TEST_STACK_1);
+
+    var item = proxy.getItem(0);
+    assertNotNull(item);
+    assertEquals(2, item.getQuantity());
+  }
+
+  @Test
+  void fullAdd() {
+    var proxy = getProxy(1);
+
+    var result = proxy.addItem(Statics.TEST_STACK_1);
+    var result2 = proxy.addItem(Statics.TEST_STACK_2);
+
+    assertEquals(StackContainer.OperationState.SUCCESS, result.operationState());
+    assertEquals(StackContainer.OperationState.INVENTORY_FULL, result2.operationState());
+
+    assertNull(result.remainder());
+    assertEquals(Statics.TEST_STACK_2, result2.remainder());
+
+    assertEquals(Statics.TEST_STACK_1, result.newStack());
+    assertNull(result2.newStack());
+
+    assertNull(result.previousStack());
+    assertNull(result2.previousStack());
+  }
+
+  @Test
+  void addAndRemove() {
+    var proxy = getProxy(1);
+
+    proxy.addItem(Statics.TEST_STACK_1);
+    assertEquals(Statics.TEST_STACK_1, proxy.getItem(0));
+
+    proxy.removeItem(0);
+    assertNull(proxy.getItem(0));
   }
 }

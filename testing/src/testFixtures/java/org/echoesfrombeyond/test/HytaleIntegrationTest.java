@@ -42,14 +42,17 @@ public class HytaleIntegrationTest implements BeforeAllCallback {
     }
 
     var assetZip = System.getProperty("org.echoesfrombeyond.assets-zip");
-    if (assetZip == null)
-      throw new IllegalStateException(
-          "Property org.echoesfrombeyond.assets-zip must be set when using the Hytale test"
-              + " extension");
 
-    Main.main(new String[] {"--disable-sentry", "--assets", assetZip});
+    try {
+      if (assetZip == null)
+        throw new IllegalStateException(
+            "Property org.echoesfrombeyond.assets-zip must be set when using the Hytale test"
+                + " extension");
 
-    // signal waiting threads that we booted the server
-    BOOTED.countDown();
+      Main.main(new String[] {"--disable-sentry", "--assets", assetZip});
+    } finally {
+      // signal waiting threads that we booted the server
+      BOOTED.countDown();
+    }
   }
 }
