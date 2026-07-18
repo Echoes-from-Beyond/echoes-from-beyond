@@ -7,7 +7,7 @@ Group {
   Group {
     Anchor: (Width: 1400, Height: 350);
 
-    $C.Container {
+    $C.@Container {
       Anchor: (Width: 1400, Height: 350);
 
       Group {
@@ -36,7 +36,7 @@ Group {
   Group {
     Anchor: (Width: 1400, Height: 350);
 
-    $C.Container {
+    $C.@Container {
       Anchor: (Width: 1400, Height: 350);
 
       Group {

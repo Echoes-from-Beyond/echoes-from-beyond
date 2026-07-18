@@ -22,39 +22,52 @@ import com.hypixel.hytale.server.core.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.echoesfrombeyond.echoesfrombeyond.asset.AlchemyItem;
 import org.jspecify.annotations.NullMarked;
 
 /**
  * An item container that represents a common type of inventory in the alchemy system. Enforces that
- * all added items contain the appropriate tag, and are singular in quantity.
+ * all added items are referenced by the {@link AlchemyItem} asset, and are singular in quantity.
  *
  * <p>This one does not allow empty (null) slots.
  */
 @NullMarked
-public class AlchemyIntermediateStackContainer extends SingleItemStackContainer {
-  public static final String ALCHEMY_INTERMEDIATE_TAG = "AlchemyIntermediate";
+public class AlchemyStackContainer extends SingleItemStackContainer {
+  public static final String ALCHEMY_INGREDIENT_TAG = "AlchemyIngredient";
 
   private final List<ItemStack> storedItems;
   private final int maxSize;
 
-  public AlchemyIntermediateStackContainer() {
+  public AlchemyStackContainer() {
     this.storedItems = new ArrayList<>();
     this.maxSize = Integer.MAX_VALUE;
   }
 
-  public AlchemyIntermediateStackContainer(int maxSize) {
+  public AlchemyStackContainer(int maxSize) {
     this.storedItems = new ArrayList<>();
     this.maxSize = maxSize;
   }
 
-  public AlchemyIntermediateStackContainer(AlchemyIntermediateStackContainer that) {
+  public AlchemyStackContainer(AlchemyStackContainer that) {
     this.storedItems = new ArrayList<>(that.storedItems);
     this.maxSize = that.maxSize;
   }
 
   @SuppressWarnings("BooleanMethodIsAlwaysInverted")
   protected boolean canAddItem(ItemStack stack) {
-    return Arrays.asList(stack.getItem().getData().getRawTags().get("Type"))
-        .contains(ALCHEMY_INTERMEDIATE_TAG);
+    // check immediately for our own items
+    // won't work for vanilla items as we can't currently override an item without potentially
+    // introducing mod conflicts?
+    if (Arrays.asList(stack.getItem().getData().getRawTags().get("Type"))
+        .contains(ALCHEMY_INGREDIENT_TAG)) return true;
+
+    var assetMap = AlchemyItem.getAssetStore().getAssetMap().getAssetMap();
+    String stackId = stack.getItemId();
+
+    for (var key : assetMap.keySet()) {
+      if (key.equals(stackId)) return true;
+    }
+
+    return false;
   }
 }

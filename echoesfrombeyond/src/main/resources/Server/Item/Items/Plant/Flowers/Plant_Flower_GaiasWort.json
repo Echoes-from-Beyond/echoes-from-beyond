@@ -4,6 +4,9 @@
   },
   "Parent": "Plant_Flower_Common_White",
   "Tags": {
+    "Type": [
+      "AlchemyIngredient"
+    ],
     "ValidAlchemyBenches": [
       "Bench_HangingCauldron"
     ]
