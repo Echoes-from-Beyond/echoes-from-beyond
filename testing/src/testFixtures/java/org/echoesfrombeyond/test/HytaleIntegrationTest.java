@@ -19,6 +19,7 @@
 package org.echoesfrombeyond.test;
 
 import com.hypixel.hytale.Main;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.jspecify.annotations.NullMarked;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
@@ -27,10 +28,18 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 @NullMarked
 public class HytaleIntegrationTest implements BeforeAllCallback {
   private static final AtomicBoolean INIT = new AtomicBoolean(false);
+  private static final CountDownLatch BOOTED = new CountDownLatch(1);
 
   @Override
   public void beforeAll(ExtensionContext context) {
-    if (!INIT.compareAndSet(false, true)) return;
+    if (!INIT.compareAndSet(false, true)) {
+      try {
+        // server has maybe not started yet, wait for it
+        BOOTED.await();
+      } catch (InterruptedException _) {
+      }
+      return;
+    }
 
     var assetZip = System.getProperty("org.echoesfrombeyond.assets-zip");
     if (assetZip == null)
@@ -39,5 +48,8 @@ public class HytaleIntegrationTest implements BeforeAllCallback {
               + " extension");
 
     Main.main(new String[] {"--disable-sentry", "--assets", assetZip});
+
+    // signal waiting threads that we booted the server
+    BOOTED.countDown();
   }
 }
