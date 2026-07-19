@@ -39,9 +39,7 @@ public class AlchemyIntermediateStackContainer extends SingleItemStackContainer 
 
   public static final BuilderCodec<AlchemyIntermediateStackContainer> CODEC =
       CodecUtil.modelBuilder(
-          AlchemyIntermediateStackContainer.class,
-          ABSTRACT_CODEC,
-          EchoesFromBeyond.get().getResolver());
+          AlchemyIntermediateStackContainer.class, ABSTRACT_CODEC, EchoesFromBeyond.EARLY_RESOLVER);
 
   public AlchemyIntermediateStackContainer() {
     super();

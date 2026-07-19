@@ -39,7 +39,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public abstract class SingleItemStackContainer implements StackContainer {
   public static final BuilderCodec<SingleItemStackContainer> ABSTRACT_CODEC =
-      CodecUtil.modelBuilder(SingleItemStackContainer.class, EchoesFromBeyond.get().getResolver());
+      CodecUtil.modelBuilder(SingleItemStackContainer.class, EchoesFromBeyond.EARLY_RESOLVER);
 
   protected final List<ItemStack> StoredItems;
   protected final int MaxSize;

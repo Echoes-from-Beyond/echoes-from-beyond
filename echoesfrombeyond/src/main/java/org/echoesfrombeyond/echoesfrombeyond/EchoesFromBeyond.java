@@ -50,6 +50,19 @@ import org.jspecify.annotations.Nullable;
 public class EchoesFromBeyond extends JavaPlugin {
   private static @Nullable EchoesFromBeyond instance;
 
+  /**
+   * Early-stage {@link CodecResolver} that doesn't require the plugin to be initialized yet. Used
+   * to break dependency cycles.
+   *
+   * <p>Should only contain direct mappings of classes whose codecs are already defined outside the
+   * scope of this repository; e.g. {@link ItemStack#CODEC}.
+   */
+  public static final CodecResolver EARLY_RESOLVER =
+      CodecResolver.builder()
+          .withDirectMapping(ItemStack.class, ItemStack.CODEC)
+          .withDirectMapping(Vector3i.class, Vector3iUtil.CODEC)
+          .build();
+
   private @Nullable CodecResolver resolver;
 
   private final Map<UUID, ChunkGridMap<AlchemyBenchInfo>> alchemyNetworks;
@@ -84,11 +97,10 @@ public class EchoesFromBeyond extends JavaPlugin {
     resolver =
         CodecResolver.builder()
             .withStandardSettings(cache)
+            .chain(EARLY_RESOLVER)
             .withDirectMapping(
                 AlchemyIntermediateStackContainer.class, AlchemyIntermediateStackContainer.CODEC)
             .withDirectMapping(AlchemyStackContainer.class, AlchemyStackContainer.CODEC)
-            .withDirectMapping(ItemStack.class, ItemStack.CODEC)
-            .withDirectMapping(Vector3i.class, Vector3iUtil.CODEC)
             .build();
 
     EchoesFromBeyond.instance = this;
