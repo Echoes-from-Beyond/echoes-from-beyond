@@ -52,7 +52,7 @@ public class AlchemyIntermediateStackContainer extends SingleItemStackContainer 
   }
 
   public AlchemyIntermediateStackContainer(AlchemyIntermediateStackContainer that) {
-    super(that.storedItems, that.maxSize);
+    super(that.StoredItems, that.MaxSize);
   }
 
   @SuppressWarnings("BooleanMethodIsAlwaysInverted")

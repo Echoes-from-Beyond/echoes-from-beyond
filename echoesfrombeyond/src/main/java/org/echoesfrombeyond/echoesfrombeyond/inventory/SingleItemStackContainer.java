@@ -38,35 +38,34 @@ import org.jspecify.annotations.Nullable;
 @ModelBuilder
 @NullMarked
 public abstract class SingleItemStackContainer implements StackContainer {
-  // TODO: figure out why the fields don't persist
   public static final BuilderCodec<SingleItemStackContainer> ABSTRACT_CODEC =
       CodecUtil.modelBuilder(SingleItemStackContainer.class, EchoesFromBeyond.get().getResolver());
 
-  protected final List<ItemStack> storedItems;
-  protected final int maxSize;
+  protected final List<ItemStack> StoredItems;
+  protected final int MaxSize;
 
   public SingleItemStackContainer() {
-    this.storedItems = new ArrayList<>();
-    this.maxSize = Integer.MAX_VALUE;
+    this.StoredItems = new ArrayList<>();
+    this.MaxSize = Integer.MAX_VALUE;
   }
 
   public SingleItemStackContainer(int maxSize) {
-    this.storedItems = new ArrayList<>();
-    this.maxSize = maxSize;
+    this.StoredItems = new ArrayList<>();
+    this.MaxSize = maxSize;
   }
 
   public SingleItemStackContainer(List<ItemStack> storedItems, int maxSize) {
-    this.storedItems = new ArrayList<>(storedItems);
-    this.maxSize = maxSize;
+    this.StoredItems = new ArrayList<>(storedItems);
+    this.MaxSize = maxSize;
   }
 
   public int getMaxSize() {
-    return this.maxSize;
+    return this.MaxSize;
   }
 
   @Override
   public int getSlotCount() {
-    return storedItems.size();
+    return StoredItems.size();
   }
 
   @SuppressWarnings("BooleanMethodIsAlwaysInverted")
@@ -74,7 +73,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
 
   @Override
   public InventoryOperationResult addItem(ItemStack stack) {
-    if (getSlotCount() > this.maxSize) return InventoryOperationResult.FAILED_ADD_FULL;
+    if (getSlotCount() > this.MaxSize) return InventoryOperationResult.FAILED_ADD_FULL;
 
     // don't add items that don't have the correct tag, or have zero quantity
     if (!canAddItem(stack))
@@ -84,7 +83,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
     // will never return null because 1 != 0
     var single = stack.withQuantity(1);
     assert single != null;
-    storedItems.add(single);
+    StoredItems.add(single);
 
     var rest = stack.withQuantity(stack.getQuantity() - 1);
     return new InventoryOperationResult(
@@ -99,10 +98,10 @@ public abstract class SingleItemStackContainer implements StackContainer {
     if (index == size) return addItem(stack);
 
     if (index > size) throw new IndexOutOfBoundsException(index);
-    if (size > this.maxSize) return InventoryOperationResult.FAILED_ADD_FULL;
+    if (size > this.MaxSize) return InventoryOperationResult.FAILED_ADD_FULL;
 
     // capture the previous item
-    var previous = storedItems.get(index);
+    var previous = StoredItems.get(index);
 
     if (!canAddItem(stack))
       return new InventoryOperationResult(
@@ -110,7 +109,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
 
     var single = stack.withQuantity(1);
     assert single != null;
-    storedItems.add(index, single);
+    StoredItems.add(index, single);
 
     var rest = stack.withQuantity(stack.getQuantity() - 1);
     return new InventoryOperationResult(
@@ -121,7 +120,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
   public InventoryOperationResult setItem(ItemStack stack, int index) {
     if (index >= getSlotCount()) throw new IndexOutOfBoundsException(index);
 
-    var previous = storedItems.get(index);
+    var previous = StoredItems.get(index);
 
     if (!canAddItem(stack))
       return new InventoryOperationResult(
@@ -130,7 +129,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
     var single = stack.withQuantity(1);
     assert single != null;
 
-    storedItems.set(index, single);
+    StoredItems.set(index, single);
 
     var rest = stack.withQuantity(stack.getQuantity() - 1);
     return new InventoryOperationResult(
@@ -141,7 +140,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
   public InventoryOperationResult removeItem(int index) {
     if (index >= getSlotCount()) throw new IndexOutOfBoundsException(index);
 
-    var previous = storedItems.get(index);
+    var previous = StoredItems.get(index);
     var rest = previous.withQuantity(previous.getQuantity() + 1);
     return new InventoryOperationResult(
         ActionType.REMOVE, OperationState.SUCCESS, index, previous, null, rest);
@@ -150,17 +149,17 @@ public abstract class SingleItemStackContainer implements StackContainer {
   @Override
   public @Nullable ItemStack getItem(int index) {
     if (index >= getSlotCount()) throw new IndexOutOfBoundsException(index);
-    return storedItems.get(index);
+    return StoredItems.get(index);
   }
 
   @Override
   public List<ItemStack> getAllItems() {
-    return new ArrayList<>(storedItems);
+    return new ArrayList<>(StoredItems);
   }
 
   @Override
   public void forEachItem(StackConsumer consumer) {
-    for (var slot = 0; slot < storedItems.size(); slot++)
-      consumer.accept(slot, storedItems.get(slot));
+    for (var slot = 0; slot < StoredItems.size(); slot++)
+      consumer.accept(slot, StoredItems.get(slot));
   }
 }

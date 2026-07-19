@@ -31,6 +31,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiFunction;
 import org.echoesfrombeyond.codechelper.CodecResolver;
 import org.echoesfrombeyond.codechelper.cache.CodecCache;
+import org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyIntermediateStackContainer;
+import org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyStackContainer;
 import org.echoesfrombeyond.modutil.map.ChunkGridMap;
 import org.jetbrains.annotations.ApiStatus;
 import org.joml.Vector3i;
@@ -82,6 +84,9 @@ public class EchoesFromBeyond extends JavaPlugin {
     resolver =
         CodecResolver.builder()
             .withStandardSettings(cache)
+            .withDirectMapping(
+                AlchemyIntermediateStackContainer.class, AlchemyIntermediateStackContainer.CODEC)
+            .withDirectMapping(AlchemyStackContainer.class, AlchemyStackContainer.CODEC)
             .withDirectMapping(ItemStack.class, ItemStack.CODEC)
             .withDirectMapping(Vector3i.class, Vector3iUtil.CODEC)
             .build();

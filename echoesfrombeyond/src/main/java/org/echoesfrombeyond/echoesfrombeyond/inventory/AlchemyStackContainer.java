@@ -38,11 +38,9 @@ import org.jspecify.annotations.NullMarked;
 public class AlchemyStackContainer extends SingleItemStackContainer {
   public static final String ALCHEMY_INGREDIENT_TAG = "AlchemyIngredient";
 
-  public static final BuilderCodec<AlchemyIntermediateStackContainer> CODEC =
+  public static final BuilderCodec<AlchemyStackContainer> CODEC =
       CodecUtil.modelBuilder(
-          AlchemyIntermediateStackContainer.class,
-          ABSTRACT_CODEC,
-          EchoesFromBeyond.get().getResolver());
+          AlchemyStackContainer.class, ABSTRACT_CODEC, EchoesFromBeyond.get().getResolver());
 
   public AlchemyStackContainer() {
     super();
@@ -53,7 +51,7 @@ public class AlchemyStackContainer extends SingleItemStackContainer {
   }
 
   public AlchemyStackContainer(AlchemyStackContainer that) {
-    super(that.storedItems, that.maxSize);
+    super(that.StoredItems, that.MaxSize);
   }
 
   @SuppressWarnings("BooleanMethodIsAlwaysInverted")
