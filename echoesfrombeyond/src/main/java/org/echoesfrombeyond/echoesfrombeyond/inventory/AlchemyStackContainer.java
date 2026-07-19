@@ -20,10 +20,7 @@ package org.echoesfrombeyond.echoesfrombeyond.inventory;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
@@ -42,7 +39,10 @@ public class AlchemyStackContainer extends SingleItemStackContainer {
   public static final String ALCHEMY_INGREDIENT_TAG = "AlchemyIngredient";
 
   public static final BuilderCodec<AlchemyIntermediateStackContainer> CODEC =
-          CodecUtil.modelBuilder(AlchemyIntermediateStackContainer.class, ABSTRACT_CODEC, EchoesFromBeyond.get().getResolver());
+      CodecUtil.modelBuilder(
+          AlchemyIntermediateStackContainer.class,
+          ABSTRACT_CODEC,
+          EchoesFromBeyond.get().getResolver());
 
   public AlchemyStackContainer() {
     super();

@@ -25,18 +25,12 @@ import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import it.unimi.dsi.fastutil.objects.Object2BooleanFunction;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyIntermediateStackContainer;
 import org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyStackContainer;
-import org.echoesfrombeyond.modutil.inventory.InventoryOperationResult;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.UnmodifiableView;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -99,7 +93,8 @@ public class MortarAndPestle implements Component<ChunkStore> {
   }
 
   public double getProgress(int baselineInteractions, int interactionsPerItem) {
-    var neededInteractions = baselineInteractions + (interactionsPerItem * ItemsToGrind.getSlotCount());
+    var neededInteractions =
+        baselineInteractions + (interactionsPerItem * ItemsToGrind.getSlotCount());
 
     if (neededInteractions <= 0) return 0.0;
     return (double) CurrentInteractions / (double) neededInteractions;

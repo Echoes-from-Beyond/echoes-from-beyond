@@ -23,7 +23,6 @@ import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.transaction.ActionType;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
@@ -41,7 +40,7 @@ import org.jspecify.annotations.Nullable;
 public abstract class SingleItemStackContainer implements StackContainer {
   // TODO: figure out why the fields don't persist
   public static final BuilderCodec<SingleItemStackContainer> ABSTRACT_CODEC =
-          CodecUtil.modelBuilder(SingleItemStackContainer.class, EchoesFromBeyond.get().getResolver());
+      CodecUtil.modelBuilder(SingleItemStackContainer.class, EchoesFromBeyond.get().getResolver());
 
   protected final List<ItemStack> storedItems;
   protected final int maxSize;

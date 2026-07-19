@@ -91,7 +91,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
     var occupiedSlots = items.size();
 
     // populate occupied slots first
-    for(int i = 0; i < occupiedSlots; i++) {
+    for (int i = 0; i < occupiedSlots; i++) {
       var item = items.get(i);
       var itemButtonSelect = "#MortarInput[" + i + "]";
 
@@ -100,13 +100,13 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
       commandBuilder.set(itemButtonSelect + " #Slot.ItemId", item.getItemId());
 
       eventBuilder.addEventBinding(
-              CustomUIEventBindingType.Activating,
-              itemButtonSelect,
-              EventData.of("Index", Integer.toString(i))
-                      .append("Type", BenchInteractionType.RemoveItemFromInput));
+          CustomUIEventBindingType.Activating,
+          itemButtonSelect,
+          EventData.of("Index", Integer.toString(i))
+              .append("Type", BenchInteractionType.RemoveItemFromInput));
     }
 
-    for(int j = occupiedSlots; j < maxSize; j++) {
+    for (int j = occupiedSlots; j < maxSize; j++) {
       commandBuilder.append("#MortarInput", "ItemSlotPreset.ui");
     }
 
