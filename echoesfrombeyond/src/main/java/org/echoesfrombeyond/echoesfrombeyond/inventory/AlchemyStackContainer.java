@@ -18,10 +18,15 @@
 
 package org.echoesfrombeyond.echoesfrombeyond.inventory;
 
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.echoesfrombeyond.codechelper.CodecUtil;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.echoesfrombeyond.echoesfrombeyond.asset.AlchemyItem;
 import org.jspecify.annotations.NullMarked;
 
@@ -31,26 +36,24 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>This one does not allow empty (null) slots.
  */
+@ModelBuilder
 @NullMarked
 public class AlchemyStackContainer extends SingleItemStackContainer {
   public static final String ALCHEMY_INGREDIENT_TAG = "AlchemyIngredient";
 
-  private final List<ItemStack> storedItems;
-  private final int maxSize;
+  public static final BuilderCodec<AlchemyIntermediateStackContainer> CODEC =
+          CodecUtil.modelBuilder(AlchemyIntermediateStackContainer.class, ABSTRACT_CODEC, EchoesFromBeyond.get().getResolver());
 
   public AlchemyStackContainer() {
-    this.storedItems = new ArrayList<>();
-    this.maxSize = Integer.MAX_VALUE;
+    super();
   }
 
   public AlchemyStackContainer(int maxSize) {
-    this.storedItems = new ArrayList<>();
-    this.maxSize = maxSize;
+    super(maxSize);
   }
 
   public AlchemyStackContainer(AlchemyStackContainer that) {
-    this.storedItems = new ArrayList<>(that.storedItems);
-    this.maxSize = that.maxSize;
+    super(that.storedItems, that.maxSize);
   }
 
   @SuppressWarnings("BooleanMethodIsAlwaysInverted")

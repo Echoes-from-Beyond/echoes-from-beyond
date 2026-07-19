@@ -56,7 +56,7 @@ public final class AlchemyBenchUtils {
                                   w, pos, AlchemyStorage.getComponentType());
                           if (storage == null) return null;
 
-                          return storage.getStorage();
+                          return storage.ItemsStored.getAllItems();
                         }))
         .flatMap(optional -> optional)
         .orElse(List.of());

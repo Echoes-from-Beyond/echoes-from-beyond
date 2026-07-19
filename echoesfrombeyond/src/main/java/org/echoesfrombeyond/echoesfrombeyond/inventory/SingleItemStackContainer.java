@@ -18,10 +18,15 @@
 
 package org.echoesfrombeyond.echoesfrombeyond.inventory;
 
+import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.transaction.ActionType;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.echoesfrombeyond.codechelper.CodecUtil;
+import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
+import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
 import org.echoesfrombeyond.modutil.inventory.InventoryOperationResult;
 import org.echoesfrombeyond.modutil.inventory.StackContainer;
 import org.jspecify.annotations.NullMarked;
@@ -31,14 +36,29 @@ import org.jspecify.annotations.Nullable;
  * Represents a StackContainer that only takes in one item at a time and does not have null slots.
  * Implementations differ in the validation that they do.
  */
+@ModelBuilder
 @NullMarked
 public abstract class SingleItemStackContainer implements StackContainer {
-  private final List<ItemStack> storedItems;
-  private final int maxSize;
+  // TODO: figure out why the fields don't persist
+  public static final BuilderCodec<SingleItemStackContainer> ABSTRACT_CODEC =
+          CodecUtil.modelBuilder(SingleItemStackContainer.class, EchoesFromBeyond.get().getResolver());
+
+  protected final List<ItemStack> storedItems;
+  protected final int maxSize;
 
   public SingleItemStackContainer() {
     this.storedItems = new ArrayList<>();
     this.maxSize = Integer.MAX_VALUE;
+  }
+
+  public SingleItemStackContainer(int maxSize) {
+    this.storedItems = new ArrayList<>();
+    this.maxSize = maxSize;
+  }
+
+  public SingleItemStackContainer(List<ItemStack> storedItems, int maxSize) {
+    this.storedItems = new ArrayList<>(storedItems);
+    this.maxSize = maxSize;
   }
 
   public int getMaxSize() {

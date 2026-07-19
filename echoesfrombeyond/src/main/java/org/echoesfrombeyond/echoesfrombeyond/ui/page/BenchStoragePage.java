@@ -63,7 +63,7 @@ public class BenchStoragePage extends InteractiveCustomUIPage<GenericBenchData> 
       AlchemyStorage storageBlock) {
     commandBuilder.append("BenchStoragePage.ui");
 
-    var storageView = storageBlock.getStorage();
+    var storage = storageBlock.ItemsStored;
   }
 
   @Override

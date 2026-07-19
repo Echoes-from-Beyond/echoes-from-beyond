@@ -84,23 +84,30 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
       MortarAndPestle mortarAndPestle) {
     commandBuilder.append("BenchMortarPage.ui");
 
-    var items = mortarAndPestle.getItems();
+    var items = mortarAndPestle.ItemsToGrind.getAllItems();
 
     // MAIN UI
-    for (int i = 0; i < items.size(); i++) {
+    var maxSize = mortarAndPestle.ItemsToGrind.getMaxSize();
+    var occupiedSlots = items.size();
+
+    // populate occupied slots first
+    for(int i = 0; i < occupiedSlots; i++) {
       var item = items.get(i);
       var itemButtonSelect = "#MortarInput[" + i + "]";
 
       commandBuilder.append("#MortarInput", "ItemSlotPreset.ui");
-      if (item == null) continue;
 
       commandBuilder.set(itemButtonSelect + " #Slot.ItemId", item.getItemId());
 
       eventBuilder.addEventBinding(
-          CustomUIEventBindingType.Activating,
-          itemButtonSelect,
-          EventData.of("Index", Integer.toString(i))
-              .append("Type", BenchInteractionType.RemoveItemFromInput));
+              CustomUIEventBindingType.Activating,
+              itemButtonSelect,
+              EventData.of("Index", Integer.toString(i))
+                      .append("Type", BenchInteractionType.RemoveItemFromInput));
+    }
+
+    for(int j = occupiedSlots; j < maxSize; j++) {
+      commandBuilder.append("#MortarInput", "ItemSlotPreset.ui");
     }
 
     var validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, position);
@@ -139,8 +146,9 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
     var overflow = mortarAndPestle.Overflow;
 
     // OVERFLOW
-    for (int i = 0; i < overflow.size(); i++) {
-      var item = overflow.get(i);
+    for (int i = 0; i < overflow.getSlotCount(); i++) {
+      var item = overflow.getItem(i);
+      assert item != null;
       String overflowSelect = "#Overflow[" + i + "]";
 
       commandBuilder.append("#Overflow", "ItemSlotPreset.ui");
@@ -215,11 +223,9 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
           case RemoveItemFromInput ->
               (!mortarAndPestle.isInProgress())
                   && data.useIndex(
-                          mortarAndPestle.getItems(),
+                          mortarAndPestle.ItemsToGrind.getAllItems(),
                           (index, itemToRemove) -> {
-                            if (itemToRemove == null) return false;
-
-                            mortarAndPestle.setItem(index, null);
+                            mortarAndPestle.ItemsToGrind.removeItem(index);
 
                             if (!combinedInventory.addItemStack(itemToRemove).succeeded())
                               ItemUtils.dropItem(ref, itemToRemove, store);
@@ -230,13 +236,13 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
 
           case RemoveItemFromOverflow ->
               data.useIndex(
-                      mortarAndPestle.Overflow,
+                      mortarAndPestle.Overflow.getAllItems(),
                       (index, item) -> {
                         // to remove from overflow, no need to check for progress
                         // however, there *shouldn't* be progress if overflow exists - a player must
                         // take out all
                         // overflow before grinding more ingredients
-                        mortarAndPestle.Overflow.remove(index);
+                        mortarAndPestle.Overflow.removeItem(index);
 
                         if (!combinedInventory.addItemStack(item).succeeded())
                           ItemUtils.dropItem(ref, item, store);

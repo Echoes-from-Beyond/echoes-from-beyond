@@ -27,11 +27,16 @@ import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import it.unimi.dsi.fastutil.objects.Object2BooleanFunction;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
+import org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyIntermediateStackContainer;
+import org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyStackContainer;
+import org.echoesfrombeyond.modutil.inventory.InventoryOperationResult;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.UnmodifiableView;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -46,10 +51,10 @@ public class MortarAndPestle implements Component<ChunkStore> {
   private static @Nullable ComponentType<ChunkStore, MortarAndPestle> COMPONENT_TYPE;
 
   @SuppressWarnings("FieldMayBeFinal")
-  private @Nullable ItemStack[] ItemsToGrind;
+  public AlchemyStackContainer ItemsToGrind;
 
   @SuppressWarnings("FieldMayBeFinal")
-  public List<ItemStack> Overflow;
+  public AlchemyIntermediateStackContainer Overflow;
 
   public int CurrentInteractions;
 
@@ -73,50 +78,19 @@ public class MortarAndPestle implements Component<ChunkStore> {
 
   @SuppressWarnings("unused")
   public MortarAndPestle() {
-    this.ItemsToGrind = new ItemStack[MAX_GRINDABLE_ITEMS];
-    this.Overflow = new ObjectArrayList<>();
+    this.ItemsToGrind = new AlchemyStackContainer(MAX_GRINDABLE_ITEMS);
+    this.Overflow = new AlchemyIntermediateStackContainer();
   }
 
   private MortarAndPestle(MortarAndPestle that) {
-    this.ItemsToGrind = new ItemStack[that.ItemsToGrind.length];
-    System.arraycopy(that.ItemsToGrind, 0, this.ItemsToGrind, 0, ItemsToGrind.length);
-    this.Overflow = new ObjectArrayList<>(that.Overflow);
+    this.ItemsToGrind = new AlchemyStackContainer(that.ItemsToGrind);
+    this.Overflow = new AlchemyIntermediateStackContainer(that.Overflow);
     this.CurrentInteractions = that.CurrentInteractions;
-  }
-
-  public boolean tryAddItemToInput(ItemStack newItem, Object2BooleanFunction<ItemStack> transact) {
-    for (int i = 0; i < ItemsToGrind.length; i++) {
-      if (ItemsToGrind[i] == null) {
-        if (transact.test(newItem)) {
-          ItemsToGrind[i] = newItem;
-          return true;
-        }
-
-        return false;
-      }
-    }
-
-    return false;
-  }
-
-  public void setItem(int index, @Nullable ItemStack item) {
-    ItemsToGrind[index] = item;
-  }
-
-  public List<@Nullable ItemStack> getItems() {
-    return Arrays.asList(ItemsToGrind);
   }
 
   @SuppressWarnings("BooleanMethodIsAlwaysInverted")
   public boolean hasItems() {
-    for (var item : ItemsToGrind) if (item != null) return true;
-    return false;
-  }
-
-  public int getItemCount() {
-    int i = 0;
-    for (var item : ItemsToGrind) if (item != null) i++;
-    return i;
+    return ItemsToGrind.getSlotCount() > 0;
   }
 
   @SuppressWarnings("BooleanMethodIsAlwaysInverted")
@@ -125,10 +99,20 @@ public class MortarAndPestle implements Component<ChunkStore> {
   }
 
   public double getProgress(int baselineInteractions, int interactionsPerItem) {
-    var neededInteractions = baselineInteractions + (interactionsPerItem * getItemCount());
+    var neededInteractions = baselineInteractions + (interactionsPerItem * ItemsToGrind.getSlotCount());
 
     if (neededInteractions <= 0) return 0.0;
     return (double) CurrentInteractions / (double) neededInteractions;
+  }
+
+  public boolean tryAddItemToInput(ItemStack newItem, Object2BooleanFunction<ItemStack> transact) {
+    if (transact.test(newItem)) {
+      var result = ItemsToGrind.addItem(newItem);
+
+      return result.operationState().isSuccess();
+    }
+
+    return false;
   }
 
   @Override

@@ -34,6 +34,8 @@ import java.util.List;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.echoesfrombeyond.EchoesFromBeyond;
+import org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyIntermediateStackContainer;
+import org.echoesfrombeyond.modutil.inventory.InventoryOperationResult;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.UnmodifiableView;
 import org.jspecify.annotations.NullMarked;
@@ -49,10 +51,8 @@ public class AlchemyStorage implements Component<ChunkStore> {
 
   private static @Nullable ComponentType<ChunkStore, AlchemyStorage> COMPONENT_TYPE;
 
-  public int MaxStorage;
-
   @SuppressWarnings("FieldMayBeFinal")
-  private List<ItemStack> ItemsStored;
+  public AlchemyIntermediateStackContainer ItemsStored;
 
   /**
    * Called internally during plugin initialization.
@@ -74,61 +74,11 @@ public class AlchemyStorage implements Component<ChunkStore> {
 
   @SuppressWarnings("unused")
   public AlchemyStorage() {
-    this.MaxStorage = DEFAULT_MAX_STORAGE_SIZE;
-    this.ItemsStored = new ArrayList<>();
+    ItemsStored = new AlchemyIntermediateStackContainer(DEFAULT_MAX_STORAGE_SIZE);
   }
 
   private AlchemyStorage(AlchemyStorage that) {
-    this.MaxStorage = that.MaxStorage;
-    this.ItemsStored = new ObjectArrayList<>(that.ItemsStored);
-  }
-
-  @UnmodifiableView
-  public List<ItemStack> getStorage() {
-    // instead of directly modifying the list, should always fall back on other methods to ensure
-    // validation
-    return Collections.unmodifiableList(ItemsStored);
-  }
-
-  public boolean addToStorage(ItemStack item) {
-    // only one item per slot
-    if (item.getQuantity() > 1) return false;
-
-    // don't add items that don't have the correct tag
-    if (!Arrays.asList(item.getItem().getData().getRawTags().get("Type"))
-        .contains(ALCHEMY_INTERMEDIATE_TAG)) return false;
-
-    ItemsStored.add(item);
-    return true;
-  }
-
-  public boolean removeFromStorage(int index) {
-    // bounds check
-    if (index < 0 || index >= ItemsStored.size()) return false;
-
-    ItemsStored.remove(index);
-
-    return true;
-  }
-
-  /**
-   * Performs extra validation by checking that the target item still exists at a given index,
-   * before removing it.
-   *
-   * @param index position in the list
-   * @param item target item
-   * @return {@code true} if all validation passes <i>and</i> the item was removed, {@code false}
-   *     otherwise.
-   */
-  public boolean removeFromStorage(int index, ItemStack item) {
-    // bounds check
-    if (index < 0 || index >= ItemsStored.size()) return false;
-
-    if (!ItemsStored.get(index).equals(item)) return false;
-
-    ItemsStored.remove(index);
-
-    return true;
+    this.ItemsStored = new AlchemyIntermediateStackContainer(that.ItemsStored);
   }
 
   @Override
