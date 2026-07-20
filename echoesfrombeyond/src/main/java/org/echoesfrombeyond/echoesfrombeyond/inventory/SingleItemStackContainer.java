@@ -38,6 +38,9 @@ import org.jspecify.annotations.Nullable;
 @ModelBuilder
 @NullMarked
 public abstract class SingleItemStackContainer implements StackContainer {
+  // defaults to 10 in event of unexpected glitches
+  // manually set to Integer.MAX_SIZE if you want to have an effectively unlimited container
+  public static final int DEFAULT_SIZE = 10;
   public static final BuilderCodec<SingleItemStackContainer> ABSTRACT_CODEC =
       CodecUtil.modelBuilder(SingleItemStackContainer.class, EchoesFromBeyond.EARLY_RESOLVER);
 
@@ -46,7 +49,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
 
   public SingleItemStackContainer() {
     this.StoredItems = new ArrayList<>();
-    this.MaxSize = Integer.MAX_VALUE;
+    this.MaxSize = DEFAULT_SIZE;
   }
 
   public SingleItemStackContainer(int maxSize) {
