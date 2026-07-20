@@ -225,7 +225,9 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
                   && data.useIndex(
                           mortarAndPestle.ItemsToGrind.getAllItems(),
                           (index, itemToRemove) -> {
-                            mortarAndPestle.ItemsToGrind.removeItem(index);
+                            var capture = mortarAndPestle.ItemsToGrind.removeItem(index);
+
+                            if(capture.operationState().isFailure()) return false;
 
                             if (!combinedInventory.addItemStack(itemToRemove).succeeded())
                               ItemUtils.dropItem(ref, itemToRemove, store);

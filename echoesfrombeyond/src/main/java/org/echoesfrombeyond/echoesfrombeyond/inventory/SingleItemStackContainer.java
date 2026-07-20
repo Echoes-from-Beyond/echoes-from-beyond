@@ -143,7 +143,7 @@ public abstract class SingleItemStackContainer implements StackContainer {
   public InventoryOperationResult removeItem(int index) {
     if (index >= getSlotCount()) throw new IndexOutOfBoundsException(index);
 
-    var previous = StoredItems.get(index);
+    var previous = StoredItems.remove(index);
     var rest = previous.withQuantity(previous.getQuantity() + 1);
     return new InventoryOperationResult(
         ActionType.REMOVE, OperationState.SUCCESS, index, previous, null, rest);
