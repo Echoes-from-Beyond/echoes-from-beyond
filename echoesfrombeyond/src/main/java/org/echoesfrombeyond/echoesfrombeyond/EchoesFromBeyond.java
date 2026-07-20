@@ -59,6 +59,7 @@ public class EchoesFromBeyond extends JavaPlugin {
    */
   public static final CodecResolver EARLY_RESOLVER =
       CodecResolver.builder()
+          .withStandardSettings()
           .withDirectMapping(ItemStack.class, ItemStack.CODEC)
           .withDirectMapping(Vector3i.class, Vector3iUtil.CODEC)
           .build();
