@@ -251,7 +251,8 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
 
     if (modification) blockStateInfo.markNeedsSaving();
 
-    validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, "MortarAndPestle");
+    validIngredients =
+        AlchemyBenchUtils.getValidIngredientsForBench(ref, store, "Bench_MortarAndPestle");
     itemsInStorage =
         AlchemyBenchUtils.getItemsInStorageNetwork(store.getExternalData().getWorld(), position);
 

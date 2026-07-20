@@ -89,7 +89,7 @@ public class BenchMortarSupplier extends AlchemyBenchSupplier {
             ChunkUtil.worldCoordFromLocalCoord(worldChunk.getZ(), cz));
 
     var validIngredients =
-        AlchemyBenchUtils.getValidIngredientsForBench(ref, ref.getStore(), "MortarAndPestle");
+        AlchemyBenchUtils.getValidIngredientsForBench(ref, ref.getStore(), "Bench_MortarAndPestle");
     var itemsInStorage =
         AlchemyBenchUtils.getItemsInStorageNetwork(store.getExternalData().getWorld(), position);
 
