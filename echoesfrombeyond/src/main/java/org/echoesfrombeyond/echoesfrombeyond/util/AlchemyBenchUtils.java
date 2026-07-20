@@ -20,7 +20,6 @@ package org.echoesfrombeyond.echoesfrombeyond.util;
 
 import com.hypixel.hytale.component.ComponentAccessor;
 import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.math.util.ChunkUtil;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.world.World;
@@ -65,24 +64,9 @@ public final class AlchemyBenchUtils {
   public static ItemStack[] getValidIngredientsForBench(
       Ref<EntityStore> ref,
       ComponentAccessor<EntityStore> componentAccessor,
-      Vector3i targetBlock) {
-    var worldChunkComponent =
-        ref.getStore()
-            .getExternalData()
-            .getWorld()
-            .getChunkIfInMemory(ChunkUtil.indexChunkFromBlock(targetBlock.x, targetBlock.z));
-    if (worldChunkComponent == null) return ItemStack.EMPTY_ARRAY;
-
-    var type =
-        worldChunkComponent.getBlockType(
-            ChunkUtil.localCoordinate(targetBlock.x),
-            targetBlock.y,
-            ChunkUtil.localCoordinate(targetBlock.z));
-    if (type == null) return ItemStack.EMPTY_ARRAY;
-
+      String targetBlockId) {
     var combinedInventory =
         InventoryComponent.getCombined(componentAccessor, ref, InventoryComponent.EVERYTHING);
-    var targetBlockId = type.getId();
 
     var items = new ArrayList<ItemStack>();
 

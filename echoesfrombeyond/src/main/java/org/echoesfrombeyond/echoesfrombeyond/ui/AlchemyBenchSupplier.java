@@ -18,8 +18,7 @@
 
 package org.echoesfrombeyond.echoesfrombeyond.ui;
 
-import com.hypixel.hytale.server.core.modules.interaction.interaction.config.server.OpenCustomUIInteraction;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public abstract class AlchemyBenchSupplier implements OpenCustomUIInteraction.CustomPageSupplier {}
+public abstract class AlchemyBenchSupplier extends BlockEntityCustomPageSupplierAdapter {}

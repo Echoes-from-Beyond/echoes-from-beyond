@@ -26,6 +26,7 @@ import com.hypixel.hytale.server.core.entity.ItemUtils;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.InteractiveCustomUIPage;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.modules.block.BlockModule;
 import com.hypixel.hytale.server.core.ui.builder.EventData;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
@@ -38,25 +39,38 @@ import org.echoesfrombeyond.echoesfrombeyond.ui.data.BenchInteractionType;
 import org.echoesfrombeyond.echoesfrombeyond.ui.data.GenericBenchData;
 import org.echoesfrombeyond.echoesfrombeyond.ui.data.ItemSource;
 import org.echoesfrombeyond.echoesfrombeyond.util.AlchemyBenchUtils;
-import org.echoesfrombeyond.modutil.component.ComponentUtils;
 import org.echoesfrombeyond.util.Check;
 import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
-  private final Vector3i position;
+  private final BlockModule.BlockStateInfo blockStateInfo;
+  private final MortarAndPestle mortarAndPestle;
+
   private final List<ItemStack> ingredientTypes;
+  private final Vector3i position;
   private final int baselineInteractions;
   private final int interactionsPerIngredient;
 
+  private ItemStack[] validIngredients;
+  private List<ItemStack> itemsInStorage;
+
   public BenchMortarPage(
       PlayerRef playerRef,
+      BlockModule.BlockStateInfo blockStateInfo,
+      MortarAndPestle mortarAndPestle,
       Vector3i position,
+      ItemStack[] validIngredients,
+      List<ItemStack> itemsInStorage,
       int baselineInteractions,
       int interactionsPerIngredient) {
     super(playerRef, CustomPageLifetime.CanDismiss, GenericBenchData.CODEC);
+    this.blockStateInfo = blockStateInfo;
+    this.mortarAndPestle = mortarAndPestle;
     this.position = position;
+    this.validIngredients = validIngredients;
+    this.itemsInStorage = itemsInStorage;
     this.ingredientTypes = new ArrayList<>();
     this.baselineInteractions = baselineInteractions;
     this.interactionsPerIngredient = interactionsPerIngredient;
@@ -76,12 +90,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
     return true;
   }
 
-  private void buildInternal(
-      Ref<EntityStore> ref,
-      Store<EntityStore> store,
-      UICommandBuilder commandBuilder,
-      UIEventBuilder eventBuilder,
-      MortarAndPestle mortarAndPestle) {
+  private void buildInternal(UICommandBuilder commandBuilder, UIEventBuilder eventBuilder) {
     commandBuilder.append("BenchMortarPage.ui");
 
     var items = mortarAndPestle.ItemsToGrind.getAllItems();
@@ -109,10 +118,6 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
     for (int j = occupiedSlots; j < maxSize; j++) {
       commandBuilder.append("#MortarInput", "ItemSlotPreset.ui");
     }
-
-    var validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, position);
-    var itemsInStorage =
-        AlchemyBenchUtils.getItemsInStorageNetwork(store.getExternalData().getWorld(), position);
 
     // STORAGE
     for (int i = 0; i < itemsInStorage.size(); i++) {
@@ -182,26 +187,12 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
       UICommandBuilder commandBuilder,
       UIEventBuilder eventBuilder,
       Store<EntityStore> store) {
-    var mortarAndPestle =
-        ComponentUtils.getBlockComponent(
-            store.getExternalData().getWorld(), position, MortarAndPestle.getComponentType());
-    if (mortarAndPestle == null) return;
-
-    buildInternal(ref, store, commandBuilder, eventBuilder, mortarAndPestle);
+    buildInternal(commandBuilder, eventBuilder);
   }
 
   @Override
   public void handleDataEvent(
       Ref<EntityStore> ref, Store<EntityStore> store, GenericBenchData data) {
-    var world = store.getExternalData().getWorld();
-    var mortarAndPestle =
-        ComponentUtils.getBlockComponent(world, position, MortarAndPestle.getComponentType());
-
-    if (mortarAndPestle == null) {
-      sendUpdate();
-      return;
-    }
-
     var combinedInventory =
         InventoryComponent.getCombined(store, ref, InventoryComponent.EVERYTHING);
 
@@ -227,7 +218,7 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
                           (index, itemToRemove) -> {
                             var capture = mortarAndPestle.ItemsToGrind.removeItem(index);
 
-                            if(capture.operationState().isFailure()) return false;
+                            if (capture.operationState().isFailure()) return false;
 
                             if (!combinedInventory.addItemStack(itemToRemove).succeeded())
                               ItemUtils.dropItem(ref, itemToRemove, store);
@@ -258,12 +249,16 @@ public class BenchMortarPage extends InteractiveCustomUIPage<GenericBenchData> {
           case null -> false;
         };
 
-    if (modification) ComponentUtils.markNeedsSaving(world, position);
+    if (modification) blockStateInfo.markNeedsSaving();
+
+    validIngredients = AlchemyBenchUtils.getValidIngredientsForBench(ref, store, "MortarAndPestle");
+    itemsInStorage =
+        AlchemyBenchUtils.getItemsInStorageNetwork(store.getExternalData().getWorld(), position);
 
     var commandBuilder = new UICommandBuilder();
     var eventBuilder = new UIEventBuilder();
 
-    buildInternal(ref, store, commandBuilder, eventBuilder, mortarAndPestle);
+    buildInternal(commandBuilder, eventBuilder);
     sendUpdate(commandBuilder, eventBuilder, true);
   }
 }

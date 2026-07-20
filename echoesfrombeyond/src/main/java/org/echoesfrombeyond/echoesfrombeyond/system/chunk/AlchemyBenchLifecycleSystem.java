@@ -49,8 +49,9 @@ public class AlchemyBenchLifecycleSystem extends RefSystem<ChunkStore> {
       Store<ChunkStore> store,
       CommandBuffer<ChunkStore> buf) {
     var stateInfo = buf.getComponent(ref, blockStateInfoComponentType);
-
     if (stateInfo == null) return;
+
+    if (reason == AddReason.SPAWN) stateInfo.markNeedsSaving();
 
     var chunkRef = stateInfo.getChunkRef();
     if (!chunkRef.isValid()) return;
@@ -91,9 +92,7 @@ public class AlchemyBenchLifecycleSystem extends RefSystem<ChunkStore> {
       Store<ChunkStore> store,
       CommandBuffer<ChunkStore> buf) {
     var stateInfo = buf.getComponent(ref, blockStateInfoComponentType);
-
     if (stateInfo == null) return;
-    if (reason == RemoveReason.UNLOAD) stateInfo.markNeedsSaving();
 
     var chunkRef = stateInfo.getChunkRef();
     if (!chunkRef.isValid()) return;

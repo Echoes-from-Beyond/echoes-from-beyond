@@ -19,19 +19,22 @@
 package org.echoesfrombeyond.echoesfrombeyond.ui.supplier;
 
 import com.hypixel.hytale.codec.builder.BuilderCodec;
-import com.hypixel.hytale.component.ComponentAccessor;
 import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.server.core.entity.InteractionContext;
+import com.hypixel.hytale.math.util.ChunkUtil;
 import com.hypixel.hytale.server.core.entity.entities.player.pages.CustomUIPage;
+import com.hypixel.hytale.server.core.modules.block.BlockModule;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
-import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
+import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import org.echoesfrombeyond.codechelper.CodecUtil;
 import org.echoesfrombeyond.codechelper.Plugin;
 import org.echoesfrombeyond.codechelper.annotation.Doc;
 import org.echoesfrombeyond.codechelper.annotation.ModelBuilder;
 import org.echoesfrombeyond.codechelper.annotation.validator.ValidateIntRange;
+import org.echoesfrombeyond.echoesfrombeyond.component.chunk.MortarAndPestle;
 import org.echoesfrombeyond.echoesfrombeyond.ui.AlchemyBenchSupplier;
 import org.echoesfrombeyond.echoesfrombeyond.ui.page.BenchMortarPage;
+import org.echoesfrombeyond.echoesfrombeyond.util.AlchemyBenchUtils;
 import org.joml.Vector3i;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -59,16 +62,46 @@ public class BenchMortarSupplier extends AlchemyBenchSupplier {
   @ValidateIntRange(min = 0, max = Integer.MAX_VALUE)
   protected int InteractionsPerIngredient;
 
-  public @Nullable CustomUIPage tryCreate(
-      Ref<EntityStore> ref,
-      ComponentAccessor<EntityStore> componentAccessor,
-      PlayerRef playerRef,
-      InteractionContext context) {
-    var block = context.getTargetBlock();
-    if (block == null) return null;
+  @Override
+  public @Nullable CustomUIPage tryCreate(PlayerRef playerRef, Ref<ChunkStore> blockEntity) {
+    var ref = playerRef.getReference();
+    if (ref == null) return null;
 
-    var targetBlock = new Vector3i(block.x, block.y, block.z);
+    var store = blockEntity.getStore();
+
+    var blockStateInfo =
+        store.getComponent(blockEntity, BlockModule.BlockStateInfo.getComponentType());
+    var mortarAndPestle = store.getComponent(blockEntity, MortarAndPestle.getComponentType());
+    var worldChunk = store.getComponent(blockEntity, WorldChunk.getComponentType());
+
+    assert blockStateInfo != null;
+    assert mortarAndPestle != null;
+    assert worldChunk != null;
+
+    var index = blockStateInfo.getIndex();
+    var cx = ChunkUtil.xFromBlockInColumn(index);
+    var cy = ChunkUtil.yFromBlockInColumn(index);
+    var cz = ChunkUtil.zFromBlockInColumn(index);
+
+    var position =
+        new Vector3i(
+            ChunkUtil.worldCoordFromLocalCoord(worldChunk.getX(), cx),
+            cy,
+            ChunkUtil.worldCoordFromLocalCoord(worldChunk.getZ(), cz));
+
+    var validIngredients =
+        AlchemyBenchUtils.getValidIngredientsForBench(ref, ref.getStore(), "MortarAndPestle");
+    var itemsInStorage =
+        AlchemyBenchUtils.getItemsInStorageNetwork(store.getExternalData().getWorld(), position);
+
     return new BenchMortarPage(
-        playerRef, targetBlock, BaselineInteractions, InteractionsPerIngredient);
+        playerRef,
+        blockStateInfo,
+        mortarAndPestle,
+        position,
+        validIngredients,
+        itemsInStorage,
+        BaselineInteractions,
+        InteractionsPerIngredient);
   }
 }

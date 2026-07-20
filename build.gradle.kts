@@ -117,8 +117,11 @@ tasks.register("runDevServer", JavaExec::class.java) {
 }
 
 tasks.register("cleanRunDir", Delete::class.java) {
+  delete(runDirectory.dir(".cache"))
+  delete(runDirectory.dir("assetEditor"))
   delete(runDirectory.dir("logs"))
   delete(runDirectory.dir("mods"))
+  delete(runDirectory.dir("telemetry"))
   delete(runDirectory.dir("universe"))
   delete(
       fileTree(runDirectory).matching {
