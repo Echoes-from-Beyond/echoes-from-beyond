@@ -63,7 +63,8 @@ public class BenchMortarSupplier extends AlchemyBenchSupplier {
   protected int InteractionsPerIngredient;
 
   @Override
-  public @Nullable CustomUIPage tryCreate(PlayerRef playerRef, Ref<ChunkStore> blockEntity, WorldChunk worldChunk) {
+  public @Nullable CustomUIPage tryCreate(
+      PlayerRef playerRef, Ref<ChunkStore> blockEntity, WorldChunk worldChunk) {
     var ref = playerRef.getReference();
     if (ref == null) return null;
 

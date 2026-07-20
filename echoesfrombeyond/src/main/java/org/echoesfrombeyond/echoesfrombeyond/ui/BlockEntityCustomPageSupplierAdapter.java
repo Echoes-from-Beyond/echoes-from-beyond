@@ -66,5 +66,6 @@ public abstract class BlockEntityCustomPageSupplierAdapter
     return tryCreate(playerRef, blockEntityRef, worldChunkComponent);
   }
 
-  public abstract @Nullable CustomUIPage tryCreate(PlayerRef ref, Ref<ChunkStore> blockEntityRef, WorldChunk chunk);
+  public abstract @Nullable CustomUIPage tryCreate(
+      PlayerRef ref, Ref<ChunkStore> blockEntityRef, WorldChunk chunk);
 }
