@@ -41,8 +41,8 @@ public abstract class SingleItemStackContainer implements StackContainer {
   public static final BuilderCodec<SingleItemStackContainer> ABSTRACT_CODEC =
       CodecUtil.modelBuilder(SingleItemStackContainer.class, EchoesFromBeyond.EARLY_RESOLVER);
 
-  protected final List<ItemStack> StoredItems;
-  protected final int MaxSize;
+  protected List<ItemStack> StoredItems;
+  protected int MaxSize;
 
   public SingleItemStackContainer() {
     this.StoredItems = new ArrayList<>();
