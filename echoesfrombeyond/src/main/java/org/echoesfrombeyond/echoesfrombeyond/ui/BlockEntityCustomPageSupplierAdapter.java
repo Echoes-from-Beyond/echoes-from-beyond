@@ -32,16 +32,12 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Abstract class uniting both {@link OpenCustomUIInteraction.CustomPageSupplier} and {@link
- * OpenCustomUIInteraction.BlockEntityCustomPageSupplier}.
- *
- * <p>Necessary to avoid needing the registration API in {@link OpenCustomUIInteraction}, which is
- * incomplete (does not support user-provided codecs).
+ * Necessary to avoid needing the registration API in {@link OpenCustomUIInteraction}, which is
+ * incomplete (does not support user-provided codecs) and kinda horrible to use.
  */
 @NullMarked
 public abstract class BlockEntityCustomPageSupplierAdapter
-    implements OpenCustomUIInteraction.CustomPageSupplier,
-        OpenCustomUIInteraction.BlockEntityCustomPageSupplier {
+    implements OpenCustomUIInteraction.CustomPageSupplier {
   @Override
   public final @Nullable CustomUIPage tryCreate(
       Ref<EntityStore> ref,
@@ -67,8 +63,8 @@ public abstract class BlockEntityCustomPageSupplierAdapter
     var blockEntityRef = worldChunkComponent.getBlockComponentEntity(cx, targetBlock.y, cz);
     if (blockEntityRef == null || !blockEntityRef.isValid()) return null;
 
-    return tryCreate(playerRef, blockEntityRef);
+    return tryCreate(playerRef, blockEntityRef, worldChunkComponent);
   }
 
-  public abstract @Nullable CustomUIPage tryCreate(PlayerRef ref, Ref<ChunkStore> blockEntityRef);
+  public abstract @Nullable CustomUIPage tryCreate(PlayerRef ref, Ref<ChunkStore> blockEntityRef, WorldChunk chunk);
 }

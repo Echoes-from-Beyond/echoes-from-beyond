@@ -63,7 +63,7 @@ public class BenchMortarSupplier extends AlchemyBenchSupplier {
   protected int InteractionsPerIngredient;
 
   @Override
-  public @Nullable CustomUIPage tryCreate(PlayerRef playerRef, Ref<ChunkStore> blockEntity) {
+  public @Nullable CustomUIPage tryCreate(PlayerRef playerRef, Ref<ChunkStore> blockEntity, WorldChunk worldChunk) {
     var ref = playerRef.getReference();
     if (ref == null) return null;
 
@@ -72,11 +72,9 @@ public class BenchMortarSupplier extends AlchemyBenchSupplier {
     var blockStateInfo =
         store.getComponent(blockEntity, BlockModule.BlockStateInfo.getComponentType());
     var mortarAndPestle = store.getComponent(blockEntity, MortarAndPestle.getComponentType());
-    var worldChunk = store.getComponent(blockEntity, WorldChunk.getComponentType());
 
     assert blockStateInfo != null;
     assert mortarAndPestle != null;
-    assert worldChunk != null;
 
     var index = blockStateInfo.getIndex();
     var cx = ChunkUtil.xFromBlockInColumn(index);
