@@ -64,7 +64,7 @@ class JavaConventionPlugin : Plugin<Project> {
     }
 
     for (configuration in target.configurations) {
-      target.setupDependencyConfiguration(libs, configuration.name);
+      target.setupDependencyConfiguration(libs, configuration.name)
     }
 
     target.extensions.configure<JavaPluginExtension>("java") {
