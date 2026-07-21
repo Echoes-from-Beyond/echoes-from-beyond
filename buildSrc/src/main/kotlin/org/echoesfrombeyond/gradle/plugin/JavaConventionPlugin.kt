@@ -47,6 +47,9 @@ class JavaConventionPlugin : Plugin<Project> {
     target.plugins.apply("com.gradleup.shadow")
     target.plugins.apply("java-library")
 
+    val targetIsTesting = target.name == "testing"
+    if (targetIsTesting) target.plugins.apply("java-test-fixtures")
+
     target.repositories.add(target.repositories.mavenCentral())
 
     val libs =
@@ -60,15 +63,9 @@ class JavaConventionPlugin : Plugin<Project> {
       local.ifPresent { provider -> dependencies.add(configurationName, provider) }
     }
 
-    target.setupDependencyConfiguration(libs, "api")
-    target.setupDependencyConfiguration(libs, "implementation")
-    target.setupDependencyConfiguration(libs, "compileOnly")
-    target.setupDependencyConfiguration(libs, "compileOnlyApi")
-    target.setupDependencyConfiguration(libs, "runtimeOnly")
-    target.setupDependencyConfiguration(libs, "shadow")
-    target.setupDependencyConfiguration(libs, "testImplementation")
-    target.setupDependencyConfiguration(libs, "testCompileOnly")
-    target.setupDependencyConfiguration(libs, "testRuntimeOnly")
+    for (configuration in target.configurations) {
+      target.setupDependencyConfiguration(libs, configuration.name);
+    }
 
     target.extensions.configure<JavaPluginExtension>("java") {
       it.toolchain.languageVersion.set(JavaLanguageVersion.of(25))
@@ -77,7 +74,10 @@ class JavaConventionPlugin : Plugin<Project> {
     }
 
     target.tasks.withType(Test::class.java).configureEach {
-      it.jvmArgs("--sun-misc-unsafe-memory-access=allow")
+      it.jvmArgs("-XX:+UseCompactObjectHeaders",
+        "--enable-native-access=ALL-UNNAMED",
+        "--sun-misc-unsafe-memory-access=allow",
+        "-ea")
       it.maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
       it.useJUnitPlatform()
     }
