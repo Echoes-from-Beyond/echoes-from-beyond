@@ -23,6 +23,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javassist.ClassPool;
 import javassist.CtClass;
+import javassist.Modifier;
 import org.jspecify.annotations.NullMarked;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -66,7 +67,7 @@ public class HytaleIntegrationTest implements BeforeAllCallback {
 
   /**
    * Injects {@link com.hypixel.hytale.server.core.plugin.PluginManager} to prevent it from failing
-   * launch on duplicate plugins. It will print a warning instead.
+   * launch on duplicate plugins, among other things.
    *
    * @throws Exception if there was a problem injecting or compiling code
    */
@@ -74,13 +75,24 @@ public class HytaleIntegrationTest implements BeforeAllCallback {
     var pool = ClassPool.getDefault();
 
     var CT_MAP = pool.get("java.util.Map");
+    var CT_PATH = pool.get("java.nio.file.Path");
     var CT_PLUGIN_MANAGER = pool.get("com.hypixel.hytale.server.core.plugin.PluginManager");
     var CT_PENDING_LOAD_PLUGIN =
         pool.get("com.hypixel.hytale.server.core.plugin.pending.PendingLoadPlugin");
 
+    var CT_PLUGIN_CLASS_LOADER =
+        pool.get("com.hypixel.hytale.server.core.plugin.PluginClassLoader");
+    CT_PLUGIN_CLASS_LOADER.getDeclaredField("childFirst").setModifiers(Modifier.PUBLIC);
+    CT_PLUGIN_CLASS_LOADER.toClass(com.hypixel.hytale.server.core.plugin.PluginType.class);
+
     var loadPluginsInClasspath =
         CT_PLUGIN_MANAGER.getDeclaredMethod(
             "loadPluginsInClasspath", new CtClass[] {CT_MAP, CT_MAP});
+
+    var loadPluginsFromDirectory =
+        CT_PLUGIN_MANAGER.getDeclaredMethod(
+            "loadPluginsFromDirectory",
+            new CtClass[] {CT_MAP, CT_PATH, CtClass.booleanType, CT_MAP});
 
     var loadPendingPlugin =
         CT_PLUGIN_MANAGER.getDeclaredMethod(
@@ -99,6 +111,26 @@ public class HytaleIntegrationTest implements BeforeAllCallback {
           }
 
           $0.classpathAssetPacks.clear();
+        }
+        """);
+
+    loadPluginsFromDirectory.insertAfter(
+        """
+        {
+          java.util.Iterator classloaderIterator = $0.classLoaders.entrySet().iterator();
+
+          while (classloaderIterator.hasNext()) {
+            java.util.Map.Entry next = (java.util.Map.Entry) classloaderIterator.next();
+
+            java.nio.file.Path key = (java.nio.file.Path) next.getKey();
+            com.hypixel.hytale.server.core.plugin.PluginClassLoader value =
+              (com.hypixel.hytale.server.core.plugin.PluginClassLoader) next.getValue();
+
+            if (key.getFileName().toString().endsWith(".jar") &&
+              value.getName().startsWith("ThirdParty(org.echoesfrombeyond")) {
+              value.childFirst = true;
+            }
+          }
         }
         """);
 
