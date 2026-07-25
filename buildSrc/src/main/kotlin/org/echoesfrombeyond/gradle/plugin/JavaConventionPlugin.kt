@@ -18,6 +18,7 @@ import org.gradle.api.plugins.JavaTestFixturesPlugin
 import org.gradle.api.provider.Provider
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.bundling.AbstractArchiveTask
 import org.gradle.api.tasks.bundling.Zip
 import org.gradle.api.tasks.bundling.ZipEntryCompression
@@ -82,10 +83,6 @@ class JavaConventionPlugin : Plugin<Project> {
       it.useJUnitPlatform()
     }
 
-    target.tasks.withType(ShadowJar::class.java).configureEach {
-      it.from(target.rootDir.resolve("LICENSE")) { spec -> spec.into("META-INF") }
-    }
-
     target.tasks.withType(AbstractArchiveTask::class.java).configureEach {
       it.isPreserveFileTimestamps = false
       it.isReproducibleFileOrder = true
@@ -103,15 +100,29 @@ class JavaConventionPlugin : Plugin<Project> {
       core?.addBooleanOption("Xdoclint:all,-missing", true)
     }
 
-    target.tasks.named("shadowJar", ShadowJar::class.java).configure {
+    target.tasks.register("shadowJarWithoutManifest", ShadowJar::class.java)
+
+    target.tasks.withType(ShadowJar::class.java).configureEach {
+      it.from(target.rootDir.resolve("LICENSE")) { spec -> spec.into("META-INF") }
+
       it.archiveClassifier.set("")
       it.enableAutoRelocation.set(true)
       it.relocationPrefix.set(
-          target.provider {
-            "${target.group.toString().replace('.', '/')}/${target.name}/internaldep"
-          }
+        target.provider {
+          "${target.group.toString().replace('.', '/')}/${target.name}/internaldep"
+        }
       )
       it.minimizeJar.set(true)
+    }
+
+    target.tasks.named("shadowJarWithoutManifest", ShadowJar::class.java).configure {
+      it.from((target.extensions.getByName("sourceSets") as SourceSetContainer)
+        .named("main").map { sourceSet -> sourceSet.output })
+      it.configurations.set(target.configurations.named("runtimeClasspath")
+        .map { configuration -> listOf(configuration) })
+      it.archiveClassifier.set("no-manifest")
+      it.exclude("manifest.json")
+      it.minimizeJar.set(false)
     }
 
     target.tasks.named("jar", Jar::class.java).configure { it.archiveClassifier.set("thin") }
@@ -167,10 +178,16 @@ fun Project.withHytaleDependency(hytaleVersion: String, prerelease: Boolean = fa
 
   val isTestFixture = plugins.withType(JavaTestFixturesPlugin::class.java).isNotEmpty()
 
+  val classpathPlugins = fileTree(extra.get("classpathPluginsDir")!!)
+
+  val exclude = (extensions.getByName("sourceSets") as SourceSetContainer)
+    .named("main").map { main -> main.output }
+
   tasks.named("test", Test::class.java) {
     it.workingDir(extra.get("runDir")!!)
     it.systemProperty("java.util.logging.manager", "com.hypixel.hytale.logger.backend.HytaleLogManager")
     it.systemProperty("org.echoesfrombeyond.assets-zip", (extra.get("assetsZip") as Provider<*>).get())
+    it.classpath = files(it.classpath, classpathPlugins).minus(files(exclude))
   }
 
   repositories.exclusiveContent { exclusive ->

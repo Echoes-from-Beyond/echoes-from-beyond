@@ -61,9 +61,8 @@ plantingyourroots-shadow = [
     "codec-helper"
 ]
 
-# testFixturesImplementation dependencies for the `testing` project.
 testing-testFixturesImplementation = [
-    "javassist"
+    "junit-jupiter"
 ]
 
 # If two or more related dependencies share the same version, define it here to
@@ -98,10 +97,6 @@ codec-helper = { module = "org.echoesfrombeyond:codec-helper", version = "0.3.0"
 # usage: manifest.json parsing during build validation
 # scope: build scripts
 gson = { module = "com.google.code.gson:gson", version = "2.13.2" }
-
-# usage: bytecode modification to fix a specific issue with integration testing Hytale
-# scope: testing module (test fixtures)
-javassist = { module = "org.javassist:javassist", version = "3.32.0-GA" }
 
 # usage: More annotations not included in jspecify
 # scope: everywhere

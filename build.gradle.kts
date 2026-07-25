@@ -11,6 +11,7 @@ apply<SpotlessPlugin>()
 
 val hytaleDotfile: RegularFile = layout.projectDirectory.file(".hytale")
 val runDirectory: Directory = layout.projectDirectory.dir("run")
+val classpathPluginsDir: Provider<Directory> = layout.buildDirectory.dir("classpathPlugins")
 
 val hytalePath: Provider<String> = provider {
   val hytaleDotfile: File = hytaleDotfile.asFile
@@ -68,19 +69,39 @@ val checkHytalePath: TaskProvider<DefaultTask> =
       }
     }
 
-subprojects.forEach { sub ->
-  sub.extra.set("assetsZip", assetsZip)
-  sub.extra.set("runDir", runDirectory)
-}
-
-val pluginJarFiles: Provider<List<Provider<File>>> = provider {
+val pluginSubprojects: Provider<List<Project>> = provider {
   subprojects
       .filter { sub -> sub.extra.has("hasPlugin") }
       .filter { sub -> sub.extra.get("hasPlugin") as? Boolean ?: false }
-      .map { sub ->
+}
+
+val pluginJarFiles: Provider<List<Provider<File>>> =
+    pluginSubprojects.map { projects ->
+      projects.map { sub ->
         sub.tasks.named("shadowJar").map { shadowJarTask -> shadowJarTask.outputs.files.singleFile }
       }
+    }
+
+val pluginJarFilesWithoutManifest: Provider<List<Provider<File>>> =
+    pluginSubprojects.map { projects ->
+      projects.map { sub ->
+        sub.tasks.named("shadowJarWithoutManifest").map { shadowJarTask ->
+          shadowJarTask.outputs.files.singleFile
+        }
+      }
+    }
+
+subprojects.forEach { sub ->
+  sub.extra.set("runDir", runDirectory)
+  sub.extra.set("assetsZip", assetsZip)
+  sub.extra.set("classpathPluginsDir", classpathPluginsDir)
 }
+
+val copyPluginJarFilesWithoutManifest: TaskProvider<Copy> =
+    tasks.register("copyPluginJarFilesWithoutManifest", Copy::class.java) {
+      from(pluginJarFilesWithoutManifest)
+      into(classpathPluginsDir)
+    }
 
 val syncPluginsTask: TaskProvider<Sync> =
     tasks.register("syncPlugins", Sync::class.java) {

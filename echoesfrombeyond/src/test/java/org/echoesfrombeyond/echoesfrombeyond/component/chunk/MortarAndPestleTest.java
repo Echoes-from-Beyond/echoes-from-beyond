@@ -18,11 +18,9 @@
 
 package org.echoesfrombeyond.echoesfrombeyond.component.chunk;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.hypixel.hytale.codec.ExtraInfo;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
-import org.echoesfrombeyond.echoesfrombeyond.inventory.AlchemyStackContainer;
+import java.lang.reflect.InvocationTargetException;
 import org.echoesfrombeyond.test.HytaleIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,13 +28,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(HytaleIntegrationTest.class)
 class MortarAndPestleTest {
   @Test
-  void roundTrip() {
-    for (int i = 0; i < 10; i++) System.out.println("TEST RUN");
-
+  void roundTrip() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     var mortarAndPestle = new MortarAndPestle();
 
-    mortarAndPestle.ItemsToGrind = new AlchemyStackContainer(10);
-    mortarAndPestle.ItemsToGrind.addItem(new ItemStack("Soil_Dirt", 1));
+    // mortarAndPestle.ItemsToGrind = new AlchemyStackContainer(10);
+    // mortarAndPestle.ItemsToGrind.addItem(new ItemStack("Soil_Dirt", 1));
+
+    mortarAndPestle
+        .ItemsToGrind
+        .getClass()
+        .getMethod("addItem", ItemStack.class)
+        .invoke(mortarAndPestle.ItemsToGrind, new ItemStack("Soil_Dirt", 1));
 
     var encoded = MortarAndPestle.CODEC.encode(mortarAndPestle, new ExtraInfo());
 
